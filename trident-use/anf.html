@@ -1064,24 +1064,24 @@
 <p class="page-details">
   
     
-    <time datetime="2022-02-01 18:53:21 +0000">02/01/2022</time>
+    <time datetime="2022-02-02 18:41:41 +0000">02/02/2022</time>
     
   
 
 <span>기여자
-  <a target="_blank" href="https://github.com/juliantap">
-    <img  class="avatar avatar-small"
-          alt="juliantap"
-          width="20" height="20"
-          src="https://avatars.githubusercontent.com/u/83591660?v=4"
-          style="border-radius: 50%;"/>
-  </a>
-  
   <a target="_blank" href="https://github.com/clintonk">
     <img  class="avatar avatar-small"
           alt="clintonk"
           width="20" height="20"
           src="https://avatars.githubusercontent.com/u/1355869?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
+  <a target="_blank" href="https://github.com/juliantap">
+    <img  class="avatar avatar-small"
+          alt="juliantap"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/83591660?v=4"
           style="border-radius: 50%;"/>
   </a>
   
@@ -1307,6 +1307,11 @@ NFS 버전 4.1을 사용하여 볼륨을 마운트하려는 경우 쉼표로 구
 <td class="tableblock halign-left valign-top"><p class="tableblock">"0.0.0.0/0"</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">나프산디렉토리</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스냅샷 디렉터리의 표시 여부를 제어합니다</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"거짓"</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">'크기&#8217;입니다</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">새 볼륨의 기본 크기입니다</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">"100G"</p></td>
@@ -1398,6 +1403,7 @@ ANF 백엔드에서 생성된 모든 볼륨의 경우, Astra Trident는 스토�
         "limitVolumeSize": "500Gi",
         "defaults": {
             "exportRule": "10.0.0.0/24,10.0.1.0/24,10.0.2.100",
+            "snapshotDir": "true",
             "size": "200Gi"
         }
     }</pre>
