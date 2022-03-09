@@ -1036,11 +1036,19 @@
 <p class="page-details">
   
     
-    <time datetime="2022-03-09 16:31:55 +0000">03/09/2022</time>
+    <time datetime="2022-03-09 18:38:40 +0000">03/09/2022</time>
     
   
 
 <span>기여자
+  <a target="_blank" href="https://github.com/juliantap">
+    <img  class="avatar avatar-small"
+          alt="juliantap"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/83591660?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
 </span>
 
 
@@ -1275,7 +1283,17 @@ Astra Trident에서 다중 경로를 사용할 수 있도록 ONTAP-SAN 및 ONTAP
 <img src="/us-en/trident/images/warning.svg" alt="경고">
 </td>
 <td class="content">
-Astra Trident와 함께 NetApp ONTAP용 Amazon FSx를 사용하는 경우 "limitAggregateUsage" 매개 변수는 "vsadmin" 및 "fsxadmin" 사용자 계정과 작동하지 않습니다. 이 매개 변수를 지정하면 구성 작업이 실패합니다.
+<div class="title">ONTAP용 Amazon FSx</div>
+<div class="ulist">
+<ul>
+<li>
+<p>limitAggregateUsage 매개변수는 vsadmin과 fsxadmin 사용자 계정에서는 작동하지 않습니다. 이 매개 변수를 지정하면 구성 작업이 실패합니다.</p>
+</li>
+<li>
+<p>NetApp ONTAP 볼륨용 Amazon FSx는 SnapMirror와 함께 사전 구성되어 제공됩니다. Trident는 수정하거나 분리할 수 없습니다. PVC를 삭제하려면 PV 및 FSx for NetApp ONTAP 볼륨을 수동으로 삭제해야 합니다.</p>
+</li>
+</ul>
+</div>
 </td>
 </tr>
 </table>
