@@ -2,14 +2,14 @@
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>trident</title>
+    <title>trident | NetApp Documentation</title>
     <atom:link href="https://docs.netapp.com/ko-kr/trident/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://docs.netapp.com/ko-kr/trident</link>
-    <description>The latest updates from NetApp Cloud Docs</description>
+    <description>The latest updates from NetApp Documentation</description>
     <language>ko-kr</language>
     <ttl>60</ttl>
-    <pubDate>Thu, 10 Mar 2022 15:40:44 +0000</pubDate>
-    <lastBuildDate>Thu, 10 Mar 2022 15:40:44 +0000</lastBuildDate>
+    <pubDate>Tue, 15 Mar 2022 17:10:34 +0000</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2022 17:10:34 +0000</lastBuildDate>
     
   </channel>
 </rss>
