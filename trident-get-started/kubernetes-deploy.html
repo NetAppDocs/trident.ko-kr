@@ -292,11 +292,11 @@
           <ul class="n-menu__list">
             <li class="n-menu__list-column">
               <ul class="n-menu__list"><li class="n-menu__list-item n-menu__list-item--level-1">
-                  <a href="https://docs.netapp.com/ko-kr/trident/trident-get-started/kubernetes-deploy.html" class="n-menu__header-text"><span translate="no" class="notranslate">한국어</span></a>
-                </li><li class="n-menu__list-item n-menu__list-item--level-1">
                   <a href="https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html" class="n-menu__header-text"><span translate="no" class="notranslate">English</span></a>
                 </li><li class="n-menu__list-item n-menu__list-item--level-1">
                   <a href="https://docs.netapp.com/ja-jp/trident/trident-get-started/kubernetes-deploy.html" class="n-menu__header-text"><span translate="no" class="notranslate">日本語</span></a>
+                </li><li class="n-menu__list-item n-menu__list-item--level-1">
+                  <a href="https://docs.netapp.com/ko-kr/trident/trident-get-started/kubernetes-deploy.html" class="n-menu__header-text"><span translate="no" class="notranslate">한국어</span></a>
                 </li><li class="n-menu__list-item n-menu__list-item--level-1">
                   <a href="https://docs.netapp.com/zh-cn/trident/trident-get-started/kubernetes-deploy.html" class="n-menu__header-text"><span translate="no" class="notranslate">简体中文</span></a>
                 </li></ul>
@@ -1117,7 +1117,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:22:34 +0000">04/18/2022</time>
+    <time datetime="2022-04-26 18:25:16 +0000">04/26/2022</time>
     
   
 
@@ -1315,6 +1315,27 @@
 </li>
 </ul>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="기타-알려진-구성-옵션">기타 알려진 구성 옵션</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>VMware Tanzu 포트폴리오 제품에 Astra Trident를 설치할 경우:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>클러스터는 권한이 있는 워크로드를 지원해야 합니다.</p>
+</li>
+<li>
+<p>kubelet-dir 플래그는 kubelet 디렉토리의 위치로 설정해야 합니다. 기본적으로 이 값은 '/var/vcap/data/kubelet&#8217;입니다.</p>
+<div class="paragraph">
+<p>Trident 연산자, Hrom 및 tridentctl 배포에서는 -kubelet -dir 을 사용하여 kubelet 위치를 지정하는 작업이 알려져 있습니다.</p>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
