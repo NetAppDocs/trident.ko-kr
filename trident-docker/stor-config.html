@@ -17,7 +17,7 @@
   <meta http-equiv="encoding" content="utf-8">
   <meta http-equiv="nss-type" content="Product Documentation"/>
   <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Astra Trident 구성에 사용할 수 있는 구성 옵션을 확인하십시오.">
-  <meta name="keywords" content=" deploy, trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, storage config, options, variables, ontap, element, aws, cvs on gcp, cvs on aws, anf, azure netapp files"><!-- Icons -->
+  <meta name="keywords" content=" deploy, trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, storage config, options, variables, ontap, element, cvs on gcp, anf, azure netapp files"><!-- Icons -->
   <link rel="icon" href="/ko-kr/trident/images/favicon.ico" type="image/x-icon">
 
   <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
@@ -562,8 +562,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -947,8 +945,6 @@
         ANF 백엔드를 구성합니다
       </a></li><li class=" "><a class="na-navbar-padding" href="/ko-kr/trident/trident-use/ads.html">
         ADS 백엔드를 구성합니다
-      </a></li><li class=" "><a class="na-navbar-padding" href="/ko-kr/trident/trident-use/aws.html">
-        AWS용 CVS 백엔드를 구성합니다
       </a></li><li class=" "><a class="na-navbar-padding" href="/ko-kr/trident/trident-use/gcp.html">
         CVS for GCP 백엔드를 구성합니다
       </a></li><li class=" "><a class="na-navbar-padding" href="/ko-kr/trident/trident-use/element.html">
@@ -1117,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:22:34 +0000">04/18/2022</time>
+    <time datetime="2022-04-28 19:03:56 +0000">04/28/2022</time>
     
   
 
@@ -1166,7 +1162,7 @@
 <p>스토리지 드라이버 이름입니다</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ONTAP-NAS, ONTAP-SAN, ONTAP-NAS-이코노미, ONTAP-NAS-Flexgroup, 졸idfire-san, Azure-NetApp-files, AWS-CV, GCP-CV</p>
+<p>ONTAP-NAS, ONTAP-SAN, ONTAP-NAS-이코노미, ONTAP-NAS-Flexgroup, 졸idfire-san, Azure-NetApp-파일, 즉 GCP-CV</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1762,185 +1758,6 @@ Swarm은 여러 노드에서 볼륨 생성을 조율하지 않으므로 현재 D
             }
         }
     ]
-}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="aws-구성에서-cvscloud-volumes-service">AWS 구성에서 CVS(Cloud Volumes Service</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>글로벌 구성 값 외에도 AWS에서 CVS를 사용할 경우 이러한 옵션을 사용할 수 있습니다. 필요한 값은 모두 CVS 웹 사용자 인터페이스에서 사용할 수 있습니다.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">옵션을 선택합니다</th>
-<th class="tableblock halign-left valign-top">설명</th>
-<th class="tableblock halign-left valign-top">예</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">아피지역</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 계정 지역(필수) CVS 웹 포털의 계정 설정 &gt; API 액세스에서 찾을 수 있습니다.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>"미국 - 동부 - 1"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"apiURL"</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 계정 API URL(필수) CVS 웹 포털의 계정 설정 &gt; API 액세스에서 찾을 수 있습니다.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“https://cds-aws-bundles.netapp.com:8080/v1” 참조하십시오</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">아피키</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 계정 API 키(필수) CVS 웹 포털의 계정 설정 &gt; API 액세스에서 찾을 수 있습니다.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“Docker”</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">재키</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 계정 비밀 키(필수). CVS 웹 포털의 계정 설정 &gt; API 액세스에서 찾을 수 있습니다.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“기본값”</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">proxyURL</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>프록시 서버가 CVS 계정에 연결해야 하는 경우 프록시 URL입니다. 프록시 서버는 HTTP 프록시 또는 HTTPS 프록시일 수 있습니다. HTTPS 프록시의 경우 프록시 서버에서 자체 서명된 인증서를 사용할 수 있도록 인증서 유효성 검사를 건너뜁니다. * 인증이 활성화된 프록시 서버는 지원되지 않습니다 *.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“http://proxy-server-hostname/” 참조하십시오</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">nfsMountOptions를 선택합니다</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NFS 마운트 옵션, 기본값: "-o nfsvers=3"</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“nfsvers=3, proto=tcp, timeo=600”</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'저급'</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>성능 수준(표준, 프리미엄, 익스트림), 기본값: "표준"</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“프리미엄”</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="/us-en/trident/images/note.svg" alt="참고">
-</td>
-<td class="content">
-NetApp Cloud Volumes Service for AWS는 100GB 미만의 볼륨을 지원하지 않습니다. 보다 쉽게 애플리케이션을 배포할 수 있도록 작은 볼륨이 요청되는 경우 Trident가 자동으로 100GB 볼륨을 생성합니다.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>AWS에서 CVS를 사용하는 경우 이러한 기본 볼륨 옵션 설정을 사용할 수 있습니다.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">옵션을 선택합니다</th>
-<th class="tableblock halign-left valign-top">설명</th>
-<th class="tableblock halign-left valign-top">예</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">엑포트 규칙</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NFS 액세스 목록(주소 및/또는 CIDR 서브넷)의 기본값은 "0.0.0.0/0"입니다.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“10.0.1.0 / 24,10.0.2.100”</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">나프산디렉토리</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>'.snapshot' 디렉토리의 가시성을 제어합니다</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>"거짓"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">안산예비역</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>스냅숏 예비 공간 비율, 기본값은 " "로, CVS 기본값을 0으로 적용합니다</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“10”</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'크기&#8217;입니다</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>볼륨 크기, 기본값: "100GB"</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>“500G”</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="aws-구성-파일의-cvs-예">AWS 구성 파일의 CVS 예</h3>
-<div class="listingblock">
-<div class="content">
-<pre>{
-    "version": 1,
-    "storageDriverName": "aws-cvs",
-    "apiRegion": "us-east-1",
-    "apiURL": "https://cds-aws-bundles.netapp.com:8080/v1",
-    "apiKey":    "znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE",
-    "secretKey": "rR0rUmWXfNioN1KhtHisiSAnoTherboGuskey6pU",
-    "region": "us-east-1",
-    "proxyURL": "http://proxy-server-hostname/",
-    "serviceLevel": "premium",
-    "limitVolumeSize": "200Gi",
-    "defaults": {
-        "snapshotDir": "true",
-        "snapshotReserve": "5",
-        "exportRule": "10.0.0.0/24,10.0.1.0/24,10.0.2.100",
-        "size": "100Gi"
-    }
 }</pre>
 </div>
 </div>
