@@ -4,7 +4,7 @@ permalink: trident-use/trident-aws-addon.html
 keywords: Trident add-on, Astra Trident EKS add-on, Trident AWS EKS add-on, integrate Trident, Trident 
 summary: Kubernetes 클러스터에 Astra Trident EKS 애드온 을 추가합니다. 
 ---
-= EKS 클러스터에서 Astra Trident EKS 애드온 버전 23.10을 구성합니다
+= EKS 클러스터에 Astra Trident EKS 애드온을 구성합니다
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -64,9 +64,9 @@ image::../media/aws-eks-05.png[AWS eks 05]
 == CLI를 사용하여 Astra Trident EKS 애드온을 설치/제거합니다
 
 .CLI를 사용하여 Astra Trident EKS 애드온을 설치합니다.
-다음 명령 예에서는 Astra Trident EKS 애드온을 설치합니다.
-`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v23.10.0-eksbuild.`
-`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v23.10.0-eksbuild.1` (전용 버전 포함)
+다음 명령 예는 Astra Trident EKS 추가 기능을 설치합니다(전용 버전 사용).
+`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.2.0-eksbuild.`
+`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.2.0-eksbuild.1`
 
 .CLI를 사용하여 Astra Trident EKS 애드온을 제거합니다.
 다음 명령을 실행하면 Astra Trident EKS 애드온이 제거됩니다.
