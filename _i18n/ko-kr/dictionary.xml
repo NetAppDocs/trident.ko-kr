@@ -1520,7 +1520,6 @@
   <block id="925060a0c0a15f99ef1bee43f1660ea4" category="paragraph">선택 사항으로, 사용량이 이 백분율보다 높을 경우 용량 할당에 실패합니다</block>
   <block id="876885770cf58d20ef5672cc5594e85d" category="inline-link">NFS 호스트 구성 정보는 여기 를 참조하십시오</block>
   <block id="0a19ca3d1db7e5bc24b58f73b91c3f49" category="paragraph">NFS 마운트 옵션을 세밀하게 제어합니다. 기본값은 "-o nfsvers=3"입니다. * ONTAP-NAS 및 ONTAP-NAS-이코노미 드라이버에만 사용 가능 *.<block ref="71f7a3f48cfd3876cffba401813b7db0" category="inline-link-rx"></block>.</block>
-  <block id="5c5adadf8175fd69d4af9bfdb608c42c" category="paragraph">최대 요청 가능 볼륨 크기 및 qtree 상위 볼륨 크기. * 이 옵션은 'ONTAP-NAS-이코노미' 드라이버의 경우 FlexVol의 크기를 추가로 제한합니다 *.</block>
   <block id="3890063556e337d458019437f027030b" category="paragraph">생성하는 모든 볼륨에 기본 옵션을 지정하지 않아도 됩니다.</block>
   <block id="b326b5062b2f0e69046810717534cb09" category="paragraph">참</block>
   <block id="90adf331b7868c7af46ad6e035e93844" category="section-title">축척 옵션</block>
@@ -4322,4 +4321,11 @@ Kubernetes Non-Graceful Node Shutdown(ngns)과 함께 작동하여 클러스터 
   <block id="23fa813a6884f33dc0d2070ae5260e6a" category="section-title">Google Cloud NetApp 볼륨 드라이버 세부 정보입니다</block>
   <block id="5fb193ca50759ba375397b4085f1116f" category="paragraph">Astra Trident는<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 클러스터와 통신할 수 있는 드라이버를 제공합니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.</block>
   <block id="5ab9649a1218ec1b35bfb38efbeaea76" category="cell"><block ref="94594b2ccbc8e0d220ad37504461650b" prefix="" category="inline-code"></block></block>
+  <block id="74d08e13aea757b8172499f067668443" category="paragraph">최대 요청 가능 볼륨 크기입니다.</block>
+  <block id="f14a3ef36727dfbbea91c1d6b3fdbede" category="cell"><block ref="c8f83e727d4a4255a6485c24776e86bb" prefix="" category="inline-code"></block></block>
+  <block id="33fefa32caf35cd4691465f3592a0539" category="cell">*<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>및<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 드라이버에서만 지원됩니다.* ONTAP ONTAP-NAS-Economy 및 ONTAP-SAN-Economy 드라이버의 FlexVol 크기를 제한합니다.</block>
+  <block id="1b75c146ff0568d5fc11072b08cfe580" category="section-title">Trident에 의해 생성되는 FlexVols의 최대 크기를 제한합니다</block>
+  <block id="913d5950907a31c9d3ea6cd0a3b6a524" category="paragraph">ONTAP-SAN-Economy 및 ONTAP-NAS-Economy 드라이버의 풀로 사용되는 FlexVol의 최대 크기를 구성하려면<block ref="c8f83e727d4a4255a6485c24776e86bb" prefix=" " category="inline-code"></block><block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block> 정의에 매개 변수를 사용하십시오.</block>
+  <block id="ae7be78c2d3d933d426bc82820accfae" category="cell">ONTAP-NAS-이코노미 백엔드에서 Qtree를 사용할 때 가장 필요한 최대 FlexVol 크기입니다.</block>
+  <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다.</block>
 </blocks>

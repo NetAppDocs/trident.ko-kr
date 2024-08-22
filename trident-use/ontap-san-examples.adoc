@@ -163,6 +163,9 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다. | ""
 
 
 | `nameTemplate` | 사용자 지정 볼륨 이름을 생성하는 템플릿입니다. | "" 
+
+
+| `limitVolumePoolSize` | ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다. | ""(기본적으로 적용되지 않음) 
 |===
 
 

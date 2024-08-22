@@ -152,7 +152,7 @@ Astra Trident는 노드당 작성 및 관리합니다 `igroups` 현재 `netappdv
 
 
 | LimitVolumeSize  a| 
-최대 요청 가능 볼륨 크기 및 qtree 상위 볼륨 크기. * 이 옵션은 'ONTAP-NAS-이코노미' 드라이버의 경우 FlexVol의 크기를 추가로 제한합니다 *.
+최대 요청 가능 볼륨 크기입니다.
  a| 
 `300g`
 
@@ -170,6 +170,11 @@ FlexVol당 최대 qtree는 범위 [50, 300]에 있어야 하며 기본값은 200
 | `sanType` | * 에 대해 지원됩니다 `ontap-san` 드라이버만.*
 
 를 사용하여 선택합니다 `iscsi` iSCSI 또는 의 경우 `nvme` NVMe/TCP의 경우 | `iscsi` 비어 있는 경우 
+
+
+| `limitVolumePoolSize` | * `ontap-san-economy`및 `ontap-san-economy` 드라이버에서만 지원됩니다.* ONTAP ONTAP-NAS-Economy 및 ONTAP-SAN-Economy 드라이버의 FlexVol 크기를 제한합니다.  a| 
+`300g`
+
 |===
 생성하는 모든 볼륨에 기본 옵션을 지정하지 않아도 됩니다.
 
