@@ -115,6 +115,29 @@ defaults:
 ----
 
 
+== LUKS 볼륨을 가져오기 위한 PVC 구성입니다
+
+LUKS 볼륨을 동적으로 가져오려면 `trident.netapp.io/luksEncryption` `true` 이 예제에 표시된 대로 주석을 로 설정하고 PVC에 LUKS 사용 스토리지 클래스를 포함합니다.
+
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: luks-pvc
+  namespace: trident
+  annotations:
+    trident.netapp.io/luksEncryption: "true"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: luks-sc
+----
+
+
 == LUKS 암호를 회전합니다
 
 LUKS 암호를 회전하고 회전을 확인할 수 있습니다.

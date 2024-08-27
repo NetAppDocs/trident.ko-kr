@@ -2058,8 +2058,6 @@
   <block id="d041a310ba7cc2599250e64801594107" category="list-text">에 대한 지원이 추가되었습니다 <block ref="ca184a2eda203b6d98158bdf24e5cf7d" category="inline-link-macro-rx"></block>.</block>
   <block id="adbfe36f6399f2846983b2901604a962" category="list-text">추가되었습니다 <block ref="40be42d37bc6014716dcd0a1d368ffb5" category="inline-link-macro-rx"></block> 를 통해<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 스토리지 드라이버.</block>
   <block id="f18a50f02f48551895d57b81dd288142" category="sidebar">네임스페이스 전체에서 NFS 볼륨을 공유합니다</block>
-  <block id="fd1117c82327fbe8671f26e897ceb8f4" category="inline-link-macro">BlueXP를 사용하는 Astra Trident</block>
-  <block id="a76a1e164520105317267dc41b95e8ce" category="paragraph">와 함께 <block ref="f8c16e8c21124ccc028d2db7fd32a98f" category="inline-link-macro-rx"></block>Astra Trident의 최신 버전으로 업그레이드하고, 스토리지 클래스를 추가 및 관리하고, 작업 환경에 연결한 다음, Cloud Backup Service를 사용하여 영구 볼륨을 백업할 수 있습니다. BlueXP는 Trident 연산자를 사용하여 수동으로 또는 Helm을 사용하여 Astra Trident 구축을 지원합니다.</block>
   <block id="66f2c42a4ca561f5472459301bc7d096" category="list-text">이제 ONTAP 드라이버에 대한 자동 MetroCluster 전환 감지 기능을 사용할 수 있습니다.</block>
   <block id="e87ded5ef8bc8adbc3c135528636f4f2" category="list-text"><block ref="e87ded5ef8bc8adbc3c135528636f4f2" category="inline-link-macro-rx"></block></block>
   <block id="fce586d9f649fb529d0a1846495ba259" category="list-text"><block ref="fce586d9f649fb529d0a1846495ba259" category="inline-link-macro-rx"></block></block>
@@ -2231,7 +2229,6 @@
   <block id="cbbeebc91e4ea4f1960f7a74b5b14c23" category="paragraph">기존 배포를 운영자로 쉽게 업데이트할 수 있습니다. 를 편집하기만 하면 됩니다<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> CR을 사용하여 설치를 업데이트합니다.</block>
   <block id="561b04cbccb34a376c360e7325ad76d0" category="paragraph">예를 들어, Astra Trident를 활성화하여 디버그 로그를 생성해야 하는 시나리오를 생각해 보십시오. 이렇게 하려면 에 패치를 적용합니다<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 를 눌러 설정합니다<block ref="8cddd364bfd0d68f21e3a9ba1123b849" prefix=" " category="inline-code"></block> 를 선택합니다<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>:</block>
   <block id="f72ba1a3a498489a96fd8774bfa9ea9d" category="example-title">&lt;/strong&gt;를 처리하는 &lt;strong&gt; 자동 Kubernetes 업그레이드</block>
-  <block id="c3b2fe84f143129d7a18ad12df229bc6" category="example-title">BlueXP(이전의 Cloud Manager) &lt;/strong&gt;를 사용한 &lt;strong&gt; Kubernetes 클러스터 관리</block>
   <block id="4c24a3b9facf2ea9fc7ed2ca52dab45d" category="inline-link-macro">&lt;block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category='inline-code'/&gt; 설치를 사용자 지정합니다</block>
   <block id="40beff6895ce0eeff65f9568dd5c7247" category="paragraph">가능합니다 <block ref="d16089dfa270d6679e80d43ec8b5c378" category="inline-link-macro-rx"></block> Trident 리소스에 대한 매니페스트를 생성합니다. 여기에는 구축, 개발/제거, 서비스 계정, Astra Trident가 설치의 일부로 생성한 클러스터 역할 등이 포함됩니다.</block>
   <block id="cb024a74bf03f9ba7a9433337492808e" category="admonition">22.04 릴리즈부터는 Astra Trident가 설치될 때마다 AES 키가 더 이상 다시 생성되지 않습니다. 이 릴리즈를 통해 Astra Trident는 설치 전반에 걸쳐 유지되는 새로운 비밀 객체를 설치합니다. 즉,<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 22.04에서는 Trident의 이전 버전을 제거할 수 있지만 이전 버전에서는 22.04 설치를 제거할 수 없습니다. 적절한 installation_method_를 선택합니다.</block>
@@ -4328,4 +4325,6 @@ Kubernetes Non-Graceful Node Shutdown(ngns)과 함께 작동하여 클러스터 
   <block id="913d5950907a31c9d3ea6cd0a3b6a524" category="paragraph">ONTAP-SAN-Economy 및 ONTAP-NAS-Economy 드라이버의 풀로 사용되는 FlexVol의 최대 크기를 구성하려면<block ref="c8f83e727d4a4255a6485c24776e86bb" prefix=" " category="inline-code"></block><block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block> 정의에 매개 변수를 사용하십시오.</block>
   <block id="ae7be78c2d3d933d426bc82820accfae" category="cell">ONTAP-NAS-이코노미 백엔드에서 Qtree를 사용할 때 가장 필요한 최대 FlexVol 크기입니다.</block>
   <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다.</block>
+  <block id="64049136ec90cc479c7521e9b6e172eb" category="section-title">LUKS 볼륨을 가져오기 위한 PVC 구성입니다</block>
+  <block id="b49b86551096c421a3bc5d3b79eede84" category="paragraph">LUKS 볼륨을 동적으로 가져오려면<block ref="36720d50814e4335401b2047257bfedf" prefix=" " category="inline-code"></block><block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 이 예제에 표시된 대로 주석을 로 설정하고 PVC에 LUKS 사용 스토리지 클래스를 포함합니다.</block>
 </blocks>
