@@ -4327,4 +4327,8 @@ Kubernetes Non-Graceful Node Shutdown(ngns)과 함께 작동하여 클러스터 
   <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다.</block>
   <block id="64049136ec90cc479c7521e9b6e172eb" category="section-title">LUKS 볼륨을 가져오기 위한 PVC 구성입니다</block>
   <block id="b49b86551096c421a3bc5d3b79eede84" category="paragraph">LUKS 볼륨을 동적으로 가져오려면<block ref="36720d50814e4335401b2047257bfedf" prefix=" " category="inline-code"></block><block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 이 예제에 표시된 대로 주석을 로 설정하고 PVC에 LUKS 사용 스토리지 클래스를 포함합니다.</block>
+  <block id="eb80be396693610ba21c23b6b222bb73" category="paragraph">* Trident 업그레이드 전에 고려해야 할 사항 *</block>
+  <block id="b100864b32a36993557470c9854e7e3a" category="list-text">23.04+에서 도입된 노드별 igroup만 사용 중인 경우, iSCSI 자동 복구가 SCSI 버스의 모든 장치에 대해 SCSI 재검색을 시작합니다.</block>
+  <block id="284bb2f9d2596017aa72985df760fdb3" category="list-text">백엔드 범위 igroup(23.04부터 더 이상 사용되지 않음)만 사용 중인 경우 iSCSI 자동 복구가 SCSI 버스에서 정확한 LUN ID에 대한 SCSI 재검색을 시작합니다.</block>
+  <block id="0d6cf1de077f00140ee25c03f94e4805" category="list-text">노드당 igroup과 백엔드 범위 igroup이 함께 사용되고 있는 경우 iSCSI 자동 복구가 SCSI 버스에서 정확한 LUN ID에 대한 SCSI 재검색을 시작합니다.</block>
 </blocks>
