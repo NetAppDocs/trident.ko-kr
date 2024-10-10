@@ -4149,12 +4149,7 @@ Kubernetes Non-Graceful Node Shutdown(ngns)과 함께 작동하여 클러스터 
   <block id="f0d0d71ad406bc532f207cda7d40e0bf" category="list-text">Linux 컨트롤러 노드 및 Windows Server 2022를 실행하는 Windows 작업자 노드가 있는 Kubernetes 클러스터 Astra Trident는 Windows 노드에서 실행되는 Pod에만 마운트된 SMB 볼륨을 지원합니다.</block>
   <block id="de547bcab0e20f54ec4d5e95ba44b0b1" category="list-text">Windows Server 2022 를 참조하십시오</block>
   <block id="010e61d0b40eeb84b96a1321e8f0bab7" category="cell">ext4, ext3, xfs</block>
-  <block id="86b88ff1a66ea55358ae99627ffdf01c" category="list-text">Kubernetes 1.30가 이제 Astra Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Astra Trident를 업그레이드합니다.</block>
-  <block id="7bcc7742161f309a6d9639847cd756b4" category="list-text">Kubernetes 1.24-1.30</block>
   <block id="c9db4c3d8dc7c24ea723ab5fe1e45fdb" category="list-text">OpenShift 4.10-4.16</block>
-  <block id="7c15363cb005546ae95eb8bf83c3cadd" category="paragraph">1.24-1.30</block>
-  <block id="88a2f4201bf0a82365ef81af5f2afeac" category="cell">v1.24.0, v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0</block>
-  <block id="b443358b172ce4f75319c7828483fb8b" category="list-text">Kubernetes 1.30가 이제 Astra Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
   <block id="e422e290c66eca7f882976f830b781b4" category="list-text">Kubernetes 1.30에 대한 지원 추가</block>
   <block id="190dbae19c88b1e68bf03f7783c5d5d1" category="list-text"><block ref="190dbae19c88b1e68bf03f7783c5d5d1" category="inline-link-rx"></block></block>
   <block id="430c6bcb8516befc45fb8173b0ca4e1f" category="list-text"><block ref="430c6bcb8516befc45fb8173b0ca4e1f" category="inline-link-rx"></block></block>
@@ -4331,4 +4326,9 @@ Kubernetes Non-Graceful Node Shutdown(ngns)과 함께 작동하여 클러스터 
   <block id="b100864b32a36993557470c9854e7e3a" category="list-text">23.04+에서 도입된 노드별 igroup만 사용 중인 경우, iSCSI 자동 복구가 SCSI 버스의 모든 장치에 대해 SCSI 재검색을 시작합니다.</block>
   <block id="284bb2f9d2596017aa72985df760fdb3" category="list-text">백엔드 범위 igroup(23.04부터 더 이상 사용되지 않음)만 사용 중인 경우 iSCSI 자동 복구가 SCSI 버스에서 정확한 LUN ID에 대한 SCSI 재검색을 시작합니다.</block>
   <block id="0d6cf1de077f00140ee25c03f94e4805" category="list-text">노드당 igroup과 백엔드 범위 igroup이 함께 사용되고 있는 경우 iSCSI 자동 복구가 SCSI 버스에서 정확한 LUN ID에 대한 SCSI 재검색을 시작합니다.</block>
+  <block id="a0deacb8333950a84bc0c07161a5ec2e" category="list-text">Kubernetes 1.31가 이제 Astra Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Astra Trident를 업그레이드합니다.</block>
+  <block id="3494d431429bb2e868fc95f1c0b9665c" category="list-text">Kubernetes 1.24-1.31</block>
+  <block id="e421e06325a1dc27ebce6f0b648866a4" category="paragraph">1.24-1.31</block>
+  <block id="5e6f6bf1a3cfa3238a4162a4f0aa6baa" category="cell">v1.24.0, v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0</block>
+  <block id="569091f6518520ecabc37c249e96bd28" category="list-text">Kubernetes 1.31가 이제 Astra Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
 </blocks>
