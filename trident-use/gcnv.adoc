@@ -49,13 +49,13 @@ Google Cloud에서 클라우드 ID를 활용하려면 다음이 필요합니다.
 
 * GKE를 사용하여 구축된 Kubernetes 클러스터
 * GKE 클러스터에 구성된 워크로드 ID 및 oidc-발급자입니다.
-*  `"GCP"`워크로드 ID를 지정하고 `cloudIdentity` 지정하는 가 포함된 Astra Trident가 설치되었습니다. `cloudProvider`
+*  `"GCP"`워크로드 ID를 지정하고 `cloudIdentity` 지정하는 가 포함된 Trident가 설치되었습니다. `cloudProvider`
 +
 [role="tabbed-block"]
 ====
 .Trident 운영자
 --
-Trident 연산자를 사용하여 Astra Trident를 설치하려면 `tridentorchestrator_cr.yaml` 를 `cloudProvider` 로 `"GCP"` 설정하고 를 로 `cloudIdentity` `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com` 설정합니다.
+Trident 연산자를 사용하여 Trident를 설치하려면 `tridentorchestrator_cr.yaml` 를 `cloudProvider` 로 `"GCP"` 설정하고 를 로 `cloudIdentity` `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com` 설정합니다.
 
 예를 들면 다음과 같습니다.
 
@@ -80,7 +80,7 @@ spec:
 `export CP="GCP"`
 `export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
 
-다음 예에서는 Astra Trident를 설치하고 환경 변수를 사용하여 GCP로 `$CP` 설정하고 환경 변수를 사용하여 `$ANNOTATION` 를 설정합니다 `cloudProvider`. `cloudIdentity`
+다음 예에서는 환경 변수를 사용하여 Trident를 설치하고 를 GCP로 `$CP` 설정하고 `cloudProvider` 환경 변수를 사용하여 `$ANNOTATION` 를 `cloudIdentity` 설정합니다.
 
 [listing]
 ----
@@ -94,7 +94,7 @@ helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --s
 `export CP="GCP"`
 `export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
 
-다음 예에서는 Astra Trident를 설치하고 플래그를 `$CP`, 및 `cloud-identity` 로 `$ANNOTATION` 설정합니다 `cloud-provider`.
+다음 예에서는 Trident를 설치하고 플래그를 `$CP` , 및 `cloud-identity` 로 설정합니다 `cloud-provider`. `$ANNOTATION`
 
 [listing]
 ----
