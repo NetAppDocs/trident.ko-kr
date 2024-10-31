@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/volumes-docker.html 
-keywords: create volumes, astra trident, trident for docker, docker, docker volume 
-summary: 볼륨을 생성하려면 필요한 경우 지정된 Astra Trident 드라이버 이름과 함께 표준 docker 볼륨 명령을 사용합니다. 
+keywords: create volumes, Trident, trident for docker, docker, docker volume 
+summary: '볼륨을 생성하려면 필요에 따라 지정된 Trident 드라이버 이름으로 표준 `docker volume` 명령을 사용합니다.' 
 ---
 = 볼륨 작업
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 볼륨을 생성하려면 필요한 경우 지정된 Astra Trident 드�
 
 
 [role="lead"]
-필요한 경우 지정된 Astra Trident 드라이버 이름을 사용하여 표준 docker 볼륨 명령을 사용하여 볼륨을 쉽게 생성, 클론 생성 및 제거할 수 있습니다.
+필요한 경우 Trident 드라이버 이름을 지정한 표준 명령을 사용하여 볼륨을 쉽게 생성, 클론 복제 및 제거할 수 `docker volume` 있습니다.
 
 
 
@@ -24,7 +24,7 @@ summary: 볼륨을 생성하려면 필요한 경우 지정된 Astra Trident 드�
 ----
 docker volume create -d netapp --name firstVolume
 ----
-* 특정 Astra Trident 인스턴스를 사용하여 볼륨 생성:
+* 특정 Trident 인스턴스를 사용하여 볼륨 생성:
 +
 [listing]
 ----
@@ -62,13 +62,13 @@ IMPORTANT: '솔드파이어-SAN' 드라이버를 사용할 때 위의 예에서�
 
 
 
-Docker를 위한 Astra Trident를 업그레이드하려면 다음 단계를 수행하십시오.
+Trident for Docker를 업그레이드하려면 아래 단계를 수행하십시오.
 
 
 
 == 볼륨의 클론을 생성합니다
 
-ONTAP-NAS, ONTAP-SAN, 졸idfire-SAN, GCP-CVS 스토리지 드라이버를 사용할 때 Astra Trident는 볼륨을 복제할 수 있습니다. ONTAP-NAS-Flexgroup 또는 ONTAP-NAS-이코노미 드라이버를 사용할 때는 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새 스냅샷이 생성됩니다.
+ `ontap-san`, , `solidfire-san` 및 를 `gcp-cvs storage drivers` 사용할 때 `ontap-nas` Trident에서 볼륨 클론 복제를 수행할 수 있습니다. 또는 `ontap-nas-economy` 드라이버를 사용할 때는 `ontap-nas-flexgroup` 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새 스냅샷이 생성됩니다.
 
 * 볼륨을 검사하여 스냅샷을 열거합니다.
 +
@@ -130,4 +130,4 @@ docker volume rm volFromSnap
 
 == 외부에서 생성된 볼륨에 액세스합니다
 
-Trident*만 * 을 사용하여 컨테이너별로 외부에서 생성된 블록 장치(또는 해당 클론)에 액세스할 수 있습니다. * 파티션이 없고 파일 시스템이 Astra Trident에서 지원하는 경우(예: "ext4"-formatted"/dev/sdc1"은 Astra Trident를 통해 액세스할 수 없습니다.
+파티션이 없고 파일 시스템이 Trident에서 지원되는 경우(예: Trident를 통해 형식 지정된 `/dev/sdc1` 블록 장치에 액세스할 수 없음) Trident * only * 를 사용하여 컨테이너를 통해 외부에서 생성된 블록 장치(또는 해당 클론) `ext4`에 액세스할 수 있습니다.

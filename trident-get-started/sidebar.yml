@@ -2,11 +2,11 @@
 section: trident-get-started
 title: 시작하십시오
 entries:
-- title: Astra Trident에 대해 자세히 알아보십시오
+- title: Trident에 대해 자세히 알아보십시오
   entries:
-  - title: Astra Trident 개요
+  - title: Trident 개요
     url: "/trident-get-started/intro.html"
-  - title: Astra Trident 아키텍처
+  - title: Trident 아키텍처
     url: "/trident-get-started/architecture.html"
   - title: 개념
     entries:

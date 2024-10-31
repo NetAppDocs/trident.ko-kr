@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/upgrade-uninstall-docker.html 
-keywords: uninstall, astra trident, trident for docker, docker, upgrade trident for docker 
-summary: 사용 중인 볼륨에 영향을 주지 않고 Docker용 Astra Trident를 안전하게 업그레이드할 수 있습니다. 업그레이드 프로세스 중에는 플러그인에서 지시하는 docker volume 명령이 성공하지 못하는 짧은 기간이 있으며 플러그인이 다시 실행될 때까지 응용 프로그램에서 볼륨을 마운트할 수 없습니다. 대부분의 경우 몇 초 이내에 완료됩니다. 
+keywords: uninstall, Trident, trident for docker, docker, upgrade trident for docker 
+summary: 'Trident for Docker를 사용 중인 볼륨에 영향을 주지 않고 안전하게 업그레이드할 수 있습니다. 업그레이드 프로세스 중에는 플러그인에 지시된 명령이 성공하지 못하고 플러그인이 다시 실행될 때까지 응용 프로그램에서 볼륨을 마운트할 수 없는 짧은 기간이 `docker volume` 있습니다. 대부분의 경우 몇 초 이내에 완료됩니다.' 
 ---
-= Astra Trident를 업그레이드하거나 제거합니다
+= Trident 업그레이드 또는 제거
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,13 +12,13 @@ summary: 사용 중인 볼륨에 영향을 주지 않고 Docker용 Astra Trident
 
 
 [role="lead"]
-사용 중인 볼륨에 영향을 주지 않고 Docker용 Astra Trident를 안전하게 업그레이드할 수 있습니다. 업그레이드 프로세스 중에는 플러그인에서 지시하는 docker volume 명령이 성공하지 못하는 짧은 기간이 있으며 플러그인이 다시 실행될 때까지 응용 프로그램에서 볼륨을 마운트할 수 없습니다. 대부분의 경우 몇 초 이내에 완료됩니다.
+Trident for Docker를 사용 중인 볼륨에 영향을 주지 않고 안전하게 업그레이드할 수 있습니다. 업그레이드 프로세스 중에는 플러그인에 지시된 명령이 성공하지 못하고 플러그인이 다시 실행될 때까지 응용 프로그램에서 볼륨을 마운트할 수 없는 짧은 기간이 `docker volume` 있습니다. 대부분의 경우 몇 초 이내에 완료됩니다.
 
 
 
 == 업그레이드
 
-Docker를 위한 Astra Trident를 업그레이드하려면 다음 단계를 수행하십시오.
+Trident for Docker를 업그레이드하려면 아래 단계를 수행하십시오.
 
 .단계
 . 기존 볼륨 나열:
@@ -46,7 +46,7 @@ docker plugin upgrade --skip-remote-check --grant-all-permissions netapp:latest 
 ----
 +
 
-NOTE: Astra Trident의 18.01 릴리스는 nDVP를 대체합니다. 'NetApp/ndvp-plugin' 이미지에서 'NetApp/트리덴트 - 플러그인' 이미지로 직접 업그레이드해야 합니다.
+NOTE: nDVP가 Trident 18.01 릴리즈로 대체됩니다. 이미지에서 이미지로 `netapp/trident-plugin` 직접 업그레이드해야 `netapp/ndvp-plugin` 합니다.
 
 . 플러그인 활성화:
 +
@@ -73,13 +73,13 @@ netapp:latest       my_volume
 
 
 
-IMPORTANT: Astra Trident(20.10 이전)의 이전 버전에서 Astra Trident 20.10 이상으로 업그레이드하는 경우 오류가 발생할 수 있습니다. 자세한 내용은 을 참조하십시오 link:known-issues-docker.html["알려진 문제"^]. 오류가 발생하면 먼저 플러그인을 비활성화한 다음 플러그인을 제거한 다음 추가 구성 매개 변수를 전달하여 필요한 Astra Trident 버전을 설치해야 합니다. `docker plugin install netapp/trident-plugin:20.10 --alias netapp --grant-all-permissions config=config.json`
+IMPORTANT: 이전 버전의 Trident(20.10 이전)에서 Trident 20.10 이상으로 업그레이드하는 경우 오류가 발생할 수 있습니다. 자세한 내용은 을 link:known-issues-docker.html["알려진 문제"^]참조하십시오. 오류가 발생하면 먼저 플러그인을 비활성화한 다음 플러그인을 제거한 다음 추가 구성 매개 변수를 전달하여 필요한 Trident 버전을 설치해야 합니다. `docker plugin install netapp/trident-plugin:20.10 --alias netapp --grant-all-permissions config=config.json`
 
 
 
 == 설치 제거
 
-Docker용 Astra Trident를 제거하려면 다음 단계를 수행하십시오.
+Trident for Docker를 제거하려면 아래 단계를 수행하십시오.
 
 .단계
 . 플러그인이 생성한 모든 볼륨을 제거합니다.

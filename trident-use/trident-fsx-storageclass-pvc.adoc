@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/trident-fsx-storageclass-pvc.html 
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
-summary: 'NetApp ONTAP용 Amazon FSx와 Astra Trident를 사용하면 Amazon EKS(Elastic Kubernetes Service)에서 실행되는 Kubernetes 클러스터가 ONTAP에서 지원하는 블록 및 파일 영구 볼륨을 프로비저닝할 수 있습니다.' 
+summary: 'Trident를 Amazon FSx for NetApp ONTAP와 함께 사용하면 Amazon EKS(Elastic Kubernetes Service)에서 실행되는 Kubernetes 클러스터가 ONTAP에서 지원하는 블록 및 파일 영구 볼륨을 프로비저닝할 수 있습니다.' 
 ---
 = 저장소 클래스 및 PVC를 구성합니다
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 'NetApp ONTAP용 Amazon FSx와 Astra Trident를 사용하면 Amazon EKS
 
 
 [role="lead"]
-Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성하여 Astra Trident에 볼륨 프로비저닝 방법을 안내합니다. 구성된 Kubernetes StorageClass를 사용하여 PV에 대한 액세스를 요청하는 PersistentVolume(PV) 및 PersistentVolumeClaim(PVC)을 생성합니다. 그런 다음 PV를 포드에 장착할 수 있습니다.
+Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성하여 Trident에 볼륨 프로비저닝 방법을 지시합니다. 구성된 Kubernetes StorageClass를 사용하여 PV에 대한 액세스를 요청하는 PersistentVolume(PV) 및 PersistentVolumeClaim(PVC)을 생성합니다. 그런 다음 PV를 포드에 장착할 수 있습니다.
 
 
 
@@ -22,7 +22,7 @@ Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성�
 
 === Kubernetes StorageClass 개체를 구성합니다
 
- https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^]Astra Trident를 해당 수업에 사용되는 프로비저닝으로 식별하면 Astra Trident에 볼륨 프로비저닝 방법이 설명됩니다. 예를 들면 다음과 같습니다.
+에서는 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] Trident를 해당 클래스에 사용되는 Provisioner로 식별하여 Trident에 볼륨 프로비저닝 방법을 지시합니다. 예를 들면 다음과 같습니다.
 
 [listing]
 ----
@@ -37,7 +37,7 @@ parameters:
   provisioningType: "thin"
   snapshots: "true"
 ----
-을 참조하십시오 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"] 스토리지 클래스가 와 상호 작용하는 방법에 대한 자세한 내용은 을 참조하십시오 `PersistentVolumeClaim` 및 Astra Trident가 볼륨을 프로비저닝하는 방법을 제어하는 매개 변수가 포함됩니다.
+Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.
 
 
 
@@ -50,7 +50,7 @@ parameters:
 ----
 kubectl create -f storage-class-ontapnas.yaml
 ----
-. 이제 Kubernetes 및 Astra Trident에 * basic-CSI * 스토리지 클래스가 표시됩니다. Astra Trident는 백엔드에서 풀을 검색했습니다.
+. 이제 Kubernetes와 Trident 모두에서 * BASIC-CSI * 스토리지 클래스가 표시되고 Trident는 백엔드에서 풀을 검색해야 합니다.
 +
 [listing]
 ----
@@ -174,13 +174,13 @@ pvc-storage Bound  pv-name 2Gi      RWO                       5m
 ----
 
 
-을 참조하십시오 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"] 스토리지 클래스가 와 상호 작용하는 방법에 대한 자세한 내용은 을 참조하십시오 `PersistentVolumeClaim` 및 Astra Trident가 볼륨을 프로비저닝하는 방법을 제어하는 매개 변수가 포함됩니다.
+Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.
 
 
 
-== Astra Trident 특성
+== Trident 특성
 
-이 매개 변수는 특정 유형의 볼륨을 프로비저닝하는 데 사용해야 하는 Astra Trident 관리형 스토리지 풀을 결정합니다.
+이러한 매개 변수는 지정된 유형의 볼륨을 프로비저닝하는 데 사용해야 하는 Trident 관리 스토리지 풀을 결정합니다.
 
 [cols=",,,,,"]
 |===

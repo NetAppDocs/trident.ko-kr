@@ -203,4 +203,4 @@ kubectl delete pod task-pv-pod
 ----
 
 
-을 참조하십시오 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"] 스토리지 클래스가 와 상호 작용하는 방법에 대한 자세한 내용은 을 참조하십시오 `PersistentVolumeClaim` 및 Astra Trident가 볼륨을 프로비저닝하는 방법을 제어하는 매개 변수가 포함됩니다.
+Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.

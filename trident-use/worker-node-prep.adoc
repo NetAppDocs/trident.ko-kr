@@ -32,24 +32,31 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nvm
 
 NOTE: NVMe/TCP에 ONTAP 9.12 이상을 사용하는 것이 좋습니다.
 
+.SCSI over FC 도구
+*FC(SCSI over Fibre Channel)는 Trident 24.10 릴리스의 기술 미리 보기 기능입니다.*
+
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-iscsi-tools["iSCSI 도구를 설치합니다"] sanType `fcp`(SCSI over FC)을 사용하는 경우 `ontap-san`
+
+자세한 내용은 을 link:https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["FC 및 AMP, FC-NVMe SAN 호스트를 구성하는 방법"] 참조하십시오.
+
 
 
 == 노드 서비스 검색
 
-Astra Trident는 노드가 iSCSI 또는 NFS 서비스를 실행할 수 있는지 자동으로 감지하려고 시도합니다.
+Trident는 노드에서 iSCSI 또는 NFS 서비스를 실행할 수 있는지 여부를 자동으로 감지합니다.
 
 
 NOTE: 노드 서비스 검색은 검색된 서비스를 식별하지만 서비스가 올바르게 구성된다고 보장하지 않습니다. 반대로 검색된 서비스가 없으면 볼륨 마운트가 실패한다고 보장할 수 없습니다.
 
 .이벤트를 검토합니다
-Astra Trident는 검색된 서비스를 식별하기 위해 노드에 대한 이벤트를 생성합니다. 이러한 이벤트를 검토하려면 다음을 실행합니다.
+Trident는 검색된 서비스를 식별하기 위해 노드에 대한 이벤트를 생성합니다. 이러한 이벤트를 검토하려면 다음을 실행합니다.
 
 [listing]
 ----
 kubectl get event -A --field-selector involvedObject.name=<Kubernetes node name>
 ----
 .검색된 서비스를 검토합니다
-Astra Trident는 Trident 노드 CR의 각 노드에 대해 활성화된 서비스를 식별합니다. 검색된 서비스를 보려면 다음을 실행합니다.
+Trident는 Trident 노드 CR의 각 노드에 대해 활성화된 서비스를 식별합니다. 검색된 서비스를 보려면 다음을 실행합니다.
 
 [listing]
 ----
@@ -85,25 +92,25 @@ WARNING: 볼륨에 연결할 때 오류가 발생하지 않도록 NFS 툴을 설
 
 == iSCSI 볼륨
 
-Astra Trident는 iSCSI 세션을 자동으로 설정하고, LUN을 검색하고, 다중 경로 장치를 검색하고, 포맷하고, 포드에 마운트할 수 있습니다.
+Trident는 자동으로 iSCSI 세션을 설정하고, LUN을 스캔하고, 다중 경로 장치를 검색하고, 포맷하고, Pod에 마운트할 수 있습니다.
 
 
 
 === iSCSI 자동 복구 기능
 
-ONTAP 시스템의 경우, Astra Trident가 5분마다 iSCSI 자동 복구를 실행하여 다음을 수행합니다.
+ONTAP 시스템의 경우 Trident는 5분마다 iSCSI 자동 복구를 실행하여 다음을 수행합니다.
 
 . * 원하는 iSCSI 세션 상태와 현재 iSCSI 세션 상태를 식별합니다.
-. * 원하는 상태를 현재 상태와 비교 * 하여 필요한 수리를 확인합니다. Astra Trident는 수리 우선 순위 및 수리 시기를 결정합니다.
+. * 원하는 상태를 현재 상태와 비교 * 하여 필요한 수리를 확인합니다. Trident는 수리 우선 순위와 수리 선점 시기를 결정합니다.
 . * 현재 iSCSI 세션 상태를 원하는 iSCSI 세션 상태로 되돌리는 데 필요한 복구 수행 *
 
 
 
-NOTE: 자동 복구 작업의 로그는 에 있습니다 `trident-main` 각 드로포드에 있는 용기. 로그를 보려면 을(를) 설정해야 합니다 `debug` Astra Trident를 설치하는 동안 "참"으로 표시합니다.
+NOTE: 자가 치유 활동 로그는 `trident-main` 해당 Demonset POD의 컨테이너에 있습니다. 로그를 보려면 Trident 설치 중에 "true"로 설정해야 `debug` 합니다.
 
-Astra Trident iSCSI 자동 복구 기능을 사용하면 다음과 같은 문제를 방지할 수 있습니다.
+Trident iSCSI 자동 복구 기능은 다음과 같은 이점을 제공합니다.
 
-* 네트워크 연결 문제가 발생한 후 발생할 수 있는 오래되거나 비정상적인 iSCSI 세션. 오래된 세션의 경우 Astra Trident는 로그아웃하기 7분 전에 대기하여 포털과의 연결을 다시 설정합니다.
+* 네트워크 연결 문제가 발생한 후 발생할 수 있는 오래되거나 비정상적인 iSCSI 세션. 오래된 세션의 경우 Trident는 로그아웃하기 전에 7분 동안 기다렸다가 포털과의 연결을 다시 설정합니다.
 +
 
 NOTE: 예를 들어, 스토리지 컨트롤러에서 CHAP 암호를 회전시키고 네트워크에서 연결이 끊어지면 이전의 (_stale_) CHAP 암호가 지속될 수 있습니다. 자동 복구 기능은 이 문제를 인식하고 업데이트된 CHAP 암호를 적용하기 위해 세션을 자동으로 다시 설정할 수 있습니다.
@@ -144,19 +151,13 @@ sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.c
 +
 [listing]
 ----
-sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
+sudo yum install -y lsscsi iscsi-initiator-utils device-mapper-multipath
 ----
 . iscsi-initiator-utils 버전이 6.2.0.874-2.el7 이상인지 확인합니다.
 +
 [listing]
 ----
 rpm -q iscsi-initiator-utils
-----
-. 스캔을 수동으로 설정합니다.
-+
-[listing]
-----
-sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . 다중 경로 설정:
 +
@@ -240,7 +241,7 @@ NOTE: Ubuntu 18.04의 경우 iSCSI 데몬이 시작되도록 "open-iscsi"를 시
 
 === iSCSI 자동 복구를 구성하거나 사용하지 않도록 설정합니다
 
-다음 Astra Trident iSCSI 자동 복구 설정을 구성하여 오래된 세션을 수정할 수 있습니다.
+다음 Trident iSCSI 자동 복구 설정을 구성하여 오래된 세션을 수정할 수 있습니다.
 
 * *iscsi 자동 복구 간격*: iSCSI 자동 복구가 호출되는 빈도를 결정합니다(기본값: 5분). 더 큰 숫자를 설정하여 더 적은 숫자를 설정하거나 더 자주 실행되도록 구성할 수 있습니다.
 
@@ -263,7 +264,7 @@ iSCSI 자동 복구 설정을 구성하거나 변경하려면 를 전달합니�
 
 [listing]
 ----
-helm install trident trident-operator-100.2406.0.tgz --set iscsiSelfHealingInterval=3m0s --set iscsiSelfHealingWaitTime=6m0s -n trident
+helm install trident trident-operator-100.2410.0.tgz --set iscsiSelfHealingInterval=3m0s --set iscsiSelfHealingWaitTime=6m0s -n trident
 ----
 --
 .tridentctl 을 선택합니다
@@ -323,4 +324,4 @@ sudo modprobe nvme-tcp
 cat /etc/nvme/hostnqn
 ----
 
-WARNING: Astra Trident가 을 수정 한다 `ctrl_device_tmo` NVMe가 중단되더라도 NVMe가 중단되지 않도록 하는 가치 이 설정을 변경하지 마십시오.
+WARNING: Trident는 이 값을 수정하여 `ctrl_device_tmo` NVMe가 다운될 경우 경로를 포기하지 않도록 합니다. 이 설정을 변경하지 마십시오.

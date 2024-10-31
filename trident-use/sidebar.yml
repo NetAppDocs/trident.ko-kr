@@ -1,6 +1,6 @@
 ---
 section: trident-use
-title: Astra Trident를 사용해 보십시오
+title: Trident를 사용합니다
 entries:
 - title: 작업자 노드를 준비합니다
   url: "/trident-use/worker-node-prep.html"
@@ -50,7 +50,7 @@ entries:
       url: "/trident-use/trident-fsx.html"
     - title: IAM 역할 및 AWS 암호를 생성합니다
       url: "/trident-use/trident-fsx-iam-role.html"
-    - title: Astra Trident를 설치합니다
+    - title: Trident를 설치합니다
       url: "/trident-use/trident-fsx-install-trident.html"
     - title: 스토리지 백엔드를 구성합니다
       url: "/trident-use/trident-fsx-storage-backend.html"
@@ -58,7 +58,7 @@ entries:
       url: "/trident-use/trident-fsx-storageclass-pvc.html"
     - title: 샘플 응용 프로그램을 배포합니다
       url: "/trident-use/trident-fsx-deploy-sample.html"
-    - title: EKS 클러스터에서 Astra Trident EKS 애드온을 구성합니다
+    - title: EKS 클러스터에 Trident EKS 추가 기능을 구성합니다
       url: "/trident-use/trident-aws-addon.html"
   - title: kubectl로 백엔드를 만듭니다
     url: "/trident-use/backend-kubectl.html"

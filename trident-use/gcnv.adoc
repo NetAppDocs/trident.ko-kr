@@ -12,17 +12,17 @@ summary:
 
 
 [role="lead"]
-이제 Google Cloud NetApp 볼륨을 Astra Trident의 백엔드로 구성할 수 있습니다. Google Cloud NetApp 볼륨 백엔드를 사용하여 NFS 볼륨을 연결할 수 있습니다.
+이제 Google Cloud NetApp 볼륨을 Trident의 백엔드로 구성할 수 있습니다. Google Cloud NetApp 볼륨 백엔드를 사용하여 NFS 볼륨을 연결할 수 있습니다.
 
 [listing]
 ----
- Google Cloud NetApp Volumes is a tech preview feature in Astra Trident 24.06.
+ Google Cloud NetApp Volumes is a tech preview feature in Trident 24.06.
 ----
 
 
 == Google Cloud NetApp 볼륨 드라이버 세부 정보입니다
 
-Astra Trident는 `google-cloud-netapp-volumes` 클러스터와 통신할 수 있는 드라이버를 제공합니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.
+Trident는 `google-cloud-netapp-volumes` 클러스터와 통신할 수 있는 드라이버를 제공합니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.
 
 [cols="2, 1, 1, 2, 2"]
 |===
@@ -39,3 +39,67 @@ RWO, ROX, rwx, RWOP
 `nfs`
 
 |===
+
+
+== GKE용 클라우드 ID
+
+클라우드 ID를 사용하면 Kubernetes Pod에서 명시적 Google Cloud 자격 증명을 제공하지 않고 워크로드 ID로 인증하여 Google Cloud 리소스에 액세스할 수 있습니다.
+
+Google Cloud에서 클라우드 ID를 활용하려면 다음이 필요합니다.
+
+* GKE를 사용하여 구축된 Kubernetes 클러스터
+* GKE 클러스터에 구성된 워크로드 ID 및 oidc-발급자입니다.
+*  `"GCP"`워크로드 ID를 지정하고 `cloudIdentity` 지정하는 가 포함된 Astra Trident가 설치되었습니다. `cloudProvider`
++
+[role="tabbed-block"]
+====
+.Trident 운영자
+--
+Trident 연산자를 사용하여 Astra Trident를 설치하려면 `tridentorchestrator_cr.yaml` 를 `cloudProvider` 로 `"GCP"` 설정하고 를 로 `cloudIdentity` `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com` 설정합니다.
+
+예를 들면 다음과 같습니다.
+
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  imagePullPolicy: IfNotPresent
+  cloudProvider: "GCP"
+  cloudIdentity: 'iam.gke.io/gcp-service-account: cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com'
+----
+--
+.헬름
+--
+다음 환경 변수를 사용하여 * 클라우드 공급자(CP) * 및 * 클라우드 ID(CI) * 플래그의 값을 설정합니다.
+
+`export CP="GCP"`
+`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+
+다음 예에서는 Astra Trident를 설치하고 환경 변수를 사용하여 GCP로 `$CP` 설정하고 환경 변수를 사용하여 `$ANNOTATION` 를 설정합니다 `cloudProvider`. `cloudIdentity`
+
+[listing]
+----
+helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
+----
+--
+.<code>tridentctl</code>
+--
+다음 환경 변수를 사용하여 * 클라우드 공급자 * 및 * 클라우드 ID * 플래그의 값을 설정합니다.
+
+`export CP="GCP"`
+`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+
+다음 예에서는 Astra Trident를 설치하고 플래그를 `$CP`, 및 `cloud-identity` 로 `$ANNOTATION` 설정합니다 `cloud-provider`.
+
+[listing]
+----
+tridentctl install --cloud-provider=$CP --cloud-identity="$ANNOTATION" -n trident
+----
+--
+====
+

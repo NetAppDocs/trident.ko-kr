@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/csi-topology.html 
 keywords: volumes, csi topology, storage classes, backends, kubernetes 
-summary: Astra Trident는 CSI 토폴로지 기능을 사용하여 Kubernetes 클러스터에 있는 노드를 선택적으로 생성하고 연결할 수 있습니다. 
+summary: Trident는 CSI 토폴로지 기능을 사용하여 Kubernetes 클러스터에 있는 노드에 볼륨을 선택적으로 생성하고 연결할 수 있습니다. 
 ---
 = CSI 토폴로지를 사용합니다
 :hardbreaks:
@@ -12,20 +12,20 @@ summary: Astra Trident는 CSI 토폴로지 기능을 사용하여 Kubernetes 클
 
 
 [role="lead"]
-Astra Trident는 을 사용하여 Kubernetes 클러스터에 있는 노드를 선택적으로 생성하여 연결할 수 있습니다 https://kubernetes-csi.github.io/docs/topology.html["CSI 토폴로지 기능"^].
+Trident은 를 사용하여 Kubernetes 클러스터에 있는 노드에 볼륨을 선택적으로 생성하고 연결할 수 있습니다 https://kubernetes-csi.github.io/docs/topology.html["CSI 토폴로지 기능"^].
 
 
 
 == 개요
 
-CSI 토폴로지 기능을 사용하면 지역 및 가용성 영역에 따라 볼륨에 대한 액세스가 노드의 하위 집합으로 제한될 수 있습니다. 오늘날의 클라우드 공급자는 Kubernetes 관리자가 영역 기반의 노드를 생성할 수 있습니다. 노드는 지역 내 또는 여러 지역의 여러 가용성 영역에 위치할 수 있습니다. Astra Trident는 다중 영역 아키텍처에서 워크로드용 볼륨 프로비저닝을 지원하기 위해 CSI 토폴로지를 사용합니다.
+CSI 토폴로지 기능을 사용하면 지역 및 가용성 영역에 따라 볼륨에 대한 액세스가 노드의 하위 집합으로 제한될 수 있습니다. 오늘날의 클라우드 공급자는 Kubernetes 관리자가 영역 기반의 노드를 생성할 수 있습니다. 노드는 지역 내 또는 여러 지역의 여러 가용성 영역에 위치할 수 있습니다. Trident는 다중 영역 아키텍처에서 워크로드용 볼륨을 간편하게 프로비저닝할 수 있도록 CSI 토폴로지를 사용합니다.
 
 
 TIP: CSI 토폴로지 기능에 대해 자세히 알아보십시오 https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/["여기"^].
 
 Kubernetes는 두 가지 고유한 볼륨 바인딩 모드를 제공합니다.
 
-* 와 함께 `VolumeBindingMode` 를 로 설정합니다 `Immediate`, Astra Trident는 토폴로지 인식 없이 볼륨을 생성합니다. 볼륨 바인딩 및 동적 프로비저닝은 PVC가 생성될 때 처리됩니다. 이것이 기본값입니다 `VolumeBindingMode` 또한 토폴로지 제약 조건을 적용하지 않는 클러스터에 적합합니다. 영구 볼륨은 요청 Pod의 예약 요구사항에 종속되지 않고 생성됩니다.
+*  `VolumeBindingMode`로 `Immediate` 설정하면 Trident에서 토폴로지를 인식하지 않고 볼륨을 생성합니다. 볼륨 바인딩 및 동적 프로비저닝은 PVC가 생성될 때 처리됩니다. 이 옵션은 기본값이며 `VolumeBindingMode` 토폴로지 제약 조건을 적용하지 않는 클러스터에 적합합니다. 영구 볼륨은 요청 Pod의 예약 요구사항에 종속되지 않고 생성됩니다.
 * VolumeBindingMode를 WaitForFirstConsumer로 설정하면 PVC를 사용하는 POD가 예약 및 생성될 때까지 PVC에 대한 영구 볼륨의 생성 및 바인딩이 지연됩니다. 이렇게 하면 토폴로지 요구 사항에 따라 적용되는 일정 제한을 충족하기 위해 볼륨이 생성됩니다.
 
 
@@ -43,7 +43,7 @@ kubectl version
 Client Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:50:19Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:41:49Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
 ----
-* 클러스터의 노드에는 토폴로지 인식( topology.Kubernetes.io/region' 및 topology.Kubernetes.io/zone')을 소개하는 레이블이 있어야 합니다. Astra Trident가 토폴로지 인식을 위해 설치되기 전에 클러스터의 노드에 이러한 레이블 * 이 있어야 합니다.
+* 클러스터의 노드에는 토폴로지 인식  및 `topology.kubernetes.io/zone` 을 설명하는 레이블이 있어야 (`topology.kubernetes.io/region`합니다. 토폴로지를 인식하려면 Trident를 설치하기 전에 클러스터의 노드에 이러한 레이블 * 이 있어야 Trident 합니다.
 +
 [listing]
 ----
@@ -58,7 +58,7 @@ kubectl get nodes -o=jsonpath='{range .items[*]}[{.metadata.name}, {.metadata.la
 
 == 1단계: 토폴로지 인식 백엔드 생성
 
-Astra Trident 스토리지 백엔드는 가용성 영역에 따라 볼륨을 선택적으로 프로비저닝하도록 설계할 수 있습니다. 각 백엔드에는 지원되는 영역 및 영역 목록을 나타내는 선택적 블록이 포함될 수 `supportedTopologies` 있습니다. 이러한 백엔드를 사용하는 StorageClasses의 경우 지원되는 영역/영역에서 예약된 애플리케이션에서 요청하는 경우에만 볼륨이 생성됩니다.
+Trident 스토리지 백엔드는 가용 영역을 기준으로 볼륨을 선택적으로 프로비저닝하도록 설계할 수 있습니다. 각 백엔드에는 지원되는 영역 및 영역 목록을 나타내는 선택적 블록이 포함될 수 `supportedTopologies` 있습니다. 이러한 백엔드를 사용하는 StorageClasses의 경우 지원되는 영역/영역에서 예약된 애플리케이션에서 요청하는 경우에만 볼륨이 생성됩니다.
 
 다음은 백엔드 정의의 예입니다.
 
@@ -104,7 +104,7 @@ supportedTopologies:
 --
 ====
 
-NOTE: 'SupportedTopologies'는 백엔드 당 지역 및 영역 목록을 제공하는 데 사용됩니다. 이러한 영역 및 영역은 StorageClass 에서 제공할 수 있는 허용 가능한 값의 목록을 나타냅니다. 백엔드에서 제공되는 지역 및 영역의 하위 집합이 포함된 StorageClasses의 경우 Astra Trident는 백엔드에 볼륨을 생성합니다.
+NOTE: `supportedTopologies` 백엔드당 지역 및 영역 목록을 제공하는 데 사용됩니다. 이러한 영역 및 영역은 StorageClass 에서 제공할 수 있는 허용 가능한 값의 목록을 나타냅니다. 백엔드에서 제공되는 영역 및 영역의 하위 집합이 포함된 StorageClasses의 경우 Trident는 백엔드에 볼륨을 생성합니다.
 
 스토리지 풀별로 'SupportedTopologies'를 정의할 수도 있습니다. 다음 예를 참조하십시오.
 
@@ -165,7 +165,7 @@ allowedTopologies:
 parameters:
   fsType: "ext4"
 ----
-위에서 제공한 StorageClass 정의에서 volumeBindingMode는 WaitForFirstConsumer로 설정됩니다. 이 StorageClass에 요청된 PVC는 POD에서 참조될 때까지 작동하지 않습니다. 그리고, “allowedTopologies”는 사용할 지역과 지역을 제공한다. NetApp-SAN-us-east1 StorageClass는 위에 정의된 'AN-BACKEND-Us-east1' 백엔드에서 PVC를 생성합니다.
+위에 제공된 StorageClass 정의에서 `volumeBindingMode` 는 로 `WaitForFirstConsumer`설정됩니다. 이 StorageClass에 요청된 PVC는 POD에서 참조될 때까지 작동하지 않습니다. 및 는 `allowedTopologies` 사용할 영역 및 영역을 제공합니다.  `netapp-san-us-east1`StorageClass는 위에 정의된 백엔드에 PVC를 `san-backend-us-east1` 생성합니다.
 
 
 

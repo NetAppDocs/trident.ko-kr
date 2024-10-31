@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-concepts/vol-access-groups.html 
-keywords: volume access groups, element, solidfire, chap, astra trident, hci, netapp hci, storage system, access volumes, 
-summary: Astra Trident가 볼륨 액세스 그룹을 사용하는 방법에 대해 자세히 알아보십시오. 
+keywords: volume access groups, element, solidfire, chap, Trident, hci, netapp hci, storage system, access volumes, 
+summary: Trident에서 볼륨 액세스 그룹을 사용하는 방법에 대해 자세히 알아보십시오. 
 ---
 = 볼륨 액세스 그룹
 :hardbreaks:
@@ -12,18 +12,18 @@ summary: Astra Trident가 볼륨 액세스 그룹을 사용하는 방법에 대�
 
 
 [role="lead"]
-Astra Trident가 사용하는 방법에 대해 자세히 알아보십시오 https://docs.netapp.com/us-en/element-software/concepts/concept_solidfire_concepts_volume_access_groups.html["볼륨 액세스 그룹"^].
+Trident의 사용 방법에 대해 https://docs.netapp.com/us-en/element-software/concepts/concept_solidfire_concepts_volume_access_groups.html["볼륨 액세스 그룹"^] 자세히 알아보십시오.
 
 
-NOTE: CHAP를 사용하는 경우 이 섹션을 무시하십시오. CHAP는 관리를 단순화하고 아래 설명된 배율 제한을 피하는 것이 좋습니다. 또한 CSI 모드에서 Astra Trident를 사용하는 경우 이 섹션을 무시할 수 있습니다. Astra Trident는 향상된 CSI 구축 기능으로 설치된 경우 CHAP를 사용합니다.
+NOTE: CHAP를 사용하는 경우 이 섹션을 무시하십시오. CHAP는 관리를 단순화하고 아래 설명된 배율 제한을 피하는 것이 좋습니다. 또한 CSI 모드에서 Trident를 사용하는 경우 이 섹션을 무시할 수 있습니다. Trident는 고급 CSI 프로비저닝기로 설치될 때 CHAP를 사용합니다.
 
 
 
 == 볼륨 액세스 그룹에 대해 알아보십시오
 
-Astra Trident는 볼륨 액세스 그룹을 사용하여 프로비저닝하는 볼륨에 대한 액세스를 제어할 수 있습니다. CHAP를 비활성화하면 구성에 하나 이상의 액세스 그룹 ID를 지정하지 않는 한 "트리덴트"라는 액세스 그룹을 찾을 수 있습니다.
+Trident는 볼륨 액세스 그룹을 사용하여 프로비저닝하는 볼륨에 대한 액세스를 제어할 수 있습니다. CHAP가 해제된 경우 구성에서 하나 이상의 액세스 그룹 ID를 지정하지 않으면 라는 액세스 그룹을 찾을 것으로 `trident` 예상됩니다.
 
-Astra Trident는 새 볼륨을 구성된 액세스 그룹과 연결하지만 액세스 그룹 자체를 생성하거나 관리하지 않습니다. 액세스 그룹은 스토리지 백엔드가 Astra Trident에 추가되기 전에 존재해야 하며, Kubernetes 클러스터의 모든 노드에 있는 iSCSI IQN을 포함해야 하며, 이 백엔드에서 프로비저닝한 볼륨을 잠재적으로 마운트할 수 있습니다. 대부분의 설치에서는 클러스터의 모든 작업자 노드를 포함합니다.
+Trident는 새 볼륨을 구성된 액세스 그룹과 연결하지만 액세스 그룹 자체를 생성하거나 관리하지 않습니다. 액세스 그룹은 스토리지 백엔드를 Trident에 추가하기 전에 존재해야 하며, 해당 백엔드에서 프로비저닝한 볼륨을 마운트할 수 있는 Kubernetes 클러스터의 모든 노드에서 iSCSI IQN을 포함해야 합니다. 대부분의 설치에서는 클러스터의 모든 작업자 노드를 포함합니다.
 
 64개 이상의 노드가 있는 Kubernetes 클러스터의 경우 다중 액세스 그룹을 사용해야 합니다. 각 액세스 그룹에는 최대 64개의 IQN이 포함될 수 있으며 각 볼륨은 4개의 액세스 그룹에 속할 수 있습니다. 최대 4개의 액세스 그룹이 구성되어 있는 경우, 클러스터의 모든 노드에서 최대 256개의 노드 크기로 모든 볼륨에 액세스할 수 있습니다. 볼륨 액세스 그룹에 대한 최신 제한은 을 참조하십시오 https://docs.netapp.com/us-en/element-software/concepts/concept_solidfire_concepts_volume_access_groups.html["여기"^].
 

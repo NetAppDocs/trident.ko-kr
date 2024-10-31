@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/element.html 
 keywords: trident backend, solidfire, netapp hci, drivers, access modes, rwo, rwx, rwp, rwop, file system 
-summary: Astra Trident 설치와 함께 Element 백엔드를 생성하고 사용하는 방법에 대해 알아보십시오. 
+summary: Trident 설치에서 Element 백엔드를 만들고 사용하는 방법에 대해 알아보십시오. 
 ---
 = NetApp HCI 또는 SolidFire 백엔드를 구성합니다
 :hardbreaks:
@@ -12,15 +12,15 @@ summary: Astra Trident 설치와 함께 Element 백엔드를 생성하고 사용
 
 
 [role="lead"]
-Astra Trident 설치 시 Element 백엔드를 생성하고 사용하는 방법을 알아보십시오.
+Trident 설치에서 Element 백엔드를 생성하고 사용하는 방법에 대해 알아봅니다.
 
 
 
 == 요소 드라이버 세부 정보
 
-Astra Trident가 제공하는 것은 다음과 같습니다 `solidfire-san` 클러스터와 통신하는 스토리지 드라이버입니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.
+Trident는 `solidfire-san` 클러스터와 통신할 수 있는 스토리지 드라이버를 제공합니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.
 
-를 클릭합니다 `solidfire-san` 스토리지 드라이버는 _FILE_AND_BLOCK_VOLUME 모드를 지원합니다. 의 경우 `Filesystem` 볼륨 코드, Astra Trident가 볼륨을 생성하고 파일 시스템을 생성합니다. 파일 시스템 유형은 StorageClass에 의해 지정됩니다.
+ `solidfire-san`스토리지 드라이버는 _FILE_AND_BLOCK_VOLUME 모드를 지원합니다. 볼륨 모드의 경우 `Filesystem` Trident는 볼륨을 생성하고 파일 시스템을 생성합니다. 파일 시스템 유형은 StorageClass에 의해 지정됩니다.
 
 [cols="5"]
 |===
@@ -94,7 +94,7 @@ Element 백엔드를 생성하기 전에 다음이 필요합니다.
 | 이니토IFace | iSCSI 트래픽을 특정 호스트 인터페이스로 제한합니다 | “기본값” 
 
 
-| 'UseCHAP'입니다 | CHAP를 사용하여 iSCSI를 인증합니다. Astra Trident는 CHAP를 사용합니다. | 참 
+| 'UseCHAP'입니다 | CHAP를 사용하여 iSCSI를 인증합니다. Trident는 CHAP를 사용합니다. | 참 
 
 
 | "액세스 그룹" | 사용할 액세스 그룹 ID 목록입니다 | "트리덴트"라는 액세스 그룹의 ID를 찾습니다. 
@@ -153,7 +153,7 @@ Types:
 
 이 예에서는 가상 풀과 이를 다시 참조하는 StorageClasses와 함께 구성된 백엔드 정의 파일을 보여 줍니다.
 
-Astra Trident는 스토리지 풀에 있는 레이블을 프로비저닝할 때 백엔드 스토리지 LUN에 복사합니다. 편의를 위해 스토리지 관리자는 가상 풀 및 그룹 볼륨별로 레이블을 레이블별로 정의할 수 있습니다.
+Trident는 용량 할당 시 스토리지 풀에 있는 레이블을 백엔드 스토리지 LUN에 복제합니다. 편의를 위해 스토리지 관리자는 가상 풀 및 그룹 볼륨별로 레이블을 레이블별로 정의할 수 있습니다.
 
 아래 표시된 샘플 백엔드 정의 파일에서 특정 기본값은 를 설정하는 모든 스토리지 풀에 대해 설정됩니다 `type` 실버. 가상 풀은 에 정의되어 있습니다 `storage` 섹션을 참조하십시오. 이 예에서는 일부 스토리지 풀이 자체 유형을 설정하고 일부 풀은 위에 설정된 기본값을 재정의합니다.
 
@@ -211,7 +211,7 @@ storage:
 ----
 다음 StorageClass 정의는 위의 가상 풀을 참조합니다. 를 사용합니다 `parameters.selector` 필드에서 각 StorageClass는 볼륨을 호스팅하는 데 사용할 수 있는 가상 풀을 호출합니다. 선택한 가상 풀에 볼륨이 정의되어 있습니다.
 
-첫 번째 StorageClass입니다 (`solidfire-gold-four`)는 첫 번째 가상 풀에 매핑합니다. 이 수영장은 골드 성능을 제공하는 유일한 수영장입니다 `Volume Type QoS` 않습니다. 마지막 StorageClass입니다 (`solidfire-silver`) 은 뛰어난 성능을 제공하는 스토리지 풀을 호출합니다. Astra Trident가 선택한 가상 풀을 결정하고 스토리지 요구 사항을 충족시킵니다.
+첫 번째 StorageClass(`solidfire-gold-four`)가 첫 번째 가상 풀에 매핑됩니다. 이 수영장은 금색 연주를 제공하는 유일한 수영장입니다. `Volume Type QoS` Last StorageClass(`solidfire-silver`)는 은색 성능을 제공하는 모든 스토리지 풀을 호출합니다. Trident는 어떤 가상 풀이 선택되었는지 결정하고 스토리지 요구 사항이 충족되는지 확인합니다.
 
 [listing]
 ----

@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/prereqs-docker.html 
-keywords: deploy, astra trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, nvme/tcp, nvme 
-summary: Astra Trident를 구축하기 전에 호스트에 필수 프로토콜 사전 요구 사항을 설치하고 구성해야 합니다. 
+keywords: deploy, Trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, nvme/tcp, nvme 
+summary: Trident를 배포하기 전에 호스트에 필요한 프로토콜 사전 요구 사항을 설치하고 구성해야 합니다. 
 ---
 = 배포를 위한 사전 요구 사항
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Astra Trident를 구축하기 전에 호스트에 필수 프로토콜 �
 
 
 [role="lead"]
-Astra Trident를 구축하기 전에 호스트에 필수 프로토콜 사전 요구 사항을 설치하고 구성해야 합니다.
+Trident를 배포하기 전에 호스트에 필요한 프로토콜 사전 요구 사항을 설치하고 구성해야 합니다.
 
 
 

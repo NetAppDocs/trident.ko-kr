@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-docker/known-issues-docker.html 
 keywords: known issues, trident, trident for docker, docker 
-summary: Docker와 함께 Astra Trident를 사용할 때 알려진 문제에 대한 정보를 확인하십시오. 
+summary: Trident와 Docker를 함께 사용할 때 알려진 문제에 대한 정보를 확인할 수 있습니다. 
 ---
 = 알려진 문제 및 제한 사항
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Docker와 함께 Astra Trident를 사용할 때 알려진 문제에 대
 
 
 [role="lead"]
-Docker에서 Astra Trident를 사용할 때 알려진 문제 및 제한 사항에 대한 정보를 확인하십시오.
+Trident를 Docker와 함께 사용할 때 알려진 문제 및 제한 사항에 대한 정보를 찾을 수 있습니다.
 
 
 
@@ -48,11 +48,11 @@ NOTE: 이는 Docker 클라이언트의 제한 사항입니다. 클라이언트�
 
 
 
-== Docker Swarm에는 Astra Trident가 모든 스토리지 및 드라이버 조합에서 이를 지원하지 않는 특정 동작이 있습니다.
+== Docker Swarm에는 모든 스토리지와 드라이버 조합에서 Trident이 이를 지원하지 못하는 특정한 동작이 있습니다.
 
 * 현재 Docker Swarm은 볼륨 ID 대신 볼륨 이름을 고유한 볼륨 식별자로 사용합니다.
 * 볼륨 요청은 Swarm 클러스터의 각 노드로 동시에 전송됩니다.
-* 볼륨 플러그인(Astra Trident 포함)은 Swarm 클러스터의 각 노드에서 독립적으로 실행해야 합니다. ONTAP의 작동 방식과 'ONTAP-NAS' 및 'ONTAP-SAN' 드라이버의 작동 방식 때문에 이러한 제한 내에서 작동할 수 있는 유일한 드라이버가 됩니다.
+* 볼륨 플러그인(Trident 포함)은 Swarm 클러스터의 각 노드에서 독립적으로 실행되어야 합니다. ONTAP의 작동 방식 및 및 및 `ontap-san` 드라이버의 작동 방식 때문에 `ontap-nas` 이러한 제한 내에서 작동할 수 있는 것은 오직 한 가지뿐입니다.
 
 
 나머지 드라이버에는 명확한 "승자" 없이 단일 요청에 대해 대량의 볼륨을 생성할 수 있는 경합 상태와 같은 문제가 있습니다. 예를 들어, Element에는 볼륨의 이름이 같지만 ID가 다를 수 있는 기능이 있습니다.

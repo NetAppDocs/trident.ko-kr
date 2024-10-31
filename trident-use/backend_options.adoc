@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/backend_options.html 
 keywords: backends, storage system, anf, cvs for aws, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, tridentctl, backend management options 
-summary: Astra Trident에서 백엔드를 관리하는 다양한 방법에 대해 알아보십시오. 
+summary: Trident에서 백엔드를 관리하는 다양한 방법에 대해 알아보십시오. 
 ---
 = 백엔드 관리 옵션 간 이동
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Astra Trident에서 백엔드를 관리하는 다양한 방법에 대�
 
 
 [role="lead"]
-Astra Trident에서 백엔드를 관리하는 다양한 방법에 대해 알아보십시오.
+Trident에서 백엔드를 관리하는 다양한 방법에 대해 알아보십시오.
 
 
 
@@ -36,7 +36,7 @@ Astra Trident에서 백엔드를 관리하는 다양한 방법에 대해 알아�
 * tridentctl로 만든 새 백엔드와 다른 트리젠BackendConfig 개체가 있습니다.
 
 
-두 시나리오 모두 Astra Trident가 볼륨을 예약하고 운영하면서 백엔드가 계속 존재할 것입니다. 관리자는 다음 두 가지 옵션 중 하나를 선택할 수 있습니다.
+두 시나리오 모두에서 Trident의 볼륨 예약 및 운영 기능과 함께 백엔드가 계속 표시됩니다. 관리자는 다음 두 가지 옵션 중 하나를 선택할 수 있습니다.
 
 * tridentctl을 사용하여 만든 백엔드를 관리하려면 계속 사용합니다.
 * tridentctl을 사용하여 만든 백엔드를 새 트리젠BackendConfig 개체에 바인딩합니다. 이를 통해 뒷골은 트리덴틀이 아니라 쿠벤틀로 관리된다는 뜻이다.
@@ -44,7 +44,7 @@ Astra Trident에서 백엔드를 관리하는 다양한 방법에 대해 알아�
 
 kubbeck을 사용하여 기존 백엔드를 관리하려면 기존 백엔드에 바인딩되는 '트리젠백엔드구성'을 생성해야 합니다. 작동 방식에 대한 개요는 다음과 같습니다.
 
-. Kubernetes 암호를 생성하십시오. 비밀에는 Astra Trident가 스토리지 클러스터/서비스와 통신하는 데 필요한 자격 증명이 포함되어 있습니다.
+. Kubernetes 암호를 생성하십시오. 비밀에는 Trident가 스토리지 클러스터/서비스와 통신하는 데 필요한 자격 증명이 포함되어 있습니다.
 . '트리멘백엔드구성' 객체를 만듭니다. 스토리지 클러스터/서비스에 대한 자세한 내용과 이전 단계에서 생성한 암호를 참조하십시오. 동일한 구성 매개 변수(예: 'pec.backendName', 'pec.storagePrefix', 'pec.storageDriverName' 등)를 지정할 때는 주의해야 합니다. '현재 백엔드 이름'을 설정해야 합니다.
 
 
@@ -235,7 +235,7 @@ tridentctl get backend ontap-san-backend -n trident
 
 === 1단계: 확인 `deletionPolicy` 가 로 설정되어 있습니다 `retain`
 
-정책이라는 가치를 한번 살펴보자. 이를 보철로 설정해야 합니다. 이렇게 하면 ' TrientBackendConfig ' CR을 삭제할 때 백엔드 정의가 계속 존재하고 'tridentctl'을 사용하여 관리할 수 있습니다.
+의 가치를 `deletionPolicy` 살펴보겠습니다. 이 설정은 로 `retain`설정해야 합니다. 이렇게 하면 CR이 삭제되어도 `TridentBackendConfig` 백엔드 정의가 계속 존재하며 로 관리할 수 `tridentctl` 있습니다.
 
 [listing]
 ----
@@ -273,4 +273,4 @@ tridentctl get backend ontap-san-backend -n trident
 | ontap-san-backend | ontap-san      | 81abcb27-ea63-49bb-b606-0a5315ac5f82 | online |      33 |
 +-------------------+----------------+--------------------------------------+--------+---------+
 ----
-트리젠벤트Config 객체를 삭제하면 Astra Trident는 백엔드 자체를 삭제하지 않고 간단히 해당 객체를 제거합니다.
+오브젝트가 삭제되면 `TridentBackendConfig` Trident은 백엔드 자체를 실제로 삭제하지 않고 기존 오브젝트를 단순히 제거합니다.

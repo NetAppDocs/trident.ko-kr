@@ -34,28 +34,16 @@ Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십시오. �
 | 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + “_” + dataLIF 
 
 
-| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소입니다
-
-FQDN(정규화된 도메인 이름)을 지정할 수 있습니다.
-
-IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]). | “10.0.0.1”, “[2001:1234:ABCD::fee]” 
+| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소 정규화된 도메인 이름(FQDN)을 지정할 수 있습니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]). | “10.0.0.1”, “[2001:1234:ABCD::fee]” 
 
 
-| 다타LIF | 프로토콜 LIF의 IP 주소입니다.
-
-* ONTAP NAS 드라이버 *: 데이터 LIF를 지정하는 것이 좋습니다. 제공되지 않는 경우 Astra Trident는 SVM에서 데이터 LIF를 가져옵니다. NFS 마운트 작업에 사용할 FQDN(정규화된 도메인 이름)을 지정하면 여러 데이터 LIF에서 로드 밸런싱을 위해 라운드 로빈 DNS를 생성할 수 있습니다. 초기 설정 후에 변경할 수 있습니다. 을 참조하십시오 .
-
-* ONTAP SAN 드라이버 *: iSCSI에 대해 지정하지 마십시오. Astra Trident는 ONTAP 선택적 LUN 맵을 사용하여 다중 경로 세션을 설정하는 데 필요한 iSCI LIF를 검색합니다. 데이터 LIF가 명시적으로 정의되어 있으면 경고가 생성됩니다.
-
-IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]). |  
+| 다타LIF | 프로토콜 LIF의 IP 주소입니다. * ONTAP NAS 드라이버 *: 데이터 LIF를 지정하는 것이 좋습니다. 제공되지 않는 경우 Trident는 SVM에서 데이터 LIF를 가져옵니다. NFS 마운트 작업에 사용할 FQDN(정규화된 도메인 이름)을 지정하면 여러 데이터 LIF에서 로드 밸런싱을 위해 라운드 로빈 DNS를 생성할 수 있습니다. 초기 설정 후에 변경할 수 있습니다. 을 참조하십시오. * ONTAP SAN 드라이버 *: iSCSI에 대해 지정하지 마십시오. Trident는 ONTAP 선택적 LUN 맵을 사용하여 다중 경로 세션을 설정하는 데 필요한 iSCI LIF를 검색합니다. 데이터 LIF가 명시적으로 정의되어 있으면 경고가 생성됩니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]). |  
 
 
-| 자동 내보내기 정책 | 자동 엑스포트 정책 생성 및 업데이트 [Boolean] 활성화 를 사용합니다 `autoExportPolicy` 및 `autoExportCIDRs` 옵션, Astra Trident는 엑스포트 정책을 자동으로 관리할 수 있습니다. | 거짓입니다 
+| 자동 내보내기 정책 | 자동 엑스포트 정책 생성 및 업데이트 [Boolean] 활성화 Trident는 및 `autoExportCIDRs` 옵션을 사용하여 `autoExportPolicy` 엑스포트 정책을 자동으로 관리할 수 있습니다. | 거짓입니다 
 
 
-| 자동 내보내기 | 언제 기준으로 Kubernetes 노드 IP를 필터링하는 CIDR 목록입니다 `autoExportPolicy` 가 활성화됩니다.
-
-를 사용합니다 `autoExportPolicy` 및 `autoExportCIDRs` 옵션, Astra Trident는 엑스포트 정책을 자동으로 관리할 수 있습니다. | "["0.0.0.0/0", "::/0"]" 
+| 자동 내보내기 | 이 설정된 경우에 대해 Kubernetes 노드 IP를 필터링하는 CIDR `autoExportPolicy` 목록입니다. Trident는 및 `autoExportCIDRs` 옵션을 사용하여 `autoExportPolicy` 엑스포트 정책을 자동으로 관리할 수 있습니다. | "["0.0.0.0/0", "::/0"]" 
 
 
 | '라벨' | 볼륨에 적용할 임의의 JSON 형식 레이블 세트입니다 | "" 
@@ -82,7 +70,7 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 | '토르agePrefix' | SVM에서 새 볼륨을 프로비저닝할 때 사용되는 접두사 생성 후에는 수정할 수 없습니다. 이 매개 변수를 업데이트하려면 새 백엔드를 생성해야 합니다. | `trident` 
 
 
-| 제한선태사용법 | * NetApp ONTAP * 용 Amazon FSx는 지정하지 마십시오 `fsxadmin` 및 `vsadmin` 애그리게이트 사용을 검색하고 Astra Trident를 사용하여 제한하는 데 필요한 권한이 포함되어 있지 않습니다. | 사용하지 마십시오. 
+| 제한선태사용법 | * NetApp ONTAP * 용 아마존 FSx에 대해서는 지정하지 마십시오 제공된 및 `vsadmin` 에는 `fsxadmin` 애그리게이트 사용량을 검색하고 Trident를 사용하여 제한하는 데 필요한 권한이 포함되어 있지 않습니다. | 사용하지 마십시오. 
 
 
 | LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에 대해 관리하는 볼륨의 최대 크기 및 을 제한합니다 `qtreesPerFlexvol` 옵션을 사용하면 FlexVol당 최대 qtree 수를 사용자 지정할 수 있습니다. | “”(기본적으로 적용되지 않음) 
@@ -94,7 +82,7 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 | debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: {“api”:false, “method”:true} 사용하지 마십시오 `debugTraceFlags` 문제 해결 및 자세한 로그 덤프가 필요한 경우를 제외하고 | null입니다 
 
 
-| nfsMountOptions를 선택합니다 | 쉼표로 구분된 NFS 마운트 옵션 목록입니다. Kubernetes 영구 볼륨의 마운트 옵션은 일반적으로 스토리지 클래스에서 지정되지만, 스토리지 클래스에 마운트 옵션을 지정하지 않으면 Astra Trident가 스토리지 백엔드의 구성 파일에 지정된 마운트 옵션을 사용하여 로 돌아갑니다. 스토리지 클래스 또는 구성 파일에 마운트 옵션이 지정되지 않은 경우 Astra Trident는 연결된 영구 볼륨에 마운트 옵션을 설정하지 않습니다. | "" 
+| nfsMountOptions를 선택합니다 | 쉼표로 구분된 NFS 마운트 옵션 목록입니다. Kubernetes 영구 볼륨의 마운트 옵션은 일반적으로 스토리지 클래스에 지정되어 있지만, 스토리지 클래스에 마운트 옵션이 지정되지 않은 경우 Trident는 스토리지 백엔드의 구성 파일에 지정된 마운트 옵션을 사용하도록 폴백합니다. 스토리지 클래스 또는 구성 파일에 마운트 옵션이 지정되지 않은 경우 Trident는 연결된 영구 볼륨에 마운트 옵션을 설정하지 않습니다. | "" 
 
 
 | `nasType` | NFS 또는 SMB 볼륨 생성을 구성합니다. 옵션은 입니다 `nfs`, `smb`또는 null입니다. * 를 로 설정해야 합니다 `smb` SMB 볼륨의 경우. * null로 설정하면 기본적으로 NFS 볼륨이 설정됩니다. | `nfs` 
@@ -103,12 +91,10 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 | "케트리스퍼플랙스볼륨" | FlexVol당 최대 qtree, 범위 [50, 300]에 있어야 함 | `200` 
 
 
-| `smbShare` | Microsoft 관리 콘솔 또는 ONTAP CLI를 사용하여 생성된 SMB 공유의 이름 또는 Astra Trident가 SMB 공유를 생성할 수 있도록 이름을 지정할 수 있습니다.
-
-이 매개변수는 ONTAP 백엔드에 대한 Amazon FSx에 필요합니다. | `smb-share` 
+| `smbShare` | Microsoft 관리 콘솔 또는 ONTAP CLI를 사용하여 생성된 SMB 공유의 이름 또는 Trident에서 SMB 공유를 생성하도록 허용하는 이름을 지정할 수 있습니다. 이 매개변수는 ONTAP 백엔드에 대한 Amazon FSx에 필요합니다. | `smb-share` 
 
 
-| 'useREST' | ONTAP REST API를 사용하는 부울 매개 변수입니다.  `useREST` 로 설정된 `true`경우 Astra Trident는 ONTAP REST API를 사용하여 백엔드와 통신합니다. 로 설정된 경우 `false`Astra Trident는 ONTAP ZAPI 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야 `ontap` 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다. `vsadmin` `cluster-admin` Astra Trident 24.06 릴리즈 및 ONTAP 9.15.1 이상부터 는 `userREST` 기본적으로 로 설정되며 `true` , ONTAP ZAPI 호출을 사용하도록 로 변경합니다. `useREST` `false` | `true` ONTAP 9.15.1 이상, 그렇지 않은 경우 `false`. 
+| 'useREST' | ONTAP REST API를 사용하는 부울 매개 변수입니다.  `useREST` 로 설정된 `true` 경우 Trident는 ONTAP REST API를 사용하여 백엔드와 통신하고, 로 설정된 경우 `false` Trident는 ONTAP ZAPI 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야 `ontap` 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다. `vsadmin` `cluster-admin` Trident 24.06 릴리스 및 ONTAP 9.15.1 이상부터 는 `userREST` 기본적으로 로 설정되어 `true` 있으며 ONTAP ZAPI 호출을 사용하도록 로 `false` 변경합니다. `useREST` | `true` ONTAP 9.15.1 이상, 그렇지 않은 경우 `false`. 
 
 
 | `aws` | AWS FSx for ONTAP의 구성 파일에서 다음을 지정할 수 있습니다.
@@ -162,7 +148,7 @@ NOTE: PVC가 하나 이상의 포드에 연결된 경우 해당 포드를 모두
 | 냅샷정책 | 사용할 스냅샷 정책입니다 | "없음" 
 
 
-| "qosPolicy" | 생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Astra Trident와 함께 QoS 정책 그룹을 사용하려면 ONTAP 9.8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성요소별로 적용되도록 하는 것이 좋습니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대해 상한을 적용합니다. | “” 
+| "qosPolicy" | 생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다. | “” 
 
 
 | 적응성 QosPolicy | 생성된 볼륨에 할당할 적응형 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. ONTAP에서 지원되지 않음 - NAS - 이코노미 | “” 
@@ -174,7 +160,7 @@ NOTE: PVC가 하나 이상의 포드에 연결된 경우 해당 포드를 모두
 | 'plitOnClone'을 선택합니다 | 생성 시 상위 클론에서 클론을 분할합니다 | 거짓입니다 
 
 
-| 암호화 | 새 볼륨에 NVE(NetApp Volume Encryption)를 사용하도록 설정하고 기본값은 'false'입니다. 이 옵션을 사용하려면 NVE 라이센스가 클러스터에서 활성화되어 있어야 합니다. 백엔드에서 NAE가 활성화된 경우 Astra Trident에 프로비저닝된 모든 볼륨은 NAE가 활성화됩니다. 자세한 내용은 다음을 참조하십시오. link:../trident-reco/security-reco.html["Astra Trident가 NVE 및 NAE와 연동되는 방식"]. | 거짓입니다 
+| 암호화 | 새 볼륨에서 NetApp 볼륨 암호화(NVE)를 활성화하고, 기본값은 로 설정합니다. `false` 이 옵션을 사용하려면 NVE 라이센스가 클러스터에서 활성화되어 있어야 합니다. 백엔드에서 NAE가 활성화된 경우 Trident에서 프로비저닝된 모든 볼륨은 NAE가 사용됩니다. 자세한 내용은 다음을 link:../trident-reco/security-reco.html["Trident가 NVE 및 NAE와 작동하는 방법"]참조하십시오. | 거짓입니다 
 
 
 | `luksEncryption` | LUKS 암호화를 사용합니다. 을 참조하십시오 link:../trident-reco/security-reco.html#Use-Linux-Unified-Key-Setup-(LUKS)["LUKS(Linux Unified Key Setup) 사용"]. SAN만 해당. | "" 

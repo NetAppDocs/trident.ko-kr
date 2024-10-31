@@ -18,20 +18,20 @@ ONTAP NAS 드라이버를 사용하여 ONTAP 백엔드를 구성하기 위한 �
 
 == 요구 사항
 
-* 모든 ONTAP 백엔드의 경우, Astra Trident는 SVM에 하나 이상의 Aggregate가 할당되어 있어야 합니다.
+* 모든 ONTAP 백엔드에 대해 Trident에는 SVM에 할당된 애그리게이트가 하나 이상 필요합니다.
 * 둘 이상의 드라이버를 실행하고 둘 중 하나를 가리키는 스토리지 클래스를 생성할 수 있습니다. 예를 들어, 을 사용하는 Gold 클래스를 구성할 수 있습니다 `ontap-nas` 드라이버 및 를 사용하는 Bronze 클래스 `ontap-nas-economy` 1개.
 * 모든 Kubernetes 작업자 노드에 적절한 NFS 툴이 설치되어 있어야 합니다. 을 참조하십시오 link:worker-node-prep.html["여기"] 를 참조하십시오.
-* Astra Trident는 Windows 노드에서 실행되는 Pod에만 마운트된 SMB 볼륨을 지원합니다. 을 참조하십시오 <<SMB 볼륨 프로비저닝을 위한 준비>> 를 참조하십시오.
+* Trident는 Windows 노드에서만 실행되는 Pod에 마운트된 SMB 볼륨을 지원합니다. 자세한 내용은 을 <<SMB 볼륨 프로비저닝을 위한 준비>> 참조하십시오.
 
 
 
 
 == ONTAP 백엔드를 인증합니다
 
-Astra Trident는 ONTAP 백엔드를 인증하는 두 가지 모드를 제공합니다.
+Trident는 ONTAP 백엔드를 인증하는 두 가지 모드를 제공합니다.
 
 * 자격 증명 기반: 이 모드에서는 ONTAP 백엔드에 대한 충분한 권한이 필요합니다. 과 같이 미리 정의된 보안 로그인 역할과 연결된 계정을 사용하는 것이 좋습니다 `admin` 또는 `vsadmin` ONTAP 버전과의 호환성을 최대한 보장하기 위해
-* 인증서 기반: 이 모드를 사용하려면 Astra Trident가 ONTAP 클러스터와 통신하려면 백엔드에 인증서가 설치되어 있어야 합니다. 이 경우 백엔드 정의에는 클라이언트 인증서, 키 및 사용할 경우 신뢰할 수 있는 CA 인증서의 Base64로 인코딩된 값이 있어야 합니다(권장).
+* 인증서 기반: 이 모드에서는 Trident가 ONTAP 클러스터와 통신하기 위해 백엔드에 인증서가 설치되어 있어야 합니다. 이 경우 백엔드 정의에는 클라이언트 인증서, 키 및 사용할 경우 신뢰할 수 있는 CA 인증서의 Base64로 인코딩된 값이 있어야 합니다(권장).
 
 
 자격 증명 기반 방법과 인증서 기반 방법 간에 이동하기 위해 기존 백엔드를 업데이트할 수 있습니다. 그러나 한 번에 하나의 인증 방법만 지원됩니다. 다른 인증 방법으로 전환하려면 백엔드 구성에서 기존 방법을 제거해야 합니다.
@@ -43,7 +43,7 @@ WARNING: 자격 증명과 인증서 * 를 모두 제공하려고 하면 구성 �
 
 === 자격 증명 기반 인증을 사용합니다
 
-Astra Trident는 SVM 범위/클러스터 범위 관리자에게 ONTAP 백엔드와 통신하기 위한 자격 증명을 요구합니다. admin 또는 vsadmin과 같이 미리 정의된 표준 역할을 사용하는 것이 좋습니다. 이를 통해 향후 Astra Trident 릴리스에서 사용할 기능 API를 노출할 수 있는 향후 ONTAP 릴리스와 향후 호환성이 보장됩니다. 사용자 지정 보안 로그인 역할은 Astra Trident와 함께 생성 및 사용할 수 있지만 권장되지 않습니다.
+Trident은 ONTAP 백엔드와 통신하기 위해 SVM 범위/클러스터 범위 관리자에 대한 자격 증명이 필요합니다. 또는 `vsadmin` 과 같은 미리 정의된 표준 역할을 사용하는 것이 좋습니다 `admin`. 따라서 향후 Trident 릴리스에서 사용할 기능 API를 노출할 수 있는 향후 ONTAP 릴리즈와의 호환성이 보장됩니다. 사용자 지정 보안 로그인 역할을 만들어 Trident와 함께 사용할 수 있지만 권장하지는 않습니다.
 
 백엔드 정의의 예는 다음과 같습니다.
 
@@ -197,28 +197,90 @@ tridentctl update backend NasBackend -f cert-backend-updated.json -n trident
 
 NOTE: 암호를 회전할 때 스토리지 관리자는 먼저 ONTAP에서 사용자의 암호를 업데이트해야 합니다. 그 다음에는 백엔드 업데이트가 있습니다. 인증서를 회전할 때 여러 인증서를 사용자에게 추가할 수 있습니다. 그런 다음 백엔드가 업데이트되어 새 인증서를 사용합니다. 그러면 ONTAP 클러스터에서 이전 인증서를 삭제할 수 있습니다.
 
-백엔드를 업데이트해도 이미 생성된 볼륨에 대한 액세스가 중단되거나 이후에 생성된 볼륨 연결에 영향을 미치지 않습니다. 백엔드 업데이트가 성공적이면 Astra Trident가 ONTAP 백엔드와 통신하고 향후 볼륨 작업을 처리할 수 있음을 나타냅니다.
+백엔드를 업데이트해도 이미 생성된 볼륨에 대한 액세스가 중단되거나 이후에 생성된 볼륨 연결에 영향을 미치지 않습니다. 백엔드 업데이트에 성공하면 Trident가 ONTAP 백엔드와 통신하여 향후 볼륨 작업을 처리할 수 있음을 나타냅니다.
+
+
+
+=== Trident에 대한 사용자 지정 ONTAP 역할을 생성합니다
+
+Privileges에서 작업을 수행할 때 ONTAP 관리자 역할을 사용할 필요가 없도록 최소 Trident로 ONTAP 클러스터 역할을 생성할 수 있습니다. Trident 백엔드 구성에 사용자 이름을 포함하면 Trident은 사용자가 생성한 ONTAP 클러스터 역할을 사용하여 작업을 수행합니다.
+
+Trident 사용자 지정 역할 생성에 대한 자세한 내용은 을 link:https://github.com/NetApp/trident/tree/master/contrib/ontap/trident_role["Trident 사용자 지정 역할 생성기"]참조하십시오.
+
+[role="tabbed-block"]
+====
+.ONTAP CLI 사용
+--
+. 다음 명령을 사용하여 새 역할을 생성합니다.
++
+`security login role create <role_name\> -cmddirname "command" -access all –vserver <svm_name\>`
+
+. Trident 사용자에 대한 사용 이름 만들기:
++
+`security login create -username <user_name\> -application ontapi -authmethod <password\> -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+
+. 역할을 사용자에게 매핑:
++
+`security login modify username <user_name\> –vserver <svm_name\> -role <role_name\> -application ontapi -application console -authmethod <password\>`
+
+
+
+--
+.System Manager 사용
+--
+ONTAP System Manager에서 다음 단계를 수행하십시오.
+
+. * 사용자 지정 역할 생성 *:
++
+.. 클러스터 레벨에서 사용자 지정 역할을 생성하려면 * 클러스터 > 설정 * 을 선택합니다.
++
+SVM 레벨에서 사용자 지정 역할을 생성하려면 * 스토리지 > 스토리지 VM >> 설정 > 사용자 및 역할 * 을 선택합니다 `required SVM`.
+
+.. 사용자 및 역할 * 옆의 화살표 아이콘(*-> *)을 선택합니다.
+.. 역할 * 아래에서 * + 추가 * 를 선택합니다.
+.. 역할에 대한 규칙을 정의하고 * 저장 * 을 클릭합니다.
+
+
+. * 역할을 Trident 사용자에게 매핑 *: + * 사용자 및 역할 * 페이지에서 다음 단계를 수행하십시오.
++
+.. 사용자 * 아래에서 추가 아이콘 * + * 를 선택합니다.
+.. 필요한 사용자 이름을 선택하고 * Role * 에 대한 드롭다운 메뉴에서 역할을 선택합니다.
+.. 저장 * 을 클릭합니다.
+
+
+
+
+--
+====
+자세한 내용은 다음 페이지를 참조하십시오.
+
+* link:https://kb.netapp.com/on-prem/ontap/Ontap_OS/OS-KBs/FAQ__Custom_roles_for_administration_of_ONTAP["ONTAP 관리를 위한 사용자 지정 역할"^] 또는 link:https://docs.netapp.com/us-en/ontap/authentication/define-custom-roles-task.html["사용자 지정 역할을 정의합니다"^]
+* link:https://docs.netapp.com/us-en/ontap-automation/rest/rbac_roles_users.html#rest-api["역할 및 사용자 작업"^]
+
 
 
 
 == NFS 엑스포트 정책을 관리합니다
 
-Astra Trident는 NFS 엑스포트 정책을 사용하여 프로비저닝하는 볼륨에 대한 액세스를 제어합니다.
+Trident는 NFS 엑스포트 정책을 사용하여 프로비저닝한 볼륨에 대한 액세스를 제어합니다.
 
-Astra Trident는 엑스포트 정책을 사용할 때 다음 두 가지 옵션을 제공합니다.
+Trident는 내보내기 정책을 사용할 때 두 가지 옵션을 제공합니다.
 
-* Astra Trident는 엑스포트 정책 자체를 동적으로 관리할 수 있습니다. 이 운영 모드에서 스토리지 관리자는 허용할 수 있는 IP 주소를 나타내는 CIDR 블록 목록을 지정합니다. Astra Trident는 이러한 범위에 속하는 노드 IP를 엑스포트 정책에 자동으로 추가합니다. 또는 CIDR을 지정하지 않으면 노드에서 발견된 글로벌 범위의 유니캐스트 IP가 내보내기 정책에 추가됩니다.
-* 스토리지 관리자는 엑스포트 정책을 생성하고 규칙을 수동으로 추가할 수 있습니다. Astra Trident는 구성에 다른 엑스포트 정책 이름을 지정하지 않는 한 기본 엑스포트 정책을 사용합니다.
+* Trident는 엑스포트 정책 자체를 동적으로 관리할 수 있습니다. 이 운영 모드에서 스토리지 관리자는 허용되는 IP 주소를 나타내는 CIDR 블록의 목록을 지정합니다. Trident는 이러한 범위에 속하는 적용 가능한 노드 IP를 게시 시 자동으로 내보내기 정책에 추가합니다. 또는 CIDR을 지정하지 않으면 게시되는 볼륨이 있는 노드에서 찾은 모든 글로벌 범위 유니캐스트 IP가 엑스포트 정책에 추가됩니다.
+* 스토리지 관리자는 엑스포트 정책을 생성하고 규칙을 수동으로 추가할 수 있습니다. 구성에 다른 엑스포트 정책 이름을 지정하지 않는 한 Trident는 기본 엑스포트 정책을 사용합니다.
 
 
 
 
 === 엑스포트 정책을 동적으로 관리
 
-Astra Trident를 사용하면 ONTAP 백엔드의 엑스포트 정책을 동적으로 관리할 수 있습니다. 따라서 스토리지 관리자는 명시적 규칙을 수동으로 정의하는 대신 작업자 노드 IP에 허용되는 주소 공간을 지정할 수 있습니다. 엑스포트 정책 관리를 크게 간소화하므로, 엑스포트 정책을 수정하면 더 이상 스토리지 클러스터에 대한 수동 작업이 필요하지 않습니다. 또한 스토리지 클러스터에 대한 액세스를 지정된 범위의 IP가 있는 작업자 노드에만 제한함으로써 세분화된 자동 관리를 지원합니다.
+Trident는 ONTAP 백엔드에 대한 엑스포트 정책을 동적으로 관리하는 기능을 제공합니다. 따라서 스토리지 관리자는 명시적 규칙을 수동으로 정의하는 대신 작업자 노드 IP에 허용되는 주소 공간을 지정할 수 있습니다. 엑스포트 정책 관리를 크게 간소화하므로, 엑스포트 정책을 수정하면 더 이상 스토리지 클러스터에 대한 수동 작업이 필요하지 않습니다. 또한 이렇게 하면 볼륨을 마운트하고 지정된 범위 내에서 IP를 갖는 작업자 노드만 스토리지 클러스터에 대한 액세스를 제한하여 세분화된 자동 관리를 지원합니다.
 
 
 NOTE: 동적 내보내기 정책을 사용할 때는 NAT(Network Address Translation)를 사용하지 마십시오. NAT를 사용하면 스토리지 컨트롤러는 실제 IP 호스트 주소가 아니라 프런트엔드 NAT 주소를 인식하므로 내보내기 규칙에 일치하는 항목이 없으면 액세스가 거부됩니다.
+
+
+NOTE: Trident 24.10에서는 `ontap-nas` 스토리지 드라이버가 이전 릴리스와 마찬가지로 계속 작동합니다. ONTAP-NAS 드라이버에 대해서는 변경된 사항이 없습니다. Trident 24.10에서는 스토리지 드라이버만 `ontap-nas-economy` 볼륨 기반의 세분화된 액세스 제어를 갖습니다.
 
 
 
@@ -230,7 +292,7 @@ NOTE: 동적 내보내기 정책을 사용할 때는 NAT(Network Address Transla
 ----
 ---
 version: 1
-storageDriverName: ontap-nas
+storageDriverName: ontap-nas-economy
 backendName: ontap_nas_auto_export
 managementLIF: 192.168.0.135
 svm: svm1
@@ -241,19 +303,32 @@ autoExportCIDRs:
 autoExportPolicy: true
 ----
 
-NOTE: 이 기능을 사용할 때는 SVM의 루트 교차점에 노드 CIDR 블록(예: 기본 엑스포트 정책)을 허용하는 엑스포트 규칙과 함께 이전에 생성된 엑스포트 정책이 있는지 확인해야 합니다. Astra Trident에 사용할 SVM을 지정하려면 항상 NetApp 권장 모범 사례를 따르십시오.
+NOTE: 이 기능을 사용할 때는 SVM의 루트 교차점에 노드 CIDR 블록(예: 기본 엑스포트 정책)을 허용하는 엑스포트 규칙과 함께 이전에 생성된 엑스포트 정책이 있는지 확인해야 합니다. Trident 전용 SVM을 사용하려면 항상 NetApp 권장 모범 사례를 따르십시오.
 
 다음은 위의 예를 사용하여 이 기능이 작동하는 방식에 대한 설명입니다.
 
-* 자동내보내기정책은 참으로 설정된다. 이는 Astra Trident가 'vm1' SVM에 대한 수출 정책을 만들고 'autoExportCIDR' 주소 블록을 사용하여 규칙 추가 및 삭제를 처리한다는 것을 의미합니다. 예를 들어 UUID 403b5326-8482-40dB-96d0-d83fb3f4daec 및 "true"로 설정된 autoExportPolicy가 있는 백엔드는 SVM에 trident-403b5326-8482-40db-96d0-d83fb3f4daec라는 이름의 엑스포트 정책을 생성합니다.
-* autoExportCIDR에는 주소 블록 목록이 포함되어 있습니다. 이 필드는 선택 사항이며 기본적으로 ["0.0.0.0/0", ":/0"]입니다. 정의되지 않은 경우 Astra Trident는 작업자 노드에 있는 모든 전역 범위의 유니캐스트 주소를 추가합니다.
+* `autoExportPolicy` 가 로 설정되어 `true` 있습니다. 이는 Trident이 SVM에 대해 이 백엔드로 프로비저닝된 각 볼륨에 대한 엑스포트 정책을 `svm1` 생성하고 주소 블록을 사용하여 규칙 추가 및 삭제를 `autoexportCIDRs` 처리합니다. 볼륨이 노드에 연결될 때까지 볼륨은 규칙 없이 빈 엑스포트 정책을 사용하여 볼륨에 대한 원치 않는 액세스를 차단합니다. 볼륨이 노드에 게시되면 Trident에서 지정된 CIDR 블록 내에 노드 IP를 포함하는 기본 qtree와 같은 이름의 엑스포트 정책을 생성합니다. 이러한 IP는 상위 FlexVol에서 사용하는 내보내기 정책에도 추가됩니다.
++
+** 예를 들면 다음과 같습니다.
++
+*** 백엔드 UUID 403b5326-8482-40dB-96d0-d83fb3f4daec
+*** `autoExportPolicy` 로 설정합니다 `true`
+*** 스토리지 접두사입니다 `trident`
+*** PVC UUID a79bcf5f-7b6d-4a40-9876-e2551f159c1c
+*** 이름이 Trident_PVC_a79bcf5f_7b6d_4a40_9876_e2551f159c1c인 FlexVol qtree에 대한 엑스포트 정책, 이름이 인 qtree에 대한 `trident-403b5326-8482-40db96d0-d83fb3f4daec` 엑스포트 정책,
+`trident_pvc_a79bcf5f_7b6d_4a40_9876_e2551f159c1c` SVM에 명명된 빈 엑스포트 정책을 `trident_empty` 생성합니다. FlexVol 엑스포트 정책 규칙은 qtree 엑스포트 정책에 포함된 모든 규칙의 상위 집합이 됩니다. 빈 내보내기 정책은 연결되지 않은 모든 볼륨에서 다시 사용됩니다.
 
 
-이 예에서는 192.168.0.0/24 주소 공간을 제공한다. 이 주소 범위에 속하는 Kubernetes 노드 IP가 Astra Trident가 생성하는 엑스포트 정책에 추가됨을 나타냅니다. Astra Trident가 실행 중인 노드를 등록하면 해당 노드의 IP 주소를 조회하여 autoExportCIDR에서 제공하는 주소 블록과 대조합니다. IP를 필터링한 후 Astra Trident는 검색된 클라이언트 IP에 대한 엑스포트 정책 규칙을 생성하며, 식별하는 각 노드에 대해 하나의 규칙을 사용합니다.
+
+
+* `autoExportCIDRs` 주소 블록 목록을 포함합니다. 이 필드는 선택 사항이며 기본적으로 ["0.0.0.0/0", ":/0"]입니다. 정의되지 않은 경우 Trident는 작업자 노드에 있는 모든 전역 범위의 유니캐스트 주소를 게시물과 함께 추가합니다.
+
+
+이 예에서는 `192.168.0.0/24` 주소 공간이 제공됩니다. 이는 발행물이 있는 이 주소 범위에 속하는 Kubernetes 노드 IP가 Trident에서 생성하는 엑스포트 정책에 추가된다는 것을 나타냅니다. Trident는 실행되는 노드를 등록할 때 노드의 IP 주소를 검색하여 에서 제공하는 주소 블록과 대조하여 확인합니다 `autoExportCIDRs`. 게시 시 IP를 필터링한 후 Trident는 게시 대상 노드의 클라이언트 IP에 대한 내보내기 정책 규칙을 만듭니다.
 
 백엔드를 생성한 후 백엔드에 대한 자동 내보내기 정책 및 자동 내보내기 CIDR을 업데이트할 수 있습니다. 기존 CIDR을 자동으로 관리하거나 삭제하는 백엔드에 새 CIDR을 추가할 수 있습니다. CIDR을 삭제할 때는 기존 연결이 끊어지지 않도록 주의해야 합니다. 백엔드에 대해 'autoExportPolicy'를 사용하지 않도록 설정하고 수동으로 생성된 내보내기 정책으로 돌아갈 수도 있습니다. 이렇게 하려면 백엔드 구성에서 'exportPolicy' 매개 변수를 설정해야 합니다.
 
-Astra Trident가 백엔드를 생성하거나 업데이트한 후 'tridentctl' 또는 해당 'tridentbackend' CRD:
+Trident에서 백엔드를 생성하거나 업데이트한 후 또는 해당 `tridentbackend` CRD를 사용하여 백엔드를 확인할 수 `tridentctl` 있습니다.
 
 [listing]
 ----
@@ -278,16 +353,14 @@ items:
       exportPolicy: <automatic>
       fileSystemType: ext4
 ----
-노드가 Kubernetes 클러스터에 추가되고 Astra Trident 컨트롤러에 등록되면 기존 백엔드의 내보내기 정책이 업데이트됩니다(백엔드의 "autoExportCIDR"에 지정된 주소 범위에 속하는 경우).
+노드가 제거되면 Trident는 모든 엑스포트 정책을 확인하여 노드에 해당하는 액세스 규칙을 제거합니다. Trident는 관리되는 백엔드의 내보내기 정책에서 이 노드 IP를 제거하여 클러스터의 새 노드에서 이 IP를 재사용하지 않는 한 불량 마운트를 방지합니다.
 
-노드가 제거되면 Astra Trident는 온라인 상태인 모든 백엔드를 검사하여 노드에 대한 액세스 규칙을 제거합니다. Astra Trident는 관리되는 백엔드의 내보내기 정책에서 이 노드 IP를 제거하여 불량 마운트를 방지합니다. 단, 클러스터의 새 노드에서 이 IP를 다시 사용하지 않는 한 마찬가지입니다.
-
-기존 백엔드의 경우 백엔드를 로 업데이트합니다 `tridentctl update backend` Astra Trident가 엑스포트 정책을 자동으로 관리하는지 확인합니다. 이렇게 하면 백엔드의 UUID를 기준으로 이름이 지정된 새 엑스포트 정책이 생성되고 백엔드에 있는 볼륨은 다시 마운트될 때 새로 생성된 엑스포트 정책을 사용합니다.
+기존 백엔드의 경우 백엔드를 로 업데이트하면 `tridentctl update backend` Trident에서 엑스포트 정책을 자동으로 관리할 수 있습니다. 이렇게 하면 필요한 경우 백엔드의 UUID 및 qtree 이름을 따서 명명된 두 개의 새 엑스포트 정책이 생성됩니다. 백엔드에 있는 볼륨은 마운트 해제했다가 다시 마운트하면 새로 생성된 엑스포트 정책을 사용합니다.
 
 
 NOTE: 자동 관리되는 내보내기 정책이 있는 백엔드를 삭제하면 동적으로 생성된 내보내기 정책이 삭제됩니다. 백엔드가 다시 생성되면 백엔드가 새 백엔드로 처리되어 새 엑스포트 정책이 생성됩니다.
 
-라이브 노드의 IP 주소가 업데이트되면 노드에서 Astra Trident POD를 다시 시작해야 합니다. 그런 다음 Astra Trident가 이 IP 변경 사항을 반영하도록 관리하는 백엔드에 대한 엑스포트 정책을 업데이트합니다.
+라이브 노드의 IP 주소가 업데이트되면 노드에서 Trident Pod를 다시 시작해야 합니다. 그런 다음 Trident는 이 IP 변경 사항을 반영하도록 관리하는 백엔드에 대한 내보내기 정책을 업데이트합니다.
 
 
 
@@ -298,11 +371,14 @@ NOTE: 자동 관리되는 내보내기 정책이 있는 백엔드를 삭제하�
 
 WARNING: SVM에서 NFS 및 SMB/CIFS 프로토콜을 모두 구성하여 을 생성해야 합니다 `ontap-nas-economy` ONTAP 사내를 위한 SMB 볼륨 이 두 프로토콜 중 하나를 구성하지 않으면 SMB 볼륨 생성에 실패합니다.
 
+
+NOTE: `autoExportPolicy` SMB 볼륨에는 가 지원되지 않습니다.
+
 .시작하기 전에
 SMB 볼륨을 프로비저닝하려면 먼저 다음 항목이 있어야 합니다.
 
-* Linux 컨트롤러 노드 및 Windows Server 2022를 실행하는 Windows 작업자 노드가 있는 Kubernetes 클러스터 Astra Trident는 Windows 노드에서 실행되는 Pod에만 마운트된 SMB 볼륨을 지원합니다.
-* Active Directory 자격 증명이 포함된 Astra Trident 암호가 하나 이상 있어야 합니다. 암호를 생성합니다 `smbcreds`:
+* Linux 컨트롤러 노드 및 Windows Server 2022를 실행하는 Windows 작업자 노드가 있는 Kubernetes 클러스터 Trident는 Windows 노드에서만 실행되는 Pod에 마운트된 SMB 볼륨을 지원합니다.
+* Active Directory 자격 증명이 포함된 Trident 암호가 하나 이상 있습니다. 비밀 생성하기 `smbcreds`:
 +
 [listing]
 ----
@@ -312,7 +388,7 @@ kubectl create secret generic smbcreds --from-literal username=user --from-liter
 
 
 .단계
-. 온프레미스 ONTAP의 경우 SMB 공유를 생성하거나 Astra Trident에서 생성할 수 있습니다.
+. 온프레미스 ONTAP의 경우 선택적으로 SMB 공유를 생성하거나 Trident에서 공유를 생성할 수 있습니다.
 +
 
 NOTE: ONTAP용 Amazon FSx에는 SMB 공유가 필요합니다.
@@ -350,11 +426,7 @@ NOTE: 을 참조하십시오 link:https://docs.netapp.com/us-en/ontap/smb-config
 | 매개 변수 | 설명 | 예 
 
 
-| `smbShare` | 다음 중 하나를 지정할 수 있습니다. Microsoft 관리 콘솔 또는 ONTAP CLI를 사용하여 생성된 SMB 공유의 이름, Astra Trident가 SMB 공유를 생성할 수 있도록 하는 이름 또는 볼륨에 대한 공통 공유 액세스를 방지하기 위해 매개 변수를 비워 둘 수 있습니다.
-
-이 매개 변수는 사내 ONTAP의 경우 선택 사항입니다.
-
-이 매개변수는 ONTAP 백엔드에 대한 아마존 FSx에 필요하며 비워둘 수 없습니다. | `smb-share` 
+| `smbShare` | Microsoft 관리 콘솔 또는 ONTAP CLI를 사용하여 생성된 SMB 공유의 이름, Trident에서 SMB 공유를 생성할 수 있는 이름, 볼륨에 대한 일반적인 공유 액세스를 방지하기 위해 매개 변수를 비워 둘 수 있습니다. 이 매개 변수는 사내 ONTAP의 경우 선택 사항입니다. 이 매개변수는 ONTAP 백엔드에 대한 아마존 FSx에 필요하며 비워둘 수 없습니다. | `smb-share` 
 
 
 | `nasType` | * 를 로 설정해야 합니다 `smb`. * null인 경우 기본값은 로 설정됩니다 `nfs`. | `smb` 

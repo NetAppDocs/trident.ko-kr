@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/ontap-san-examples.html 
 keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx, metrocluster 
-summary: Astra Trident 설치를 통해 ONTAP SAN 드라이버를 생성하고 사용하는 방법에 대해 알아보십시오. 이 섹션에서는 백엔드 구성 예제 및 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 
+summary: Trident 설치 시 ONTAP SAN 드라이버를 생성하고 사용하는 방법에 대해 알아봅니다. 이 섹션에서는 백엔드 구성 예제 및 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 
 ---
 = ONTAP SAN 구성 옵션 및 예
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Astra Trident 설치를 통해 ONTAP SAN 드라이버를 생성하고 �
 
 
 [role="lead"]
-Astra Trident 설치에서 ONTAP SAN 드라이버를 생성하고 사용하는 방법을 알아보십시오. 이 섹션에서는 백엔드 구성 예제 및 Backend를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다.
+Trident 설치 시 ONTAP SAN 드라이버를 생성하고 사용하는 방법에 대해 알아봅니다. 이 섹션에서는 백엔드 구성 예제 및 Backend를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다.
 
 
 
@@ -34,20 +34,10 @@ Astra Trident 설치에서 ONTAP SAN 드라이버를 생성하고 사용하는 �
 | 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + "_" + dataLIF 
 
 
-| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소입니다.
-
-FQDN(정규화된 도메인 이름)을 지정할 수 있습니다.
-
-IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 과 같이 대괄호로 정의해야 합니다 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`.
-
-원활한 MetroCluster 전환은 를 참조하십시오 <<mcc-best>>. | “10.0.0.1”, “[2001:1234:ABCD::fee]” 
+| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소입니다. FQDN(정규화된 도메인 이름)을 지정할 수 있습니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 과 같이 대괄호로 정의해야 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` 합니다. 원활한 MetroCluster 전환은 를 <<mcc-best>>참조하십시오. | “10.0.0.1”, “[2001:1234:ABCD::fee]” 
 
 
-| 다타LIF | 프로토콜 LIF의 IP 주소입니다.
-
-* iSCSI에 대해서는 지정하지 마십시오. * Astra Trident가 사용합니다 link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 선택적 LUN 맵"^] 다중 경로 세션을 설정하는 데 필요한 iSCI LIF를 검색하려면 경고 발생 시 `dataLIF` 명시적으로 정의됩니다.
-
-*MetroCluster의 경우 생략합니다. * 를 참조하십시오 <<mcc-best>>. | SVM에서 파생됩니다 
+| 다타LIF | 프로토콜 LIF의 IP 주소입니다. *iSCSI에 대해 지정하지 마십시오.* Trident는 를 사용하여 link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 선택적 LUN 맵"^]다중 경로 세션을 설정하는 데 필요한 iSCI LIF를 검색합니다. 이 명시적으로 정의된 경우 경고가 `dataLIF` 생성됩니다. * MetroCluster의 경우 생략합니다. * 를 <<mcc-best>>참조하십시오. | SVM에서 파생됩니다 
 
 
 | 'VM'입니다 | 사용할 스토리지 가상 머신입니다
@@ -55,7 +45,7 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 *MetroCluster의 경우 생략합니다. * 를 참조하십시오 <<mcc-best>>. | SVM 'managementLIF'가 지정된 경우에 파생됩니다 
 
 
-| 'useCHAP'입니다 | CHAP를 사용하여 ONTAP SAN 드라이버에 대한 iSCSI 인증 [Boolean]. 를 로 설정합니다 `true` Astra Trident에서 백엔드에 제공된 SVM에 대한 기본 인증으로 양방향 CHAP를 구성하고 사용합니다. 을 참조하십시오 link:ontap-san-prep.html["ONTAP SAN 드라이버를 사용하여 백엔드를 구성할 준비를 합니다"] 를 참조하십시오. | 거짓입니다 
+| 'useCHAP'입니다 | CHAP를 사용하여 ONTAP SAN 드라이버에 대한 iSCSI 인증 [Boolean]. 백엔드에 제공된 SVM에 대한 기본 인증으로 양방향 CHAP를 구성하고 사용하려면 Trident에 대해 으로 `true` 설정합니다. 자세한 내용은 을 link:ontap-san-prep.html["ONTAP SAN 드라이버를 사용하여 백엔드를 구성할 준비를 합니다"] 참조하십시오. | 거짓입니다 
 
 
 | 챕터시크릿 | CHAP 이니시에이터 암호입니다. useCHAP=true인 경우 필수입니다 | "" 
@@ -94,7 +84,17 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 | '토르agePrefix' | SVM에서 새 볼륨을 프로비저닝할 때 사용되는 접두사 나중에 수정할 수 없습니다. 이 매개 변수를 업데이트하려면 새 백엔드를 생성해야 합니다. | `trident` 
 
 
-| 제한선태사용법 | 사용량이 이 비율을 초과하면 프로비저닝이 실패합니다. NetApp ONTAP 백엔드에 Amazon FSx를 사용하는 경우 를 지정하지 마십시오  `limitAggregateUsage`. 제공 `fsxadmin` 및 `vsadmin` 애그리게이트 사용을 검색하고 Astra Trident를 사용하여 제한하는 데 필요한 권한이 포함되어 있지 않습니다. | ""(기본적으로 적용되지 않음) 
+| 골재  a| 
+프로비저닝을 위한 애그리게이트(선택 사항, SVM에 셋팅해야 하는 경우) 드라이버의 경우 `ontap-nas-flexgroup` 이 옵션은 무시됩니다. 할당되지 않은 경우  사용 가능한 애그리게이트를 사용하여 FlexGroup 볼륨을 프로비저닝할 수 있습니다.
+
+
+NOTE: SVM에서 Aggregate를 업데이트하면 Trident 컨트롤러를 다시 시작하지 않고도 SVM을 폴링하여 Trident에서 자동으로 업데이트됩니다. 볼륨을 프로비저닝하기 위해 Trident의 특정 애그리게이트를 구성한 경우, 애그리게이트의 이름을 바꾸거나 SVM에서 이동할 경우 SVM 애그리게이트를 폴링하는 동안 백엔드가 Trident에서 오류 상태로 전환됩니다. Aggregate를 SVM에 있는 Aggregate로 변경하거나 완전히 제거하여 백엔드를 다시 온라인 상태로 전환해야 합니다.
+ a| 
+""
+
+
+
+| 제한선태사용법 | 사용량이 이 비율을 초과하면 프로비저닝이 실패합니다. Amazon FSx for NetApp ONTAP 백엔드를 사용하는 경우 을 지정하지  `limitAggregateUsage`마십시오. 제공된 및 `vsadmin` 에는 `fsxadmin` 애그리게이트 사용량을 검색하고 Trident를 사용하여 제한하는 데 필요한 권한이 포함되어 있지 않습니다. | ""(기본적으로 적용되지 않음) 
 
 
 | LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에 대해 관리하는 볼륨의 최대 크기도 제한합니다. | ""(기본적으로 적용되지 않음) 
@@ -109,13 +109,34 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 
 
 | 'useREST' | ONTAP REST API를 사용하는 부울 매개 변수입니다. 
-`useREST` 로 설정된 `true`경우 Astra Trident는 ONTAP REST API를 사용하여 백엔드와 통신합니다. 로 설정된 경우 `false`Astra Trident는 ONTAP ZAPI 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야 `ontap` 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다. `vsadmin` `cluster-admin` Astra Trident 24.06 릴리즈 및 ONTAP 9.15.1 이상부터 는 `userREST` 기본적으로 로 설정되며 `true` , ONTAP ZAPI 호출을 사용하도록 로 변경합니다.
-`useREST` `false` 
+`useREST` 로 설정된 `true` 경우 Trident는 ONTAP REST API를 사용하여 백엔드와 통신하고, 로 설정된 경우 `false` Trident는 ONTAP ZAPI 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야 `ontap` 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다. `vsadmin` `cluster-admin` Trident 24.06 릴리스 및 ONTAP 9.15.1 이상부터 는 `userREST` 기본적으로 로 설정되어 `true` 있으며 ONTAP ZAPI 호출을 사용하도록 로 `false` 변경합니다.
+`useREST` 
 `useREST` NVMe/TCP에 대해 완전한 자격을 갖추고 있음 | `true` ONTAP 9.15.1 이상, 그렇지 않은 경우 `false`. 
 
 
-| `sanType` | 를 사용하여 선택합니다 `iscsi` iSCSI 또는 의 경우 `nvme` NVMe/TCP의 경우 | `iscsi` 비어 있는 경우 
+ a| 
+`sanType`
+| iSCSI, `nvme` NVMe/TCP 또는 `fcp` FC(SCSI over Fibre Channel)를 선택할 때 `iscsi` 사용합니다. * 'FCP'(SCSI over FC)는 Trident 24.10 릴리스의 기술 미리 보기 기능입니다. * | `iscsi` 비어 있는 경우 
+
+
+| `formatOptions`  a| 
+ `formatOptions`볼륨을 포맷할 때마다 적용되는 명령에 대한 명령줄 인수를 지정하는 데 `mkfs` 사용합니다. 이렇게 하면 기본 설정에 따라 볼륨을 포맷할 수 있습니다. 장치 경로를 제외하고 mkfs 명령 옵션과 비슷한 formatOptions를 지정해야 합니다. 예: "-E NODEARD"
+
+* `ontap-san`및 `ontap-san-economy` 드라이버에서만 지원됩니다.*
+ a| 
+
 |===
+
+
+=== 포맷옵션 사용에 대한 권장 사항
+
+Trident에서는 다음 옵션을 사용하여 서식 프로세스를 신속하게 수행할 것을 권장합니다.
+
+* -E nobiscard: *
+
+* 유지, mkfs 시간에 블록 삭제를 시도하지 마십시오(처음에는 솔리드 스테이트 디바이스 및 스파스/씬 프로비저닝된 스토리지에서 블록 삭제가 유용함). 이 옵션은 사용되지 않는 "-K" 옵션을 대체하며 모든 파일 시스템(xfs, ext3 및 ext4)에 적용됩니다.
+
+
 
 
 == 볼륨 프로비저닝을 위한 백엔드 구성 옵션
@@ -136,7 +157,7 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 | 냅샷정책 | 사용할 스냅샷 정책입니다 | "없음" 
 
 
-| "qosPolicy" | 생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀/백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Astra Trident와 함께 QoS 정책 그룹을 사용하려면 ONTAP 9.8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성요소별로 적용되도록 하는 것이 좋습니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대해 상한을 적용합니다. | "" 
+| "qosPolicy" | 생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀/백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다. | "" 
 
 
 | 적응성 QosPolicy | 생성된 볼륨에 할당할 적응형 QoS 정책 그룹입니다. 스토리지 풀/백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다 | "" 
@@ -148,7 +169,7 @@ IPv6 플래그를 사용하여 Astra Trident를 설치한 경우 IPv6 주소를 
 | 'plitOnClone'을 선택합니다 | 생성 시 상위 클론에서 클론을 분할합니다 | "거짓" 
 
 
-| 암호화 | 새 볼륨에 NVE(NetApp Volume Encryption)를 사용하도록 설정하고 기본값은 'false'입니다. 이 옵션을 사용하려면 NVE 라이센스가 클러스터에서 활성화되어 있어야 합니다. 백엔드에서 NAE가 활성화된 경우 Astra Trident에 프로비저닝된 모든 볼륨은 NAE가 활성화됩니다. 자세한 내용은 다음을 참조하십시오. link:../trident-reco/security-reco.html["Astra Trident가 NVE 및 NAE와 연동되는 방식"]. | "거짓" 
+| 암호화 | 새 볼륨에서 NetApp 볼륨 암호화(NVE)를 활성화하고, 기본값은 로 설정합니다. `false` 이 옵션을 사용하려면 NVE 라이센스가 클러스터에서 활성화되어 있어야 합니다. 백엔드에서 NAE가 활성화된 경우 Trident에서 프로비저닝된 모든 볼륨은 NAE가 사용됩니다. 자세한 내용은 다음을 link:../trident-reco/security-reco.html["Trident가 NVE 및 NAE와 작동하는 방법"]참조하십시오. | "거짓" 
 
 
 | `luksEncryption` | LUKS 암호화를 사용합니다. 을 참조하십시오 link:../trident-reco/security-luks.html["LUKS(Linux Unified Key Setup) 사용"].
@@ -166,6 +187,9 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다. | ""
 
 
 | `limitVolumePoolSize` | ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다. | ""(기본적으로 적용되지 않음) 
+
+
+| `denyNewVolumePools` | 백엔드가 LUN을 포함하도록 새 FlexVol 볼륨을 생성하지 못하도록 `ontap-san-economy` 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다. |  
 |===
 
 
@@ -198,15 +222,15 @@ defaults:
 
 ----
 
-NOTE: 'ONTAP-SAN' 드라이버를 사용하여 생성된 모든 볼륨의 경우, Astra Trident가 FlexVol에 10%의 용량을 추가하여 LUN 메타데이터를 수용합니다. LUN은 사용자가 PVC에서 요청하는 정확한 크기로 프로비저닝됩니다. Astra Trident가 FlexVol에 10%를 더합니다(ONTAP에서 사용 가능한 크기로 표시). 이제 사용자가 요청한 가용 용량을 얻을 수 있습니다. 또한 이 변경으로 인해 사용 가능한 공간이 완전히 활용되지 않는 한 LUN이 읽기 전용이 되는 것을 방지할 수 있습니다. ONTAP-SAN-경제에는 적용되지 않습니다.
+NOTE: 드라이버를 사용하여 생성된 모든 볼륨의 경우 `ontap-san` Trident는 LUN 메타데이터를 수용하기 위해 FlexVol에 10%의 용량을 추가합니다. LUN은 사용자가 PVC에서 요청하는 정확한 크기로 프로비저닝됩니다. Trident는 FlexVol에 10%를 추가합니다(ONTAP에서 사용 가능한 크기로 표시됨). 이제 사용자가 요청한 가용 용량을 얻을 수 있습니다. 또한 이 변경으로 인해 사용 가능한 공간이 완전히 활용되지 않는 한 LUN이 읽기 전용이 되는 것을 방지할 수 있습니다. ONTAP-SAN-경제에는 적용되지 않습니다.
 
-'스냅샷 보존'을 정의하는 백엔드의 경우 Astra Trident는 다음과 같이 볼륨의 크기를 계산합니다.
+을 정의하는 백엔드의 경우 `snapshotReserve` Trident는 다음과 같이 볼륨 크기를 계산합니다.
 
 [listing]
 ----
 Total volume size = [(PVC requested size) / (1 - (snapshotReserve percentage) / 100)] * 1.1
 ----
-1.1은 LUN 메타데이터를 수용하도록 FlexVol에 추가된 10%의 Astra Trident입니다. 나프산예비공간 = 5%, PVC 요청 = 5GiB의 경우 총 용적 크기는 5.79GiB이고 사용 가능한 크기는 5.5GiB입니다. 'volume show' 명령은 다음 예와 유사한 결과를 표시합니다.
+1.1은 LUN 메타데이터를 수용하기 위해 FlexVol에 추가되는 10%의 Trident입니다. = 5%, PVC 요청 = 5GiB의 경우 `snapshotReserve` 총 볼륨 크기는 5.79GiB이고 사용 가능한 크기는 5.5GiB입니다. 이 `volume show` 명령은 다음 예제와 유사한 결과를 표시해야 합니다.
 
 image::../media/vol-show-san.png[에는 volume show 명령의 출력이 나와 있습니다.]
 
@@ -219,7 +243,7 @@ image::../media/vol-show-san.png[에는 volume show 명령의 출력이 나와 �
 다음 예에서는 대부분의 매개 변수를 기본값으로 두는 기본 구성을 보여 줍니다. 이는 백엔드를 정의하는 가장 쉬운 방법입니다.
 
 
-NOTE: NetApp ONTAP에서 Astra Trident와 함께 Amazon FSx를 사용하는 경우 IP 주소 대신 LIF에 대한 DNS 이름을 지정하는 것이 좋습니다.
+NOTE: NetApp ONTAP on Trident와 함께 Amazon FSx를 사용하는 경우 IP 주소 대신 LIF에 대한 DNS 이름을 지정하는 것이 좋습니다.
 
 .ONTAP SAN의 예
 [%collapsible]
@@ -376,13 +400,32 @@ defaults: {
 "labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
 ----
 ====
+.<code> ONTAP-SAN-Economy </code> 드라이버에 대한 옵션 예
+[%collapsible]
+====
+[listing]
+----
+version: 1
+storageDriverName: ontap-san-economy
+managementLIF: ''
+svm: svm1
+username: ''
+password: "!"
+storagePrefix: whelk_
+debugTraceFlags:
+  method: true
+  api: true
+defaults:
+  formatOptions: "-E nodiscard"
+----
+====
 
 
 == 가상 풀의 백엔드 예
 
 이러한 백엔드 정의 파일 샘플에서는 와 같은 모든 스토리지 풀에 대해 특정 기본값이 설정됩니다 `spaceReserve` 없음, `spaceAllocation` 거짓일 경우, 및 `encryption` 거짓일 때. 가상 풀은 스토리지 섹션에 정의됩니다.
 
-Astra Trident가 "Comments" 필드에 프로비저닝 레이블을 설정합니다. FlexVol에 주석이 설정됩니다. Astra Trident는 프로비저닝할 때 가상 풀에 있는 모든 레이블을 스토리지 볼륨에 복사합니다. 편의를 위해 스토리지 관리자는 가상 풀 및 그룹 볼륨별로 레이블을 레이블별로 정의할 수 있습니다.
+Trident는 "Comments" 필드에 프로비저닝 레이블을 설정합니다. FlexVol에 주석이 설정됩니다. Trident는 프로비저닝 시 가상 풀에 있는 모든 레이블을 스토리지 볼륨에 복제합니다. 편의를 위해 스토리지 관리자는 가상 풀 및 그룹 볼륨별로 레이블을 레이블별로 정의할 수 있습니다.
 
 이 예에서는 일부 스토리지 풀이 자체적으로 설정됩니다 `spaceReserve`, `spaceAllocation`, 및 `encryption` 일부 풀은 기본값을 재정의합니다.
 
@@ -604,4 +647,4 @@ parameters:
 ----
 
 
-Astra Trident가 선택한 가상 풀을 결정하고 스토리지 요구 사항을 충족시킵니다.
+Trident는 어떤 가상 풀이 선택되었는지 결정하고 스토리지 요구 사항이 충족되는지 확인합니다.

@@ -2,13 +2,13 @@
 section: trident-reference
 title: 참조하십시오
 entries:
-- title: Astra Trident 포트
+- title: Trident 포트
   url: "/trident-reference/ports.html"
-- title: Astra Trident REST API
+- title: Trident REST API
   url: "/trident-reference/rest-api.html"
 - title: 명령줄 옵션
   url: "/trident-reference/trident-cl.html"
-- title: Kubernetes 및 Astra Trident 오브젝트
+- title: Kubernetes 및 Trident 오브젝트
   url: "/trident-reference/objects.html"
 - title: POD 보안 표준(PSS) 및 보안 컨텍스트 제약(SCC)
   url: "/trident-reference/pod-security.html"

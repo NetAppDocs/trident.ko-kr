@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-expansion.html 
 keywords: volumes, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion 
-summary: Astra Trident를 사용하면 Kubernetes 사용자가 볼륨을 생성한 후 확장할 수 있습니다. iSCSI 및 NFS 볼륨을 확장하는 데 필요한 구성에 대한 정보를 찾습니다. 
+summary: Trident를 사용하면 Kubernetes 사용자가 생성된 후에 볼륨을 확장할 수 있습니다. iSCSI 및 NFS 볼륨을 확장하는 데 필요한 구성에 대한 정보를 찾습니다. 
 ---
 = 볼륨 확장
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Astra Trident를 사용하면 Kubernetes 사용자가 볼륨을 생성�
 
 
 [role="lead"]
-Astra Trident를 사용하면 Kubernetes 사용자가 볼륨을 생성한 후 확장할 수 있습니다. iSCSI 및 NFS 볼륨을 확장하는 데 필요한 구성에 대한 정보를 찾습니다.
+Trident를 사용하면 Kubernetes 사용자가 생성된 후에 볼륨을 확장할 수 있습니다. iSCSI 및 NFS 볼륨을 확장하는 데 필요한 구성에 대한 정보를 찾습니다.
 
 
 
@@ -65,7 +65,7 @@ spec:
       storage: 1Gi
   storageClassName: ontap-san
 ----
-Astra Trident가 PV(Persistent Volume)를 생성하여 이 PVC(Persistent Volume Claim)와 연결합니다.
+Trident는 영구 볼륨(PV)을 만들고 이 영구 볼륨 클레임(PVC)과 연결합니다.
 
 [listing]
 ----
@@ -83,8 +83,8 @@ pvc-8a814d62-bd58-4253-b0d1-82f2885db671   1Gi        RWO            Delete     
 
 크기를 조정할 수 있도록 PV를 포드에 연결합니다. iSCSI PV의 크기를 조정할 때 두 가지 시나리오가 있습니다.
 
-* PV가 포드에 연결된 경우 Astra Trident는 스토리지 백엔드의 볼륨을 확장하고 디바이스를 다시 검사하며 파일 시스템의 크기를 조정합니다.
-* 연결되지 않은 PV의 크기를 조정하려고 하면 Astra Trident가 스토리지 백엔드의 볼륨을 확장합니다. PVC가 POD에 바인딩되면 Trident가 디바이스를 다시 검사해 파일 시스템의 크기를 조정합니다. 그런 다음 확장 작업이 성공적으로 완료된 후 Kubernetes에서 PVC 크기를 업데이트합니다.
+* PV가 Pod에 연결된 경우 Trident는 스토리지 백엔드에서 볼륨을 확장하고 디바이스를 다시 스캔하고 파일 시스템의 크기를 조정합니다.
+* 연결되지 않은 PV의 크기를 조정하려고 하면 Trident는 스토리지 백엔드에서 볼륨을 확장합니다. PVC가 POD에 바인딩되면 Trident가 디바이스를 다시 검사해 파일 시스템의 크기를 조정합니다. 그런 다음 확장 작업이 성공적으로 완료된 후 Kubernetes에서 PVC 크기를 업데이트합니다.
 
 
 이 예제에서는 'AN-PVC'를 사용하는 POD가 생성됩니다.
@@ -151,7 +151,7 @@ spec:
 
 === 5단계: 확장 확인
 
-PVC, PV, Astra Trident 볼륨의 크기를 확인하여 확장이 제대로 작동하는지 확인할 수 있습니다.
+PVC, PV 및 Trident 볼륨의 크기를 확인하여 팽창이 올바르게 작동하는지 확인할 수 있습니다.
 
 [listing]
 ----
@@ -172,7 +172,7 @@ tridentctl get volumes -n trident
 
 == NFS 볼륨을 확장합니다
 
-Astra Trident는 ONTAP-NAS, ONTAP-NAS-이코노미, ONTAP-NAS-Flexgroup, GCP-CV, Azure-NetApp-files 백엔드에 프로비저닝된 NFS PVS의 볼륨 확장을 지원합니다.
+Trident는 , `ontap-nas-economy`, `ontap-nas-flexgroup` `gcp-cvs` 및 `azure-netapp-files` 백엔드에서 프로비저닝되는 NFS PVS에 대한 볼륨 확장을 `ontap-nas` 지원합니다.
 
 
 
@@ -213,7 +213,7 @@ spec:
       storage: 20Mi
   storageClassName: ontapnas
 ----
-Astra Trident는 이 PVC에 대해 20MiB NFS PV를 생성해야 합니다.
+Trident는 이 PVC에 대해 20MiB NFS PV를 생성해야 합니다.
 
 [listing]
 ----
@@ -265,7 +265,7 @@ spec:
 
 === 4단계: 확장을 확인합니다
 
-PVC, PV, Astra Trident 볼륨의 크기를 확인하여 크기가 올바르게 작동하는지 확인할 수 있습니다.
+PVC, PV 및 Trident 볼륨의 크기를 확인하여 크기가 올바르게 조정되었는지 확인할 수 있습니다.
 
 [listing]
 ----

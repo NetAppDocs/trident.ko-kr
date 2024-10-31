@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: earlier-versions.html 
-keywords: earlier versions, astra trident versions 
+keywords: earlier versions, Trident versions 
 summary: 버전 선택기를 사용하여 최신 버전과 이전 버전 4개를 탐색하거나 아래 링크를 사용할 수 있습니다. 
 ---
 = 이전 버전의 문서
@@ -12,16 +12,16 @@ summary: 버전 선택기를 사용하여 최신 버전과 이전 버전 4개를
 
 
 [role="lead"]
-Astra Trident 24.06을 실행하지 않는 경우 를 기반으로 이전 릴리즈에 대한 문서를 사용할 수 있습니다 link:get-help.html["Astra Trident 지원 라이프사이클"].
+Trident 24.10을 실행하지 않는 경우 를 기반으로 이전 릴리스에 대한 설명서를 사용할 수 link:get-help.html["Trident 지원 라이프사이클"]있습니다.
 
-* https://docs.netapp.com/us-en/trident-2402/index.html["Astra Trident 24.02"^]
-* https://docs.netapp.com/us-en/trident-2310/index.html["Astra Trident 23.10"^]
-* https://docs.netapp.com/us-en/trident-2307/index.html["Astra Trident 23.07"^]
-* https://docs.netapp.com/us-en/trident-2304/index.html["Astra Trident 23.04"^]
-* https://docs.netapp.com/us-en/trident-2301/index.html["Astra Trident 23.01"^]
-* https://docs.netapp.com/us-en/trident-2210/index.html["Astra Trident 22.10"^]
-* https://docs.netapp.com/us-en/trident-2207/index.html["Astra Trident 22.07"^]
-* https://docs.netapp.com/us-en/trident-2204/index.html["Astra Trident 22.04"^]
-* https://docs.netapp.com/us-en/trident-2201/index.html["Astra Trident 22.01"^]
-* https://docs.netapp.com/us-en/trident-2110/index.html["Astra Trident 21.10"^]
+* https://docs.netapp.com/us-en/trident-2406/index.html["Trident 24.06 을 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2402/index.html["Trident 24.02 를 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2310/index.html["Trident 23.10 을 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2307/index.html["Trident 2007년 3월"^]
+* https://docs.netapp.com/us-en/trident-2304/index.html["Trident 23.04 를 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2301/index.html["Trident 23.01 을 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2210/index.html["Trident 22.10 을 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2207/index.html["Trident 22.07 을 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2204/index.html["Trident 22.04 를 참조하십시오"^]
+* https://docs.netapp.com/us-en/trident-2201/index.html["Trident 22.01 을 참조하십시오"^]
 

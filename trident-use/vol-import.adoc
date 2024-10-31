@@ -18,7 +18,7 @@ tridentctl import를 사용하여 기존 스토리지 볼륨을 Kubernetes PV로
 
 == 개요 및 고려 사항
 
-다음과 같은 작업을 위해 Astra Trident로 볼륨을 가져올 수 있습니다.
+Trident로 볼륨을 가져올 수 있는 대상:
 
 * 응용 프로그램을 Containerize 하고 기존 데이터 집합을 다시 사용합니다
 * 수명이 짧은 애플리케이션에 사용할 데이터 세트의 클론을 사용합니다
@@ -29,20 +29,20 @@ tridentctl import를 사용하여 기존 스토리지 볼륨을 Kubernetes PV로
 .고려 사항
 볼륨을 가져오기 전에 다음 고려 사항을 검토하십시오.
 
-* Astra Trident는 RW(읽기-쓰기) 유형의 ONTAP 볼륨만 가져올 수 있습니다. DP(데이터 보호) 유형 볼륨은 SnapMirror 대상 볼륨입니다. Astra Trident로 볼륨을 가져오기 전에 미러 관계를 끊어야 합니다.
+* Trident는 RW(읽기-쓰기) 유형의 ONTAP 볼륨만 가져올 수 있습니다. DP(데이터 보호) 유형 볼륨은 SnapMirror 대상 볼륨입니다. 볼륨을 Trident로 가져오기 전에 미러 관계를 해제해야 합니다.
 * 활성 연결이 없는 볼륨을 가져오는 것이 좋습니다. 활성 볼륨을 가져오려면 볼륨을 클론한 다음 가져오기를 수행합니다.
 +
 
 WARNING: Kubernetes가 이전 연결을 인식하지 못하고 활성 볼륨을 POD에 쉽게 연결할 수 있기 때문에 블록 볼륨에서 특히 중요합니다. 이로 인해 데이터가 손상될 수 있습니다.
 
-* 하지만 `StorageClass` PVC에 지정해야 하며 Astra Trident는 가져오는 동안 이 매개 변수를 사용하지 않습니다. 스토리지 클래스는 볼륨 생성 중에 스토리지 특성에 따라 사용 가능한 풀에서 선택하는 데 사용됩니다. 볼륨이 이미 있으므로 가져오는 동안 풀을 선택할 필요가 없습니다. 따라서 볼륨이 PVC에 지정된 스토리지 클래스와 일치하지 않는 백엔드 또는 풀에 있더라도 가져오기에 실패합니다.
+* PVC에 지정해야 하지만 `StorageClass` Trident는 가져오는 동안 이 매개변수를 사용하지 않습니다. 스토리지 클래스는 볼륨 생성 중에 스토리지 특성에 따라 사용 가능한 풀에서 선택하는 데 사용됩니다. 볼륨이 이미 있으므로 가져오는 동안 풀을 선택할 필요가 없습니다. 따라서 볼륨이 PVC에 지정된 스토리지 클래스와 일치하지 않는 백엔드 또는 풀에 있더라도 가져오기에 실패합니다.
 * 기존 체적 크기는 PVC에서 결정되고 설정됩니다. 스토리지 드라이버에서 볼륨을 가져온 후 PV는 PVC에 대한 ClaimRef를 사용하여 생성됩니다.
 +
 ** 처음에 부가세 반환 청구액 정책이 로 설정되어 있습니다 `retain` PV에서 Kubernetes에서 PVC 및 PV를 성공적으로 바인딩하면 스토리지 클래스의 부가세 반환 청구액 정책에 맞게 부가세 반환 청구액 정책이 업데이트됩니다.
 ** 스토리지 클래스의 부가세 반환 청구액 정책이 인 경우 `delete`, PV 삭제 시 저장 볼륨이 삭제된다.
 
 
-* 기본적으로 Astra Trident는 PVC를 관리하고 백엔드에서 FlexVol 및 LUN의 이름을 바꿉니다. 을(를) 통과할 수 있습니다 `--no-manage` 관리되지 않는 볼륨을 가져오려면 플래그를 지정합니다. 를 사용하는 경우 `--no-manage`, Astra Trident는 개체의 수명 주기 동안 PVC 또는 PV에 대한 추가 작업을 수행하지 않습니다. PV가 삭제되어도 스토리지 볼륨은 삭제되지 않으며 볼륨 클론 및 볼륨 크기 조정과 같은 다른 작업도 무시됩니다.
+* 기본적으로 Trident는 PVC를 관리하고 백엔드에서 FlexVol 및 LUN의 이름을 바꿉니다. 플래그를 전달하여 관리되지 않는 볼륨을 가져올 수 `--no-manage` 있습니다. 을 `--no-manage`사용하면 Trident는 개체의 수명 주기 동안 PVC 또는 PV에 대한 추가 작업을 수행하지 않습니다. PV가 삭제되어도 스토리지 볼륨은 삭제되지 않으며 볼륨 클론 및 볼륨 크기 조정과 같은 다른 작업도 무시됩니다.
 +
 
 TIP: 이 옵션은 컨테이너화된 워크로드에 Kubernetes를 사용하고, 그렇지 않고 Kubernetes 외부 스토리지 볼륨의 라이프사이클을 관리하려는 경우에 유용합니다.
@@ -78,7 +78,7 @@ spec:
 
 WARNING: PV 이름 또는 볼륨 크기와 같은 추가 매개 변수는 포함하지 마십시오. 이로 인해 가져오기 명령이 실패할 수 있습니다.
 
-. 를 사용합니다 `tridentctl import` 볼륨을 포함하는 Astra Trident 백엔드의 이름과 스토리지에서 볼륨을 고유하게 식별하는 이름(예: ONTAP FlexVol, Element Volume, Cloud Volumes Service 경로)을 지정하는 명령입니다. 를 클릭합니다 `-f` PVC 파일의 경로를 지정하려면 인수가 필요합니다.
+.  `tridentctl import`명령을 사용하여 볼륨이 포함된 Trident 백엔드의 이름과 스토리지에서 볼륨을 고유하게 식별하는 이름(예: ONTAP FlexVol, 요소 볼륨, Cloud Volumes Service 경로)을 지정할 수 있습니다.  `-f`PVC 파일의 경로를 지정하려면 인수가 필요합니다.
 +
 [listing]
 ----
@@ -96,7 +96,7 @@ tridentctl import volume <backendName> <volumeName> -f <path-to-pvc-file>
 
 === ONTAP NAS 및 ONTAP NAS FlexGroup를 지원합니다
 
-Astra Trident는 를 사용하여 볼륨 가져오기를 지원합니다 `ontap-nas` 및 `ontap-nas-flexgroup` 드라이버.
+Trident는 및 `ontap-nas-flexgroup` 드라이버를 사용하여 볼륨 가져오기를 `ontap-nas` 지원합니다.
 
 [NOTE]
 ====
@@ -129,7 +129,7 @@ tridentctl import volume ontap_nas managed_volume -f <path-to-pvc-file>
 --
 .관리되지 않는 볼륨
 --
-를 사용할 때 `--no-manage` argument, Astra Trident는 볼륨의 이름을 바꾸지 않습니다.
+인수를 사용할 때 `--no-manage` Trident는 볼륨의 이름을 바꾸지 않습니다.
 
 다음 예에서는 를 가져옵니다 `unmanaged_volume` 를 누릅니다 `ontap_nas` 백엔드:
 
@@ -149,9 +149,9 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 
 === ONTAP SAN
 
-Astra Trident는 를 사용하여 볼륨 가져오기를 지원합니다 `ontap-san` 드라이버. 에서는 볼륨 가져오기가 지원되지 않습니다 `ontap-san-economy` 드라이버.
+Trident는 및 `ontap-san-economy` 드라이버를 사용하여 볼륨 가져오기를 `ontap-san` 지원합니다.
 
-Astra Trident는 단일 LUN이 포함된 ONTAP SAN FlexVol을 가져올 수 있습니다. 이는 와 일치합니다 `ontap-san` 드라이버 - 각 PVC 및 FlexVol 내의 LUN에 대한 FlexVol를 생성합니다. Astra Trident는 FlexVol를 불러와 PVC 정의와 연결합니다.
+Trident는 단일 LUN이 포함된 ONTAP SAN FlexVol을 가져올 수 있습니다. 이는 `ontap-san` 각 PVC 및 FlexVol 내의 LUN에 대한 FlexVol를 생성하는 드라이버와 일치합니다. Trident는 FlexVol를 가져와 PVC 정의와 연결합니다.
 
 .ONTAP SAN 예
 다음은 관리되는 볼륨 및 관리되지 않는 볼륨 가져오기의 예입니다.
@@ -160,7 +160,7 @@ Astra Trident는 단일 LUN이 포함된 ONTAP SAN FlexVol을 가져올 수 있�
 ====
 .관리 볼륨
 --
-관리 볼륨의 경우 Astra Trident가 FlexVol의 이름을 로 바꿉니다 `pvc-<uuid>` 및 FlexVol 내의 LUN을 에 포맷합니다 `lun0`.
+관리되는 볼륨의 경우 Trident의 이름은 FlexVol의 이름을 형식으로, FlexVol 내의 LUN의 `lun0` 이름은 `pvc-<uuid>` 으로 바꿉니다.
 
 다음 예제에서는 을 가져옵니다 `ontap-san-managed` 에 있는 FlexVol입니다 `ontap_san_default` 백엔드:
 
@@ -201,10 +201,10 @@ image:./san-import-igroup.png["iqn 및 클러스터 iqn에 매핑된 LUN 이미�
 
 === 요소
 
-Astra Trident는 를 사용하여 NetApp Element 소프트웨어 및 NetApp HCI 볼륨 가져오기를 지원합니다 `solidfire-san` 드라이버.
+Trident는 드라이버를 사용하여 NetApp Element 소프트웨어 및 NetApp HCI 볼륨 가져오기를 `solidfire-san` 지원합니다.
 
 
-NOTE: Element 드라이버는 중복 볼륨 이름을 지원합니다. 그러나 중복 볼륨 이름이 있는 경우 Astra Trident에서 오류를 반환합니다. 이 문제를 해결하려면 볼륨을 클론하고 고유한 볼륨 이름을 제공한 다음 복제된 볼륨을 가져옵니다.
+NOTE: Element 드라이버는 중복 볼륨 이름을 지원합니다. 그러나 볼륨 이름이 중복되면 Trident에서 오류를 반환합니다. 이 문제를 해결하려면 볼륨을 클론하고 고유한 볼륨 이름을 제공한 다음 복제된 볼륨을 가져옵니다.
 
 .요소 예제
 다음 예제에서는 을 가져옵니다 `element-managed` 백엔드의 볼륨 `element_default`.
@@ -223,7 +223,7 @@ tridentctl import volume element_default element-managed -f pvc-basic-import.yam
 
 === Google 클라우드 플랫폼
 
-Astra Trident는 를 사용하여 볼륨 가져오기를 지원합니다 `gcp-cvs` 드라이버.
+Trident는 드라이버를 사용하여 볼륨 가져오기를 `gcp-cvs` 지원합니다.
 
 
 NOTE: Google Cloud Platform에서 NetApp Cloud Volumes Service가 지원하는 볼륨을 가져오려면 해당 볼륨 경로를 기준으로 볼륨을 식별합니다. 볼륨 경로는 이후 볼륨 내보내기 경로의 일부입니다 `:/`. 예를 들어, 내보내기 경로가 인 경우 `10.0.0.1:/adroit-jolly-swift`, 볼륨 경로는 입니다 `adroit-jolly-swift`.
@@ -245,7 +245,7 @@ tridentctl import volume gcpcvs_YEppr adroit-jolly-swift -f <path-to-pvc-file> -
 
 === Azure NetApp Files
 
-Astra Trident는 를 사용하여 볼륨 가져오기를 지원합니다 `azure-netapp-files` 드라이버.
+Trident는 드라이버를 사용하여 볼륨 가져오기를 `azure-netapp-files` 지원합니다.
 
 
 NOTE: Azure NetApp Files 볼륨을 가져오려면 해당 볼륨 경로를 기준으로 볼륨을 식별합니다. 볼륨 경로는 이후 볼륨 내보내기 경로의 일부입니다 `:/`. 예를 들어, 마운트 경로가 인 경우 `10.0.0.2:/importvol1`, 볼륨 경로는 입니다 `importvol1`.

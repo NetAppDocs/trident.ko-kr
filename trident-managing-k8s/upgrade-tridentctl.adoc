@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-managing-k8s/upgrade-tridentctl.html 
 keywords: upgrade, trident, methods, operator, tridentctl, helm 
-summary: tridentctl을 사용하여 기존 Astra Trident 설치를 쉽게 업그레이드할 수 있습니다. 
+summary: '을 사용하여 기존 Trident 설치를 쉽게 업그레이드할 수 `tridentctl` 있습니다.' 
 ---
 = tridentctl로 업그레이드하십시오
 :hardbreaks:
@@ -12,22 +12,22 @@ summary: tridentctl을 사용하여 기존 Astra Trident 설치를 쉽게 업그
 
 
 [role="lead"]
-을 사용하여 기존 Astra Trident 설치를 쉽게 업그레이드할 수 있습니다 `tridentctl`.
+를 사용하여 기존 Trident 설치를 쉽게 업그레이드할 수 `tridentctl` 있습니다.
 
 .이 작업에 대해
-Astra Trident를 제거하고 다시 설치하면 업그레이드 역할을 합니다. Trident를 제거할 때 Astra Trident 배포에 사용되는 영구 볼륨 클레임(PVC) 및 영구 볼륨(PV)은 삭제되지 않습니다. 이미 프로비저닝된 PVS는 Astra Trident가 오프라인 상태인 동안 계속 사용할 수 있으며, Astra Trident는 다시 온라인 상태가 되면 중간 기간 동안 생성된 모든 PVC에 대해 볼륨을 프로비저닝합니다.
+Trident 제거 및 재설치는 업그레이드로 작동합니다. Trident를 제거하면 Trident 배포에 사용되는 PVC(영구 볼륨 클레임) 및 PV(영구 볼륨)가 삭제되지 않습니다. 이미 프로비저닝된 PVS는 Trident가 오프라인 상태인 동안 사용 가능한 상태로 유지되며, Trident는 다시 온라인 상태가 된 후 그 사이에 생성된 모든 PVC에 대한 볼륨을 프로비저닝합니다.
 
 .시작하기 전에
 검토 link:upgrade-trident.html#select-an-upgrade-method["업그레이드 방법을 선택합니다"] 를 사용하여 업그레이드하기 전에 `tridentctl`.
 
 .단계
-. 에서 제거 명령을 실행합니다 `tridentctl` CRD 및 관련 객체를 제외한 Astra Trident와 연결된 모든 리소스를 제거합니다.
+. 에서 uninstall 명령을 `tridentctl` 실행하여 CRD 및 관련 객체를 제외한 Trident와 연결된 모든 리소스를 제거합니다.
 +
 [listing]
 ----
 ./tridentctl uninstall -n <namespace>
 ----
-. Astra Trident를 다시 설치합니다. 을 참조하십시오 link:../trident-get-started/kubernetes-deploy-tridentctl.html["tridentctl을 사용하여 Astra Trident를 설치합니다"].
+. Trident를 다시 설치합니다. 을 link:../trident-get-started/kubernetes-deploy-tridentctl.html["tridentctl을 사용하여 Trident를 설치합니다"]참조하십시오.
 
 
 

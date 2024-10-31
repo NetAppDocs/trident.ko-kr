@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/gcp.html 
 keywords: trident backend, cloud volumes service for google cloud platform, google cloud platform, gcp, storage pool labels, storage pool, cvs, cvs-performance, service type, service level, cloud volumes service, cloud volumes, drivers, access modes, rwo, rwx, rwp, rwop, file system 
-summary: 제공된 샘플 구성을 사용하여 Astra Trident 설치를 위한 백엔드로 Google Cloud용 Cloud Volumes Service를 구성하는 방법을 알아보십시오. 
+summary: 제공된 샘플 구성을 사용하여 Trident 설치를 위한 백엔드로 Cloud Volumes Service for Google Cloud를 구성하는 방법에 대해 알아보십시오. 
 ---
 = Google Cloud용 Cloud Volumes Service 백엔드를 구성합니다
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: 제공된 샘플 구성을 사용하여 Astra Trident 설치를 위한 
 
 
 [role="lead"]
-제공된 샘플 구성을 사용하여 Astra Trident 설치를 위한 백엔드로 NetApp Cloud Volumes Service for Google Cloud를 구성하는 방법을 알아보십시오.
+제공된 샘플 구성을 사용하여 Trident 설치를 위한 백엔드로 NetApp Cloud Volumes Service for Google Cloud를 구성하는 방법에 대해 알아보십시오.
 
 
 
 == Google Cloud 드라이버 세부 정보입니다
 
-Astra Trident가 제공하는 것은 다음과 같습니다 `gcp-cvs` 클러스터와 통신하는 드라이버입니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.
+Trident는 `gcp-cvs` 클러스터와 통신할 수 있는 드라이버를 제공합니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.
 
 [cols="1, 1, 1, 2, 2"]
 |===
@@ -37,11 +37,11 @@ RWO, ROX, rwx, RWOP
 |===
 
 
-== Cloud Volumes Service for Google Cloud를 위한 Astra Trident 지원에 대해 알아보십시오
+== Cloud Volumes Service for Google Cloud에 대한 Trident의 지원에 대해 알아보십시오
 
-Astra Trident는 두 개 중 하나로 Cloud Volumes Service 볼륨을 생성할 수 있습니다 link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["서비스 유형"^]:
+Trident는 다음 2가지 중 하나로 Cloud Volumes Service 볼륨을 생성할 수 있습니다link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["서비스 유형"^].
 
-* * CVS - 성능 *: 기본 Astra Trident 서비스 유형입니다. 이처럼 성능에 최적화된 서비스 유형은 성능을 중요시하는 운영 워크로드에 가장 적합합니다. CVS - 성능 서비스 유형은 최소 100GiB 크기의 볼륨을 지원하는 하드웨어 옵션입니다. 다음 중 하나를 선택할 수 있습니다 link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs-performance_service_type["3가지 서비스 레벨"^]:
+* * CVS - 성능 *: 기본 Trident 서비스 유형입니다. 이처럼 성능에 최적화된 서비스 유형은 성능을 중요시하는 운영 워크로드에 가장 적합합니다. CVS - 성능 서비스 유형은 최소 100GiB 크기의 볼륨을 지원하는 하드웨어 옵션입니다. link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs-performance_service_type["3가지 서비스 레벨"^]다음 중 하나를 선택할 수 있습니다.
 +
 ** `standard`
 ** `premium`
@@ -85,7 +85,7 @@ Astra Trident는 두 개 중 하나로 Cloud Volumes Service 볼륨을 생성할
 | 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + "_" + API 키의 일부 
 
 
-| '원어클래스' | CVS 서비스 유형을 지정하는 데 사용되는 선택적 매개 변수입니다. 사용 `software` CVS 서비스 유형을 선택합니다. 그렇지 않으면 Astra Trident가 CVS - 성능 서비스 유형을 가정합니다 (`hardware`)를 클릭합니다. |  
+| '원어클래스' | CVS 서비스 유형을 지정하는 데 사용되는 선택적 매개 변수입니다. 를 사용하여 `software` CVS 서비스 유형을 선택합니다. 그렇지 않은 경우, Trident은 CVS-Performance 서비스 유형으로 가정(`hardware`) |  
 
 
 | `storagePools` | CVS 서비스 유형만 볼륨 생성을 위한 스토리지 풀을 지정하는 데 사용되는 선택적 매개 변수입니다. |  
@@ -97,7 +97,7 @@ Astra Trident는 두 개 중 하나로 Cloud Volumes Service 볼륨을 생성할
 | hostProjectNumber입니다 | 공유 VPC 네트워크를 사용하는 경우 필요합니다. 이 시나리오에서는 `projectNumber` 은(는) 서비스 프로젝트입니다 `hostProjectNumber` 는 호스트 프로젝트입니다. |  
 
 
-| 아피지역 | Astra Trident가 Cloud Volumes Service 볼륨을 생성하는 Google 클라우드 영역 지역 간 Kubernetes 클러스터를 생성할 때 에서 생성된 볼륨입니다 `apiRegion` 여러 Google Cloud 지역의 노드에 예약된 워크로드에 사용할 수 있습니다. 지역 간 트래픽에는 추가 비용이 발생합니다. |  
+| 아피지역 | Trident에서 Cloud Volumes Service 볼륨을 생성하는 Google Cloud 영역입니다. 교차 지역 Kubernetes 클러스터를 생성할 경우, 에서 생성된 볼륨을 `apiRegion` 여러 Google Cloud 지역의 노드에 예약된 워크로드에 사용할 수 있습니다. 지역 간 트래픽에는 추가 비용이 발생합니다. |  
 
 
 | 아피키 | 를 사용하여 Google Cloud 서비스 계정에 대한 API 키입니다 `netappcloudvolumes.admin` 역할. 여기에는 Google Cloud 서비스 계정의 개인 키 파일(백엔드 구성 파일에 verbatim 복사)의 JSON 형식 콘텐츠가 포함됩니다. |  
@@ -354,7 +354,7 @@ allowVolumeExpansion: true
 ----
 ====
 * 첫 번째 StorageClass입니다 (`cvs-extreme-extra-protection`)가 첫 번째 가상 풀에 매핑됩니다. 이 풀은 스냅샷 예약 공간이 10%인 최고 성능을 제공하는 유일한 풀입니다.
-* 마지막 StorageClass입니다 (`cvs-extra-protection`) 10%의 스냅샷 예약 공간을 제공하는 스토리지 풀을 호출합니다. Astra Trident는 선택된 가상 풀을 결정하고 스냅샷 예약 요구 사항이 충족되는지 확인합니다.
+* Last StorageClass(`cvs-extra-protection`)는 10%의 스냅숏 예비 공간을 제공하는 모든 스토리지 풀을 호출합니다. Trident는 선택된 가상 풀을 결정하고 스냅샷 예약 요구 사항이 충족되는지 확인합니다.
 
 
 

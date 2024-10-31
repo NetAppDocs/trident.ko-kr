@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-concepts/virtual-storage-pool.html 
-keywords: virtual pools, astra trident, backends 
-summary: 가상 풀은 Astra Trident의 스토리지 백엔드와 Kubernetes의 StorageClasses 간의 추상화 계층을 제공합니다. 관리자는 StorageClass를 만들지 않고도 각 백엔드에 대한 위치, 성능 및 보호와 같은 측면을 백엔드에 관계없이 공통된 방식으로 정의할 수 있습니다. 원하는 기준을 충족하는 데 사용할 물리적 백엔드, 백엔드 풀 또는 백엔드 유형을 지정할 수 있습니다. 
+keywords: virtual pools, Trident, backends 
+summary: 가상 풀은 Trident의 스토리지 백엔드와 Kubernetes의 StorageClasses 간에 추상화 계층을 제공합니다. 관리자는 StorageClass를 만들지 않고도 각 백엔드에 대한 위치, 성능 및 보호와 같은 측면을 백엔드에 관계없이 공통된 방식으로 정의할 수 있습니다. 원하는 기준을 충족하는 데 사용할 물리적 백엔드, 백엔드 풀 또는 백엔드 유형을 지정할 수 있습니다. 
 ---
 = 가상 풀
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: 가상 풀은 Astra Trident의 스토리지 백엔드와 Kubernetes의 
 
 
 [role="lead"]
-가상 풀은 Astra Trident 스토리지 백엔드와 Kubernetes 간의 추상화 계층을 제공합니다 `StorageClasses`. 관리자는 을 만들지 않고 각 백엔드에 대한 위치, 성능 및 보호와 같은 측면을 일반적인 백엔드 방식으로 정의할 수 있습니다 `StorageClass` 원하는 기준을 충족하는 데 사용할 물리적 백엔드, 백엔드 풀 또는 백엔드 유형을 지정합니다.
+가상 풀은 Trident 스토리지 백엔드와 Kubernetes 간에 추상화 계층을 `StorageClasses` 제공합니다. 관리자는 이러한 기능을 사용하여 원하는 기준을 충족하는 데 사용할 물리적 백엔드, 백엔드 풀 또는 백엔드 유형을 지정하지 않고 백엔드에 관계없이 공통의 방식으로 각 백엔드에 대한 위치, 성능 및 보호 등의 측면을 정의할 수 `StorageClass` 있습니다.
 
 
 
 == 가상 풀에 대해 알아보십시오
 
-스토리지 관리자는 Astra Trident 백엔드의 가상 풀을 JSON 또는 YAML 정의 파일로 정의할 수 있습니다.
+스토리지 관리자는 Trident 백엔드의 가상 풀을 JSON 또는 YAML 정의 파일로 정의할 수 있습니다.
 
 image::virtual_storage_pools.png[에는 가상 풀의 개념적 다이어그램이 나와 있습니다.]
 

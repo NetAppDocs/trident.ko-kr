@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-operations.html 
 keywords: snapshots, volumes, csi topology, storage classes, pv, pvc, persistent volumes, persistent volume claims, backends, expand volumes, import volumes 
-summary: Astra Trident는 볼륨을 관리하는 몇 가지 기능을 제공합니다. Astra Trident가 볼륨에 제공하는 기능에 대해 알아보십시오. 
+summary: Trident는 볼륨 관리를 위한 몇 가지 기능을 제공합니다. Trident이 볼륨에 제공하는 기능에 대해 알아보십시오. 
 ---
 = 볼륨 작업을 수행합니다
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: Astra Trident는 볼륨을 관리하는 몇 가지 기능을 제공합�
 
 
 [role="lead"]
-볼륨 관리를 위한 Astra Trident의 기능에 대해 알아보십시오.
+볼륨 관리를 위한 Trident의 기능에 대해 알아봅니다.
 
 
 
 == 볼륨 관리
 
-Astra Trident를 사용하여 볼륨을 관리하는 방법에 대한 자세한 내용은 다음을 참조하십시오.
+Trident를 사용하여 볼륨을 관리하는 방법에 대한 자세한 내용은 다음을 참조하십시오.
 
 * link:csi-topology.html["CSI 토폴로지를 사용합니다"^]
 * link:vol-snapshots.html["스냅샷 작업"^]

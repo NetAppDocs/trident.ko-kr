@@ -4,7 +4,7 @@ permalink: trident-reco/integrate-trident.html
 keywords: kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual pool, cvs, gcp, volumes 
 summary: Kubernetes 클러스터는 일반적으로 두 가지 유형의 노드로 구성되며, 각 노드는 다양한 기능의 측면을 담당합니다. 
 ---
-= Astra Trident 통합
+= Trident 통합
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,7 +12,7 @@ summary: Kubernetes 클러스터는 일반적으로 두 가지 유형의 노드�
 
 
 [role="lead"]
-Astra Trident를 통합하려면 다음과 같은 설계 및 아키텍처 요소를 통합해야 합니다. 드라이버 선택 및 배포, 스토리지 클래스 설계, 가상 풀 설계, PVC(Persistent Volume Claim)가 Astra Trident를 사용한 스토리지 프로비저닝, 볼륨 운영, OpenShift 서비스 구축에 미치는 영향
+Trident를 통합하려면 드라이버 선택 및 배포, 스토리지 클래스 설계, 가상 풀 설계, PVC(영구적 볼륨 클레임)가 스토리지 프로비저닝, 볼륨 운영, Trident를 사용하는 OpenShift 서비스 배포에 미치는 영향 등 통합이 필요합니다.
 
 
 
@@ -39,7 +39,7 @@ ONTAP 백엔드 드라이버는 사용된 프로토콜과 스토리지 시스템
 
 세 개의 NAS 드라이버 중 하나를 선택할 경우 해당 기능에 약간의 영향을 줍니다. 이 기능은 응용 프로그램에서 사용할 수 있습니다.
 
-아래 표에서 모든 기능이 Astra Trident를 통해 표시되는 것은 아닙니다. 용량 할당 후 기능을 적용하려면 스토리지 관리자가 일부 기능을 적용해야 합니다. 위 첨자 각주는 기능 및 드라이버별 기능을 구별합니다.
+아래 표에서 모든 기능이 Trident를 통해 표시되는 것은 아닙니다. 용량 할당 후 기능을 적용하려면 스토리지 관리자가 일부 기능을 적용해야 합니다. 위 첨자 각주는 기능 및 드라이버별 기능을 구별합니다.
 
 [cols="20,10,10,10,10,10,10,10"]
 |===
@@ -54,7 +54,7 @@ ONTAP 백엔드 드라이버는 사용된 프로토콜과 스토리지 시스템
 
 | 'ONTAP-NAS-Flexgroup' | Yesfootnote: 1[] | 아니요 | Yesfootnote: 5[] | 예 | Yesfootnote: 1[] | 예 | Yesfootnote: 1[] 
 |===
-Astra Trident는 ONTAP용 SAN 드라이버 2개를 제공하며 해당 기능은 아래에 나와 있습니다.
+Trident는 ONTAP용 SAN 드라이버 2개를 제공합니다. 이러한 드라이버는 다음과 같습니다.
 
 [cols="20,10,10,10,10,10,10,10"]
 |===
@@ -67,12 +67,7 @@ Astra Trident는 ONTAP용 SAN 드라이버 2개를 제공하며 해당 기능은
 | ONTAP-SAN-이코노미 | 예 | 예 | Yesfootnote: 4[] | 예 | Yesfootnote: 3[] | 예 | Yesfootnote: 3[] 
 |===
 [verse]
-위 표의 각주:
-Yesfootnote: 1[]: Astra Trident에서 관리하지 않음
-Yesfootnote: 2 [ ]: Astra Trident에서 관리하지만 PV는 세분화하지 않습니다
-Yesfootnote: 3 [ ] : 아스트라 트리덴트(Astra Trident)가 관리하지 않고 PV가 세분화되어 있지 않습니다
-Yesfootnote:4[]: 원시 블록 볼륨에서 지원됩니다
-예각주:5[]: Astra Trident에서 지원합니다
+위 표의 각주: Yesfootnote:1[]:Trident에서 관리되지 않음 예각주:2[]:Trident에서 관리하지만 PV 입상으로는 관리하지 않음 예각주:3[]:Trident에서 관리되지 않으며 PV 입상화가 아님 예각주:4[]: 원시 블록 볼륨에 대해 지원됨 예각주:5[]: Trident에서 지원
 
 PV 세분화되지 않은 기능은 전체 FlexVolume에 적용되고 모든 PVS(즉, 공유 FlexVol의 qtree 또는 LUN)는 공통 스케줄을 공유합니다.
 
@@ -107,15 +102,15 @@ NetApp HCI/SolidFire 플랫폼과 함께 사용되는 'olidfire-SAN' 드라이�
 | '솔더불-산' | 예 | 예 | Yesfootnote:2[] | 예 | 예 | 예 | Yesfootnote: 1[] 
 |===
 [verse]
-각주: Yesfootnote: 1 [ ]: Astra Trident Yesfootnote: 2 [ ]: 원시 블록 볼륨에서 지원됩니다
+각주: Yesfootnote:1[]: Trident에서 관리하지 않습니다. 예각주:2[]: 원시 블록 볼륨에 대해 지원됩니다
 
 
 
 === Azure NetApp Files 백엔드 드라이버
 
-Astra Trident는 'Azure-NetApp-files' 드라이버를 사용하여 를 관리합니다 link:https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"^] 서비스.
+Trident는 드라이버를 link:https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"^]사용하여 `azure-netapp-files` 서비스를 관리합니다.
 
-이 드라이버 및 구성 방법에 대한 자세한 내용은 에서 찾을 수 있습니다 link:https://docs.netapp.com/us-en/trident/trident-use/anf.html["Azure NetApp Files를 위한 Astra Trident 백엔드 구성입니다"^].
+이 드라이버에 대한 자세한 내용 및 구성 방법은 을 link:https://docs.netapp.com/us-en/trident/trident-use/anf.html["Azure NetApp Files에 대한 Trident 백엔드 구성"^]참조하십시오.
 
 [cols="20,10,10,10,10,10,10"]
 |===
@@ -125,23 +120,23 @@ Astra Trident는 'Azure-NetApp-files' 드라이버를 사용하여 를 관리합
 | 'Azure-NetApp-파일' | 예 | 예 | 예 | 예 | 예 | Yesfootnote: 1[] 
 |===
 [verse]
-각주: Yesfootnote: 1 [ ]: Astra Trident에서 관리하지 않습니다
+각주: Yesfootnote:1[]: Trident에서 관리하지 않습니다
 
 
 
 === Cloud Volumes Service on Google Cloud 백엔드 드라이버
 
-Astra Trident가 을 사용합니다 `gcp-cvs` Google Cloud에서 Cloud Volumes Service와 연결할 드라이버.
+Trident는 이 드라이버를 사용하여 `gcp-cvs` Google Cloud의 Cloud Volumes Service와 연결합니다.
 
-를 클릭합니다 `gcp-cvs` 드라이버는 가상 풀을 사용하여 백엔드를 추상화하고 Astra Trident가 볼륨 배치를 결정할 수 있도록 합니다. 관리자는 에서 가상 풀을 정의합니다 `backend.json` 파일. 스토리지 클래스는 선택기를 사용하여 레이블별로 가상 풀을 식별합니다.
+ `gcp-cvs`드라이버는 가상 풀을 사용하여 백엔드를 추상화하고 Trident에서 볼륨 배치를 결정할 수 있도록 합니다. 관리자는 파일의 가상 풀을 `backend.json` 정의합니다. 스토리지 클래스는 선택기를 사용하여 레이블별로 가상 풀을 식별합니다.
 
-* 백엔드에 가상 풀이 정의되어 있는 경우, Astra Trident는 Google Cloud 스토리지 풀에서 해당 가상 풀이 제한되는 볼륨을 생성하려고 시도합니다.
-* 백엔드에 가상 풀이 정의되지 않은 경우 Astra Trident는 해당 지역의 사용 가능한 스토리지 풀에서 Google Cloud 스토리지 풀을 선택합니다.
+* 백엔드에 가상 풀이 정의되어 있는 경우, Trident는 Google Cloud 스토리지 풀에 해당 가상 풀이 제한된 볼륨을 생성하려고 합니다.
+* 백엔드에 가상 풀이 정의되지 않은 경우 Trident는 해당 지역의 사용 가능한 스토리지 풀에서 Google Cloud 스토리지 풀을 선택합니다.
 
 
-Astra Trident에서 Google Cloud 백엔드를 구성하려면 을 지정해야 합니다 `projectNumber`, `apiRegion`, 및 `apiKey` 백엔드 파일 Google Cloud 콘솔에서 프로젝트 번호를 찾을 수 있습니다. API 키는 Google Cloud에서 Cloud Volumes Service에 대한 API 액세스를 설정할 때 생성한 서비스 계정 개인 키 파일에서 가져옵니다.
+Trident에서 Google Cloud 백엔드를 구성하려면 백 엔드 파일에, `apiRegion` 및 `apiKey` 를 지정해야 `projectNumber` 합니다. Google Cloud 콘솔에서 프로젝트 번호를 찾을 수 있습니다. API 키는 Google Cloud에서 Cloud Volumes Service에 대한 API 액세스를 설정할 때 생성한 서비스 계정 개인 키 파일에서 가져옵니다.
 
-Cloud Volumes Service on Google Cloud 서비스 유형 및 서비스 수준에 대한 자세한 내용은 을 참조하십시오 link:../trident-use/gcp.html["CVS for GCP에 대한 Astra Trident 지원에 대해 알아보십시오"].
+Cloud Volumes Service on Google Cloud 서비스 유형 및 서비스 수준에 대한 자세한 내용은 을 참조하십시오link:../trident-use/gcp.html["GCP용 CVS에 대한 Trident의 지원에 대해 알아보십시오"].
 
 [cols="20,10,10,10,10,10,10"]
 |===
@@ -153,7 +148,7 @@ Cloud Volumes Service on Google Cloud 서비스 유형 및 서비스 수준에 �
 [NOTE]
 ====
 .복제 참고 사항
-* Astra Trident에서 복제를 관리하지 않습니다.
+* 복제는 Trident에서 관리하지 않습니다.
 * 클론이 소스 볼륨과 동일한 스토리지 풀에 생성됩니다.
 
 
@@ -170,7 +165,7 @@ Kubernetes Storage Class 객체를 생성하려면 개별 스토리지 클래스
 
 특정 스토리지 클래스 객체 내에서 필터링을 사용하여 해당 스토리지 클래스에 사용할 스토리지 풀 또는 풀 세트를 결정할 수 있습니다. Storage Class에서 'toragePools', 'additionalStoragePools', 'excludeStoragePools' 등의 세 가지 필터를 설정할 수 있습니다.
 
-'toragePools' 매개 변수는 지정된 속성과 일치하는 풀 세트로 스토리지를 제한하는 데 도움이 됩니다. 추가 StoragePools 매개변수는 Astra Trident가 프로비저닝에 사용할 풀 세트를 속성 및 'toragePools' 매개 변수로 선택한 풀 세트와 함께 확장하는 데 사용됩니다. 매개 변수만 사용하거나 둘 모두를 함께 사용하여 적절한 스토리지 풀 세트가 선택되었는지 확인할 수 있습니다.
+ `storagePools`매개 변수를 사용하면 지정된 속성과 일치하는 풀 세트로 스토리지를 제한할 수 있습니다.  `additionalStoragePools`매개 변수는 Trident가 프로비저닝에 사용하는 풀 세트를 속성 및 매개 변수로 선택한 풀 세트와 함께 확장하는 데 `storagePools` 사용됩니다. 매개 변수만 사용하거나 둘 모두를 함께 사용하여 적절한 스토리지 풀 세트가 선택되었는지 확인할 수 있습니다.
 
 excludeStoragePools 매개 변수는 속성과 일치하는 나열된 풀 세트를 명시적으로 제외하는 데 사용됩니다.
 
@@ -190,15 +185,15 @@ excludeStoragePools 매개 변수는 속성과 일치하는 나열된 풀 세트
 
 === 가상 풀
 
-모든 Astra Trident 백엔드에 가상 풀을 사용할 수 있습니다. Astra Trident가 제공하는 모든 드라이버를 사용하여 백엔드에 대한 가상 풀을 정의할 수 있습니다.
+모든 Trident 백엔드에서 가상 풀을 사용할 수 있습니다. Trident에서 제공하는 모든 드라이버를 사용하여 백엔드에 대한 가상 풀을 정의할 수 있습니다.
 
-가상 풀을 사용하면 관리자가 저장소 클래스를 통해 참조할 수 있는 백엔드에 대한 추상화 수준을 생성하여 백엔드에 볼륨을 보다 유연하고 효율적으로 배치할 수 있습니다. 동일한 서비스 클래스로 다른 백엔드를 정의할 수 있습니다. 또한 동일한 백엔드에서 여러 스토리지 풀을 생성할 수 있지만 특성이 다릅니다. 특정 레이블이 있는 선택기로 스토리지 클래스를 구성한 경우 Astra Trident는 볼륨을 배치할 모든 선택기 레이블과 일치하는 백엔드를 선택합니다. 스토리지 클래스 선택기 레이블이 여러 스토리지 풀과 일치하면 Astra Trident가 볼륨 용량을 할당할 스토리지 풀 중 하나를 선택합니다.
+가상 풀을 사용하면 관리자가 저장소 클래스를 통해 참조할 수 있는 백엔드에 대한 추상화 수준을 생성하여 백엔드에 볼륨을 보다 유연하고 효율적으로 배치할 수 있습니다. 동일한 서비스 클래스로 다른 백엔드를 정의할 수 있습니다. 또한 동일한 백엔드에서 여러 스토리지 풀을 생성할 수 있지만 특성이 다릅니다. 특정 레이블이 있는 선택기를 사용하여 스토리지 클래스를 구성하면 Trident에서 볼륨을 배치할 모든 선택기 레이블과 일치하는 백엔드를 선택합니다. 스토리지 클래스 선택기 레이블이 여러 스토리지 풀과 일치하는 경우 Trident는 볼륨 용량 할당을 위해 둘 중 하나를 선택합니다.
 
 
 
 == 가상 풀 설계
 
-백엔드를 생성하는 동안 일반적으로 매개 변수 집합을 지정할 수 있습니다. 관리자가 동일한 스토리지 자격 증명을 사용하여 다른 매개 변수 집합을 가진 다른 백엔드를 생성할 수 없었습니다. 가상 풀이 도입됨에 따라 이 문제가 완화되었습니다. 가상 풀은 백엔드 및 Kubernetes 스토리지 클래스 간에 도입된 레벨 추상화입니다. 따라서 관리자는 Kubernetes 스토리지 클래스를 통해 백엔드에 독립적인 방식으로 Selector로 참조할 수 있는 레이블과 함께 매개 변수를 정의할 수 있습니다. Astra Trident를 사용하여 지원되는 모든 NetApp 백엔드에 가상 풀을 정의할 수 있습니다. 해당 목록에는 SolidFire/NetApp HCI, ONTAP, Cloud Volumes Service on GCP 및 Azure NetApp Files가 포함됩니다.
+백엔드를 생성하는 동안 일반적으로 매개 변수 집합을 지정할 수 있습니다. 관리자가 동일한 스토리지 자격 증명을 사용하여 다른 매개 변수 집합을 가진 다른 백엔드를 생성할 수 없었습니다. 가상 풀이 도입됨에 따라 이 문제가 완화되었습니다. 가상 풀은 백엔드 및 Kubernetes 스토리지 클래스 간에 도입된 레벨 추상화입니다. 따라서 관리자는 Kubernetes 스토리지 클래스를 통해 백엔드에 독립적인 방식으로 Selector로 참조할 수 있는 레이블과 함께 매개 변수를 정의할 수 있습니다. Trident를 사용하여 지원되는 모든 NetApp 백엔드에 대해 가상 풀을 정의할 수 있습니다. 해당 목록에는 SolidFire/NetApp HCI, ONTAP, Cloud Volumes Service on GCP 및 Azure NetApp Files가 포함됩니다.
 
 
 NOTE: 가상 풀을 정의할 때는 백엔드 정의에서 기존 가상 풀의 순서를 재정렬하지 않는 것이 좋습니다. 또한 기존 가상 풀의 속성을 편집/수정하고 대신 새 가상 풀을 정의하는 것이 좋습니다.
@@ -219,7 +214,7 @@ NOTE: 가상 풀을 정의할 때는 백엔드 정의에서 기존 가상 풀의
 
 === 스토리지 프로비저닝에 영향을 미치는 PVC 특성
 
-요청된 스토리지 클래스 이외의 일부 매개 변수는 PVC 생성 시 Astra Trident 프로비저닝 결정 프로세스에 영향을 줄 수 있습니다.
+요청된 스토리지 클래스를 벗어난 일부 매개변수는 PVC 생성 시 Trident 프로비저닝 결정 프로세스에 영향을 미칠 수 있습니다.
 
 
 
@@ -227,7 +222,7 @@ NOTE: 가상 풀을 정의할 때는 백엔드 정의에서 기존 가상 풀의
 
 PVC를 통한 저장 요청 시 필수 필드 중 하나가 액세스 모드입니다. 원하는 모드는 스토리지 요청을 호스팅하기 위해 선택한 백엔드에 영향을 줄 수 있습니다.
 
-Astra Trident는 다음 매트릭스에 따라 지정된 액세스 방법과 사용된 스토리지 프로토콜을 일치시키려고 시도합니다. 이는 기본 스토리지 플랫폼과 무관합니다.
+Trident는 다음 매트릭스에 따라 지정된 액세스 방법과 함께 사용되는 스토리지 프로토콜을 일치시키려고 시도합니다. 이는 기본 스토리지 플랫폼과 무관합니다.
 
 [cols="20,30,30,30"]
 |===
@@ -252,7 +247,7 @@ NFS 백엔드가 구성되지 않은 상태로 Trident 배포에 제출된 ReadW
 영구 볼륨은 Kubernetes에서 두 가지 예외, 영구적 객체입니다. 생성된 후에는 부가세 반환 청구액 정책 및 크기를 수정할 수 있습니다. 그러나 이렇게 해도 볼륨의 일부 측면이 Kubernetes 외부에서 수정되는 것을 방지할 수 없습니다. 특정 애플리케이션에 맞게 볼륨을 사용자 지정하거나, 실수로 용량이 소비되지 않도록 하거나, 어떠한 이유로든 볼륨을 다른 스토리지 컨트롤러로 이동하는 것이 좋을 수 있습니다.
 
 
-NOTE: 현재 Kubernetes 트리 프로비저닝 시 NFS 또는 iSCSI PVS의 볼륨 크기 조정 작업은 지원되지 않습니다. Astra Trident는 NFS 및 iSCSI 볼륨 확장을 지원합니다.
+NOTE: 현재 Kubernetes 트리 프로비저닝 시 NFS 또는 iSCSI PVS의 볼륨 크기 조정 작업은 지원되지 않습니다. Trident는 NFS 및 iSCSI 볼륨의 확장을 지원합니다.
 
 PV의 접속 세부 정보는 생성 후 수정할 수 없습니다.
 
@@ -260,29 +255,29 @@ PV의 접속 세부 정보는 생성 후 수정할 수 없습니다.
 
 === 주문형 볼륨 스냅샷을 생성합니다
 
-Astra Trident는 CSI 프레임워크를 사용하여 필요 시 볼륨 스냅샷 생성 및 스냅샷에서 PVC 생성을 지원합니다. 스냅샷은 편리한 데이터 시점 복사본을 유지 관리하는 방법을 제공하며 Kubernetes의 소스 PV와 독립적인 라이프사이클을 갖고 있습니다. 이러한 스냅샷을 사용하여 PVC를 복제할 수 있습니다.
+Trident는 CSI 프레임워크를 사용하여 주문형 볼륨 스냅샷 생성 및 스냅샷으로부터 PVC 생성을 지원합니다. 스냅샷은 편리한 데이터 시점 복사본을 유지 관리하는 방법을 제공하며 Kubernetes의 소스 PV와 독립적인 라이프사이클을 갖고 있습니다. 이러한 스냅샷을 사용하여 PVC를 복제할 수 있습니다.
 
 
 
 === 스냅샷으로부터 볼륨을 생성합니다
 
-Astra Trident는 볼륨 스냅샷으로부터 PersistentVolumes 생성을 지원합니다. 이를 위해 PersistentVolumeClaim을 생성하고 볼륨을 생성해야 하는 필수 스냅샷으로 "소스"를 언급하기만 하면 됩니다. Astra Trident는 스냅샷에 데이터가 있는 볼륨을 생성하여 이 PVC를 처리합니다. 이 기능을 사용하면 지역 간에 데이터를 복제하거나 테스트 환경을 생성하거나 손상되거나 손상된 운영 볼륨을 전체적으로 교체하거나 특정 파일 및 디렉토리를 검색하여 연결된 다른 볼륨으로 전송할 수 있습니다.
+Trident는 또한 볼륨 스냅샷에서 PersistentVolumes 생성을 지원합니다. 이를 위해 PersistentVolumeClaim을 생성하고 볼륨을 생성해야 하는 필수 스냅샷으로 을 언급하면 `datasource` 됩니다. Trident는 스냅샷에 데이터가 있는 볼륨을 생성하여 이 PVC를 처리합니다. 이 기능을 사용하면 지역 간에 데이터를 복제하거나 테스트 환경을 생성하거나 손상되거나 손상된 운영 볼륨을 전체적으로 교체하거나 특정 파일 및 디렉토리를 검색하여 연결된 다른 볼륨으로 전송할 수 있습니다.
 
 
 
 === 클러스터에서 볼륨 이동
 
-스토리지 관리자는 ONTAP 클러스터의 Aggregate와 컨트롤러 간에 볼륨을 스토리지 소비자로 중단 없이 이동할 수 있습니다. 대상 애그리게이트는 Astra Trident가 사용하는 SVM이 액세스할 수 있는 경우, 이 작업은 Astra Trident 또는 Kubernetes 클러스터에 영향을 주지 않습니다. 여기서 중요한 점은 애그리게이트를 SVM에 새로 추가한 경우, Astra Trident에 다시 추가하여 백엔드를 새로 고쳐야 한다는 것입니다. 그러면 Astra Trident가 SVM의 인벤토리를 다시 만들어 새 애그리게이트를 인식할 수 있습니다.
+스토리지 관리자는 ONTAP 클러스터의 Aggregate와 컨트롤러 간에 볼륨을 스토리지 소비자로 중단 없이 이동할 수 있습니다. 대상 애그리게이트가 Trident가 사용 중인 SVM에 액세스할 수 있는 경우에만 이 작업이 Trident 또는 Kubernetes 클러스터에는 영향을 미치지 않습니다. 중요한 것은, aggregate가 SVM에 새로 추가된 경우 이를 Trident에 다시 추가하여 백엔드를 새로 고쳐야 한다는 것입니다. 이 경우 Trident가 SVM의 인벤토리를 다시 작성하도록 트리거하여 새 애그리게이트가 인식됩니다.
 
-그러나 Astra Trident는 백엔드에서 볼륨을 이동하는 기능을 자동으로 지원하지 않습니다. 여기에는 동일한 클러스터, 클러스터 간 또는 다른 스토리지 플랫폼(스토리지 시스템이 Astra Trident에 연결된 SVM인 경우에도 해당 스토리지 플랫폼)에 있는 SVM이 포함됩니다.
+하지만 Trident에서는 백엔드 볼륨 이동이 자동으로 지원되지 않습니다. 여기에는 동일한 클러스터 내, 클러스터 간 또는 다른 스토리지 플랫폼(스토리지 시스템이 Trident에 연결된 SVM인 경우에도)에 있는 SVM이 포함됩니다.
 
-볼륨이 다른 위치에 복사되면 볼륨 가져오기 기능을 사용하여 현재 볼륨을 Astra Trident로 가져올 수 있습니다.
+볼륨이 다른 위치에 복사되면 볼륨 가져오기 기능을 사용하여 현재 볼륨을 Trident로 가져올 수 있습니다.
 
 
 
 === 볼륨 확장
 
-Astra Trident는 NFS 및 iSCSI PVS 크기를 조정할 수 있도록 지원합니다. 따라서 사용자는 Kubernetes 계층을 통해 직접 볼륨의 크기를 조정할 수 있습니다. ONTAP, SolidFire/NetApp HCI 및 Cloud Volumes Service 백엔드를 포함한 모든 주요 NetApp 스토리지 플랫폼에서 볼륨 확장이 가능합니다. 나중에 확장을 허용하려면 볼륨과 연관된 StorageClass에서 allowVolumeExpansion을 true로 설정합니다. 영구 볼륨의 크기를 조정해야 할 때마다 영구 볼륨 클레임의 'pec.resources.requests.storage' 주석을 필요한 볼륨 크기로 편집합니다. Trident는 스토리지 클러스터의 볼륨 크기를 자동으로 조정합니다.
+Trident는 NFS 및 iSCSI PVS 크기 조정을 지원합니다. 따라서 사용자는 Kubernetes 계층을 통해 직접 볼륨의 크기를 조정할 수 있습니다. ONTAP, SolidFire/NetApp HCI 및 Cloud Volumes Service 백엔드를 포함한 모든 주요 NetApp 스토리지 플랫폼에서 볼륨 확장이 가능합니다. 나중에 확장을 허용하려면 `allowVolumeExpansion` 볼륨과 연결된 StorageClass에서 로 `true` 설정하십시오. 영구 볼륨의 크기를 조정해야 할 때마다 `spec.resources.requests.storage` 영구 볼륨 클레임의 주석을 필요한 볼륨 크기로 편집합니다. Trident는 스토리지 클러스터의 볼륨 크기를 자동으로 조정합니다.
 
 
 
@@ -290,11 +285,11 @@ Astra Trident는 NFS 및 iSCSI PVS 크기를 조정할 수 있도록 지원합�
 
 볼륨 가져오기를 사용하면 기존 스토리지 볼륨을 Kubernetes 환경으로 가져올 수 있습니다. 이는 현재 ONTAP-NAS, ONTAP-NAS-Flexgroup, 졸idfire-SAN, Azure-NetApp-files, GCP-cvs 드라이버의 지원을 받고 있습니다. 이 기능은 기존 애플리케이션을 Kubernetes로 포팅하거나 재해 복구 시나리오에서 유용합니다.
 
-ONTAP 및 'solidfire-san' 드라이버를 사용하는 경우, 'tridentctl import volume <backend-name><volume-name> -f/path/PVC.YAML' 명령을 사용하여 Astra Trident에서 관리할 기존 볼륨을 Kubernetes로 가져옵니다. 볼륨 가져오기 명령에 사용되는 PVC YAML 또는 JSON 파일은 Astra Trident를 프로비저닝자로 식별하는 스토리지 클래스를 가리킵니다. NetApp HCI/SolidFire 백엔드를 사용할 경우 볼륨 이름이 고유한지 확인합니다. 볼륨 이름이 중복되면 볼륨을 고유한 이름으로 복제하여 볼륨 가져오기 기능에서 볼륨 이름을 구분할 수 있도록 합니다.
+ONTAP 및 드라이버를 사용할 `solidfire-san` 경우 명령을 `tridentctl import volume <backend-name> <volume-name> -f /path/pvc.yaml` 사용하여 기존 볼륨을 Kubernetes로 임포트하여 Trident에서 관리할 수 있습니다. 가져오기 볼륨 명령에 사용된 PVC YAML 또는 JSON 파일은 Trident를 프로비저닝자로 식별하는 저장소 클래스를 가리킵니다. NetApp HCI/SolidFire 백엔드를 사용할 경우 볼륨 이름이 고유한지 확인합니다. 볼륨 이름이 중복되면 볼륨을 고유한 이름으로 복제하여 볼륨 가져오기 기능에서 볼륨 이름을 구분할 수 있도록 합니다.
 
-'Azure-NetApp-files' 또는 'GCP-CV' 드라이버를 사용하는 경우 'tridentctl import volume <backend-name><volume path> -f/path/PVC.YAML' 명령을 사용하여 Astra Trident에서 관리할 Kubernetes로 볼륨을 가져옵니다. 이렇게 하면 고유한 볼륨 참조가 보장됩니다.
+ `azure-netapp-files`또는 `gcp-cvs` 드라이버를 사용하는 경우 명령을 사용하여 `tridentctl import volume <backend-name> <volume path> -f /path/pvc.yaml` Trident에서 관리할 Kubernetes로 볼륨을 가져옵니다. 이렇게 하면 고유한 볼륨 참조가 보장됩니다.
 
-위 명령을 실행하면 Astra Trident가 백엔드에서 볼륨을 찾고 해당 크기를 읽습니다. 구성된 PVC 볼륨 크기를 자동으로 추가(필요한 경우 덮어쓰기)합니다. 그런 다음 Astra Trident가 새로운 PV를 생성하고 Kubernetes가 PVC를 PV에 결합합니다.
+위의 명령을 실행하면 Trident는 백엔드에서 볼륨을 찾고 크기를 읽습니다. 구성된 PVC 볼륨 크기를 자동으로 추가(필요한 경우 덮어쓰기)합니다. 그런 다음 Trident는 새 PV를 만들고 Kubernetes는 PV에 PVC를 바인딩합니다.
 
 특정 가져온 PVC가 필요한 컨테이너를 배포한 경우 PVC/PV 쌍이 볼륨 가져오기 프로세스를 통해 바인딩될 때까지 보류 상태로 유지됩니다. PVC/PV 쌍이 바인딩되면 다른 문제가 없는 한 컨테이너가 나타나야 합니다.
 
@@ -443,6 +438,6 @@ OpenShift 클러스터가 이미 실행 중이고 Trident가 배포 및 구성�
 
 === 메트릭 서비스를 구축합니다
 
-호스트/인벤토리 파일에 정의된 적절한 Ansible 변수를 사용하여 서비스를 구축하십시오. OpenShift 설치 시 배포하는 경우 PV가 자동으로 생성되고 사용됩니다. 구성 요소 플레이북을 사용하여 구축하는 경우, OpenShift 설치 후 Ansible에서 필요한 PVC를 생성하고 Astra Trident가 이를 위한 스토리지를 프로비저닝한 후 서비스를 배포합니다.
+호스트/인벤토리 파일에 정의된 적절한 Ansible 변수를 사용하여 서비스를 구축하십시오. OpenShift 설치 시 배포하는 경우 PV가 자동으로 생성되고 사용됩니다. 구성 요소 플레이북을 사용하여 배포하려는 경우 OpenShift 설치 후 Ansible은 필요한 PVC를 생성하고 Trident에서 이를 위해 스토리지를 프로비저닝한 후 서비스를 배포합니다.
 
 위의 변수와 배포 프로세스는 각 OpenShift 버전에 따라 변경될 수 있습니다. 검토 후 준수해야 합니다 link:https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html["RedHat의 OpenShift 배포 가이드"^] 사용자 환경에 맞게 구성되도록 사용자의 버전에 대해.

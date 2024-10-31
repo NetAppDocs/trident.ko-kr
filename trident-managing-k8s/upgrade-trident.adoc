@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-managing-k8s/upgrade-trident.html 
 keywords: upgrade, trident, methods, operator, tridentctl, helm 
-summary: Astra Trident는 4개월의 릴리즈 주기를 준수하여 매년 3가지 주요 릴리즈를 제공합니다. 각 새로운 릴리스는 이전 릴리즈를 기반으로 하며 새로운 기능과 성능 향상, 버그 수정 및 개선 기능을 제공합니다. Astra Trident의 새로운 기능을 이용하려면 1년에 한 번 이상 업그레이드하는 것이 좋습니다. 
+summary: Trident는 4개월 릴리즈 주기를 준수하여 매년 3가지 주요 릴리즈를 제공합니다. 각 새로운 릴리스는 이전 릴리즈를 기반으로 하며 새로운 기능과 성능 향상, 버그 수정 및 개선 기능을 제공합니다. Trident의 새로운 기능을 활용하려면 1년에 한 번 이상 업그레이드하는 것이 좋습니다. 
 ---
-= Astra Trident를 업그레이드합니다
+= Trident를 업그레이드합니다
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,18 +12,18 @@ summary: Astra Trident는 4개월의 릴리즈 주기를 준수하여 매년 3�
 
 
 [role="lead"]
-24.02 릴리즈부터 Astra Trident는 4개월의 릴리즈 주기를 따릅니다. 매년 3개의 주요 릴리즈를 제공합니다. 각각의 새 릴리스는 이전 릴리스에서 빌드되며 새로운 기능, 성능 향상, 버그 수정 및 개선 사항을 제공합니다. Astra Trident의 새로운 기능을 이용하려면 1년에 한 번 이상 업그레이드하시기 바랍니다.
+24.02 릴리즈부터 Trident는 4개월 릴리즈 주기를 따르며 매년 3개의 주요 릴리즈를 제공합니다. 각각의 새 릴리스는 이전 릴리스에서 빌드되며 새로운 기능, 성능 향상, 버그 수정 및 개선 사항을 제공합니다. Trident의 새로운 기능을 활용하려면 1년에 한 번 이상 업그레이드하는 것이 좋습니다.
 
 
 
 == 업그레이드 전 고려 사항
 
-Astra Trident의 최신 릴리즈로 업그레이드할 때 다음 사항을 고려하십시오.
+Trident의 최신 릴리즈로 업그레이드할 때 다음 사항을 고려하십시오.
 
-* 주어진 Kubernetes 클러스터의 모든 네임스페이스에 하나의 Astra Trident 인스턴스만 설치되어야 합니다.
-* Astra Trident 23.07 이상에서는 v1 볼륨 스냅샷이 필요하며 알파 또는 베타 스냅샷을 더 이상 지원하지 않습니다.
-* 에서 Google Cloud용 Cloud Volumes Service를 생성한 경우 link:../trident-use/gcp.html#learn-about-astra-trident-support-for-cloud-volumes-service-for-google-cloud["CVS 서비스 유형입니다"]을 사용하려면 백엔드 구성을 업데이트해야 합니다 `standardsw` 또는 `zoneredundantstandardsw` Astra Trident 23.01에서 업그레이드할 때의 서비스 수준입니다. 를 업데이트하지 못했습니다 `serviceLevel` 백엔드에서 볼륨이 실패할 수 있습니다. 을 참조하십시오 link:../trident-use/gcp.html#cvs-service-type-examples["CVS 서비스 유형 샘플"] 를 참조하십시오.
-* 업그레이드할 때 제공하는 것이 중요합니다 `parameter.fsType` 인치 `StorageClasses` Astra Trident에서 사용 삭제하고 다시 만들 수 있습니다 `StorageClasses` 기존 볼륨을 그대로 사용합니다.
+* 특정 Kubernetes 클러스터의 모든 네임스페이스에 Trident 인스턴스는 하나만 설치해야 합니다.
+* Trident 23.07 이상에서는 v1 볼륨 스냅샷이 필요하며 알파 또는 베타 스냅샷을 더 이상 지원하지 않습니다.
+* 에서 Google Cloud용 Cloud Volumes Service를 생성한 경우 Trident 23.01에서 업그레이드할 때 또는 `zoneredundantstandardsw` 서비스 수준을link:../trident-use/gcp.html#learn-about-trident-support-for-cloud-volumes-service-for-google-cloud["CVS 서비스 유형입니다"] 사용하도록 백엔드 구성을 업데이트해야 `standardsw` 합니다. 백엔드에서 을 업데이트하지 `serviceLevel` 못하면 볼륨이 실패할 수 있습니다. 자세한 내용은 을 link:../trident-use/gcp.html#cvs-service-type-examples["CVS 서비스 유형 샘플"] 참조하십시오.
+* 업그레이드할 때 Trident에서 사용되는 를 `StorageClasses` 제공하는 것이 중요합니다 `parameter.fsType`. 기존 볼륨을 중단하지 않고 삭제 및 재생성할 수 `StorageClasses` 있습니다.
 +
 ** 이것은 시행에 대한 ** 요구 사항입니다 https://kubernetes.io/docs/tasks/configure-pod-container/security-context/["보안 컨텍스트"^] SAN 볼륨:
 ** https://github.com/NetApp/trident/tree/master/trident-installer/sample-input[sample input^] 디렉토리에는 https://github.com/NetApp/trident/blob/master/trident-installer/sample-input/storage-class-samples/storage-class-basic.yaml.templ와 같은 예가 포함되어 있습니다[`storage-class-basic.yaml.templ`^] 및 링크: https://github.com/NetApp/trident/blob/master/trident-installer/sample-input/storage-class-samples/storage-class-bronze-default.yaml[`storage-class-bronze-default.yaml`^].
@@ -36,7 +36,7 @@ Astra Trident의 최신 릴리즈로 업그레이드할 때 다음 사항을 고
 
 == 1단계: 버전을 선택합니다
 
-Astra Trident 버전은 날짜를 기반으로 합니다 `YY.MM` 이름 지정 규칙. 여기서 "YY"는 연도의 마지막 두 자리이고 "MM"은 월입니다. DOT 릴리스는 a를 따릅니다 `YY.MM.X` 규칙. 여기서 "X"는 패치 수준입니다. 업그레이드할 버전에 따라 업그레이드할 버전을 선택합니다.
+Trident 버전은 날짜 기반 `YY.MM` 명명 규칙을 따릅니다. 여기서 "YY"는 연도의 마지막 두 자리이고 "MM"은 월입니다. DOT 릴리스는 `YY.MM.X` 규칙을 따릅니다. 여기서 "X"는 패치 수준입니다. 업그레이드할 버전에 따라 업그레이드할 버전을 선택합니다.
 
 * 설치된 버전의 4 릴리스 창 내에 있는 모든 대상 릴리스에 대해 직접 업그레이드를 수행할 수 있습니다. 예를 들어 23.04(또는 23.04 도트 릴리스)에서 24.06로 직접 업그레이드할 수 있습니다.
 * 릴리스 4개가 아닌 다른 릴리스에서 업그레이드하는 경우 여러 단계로 업그레이드를 수행합니다. 에서 4개의 릴리스 윈도우에 맞는 가장 최신 릴리스로 업그레이드하려는 의 업그레이드 지침을 link:../earlier-versions.html["이전 버전"] 사용합니다. 예를 들어, 22.01을 실행하고 있고 24.06로 업그레이드하려는 경우:
@@ -54,18 +54,18 @@ NOTE: OpenShift Container Platform에서 Trident 연산자를 사용하여 업�
 
 == 2단계: 원래 설치 방법을 결정합니다
 
-처음에 Astra Trident를 설치하는 데 사용한 버전을 확인하려면:
+Trident를 처음 설치할 때 사용한 버전을 확인하려면 다음을 수행합니다.
 
 . 사용 `kubectl get pods -n trident` 를 눌러 포드를 검사합니다.
 +
-** 운영자 POD가 없는 경우, 를 사용하여 Astra Trident를 설치했습니다 `tridentctl`.
-** 운영자 포드가 있는 경우, Trident 연산자를 사용하여 수동으로 또는 Hrom을 사용하여 Astra Trident를 설치했습니다.
+** 운영자 포드가 없으면 를 사용하여 Trident를 설치한 `tridentctl` 것입니다.
+** 운영자 포드가 있는 경우, Trident는 Trident 운영자를 사용하여 수동으로 또는 Helm을 사용하여 설치되었습니다.
 
 
-. 작업자 포드가 있는 경우 를 사용합니다 `kubectl describe torc` Helm을 사용하여 Astra Trident가 설치되었는지 확인합니다.
+. 운영자 포드가 있는 경우 를 `kubectl describe torc` 사용하여 Trident가 Helm을 사용하여 설치되었는지 확인합니다.
 +
-** H제어 레이블이 있는 경우, Hrom을 사용하여 Astra Trident를 설치했습니다.
-** H제어 레이블이 없는 경우 Trident 연산자를 사용하여 Astra Trident를 수동으로 설치했습니다.
+** Helm 레이블이 있는 경우 Helm을 사용하여 Trident를 설치한 것입니다.
+** Helm 레이블이 없는 경우 Trident 연산자를 사용하여 Trident를 수동으로 설치했습니다.
 
 
 
@@ -74,7 +74,7 @@ NOTE: OpenShift Container Platform에서 Trident 연산자를 사용하여 업�
 
 == 3단계: 업그레이드 방법을 선택합니다
 
-일반적으로 초기 설치에 사용한 것과 동일한 방법으로 업그레이드해야 하지만 link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["설치 방법 간에 이동합니다"]. Astra Trident를 업그레이드할 수 있는 두 가지 옵션이 있습니다.
+일반적으로 초기 설치에 사용한 것과 동일한 방법으로 업그레이드해야 하지만, 가능한 경우link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["설치 방법 간에 이동합니다"] Trident를 업그레이드할 수 있는 두 가지 옵션이 있습니다.
 
 * link:upgrade-operator.html["Trident 연산자를 사용하여 업그레이드합니다"]
 +

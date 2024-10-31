@@ -1,6 +1,6 @@
 ---
 section: trident-install
-title: Astra Trident를 설치합니다
+title: Trident를 설치합니다
 entries:
 - title: 설치 개요
   url: "/trident-get-started/kubernetes-deploy.html"

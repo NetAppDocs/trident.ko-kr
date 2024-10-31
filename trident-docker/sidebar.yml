@@ -1,10 +1,10 @@
 ---
 section: trident-docker
-title: Docker를 위한 Astra Trident
+title: Docker를 위한 Trident
 entries:
 - title: 배포를 위한 사전 요구 사항
   url: "/trident-docker/prereqs-docker.html"
-- title: Astra Trident 구축
+- title: Trident를 구축합니다
   url: "/trident-docker/deploy-docker.html"
 - title: Trident 업그레이드 또는 제거
   url: "/trident-docker/upgrade-uninstall-docker.html"
@@ -15,7 +15,7 @@ entries:
     url: "/trident-docker/volume-driver-options.html"
 - title: 로그를 수집합니다
   url: "/trident-docker/collect-logs-docker.html"
-- title: 여러 Astra Trident 인스턴스를 관리합니다
+- title: 여러 Trident 인스턴스를 관리합니다
   url: "/trident-docker/multiple-instances-docker.html"
 - title: 스토리지 구성 옵션
   url: "/trident-docker/stor-config.html"

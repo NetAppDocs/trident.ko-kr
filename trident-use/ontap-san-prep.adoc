@@ -18,7 +18,7 @@ ONTAP SAN 드라이버를 사용하여 ONTAP 백엔드를 구성하기 위한 �
 
 == 요구 사항
 
-모든 ONTAP 백엔드의 경우, Astra Trident는 SVM에 하나 이상의 Aggregate가 할당되어 있어야 합니다.
+모든 ONTAP 백엔드에 대해 Trident에는 SVM에 할당된 애그리게이트가 하나 이상 필요합니다.
 
 또한 둘 이상의 드라이버를 실행하고 둘 중 하나를 가리키는 스토리지 클래스를 생성할 수도 있습니다. 예를 들어, ONTAP-SAN 드라이버와 ONTAP-SAN-이코노미 클래스를 사용하는 '기본 클래스'를 사용하는 'san-dev' 클래스를 구성할 수 있습니다.
 
@@ -28,10 +28,10 @@ ONTAP SAN 드라이버를 사용하여 ONTAP 백엔드를 구성하기 위한 �
 
 == ONTAP 백엔드를 인증합니다
 
-Astra Trident는 ONTAP 백엔드를 인증하는 두 가지 모드를 제공합니다.
+Trident는 ONTAP 백엔드를 인증하는 두 가지 모드를 제공합니다.
 
 * 자격 증명 기반: 필요한 권한이 있는 ONTAP 사용자의 사용자 이름 및 암호입니다. ONTAP 버전과의 호환성을 최대한 보장하기 위해 admin 또는 vsadmin과 같은 미리 정의된 보안 로그인 역할을 사용하는 것이 좋습니다.
-* 인증서 기반: Astra Trident는 백엔드에 설치된 인증서를 사용하여 ONTAP 클러스터와 통신할 수도 있습니다. 이 경우 백엔드 정의에는 클라이언트 인증서, 키 및 사용할 경우 신뢰할 수 있는 CA 인증서의 Base64로 인코딩된 값이 있어야 합니다(권장).
+* 인증서 기반: Trident는 백엔드에 설치된 인증서를 사용하여 ONTAP 클러스터와 통신할 수도 있습니다. 이 경우 백엔드 정의에는 클라이언트 인증서, 키 및 사용할 경우 신뢰할 수 있는 CA 인증서의 Base64로 인코딩된 값이 있어야 합니다(권장).
 
 
 자격 증명 기반 방법과 인증서 기반 방법 간에 이동하기 위해 기존 백엔드를 업데이트할 수 있습니다. 그러나 한 번에 하나의 인증 방법만 지원됩니다. 다른 인증 방법으로 전환하려면 백엔드 구성에서 기존 방법을 제거해야 합니다.
@@ -43,7 +43,7 @@ WARNING: 자격 증명과 인증서 * 를 모두 제공하려고 하면 구성 �
 
 === 자격 증명 기반 인증을 사용합니다
 
-Astra Trident는 SVM 범위/클러스터 범위 관리자에게 ONTAP 백엔드와 통신하기 위한 자격 증명을 요구합니다. admin 또는 vsadmin과 같이 미리 정의된 표준 역할을 사용하는 것이 좋습니다. 이를 통해 향후 Astra Trident 릴리스에서 사용할 기능 API를 노출할 수 있는 향후 ONTAP 릴리스와 향후 호환성이 보장됩니다. 사용자 지정 보안 로그인 역할은 Astra Trident와 함께 생성 및 사용할 수 있지만 권장되지 않습니다.
+Trident은 ONTAP 백엔드와 통신하기 위해 SVM 범위/클러스터 범위 관리자에 대한 자격 증명이 필요합니다. 또는 `vsadmin` 과 같은 미리 정의된 표준 역할을 사용하는 것이 좋습니다 `admin`. 따라서 향후 Trident 릴리스에서 사용할 기능 API를 노출할 수 있는 향후 ONTAP 릴리즈와의 호환성이 보장됩니다. 사용자 지정 보안 로그인 역할을 만들어 Trident와 함께 사용할 수 있지만 권장하지는 않습니다.
 
 백엔드 정의의 예는 다음과 같습니다.
 
@@ -194,13 +194,72 @@ tridentctl update backend SanBackend -f cert-backend-updated.json -n trident
 
 NOTE: 암호를 회전할 때 스토리지 관리자는 먼저 ONTAP에서 사용자의 암호를 업데이트해야 합니다. 그 다음에는 백엔드 업데이트가 있습니다. 인증서를 회전할 때 여러 인증서를 사용자에게 추가할 수 있습니다. 그런 다음 백엔드가 업데이트되어 새 인증서를 사용합니다. 그러면 ONTAP 클러스터에서 이전 인증서를 삭제할 수 있습니다.
 
-백엔드를 업데이트해도 이미 생성된 볼륨에 대한 액세스가 중단되거나 이후에 생성된 볼륨 연결에 영향을 미치지 않습니다. 백엔드 업데이트가 성공적이면 Astra Trident가 ONTAP 백엔드와 통신하고 향후 볼륨 작업을 처리할 수 있음을 나타냅니다.
+백엔드를 업데이트해도 이미 생성된 볼륨에 대한 액세스가 중단되거나 이후에 생성된 볼륨 연결에 영향을 미치지 않습니다. 백엔드 업데이트에 성공하면 Trident가 ONTAP 백엔드와 통신하여 향후 볼륨 작업을 처리할 수 있음을 나타냅니다.
+
+
+
+=== Trident에 대한 사용자 지정 ONTAP 역할을 생성합니다
+
+Privileges에서 작업을 수행할 때 ONTAP 관리자 역할을 사용할 필요가 없도록 최소 Trident로 ONTAP 클러스터 역할을 생성할 수 있습니다. Trident 백엔드 구성에 사용자 이름을 포함하면 Trident은 사용자가 생성한 ONTAP 클러스터 역할을 사용하여 작업을 수행합니다.
+
+Trident 사용자 지정 역할 생성에 대한 자세한 내용은 을 link:https://github.com/NetApp/trident/tree/master/contrib/ontap/trident_role["Trident 사용자 지정 역할 생성기"]참조하십시오.
+
+[role="tabbed-block"]
+====
+.ONTAP CLI 사용
+--
+. 다음 명령을 사용하여 새 역할을 생성합니다.
++
+`security login role create <role_name\> -cmddirname "command" -access all –vserver <svm_name\>`
+
+. Trident 사용자에 대한 사용 이름 만들기:
++
+`security login create -username <user_name\> -application ontapi -authmethod <password\> -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+
+. 역할을 사용자에게 매핑:
++
+`security login modify username <user_name\> –vserver <svm_name\> -role <role_name\> -application ontapi -application console -authmethod <password\>`
+
+
+
+--
+.System Manager 사용
+--
+ONTAP System Manager에서 다음 단계를 수행하십시오.
+
+. * 사용자 지정 역할 생성 *:
++
+.. 클러스터 레벨에서 사용자 지정 역할을 생성하려면 * 클러스터 > 설정 * 을 선택합니다.
++
+SVM 레벨에서 사용자 지정 역할을 생성하려면 * 스토리지 > 스토리지 VM >> 설정 > 사용자 및 역할 * 을 선택합니다 `required SVM`.
+
+.. 사용자 및 역할 * 옆의 화살표 아이콘(*-> *)을 선택합니다.
+.. 역할 * 아래에서 * + 추가 * 를 선택합니다.
+.. 역할에 대한 규칙을 정의하고 * 저장 * 을 클릭합니다.
+
+
+. * 역할을 Trident 사용자에게 매핑 *: + * 사용자 및 역할 * 페이지에서 다음 단계를 수행하십시오.
++
+.. 사용자 * 아래에서 추가 아이콘 * + * 를 선택합니다.
+.. 필요한 사용자 이름을 선택하고 * Role * 에 대한 드롭다운 메뉴에서 역할을 선택합니다.
+.. 저장 * 을 클릭합니다.
+
+
+
+
+--
+====
+자세한 내용은 다음 페이지를 참조하십시오.
+
+* link:https://kb.netapp.com/on-prem/ontap/Ontap_OS/OS-KBs/FAQ__Custom_roles_for_administration_of_ONTAP["ONTAP 관리를 위한 사용자 지정 역할"^] 또는 link:https://docs.netapp.com/us-en/ontap/authentication/define-custom-roles-task.html["사용자 지정 역할을 정의합니다"^]
+* link:https://docs.netapp.com/us-en/ontap-automation/rest/rbac_roles_users.html#rest-api["역할 및 사용자 작업"^]
+
 
 
 
 == 양방향 CHAP를 사용하여 연결을 인증합니다
 
-Astra Trident는 의 양방향 CHAP를 사용하여 iSCSI 세션을 인증할 수 있습니다 `ontap-san` 및 `ontap-san-economy` 드라이버. 이를 위해서는 가 활성화되어야 합니다 `useCHAP` 백엔드 정의에서 선택할 수 있습니다. 를 로 설정한 경우 `true`Astra Trident는 SVM의 기본 이니시에이터 보안을 양방향 CHAP로 구성하고 백엔드 파일에서 사용자 이름과 암호를 설정합니다. 양방향 CHAP를 사용하여 연결을 인증하는 것이 좋습니다. 다음 샘플 구성을 참조하십시오.
+Trident는 및 `ontap-san-economy` 드라이버에 대해 양방향 CHAP를 사용하여 iSCSI 세션을 인증할 수 `ontap-san` 있습니다. 이를 위해서는 백엔드 정의에서 옵션을 활성화해야 `useCHAP` 합니다. 로 `true` 설정하면 Trident는 SVM의 기본 이니시에이터 보안을 양방향 CHAP로 구성하고 백엔드 파일의 사용자 이름과 암호를 설정합니다. 양방향 CHAP를 사용하여 연결을 인증하는 것이 좋습니다. 다음 샘플 구성을 참조하십시오.
 
 [listing]
 ----
@@ -227,18 +286,18 @@ useCHAP=true 외에, chapInitatorSecret, chapTargetInitialatorSecret, chapchTarg
 
 === 작동 방식
 
-스토리지 관리자는 useCHAP를 true로 설정하여 스토리지 백엔드에서 CHAP를 구성하도록 Astra Trident에 지시합니다. 여기에는 다음이 포함됩니다.
+ `useCHAP`true로 설정하면 스토리지 관리자가 Trident에 스토리지 백엔드에서 CHAP를 구성하도록 지시합니다. 여기에는 다음이 포함됩니다.
 
 * SVM에서 CHAP 설정:
 +
-** SVM의 기본 이니시에이터 보안 유형이 none(기본적으로 설정) * 이고 * 기존 LUN이 볼륨에 이미 있으면 Astra Trident가 기본 보안 유형을 로 설정합니다 `CHAP` CHAP 이니시에이터와 타겟 사용자 이름 및 암호 구성 을 진행합니다.
-** SVM에 LUN이 포함된 경우 Astra Trident는 SVM에서 CHAP를 활성화하지 않습니다. 따라서 SVM에 이미 있는 LUN에 대한 액세스가 제한되지 않습니다.
+** SVM의 기본 이니시에이터 보안 유형이 NONE(기본값 설정) * 이고 * 이미 존재하는 LUN이 볼륨에 없는 경우 Trident는 기본 보안 유형을 로 설정하고 CHAP 이니시에이터 및 타겟 사용자 이름과 암호를 구성합니다. `CHAP`
+** SVM에 LUN이 포함된 경우 Trident은 SVM에서 CHAP를 사용하도록 설정하지 않습니다. 따라서 SVM에 이미 있는 LUN에 대한 액세스가 제한되지 않습니다.
 
 
 * CHAP 이니시에이터 및 타겟 사용자 이름과 암호를 구성합니다. 이러한 옵션은 백엔드 구성에 지정해야 합니다(위 참조).
 
 
-백엔드가 생성된 후 Astra Trident는 해당 'tridentbackend' CRD를 생성하고 CHAP 비밀과 사용자 이름을 Kubernetes 비밀로 저장합니다. 이 백엔드에서 Astra Trident에 의해 생성된 모든 PVS는 CHAP를 통해 마운트되고 연결됩니다.
+백엔드가 생성된 후 Trident는 해당 `tridentbackend` CRD를 생성하고 CHAP 암호 및 사용자 이름을 Kubernetes 비밀로 저장합니다. 이 백엔드에서 Trident에 의해 생성된 모든 PVS가 CHAP를 통해 마운트되고 연결됩니다.
 
 
 
@@ -247,7 +306,7 @@ useCHAP=true 외에, chapInitatorSecret, chapTargetInitialatorSecret, chapchTarg
 backend.json 파일에서 CHAP 파라미터를 업데이트하여 CHAP 자격 증명을 업데이트할 수 있다. 이렇게 하려면 CHAP 암호를 업데이트하고 "tridentctl update" 명령을 사용하여 이러한 변경 사항을 반영해야 합니다.
 
 
-WARNING: 백엔드의 CHAP 암호를 업데이트할 때 "tridentctl"을 사용하여 백엔드를 업데이트해야 합니다. Astra Trident에서 변경 사항을 선택할 수 없으므로 CLI/ONTAP UI를 통해 스토리지 클러스터의 자격 증명을 업데이트하지 마십시오.
+WARNING: 백엔드의 CHAP 암호를 업데이트할 때 을 사용하여 백엔드를 업데이트해야 `tridentctl` 합니다. Trident은 이러한 변경 사항을 파악할 수 없으므로 CLI/ONTAP UI를 통해 스토리지 클러스터의 자격 증명을 업데이트하지 마십시오.
 
 [listing]
 ----
@@ -274,4 +333,4 @@ cat backend-san.json
 | ontap_san_chap | ontap-san      | aa458f3b-ad2d-4378-8a33-1a472ffbeb5c | online |       7 |
 +----------------+----------------+--------------------------------------+--------+---------+
 ----
-기존 연결은 영향을 받지 않습니다. SVM에서 Astra Trident가 자격 증명을 업데이트하면 활성 상태로 유지됩니다. 새 연결은 업데이트된 자격 증명을 사용하며 기존 연결은 계속 활성 상태로 유지됩니다. 기존 PVS를 연결 해제하고 다시 연결하면 업데이트된 자격 증명을 사용하게 됩니다.
+기존 연결은 영향을 받지 않고 그대로 유지되며 SVM의 Trident가 자격 증명을 업데이트하는 경우 계속 활성 상태로 유지됩니다. 새 연결은 업데이트된 자격 증명을 사용하며 기존 연결은 계속 활성 상태를 유지합니다. 기존 PVS를 연결 해제하고 다시 연결하면 업데이트된 자격 증명을 사용하게 됩니다.

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-reco/deploy-reco.html 
 keywords: deployment, deploy, trident, namespace 
-summary: Astra Trident를 배포할 때 여기에 나열된 권장 사항을 사용하십시오. 
+summary: Trident를 구축할 때 여기에 나열된 권장 사항을 사용합니다. 
 ---
 = 구축
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: Astra Trident를 배포할 때 여기에 나열된 권장 사항을 사
 
 
 [role="lead"]
-Astra Trident를 배포할 때 여기에 나열된 권장 사항을 사용하십시오.
+Trident를 구축할 때 여기에 나열된 권장 사항을 사용합니다.
 
 
 
 == 전용 네임스페이스에 구축
 
-https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/["네임스페이스"^] 서로 다른 애플리케이션 간의 관리 분리를 제공하며 리소스 공유의 장벽입니다. 예를 들어, 한 네임스페이스의 PVC는 다른 네임스페이스에서 사용할 수 없습니다. Astra Trident는 Kubernetes 클러스터의 모든 네임스페이스에 PV 리소스를 제공하고, 결과적으로 권한이 상승된 서비스 계정을 활용합니다.
+https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/["네임스페이스"^] 서로 다른 응용 프로그램 간의 관리 분리 기능을 제공하며 리소스 공유에 대한 장벽입니다. 예를 들어, 한 네임스페이스의 PVC는 다른 네임스페이스에서 사용할 수 없습니다. Trident는 Kubernetes 클러스터의 모든 네임스페이스에 PV 리소스를 제공하므로 Privileges가 상승한 서비스 계정을 활용합니다.
 
 또한 Trident Pod에 액세스하면 사용자가 스토리지 시스템 자격 증명 및 기타 중요한 정보에 액세스할 수 있습니다. 애플리케이션 사용자 및 관리 애플리케이션에서 Trident 객체 정의 또는 POD 자체에 액세스할 수 없도록 하는 것이 중요합니다.
 

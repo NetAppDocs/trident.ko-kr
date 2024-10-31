@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-reference/pod-security.html 
 keywords: psp, pss, scc, pod security, pod security standards, pod security policies, security context constraints 
-summary: 'Kubernetes Pod 보안 표준(PSS) 및 Pod 보안 정책(PSP)에서 사용 권한 수준을 정의하고 Pod의 동작을 제한합니다. OpenShift Security Context Constraints(SCC)도 OpenShift Kubernetes Engine에 특정한 POD 제한을 정의합니다. 이러한 사용자 지정을 제공하기 위해 Astra Trident는 설치 중에 특정 권한을 활성화합니다.' 
+summary: 'Kubernetes Pod 보안 표준(PSS) 및 Pod 보안 정책(PSP)에서 사용 권한 수준을 정의하고 Pod의 동작을 제한합니다. OpenShift Security Context Constraints(SCC)도 OpenShift Kubernetes Engine에 특정한 POD 제한을 정의합니다. 이러한 사용자 지정 기능을 제공하기 위해 Trident는 설치 중에 특정 권한을 활성화합니다.' 
 ---
 = POD 보안 표준(PSS) 및 보안 컨텍스트 제약(SCC)
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 'Kubernetes Pod 보안 표준(PSS) 및 Pod 보안 정책(PSP)에서 사
 
 
 [role="lead"]
-Kubernetes Pod 보안 표준(PSS) 및 Pod 보안 정책(PSP)에서 사용 권한 수준을 정의하고 Pod의 동작을 제한합니다. OpenShift Security Context Constraints(SCC)도 OpenShift Kubernetes Engine에 특정한 POD 제한을 정의합니다. 이러한 사용자 지정을 제공하기 위해 Astra Trident는 설치 중에 특정 권한을 활성화합니다. 다음 섹션에서는 Astra Trident에서 설정한 사용 권한에 대해 자세히 설명합니다.
+Kubernetes Pod 보안 표준(PSS) 및 Pod 보안 정책(PSP)에서 사용 권한 수준을 정의하고 Pod의 동작을 제한합니다. OpenShift Security Context Constraints(SCC)도 OpenShift Kubernetes Engine에 특정한 POD 제한을 정의합니다. 이러한 사용자 지정 기능을 제공하기 위해 Trident는 설치 중에 특정 권한을 활성화합니다. 다음 섹션에서는 Trident에서 설정한 사용 권한에 대해 자세히 설명합니다.
 
 
 NOTE: PSS는 Pod 보안 정책(PSP)을 대체합니다. PSP는 Kubernetes v1.21에서 사용되지 않으며 v1.25에서 제거됩니다. 자세한 내용은 을 참조하십시오 link:https://kubernetes.io/docs/concepts/security/["Kubernetes: 보안"].
@@ -35,16 +35,16 @@ NOTE: PSS는 Pod 보안 정책(PSP)을 대체합니다. PSP는 Kubernetes v1.21�
 | 호스트 IPC | NFS는 IPC(프로세스 간 통신)를 사용하여 NFSD와 통신합니다. 
 
 
-| 호스트 PID | NFS에 대해 RPC-statd를 시작해야 합니다. Astra Trident는 호스트 프로세스를 쿼리하여 NFS 볼륨을 마운트하기 전에 "RPC-statd"가 실행되고 있는지 확인합니다. 
+| 호스트 PID | NFS를 시작하기 위해 `rpc-statd` 필요합니다. Trident는 NFS 볼륨을 마운트하기 전에 호스트 프로세스를 쿼리하여 가 실행 중인지 여부를 `rpc-statd` 확인합니다. 
 
 
 | 제공합니다 | 'SYS_ADMIN' 기능은 권한 있는 컨테이너의 기본 기능의 일부로 제공됩니다. 예를 들어, Docker는 권한이 있는 컨테이너인 'CapPrm:0000003fffffffffff''CapEff:0000003fffffffffff'에 대해 이러한 기능을 설정합니다 
 
 
-| Seccomp | Seccomp 프로필은 권한 있는 컨테이너에서 항상 "제한 없음"이므로 Astra Trident에서 활성화할 수 없습니다. 
+| Seccomp | Seccomp 프로필은 권한이 있는 컨테이너에서 항상 "제한 없음"이므로 Trident에서 활성화할 수 없습니다. 
 
 
-| SELinux | OpenShift에서는 특권 컨테이너가 'spc_t'(슈퍼 프리빌리지 컨테이너) 도메인에서 실행되고 권한 없는 컨테이너는 container_t 도메인에서 실행됩니다. 컨테이너에서는 컨테이너 SELinux가 설치된 상태로 모든 컨테이너가 'PC_t' 도메인에서 실행되어 SELinux를 효과적으로 비활성화합니다. 따라서 Astra Trident는 컨테이너에 'eLinuxOptions'를 추가하지 않습니다. 
+| SELinux | OpenShift에서는 권한이 있는 컨테이너가 `spc_t` ("상위 권한 있는 컨테이너") 도메인에서 실행되고 권한이 없는 컨테이너는 `container_t` 도메인에서 실행됩니다.  `containerd`가 설치되어 있으면 `container-selinux` 모든 컨테이너가 도메인에서 실행되어 `spc_t` SELinux가 효과적으로 비활성화됩니다. 따라서 Trident는 컨테이너에 추가되지 `seLinuxOptions` 않습니다. 
 
 
 | DAC | 권한이 있는 컨테이너는 루트로 실행되어야 합니다. 권한이 없는 컨테이너는 root로 실행되어 CSI에 필요한 UNIX 소켓에 액세스합니다. 
