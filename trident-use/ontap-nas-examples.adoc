@@ -172,6 +172,9 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 
 
 | `nameTemplate` | 사용자 지정 볼륨 이름을 생성하는 템플릿입니다. | "" 
+
+
+| `denyNewVolumePools` |  못하도록백 엔드가 새 FlexVol 볼륨을 생성하지 포함하도록 `ontap-nas-economy` 해당 qtree를 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다. |  
 |===
 
 NOTE: Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다.
