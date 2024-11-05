@@ -28,7 +28,7 @@ Trident에서 다른 애플리케이션과 사용자를 분리하려면 항상 �
 
 Trident는 및 `ontap-san-economy` 드라이버를 사용하여 ONTAP SAN 워크로드에 대한 CHAP 기반 인증을 `ontap-san` 지원합니다. NetApp에서는 Trident 호스트와 스토리지 백엔드 간의 인증에 양방향 CHAP를 사용할 것을 권장합니다.
 
-SAN 스토리지 드라이버를 사용하는 ONTAP 백엔드의 경우 Trident에서 양방향 CHAP를 설정하고 를 통해 CHAP 사용자 이름 및 암호를 관리할 수 `tridentctl` 있습니다. Trident가 ONTAP 백엔드에서 CHAP를 구성하는 방법에 대한 자세한 내용은 을 link:../trident-use/ontap-san-prep.html[""^]참조하십시오.
+SAN 스토리지 드라이버를 사용하는 ONTAP 백엔드의 경우 Trident에서 양방향 CHAP를 설정하고 를 통해 CHAP 사용자 이름 및 암호를 관리할 수 `tridentctl` 있습니다. Trident가 ONTAP 백엔드에서 CHAP를 구성하는 방법에 대한 자세한 내용은 을 link:../trident-use/ontap-san-prep.html["ONTAP SAN 드라이버를 사용하여 백엔드를 구성할 준비를 합니다"^]참조하십시오.
 
 
 

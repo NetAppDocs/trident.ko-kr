@@ -97,7 +97,7 @@ NOTE: SVM에서 Aggregate를 업데이트하면 Trident 컨트롤러를 다시 �
 | 제한선태사용법 | 사용량이 이 비율을 초과하면 프로비저닝이 실패합니다. Amazon FSx for NetApp ONTAP 백엔드를 사용하는 경우 을 지정하지  `limitAggregateUsage`마십시오. 제공된 및 `vsadmin` 에는 `fsxadmin` 애그리게이트 사용량을 검색하고 Trident를 사용하여 제한하는 데 필요한 권한이 포함되어 있지 않습니다. | ""(기본적으로 적용되지 않음) 
 
 
-| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에 대해 관리하는 볼륨의 최대 크기도 제한합니다. | ""(기본적으로 적용되지 않음) 
+| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 LUN에 대해 관리하는 볼륨의 최대 크기를 제한합니다. | ""(기본적으로 적용되지 않음) 
 
 
 | '오만유연한' | FlexVol당 최대 LUN 수는 범위[50, 200]에 있어야 합니다. | `100` 
@@ -125,6 +125,12 @@ NOTE: SVM에서 Aggregate를 업데이트하면 Trident 컨트롤러를 다시 �
 * `ontap-san`및 `ontap-san-economy` 드라이버에서만 지원됩니다.*
  a| 
 
+
+
+| `limitVolumePoolSize` | ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다. | ""(기본적으로 적용되지 않음) 
+
+
+| `denyNewVolumePools` | 백엔드가 LUN을 포함하도록 새 FlexVol 볼륨을 생성하지 못하도록 `ontap-san-economy` 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다. |  
 |===
 
 
@@ -184,12 +190,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다. | ""
 
 
 | `nameTemplate` | 사용자 지정 볼륨 이름을 생성하는 템플릿입니다. | "" 
-
-
-| `limitVolumePoolSize` | ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다. | ""(기본적으로 적용되지 않음) 
-
-
-| `denyNewVolumePools` | 백엔드가 LUN을 포함하도록 새 FlexVol 볼륨을 생성하지 못하도록 `ontap-san-economy` 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다. |  
 |===
 
 

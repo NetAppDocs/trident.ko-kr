@@ -2080,7 +2080,6 @@
   <block id="394d848f17683e31e21f6cde5fd9e3e4" category="cell">ONTAP 클러스터와 통신하는 데 필요한 사용자 이름입니다. 자격 증명 기반 인증에 사용됩니다.</block>
   <block id="6f0acf4836d44b03512e1caa0d774777" category="cell">ONTAP 클러스터와 통신하는 데 필요한 암호입니다. 자격 증명 기반 인증에 사용됩니다.</block>
   <block id="a0de2cc0c77c388210e1f48423eea29c" category="cell">SVM에서 새 볼륨을 프로비저닝할 때 사용되는 접두사 나중에 수정할 수 없습니다. 이 매개 변수를 업데이트하려면 새 백엔드를 생성해야 합니다.</block>
-  <block id="f804cd6668c0728e26448509210268d3" category="cell">요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에 대해 관리하는 볼륨의 최대 크기도 제한합니다.</block>
   <block id="c59183b2f668b355e81e7bb1256f92b3" category="paragraph">에서 이러한 옵션을 사용하여 기본 프로비저닝을 제어할 수 있습니다<block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block> 섹션을 참조하십시오. 예를 들어, 아래 구성 예제를 참조하십시오.</block>
   <block id="e62f5d0a5a95571e25197caafe78cd98" category="section-title">볼륨 프로비저닝의 예</block>
   <block id="1b9ef354b22d8a8b125247fd538da4b2" category="section-title">가상 풀의 백엔드 예</block>
@@ -2676,7 +2675,6 @@
   <block id="1cf7168782187634fbc408c66b895dbc" category="section-title">커뮤니티 지원</block>
   <block id="965b11d07d6acceebc9efec23e5e74a9" category="section-title">NetApp 기술 지원</block>
   <block id="8f4c1b75985ff2903107b7115115ea58" category="list-text"><block ref="8f4c1b75985ff2903107b7115115ea58" category="inline-link-macro-rx"></block></block>
-  <block id="b86b16f39688f208b4a554adb7958c46" category="list-text"><block ref="b86b16f39688f208b4a554adb7958c46" category="inline-link-macro-rx"></block></block>
   <block id="0adc03eac86772ad2c75c8f140be417e" category="sidebar">지식 및 지원</block>
   <block id="fabfc25ef8996fd90836e58a4c0b26b6" category="sidebar">도움을 받으십시오</block>
   <block id="5248a0897439d95866d14416e307c927" category="sidebar">백엔드 구성 및 관리</block>
@@ -2781,7 +2779,6 @@
   <block id="a486595fa1d9f349d9f9385ef2cb39f0" category="cell">"ONTAP-NAS", "ONTAP-NAS-Economy", "ONTAP-NAS-flexgroup", "ONTAP-SAN", "ONTAP-SAN-Economy"</block>
   <block id="e50e8adc0d4818a8ed496eb95b3aea51" category="cell">["0.0.0.0/0",":/0"]'</block>
   <block id="86780ad6247dfbcd90ca1455ee592852" category="cell">"트리덴트"</block>
-  <block id="e70237f69c6dce25fd2312b8d7f00b1e" category="cell">"100"</block>
   <block id="7e6a32bd8074b1aa2c8c0d2529140ae4" category="cell">문제 해결 시 사용할 디버그 플래그입니다. 예: {"api":false, "method":true}
 
 사용하지 마십시오<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block> 문제 해결 및 자세한 로그 덤프가 필요한 경우를 제외하고</block>
@@ -3362,7 +3359,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="33fefa32caf35cd4691465f3592a0539" category="cell">*<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>및<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 드라이버에서만 지원됩니다.* ONTAP ONTAP-NAS-Economy 및 ONTAP-SAN-Economy 드라이버의 FlexVol 크기를 제한합니다.</block>
   <block id="1b75c146ff0568d5fc11072b08cfe580" category="section-title">Trident에 의해 생성되는 FlexVols의 최대 크기를 제한합니다</block>
   <block id="913d5950907a31c9d3ea6cd0a3b6a524" category="paragraph">ONTAP-SAN-Economy 및 ONTAP-NAS-Economy 드라이버의 풀로 사용되는 FlexVol의 최대 크기를 구성하려면<block ref="c8f83e727d4a4255a6485c24776e86bb" prefix=" " category="inline-code"></block><block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block> 정의에 매개 변수를 사용하십시오.</block>
-  <block id="ae7be78c2d3d933d426bc82820accfae" category="cell">ONTAP-NAS-이코노미 백엔드에서 Qtree를 사용할 때 가장 필요한 최대 FlexVol 크기입니다.</block>
   <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">ONTAP-SAN-Economy 백엔드에서 LUN을 사용할 때 요청될 수 있는 최대 FlexVol 크기입니다.</block>
   <block id="64049136ec90cc479c7521e9b6e172eb" category="section-title">LUKS 볼륨을 가져오기 위한 PVC 구성입니다</block>
   <block id="b49b86551096c421a3bc5d3b79eede84" category="paragraph">LUKS 볼륨을 동적으로 가져오려면<block ref="36720d50814e4335401b2047257bfedf" prefix=" " category="inline-code"></block><block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 이 예제에 표시된 대로 주석을 로 설정하고 PVC에 LUKS 사용 스토리지 클래스를 포함합니다.</block>
@@ -3491,7 +3487,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="9cc21385e3a5bbf0e140948125e39e4c" category="paragraph">당사의 컨테이너 사용자(Trident 개발자 포함)로 구성된 활발한 공용 커뮤니티가 <block ref="6130664377fa14615bb1abd5257e9714" category="inline-link-macro-rx"></block>있습니다. 프로젝트에 대한 일반적인 질문을 하고 비슷한 생각을 가진 동료와 관련 주제를 논의할 수 있는 좋은 장소입니다.</block>
   <block id="b27fcb3adc5d56564559e3f24a9659c8" category="paragraph">Trident에 대한 도움말을 보려면 를 사용하여 지원 번들을 만들어<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block> 로<block ref="da34ca64df3f236a423516102d4096c2" prefix=" " category="inline-code"></block>보내십시오.</block>
   <block id="40d95260a6bcacc40a23df4576b97ec8" category="inline-link-macro">Trident 블로그</block>
-  <block id="a8a63a855db4681941d1e94768ac71b6" category="list-text"><block ref="a8a63a855db4681941d1e94768ac71b6" category="inline-link-macro-rx"></block></block>
   <block id="952c901e482a50d005ae898106cd4571" category="summary">Trident은 NetApp에서 관리하는 오픈 소스 스토리지 프로비저닝 및 오케스트레이터입니다. Docker 및 Kubernetes에서 관리하는 컨테이너식 애플리케이션을 위한 스토리지 볼륨을 생성할 수 있습니다. ** Trident 24.10으로 업그레이드하는 것에 대한 중요 정보는 릴리스 노트를 참조하십시오.**</block>
   <block id="5165d9ce1563da7d69f720dbb362a3ae" category="doc">Trident 24.10 설명서</block>
   <block id="e476cbfc1ce1aee033e17376d6942cf3" category="paragraph">Trident용 NetApp 소프트웨어에 사용된 타사 저작권 및 라이선스는 의 각 릴리스에 대한 고지 파일에서 검토할 수 있습니다<block ref="4a3c8c5a408c6db1c44c04391a8a0a2f" category="inline-link-rx"></block>.</block>
@@ -3912,7 +3907,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="7d4a55ae858dcca9ad616f33e6035cc6" category="paragraph">안정적인 스토리지를 확보하고 잠재적 악의적인 활동을 차단하려면 애플리케이션, 애플리케이션 관리자, 사용자 및 관리 애플리케이션이 Trident 오브젝트 정의 또는 포드에 액세스하지 못하도록 방지하는 것이 중요합니다.</block>
   <block id="59eb6cc525324355d85d541c963c8697" category="paragraph">Trident에서 다른 애플리케이션과 사용자를 분리하려면 항상 자체 Kubernetes 네임스페이스에 Trident를 <block ref="47cb44be55a0dffa15dfc900a4c687be" prefix="(" category="inline-code"></block>설치해야 합니다.) Trident를 자체 네임스페이스에 배치하면 Kubernetes 관리 담당자만 Trident Pod와 이름 속도의 CRD 개체에 저장된 아티팩트(예: 백엔드 및 CHAP 암호(해당하는 경우)에 액세스할 수 있습니다. 관리자만 Trident 네임스페이스에 액세스하여 응용 프로그램에 액세스할 수 있도록 해야<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 합니다.</block>
   <block id="9d9837d692b44e524c96b427964bea85" category="paragraph">Trident는 및<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 드라이버를 사용하여 ONTAP SAN 워크로드에 대한 CHAP 기반 인증을<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 지원합니다. NetApp에서는 Trident 호스트와 스토리지 백엔드 간의 인증에 양방향 CHAP를 사용할 것을 권장합니다.</block>
-  <block id="3541ea2c55cdc61240be724622aa6e3c" category="paragraph">SAN 스토리지 드라이버를 사용하는 ONTAP 백엔드의 경우 Trident에서 양방향 CHAP를 설정하고 를 통해 CHAP 사용자 이름 및 암호를 관리할 수<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 있습니다. Trident가 ONTAP 백엔드에서 CHAP를 구성하는 방법에 대한 자세한 내용은 을 <block ref="5cdb093a3afb814148505ae9813b18af" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="a77f6a8d6a33d8d8102cdeed9631b96d" category="paragraph">양방향 CHAP를 구축하여 호스트와 NetApp HCI 및 SolidFire 백엔드 간의 인증을 보장하는 것이 좋습니다. Trident는 테넌트당 두 개의 CHAP 암호를 포함하는 비밀 개체를 사용합니다. Trident가 설치되면 CHAP 암호를 관리하고<block ref="3ddc70b4b408f6dd5bbd5fe7d6008993" prefix=" " category="inline-code"></block> 해당 PV에 대한 CR 개체에 저장합니다. PV를 생성할 때 Trident는 CHAP 암호를 사용하여 iSCSI 세션을 시작하고 CHAP를 통해 NetApp HCI 및 SolidFire 시스템과 통신합니다.</block>
   <block id="99dfe9c8c9bd791b7382d67a440c38be" category="admonition">Trident에 의해 생성된 볼륨은 볼륨 액세스 그룹과 연결되지 않습니다.</block>
   <block id="9559c7656e8a28d235478856aa8e44ce" category="section-title">NVE 및 NAE에 Trident를 사용하십시오</block>
@@ -4358,4 +4352,11 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="7ba174e1291062b960ec1b8607b6e1e2" category="paragraph">다음 예에서는 환경 변수를 사용하여 Trident를 설치하고 를 GCP로<block ref="e7b51407a2bfaa34b58afce0107e9a5f" prefix=" " category="inline-code"></block> 설정하고<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block> 환경 변수를 사용하여<block ref="fab50dca589d1a68fdf56bd4ae0b4a83" prefix=" " category="inline-code"></block> 를<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block> 설정합니다.</block>
   <block id="bde178d22672aa38120646e529ed04b5" category="paragraph">다음 예에서는 Trident를 설치하고 플래그를<block ref="e7b51407a2bfaa34b58afce0107e9a5f" prefix=" " category="inline-code"></block> , 및<block ref="c5af480af77c330e04a1fce1f6c2b03a" prefix=" " category="inline-code"></block> 로 설정합니다<block ref="e33bb4eb32023da4a8ea7a1ba6927067" prefix=" " category="inline-code"></block>.<block ref="fab50dca589d1a68fdf56bd4ae0b4a83" prefix=" " category="inline-code"></block></block>
   <block id="dc3d22611e67d08cb39256f8980be582" category="cell"> 못하도록백 엔드가 새 FlexVol 볼륨을 생성하지 포함하도록<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 해당 qtree를 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다.</block>
+  <block id="eddc3ab7d283c02464f100ff837cf055" category="inline-link-macro">Trident 리소스</block>
+  <block id="01ba66c56fa9029a3ce0095f09b9b340" category="list-text"><block ref="01ba66c56fa9029a3ce0095f09b9b340" category="inline-link-macro-rx"></block></block>
+  <block id="10c80ca6b662fb62c61b4f3551fa4460" category="paragraph">SAN 스토리지 드라이버를 사용하는 ONTAP 백엔드의 경우 Trident에서 양방향 CHAP를 설정하고 를 통해 CHAP 사용자 이름 및 암호를 관리할 수<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 있습니다. Trident가 ONTAP 백엔드에서 CHAP를 구성하는 방법에 대한 자세한 내용은 을 <block ref="647d5f494fdd01a14f263aa1b49a3db4" category="inline-link-macro-rx"></block>참조하십시오.</block>
+  <block id="5284eab1174c1855178274272e78ca5a" category="cell">요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree에서 관리하는 볼륨의 최대 크기를 제한하고,<block ref="8b08152c170e621ffcc8bfac7c4d6785" prefix=" " category="inline-code"></block> 옵션을 통해 FlexVol당 최대 qtree 수를 사용자 지정할 수 있습니다.</block>
+  <block id="98b1298645505c6ec838667dff651c81" category="cell">ONTAP-NAS-이코노미 백엔드에서 Qtree를 사용할 때 가장 필요한 최대 FlexVol 크기입니다.</block>
+  <block id="7be7ec1f4262cda30e19c85af89449af" category="cell">Qtree에 공간 할당</block>
+  <block id="bc78339d85241498c635b61d8f201ef9" category="cell">요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 LUN에 대해 관리하는 볼륨의 최대 크기를 제한합니다.</block>
 </blocks>

@@ -93,10 +93,7 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 | "" 
 
 
-| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에 대해 관리하는 볼륨의 최대 크기 및 을 제한합니다 `qtreesPerFlexvol` 옵션을 사용하면 FlexVol당 최대 qtree 수를 사용자 지정할 수 있습니다. | ""(기본적으로 적용되지 않음) 
-
-
-| '오만유연한' | FlexVol당 최대 LUN 수는 범위[50, 200]에 있어야 합니다. | "100" 
+| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree에서 관리하는 볼륨의 최대 크기를 제한하고, `qtreesPerFlexvol` 옵션을 통해 FlexVol당 최대 qtree 수를 사용자 지정할 수 있습니다. | ""(기본적으로 적용되지 않음) 
 
 
 | debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: {"api":false, "method":true}
@@ -120,6 +117,9 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 
 
 | `limitVolumePoolSize` | ONTAP-NAS-이코노미 백엔드에서 Qtree를 사용할 때 가장 필요한 최대 FlexVol 크기입니다. | ""(기본적으로 적용되지 않음) 
+
+
+| `denyNewVolumePools` |  못하도록백 엔드가 새 FlexVol 볼륨을 생성하지 포함하도록 `ontap-nas-economy` 해당 qtree를 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다. |  
 |===
 
 
@@ -132,7 +132,7 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 | 매개 변수 | 설명 | 기본값 
 
 
-| '팩시배부 | LUN에 대한 공간 할당 | "참" 
+| '팩시배부 | Qtree에 공간 할당 | "참" 
 
 
 | '예비공간' | 공간 예약 모드, "없음"(씬) 또는 "볼륨"(일반) | "없음" 
@@ -172,9 +172,6 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 
 
 | `nameTemplate` | 사용자 지정 볼륨 이름을 생성하는 템플릿입니다. | "" 
-
-
-| `denyNewVolumePools` |  못하도록백 엔드가 새 FlexVol 볼륨을 생성하지 포함하도록 `ontap-nas-economy` 해당 qtree를 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다. |  
 |===
 
 NOTE: Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다.
