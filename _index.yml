@@ -41,6 +41,12 @@ indexpage:
       url: "/trident-use/manage-stor-class.html"
     - title: 볼륨 작업을 수행합니다
       url: "/trident-use/vol-operations.html"
+  - title: 고급 데이터 관리 및 보호 기능을 제공합니다
+    links:
+    - title: Trident 보호를 통한 고급 데이터 보호
+      url: "/trident-protect/learn-about-trident-protect.html"
+    - title: Trident Protect를 구축합니다
+      url: "/trident-protect/trident-protect-installation.html"
   - title: 데모 자습서
     links:
     - title: Trident 비디오

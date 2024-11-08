@@ -1,0 +1,191 @@
+---
+permalink: trident-protect/manage-authorization-access-control.html 
+sidebar: sidebar 
+keywords: manage, authentication, rbac 
+summary: 'Trident Protect는 역할 기반 액세스 제어(RBAC)의 Kubernetes 모델을 사용합니다. Trident Protect RBAC 기능을 사용하여 리소스에 대한 액세스를 더 세부적으로 제어할 수 있습니다.' 
+---
+= 권한 부여 및 액세스 제어 관리
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident Protect는 역할 기반 액세스 제어(RBAC)의 Kubernetes 모델을 사용합니다. 기본적으로 Trident Protect는 단일 시스템 네임스페이스 및 연결된 기본 서비스 계정을 제공합니다. 조직에 많은 사용자 또는 특정 보안 요구 사항이 있는 경우 Trident Protect의 RBAC 기능을 사용하여 리소스 및 네임스페이스에 대한 액세스를 보다 세부적으로 제어할 수 있습니다.
+
+클러스터 관리자는 항상 기본 네임스페이스의 리소스에 액세스할 수 `trident-protect` 있으며 다른 모든 네임스페이스의 리소스에 액세스할 수도 있습니다. 리소스 및 응용 프로그램에 대한 액세스를 제어하려면 추가 네임스페이스를 만들고 해당 네임스페이스에 리소스 및 응용 프로그램을 추가해야 합니다.
+
+사용자는 기본 네임스페이스에 응용 프로그램 데이터 관리 CRS를 만들 수 `trident-protect` 없습니다. 응용 프로그램 네임스페이스에 응용 프로그램 데이터 관리 CRS를 만들어야 합니다(모범 사례로서 연결된 응용 프로그램과 동일한 네임스페이스에 응용 프로그램 데이터 관리 CRS를 만듭니다).
+
+[NOTE]
+====
+관리자만 권한이 있는 Trident Protect 사용자 지정 리소스 객체에 액세스할 수 있어야 합니다. 여기에는 다음이 포함됩니다.
+
+* * AppVault *: 버킷 자격 증명 데이터가 필요합니다
+* * AutoSupport 번들 *: 메트릭, 로그 및 기타 민감한 Trident 보호 데이터를 수집합니다
+* * AutoSupport기술에 따라 로그 수집 일정을 관리할 수 있습니다
+
+
+가장 좋은 방법은 RBAC를 사용하여 권한이 있는 객체에 대한 액세스를 관리자에게 제한하는 것입니다.
+
+====
+RBAC가 리소스 및 네임스페이스에 대한 액세스를 규제하는 방법에 대한 자세한 내용은 를 https://kubernetes.io/docs/reference/access-authn-authz/rbac/["Kubernetes RBAC 설명서"^]참조하십시오.
+
+서비스 계정에 대한 자세한 내용은 을 https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/["Kubernetes 서비스 계정 설명서"^]참조하십시오.
+
+
+
+== 예: 두 사용자 그룹에 대한 액세스를 관리합니다
+
+예를 들어, 조직에는 클러스터 관리자, 엔지니어링 사용자 그룹 및 마케팅 사용자 그룹이 있습니다. 클러스터 관리자는 엔지니어링 그룹과 마케팅 그룹이 각각 해당 네임스페이스에 할당된 리소스에만 액세스할 수 있는 환경을 만들기 위해 다음 작업을 완료합니다.
+
+
+
+=== 1단계: 각 그룹의 리소스를 포함할 네임스페이스를 만듭니다
+
+네임스페이스를 만들면 리소스를 논리적으로 분리하고 해당 리소스에 액세스할 수 있는 사용자를 보다 효율적으로 제어할 수 있습니다.
+
+.단계
+. 엔지니어링 그룹의 네임스페이스를 만듭니다.
++
+[source, console]
+----
+kubectl create ns engineering-ns
+----
+. 마케팅 그룹의 네임스페이스를 만듭니다.
++
+[source, console]
+----
+kubectl create ns marketing-ns
+----
+
+
+
+
+=== 2단계: 각 네임스페이스의 리소스와 상호 작용할 새 서비스 계정을 만듭니다
+
+새로 만드는 각 네임스페이스에는 기본 서비스 계정이 함께 제공되지만, 나중에 필요한 경우 그룹 간에 Privileges를 추가로 나눌 수 있도록 각 사용자 그룹에 대한 서비스 계정을 만들어야 합니다.
+
+.단계
+. 엔지니어링 그룹에 대한 서비스 계정을 생성합니다.
++
+[source, yaml]
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eng-user
+  namespace: engineering-ns
+----
+. 마케팅 그룹의 서비스 계정 만들기:
++
+[source, yaml]
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mkt-user
+  namespace: marketing-ns
+----
+
+
+
+
+=== 3단계: 각 새 서비스 계정에 대한 암호를 만듭니다
+
+서비스 계정 암호는 서비스 계정을 인증하는 데 사용되며, 손상된 경우 쉽게 삭제하고 다시 만들 수 있습니다.
+
+.단계
+. 엔지니어링 서비스 계정에 대한 암호를 생성합니다.
++
+[source, yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: eng-user
+  name: eng-user-secret
+  namespace: engineering-ns
+type: kubernetes.io/service-account-token
+----
+. 마케팅 서비스 계정에 대한 암호 만들기:
++
+[source, yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: mkt-user
+  name: mkt-user-secret
+  namespace: marketing-ns
+type: kubernetes.io/service-account-token
+----
+
+
+
+
+=== 4단계: RoleBinding 개체를 만들어 ClusterRole 개체를 각 새 서비스 계정에 바인딩합니다
+
+기본 ClusterRole 개체는 Trident Protect를 설치할 때 만들어집니다. RoleBinding 개체를 만들고 적용하여 이 ClusterRole 을 서비스 계정에 바인딩할 수 있습니다.
+
+.단계
+. ClusterRole을 엔지니어링 서비스 계정에 바인딩합니다.
++
+[source, yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: engineering-ns-tenant-rolebinding
+  namespace: engineering-ns
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: trident-protect-tenant-cluster-role
+subjects:
+- kind: ServiceAccount
+  name: eng-user
+  namespace: engineering-ns
+----
+. ClusterRole을 마케팅 서비스 계정에 연결:
++
+[source, yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: marketing-ns-tenant-rolebinding
+  namespace: marketing-ns
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: trident-protect-tenant-cluster-role
+subjects:
+- kind: ServiceAccount
+  name: mkt-user
+  namespace: marketing-ns
+----
+
+
+
+
+=== 5단계: 권한을 테스트합니다
+
+권한이 올바른지 테스트합니다.
+
+.단계
+. 엔지니어링 사용자가 엔지니어링 리소스에 액세스할 수 있는지 확인합니다.
++
+[source, console]
+----
+kubectl auth can-i --as=system:serviceaccount:engineering-ns:eng-user get applications.protect.trident.netapp.io -n engineering-ns
+----
+. 엔지니어링 사용자가 마케팅 리소스에 액세스할 수 없는지 확인합니다.
++
+[source, console]
+----
+kubectl auth can-i --as=system:serviceaccount:engineering-ns:eng-user get applications.protect.trident.netapp.io -n marketing-ns
+----
+

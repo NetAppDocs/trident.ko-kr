@@ -30,7 +30,7 @@ settings:
     url: "/trident-2204"
   - version-number: '22.01'
     url: "/trident-2201"
-  langs: ko-kr,us-en,de-de,es-es,fr-fr,it-it,pt-br,ja-jp,zh-cn,zh-tw
+  langs: ko-kr,us-en,ja-jp,zh-cn,zh-tw,de-de,es-es,fr-fr,it-it
 sidebar:
   entries:
   - title: Trident 문서
@@ -47,6 +47,7 @@ sidebar:
   - section: trident-managing-k8s
   - section: trident-docker
   - section: trident-reco
+  - section: trident-protect
   - title: 지식 및 지원
     entries:
     - title: FAQ 를 참조하십시오

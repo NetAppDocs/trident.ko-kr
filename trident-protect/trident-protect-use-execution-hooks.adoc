@@ -1,0 +1,195 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-use-execution-hooks.html 
+keywords: trident, protect, execution hooks 
+summary: Trident Protect를 사용하여 앱에 대한 사용자 지정 실행 후크를 생성할 수 있습니다. 실행 후크를 만들려면 소유자, 관리자 또는 구성원 권한이 있어야 합니다. 
+---
+= 실행 후크를 관리합니다
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+실행 후크는 관리되는 앱의 데이터 보호 작업과 함께 실행되도록 구성할 수 있는 사용자 지정 작업입니다. 예를 들어 데이터베이스 앱이 있는 경우 실행 후크를 사용하여 스냅샷 전에 모든 데이터베이스 트랜잭션을 일시 중지하고 스냅샷이 완료된 후 트랜잭션을 다시 시작할 수 있습니다. 따라서 애플리케이션 정합성이 보장되는 스냅샷이 보장됩니다.
+
+
+
+== 실행 후크 유형
+
+Trident Protect는 실행 가능한 시기에 따라 다음과 같은 유형의 실행 후크를 지원합니다.
+
+* 사전 스냅샷
+* 사후 스냅샷
+* 사전 백업
+* 백업 후
+* 사후 복원
+* 장애 조치 후
+
+
+
+
+=== 실행 순서
+
+데이터 보호 작업이 실행되면 실행 후크 이벤트가 다음 순서로 발생합니다.
+
+. 해당되는 모든 사용자 정의 사전 작업 실행 후크는 해당 컨테이너에서 실행됩니다. 필요한 만큼 사용자 지정 사전 작업 후크를 만들고 실행할 수 있지만, 이 후크의 실행 순서는 보장되거나 구성할 수 없습니다.
+. 데이터 보호 작업이 수행됩니다.
+. 해당되는 모든 사용자 지정 작업 후 실행 후크는 해당 컨테이너에서 실행됩니다. 필요한 만큼 사용자 지정 사후 작업 후크를 만들고 실행할 수 있지만 작업 후 후크의 실행 순서는 보장되거나 구성할 수 없습니다.
+
+
+같은 유형의 실행 후크를 여러 개 생성하는 경우(예: 사전 스냅샷) 해당 후크의 실행 순서는 보장되지 않습니다. 그러나 다른 유형의 후크를 실행하는 순서는 보장됩니다. 예를 들어, 다음과 같은 순서로 서로 다른 유형의 후크가 모두 있는 구성을 실행할 수 있습니다.
+
+. 사전 스냅샷 후크가 실행되었습니다
+. 사후 스냅샷 후크가 실행되었습니다
+. 예비 후크가 실행되었습니다
+. 백업 후 후크가 실행되었습니다
+
+
+
+NOTE: 위의 순서 예제는 기존 스냅샷을 사용하지 않는 백업을 실행하는 경우에만 적용됩니다.
+
+
+NOTE: 운영 환경에서 실행 후크 스크립트를 사용하려면 항상 해당 스크립트를 테스트해야 합니다. 'kubbeck exec' 명령을 사용하여 스크립트를 편리하게 테스트할 수 있습니다. 운영 환경에서 실행 후크를 사용하도록 설정한 후 결과 스냅샷과 백업을 테스트하여 정합성이 보장되는지 확인합니다. 앱을 임시 네임스페이스에 클론 복제하고, 스냅샷 또는 백업을 복원한 다음 앱을 테스트하여 이 작업을 수행할 수 있습니다.
+
+
+
+== 사용자 정의 실행 후크에 대한 중요 참고 사항
+
+앱에 대한 실행 후크를 계획할 때 다음 사항을 고려하십시오.
+
+* 실행 후크는 스크립트를 사용하여 작업을 수행해야 합니다. 많은 실행 후크가 동일한 스크립트를 참조할 수 있습니다.
+* Trident Protect는 실행 후크를 사용하는 스크립트를 실행 가능한 셸 스크립트 형식으로 작성해야 합니다.
+* 스크립트 크기는 96KB로 제한됩니다.
+* Trident Protect는 실행 후크 설정과 일치하는 기준을 사용하여 스냅샷, 백업 또는 복구 작업에 적용할 수 있는 후크를 결정합니다.
+
+
+
+NOTE: 실행 후크는 실행 중인 응용 프로그램의 기능을 줄이거나 완전히 비활성화하기 때문에 사용자 지정 실행 후크가 실행되는 시간을 최소화해야 합니다. 연결된 실행 후크와 함께 백업 또는 스냅샷 작업을 시작한 다음 취소하면 백업 또는 스냅샷 작업이 이미 시작된 경우에도 후크를 실행할 수 있습니다. 즉, 백업 후 실행 후크에 사용되는 논리는 백업이 완료된 것으로 가정할 수 없습니다.
+
+
+
+== 실행 후크 필터
+
+응용 프로그램의 실행 후크를 추가하거나 편집할 때 실행 후크에 필터를 추가하여 후크가 일치할 컨테이너를 관리할 수 있습니다. 필터는 모든 컨테이너에서 동일한 컨테이너 이미지를 사용하는 응용 프로그램에 유용하지만 각 이미지를 다른 용도(예: Elasticsearch)로 사용할 수 있습니다. 필터를 사용하면 실행 후크가 실행되는 시나리오를 만들 수 있습니다. 단, 모든 동일한 컨테이너를 실행하는 것은 아닙니다. 단일 실행 후크에 대해 여러 개의 필터를 만들면 논리적 필터 및 연산자와 결합됩니다. 실행 후크당 최대 10개의 활성 필터를 사용할 수 있습니다.
+
+실행 후크에 추가하는 각 필터는 클러스터의 컨테이너와 일치시키기 위해 정규식을 사용합니다. 후크가 컨테이너와 일치하면 후크는 해당 컨테이너에서 연결된 스크립트를 실행합니다. 필터에 대한 정규식은 정규식 2(RE2) 구문을 사용합니다. 이 구문은 일치 목록에서 컨테이너를 제외하는 필터를 만드는 것을 지원하지 않습니다. Trident Protect가 실행 후크 필터에서 정규식을 지원하는 구문에 대한 자세한 내용은 을 참조하십시오. https://github.com/google/re2/wiki/Syntax["정규식 2(RE2) 구문 지원"^]
+
+
+NOTE: 복원 또는 클론 작업 후에 실행되는 실행 후크에 네임스페이스 필터를 추가하고 복원 또는 클론 소스와 대상이 서로 다른 네임스페이스에 있는 경우 네임스페이스 필터는 대상 네임스페이스에만 적용됩니다.
+
+
+
+== 실행 후크 예
+
+를 방문하여 https://github.com/NetApp/Verda["NetApp Verda GitHub 프로젝트"] Apache Cassandra 및 Elasticsearch와 같은 인기 앱의 실제 실행 후크를 다운로드하십시오. 예제를 보고 사용자 지정 실행 후크를 구조화하는 아이디어를 얻을 수도 있습니다.
+
+
+
+== 실행 후크를 만듭니다
+
+Trident Protect를 사용하여 앱에 대한 사용자 지정 실행 후크를 생성할 수 있습니다. 실행 후크를 만들려면 소유자, 관리자 또는 구성원 권한이 있어야 합니다.
+
+[role="tabbed-block"]
+====
+.CR을 사용합니다
+--
+. CR(사용자 정의 리소스) 파일을 만들고 이름을 `trident-protect-hook.yaml`지정합니다.
+. 다음 특성을 Trident Protect 환경과 클러스터 구성과 일치하도록 구성합니다.
++
+** *metadata.name*: (_required_) 이 사용자 정의 리소스의 이름입니다. 사용자 환경에 맞는 고유하고 합리적인 이름을 선택하십시오.
+** * spec.applicationRef *:(_required_) 실행 후크를 실행할 응용 프로그램의 Kubernetes 이름입니다.
+** * spec.stage *: (_required_) 실행 후크가 실행되어야 하는 작업 중 단계를 나타내는 문자열입니다. 가능한 값:
++
+*** 사전
+*** 게시
+
+
+** * spec.action *:(_required_) 지정된 실행 후크 필터가 일치한다고 가정할 때 실행 후크가 수행할 작업을 나타내는 문자열입니다. 가능한 값:
++
+*** 스냅샷
+*** 백업
+*** 복원
+*** 페일오버
+
+
+** *spec.enabled*: (_Optional_) 이 실행 후크의 활성화 여부를 나타냅니다. 지정하지 않으면 기본값은 true 입니다.
+** *spec.hookSource*:(_required_) base64로 인코딩된 후크 스크립트를 포함하는 문자열입니다.
+** *spec.timeout*: (_Optional_) 실행 후크가 실행될 수 있는 시간을 분 단위로 정의하는 숫자입니다. 최소값은 1분이고, 지정하지 않은 경우 기본값은 25분입니다.
+** *spec.arguments*: (_Optional_) 실행 후크에 지정할 수 있는 인수의 YAML 목록입니다.
+** * spec.matchingCriteria *: (_Optional_) 각 쌍이 실행 후크 필터를 구성하는 조건 키 값 쌍의 선택적 목록입니다. 실행 후크당 최대 10개의 필터를 추가할 수 있습니다.
+** * spec.matchingCriteria.type *: (_Optional_) 실행 후크 필터 유형을 식별하는 문자열입니다. 가능한 값:
++
+*** 컨테이너이미지
+*** 컨테이너명
+*** PodName을 선택합니다
+*** PodLabel을 선택합니다
+*** 이름 이름 이름
+
+
+** * spec.matchingCriteria.value *: (_Optional_) 실행 후크 필터 값을 식별하는 문자열 또는 정규식입니다.
++
+YAML 예:
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: ExecHook
+metadata:
+  name: example-hook-cr
+  namespace: my-app-namespace
+  annotations:
+    astra.netapp.io/astra-control-hook-source-id: /account/test/hookSource/id
+spec:
+  applicationRef: my-app-name
+  stage: Pre
+  action: Snapshot
+  enabled: true
+  hookSource: IyEvYmluL2Jhc2gKZWNobyAiZXhhbXBsZSBzY3JpcHQiCg==
+  timeout: 10
+  arguments:
+    - FirstExampleArg
+    - SecondExampleArg
+  matchingCriteria:
+    - type: containerName
+      value: mysql
+    - type: containerImage
+      value: bitnami/mysql
+    - type: podName
+      value: mysql
+    - type: namespaceName
+      value: mysql-a
+    - type: podLabel
+      value: app.kubernetes.io/component=primary
+    - type: podLabel
+      value: helm.sh/chart=mysql-10.1.0
+    - type: podLabel
+      value: deployment-type=production
+----
+
+
+. CR 파일을 올바른 값으로 채운 후 CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-hook.yaml
+----
+
+
+--
+.CLI를 사용합니다
+--
+. 괄호 안의 값을 사용자 환경의 정보로 대체하여 실행 후크를 만듭니다. 예를 들면 다음과 같습니다.
++
+[source, console]
+----
+tridentctl protect create exechook <my_exec_hook_name> --action <action_type> --app <app_to_use_hook> --stage <pre_or_post_stage> --source-file <script-file>
+----
+
+
+--
+====

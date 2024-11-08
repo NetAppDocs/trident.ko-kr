@@ -1,0 +1,187 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-migrate-apps.html 
+keywords: trident, protect, migrate, storage, restore, backup 
+summary: 백업 또는 스냅샷 데이터를 다른 클러스터 또는 스토리지 클래스로 복원할 수 있습니다 
+---
+= 애플리케이션을 마이그레이션합니다
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+백업 또는 스냅샷 데이터를 다른 클러스터 또는 스토리지 클래스로 복원하여 클러스터 또는 스토리지 클래스 간에 애플리케이션을 마이그레이션할 수 있습니다.
+
+
+NOTE: 애플리케이션을 마이그레이션하면 애플리케이션에 대해 구성된 모든 실행 후크가 앱과 함께 마이그레이션됩니다. 복원 후 실행 후크가 있는 경우 복구 작업의 일부로 자동으로 실행됩니다.
+
+
+
+== 백업 및 복원 작업
+
+다음 시나리오에 대한 백업 및 복원 작업을 수행하려면 특정 백업 및 복원 작업을 자동화할 수 있습니다.
+
+
+
+=== 같은 클러스터에 클론 복제
+
+애플리케이션을 동일한 클러스터에 복제하려면 스냅샷 또는 백업을 생성하고 데이터를 동일한 클러스터에 복구합니다.
+
+.단계
+. 다음 중 하나를 수행합니다.
++
+.. link:trident-protect-protect-apps.html#create-an-on-demand-snapshot["스냅샷을 생성합니다"]..
+.. link:trident-protect-protect-apps.html#create-an-on-demand-backup["백업을 생성합니다"]..
+
+
+. 동일한 클러스터에서 스냅샷 또는 백업을 생성했는지에 따라 다음 중 하나를 수행합니다.
++
+.. link:trident-protect-restore-apps.html#restore-from-a-snapshot-to-a-different-namespace["스냅샷에서 데이터를 복원합니다"]..
+.. link:trident-protect-restore-apps.html#restore-from-a-backup-to-a-different-namespace["백업에서 데이터를 복원합니다"]..
+
+
+
+
+
+
+=== 다른 클러스터에 클론 복제
+
+애플리케이션을 다른 클러스터에 클론 복제(클러스터 간 클론 수행)하려면 스냅샷 또는 백업을 생성하고 데이터를 다른 클러스터에 복구합니다. 대상 클러스터에 Trident Protect가 설치되어 있는지 확인하십시오.
+
+.단계
+. 다음 중 하나를 수행합니다.
++
+.. link:trident-protect-protect-apps.html#create-an-on-demand-snapshot["스냅샷을 생성합니다"]..
+.. link:trident-protect-protect-apps.html#create-an-on-demand-backup["백업을 생성합니다"]..
+
+
+. 백업 또는 스냅샷이 포함된 객체 스토리지 버킷의 AppVault CR이 대상 클러스터에 구성되어 있는지 확인합니다.
+. 대상 클러스터에서 스냅샷 또는 백업을 생성했는지 여부에 따라 다음 중 하나를 수행합니다.
++
+.. link:trident-protect-restore-apps.html#restore-from-a-snapshot-to-a-different-namespace["스냅샷에서 데이터를 복원합니다"]..
+.. link:trident-protect-restore-apps.html#restore-from-a-backup-to-a-different-namespace["백업에서 데이터를 복원합니다"]..
+
+
+
+
+
+
+== 한 스토리지 클래스에서 다른 스토리지 클래스로 애플리케이션을 마이그레이션합니다
+
+스냅샷을 다른 대상 스토리지 클래스로 복원하여 한 스토리지 클래스에서 다른 스토리지 클래스로 애플리케이션을 마이그레이션할 수 있습니다.
+
+예를 들어 복원 CR에서 비밀 제외):
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: SnapshotRestore
+metadata:
+  name: "${snapshotRestoreCRName}"
+spec:
+  appArchivePath: "${snapshotArchivePath}"
+  appVaultRef: "${appVaultCRName}"
+  namespaceMapping:
+    destination: "${destinationNamespace}"
+    source: "${sourceNamespace}"
+  storageClassMapping:
+    destination: "${destinationStorageClass}"
+    source: "${sourceStorageClass}"
+  resourceFilter:
+    resourceMatchers:
+      kind: Secret
+      version: v1
+    resourceSelectionCriteria: exclude
+----
+[role="tabbed-block"]
+====
+.CR을 사용하여 스냅샷을 복원합니다
+--
+. CR(사용자 정의 리소스) 파일을 만들고 이름을 `trident-protect-snapshot-restore-cr.yaml`지정합니다.
+. 생성한 파일에서 다음 속성을 구성합니다.
++
+** *metadata.name*: (_required_) 이 사용자 정의 리소스의 이름입니다. 사용자 환경에 맞는 고유하고 합리적인 이름을 선택하십시오.
+** * spec.appArchivePath *: 스냅샷 내용이 저장되는 AppVault 내부 경로입니다. 다음 명령을 사용하여 이 경로를 찾을 수 있습니다.
++
+[source, console]
+----
+kubectl get snapshots <my-snapshot-name> -n trident-protect -o jsonpath='{.status.appArchivePath}'
+----
+** * spec.appVaultRef *: (_required_) 스냅샷 내용이 저장된 AppVault의 이름입니다.
+** *spec.namespaceMapping*: 복구 작업의 소스 네임스페이스를 대상 네임스페이스에 매핑하는 것입니다.  `my-source-namespace`및 를 `my-destination-namespace` 사용자 환경의 정보로 바꿉니다.
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: SnapshotRestore
+metadata:
+  name: my-cr-name
+  namespace: trident-protect
+spec:
+  appArchivePath: my-snapshot-path
+  appVaultRef: appvault-name
+  namespaceMapping: [{"source": "my-source-namespace", "destination": "my-destination-namespace"}]
+----
+
+
+. 복원할 응용 프로그램의 특정 리소스만 선택해야 하는 경우 특정 레이블로 표시된 리소스를 포함하거나 제외하는 필터링을 추가합니다.
++
+** *resourceFilter.resourceSelectionCriteria*:(필터링에 필요) `include or exclude` resourceMatchers에 정의된 리소스를 포함하거나 제외하는 데 사용합니다. 다음 resourceMatchers 매개 변수를 추가하여 포함하거나 제외할 리소스를 정의합니다.
+** *resourceMatchers.group*: (_Optional_) 필터링할 리소스의 그룹입니다.
+** * resourceMatchers.kind *: (_Optional_) 필터링할 리소스의 종류입니다.
+** * resourceMatchers.version *: (_Optional_) 필터링할 리소스의 버전입니다.
+** *resourceMatchers.names*: (_Optional_) 필터링할 리소스의 Kubernetes metadata.name 필드에 있는 이름입니다.
+** *resourceMatchers.namespaces*: (_Optional_) 필터링할 리소스의 Kubernetes metadata.name 필드에 있는 네임스페이스입니다.
+** * resourceMatchers.labelSelectors *: (_Optional_) 에 정의된 대로 리소스의 Kubernetes metadata.name 필드에 있는 레이블 선택기 문자열입니다. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors["Kubernetes 문서"^] 예를 들면 다음과 `"trident.netapp.io/os=linux"`같습니다.
++
+예를 들면 다음과 같습니다.
+
++
+[source, yaml]
+----
+spec:
+  resourceFilter:
+    resourceSelectionCriteria: "include"
+    resourceMatchers:
+      group: my-resource-group
+      kind: my-resource-kind
+      version: my-resource-version
+      names: ["my-resource-names"]
+      namespaces: ["my-resource-namespaces"]
+      labelSelectors: ["trident.netapp.io/os=linux"]
+----
+
+
+. 파일을 올바른 값으로 채운 후 `trident-protect-snapshot-restore-cr.yaml` CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-snapshot-restore-cr.yaml
+----
+
+
+--
+.CLI를 사용하여 스냅샷을 복원합니다
+--
+. 대괄호 안의 값을 사용자 환경의 정보로 대체하여 스냅샷을 다른 네임스페이스로 복원합니다.
++
+**  `snapshot`인수에 네임스페이스 및 스냅숏 이름이 형식으로 `<namespace>/<name>` 사용됩니다.
+** 이 `namespace-mapping` 인수는 콜론으로 구분된 네임스페이스를 사용하여 소스 네임스페이스를 올바른 대상 네임스페이스에 형식 `source1:dest1,source2:dest2`으로 매핑합니다.
++
+예를 들면 다음과 같습니다.
+
++
+[source, console]
+----
+tridentctl protect create snapshotrestore <my_restore_name> --snapshot <namespace/snapshot_to_restore> --namespace-mapping <source_to_destination_namespace_mapping>
+----
+
+
+
+
+--
+====

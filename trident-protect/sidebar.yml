@@ -1,0 +1,38 @@
+---
+section: trident-protect
+title: Trident Protect로 애플리케이션을 보호합니다
+entries:
+- title: Trident Protect에 대해 자세히 알아보십시오
+  url: "/trident-protect/learn-about-trident-protect.html"
+- title: Trident Protect를 설치합니다
+  entries:
+  - title: Trident 보호 요구 사항
+    url: "/trident-protect/trident-protect-requirements.html"
+  - title: Trident Protect를 설치합니다
+    url: "/trident-protect/trident-protect-installation.html"
+  - title: Trident Protect CLI 플러그인을 설치합니다
+    url: "/trident-protect/trident-protect-cli.html"
+- title: Trident Protect를 관리합니다
+  entries:
+  - title: 권한 부여 및 액세스 제어 관리
+    url: "/trident-protect/manage-authorization-access-control.html"
+  - title: Trident Protect 지원 번들을 생성합니다
+    url: "/trident-protect/trident-protect-generate-support-bundle.html"
+- title: 애플리케이션을 관리하고 보호합니다
+  entries:
+  - title: AppVault 객체를 사용하여 버킷을 관리합니다
+    url: "/trident-protect/trident-protect-appvault-custom-resources.html"
+  - title: 관리할 애플리케이션을 정의합니다
+    url: "/trident-protect/trident-protect-manage-applications.html"
+  - title: 애플리케이션 보호
+    url: "/trident-protect/trident-protect-protect-apps.html"
+  - title: 응용 프로그램을 복원합니다
+    url: "/trident-protect/trident-protect-restore-apps.html"
+  - title: NetApp SnapMirror를 사용하여 애플리케이션 복제
+    url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
+  - title: 애플리케이션을 마이그레이션합니다
+    url: "/trident-protect/trident-protect-migrate-apps.html"
+  - title: Trident Protect로 실행 후크를 관리합니다
+    url: "/trident-protect/trident-protect-use-execution-hooks.html"
+- title: Trident Protect를 제거합니다
+  url: "/trident-protect/trident-protect-uninstall.html"

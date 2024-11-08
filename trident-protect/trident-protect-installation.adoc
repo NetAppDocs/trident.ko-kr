@@ -1,0 +1,158 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-installation.html 
+keywords: install, trident, protect, requirements, registry 
+summary: 사용자 환경이 요구 사항을 충족하는 경우 다음 단계에 따라 Trident Protect를 설치할 수 있습니다. 
+---
+= Trident Protect를 설치하고 구성합니다
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+사용 중인 환경이 Trident Protect 요구 사항을 충족하는 경우 다음 단계에 따라 클러스터에 Trident Protect를 설치할 수 있습니다. NetApp에서 Trident Protect를 얻거나 개인 레지스트리에서 설치할 수 있습니다. 클러스터가 인터넷에 액세스할 수 없는 경우 개인 레지스트리에서 설치하는 것이 유용합니다.
+
+[role="tabbed-block"]
+====
+.NetApp에서 Trident Protect를 설치합니다
+--
+. Trident Helm 저장소 추가:
++
+[source, console]
+----
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+----
+. Helm을 사용하여 Trident Protect를 설치합니다. 클러스터에 할당되고 이 클러스터에서 백업 및 스냅샷을 식별하는 데 사용되는 클러스터 이름으로 바꿉니다 `<name_of_cluster>`.
++
+[source, console]
+----
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0
+----
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect
+----
+. 필요한 경우 VM을 고정합니다. SnapMirror용 KubeVirt 지원을 사용하는 경우 VM을 동결하면 VM을 효과적으로 관리할 수 있습니다.
++
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
+----
++
+
+NOTE: 고정 기능이 작동하려면 가상화를 설정해야 합니다. 이 설정 후에 배포된 VM에는 고정 및 고정 취소에 필요한 바이너리가 포함되어 있습니다. 가상화 설정에 대한 자세한 내용은 을 link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["OpenShift Virtualization 설치"^]참조하십시오.
+
+
+
+--
+.개인 레지스트리로부터 Trident Protect를 설치합니다
+--
+Kubernetes 클러스터가 인터넷에 액세스할 수 없는 경우 개인 이미지 레지스트리에서 Trident Protect를 설치할 수 있습니다. 이 예제에서는 대괄호 안의 값을 사용자 환경의 정보로 바꿉니다.
+
+. 다음 이미지를 로컬 컴퓨터로 가져와서 태그를 업데이트한 다음 개인 레지스트리에 푸시합니다.
++
+[source, console]
+----
+netapp/controller:24.10.0
+netapp/restic:24.10.0
+netapp/kopia:24.10.0
+netapp/trident-autosupport:24.10.0
+netapp/exechook:24.10.0
+netapp/resourcebackup:24.10.0
+netapp/resourcerestore:24.10.0
+bitnami/kubectl:1.30.2
+kubebuilder/kube-rbac-proxy:v0.16.0
+----
++
+예를 들면 다음과 같습니다.
+
++
+[source, console]
+----
+docker pull netapp/controller:24.10.0
+----
++
+[source, console]
+----
+docker tag netapp/controller:24.10.0 <private-registry-url>/controller:24.10.0
+----
++
+[source, console]
+----
+docker push <private-registry-url>/controller:24.10.0
+----
+. Trident Protect 시스템 네임스페이스를 생성합니다.
++
+[source, console]
+----
+kubectl create ns trident-protect
+----
+. 레지스트리에 로그인합니다.
++
+[source, console]
+----
+helm registry login <private-registry-url> -u <account-id> -p <api-token>
+----
+. 개인 레지스트리 인증에 사용할 풀 암호를 만듭니다.
++
+[source, console]
+----
+kubectl create secret docker-registry regcred --docker-username=<registry-username> --docker-password=<api-token> -n trident-protect --docker-server=<private-registry-url>
+----
+. Trident Helm 저장소 추가:
++
+[source, console]
+----
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+----
+. 다음 Trident Protect 설정이 포함된 파일을 만듭니다 `protectValues.yaml`.
++
+[source, yaml]
+----
+image:
+  registry: <private-registry-url>
+imagePullSecrets:
+- name: regcred
+controller:
+  image:
+    registry: <private-registry-url>
+rbacProxy:
+  image:
+    registry: <private-registry-url>
+crCleanup:
+  imagePullSecrets:
+  - name: regcred
+webhooksCleanup:
+  imagePullSecrets:
+  - name: regcred
+----
+. Helm을 사용하여 Trident Protect 설치:
++
+[source, console]
+----
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0
+----
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+----
+. 필요한 경우 VM을 고정합니다. SnapMirror용 KubeVirt 지원을 사용하는 경우 VM을 동결하면 VM을 효과적으로 관리할 수 있습니다.
++
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
+----
++
+
+NOTE: 고정 기능이 작동하려면 가상화를 설정해야 합니다. 이 설정 후에 배포된 VM에는 고정 및 고정 취소에 필요한 바이너리가 포함되어 있습니다. 가상화 설정에 대한 자세한 내용은 을 link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["OpenShift Virtualization 설치"^]참조하십시오.
+
+
+
+--
+====

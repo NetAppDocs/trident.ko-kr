@@ -37,7 +37,7 @@ If you want to make use of the snapshot functionality, install the CSI snapshot 
 
 [listing]
 ----
-helm install trident trident-operator-100.2410.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI -–namespace trident
+helm install trident trident-operator-100.2410.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI --namespace trident
 ----
 
 
@@ -186,8 +186,8 @@ netapp_trident-operator    v24.2.0-eksbuild.1    ACTIVE    0       {"cloudIdenti
 
 Amazon EKS 애드온을 제거하는 두 가지 옵션이 있습니다.
 
-* * 클러스터에 애드온 소프트웨어 유지 * – 이 옵션은 모든 설정의 Amazon EKS 관리를 제거합니다. 또한 업데이트를 시작한 후 Amazon EKS에서 업데이트를 알리고 Amazon EKS 애드온을 자동으로 업데이트하는 기능도 제거합니다. 하지만 클러스터에 애드온 소프트웨어가 보존됩니다. 이 옵션을 사용하면 Amazon EKS 애드온이 아닌 자가 관리형 설치가 됩니다. 이 옵션을 사용하면 애드온에 대한 다운타임이 없습니다.  `--preserve`명령의 옵션을 유지하여 추가 기능을 유지합니다.
-* * 클러스터에서 애드온 소프트웨어 완전히 제거 * – 클러스터에 종속된 리소스가 없는 경우에만 Amazon EKS 애드온을 클러스터에서 제거하는 것이 좋습니다.  `--preserve`추가 기능을 제거하려면 명령에서 옵션을 `delete` 제거하십시오.
+* * 클러스터에 애드온 소프트웨어 유지 * - 이 옵션은 모든 설정의 Amazon EKS 관리를 제거합니다. 또한 업데이트를 시작한 후 Amazon EKS에서 업데이트를 알리고 Amazon EKS 애드온을 자동으로 업데이트하는 기능도 제거합니다. 하지만 클러스터에 애드온 소프트웨어가 보존됩니다. 이 옵션을 사용하면 Amazon EKS 애드온이 아닌 자가 관리형 설치가 됩니다. 이 옵션을 사용하면 애드온에 대한 다운타임이 없습니다.  `--preserve`명령의 옵션을 유지하여 추가 기능을 유지합니다.
+* * 클러스터에서 애드온 소프트웨어 완전히 제거 * - 클러스터에 종속된 리소스가 없는 경우에만 Amazon EKS 애드온을 클러스터에서 제거하는 것이 좋습니다.  `--preserve`추가 기능을 제거하려면 명령에서 옵션을 `delete` 제거하십시오.
 
 
 

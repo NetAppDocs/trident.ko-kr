@@ -1,0 +1,264 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-appvault-custom-resources.html 
+keywords: trident. appvault, custom, protect, kubernetes 
+summary: 'Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault라고 합니다. AppVaults는 스토리지 버킷의 선언적 Kubernetes 워크플로 표현입니다.' 
+---
+= AppVault 객체를 사용하여 버킷을 관리합니다
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault라고 합니다. AppVault 개체는 스토리지 버킷의 선언적 Kubernetes 워크플로우 표현입니다. AppVault CR에는 백업, 스냅샷, 복원 작업 및 SnapMirror 복제와 같은 보호 작업에 사용되는 버킷에 필요한 구성이 포함되어 있습니다. 관리자만 AppVaults를 만들 수 있습니다.
+
+
+
+== 키 생성 및 AppVault 정의 예
+
+AppVault CR을 정의할 때 공급자가 호스팅하는 리소스에 액세스하려면 자격 증명을 포함해야 합니다. 자격 증명에 대한 키를 생성하는 방법은 공급자에 따라 다릅니다. 다음은 여러 공급자에 대한 명령줄 키 생성 예제와 각 공급자에 대한 AppVault 정의 예입니다.
+
+
+
+=== Google 클라우드
+
+키 생성 예:
+
+[source, console]
+----
+kubectl create secret generic gcp-creds --from-file=credentials=<mycreds-file.json> -n trident-protect
+----
+다음 AppVault 정의 예는 사용 및 수정할 수 있는 CR 또는 Trident Protect CLI 명령의 예를 통해 AppVault CR을 생성합니다.
+
+[role="tabbed-block"]
+====
+.AppVault CR 예
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: gcp-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: GCP
+  providerConfig:
+    gcp:
+      bucketName: trident-protect-src-bucket
+      projectID: project-id
+  providerCredentials:
+    credentials:
+      valueFromSecret:
+        key: credentials
+        name: gcp-trident-protect-src-bucket-secret
+----
+--
+.Trident Protect CLI를 사용한 AppVault CR 생성 예
+--
+[source, console]
+----
+tridentctl protect create vault gcp my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
+----
+--
+====
+
+
+=== Amazon S3
+
+키 생성 예:
+
+[source, console]
+----
+kubectl create secret generic -n trident-protect s3 --from-literal=accessKeyID=<secret-name> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret>
+----
+다음 AppVault 정의 예는 사용 및 수정할 수 있는 CR 또는 Trident Protect CLI 명령의 예를 통해 AppVault CR을 생성합니다.
+
+[role="tabbed-block"]
+====
+.AppVault CR 예
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: amazon-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: AWS
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+.CLI를 사용한 AppVault 작성 예제
+--
+[source, console]
+----
+tridentctl protect create vault GenericS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+====
+
+
+=== Microsoft Azure를 참조하십시오
+
+키 생성 예:
+
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accountKey=<secret-name> -n trident-protect
+----
+다음 AppVault 정의 예는 사용 및 수정할 수 있는 CR 또는 Trident Protect CLI 명령의 예를 통해 AppVault CR을 생성합니다.
+
+[role="tabbed-block"]
+====
+.AppVault CR 예
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: azure-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: Azure
+  providerConfig:
+    azure:
+      accountName: account-name
+      bucketName: trident-protect-src-bucket
+  providerCredentials:
+    accountKey:
+      valueFromSecret:
+        key: accountKey
+        name: azure-trident-protect-src-bucket-secret
+----
+--
+.CLI를 사용한 AppVault 작성 예제
+--
+[source, console]
+----
+tridentctl protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
+----
+--
+====
+
+
+=== providerType 및 providerConfig 에 대해 지원되는 값입니다
+
+ `providerType`AppVault CR의 및 `providerConfig` 키에는 특정 값이 필요합니다. 다음 표에서는 키에 대해 지원되는 값과 각 값에 사용해야 하는 관련 `providerConfig` 키를 `providerType` 보여 `providerType` 줍니다.
+
+[cols="2,2"]
+|===
+| 지원되는 `providerType` 값입니다 | 연결된 `providerConfig` 키 
+
+
+| 설치하고 | s3를 참조하십시오 
+
+
+| Azure를 지원합니다 | Azure를 지원합니다 
+
+
+| GCP | GCP 
+
+
+| GenericS3를 참조하십시오 | s3를 참조하십시오 
+
+
+| OntapS3를 참조하십시오 | s3를 참조하십시오 
+
+
+| StorageGridS3를 참조하십시오 | s3를 참조하십시오 
+|===
+
+
+== AppVault 브라우저를 사용하여 AppVault 정보를 봅니다
+
+Trident Protect CLI 플러그인을 사용하여 클러스터에 생성된 AppVault 개체에 대한 정보를 볼 수 있습니다.
+
+.단계
+. AppVault 개체의 내용을 봅니다.
++
+[source, console]
+----
+tridentctl protect get appvaultcontent gcp-vault --show-resources all
+----
++
+* 출력 예 *:
+
++
+[listing]
+----
++-------------+-------+----------+-----------------------------+---------------------------+
+|   CLUSTER   |  APP  |   TYPE   |            NAME             |         TIMESTAMP         |
++-------------+-------+----------+-----------------------------+---------------------------+
+|             | mysql | snapshot | mysnap                      | 2024-08-09 21:02:11 (UTC) |
+| production1 | mysql | snapshot | hourly-e7db6-20240815180300 | 2024-08-15 18:03:06 (UTC) |
+| production1 | mysql | snapshot | hourly-e7db6-20240815190300 | 2024-08-15 19:03:06 (UTC) |
+| production1 | mysql | snapshot | hourly-e7db6-20240815200300 | 2024-08-15 20:03:06 (UTC) |
+| production1 | mysql | backup   | hourly-e7db6-20240815180300 | 2024-08-15 18:04:25 (UTC) |
+| production1 | mysql | backup   | hourly-e7db6-20240815190300 | 2024-08-15 19:03:30 (UTC) |
+| production1 | mysql | backup   | hourly-e7db6-20240815200300 | 2024-08-15 20:04:21 (UTC) |
+| production1 | mysql | backup   | mybackup5                   | 2024-08-09 22:25:13 (UTC) |
+|             | mysql | backup   | mybackup                    | 2024-08-09 21:02:52 (UTC) |
++-------------+-------+----------+-----------------------------+---------------------------+
+----
+. 선택적으로, 각 리소스의 AppVaultPath를 보려면 플래그를 `--show-paths`사용합니다.
++
+테이블의 첫 번째 열에 있는 클러스터 이름은 Trident Protect Helm 설치에 클러스터 이름이 지정된 경우에만 사용할 수 있습니다. 예를 들면 다음과 `--set clusterName=production1`같습니다.
+
+
+
+
+
+== AppVault를 제거합니다
+
+언제든지 AppVault 개체를 제거할 수 있습니다.
+
+
+NOTE: AppVault 개체를 삭제하기 전에 AppVault CR에서 키를 제거하지 `finalizers` 마십시오. 이렇게 하면 AppVault 버킷의 잔여 데이터와 클러스터의 분리된 리소스가 생성될 수 있습니다.
+
+.시작하기 전에
+연결된 버킷에 저장된 모든 스냅샷과 백업을 삭제했는지 확인합니다.
+
+[role="tabbed-block"]
+====
+.Kubernetes CLI를 사용하여 AppVault를 제거합니다
+--
+. AppVault 개체를 제거하고 `appvault_name` 제거할 AppVault 개체의 이름으로 바꿉니다.
++
+[source, console]
+----
+kubectl delete appvault <appvault_name> -n trident-protect
+----
+
+
+--
+.Trident CLI를 사용하여 AppVault를 제거합니다
+--
+. AppVault 개체를 제거하고 `appvault_name` 제거할 AppVault 개체의 이름으로 바꿉니다.
++
+[source, console]
+----
+tridentctl protect delete appvault <appvault_name> -n trident-protect
+----
+
+
+--
+====

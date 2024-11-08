@@ -1,0 +1,139 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-requirements.html 
+keywords: trident protect, application, cluster, snapmirror replication, ontap, configuration 
+summary: 운영 환경, 애플리케이션 클러스터, 애플리케이션 및 라이센스의 준비 상태를 확인하는 것으로 시작하십시오. Trident Protect를 배포 및 운영하기 위해 사용자 환경이 이러한 요구 사항을 충족하는지 확인합니다. 
+---
+= Trident 보호 요구 사항
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+운영 환경, 애플리케이션 클러스터, 애플리케이션 및 라이센스의 준비 상태를 확인하는 것으로 시작하십시오. Trident Protect를 배포 및 운영하기 위해 사용자 환경이 이러한 요구 사항을 충족하는지 확인합니다.
+
+
+
+== Trident는 Kubernetes 호환성을 보호합니다
+
+Trident Protect는 다음과 같은 완전관리형 및 자가 관리형 Kubernetes 오퍼링과 호환됩니다.
+
+* Amazon Elastic Kubernetes Service(EKS)
+* Google Kubernetes Engine(GKE)
+* Microsoft Azure Kubernetes Service(AKS)
+* Red Hat OpenShift
+* 수세 목장
+* VMware Tanzu 포트폴리오
+* 업스트림 Kubernetes
+
+
+
+
+== Trident는 스토리지 백엔드 호환성을 보호합니다
+
+Trident Protect는 다음 스토리지 백엔드를 지원합니다.
+
+* NetApp ONTAP용 Amazon FSx
+* Cloud Volumes ONTAP
+* ONTAP 스토리지 어레이
+* Google Cloud NetApp 볼륨
+* Azure NetApp Files
+
+
+스토리지 백엔드가 다음 요구 사항을 충족하는지 확인합니다.
+
+* 클러스터에 연결된 NetApp 스토리지가 Astra Trident 24.02 이상을 사용하는지 확인합니다(Trident 24.10 권장).
++
+** Astra Trident가 24.06.1 이전 버전이고 NetApp SnapMirror 재해 복구 기능을 사용하려면 Astra Control Provisioner를 수동으로 활성화해야 합니다.
+
+
+* 최신 Astra Control Provisioner(Astra Trident 24.06.1 기준으로 기본적으로 설치 및 활성화됨)가 있는지 확인합니다.
+* NetApp ONTAP 스토리지 백엔드가 있는지 확인합니다.
+* 백업을 저장할 오브젝트 스토리지 버킷을 구성했는지 확인합니다.
+* 응용 프로그램 또는 응용 프로그램 데이터 관리 작업에 사용할 응용 프로그램 네임스페이스를 만듭니다. Trident Protect는 이러한 네임스페이스를 자동으로 만들지 않습니다. 사용자 지정 리소스에 존재하지 않는 네임스페이스를 지정하면 작업이 실패합니다.
+
+
+
+
+== NAS 경제 볼륨에 대한 요구 사항
+
+Trident Protect는 NAS 경제 볼륨에 대한 백업 및 복원 작업을 지원합니다. 현재 NAS 경제 볼륨으로의 스냅샷, 클론, SnapMirror 복제는 지원되지 않습니다. Trident Protect와 함께 사용할 각 NAS 경제 볼륨에 대해 스냅샷 디렉토리를 활성화해야 합니다.
+
+[NOTE]
+====
+일부 애플리케이션은 스냅샷 디렉토리를 사용하는 볼륨과 호환되지 않습니다. 이러한 애플리케이션의 경우 ONTAP 스토리지 시스템에서 다음 명령을 실행하여 스냅샷 디렉토리를 숨겨야 합니다.
+
+[source, console]
+----
+nfs modify -vserver <svm> -v3-hide-snapshot enabled
+----
+====
+각 NAS 경제 볼륨에 대해 다음 명령을 실행하여 스냅샷 디렉토리를 설정할 수 있으며, 변경할 볼륨의 UUID로 바꿀 수 `<volume-UUID>` 있습니다.
+
+[source, console]
+----
+tridentctl update volume <volume-UUID> --snapshot-dir=true --pool-level=true -n trident
+----
+
+NOTE: Trident 백엔드 구성 옵션을 로 `true` 설정하면 기본적으로 새 볼륨에 대해 스냅샷 디렉토리를 설정할 수 `snapshotDir` 있습니다. 기존 볼륨은 영향을 받지 않습니다.
+
+
+
+== SnapMirror 복제에 대한 요구 사항
+
+NetApp SnapMirror는 다음 ONTAP 솔루션에 대해 Trident Protect와 함께 사용할 수 있습니다.
+
+* NetApp ASA
+* NetApp AFF
+* NetApp FAS
+* NetApp ONTAP Select를 참조하십시오
+* NetApp Cloud Volumes ONTAP를 참조하십시오
+* NetApp ONTAP용 Amazon FSx
+
+
+
+
+=== SnapMirror 복제를 위한 ONTAP 클러스터 요구 사항
+
+SnapMirror 복제를 사용하려는 경우 ONTAP 클러스터가 다음 요구 사항을 충족하는지 확인하십시오.
+
+* * Astra Control Provisioner 또는 Trident *: Astra Control Provisioner 또는 Trident는 ONTAP를 백엔드로 활용하는 소스 및 대상 Kubernetes 클러스터 모두에 존재해야 합니다. Trident Protect는 다음 드라이버를 통해 지원되는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 복제를 지원합니다.
++
+** 'ONTAP-NAS'
+** 'ONTAP-SAN'
+
+
+* * 라이센스 *: 소스 및 대상 ONTAP 클러스터 모두에서 데이터 보호 번들을 사용하는 ONTAP SnapMirror 비동기 라이센스를 활성화해야 합니다. 자세한 내용은 을 https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["ONTAP의 SnapMirror 라이센스 개요"^] 참조하십시오.
+
+
+
+
+=== SnapMirror 복제에 대한 피어링 고려 사항
+
+스토리지 백엔드 피어링을 사용하려는 경우 환경이 다음 요구 사항을 충족하는지 확인하십시오.
+
+* * 클러스터 및 SVM *: ONTAP 스토리지 백엔드를 피어링해야 합니다. 자세한 내용은 을 https://docs.netapp.com/us-en/ontap/peering/index.html["클러스터 및 SVM 피어링 개요"^] 참조하십시오.
++
+
+NOTE: 두 ONTAP 클러스터 간의 복제 관계에 사용되는 SVM 이름이 고유한지 확인합니다.
+
+* * Astra Control Provisioner 또는 Trident 및 SVM *: 피어링된 원격 SVM을 대상 클러스터의 Astra Control Provisioner 또는 Trident에서 사용할 수 있어야 합니다.
+* * 관리되는 백엔드 *: 복제 관계를 만들려면 Trident Protect에서 ONTAP 스토리지 백엔드를 추가 및 관리해야 합니다.
+* * over TCP *: Trident Protect는 NVMe over TCP 프로토콜을 사용하는 스토리지 백엔드에 대해 NetApp SnapMirror 복제를 지원하지 않습니다.
+
+
+
+
+=== SnapMirror 복제를 위한 Trident/ONTAP 구성
+
+Trident Protect를 사용하려면 소스 및 대상 클러스터 모두에 대해 복제를 지원하는 스토리지 백엔드를 하나 이상 구성해야 합니다. 소스 및 대상 클러스터가 동일한 경우 대상 애플리케이션은 최상의 복원력을 위해 소스 애플리케이션과 다른 스토리지 백엔드를 사용해야 합니다.
+
+
+
+=== KubeVirt 사용 시 고려 사항
+
+ https://kubevirt.io/["KubeVirt"^]SnapMirror 복제와 함께 가상 머신을 사용하려면 SVM을 고정 및 고정 해제할 수 있도록 가상화를 설정해야 합니다. 가상화를 설정하면 SVM에서 사용 중지 및 사용 중지를 푸는 데 필요한 툴이 포함됩니다. 가상화 설정에 대한 자세한 내용은 을 https://docs.openshift.com/container-platform/4.17/virt/install/installing-virt.html["OpenShift Virtualization 설치"^]참조하십시오.
