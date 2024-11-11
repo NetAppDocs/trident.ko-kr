@@ -24,7 +24,7 @@ summary: 사용자 환경이 요구 사항을 충족하는 경우 다음 단계�
 +
 [source, console]
 ----
-helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
 . Helm을 사용하여 Trident Protect를 설치합니다. 클러스터에 할당되고 이 클러스터에서 백업 및 스냅샷을 식별하는 데 사용되는 클러스터 이름으로 바꿉니다 `<name_of_cluster>`.
 +
@@ -65,6 +65,7 @@ netapp/trident-autosupport:24.10.0
 netapp/exechook:24.10.0
 netapp/resourcebackup:24.10.0
 netapp/resourcerestore:24.10.0
+netapp/resourcedelete:24.10.0
 bitnami/kubectl:1.30.2
 kubebuilder/kube-rbac-proxy:v0.16.0
 ----
@@ -108,7 +109,7 @@ kubectl create secret docker-registry regcred --docker-username=<registry-userna
 +
 [source, console]
 ----
-helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
 . 다음 Trident Protect 설정이 포함된 파일을 만듭니다 `protectValues.yaml`.
 +

@@ -124,7 +124,7 @@ curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.
 +
 [source, console]
 ----
-md ~/.bash/completions
+mkdir -p ~/.bash/completions
 ----
 . 다운로드한 스크립트를 디렉터리로 이동합니다 `~/.bash/completions`.
 +
@@ -153,7 +153,7 @@ curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.
 +
 [source, console]
 ----
-md ~/.zsh/completions
+mkdir -p ~/.zsh/completions
 ----
 . 다운로드한 스크립트를 디렉터리로 이동합니다 `~/.zsh/completions`.
 +
