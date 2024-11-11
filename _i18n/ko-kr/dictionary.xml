@@ -4911,7 +4911,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="645a84975202e30700b572b49a5ee29d" category="list-text">재해 복구</block>
   <block id="11d5920d0c0b3a97e764f84dc92ef110" category="list-text">애플리케이션 이동성</block>
   <block id="f593e32b2a3ead4ac029c13126d3531d" category="inline-link-macro">Trident Protect에 대해 자세히 알아보십시오</block>
-  <block id="4f341cba22662b4f62e28f58e573db1f" category="paragraph"><block ref="d74b9942b9f31e879889873ba2e086e3" category="inline-link-macro-rx"></block>..</block>
   <block id="487dc96e91d89134e7a216bab529a019" category="paragraph">24.10 릴리즈부터 Astra Trident은 NetApp Trident(Trident)으로 브랜드를 변경했습니다. 이 브랜드 변경은 Trident의 기능, 지원되는 플랫폼 또는 상호 운용성에 영향을 미치지 않습니다.</block>
   <block id="cf3f16653945ea2a3c2a47b5dce1e6b2" category="list-text">* 클러스터에 애드온 소프트웨어 유지 * - 이 옵션은 모든 설정의 Amazon EKS 관리를 제거합니다. 또한 업데이트를 시작한 후 Amazon EKS에서 업데이트를 알리고 Amazon EKS 애드온을 자동으로 업데이트하는 기능도 제거합니다. 하지만 클러스터에 애드온 소프트웨어가 보존됩니다. 이 옵션을 사용하면 Amazon EKS 애드온이 아닌 자가 관리형 설치가 됩니다. 이 옵션을 사용하면 애드온에 대한 다운타임이 없습니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>명령의 옵션을 유지하여 추가 기능을 유지합니다.</block>
   <block id="b84ba52748723df31fdf54485208c120" category="list-text">* 클러스터에서 애드온 소프트웨어 완전히 제거 * - 클러스터에 종속된 리소스가 없는 경우에만 Amazon EKS 애드온을 클러스터에서 제거하는 것이 좋습니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>추가 기능을 제거하려면 명령에서 옵션을<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> 제거하십시오.</block>
@@ -4924,4 +4923,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="b9ef0ee6944eb101de3de64b82db00dd" category="sidebar">Trident Protect 지원 번들을 생성합니다</block>
   <block id="1ae067a03c56065918252f36c73024d1" category="sidebar">애플리케이션을 관리하고 보호합니다</block>
   <block id="793ba052e921b84a44dd053d68f45012" category="sidebar">Trident Protect로 실행 후크를 관리합니다</block>
+  <block id="a4ac350fb585f51020f747525f3175d8" category="paragraph"><block ref="2c7a14b5507108d57a83e6eb9858f03a" category="inline-link-macro-rx"></block>..</block>
 </blocks>

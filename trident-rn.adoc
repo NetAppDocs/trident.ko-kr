@@ -48,7 +48,7 @@ WARNING: 설치 프로그램 zip 파일에 제공되는 Linux용 tridentctl 바�
 ** 재해 복구
 ** 애플리케이션 이동성
 +
-link:/trident-protect/learn-about-trident-protect.html["Trident Protect에 대해 자세히 알아보십시오"]..
+link:./trident-protect/learn-about-trident-protect.html["Trident Protect에 대해 자세히 알아보십시오"]..
 
 
 
