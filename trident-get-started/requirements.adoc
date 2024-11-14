@@ -70,7 +70,7 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 * NetApp ONTAP용 Amazon FSx
 * Azure NetApp Files
 * Cloud Volumes ONTAP
-* GCP용 Cloud Volumes Service
+* Google Cloud NetApp 볼륨
 * FAS/AFF/9.5 이상을 선택합니다
 * NetApp All SAN 어레이(ASA)
 * NetApp HCI/Element 소프트웨어 11 이상
