@@ -4454,7 +4454,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="9ee0b57319616120eef37546fa8e4c42" category="doc">Trident Protect를 설치하고 구성합니다</block>
   <block id="dc48a335c2095fb6a79ee14ee62b4806" category="paragraph">사용 중인 환경이 Trident Protect 요구 사항을 충족하는 경우 다음 단계에 따라 클러스터에 Trident Protect를 설치할 수 있습니다. NetApp에서 Trident Protect를 얻거나 개인 레지스트리에서 설치할 수 있습니다. 클러스터가 인터넷에 액세스할 수 없는 경우 개인 레지스트리에서 설치하는 것이 유용합니다.</block>
   <block id="1d5f2a4008fa2c223d0ebc6aea423256" category="open-title">NetApp에서 Trident Protect를 설치합니다</block>
-  <block id="6802e29016a0674682497c848bf90236" category="list-text">Helm을 사용하여 Trident Protect를 설치합니다. 클러스터에 할당되고 이 클러스터에서 백업 및 스냅샷을 식별하는 데 사용되는 클러스터 이름으로 바꿉니다<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block>.</block>
   <block id="b533d7fe842e47fbd62d24400867d3f2" category="list-text">필요한 경우 VM을 고정합니다. SnapMirror용 KubeVirt 지원을 사용하는 경우 VM을 동결하면 VM을 효과적으로 관리할 수 있습니다.</block>
   <block id="e49b02afb984c32aa521917480fc4012" category="inline-link-macro">OpenShift Virtualization 설치</block>
   <block id="c096df753a5c7335177118895259c96a" category="admonition">고정 기능이 작동하려면 가상화를 설정해야 합니다. 이 설정 후에 배포된 VM에는 고정 및 고정 취소에 필요한 바이너리가 포함되어 있습니다. 가상화 설정에 대한 자세한 내용은 을 <block ref="2e657c6eb92d8a54673acb8e93eb84d5" category="inline-link-macro-rx"></block>참조하십시오.</block>
@@ -4465,7 +4464,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="e0f6b701766eb28d805d7ba1e820f582" category="list-text">레지스트리에 로그인합니다.</block>
   <block id="814565bb5d7e7359fff967986fd4195a" category="list-text">개인 레지스트리 인증에 사용할 풀 암호를 만듭니다.</block>
   <block id="9fd6c1e403ca347a1528f0f6688f6a06" category="list-text">다음 Trident Protect 설정이 포함된 파일을 만듭니다<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block>.</block>
-  <block id="5d276dc92276b59621488d2545356081" category="list-text">Helm을 사용하여 Trident Protect 설치:</block>
   <block id="86e8b34710172d33dcae839e1f4dd07e" category="summary">응용 프로그램 CR 및 연결된 AppVault CR을 생성하여 Trident Protect에서 관리하려는 응용 프로그램을 인식하도록 할 수 있습니다.</block>
   <block id="80b940e5c68d020c06f9dc2f188d2169" category="doc">관리할 애플리케이션을 정의합니다</block>
   <block id="1e10d655f5307ce7f79aeee68a9e72f3" category="paragraph">애플리케이션 CR 및 연결된 AppVault CR을 생성하여 Trident Protect로 관리할 애플리케이션을 정의할 수 있습니다.</block>
@@ -4854,7 +4852,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="eae3a231fcdd07328a039c0bd1b3ebdf" category="list-text">다음 명령을 사용하여 * shutdownsnapshot.status.appArchivePath * 의 값을 찾고 파일 경로의 마지막 부분(basename라고도 함. 이것은 마지막 슬래시 다음에 모두 있음)을 기록합니다.</block>
   <block id="9facdd349a186c792ec6a26f5b938472" category="list-text">다음과 같이 변경하여 대상 클러스터에서 소스 클러스터로 페일오버를 수행합니다.</block>
   <block id="bdd0666b03fe73dd725c0376fdb435e0" category="admonition">페일오버 절차의 2단계에서 AppMirrorRelationship CR 파일에 필드를 포함하고<block ref="60464bee8fcac84cb209df68a2b05fba" prefix=" " category="inline-code"></block> 위의 3단계에서 기록한 기본 이름으로 값을 설정합니다.</block>
-  <block id="6813800aea854bfb29f3b2931dae3410" category="list-text">의 역동기화 단계를 <block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block>수행합니다.</block>
   <block id="ab486212bb19e45c8e71532739574a22" category="list-text">새 소스 클러스터에서 보호 스케줄을 설정합니다.</block>
   <block id="aea4fd534bd3152673956c6bbd7c115c" category="paragraph">역방향 복제 때문에 다음 작업이 발생합니다.</block>
   <block id="a23cf6af7e31f808d57bb74c992226c6" category="list-text">원본 소스 앱의 Kubernetes 리소스에 대한 스냅샷이 생성됩니다.</block>
@@ -4867,10 +4864,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="fbe6471033a142db5e3165e4034c1157" category="paragraph">Trident Protect를 사용하면 다음 작업 순서를 사용하여 페일오버 작업 후에 "페일백"을 수행할 수 있습니다. 이 워크플로우에서 원래 복제 방향을 복구하면 Trident Protect는 복제 방향을 바꾸기 전에 애플리케이션 변경 내용을 원래 소스 애플리케이션으로 다시 복제(재동기화)합니다.</block>
   <block id="3a045f0ae84563b460627f43bb272936" category="paragraph">이 프로세스는 대상에 대한 페일오버를 완료한 관계로부터 시작되며 다음 단계를 포함합니다.</block>
   <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">페일오버된 상태로 시작합니다.</block>
-  <block id="9f8be3d8552ca406f8bc6e98f620deeb" category="list-text">관계를 반대로 다시 동기화합니다.</block>
-  <block id="ad04ac539c02d43abb5b3468d853b96d" category="list-text">복제를 역으로 수행합니다.</block>
-  <block id="a98cf8721f50314020f780a1b99cc880" category="list-text"><block ref="3767bb9c312610e22029cc3e24b4717f" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다</block>
-  <block id="b776a375decd9bf6b9cc3c7744034e92" category="list-text"><block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다</block>
   <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">복제 관계를 삭제합니다</block>
   <block id="a6c87e2b66308cd117a39af0fdac9885" category="paragraph">언제든지 복제 관계를 삭제할 수 있습니다. 애플리케이션 복제 관계를 삭제하면 서로 관계가 없는 두 개의 개별 애플리케이션이 생성됩니다.</block>
   <block id="146012b834b7d1f68305ff2495a1beb7" category="list-text">AppMirrorRelationship CR 삭제:</block>
@@ -4933,4 +4926,26 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="8019e0dcd97c1bda9a4283c660df9424" category="list-text">Add-ons * 탭을 클릭한 다음 * Astra Trident by NetApp * 를 클릭합니다</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> 는 Google Cloud에서 제공하는 완전 관리형 파일 스토리지 서비스로서, 고성능 엔터프라이즈급 파일 스토리지를 제공합니다.</block>
   <block id="0ce84605b24873b2ee81987302d60089" category="paragraph"><block ref="bc468e9b0072cb6f1552f9bc0a3b6063" category="inline-link-rx"></block> 는 NFS를 통해 All-Flash 성능과 함께 NAS 볼륨을 제공하는 클라우드 네이티브 파일 서비스입니다. 이 서비스를 사용하면 기존 애플리케이션을 포함한 모든 워크로드를 GCP 클라우드에서 실행할 수 있습니다. GCE(Google Compute Engine) 인스턴스에 대한 일관된 고성능, 즉각적인 복제, 데이터 보호 및 보안 액세스를 제공하는 완전 관리형 서비스를 제공합니다.</block>
+  <block id="afb432a9cb893dca3218bf5ed8f124b6" category="section-title">6단계: AppVault 객체에 대한 액세스 권한 부여</block>
+  <block id="518792e00e0ca0d711657c9051ae8b45" category="paragraph">백업 및 스냅샷과 같은 데이터 관리 작업을 수행하려면 클러스터 관리자가 개별 사용자에게 AppVault 개체에 대한 액세스 권한을 부여해야 합니다.</block>
+  <block id="3ce2b0dd65dc314e4d0ccf4ed02db5a7" category="list-text">AppVault에 대한 사용자 액세스 권한을 부여하는 AppVault 및 암호 조합 YAML 파일을 만들고 적용합니다. 예를 들어, 다음 CR은 사용자에게 AppVault에 대한 액세스 권한을<block ref="6ca05da537cc3daa1ec22134c0b69946" prefix=" " category="inline-code"></block> 부여합니다.</block>
+  <block id="f1c648202447b3667edef5439e1a8c5e" category="list-text">클러스터 관리자가 네임스페이스의 특정 리소스에 대한 액세스 권한을 부여할 수 있도록 역할 CR을 생성하고 적용합니다. 예를 들면 다음과 같습니다.</block>
+  <block id="2ebacf7e8f38b367350c5c91618a6e79" category="list-text">RoleBinding CR을 만들고 적용하여 권한을 사용자 eng-user에 바인딩합니다. 예를 들면 다음과 같습니다.</block>
+  <block id="dc3d0a515ce0266cb00eb5cc06c4fe94" category="list-text">권한이 올바른지 확인합니다.</block>
+  <block id="b5c9b7c142e23b0f885d64628ec267ff" category="list-text">모든 네임스페이스에 대한 AppVault 개체 정보를 검색하려고 합니다.</block>
+  <block id="d0848afd8553c34945705222a97a4553" category="paragraph">다음과 유사한 출력이 표시됩니다.</block>
+  <block id="07337191562a62a775a853d9901903a6" category="list-text">사용자가 이제 액세스 권한이 있는 AppVault 정보를 얻을 수 있는지 테스트해 봅니다.</block>
+  <block id="e7165fc51f62031fcae1d793899febaa" category="paragraph">AppVault 권한을 부여한 사용자는 응용 프로그램 데이터 관리 작업에 승인된 AppVault 개체를 사용할 수 있어야 하며, 할당된 네임스페이스 외부의 리소스에 액세스하거나 액세스 권한이 없는 새 리소스를 생성할 수 없습니다.</block>
+  <block id="a268a576db3133de464aad1cd81ab3e1" category="inline-link-macro">지원 번들을 생성합니다</block>
+  <block id="a10e94152d7706a1754c5224358811ad" category="admonition">기본적으로 Trident Protect는 클러스터 및 관리형 애플리케이션에 대한 로그, 메트릭, 토폴로지 정보 등 파트너가 개설할 수 있는 모든 NetApp 지원 사례에 도움이 되는 지원 정보를 수집합니다. Trident Protect는 이러한 지원 번들을 일일 일정에 따라 NetApp로 전송합니다. Trident Protect를 설치할 때 선택적으로 이 지원 번들 컬렉션을 비활성화할 수 있습니다. 언제든지 수동으로 수행할 수 <block ref="dedfc5877c343d6cbe77701c7edd9bde" category="inline-link-macro-rx"></block>있습니다.</block>
+  <block id="76d9687f27080e6c2da9c8a0d64fbd42" category="list-text">Trident Protect CRD를 설치합니다.</block>
+  <block id="a29c2442da7eaa2adc245c73a4fa8969" category="list-text">Helm을 사용하여 다음 명령 중 하나를 사용하여 Trident Protect를 설치합니다. 클러스터에 할당되고 클러스터의 백업 및 스냅샷을 식별하는 데 사용되는 클러스터 이름으로 바꿉니다<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block>.</block>
+  <block id="7eccc1ff44845b9328911013fd4f479d" category="list-text">Trident Protect를 정상적으로 설치합니다.</block>
+  <block id="567ddef6d1b44dd7de5bb03fcf15e432" category="list-text">Trident Protect를 설치하고 예약된 일일 Trident Protect AutoSupport 지원 번들 업로드를 비활성화합니다.</block>
+  <block id="753f99fdafabdea1282917a0d7df52d4" category="list-text">의 역동기화 단계를 <block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>수행합니다.</block>
+  <block id="fe411ea35c29677771dcaad52985fc08" category="list-text">복제 관계를 역방향으로 다시 동기화합니다.</block>
+  <block id="eb10e971ec83f13f35beb8166ae8958b" category="admonition">일반 재동기화 작업을 수행하지 마십시오. 그러면 페일오버 절차 중에 대상 클러스터에 기록된 데이터가 삭제됩니다.</block>
+  <block id="de5da2c7cfd6c7eda31703be01d3513e" category="list-text">복제 방향을 반대로 바꿉니다.</block>
+  <block id="be41e0ea028981dcba35343dcbd34991" category="list-text"><block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다.</block>
+  <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text"><block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다.</block>
 </blocks>

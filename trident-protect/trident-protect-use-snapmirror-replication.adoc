@@ -458,7 +458,7 @@ k get shutdownsnapshot -n my-app-namespace <shutdown_snapshot_name> -o jsonpath=
 
 NOTE: 페일오버 절차의 2단계에서 AppMirrorRelationship CR 파일에 필드를 포함하고 `spec.promotedSnapshot` 위의 3단계에서 기록한 기본 이름으로 값을 설정합니다.
 
-. 의 역동기화 단계를 <<Reverse resync a failed over replication>>수행합니다.
+. 의 역동기화 단계를 <<페일오버된 복제 관계를 역방향으로 재동기화합니다>>수행합니다.
 . 새 소스 클러스터에서 보호 스케줄을 설정합니다.
 
 
@@ -485,13 +485,17 @@ Trident Protect를 사용하면 다음 작업 순서를 사용하여 페일오�
 이 프로세스는 대상에 대한 페일오버를 완료한 관계로부터 시작되며 다음 단계를 포함합니다.
 
 * 페일오버된 상태로 시작합니다.
-* 관계를 반대로 다시 동기화합니다.
-* 복제를 역으로 수행합니다.
+* 복제 관계를 역방향으로 다시 동기화합니다.
++
+
+CAUTION: 일반 재동기화 작업을 수행하지 마십시오. 그러면 페일오버 절차 중에 대상 클러스터에 기록된 데이터가 삭제됩니다.
+
+* 복제 방향을 반대로 바꿉니다.
 
 
 .단계
-. <<Resync a failed over replication>>다음 단계를 수행합니다
-. <<Reverse resync a failed over replication>>다음 단계를 수행합니다
+. <<페일오버된 복제 관계를 역방향으로 재동기화합니다>>다음 단계를 수행합니다.
+. <<애플리케이션 복제 방향을 반대로 전환합니다>>다음 단계를 수행합니다.
 
 
 
