@@ -3217,7 +3217,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="bd97885496639b0f4498d4131198ac36" category="list-text">Windows Server 2022 노드에 대한 지원이 추가되었습니다.</block>
   <block id="de547bcab0e20f54ec4d5e95ba44b0b1" category="list-text">Windows Server 2022 를 참조하십시오</block>
   <block id="010e61d0b40eeb84b96a1321e8f0bab7" category="cell">ext4, ext3, xfs</block>
-  <block id="c9db4c3d8dc7c24ea723ab5fe1e45fdb" category="list-text">OpenShift 4.10-4.16</block>
   <block id="e422e290c66eca7f882976f830b781b4" category="list-text">Kubernetes 1.30에 대한 지원 추가</block>
   <block id="190dbae19c88b1e68bf03f7783c5d5d1" category="list-text"><block ref="190dbae19c88b1e68bf03f7783c5d5d1" category="inline-link-rx"></block></block>
   <block id="430c6bcb8516befc45fb8173b0ca4e1f" category="list-text"><block ref="430c6bcb8516befc45fb8173b0ca4e1f" category="inline-link-rx"></block></block>
@@ -4977,4 +4976,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="61379a8f62ab2974cb68f4754e439dfd" category="list-text"><block ref="61379a8f62ab2974cb68f4754e439dfd" category="inline-link-macro-rx"></block></block>
   <block id="553ac32ac6bcab84d5384eda7468d415" category="paragraph">Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저닝된 볼륨을 마운트할 수 있어야 합니다. 작업자 노드를 준비하려면 드라이버 선택에 따라 NFS, iSCSI, NVMe/TCP 또는 FC 툴을 설치해야 합니다.</block>
   <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">FC(Fibre Channel을 통한 SCSI)</block>
+  <block id="766a0f35ad6c38b247125809df6efead" category="list-text">OpenShift 4.10-4.17</block>
+  <block id="64467ac9530ff26c4e6495117175346d" category="admonition">24자 이상인 ONTAP-nas-Economy와 storagePrefix를 사용할 경우 볼륨 이름에 포함되기는 하지만 qtree에 스토리지 접두사가 포함되지 않습니다.</block>
 </blocks>

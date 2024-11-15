@@ -42,7 +42,7 @@ Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
 * Kubernetes 1.25-1.31
-* OpenShift 4.10-4.16
+* OpenShift 4.10-4.17
 * Rancher Kubernetes Engine 2(RKE2) v1.28.5 + rke2r1
 
 
@@ -50,7 +50,7 @@ Trident 연산자는 다음 릴리즈에서 지원됩니다.
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
 * Kubernetes 1.25-1.31
-* OpenShift 4.10-4.16
+* OpenShift 4.10-4.17
 * Rancher Kubernetes Engine 2(RKE2) v1.28.5 + rke2r1
 
 
