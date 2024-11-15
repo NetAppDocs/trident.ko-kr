@@ -2834,7 +2834,6 @@
   <block id="e80aabfb35c98e66a71baf6a3c90a7df" category="paragraph">전체 기능을 복원하려면 dataLIFS를 불러옵니다.</block>
   <block id="5afe86ac983ac04ac6d9268beb2bc024" category="section-title">네임스페이스 매핑을 삭제했습니다</block>
   <block id="9b0dbff182f270b33423b281f92bddc2" category="paragraph">를 추가합니다<block ref="a564a902c12941efa27c1d2ea4a19f8e" prefix=" " category="inline-code"></block> 하위 시스템으로 돌아갑니다.</block>
-  <block id="cedfb4d575651cbf026e87084c68731c" category="paragraph">Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저닝된 볼륨을 마운트할 수 있어야 합니다. 작업자 노드를 준비하려면 드라이버 선택에 따라 NFS, iSCSI 또는 NVMe/TCP 도구를 설치해야 합니다.</block>
   <block id="2994aa6a94d7af57a2fb9663129866a9" category="paragraph">드라이버 조합을 사용하는 경우 드라이버에 필요한 모든 도구를 설치해야 합니다. 최신 버전의 RedHat CoreOS에는 기본적으로 도구가 설치되어 있습니다.</block>
   <block id="bfd6781963e74cc6cfd1f864a28a5b5b" category="admonition">NVMe/TCP에 ONTAP 9.12 이상을 사용하는 것이 좋습니다.</block>
   <block id="4771a9c521a7d39c2dcf6ee71d0ef032" category="section-title">NVMe/TCP 볼륨</block>
@@ -3956,7 +3955,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="326a8f228f219b0e904c9d182f05edc0" category="list-text">새로운 ONTAP-NAS-Economy NFS 볼륨은 백엔드 옵션을 사용할 때 qtree별 엑스포트 정책을<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block> 사용합니다. qtree는 게시 시점에 노드 제한 엑스포트 정책에만 매핑되어 액세스 제어와 보안을 개선합니다. Trident이 활성 워크로드에 영향을 주지 않고 모든 노드에서 볼륨을 게시 해제하면 기존 qtree가 새로운 엑스포트 정책 모델로 전환됩니다.</block>
   <block id="62900e6f021ab726737e77fc086ef8d8" category="list-text">Kubernetes 1.31에 대한 지원 추가</block>
   <block id="99feca4f342726633c553b7037f4effd" category="section-title">실험적 개선 사항</block>
-  <block id="b4da90c52a04dd004929d86ec62cc931" category="list-text">ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다.</block>
   <block id="f47cb8e173cabaf3981c7356253eaf5f" category="list-text">* Kubernetes *:</block>
   <block id="d17c6ce149a6479587ff459c15a1f857" category="inline-link-macro">문제 #839</block>
   <block id="0d72ada08f4f4a9200f5e98c300ac3f5" category="list-text">Trident Helm 설치를 방지하는 고정 레인처 입원 웹후크<block ref="db779c46d1b4e6ce40c3816626258ba8" category="inline-link-macro-rx"></block>().</block>
@@ -4948,4 +4946,35 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="de5da2c7cfd6c7eda31703be01d3513e" category="list-text">복제 방향을 반대로 바꿉니다.</block>
   <block id="be41e0ea028981dcba35343dcbd34991" category="list-text"><block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다.</block>
   <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text"><block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다.</block>
+  <block id="d5b345f45f80f7f56440408591048e1a" category="inline-link-macro">파이버 채널 지원</block>
+  <block id="f1c09cfcd8aa6e6314b92b3a724aca83" category="list-text">ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다. 을 <block ref="9954ad164e99690ed1af0635a7949c36" category="inline-link-macro-rx"></block>참조하십시오.</block>
+  <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">파이버 채널(FC) 지원</block>
+  <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">이제 Trident와 함께 파이버 채널(FC) 프로토콜을 사용하여 ONTAP 시스템에서 스토리지 리소스를 프로비저닝하고 관리할 수 있습니다.</block>
+  <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">파이버 채널은 뛰어난 성능, 안정성 및 확장성으로 인해 엔터프라이즈 스토리지 환경에서 널리 채택되는 프로토콜입니다. 스토리지 장치에 강력하고 효율적인 통신 채널을 제공하여 데이터를 빠르고 안전하게 전송할 수 있습니다. Fibre Channel을 통한 SCSI를 사용하면 기존 SCSI 기반 스토리지 인프라를 활용하면서 Fibre Channel의 고성능 및 장거리 기능을 활용할 수 있습니다. 스토리지 리소스를 통합하고 짧은 지연 시간으로 대량의 데이터를 처리할 수 있는 확장 가능하고 효율적인 SAN(Storage Area Network)을 만들 수 있습니다.</block>
+  <block id="87ef5e348a9702ee84419ab313442e62" category="paragraph">Trident에서 FC 기능을 사용하면 다음을 수행할 수 있습니다.* 배포 사양을 사용하여 PVC를 동적으로 프로비저닝합니다. * 볼륨 스냅샷을 촬영하고 스냅샷에서 새 볼륨을 생성합니다. * 기존 FC-PVC를 복제합니다. * 이미 배포된 볼륨의 크기를 조정합니다.</block>
+  <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">FC에 필요한 네트워크 및 노드 설정을 구성합니다.</block>
+  <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">네트워크 설정</block>
+  <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">네트워크 인터페이스가 표시됩니다</block>
+  <block id="fc2e7b75efdee011ff06c37c7b71f6a6" category="list-text">대상 인터페이스의 WWPN을 가져옵니다. 자세한 내용은 을 <block ref="cc71fd7fb2f6e7e70f421fe2150fdc04" category="inline-link-macro-rx"></block> 참조하십시오.</block>
+  <block id="cc7e69899d736126df9787634ad41870" category="list-text">이니시에이터(호스트)의 인터페이스에 대한 WWPN을 가져옵니다.</block>
+  <block id="1089b965cabd19cfee7f3ef855fbd63d" category="paragraph">해당 호스트 운영 체제 유틸리티를 참조하십시오.</block>
+  <block id="6f58745fc3a341adae0772d30d9e508c" category="list-text">호스트와 대상의 WWPN을 사용하여 FC 스위치에서 조닝을 구성합니다.</block>
+  <block id="54336aa51b161faac4d0ebb1b76b1536" category="paragraph">자세한 내용은 존경하는 스위치 공급업체 문서를 참조하십시오.</block>
+  <block id="299f2e1a529559eb06c9dfbe12ccdea9" category="paragraph">자세한 내용은 다음 ONTAP 설명서를 참조하십시오.</block>
+  <block id="d7281ba358054b30594dcd34819057a1" category="inline-link">파이버 채널 및 FCoE 조닝 개요</block>
+  <block id="bce9f24194c15bbf6b5ad6cd1d8d1899" category="list-text"><block ref="bce9f24194c15bbf6b5ad6cd1d8d1899" category="inline-link-rx"></block></block>
+  <block id="9b9db0b6f6df6361aa97412feea7ae07" category="list-text"><block ref="1a83c479258a4b0e250085c944bae4de" category="inline-link-rx"></block></block>
+  <block id="a92a311c4eeb6cfdcc775cfca067ea8d" category="paragraph">Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저닝된 볼륨을 마운트할 수 있어야 합니다. FC에 대한 작업자 노드를 준비하려면 필요한 도구를 설치해야 합니다.</block>
+  <block id="36b37761159ed00a729b4f6fab9a0f02" category="paragraph-title">FC 툴을 설치합니다</block>
+  <block id="f0ad3dc6a6ba17b1e77a2a4af657f22a" category="paragraph">운영 체제의 명령을 사용하여 FC 툴을 설치합니다.</block>
+  <block id="ef7c7fb7512d2686223cbef4d18a4687" category="section-title">백엔드 구성을 생성합니다</block>
+  <block id="9ca5edfbebc9d61a4e6f574ff097a540" category="paragraph">드라이버 및<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block> sanType에 대한 Trident 백엔드를<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 생성합니다.</block>
+  <block id="6563093287f74a616e9d7ac49b4d6a44" category="paragraph">참조:</block>
+  <block id="c8a4ebb8f375440952f478262c6dc775" category="list-text"><block ref="c8a4ebb8f375440952f478262c6dc775" category="inline-link-macro-rx"></block></block>
+  <block id="4dff3394c7a642139ff55771ed74588c" category="list-text"><block ref="4dff3394c7a642139ff55771ed74588c" category="inline-link-macro-rx"></block></block>
+  <block id="db9cdbb22315c0c520742eed35564a6e" category="listing-title">FC를 사용한 백엔드 구성 예</block>
+  <block id="2f8299f876158db323c08455b12b585a" category="paragraph">자세한 내용은 다음을 참조하십시오.</block>
+  <block id="61379a8f62ab2974cb68f4754e439dfd" category="list-text"><block ref="61379a8f62ab2974cb68f4754e439dfd" category="inline-link-macro-rx"></block></block>
+  <block id="553ac32ac6bcab84d5384eda7468d415" category="paragraph">Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저닝된 볼륨을 마운트할 수 있어야 합니다. 작업자 노드를 준비하려면 드라이버 선택에 따라 NFS, iSCSI, NVMe/TCP 또는 FC 툴을 설치해야 합니다.</block>
+  <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">FC(Fibre Channel을 통한 SCSI)</block>
 </blocks>

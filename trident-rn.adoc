@@ -63,7 +63,7 @@ link:./trident-protect/learn-about-trident-protect.html["Trident Protect에 대�
 
 ==== 실험적 개선 사항
 
-* ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다.
+* ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다. 을 link:../trident-use/fcp.html["파이버 채널 지원"]참조하십시오.
 
 
 
