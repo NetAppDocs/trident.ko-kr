@@ -4977,6 +4977,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">FC(Fibre Channel을 통한 SCSI)</block>
   <block id="766a0f35ad6c38b247125809df6efead" category="list-text">OpenShift 4.10-4.17</block>
   <block id="64467ac9530ff26c4e6495117175346d" category="admonition">24자 이상인 ONTAP-nas-Economy와 storagePrefix를 사용할 경우 볼륨 이름에 포함되기는 하지만 qtree에 스토리지 접두사가 포함되지 않습니다.</block>
-  <block id="f1c09cfcd8aa6e6314b92b3a724aca83" category="list-text">ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다. 을 <block ref="9954ad164e99690ed1af0635a7949c36" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
+  <block id="8643539c7696bee604cfc39337280ef3" category="list-text">ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다. 을 <block ref="5aa030ef89b8f38b2fa353dc2fa17e8d" category="inline-link-macro-rx"></block>참조하십시오.</block>
 </blocks>
