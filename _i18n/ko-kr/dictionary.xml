@@ -4946,7 +4946,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="be41e0ea028981dcba35343dcbd34991" category="list-text"><block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다.</block>
   <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text"><block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block>다음 단계를 수행합니다.</block>
   <block id="d5b345f45f80f7f56440408591048e1a" category="inline-link-macro">파이버 채널 지원</block>
-  <block id="f1c09cfcd8aa6e6314b92b3a724aca83" category="list-text">ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다. 을 <block ref="9954ad164e99690ed1af0635a7949c36" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">파이버 채널(FC) 지원</block>
   <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">이제 Trident와 함께 파이버 채널(FC) 프로토콜을 사용하여 ONTAP 시스템에서 스토리지 리소스를 프로비저닝하고 관리할 수 있습니다.</block>
   <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">파이버 채널은 뛰어난 성능, 안정성 및 확장성으로 인해 엔터프라이즈 스토리지 환경에서 널리 채택되는 프로토콜입니다. 스토리지 장치에 강력하고 효율적인 통신 채널을 제공하여 데이터를 빠르고 안전하게 전송할 수 있습니다. Fibre Channel을 통한 SCSI를 사용하면 기존 SCSI 기반 스토리지 인프라를 활용하면서 Fibre Channel의 고성능 및 장거리 기능을 활용할 수 있습니다. 스토리지 리소스를 통합하고 짧은 지연 시간으로 대량의 데이터를 처리할 수 있는 확장 가능하고 효율적인 SAN(Storage Area Network)을 만들 수 있습니다.</block>
@@ -4978,4 +4977,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">FC(Fibre Channel을 통한 SCSI)</block>
   <block id="766a0f35ad6c38b247125809df6efead" category="list-text">OpenShift 4.10-4.17</block>
   <block id="64467ac9530ff26c4e6495117175346d" category="admonition">24자 이상인 ONTAP-nas-Economy와 storagePrefix를 사용할 경우 볼륨 이름에 포함되기는 하지만 qtree에 스토리지 접두사가 포함되지 않습니다.</block>
+  <block id="716e675a4fa1eb80b65e215c4053483e" category="list-text">ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다. 을 <block ref="261f4d716d9b6dc09663ffbaf6630011" category="inline-link-macro-rx"></block>참조하십시오.</block>
 </blocks>
