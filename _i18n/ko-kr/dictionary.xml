@@ -4949,7 +4949,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">파이버 채널(FC) 지원</block>
   <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">이제 Trident와 함께 파이버 채널(FC) 프로토콜을 사용하여 ONTAP 시스템에서 스토리지 리소스를 프로비저닝하고 관리할 수 있습니다.</block>
   <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">파이버 채널은 뛰어난 성능, 안정성 및 확장성으로 인해 엔터프라이즈 스토리지 환경에서 널리 채택되는 프로토콜입니다. 스토리지 장치에 강력하고 효율적인 통신 채널을 제공하여 데이터를 빠르고 안전하게 전송할 수 있습니다. Fibre Channel을 통한 SCSI를 사용하면 기존 SCSI 기반 스토리지 인프라를 활용하면서 Fibre Channel의 고성능 및 장거리 기능을 활용할 수 있습니다. 스토리지 리소스를 통합하고 짧은 지연 시간으로 대량의 데이터를 처리할 수 있는 확장 가능하고 효율적인 SAN(Storage Area Network)을 만들 수 있습니다.</block>
-  <block id="87ef5e348a9702ee84419ab313442e62" category="paragraph">Trident에서 FC 기능을 사용하면 다음을 수행할 수 있습니다.* 배포 사양을 사용하여 PVC를 동적으로 프로비저닝합니다. * 볼륨 스냅샷을 촬영하고 스냅샷에서 새 볼륨을 생성합니다. * 기존 FC-PVC를 복제합니다. * 이미 배포된 볼륨의 크기를 조정합니다.</block>
   <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">FC에 필요한 네트워크 및 노드 설정을 구성합니다.</block>
   <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">네트워크 설정</block>
   <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">네트워크 인터페이스가 표시됩니다</block>
@@ -4979,4 +4978,9 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="64467ac9530ff26c4e6495117175346d" category="admonition">24자 이상인 ONTAP-nas-Economy와 storagePrefix를 사용할 경우 볼륨 이름에 포함되기는 하지만 qtree에 스토리지 접두사가 포함되지 않습니다.</block>
   <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
   <block id="8643539c7696bee604cfc39337280ef3" category="list-text">ONTAP-SAN 드라이버에서 파이버 채널 지원에 대한 기술 미리 보기가 추가되었습니다. 을 <block ref="5aa030ef89b8f38b2fa353dc2fa17e8d" category="inline-link-macro-rx"></block>참조하십시오.</block>
+  <block id="1803781f7c004f51be9b62cbcd506ed2" category="paragraph">Trident에서 FC 기능을 사용하여 다음을 수행할 수 있습니다.</block>
+  <block id="7294f3b61be368d5929dcdabac5431cf" category="list-text">배포 사양을 사용하여 PVC를 동적으로 프로비저닝합니다.</block>
+  <block id="aedb73fd0ccffbcf4bb3a5bc721b9603" category="list-text">볼륨 스냅샷을 촬영하고 스냅샷에서 새 볼륨을 생성합니다.</block>
+  <block id="aa2fd96b8dfdeb6aaaf2bb11da1413aa" category="list-text">기존 FC-PVC를 복제합니다.</block>
+  <block id="de35bb06ba09c90d091b31450c61efd7" category="list-text">이미 구축한 볼륨의 크기를 조정합니다.</block>
 </blocks>
