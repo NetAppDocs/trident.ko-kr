@@ -25,6 +25,9 @@ NOTE: Application Restore 시 해당 Application에 설정된 모든 execution h
 
 BackupRestore CR을 사용하여 다른 네임스페이스로 백업을 복원할 경우 Trident Protect는 새 네임스페이스에서 응용 프로그램을 복원하지만 복원된 응용 프로그램은 Trident Protect로 자동으로 보호되지 않습니다. 복원된 응용 프로그램을 보호하려면 복원된 응용 프로그램에 대해 Trident Protect로 보호되도록 응용 프로그램 CR을 만들어야 합니다.
 
+
+NOTE: 기존 리소스가 있는 다른 네임스페이스로 백업을 복원해도 백업의 리소스와 이름을 공유하는 리소스는 변경되지 않습니다. 백업의 모든 리소스를 복구하려면 타겟 네임스페이스를 삭제하고 다시 생성하거나 백업을 새 네임스페이스로 복원하십시오.
+
 [role="tabbed-block"]
 ====
 .CR을 사용합니다
@@ -121,9 +124,6 @@ tridentctl protect create backuprestore <my_restore_name> --backup <backup_names
 == 백업에서 원래 네임스페이스로 복구합니다
 
 언제든지 원래 네임스페이스로 백업을 복원할 수 있습니다.
-
-
-NOTE: 기존 리소스가 있는 네임스페이스에 백업을 복원해도 백업의 리소스와 이름을 공유하는 리소스는 변경되지 않습니다. 백업의 모든 리소스를 복구하려면 타겟 네임스페이스를 삭제하고 다시 생성하거나 백업을 새 네임스페이스로 복원하십시오.
 
 [role="tabbed-block"]
 ====
