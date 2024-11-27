@@ -101,6 +101,7 @@ spec:
 ====
 .CR을 사용하여 스냅샷을 복원합니다
 --
+.단계
 . CR(사용자 정의 리소스) 파일을 만들고 이름을 `trident-protect-snapshot-restore-cr.yaml`지정합니다.
 . 생성한 파일에서 다음 속성을 구성합니다.
 +
@@ -167,6 +168,7 @@ kubectl apply -f trident-protect-snapshot-restore-cr.yaml
 --
 .CLI를 사용하여 스냅샷을 복원합니다
 --
+.단계
 . 대괄호 안의 값을 사용자 환경의 정보로 대체하여 스냅샷을 다른 네임스페이스로 복원합니다.
 +
 **  `snapshot`인수에 네임스페이스 및 스냅숏 이름이 형식으로 `<namespace>/<name>` 사용됩니다.

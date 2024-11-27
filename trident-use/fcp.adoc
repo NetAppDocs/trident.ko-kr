@@ -64,7 +64,7 @@ Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저�
 .FC 툴을 설치합니다
 운영 체제의 명령을 사용하여 FC 툴을 설치합니다.
 
-* iSCSI PVS에서 RHEL/RedHat CoreOS를 실행하는 작업자 노드를 사용하는 경우 를 지정합니다 `discard` StorageClass의 mountOption을 사용하여 인라인 공간 재확보를 수행합니다. 을 참조하십시오 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["RedHat 설명서"^].
+* FC PVS와 함께 RHEL/RedHat CoreOS를 실행하는 작업자 노드를 사용하는 경우 `discard` 인라인 공간 재확보를 수행하려면 StorageClass에 mount옵션을 지정합니다. 을 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["RedHat 설명서"^]참조하십시오.
 
 
 [role="tabbed-block"]
@@ -75,13 +75,7 @@ Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저�
 +
 [listing]
 ----
-sudo yum install -y lsscsi iscsi-initiator-utils device-mapper-multipath
-----
-. iscsi-initiator-utils 버전이 6.2.0.874-2.el7 이상인지 확인합니다.
-+
-[listing]
-----
-rpm -q iscsi-initiator-utils
+sudo yum install -y lsscsi device-mapper-multipath
 ----
 . 다중 경로 설정:
 +
@@ -93,17 +87,11 @@ sudo mpathconf --enable --with_multipathd y --find_multipaths n
 
 NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
 
-. iscsid와 multipathd가 실행 중인지 확인합니다.
+. 가 `multipathd` 실행 중인지 확인합니다.
 +
 [listing]
 ----
-sudo systemctl enable --now iscsid multipathd
-----
-. "iSCSI" 활성화 및 시작:
-+
-[listing]
-----
-sudo systemctl enable --now iscsi
+sudo systemctl enable --now multipathd
 ----
 
 
@@ -114,19 +102,7 @@ sudo systemctl enable --now iscsi
 +
 [listing]
 ----
-sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
-----
-. open-iscsi 버전이 2.0.874-5ubuntu2.10 이상(bionic) 또는 2.0.874-7.1uubuttu6.1 이상(focal)인지 확인합니다.
-+
-[listing]
-----
-dpkg -l open-iscsi
-----
-. 스캔을 수동으로 설정합니다.
-+
-[listing]
-----
-sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+sudo apt-get install -y lsscsi sg3-utils multipath-tools scsitools
 ----
 . 다중 경로 설정:
 +
@@ -145,18 +121,12 @@ sudo service multipath-tools restart
 
 NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
 
-. 'open-iscsi'와 'multirpath-tools'가 활성화되어 실행되고 있는지 확인합니다.
+. 가 활성화되어 있고 실행 중인지 `multipath-tools` 확인합니다.
 +
 [listing]
 ----
 sudo systemctl status multipath-tools
-sudo systemctl enable --now open-iscsi.service
-sudo systemctl status open-iscsi
 ----
-+
-
-NOTE: Ubuntu 18.04의 경우 iSCSI 데몬이 시작되도록 "open-iscsi"를 시작하기 전에 iscsiadm"이 있는 타겟 포트를 검색해야 합니다. 또는 iSCSI 서비스를 수정하여 iscsid를 자동으로 시작할 수 있습니다.
-
 
 
 --

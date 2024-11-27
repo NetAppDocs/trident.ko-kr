@@ -23,6 +23,7 @@ NOTE: 기본적으로 Trident Protect는 클러스터 및 관리형 애플리케
 ====
 .NetApp에서 Trident Protect를 설치합니다
 --
+.단계
 . Trident Helm 저장소 추가:
 +
 [source, console]
@@ -68,6 +69,7 @@ NOTE: 고정 기능이 작동하려면 가상화를 설정해야 합니다. 이 
 --
 Kubernetes 클러스터가 인터넷에 액세스할 수 없는 경우 개인 이미지 레지스트리에서 Trident Protect를 설치할 수 있습니다. 이 예제에서는 대괄호 안의 값을 사용자 환경의 정보로 바꿉니다.
 
+.단계
 . 다음 이미지를 로컬 컴퓨터로 가져와서 태그를 업데이트한 다음 개인 레지스트리에 푸시합니다.
 +
 [source, console]

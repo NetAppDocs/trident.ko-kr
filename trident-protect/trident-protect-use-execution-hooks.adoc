@@ -97,6 +97,7 @@ Trident Protect를 사용하여 앱에 대한 사용자 지정 실행 후크를 
 ====
 .CR을 사용합니다
 --
+.단계
 . CR(사용자 정의 리소스) 파일을 만들고 이름을 `trident-protect-hook.yaml`지정합니다.
 . 다음 특성을 Trident Protect 환경과 클러스터 구성과 일치하도록 구성합니다.
 +
@@ -183,6 +184,7 @@ kubectl apply -f trident-protect-hook.yaml
 --
 .CLI를 사용합니다
 --
+.단계
 . 괄호 안의 값을 사용자 환경의 정보로 대체하여 실행 후크를 만듭니다. 예를 들면 다음과 같습니다.
 +
 [source, console]
