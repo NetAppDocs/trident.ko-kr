@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-manage-applications.html
 keywords: appvault, data protection, custom resource, namespace, application, cluster 
 summary: 응용 프로그램 CR 및 연결된 AppVault CR을 생성하여 Trident Protect에서 관리하려는 응용 프로그램을 인식하도록 할 수 있습니다. 
 ---
-= 관리할 애플리케이션을 정의합니다
+= Trident Protect로 관리할 애플리케이션을 정의합니다
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

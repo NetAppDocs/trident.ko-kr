@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-use-execution-hooks.html
 keywords: trident, protect, execution hooks 
 summary: Trident Protect를 사용하여 앱에 대한 사용자 지정 실행 후크를 생성할 수 있습니다. 실행 후크를 만들려면 소유자, 관리자 또는 구성원 권한이 있어야 합니다. 
 ---
-= 실행 후크를 관리합니다
+= Trident Protect 실행 후크를 관리합니다
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

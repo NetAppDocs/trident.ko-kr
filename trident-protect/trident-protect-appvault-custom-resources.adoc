@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-appvault-custom-resources.html
 keywords: trident. appvault, custom, protect, kubernetes 
 summary: 'Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault라고 합니다. AppVaults는 스토리지 버킷의 선언적 Kubernetes 워크플로 표현입니다.' 
 ---
-= AppVault 객체를 사용하여 버킷을 관리합니다
+= Trident Protect AppVault 객체를 사용하여 버킷을 관리합니다
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

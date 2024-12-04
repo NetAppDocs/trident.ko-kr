@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-restore-apps.html
 keywords: trident, protect, restore, data, backup 
 summary: Trident Protect를 사용하여 스냅샷 또는 백업에서 애플리케이션을 복원할 수 있습니다. 애플리케이션을 동일한 클러스터로 복구할 경우 기존 스냅샷에서 복구하는 속도가 빨라집니다. 
 ---
-= 응용 프로그램을 복원합니다
+= Trident Protect를 사용하여 애플리케이션을 복원합니다
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

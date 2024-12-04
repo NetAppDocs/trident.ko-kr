@@ -4429,7 +4429,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">결과</block>
   <block id="a2290b3f31cfd85a3e9ff7885be716a7" category="paragraph">다음 쉘 로그인 시 tridentctl Protect 플러그인으로 명령 자동 완성 기능을 사용할 수 있습니다.</block>
   <block id="7b6672be7a52979b1357ccc3d2a45f8a" category="summary">Trident Protect를 사용하면 관리자가 관리 중인 클러스터 및 앱에 대한 로그, 메트릭, 토폴로지 정보 등 NetApp 지원에 유용한 정보를 포함하는 번들을 생성할 수 있습니다. 인터넷에 연결되어 있는 경우 CR(사용자 지정 리소스) 파일을 사용하여 NSS(NetApp 지원 사이트)에 지원 번들을 업로드할 수 있습니다.</block>
-  <block id="c06b3814928e21adcd4d633f11293a23" category="doc">지원 번들을 생성합니다</block>
   <block id="e984343e441956b7136d09919877b5ab" category="open-title">CR을 사용하여 지원 번들을 만듭니다</block>
   <block id="dd942fa25b8e28c96c8d05e37b0f157e" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block>).</block>
   <block id="18924d9e76d2dc9a88bddb772904461d" category="list-text">다음 특성을 구성합니다.</block>
@@ -4680,7 +4679,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="aec02c2a1b714f40a949aa18d1f2d588" category="list-text">Trident Protect 제거:</block>
   <block id="20c06650be80c297c0e4dc5ae977d44f" category="list-text">Trident Protect 네임스페이스 제거:</block>
   <block id="a8c1fc9f09b8338dd9f8badd5c3d30c0" category="summary">Trident Protect를 사용하여 앱에 대한 사용자 지정 실행 후크를 생성할 수 있습니다. 실행 후크를 만들려면 소유자, 관리자 또는 구성원 권한이 있어야 합니다.</block>
-  <block id="cbb269e08085ebb437449cc744357ee6" category="doc">실행 후크를 관리합니다</block>
   <block id="ccd62d676165e34c2e9c6d088c06e70f" category="paragraph">실행 후크는 관리되는 앱의 데이터 보호 작업과 함께 실행되도록 구성할 수 있는 사용자 지정 작업입니다. 예를 들어 데이터베이스 앱이 있는 경우 실행 후크를 사용하여 스냅샷 전에 모든 데이터베이스 트랜잭션을 일시 중지하고 스냅샷이 완료된 후 트랜잭션을 다시 시작할 수 있습니다. 따라서 애플리케이션 정합성이 보장되는 스냅샷이 보장됩니다.</block>
   <block id="83fbf1604bedff410ea11872b40ab9f0" category="section-title">실행 후크 유형</block>
   <block id="d702711249a4d54c15ce81c80152b8e7" category="paragraph">Trident Protect는 실행 가능한 시기에 따라 다음과 같은 유형의 실행 후크를 지원합니다.</block>
@@ -4986,4 +4984,12 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">가<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block> 실행 중인지 확인합니다.</block>
   <block id="69eeaf73fccab6d6abcba46bd6a3a3bf" category="list-text">가 활성화되어 있고 실행 중인지<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block> 확인합니다.</block>
   <block id="00ea3f7016d7b9a4ad023b106cc1e6d3" category="paragraph"><block ref="7e7b7908484dc2cebc13ec93d8042bd0" category="inline-link-macro-rx"></block> sanType<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block>(SCSI over FC)을 사용하는 경우<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block></block>
+  <block id="0cc310db20eaee9161e8ef937010b536" category="doc">Trident 보호 인증 및 액세스 제어를 관리합니다</block>
+  <block id="97f3fa7a4bb86197f0db69aa160c73e9" category="doc">Trident Protect AppVault 객체를 사용하여 버킷을 관리합니다</block>
+  <block id="bf4313699bccd15d73aa8653cfdfd754" category="doc">Trident Protect로 관리할 애플리케이션을 정의합니다</block>
+  <block id="b6a8ee5a5280d899b4ea1be0f8697335" category="doc">Trident Protect를 사용하여 애플리케이션을 마이그레이션합니다</block>
+  <block id="8686ed080978191a10848ee52cd0c87a" category="doc">Trident Protect를 사용하여 애플리케이션을 보호합니다</block>
+  <block id="0539043b2ec0bd1bfae64dc58173dec7" category="doc">Trident Protect를 사용하여 애플리케이션을 복원합니다</block>
+  <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">Trident Protect 실행 후크를 관리합니다</block>
+  <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">NetApp SnapMirror 및 Trident Protect를 사용하여 애플리케이션을 복제합니다</block>
 </blocks>
