@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/intro.html 
-keywords: product overview, Trident, fsx, element, google cloud, cvs, architecture, test drive, node pod, controller pod, pods, csi, sidecar 
+keywords: product overview, Trident, fsx, element, google cloud, cvs, architecture, node pod, controller pod, pods, csi, sidecar 
 summary: 'Trident는 NetApp에서 관리하며 완벽한 지원이 제공되는 오픈 소스 프로젝트입니다. CSI(Container Storage Interface)와 같은 업계 표준 인터페이스를 사용하여 컨테이너식 애플리케이션의 지속성 요구 사항을 충족하도록 설계되었습니다.' 
 ---
 = Trident에 대해 자세히 알아보십시오
@@ -26,17 +26,6 @@ Trident는 또한 NetApp 스토리지 플랫폼을 위한 Docker 에코시스템
 
 
 NOTE: Kubernetes를 처음으로 사용하는 경우라면 에 익숙해야 합니다 link:https://kubernetes.io/docs/home/["Kubernetes 개념 및 툴"^].
-
-
-
-== Trident 시험 구동을 시작하십시오
-
-시험 구동을 실시하려면 즉시 사용 가능한 랩 이미지를 사용하여 "컨테이너화된 워크로드용 영구 스토리지 간편한 배포 및 복제" 액세스 권한을 link:https://www.netapp.com/us/try-and-buy/test-drive/index.aspx["NetApp 시험 구동"^]요청하십시오. 테스트 드라이브는 3노드 Kubernetes 클러스터와 Trident 설치 및 구성된 샌드박스 환경을 제공합니다. Trident에 익숙해지고 기능을 탐색할 수 있는 좋은 방법입니다.
-
-또 다른 옵션은 입니다 link:https://kubernetes.io/docs/setup/independent/install-kubeadm/["kubeadm 설치 가이드"] Kubernetes에서 제공:
-
-
-NOTE: 운영 환경에서는 이러한 지침에 따라 구축한 Kubernetes 클러스터를 사용하지 마십시오. 운영 가능 클러스터에 대해 배포에서 제공하는 운영 구축 가이드를 사용하십시오.
 
 
 
