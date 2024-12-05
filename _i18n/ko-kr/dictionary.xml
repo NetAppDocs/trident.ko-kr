@@ -379,8 +379,6 @@
   <block id="923680056b0f0258907f498670b4ead1" category="section-title">컨테이너 이미지 및 해당 Kubernetes 버전</block>
   <block id="aa92c4c233bc01609d957e469736b699" category="cell">컨테이너 이미지</block>
   <block id="a60c2f57df655a9ac5fcaa0750886195" category="summary">Kubernetes를 시작하는 경우 지침에 따라 Kubernetes를 설치하여 사용해 보십시오. 다음 지침은 Trident에서 시연을 위해 통합할 수 있는 베어본 단일 노드 클러스터를 제공합니다.</block>
-  <block id="e8dadc588901af436e2c6036acf23973" category="inline-link-macro">NetApp 시험 구동</block>
-  <block id="8685ac2061f9dca7ab48f41e0871f7af" category="inline-link-macro">kubeadm 설치 가이드</block>
   <block id="af2a4d2810d86aa0169c117f82682f9a" category="doc">자주 묻는 질문</block>
   <block id="96ab491ef73d5db0cd15f55e1552cc22" category="section-title">일반적인 질문</block>
   <block id="92d1656d06303733c5e1398fb273a17e" category="section-title">문제 해결 및 지원</block>
@@ -2548,8 +2546,6 @@
   <block id="8f29ef239c0926132689374fc142a732" category="image-alt">해당 CSI 사이드카와 함께 CSI 노드 플러그인을 실행하는 Trident 노드 Pod 다이어그램</block>
   <block id="58095fffdb6c13585af5e47e876f7afe" category="inline-link-macro">Kubernetes 개념 및 툴</block>
   <block id="1bc6462cd59612636c72620a6a67410b" category="admonition">Kubernetes를 처음으로 사용하는 경우라면 에 익숙해야 합니다 <block ref="41eecc10f74d492dbf2a2c207d5acb1b" category="inline-link-macro-rx"></block>.</block>
-  <block id="3ff64d30b8ccd0f89740b2ba54cf8bf3" category="paragraph">또 다른 옵션은 입니다 <block ref="c7dbb75618a5e106a360075f923cb87f" category="inline-link-macro-rx"></block> Kubernetes에서 제공:</block>
-  <block id="80f4cfbe493e12651c3514c9481ce1ee" category="admonition">운영 환경에서는 이러한 지침에 따라 구축한 Kubernetes 클러스터를 사용하지 마십시오. 운영 가능 클러스터에 대해 배포에서 제공하는 운영 구축 가이드를 사용하십시오.</block>
   <block id="2d15dd50ddfe5e28746975645a5652ca" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block> 작업자 노드를 준비합니다</block>
   <block id="aba4bc9d3bde7d18b07c23d5c7d0f495" category="paragraph">Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저닝된 볼륨을 마운트할 수 있어야 합니다.</block>
   <block id="f3b066024fd8e2699d194d41d5e46a5d" category="paragraph-title"><block ref="05b2444faffd66d76e88602ea7dd353f" category="inline-image-macro-rx" type="image"></block> 백엔드를 생성합니다</block>
@@ -3579,8 +3575,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="b1779edf31deaecac634566a2a377f62" category="paragraph">Trident는 기본적으로 와 통합되는 CSI(컨테이너 스토리지 인터페이스) 호환 동적 스토리지 오케스트레이터입니다.<block ref="c4f47b2d4c7b6c009c3ed9bc1f952dce" category="inline-link-macro-rx"></block> Trident는 클러스터의 각 작업자 노드에서 단일 컨트롤러 Pod와 노드 Pod로 실행됩니다. 자세한 내용은 을 <block ref="9f6208219ae600271f6632db354451ed" category="inline-link-macro-rx"></block> 참조하십시오.</block>
   <block id="d613d80a6fcacbbceeb665fc5b0846f0" category="inline-link-macro">Docker용 Trident를 구축하십시오</block>
   <block id="5b6cbf8e3be454064a322ad7f9c47cc2" category="paragraph">Trident는 또한 NetApp 스토리지 플랫폼을 위한 Docker 에코시스템과의 직접 통합을 제공합니다. NetApp Docker 볼륨 플러그인(nDVP)은 스토리지 플랫폼에서 Docker 호스트로 스토리지 리소스를 프로비저닝 및 관리할 수 있도록 지원합니다. 자세한 내용은 을 <block ref="168e02b8c5756e29b56aa79aa4a1b715" category="inline-link-macro-rx"></block> 참조하십시오.</block>
-  <block id="3c22b34ac3f55b89b9b011bed80160de" category="section-title">Trident 시험 구동을 시작하십시오</block>
-  <block id="f8bae4faf187691bac6dbbda926fb426" category="paragraph">시험 구동을 실시하려면 즉시 사용 가능한 랩 이미지를 사용하여 "컨테이너화된 워크로드용 영구 스토리지 간편한 배포 및 복제" 액세스 권한을 <block ref="eb9c34df0ed196dd801ef85207c8bf2c" category="inline-link-macro-rx"></block>요청하십시오. 테스트 드라이브는 3노드 Kubernetes 클러스터와 Trident 설치 및 구성된 샌드박스 환경을 제공합니다. Trident에 익숙해지고 기능을 탐색할 수 있는 좋은 방법입니다.</block>
   <block id="ad82bf93e4b28ad012a8be09e30d3d59" category="paragraph">Trident는 컨테이너화된 애플리케이션에 대한 스토리지 장치를 기본 NetApp HCI 스토리지 플랫폼에 직접 프로비저닝 및 관리할 수 있습니다.</block>
   <block id="2c1264786e66608f1b91c735d79624ad" category="paragraph">ONTAP 시스템은 All-Flash, 하이브리드 또는 All-HDD 구성을 제공하며 엔지니어링 하드웨어(FAS 및 AFF), 화이트박스(ONTAP Select), 클라우드 전용(Cloud Volumes ONTAP) 등 다양한 구축 모델을 제공합니다. Trident는 이러한 ONTAP 구축 모델을 지원합니다.</block>
   <block id="10f0fa4079121b371145e16713fdbb44" category="section-title">트라이던트</block>
@@ -4992,4 +4986,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="0539043b2ec0bd1bfae64dc58173dec7" category="doc">Trident Protect를 사용하여 애플리케이션을 복원합니다</block>
   <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">Trident Protect 실행 후크를 관리합니다</block>
   <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">NetApp SnapMirror 및 Trident Protect를 사용하여 애플리케이션을 복제합니다</block>
+  <block id="2fc23e09b483dc4495beb473646c0273" category="list-text"><block ref="2fc23e09b483dc4495beb473646c0273" category="inline-link-macro-rx"></block></block>
 </blocks>

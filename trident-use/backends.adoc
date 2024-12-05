@@ -17,6 +17,7 @@ summary: 백엔드는 Trident와 스토리지 시스템 간의 관계를 정의�
 Trident는 스토리지 클래스에 정의된 요구 사항에 맞는 백 엔드에서 스토리지 풀을 자동으로 제공합니다. 스토리지 시스템에 대한 백엔드를 구성하는 방법에 대해 알아봅니다.
 
 * link:anf.html["Azure NetApp Files 백엔드를 구성합니다"^]
+* link:gcnv.html["Google Cloud NetApp 볼륨 백엔드를 구성합니다"^]
 * link:gcp.html["Google Cloud Platform 백엔드에 Cloud Volumes Service를 구성합니다"^]
 * link:element.html["NetApp HCI 또는 SolidFire 백엔드를 구성합니다"^]
 * link:ontap-nas.html["ONTAP 또는 Cloud Volumes ONTAP NAS 드라이버를 사용하여 백엔드를 구성합니다"^]
