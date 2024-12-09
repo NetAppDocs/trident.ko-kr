@@ -36,7 +36,7 @@ FC에 필요한 네트워크 및 노드 설정을 구성합니다.
 
 === 네트워크 설정
 
-. 대상 인터페이스의 WWPN을 가져옵니다. 자세한 내용은 을 link:..https://docs.netapp.com/us-en/ontap-cli//network-interface-show.html["네트워크 인터페이스가 표시됩니다"^] 참조하십시오.
+. 대상 인터페이스의 WWPN을 가져옵니다. 자세한 내용은 을 https://docs.netapp.com/us-en/ontap-cli//network-interface-show.html["네트워크 인터페이스가 표시됩니다"^] 참조하십시오.
 . 이니시에이터(호스트)의 인터페이스에 대한 WWPN을 가져옵니다.
 +
 해당 호스트 운영 체제 유틸리티를 참조하십시오.

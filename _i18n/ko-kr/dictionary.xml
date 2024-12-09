@@ -3228,7 +3228,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="98c3c9acd444d11890d48438db3c165e" category="paragraph">AWS 자격 증명을 명시적으로 제공하는 대신 AWS IAM 역할로 인증하여 Kubernetes Pod를 구성하여 AWS 리소스에 액세스할 수 있습니다.</block>
   <block id="3f566b5ded6e7ac8c26dd3c07a2ea056" category="admonition">AWS IAM 역할을 사용하여 인증하려면 EKS를 사용하여 Kubernetes 클러스터를 구축해야 합니다.</block>
   <block id="3a218e8961578d046aa713039445902b" category="section-title">AWS Secret Manager 암호를 생성합니다</block>
-  <block id="6a73f77169c507b4f8a8e33a9180355b" category="paragraph"><block ref="0d1bf1201bf9db7aed15db6de2873c7a" prefix="" category="inline-code"></block></block>
   <block id="3926fdac6344d565c95f560468946335" category="section-title">IAM 정책을 생성합니다</block>
   <block id="78edc229f8df1c5e0840f6469bc28454" category="paragraph">다음 예에서는 AWS CLI를 사용하여 IAM 정책을 생성합니다.</block>
   <block id="96cc21e053acccb273475c8c6744b18e" category="paragraph"><block ref="21a8f9d92c42f5ae09a1d5ac91dbb3c5" prefix="" category="inline-code"></block></block>
@@ -4940,7 +4939,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">FC에 필요한 네트워크 및 노드 설정을 구성합니다.</block>
   <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">네트워크 설정</block>
   <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">네트워크 인터페이스가 표시됩니다</block>
-  <block id="fc2e7b75efdee011ff06c37c7b71f6a6" category="list-text">대상 인터페이스의 WWPN을 가져옵니다. 자세한 내용은 을 <block ref="cc71fd7fb2f6e7e70f421fe2150fdc04" category="inline-link-macro-rx"></block> 참조하십시오.</block>
   <block id="cc7e69899d736126df9787634ad41870" category="list-text">이니시에이터(호스트)의 인터페이스에 대한 WWPN을 가져옵니다.</block>
   <block id="1089b965cabd19cfee7f3ef855fbd63d" category="paragraph">해당 호스트 운영 체제 유틸리티를 참조하십시오.</block>
   <block id="6f58745fc3a341adae0772d30d9e508c" category="list-text">호스트와 대상의 WWPN을 사용하여 FC 스위치에서 조닝을 구성합니다.</block>
@@ -4987,4 +4985,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">Trident Protect 실행 후크를 관리합니다</block>
   <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">NetApp SnapMirror 및 Trident Protect를 사용하여 애플리케이션을 복제합니다</block>
   <block id="2fc23e09b483dc4495beb473646c0273" category="list-text"><block ref="2fc23e09b483dc4495beb473646c0273" category="inline-link-macro-rx"></block></block>
+  <block id="e132245ad28668c6b32dee21fb8a3820" category="list-text">대상 인터페이스의 WWPN을 가져옵니다. 자세한 내용은 을<block ref="92fd8fd0370792cd397ea6fdc3c8edb0" category="inline-link-rx"></block> 참조하십시오.</block>
+  <block id="5597ca99169fee10411d6b2ace3c56ea" category="paragraph"><block ref="bf121260f097199f29e6e1734da8ea69" prefix="" category="inline-code"></block></block>
 </blocks>
