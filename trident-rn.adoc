@@ -144,13 +144,6 @@ link:./trident-protect/learn-about-trident-protect.html["Trident Protect에 대�
 
 
 
-=== 사용 중단
-
-* EOL Windows Server 2019에 대한 지원이 제거되었습니다.
-
-
-
-
 == 24.02의 변경 사항
 
 
