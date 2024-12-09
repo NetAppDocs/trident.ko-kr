@@ -24,9 +24,9 @@ summary: 응용 프로그램 CR 및 연결된 AppVault CR을 생성하여 Triden
 
 
 
-== 응용 프로그램 CR을 만듭니다
+== 응용 프로그램을 정의합니다
 
-Trident Protect로 관리하려는 각 응용 프로그램에 대해 CR 대상 응용 프로그램을 만들어야 합니다. 응용 프로그램 CR을 수동으로 생성하거나 Trident Protect CLI를 사용하여 CR을 생성하여 관리용 응용 프로그램을 추가할 수 있습니다.
+Trident Protect로 관리하려는 각 애플리케이션을 정의해야 합니다. 응용 프로그램 CR을 수동으로 생성하거나 Trident Protect CLI를 사용하여 관리할 응용 프로그램을 정의할 수 있습니다.
 
 [role="tabbed-block"]
 ====
@@ -53,13 +53,18 @@ metadata:
   namespace: my-app-namespace
 spec:
   includedNamespaces:
-    labelSelector: {}
-    namespace: my-app-namespace
+    - namespace: my-app-namespace
 ----
 
 
 
 
+. 환경에 맞게 응용 프로그램 CR을 만든 후 CR을 적용합니다. 예를 들면 다음과 같습니다.
++
+[source, console]
+----
+kubectl apply -f maria-app.yaml
+----
 
 
 --

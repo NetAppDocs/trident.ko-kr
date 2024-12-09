@@ -4452,8 +4452,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="58bd941b0268654136e17a3f6361fa75" category="section-title">AppVault CR을 작성합니다</block>
   <block id="f5ddee36f3439fbf6875de509925b804" category="inline-link-macro">AppVault 사용자 지정 리소스.</block>
   <block id="2c2c79b6a4bc3f3b90fed9b96ab44d05" category="paragraph">응용 프로그램에서 데이터 보호 작업을 수행할 때 사용할 AppVault CR을 만들어야 하며 Trident Protect가 설치된 클러스터에 AppVault CR이 있어야 합니다. AppVault CR은 사용자 환경에 따라 다릅니다. AppVault CRS의 예는 을 참조하십시오 <block ref="7e7838343a821a01b97d2b866c568a54" category="inline-link-macro-rx"></block></block>
-  <block id="bb54028c613908a73e7575bf50ce2f8b" category="section-title">응용 프로그램 CR을 만듭니다</block>
-  <block id="650b7f6eb7d8e2a1b558878be64e787f" category="paragraph">Trident Protect로 관리하려는 각 응용 프로그램에 대해 CR 대상 응용 프로그램을 만들어야 합니다. 응용 프로그램 CR을 수동으로 생성하거나 Trident Protect CLI를 사용하여 CR을 생성하여 관리용 응용 프로그램을 추가할 수 있습니다.</block>
   <block id="7eb786201a1068df31c2a8d7805c50bf" category="open-title">CR을 사용하여 응용 프로그램을 추가합니다</block>
   <block id="b4b10aa7102ef4de9ba1d5672445c895" category="list-text">대상 응용 프로그램 CR 파일을 만듭니다.</block>
   <block id="0f14679ea6b53d676a4e19300d32937e" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="6e1c6964e1bb7e391ff353b09e122d80" prefix=" " category="inline-code"></block>).</block>
@@ -4986,4 +4984,7 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="ab17e5f89eede1d0e6d8d31cc646b837" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block> 작업자 노드를 준비합니다</block>
   <block id="8f571d58ed95211be01ea993de3fee3e" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block> Trident를 설치합니다</block>
   <block id="0bd5a1e8269929431127f21fd594adfa" category="cell">프로토콜 LIF의 IP 주소입니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 과 같이 대괄호로 정의해야<block ref="33e9328e92e3ef05629093b4693b3925" prefix=" " category="inline-code"></block> 합니다. *iSCSI에 대해 지정하지 마십시오.* Trident는 를 사용하여 <block ref="2de2f329c45219df280af5a70ed7a17c" category="inline-link-macro-rx"></block>다중 경로 세션을 설정하는 데 필요한 iSCI LIF를 검색합니다. 이 명시적으로 정의된 경우 경고가<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block> 생성됩니다. * MetroCluster의 경우 생략합니다. * 를 <block ref="41195e18a4a81a05f5c5a6be365a5602" category="inline-xref-macro-rx"></block>참조하십시오.</block>
+  <block id="2fd92693952062fc00d949899370185d" category="section-title">응용 프로그램을 정의합니다</block>
+  <block id="da305154e58c2f6709cee1cca6b2d8c8" category="paragraph">Trident Protect로 관리하려는 각 애플리케이션을 정의해야 합니다. 응용 프로그램 CR을 수동으로 생성하거나 Trident Protect CLI를 사용하여 관리할 응용 프로그램을 정의할 수 있습니다.</block>
+  <block id="964ba319e15e38c5b0f3ee2a3dd4a8f8" category="list-text">환경에 맞게 응용 프로그램 CR을 만든 후 CR을 적용합니다. 예를 들면 다음과 같습니다.</block>
 </blocks>
