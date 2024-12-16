@@ -18,6 +18,8 @@ entries:
     url: "/trident-protect/manage-authorization-access-control.html"
   - title: Trident Protect 지원 번들을 생성합니다
     url: "/trident-protect/trident-protect-generate-support-bundle.html"
+  - title: Trident Protect를 업그레이드합니다
+    url: "/trident-protect/trident-protect-upgrade.html"
 - title: 애플리케이션을 관리하고 보호합니다
   entries:
   - title: AppVault 객체를 사용하여 버킷을 관리합니다

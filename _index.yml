@@ -47,6 +47,8 @@ indexpage:
       url: "/trident-protect/learn-about-trident-protect.html"
     - title: Trident Protect를 구축합니다
       url: "/trident-protect/trident-protect-installation.html"
+    - title: Trident Protect를 업그레이드합니다
+      url: "/trident-protect/trident-protect-upgrade.html"
   - title: 데모 자습서
     links:
     - title: Trident 비디오
