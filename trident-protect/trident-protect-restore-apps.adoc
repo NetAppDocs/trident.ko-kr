@@ -147,7 +147,7 @@ spec:
 +
 ** *resourceFilter.resourceSelectionCriteria*:(필터링에 필요) `include or exclude` resourceMatchers에 정의된 리소스를 포함하거나 제외하는 데 사용합니다. 다음 resourceMatchers 매개 변수를 추가하여 포함하거나 제외할 리소스를 정의합니다.
 +
-*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다.
+*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.
 +
 **** *resourceMatchers[].group*:(_Optional_) 필터링할 리소스의 그룹입니다.
 **** * resourceMatchers [].kind *: (_Optional_) 필터링할 리소스의 종류입니다.
@@ -165,12 +165,18 @@ spec:
   resourceFilter:
     resourceSelectionCriteria: "include"
     resourceMatchers:
-      group: my-resource-group
-      kind: my-resource-kind
-      version: my-resource-version
-      names: ["my-resource-names"]
-      namespaces: ["my-resource-namespaces"]
-      labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-1
+        kind: my-resource-kind-1
+        version: my-resource-version-1
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-2
+        kind: my-resource-kind-2
+        version: my-resource-version-2
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
 ----
 
 
@@ -243,7 +249,7 @@ spec:
 +
 ** *resourceFilter.resourceSelectionCriteria*:(필터링에 필요) `include or exclude` resourceMatchers에 정의된 리소스를 포함하거나 제외하는 데 사용합니다. 다음 resourceMatchers 매개 변수를 추가하여 포함하거나 제외할 리소스를 정의합니다.
 +
-*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다.
+*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.
 +
 **** *resourceMatchers[].group*:(_Optional_) 필터링할 리소스의 그룹입니다.
 **** * resourceMatchers [].kind *: (_Optional_) 필터링할 리소스의 종류입니다.
@@ -261,12 +267,18 @@ spec:
   resourceFilter:
     resourceSelectionCriteria: "include"
     resourceMatchers:
-      group: my-resource-group
-      kind: my-resource-kind
-      version: my-resource-version
-      names: ["my-resource-names"]
-      namespaces: ["my-resource-namespaces"]
-      labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-1
+        kind: my-resource-kind-1
+        version: my-resource-version-1
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-2
+        kind: my-resource-kind-2
+        version: my-resource-version-2
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
 ----
 
 
@@ -342,7 +354,7 @@ spec:
 +
 ** *resourceFilter.resourceSelectionCriteria*:(필터링에 필요) `include or exclude` resourceMatchers에 정의된 리소스를 포함하거나 제외하는 데 사용합니다. 다음 resourceMatchers 매개 변수를 추가하여 포함하거나 제외할 리소스를 정의합니다.
 +
-*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다.
+*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.
 +
 **** *resourceMatchers[].group*:(_Optional_) 필터링할 리소스의 그룹입니다.
 **** * resourceMatchers [].kind *: (_Optional_) 필터링할 리소스의 종류입니다.
@@ -360,12 +372,18 @@ spec:
   resourceFilter:
     resourceSelectionCriteria: "include"
     resourceMatchers:
-      group: my-resource-group
-      kind: my-resource-kind
-      version: my-resource-version
-      names: ["my-resource-names"]
-      namespaces: ["my-resource-namespaces"]
-      labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-1
+        kind: my-resource-kind-1
+        version: my-resource-version-1
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-2
+        kind: my-resource-kind-2
+        version: my-resource-version-2
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
 ----
 
 
@@ -443,7 +461,7 @@ spec:
 +
 ** *resourceFilter.resourceSelectionCriteria*:(필터링에 필요) `include or exclude` resourceMatchers에 정의된 리소스를 포함하거나 제외하는 데 사용합니다. 다음 resourceMatchers 매개 변수를 추가하여 포함하거나 제외할 리소스를 정의합니다.
 +
-*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다.
+*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.
 +
 **** *resourceMatchers[].group*:(_Optional_) 필터링할 리소스의 그룹입니다.
 **** * resourceMatchers [].kind *: (_Optional_) 필터링할 리소스의 종류입니다.
@@ -461,12 +479,18 @@ spec:
   resourceFilter:
     resourceSelectionCriteria: "include"
     resourceMatchers:
-      group: my-resource-group
-      kind: my-resource-kind
-      version: my-resource-version
-      names: ["my-resource-names"]
-      namespaces: ["my-resource-namespaces"]
-      labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-1
+        kind: my-resource-kind-1
+        version: my-resource-version-1
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-2
+        kind: my-resource-kind-2
+        version: my-resource-version-2
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
 ----
 
 
