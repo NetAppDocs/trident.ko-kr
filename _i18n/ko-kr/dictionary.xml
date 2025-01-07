@@ -5019,5 +5019,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="a16ec228f0e3336de76f224b11d860d9" category="list-text">Trident Protect 업그레이드:</block>
   <block id="08810911e9a818361e28207072354bd4" category="list-text">해당하는 경우 파일 시스템 작동이 중지됩니다. <block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>..</block>
   <block id="caf47630bbafdc416f6b6ecdb585e83e" category="list-text">해당되는 경우 동결된 파일 시스템은 동결 해제됩니다.</block>
-  <block id="2d9c57bbe7c29718be24410f0c38688e" category="list-text">*resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.</block>
+  <block id="1eb6c79d30a4cb086ad406cb25fec350" category="list-text">*resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.</block>
 </blocks>
