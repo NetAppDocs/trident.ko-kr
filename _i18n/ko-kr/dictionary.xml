@@ -4473,9 +4473,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="1c7b9a68982aa2ad5f1d69eeb5bdf99e" category="inline-link-macro">백업에서 데이터를 복원합니다</block>
   <block id="e27031b9d0bffffcf2abd2136eed21f5" category="list-text"><block ref="71bc4096317f8eb78a9951851bc1165b" category="inline-link-macro-rx"></block>..</block>
   <block id="403ecb1db6fa0f1bb20e787bb5f5dacd" category="section-title">다른 클러스터에 클론 복제</block>
-  <block id="1fe732d5921038b3ec81023b7a5d8068" category="paragraph">애플리케이션을 다른 클러스터에 클론 복제(클러스터 간 클론 수행)하려면 스냅샷 또는 백업을 생성하고 데이터를 다른 클러스터에 복구합니다. 대상 클러스터에 Trident Protect가 설치되어 있는지 확인하십시오.</block>
-  <block id="884bacf23a56346ab0468809c6cb7145" category="list-text">백업 또는 스냅샷이 포함된 객체 스토리지 버킷의 AppVault CR이 대상 클러스터에 구성되어 있는지 확인합니다.</block>
-  <block id="f5c64bf182766988d3561488bae5bf83" category="list-text">대상 클러스터에서 스냅샷 또는 백업을 생성했는지 여부에 따라 다음 중 하나를 수행합니다.</block>
   <block id="181aa092ab965b34bcee90e25056f876" category="section-title">한 스토리지 클래스에서 다른 스토리지 클래스로 애플리케이션을 마이그레이션합니다</block>
   <block id="97a1f17d0c2154050e8ba2ecfd07ecf4" category="paragraph">스냅샷을 다른 대상 스토리지 클래스로 복원하여 한 스토리지 클래스에서 다른 스토리지 클래스로 애플리케이션을 마이그레이션할 수 있습니다.</block>
   <block id="f1ad7bca566917ee78958caa78fab3f5" category="paragraph">예를 들어 복원 CR에서 비밀 제외):</block>
@@ -5017,4 +5014,10 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="f266533c568f7d6d2cb55d3ef8fa6b5b" category="list-text">선택한 추가 기능 설정 구성 * 페이지에서 다음을 수행합니다.</block>
   <block id="effa92215c770083617150adc291c130" category="list-text">선택적 구성 설정 * 을 확장하고 필요에 따라 수정합니다.</block>
   <block id="c44618c9f0d840029b691a1dee65b927" category="paragraph"><block ref="7111ba434e6642bb1d25b7f45b940c41" prefix="" category="inline-code"></block></block>
+  <block id="fd8585ec0c8ba7001713251f9ab9c69e" category="paragraph">애플리케이션을 다른 클러스터에 클론 생성(클러스터 간 클론 수행)하려면 소스 클러스터에 백업을 생성한 다음 다른 클러스터에 백업을 복원합니다. 대상 클러스터에 Trident Protect가 설치되어 있는지 확인하십시오.</block>
+  <block id="a1f41e52e9ddbd9f87ecd032c237b1c0" category="inline-link-macro">SnapMirror 복제</block>
+  <block id="f6acb98f21e25882aaaa267339abcc92" category="admonition">을 사용하여 서로 다른 클러스터 간에 애플리케이션을 복제할 수 <block ref="69314cba6d14bf88b8e850c978056766" category="inline-link-macro-rx"></block>있습니다.</block>
+  <block id="fe961357dbe4b6bf8b5503f4919ea35c" category="list-text">백업이 포함된 객체 스토리지 버킷의 AppVault CR이 대상 클러스터에 구성되어 있는지 확인합니다.</block>
+  <block id="baafbccab17d07f9ba18e7becb7c76d2" category="inline-link-macro">백업에서 데이터를 복원합니다</block>
+  <block id="878bbf0662ed19ef900e4e06bfad92d2" category="list-text">대상 클러스터에서<block ref="11860f9f3ec51316f8ebc9805806b6cd" category="inline-link-macro-rx"></block>.</block>
 </blocks>
