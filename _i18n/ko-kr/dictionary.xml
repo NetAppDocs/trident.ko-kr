@@ -3241,7 +3241,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="8d1588a59bc508adad8a62ccaaa1c610" category="list-text">왼쪽 탐색 창에서 * 클러스터 * 를 클릭합니다.</block>
   <block id="32d9b71b3fc3fad1385ba62a9bf6bf46" category="list-text">NetApp Trident CSI 추가 기능을 구성할 클러스터의 이름을 클릭합니다.</block>
   <block id="91e45a55d3dd23153429aac3c45c53ae" category="list-text">추가 기능 * 을 클릭한 다음 * 추가 기능 얻기 * 를 클릭합니다.</block>
-  <block id="2fd89d18351d32a81158a0ff94206b31" category="list-text">S * 추가 기능 선택 * 페이지에서 다음을 수행합니다.</block>
   <block id="5a378b18f7bf0c4cabc6c655cd2f535e" category="list-text">다음 * 을 클릭합니다.</block>
   <block id="cacc1ddf612923b1c73b0a9a76659f42" category="list-text">선택한 추가 기능 구성 * 설정 페이지에서 다음을 수행합니다.</block>
   <block id="149e81257342cd05b0256d010b0b4a37" category="list-text">사용할 * 버전 * 을 선택합니다.</block>
@@ -3261,7 +3260,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="b0c6845b636be8c810182f985c930fed" category="list-text">Amazon EKS 콘솔을<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>엽니다.</block>
   <block id="69bd32cd7d6c3b5f9de30250cec1b478" category="list-text">NetApp Trident CSI 추가 기능을 업데이트할 클러스터의 이름을 클릭합니다.</block>
   <block id="a02487427219ab03773fe3c66fa96556" category="list-text">추가 기능 * 탭을 클릭합니다.</block>
-  <block id="f1b1f807d9e1301dcc6fd3e44d5de4bd" category="list-text">(선택 사항) * 선택적 구성 설정 * 을 확장하고 필요에 따라 수정할 수 있습니다.</block>
   <block id="3dca1b912e3d43e2a746fbcde32a6018" category="list-text">변경 내용 저장 * 을 클릭합니다.</block>
   <block id="5f06738a5749e735a4681f5c09e2bafc" category="paragraph">다음 예에서는 EKS 추가 기능을 업데이트합니다.</block>
   <block id="d8c918c170a0768203b4c2a6218e22bf" category="paragraph">Amazon EKS 애드온을 제거하는 두 가지 옵션이 있습니다.</block>
@@ -4855,13 +4853,9 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="fde605b45abe19dca0689ef0eaa6e384" category="paragraph">Astra Trident는 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다. Astra Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것을 검증했습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.</block>
   <block id="2f2c25cde4f655e64149cdd745b67001" category="paragraph">AWS EKS용 Astra Trident 애드온을 구성하기 전에 다음 사항을 확인하십시오.</block>
   <block id="0b95c9980ec3cd04cdefd538573b1be4" category="list-text">NetApp Trident * 를 찾아 Astra Trident 애드온의 확인란을 선택합니다.</block>
-  <block id="a4e2df789e9069728f679b749e49731e" category="list-text">(선택 사항) 필요에 따라 옵션 구성 설정을 구성하고 * 다음 * 을 선택합니다.</block>
-  <block id="0981ca89b033fc9fc2d79b4a4f3cd7d4" category="paragraph">추가 기능 구성 스키마 * 에 따라 * 구성 값 * 섹션의 configurationValues 매개 변수를 이전 단계에서 만든 역할-arn으로 설정합니다(값은 다음 형식이어야 함).<block ref="ee1eb31b5aebe5472fc52cb0ae20b077" prefix=" " category="inline-code"></block> 충돌 해결 방법으로 재정의 를 선택한 경우 기존 애드온에 대한 하나 이상의 설정을 Amazon EKS 애드온 설정으로 덮어쓸 수 있습니다. 이 옵션을 사용하지 않고 기존 설정과 충돌하는 경우 작업이 실패합니다. 결과 오류 메시지를 사용하여 충돌 문제를 해결할 수 있습니다. 이 옵션을 선택하기 전에 Amazon EKS 추가 기능이 자체 관리해야 하는 설정을 관리하지 않는지 확인하십시오.</block>
-  <block id="fceb57704a4212e759be2ffe9a3eb72f" category="admonition">선택적 매개 변수를 구성할<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block> 때는 EKS 추가 기능을 사용하여 Trident를 설치할 때 로<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block> 지정해야<block ref="4847e034bb0a55fcbc8a3380d6a3ab80" prefix=" " category="inline-code"></block> 합니다.</block>
   <block id="c5bc7ac802b8e0a400d724239314a7bf" category="image-alt">AWS eks 06</block>
   <block id="cec2926f3f12e3edd6577d4f1edd4e22" category="section-title">CLI를 사용하여 Astra Trident EKS 애드온을 설치/제거합니다</block>
   <block id="64f82c86eee854db6eefc72dbf352f85" category="paragraph-title">CLI를 사용하여 Astra Trident EKS 애드온을 설치합니다.</block>
-  <block id="d64cfa59e3953168a377893fca4265c8" category="paragraph">다음 명령 예에서는 Astra Trident EKS 추가 기능을 설치합니다(전용 버전 포함).<block ref="d51915e8dc2e65bf59ac801eb01ea812" prefix=" " category="inline-code"></block><block ref="21c6b99e1b958da23b23c0373944c626" prefix=" " category="inline-code"></block></block>
   <block id="aacf8a1c5f871dadd44e14addd9a995d" category="admonition">선택적 매개 변수를 구성할 때는<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block> EKS 추가 기능을 사용하여 Trident를 설치할 때 를 지정해야<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block> 합니다.</block>
   <block id="5fef1c4f3767262a0ef823aaa69e1703" category="paragraph-title">CLI를 사용하여 Astra Trident EKS 애드온을 제거합니다.</block>
   <block id="e1f272eb0b2aaba7b1cb689543f653e0" category="paragraph">다음 명령을 실행하면 Astra Trident EKS 애드온이 제거됩니다.<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
@@ -4878,14 +4872,8 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="0a77764215483fbccc22e1d77abfb50f" category="paragraph">Astra Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것을 검증했습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.</block>
   <block id="7184de869a88c49faff4f6482457e5cb" category="section-title">AWS용 Astra Trident 애드온 을 지원합니다</block>
   <block id="9ea02e0a94b03561cf2861dcac685125" category="paragraph">다음 명령 예에서는 Astra Trident EKS 애드온을 설치합니다.</block>
-  <block id="4f9bffbf1ddd667b6d18ee5fe3bc3389" category="paragraph"><block ref="3428bfd6b9aff85ad104616c57d9e301" prefix="" category="inline-code"></block><block ref="21c6b99e1b958da23b23c0373944c626" prefix=" " category="inline-code"></block> (전용 버전 포함)</block>
-  <block id="d6821a378e60f781e319890caff45c30" category="list-text">AWS Marketplace EKS-addons 섹션에서 * Astra Trident by NetApp * 확인란을 선택합니다.</block>
   <block id="dbc0f27a2aa9fd3fbef77c25870f8248" category="list-text">Astra Trident EKS 애드온 설치"</block>
   <block id="ee502e3f68953ecace683d05b827a6ae" category="section-title">Astra Trident EKS 애드온을 업데이트합니다</block>
-  <block id="d7cbf82bbbafb530fdf4ff891b9d305d" category="list-text">이전 단계의 출력에서 사용할 수 있는 업데이트 아래에 반환된 버전으로 추가 기능을 업데이트합니다.<block ref="7517f28d87e3e3f5f51c7054bcfb6847" prefix=" " category="inline-code"></block></block>
-  <block id="1b11ccfac36888509b0b9fb0f99a4bbb" category="list-text">Astra Trident by NetApp * 를 클릭한 다음 * 편집 * 을 클릭합니다.</block>
-  <block id="351442864548fcc84173a68a66b38f2d" category="list-text">Astra Trident by NetApp * 구성 페이지에서 다음을 수행합니다.</block>
-  <block id="844c1d7ef01df888c2eaad6c7c2913c1" category="paragraph"><block ref="1e4bc555b90c0333c8626cc7405bd1f8" prefix="" category="inline-code"></block></block>
   <block id="8d995c3ade9702f8b3d41df18d276fc0" category="section-title">Astra Trident EKS 애드온을 제거/제거합니다</block>
   <block id="d43d72969793ea80734b71e9c2406b2a" category="list-text">* 클러스터에 애드온 소프트웨어 유지 * – 이 옵션은 모든 설정의 Amazon EKS 관리를 제거합니다. 또한 업데이트를 시작한 후 Amazon EKS에서 업데이트를 알리고 Amazon EKS 애드온을 자동으로 업데이트하는 기능도 제거합니다. 하지만 클러스터에 애드온 소프트웨어가 보존됩니다. 이 옵션을 사용하면 Amazon EKS 애드온이 아닌 자가 관리형 설치가 됩니다. 이 옵션을 사용하면 애드온에 대한 다운타임이 없습니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>명령의 옵션을 유지하여 추가 기능을 유지합니다.</block>
   <block id="4c467d48a00d885ea22b1e685b747492" category="list-text">* 클러스터에서 애드온 소프트웨어 완전히 제거 * – 클러스터에 종속된 리소스가 없는 경우에만 Amazon EKS 애드온을 클러스터에서 제거하는 것이 좋습니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>추가 기능을 제거하려면 명령에서 옵션을<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> 제거하십시오.</block>
@@ -5020,4 +5008,13 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="08810911e9a818361e28207072354bd4" category="list-text">해당하는 경우 파일 시스템 작동이 중지됩니다. <block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>..</block>
   <block id="caf47630bbafdc416f6b6ecdb585e83e" category="list-text">해당되는 경우 동결된 파일 시스템은 동결 해제됩니다.</block>
   <block id="1eb6c79d30a4cb086ad406cb25fec350" category="list-text">*resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.</block>
+  <block id="02bdfa3ac07784bdcb9a3ee996d74f7b" category="paragraph">다음 명령 예에서는 Astra Trident EKS 추가 기능을 설치합니다(전용 버전 포함).<block ref="f0ef0295c3aa6b3cec6297d6cd4ffbb0" prefix=" " category="inline-code"></block><block ref="7e9a9ed0bc982ca0ebe942eb94c1c6df" prefix=" " category="inline-code"></block></block>
+  <block id="a22e5011a5a8410071eb4306d647c90e" category="paragraph"><block ref="12472a1be5dbf38f4ae352b193c3ddf9" prefix="" category="inline-code"></block><block ref="7e9a9ed0bc982ca0ebe942eb94c1c6df" prefix=" " category="inline-code"></block> (전용 버전 포함)</block>
+  <block id="3a8f61f44f4f674928f31c4074b024b1" category="list-text">추가 기능 선택 * 페이지에서 다음을 수행합니다.</block>
+  <block id="203d72b01273331f7805b46e308a1162" category="list-text">AWS Marketplace EKS-addons 섹션에서 * NetApp Trident * 확인란을 선택합니다.</block>
+  <block id="85646ef7dba6a54cc509ac3c04e50a92" category="list-text">이전 단계의 출력에서 사용할 수 있는 업데이트 아래에 반환된 버전으로 추가 기능을 업데이트합니다.<block ref="c9de3122a6da67c7226cd55ea4383a86" prefix=" " category="inline-code"></block></block>
+  <block id="bd9e8b38a4195a88d1b777593b0ef6a4" category="list-text">NetApp Trident * 를 클릭한 다음 * 편집 * 을 클릭합니다.</block>
+  <block id="f266533c568f7d6d2cb55d3ef8fa6b5b" category="list-text">선택한 추가 기능 설정 구성 * 페이지에서 다음을 수행합니다.</block>
+  <block id="effa92215c770083617150adc291c130" category="list-text">선택적 구성 설정 * 을 확장하고 필요에 따라 수정합니다.</block>
+  <block id="c44618c9f0d840029b691a1dee65b927" category="paragraph"><block ref="7111ba434e6642bb1d25b7f45b940c41" prefix="" category="inline-code"></block></block>
 </blocks>
