@@ -340,7 +340,7 @@ kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n my-app-n
 *** *spec.namespaceMapping*: (_required_) 대상 및 소스 네임스페이스는 해당 응용 프로그램 CR에 정의된 응용 프로그램 네임스페이스와 일치해야 합니다.
 *** * spec.sourceAppVaultRef *: (_required_) 이 값은 소스 응용 프로그램의 AppVault 이름과 일치해야 합니다.
 *** * spec.sourceApplicationName *: (_required_) 이 값은 소스 응용 프로그램 CR에서 정의한 소스 응용 프로그램의 이름과 일치해야 합니다.
-*** * spec.storageClassName *: (_required_) 클러스터에서 유효한 스토리지 클래스의 이름을 선택하십시오. 소스 애플리케이션이 구축된 소스 클러스터에서 사용 중인 스토리지 클래스로 스토리지 클래스를 피어링해야 합니다.
+*** * spec.storageClassName *: (_required_) 클러스터에서 유효한 스토리지 클래스의 이름을 선택하십시오. 스토리지 클래스는 소스 환경을 피어링하는 ONTAP 스토리지 VM에 연결되어야 한다.
 *** *spec.recurrenceRule*: UTC 시간과 반복 간격으로 시작 날짜를 정의합니다.
 +
 YAML 예:
