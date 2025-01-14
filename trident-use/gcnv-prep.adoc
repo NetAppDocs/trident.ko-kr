@@ -24,7 +24,7 @@ Google Cloud NetApp 볼륨 백엔드를 구성하기 전에 다음 사항이 있
 
 * Google Cloud NetApp Volumes 서비스로 구성된 Google Cloud 계정 을 link:https://cloud.google.com/netapp-volumes["Google Cloud NetApp 볼륨"^]참조하십시오.
 * Google Cloud 계정의 프로젝트 번호입니다. 을 link:https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects["프로젝트 식별"^]참조하십시오.
-* NetApp 볼륨 관리자) 역할을 가진 Google Cloud 서비스 계정입니다. (`netappcloudvolumes.admin` 을 link:https://cloud.google.com/netapp/volumes/docs/get-started/configure-access/iam#roles_and_permissions["ID 및 액세스 관리 역할 및 권한"^]참조하십시오.
+* NetApp 볼륨 관리자) 역할을 가진 Google Cloud 서비스 계정입니다. (`roles/netapp.admin` 을 link:https://cloud.google.com/netapp/volumes/docs/get-started/configure-access/iam#roles_and_permissions["ID 및 액세스 관리 역할 및 권한"^]참조하십시오.
 * GCNV 계정에 대한 API 키 파일입니다. 을 참조하십시오 link:https://cloud.google.com/iam/docs/keys-create-delete#creating["서비스 계정 키를 생성합니다"^]
 * 스토리지 풀입니다. 을 link:https://cloud.google.com/netapp/volumes/docs/configure-and-use/storage-pools/overview["스토리지 풀 개요"^]참조하십시오.
 
