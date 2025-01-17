@@ -4355,26 +4355,9 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="b0f47f6adf0e419b1f2eec1a0a995e8c" category="section-title">키 생성 및 AppVault 정의 예</block>
   <block id="e1acb82bf1e9f5db4a12c5a7eb653d47" category="paragraph">AppVault CR을 정의할 때 공급자가 호스팅하는 리소스에 액세스하려면 자격 증명을 포함해야 합니다. 자격 증명에 대한 키를 생성하는 방법은 공급자에 따라 다릅니다. 다음은 여러 공급자에 대한 명령줄 키 생성 예제와 각 공급자에 대한 AppVault 정의 예입니다.</block>
   <block id="56ef2682280ac110060b881925a87b80" category="section-title">Google 클라우드</block>
-  <block id="740ca32fc91467fd47fb71d2414cfef5" category="paragraph">키 생성 예:</block>
-  <block id="194398b8524e2cd4b7f246805e250ed0" category="paragraph">다음 AppVault 정의 예는 사용 및 수정할 수 있는 CR 또는 Trident Protect CLI 명령의 예를 통해 AppVault CR을 생성합니다.</block>
-  <block id="717b55966fdf152c0b975d5025c190c0" category="open-title">AppVault CR 예</block>
-  <block id="970235f2b49975fd398ad1272198687b" category="open-title">Trident Protect CLI를 사용한 AppVault CR 생성 예</block>
-  <block id="270fcb785810d0206945029bb05f4e97" category="section-title">Amazon S3</block>
-  <block id="cde0d86b75c5d9604be18e3bd522bf17" category="open-title">CLI를 사용한 AppVault 작성 예제</block>
   <block id="1668ca1bd914c1d847f23b491319ac91" category="section-title">Microsoft Azure를 참조하십시오</block>
-  <block id="017615c1142fadb040de32a937ba28a5" category="section-title">providerType 및 providerConfig 에 대해 지원되는 값입니다</block>
-  <block id="f6583553f122a79fc1cb33273af12b71" category="paragraph"><block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block>AppVault CR의 및<block ref="93fc18ae6fe8f42e5ec9235d62051855" prefix=" " category="inline-code"></block> 키에는 특정 값이 필요합니다. 다음 표에서는 키에 대해 지원되는 값과 각 값에 사용해야 하는 관련<block ref="93fc18ae6fe8f42e5ec9235d62051855" prefix=" " category="inline-code"></block> 키를<block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block> 보여<block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block> 줍니다.</block>
-  <block id="465bce4ca7a51a41028b39e2638813e7" category="cell">지원되는<block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block> 값입니다</block>
-  <block id="62047e0c7c39225e57ee4ea7021c2c03" category="cell">연결된<block ref="93fc18ae6fe8f42e5ec9235d62051855" prefix=" " category="inline-code"></block> 키</block>
-  <block id="4847e034bb0a55fcbc8a3380d6a3ab80" category="cell">설치하고</block>
-  <block id="c0828e0381730befd1f7a025057c74fb" category="cell">s3를 참조하십시오</block>
-  <block id="3a580f142203677f1f0bc30898f63f53" category="cell">Azure를 지원합니다</block>
   <block id="cf04a02e37b774fc311a48f605c3c597" category="cell">Azure를 지원합니다</block>
-  <block id="c731f72e1d22a7c5e01a7cb789a8885e" category="cell">GCP</block>
   <block id="50f66ecbc45488ee5826941bfbc50411" category="cell">GCP</block>
-  <block id="7f93d53700ceda931b2ea8335eef2b68" category="cell">GenericS3를 참조하십시오</block>
-  <block id="e65506feb09d12651a37ac31d3023758" category="cell">OntapS3를 참조하십시오</block>
-  <block id="339a160f314b213eaa0ef1a17608793b" category="cell">StorageGridS3를 참조하십시오</block>
   <block id="4ac6e7a03fe8abedfa131f8cf6680984" category="section-title">AppVault 브라우저를 사용하여 AppVault 정보를 봅니다</block>
   <block id="ce8f41081c98b9eea8be01b08936dbb0" category="paragraph">Trident Protect CLI 플러그인을 사용하여 클러스터에 생성된 AppVault 개체에 대한 정보를 볼 수 있습니다.</block>
   <block id="485573baf8bfa9487485deb07780d89f" category="list-text">AppVault 개체의 내용을 봅니다.</block>
@@ -5021,4 +5004,14 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="5e77ee724e7a9c6f34c1fd6a65b3f3b5" category="list-text">* spec.storageClassName *: (_required_) 클러스터에서 유효한 스토리지 클래스의 이름을 선택하십시오. 스토리지 클래스는 소스 환경을 피어링하는 ONTAP 스토리지 VM에 연결되어야 한다.</block>
   <block id="b22804421b3e5bca94f2a9979721eb60" category="cell">역할이 지정된 Google Cloud 서비스 계정의 API 키입니다.<block ref="e50dbf86780cfad5e007e4a95a6aa71e" prefix=" " category="inline-code"></block> 여기에는 Google Cloud 서비스 계정의 개인 키 파일(백엔드 구성 파일에 verbatim 복사)의 JSON 형식 콘텐츠가 포함됩니다. <block ref="c9ff119073ea2567730fb42e3a4fe805" prefix=" " category="inline-code"></block>, , , , , , 키를 사용하려면 키-값 쌍을 포함해야 합니다<block ref="599dcce2998a6b40b1e38e8c6006cb0a" prefix=" " category="inline-code"></block><block ref="b098ad43c65e68f3d8ce27a3c7e6f6e2" prefix=" " category="inline-code"></block><block ref="a4a9fd77bfb3720e66b510bef7ffe71a" prefix=" " category="inline-code"></block><block ref="2bfe9d72a4aae8f06a31025b7536be80" prefix=" " category="inline-code"></block><block ref="478cc0e49bfbb9ded4ffc7ea662d3968" prefix=" " category="inline-code"></block>.<block ref="98b215082431c21156af94f3aa69f838" prefix=" " category="inline-code"></block><block ref="8201fe8e688f4f948a62370fd1b411d4" prefix=" " category="inline-code"></block>, , 및<block ref="61426bc7fdd11e59a5c98e7ee37e3dbb" prefix=" " category="inline-code"></block>.</block>
   <block id="d0e48e9528072c6ff90b82adeab94dea" category="list-text">NetApp 볼륨 관리자) 역할을 가진 Google Cloud 서비스 계정입니다. <block ref="04bf1a6a0250bc9d4cba09ee34106dfc" prefix="(" category="inline-code"></block> 을 <block ref="4f506c30a158c85db714d53536a12770" category="inline-link-macro-rx"></block>참조하십시오.</block>
+  <block id="993632e3de5c928730b804a11727536f" category="section-title">키 생성 예</block>
+  <block id="92de772dd8341bb6222522a5591e1395" category="paragraph">다음 예제를 사용하여 각 클라우드 공급자의 자격 증명에 대한 키를 생성할 수 있습니다.</block>
+  <block id="a13eeeef5ff2b7fe85692890fb5d28b3" category="open-title">Amazon S3(AWS)</block>
+  <block id="b2aa71ee04e531f0b6d1f084ba45f52f" category="open-title">일반 S3</block>
+  <block id="1716834171e243de0f898a67621b6624" category="open-title">ONTAP S3 를 참조하십시오</block>
+  <block id="79832d443dadeb6d3b0637941d6ac067" category="open-title">StorageGRID S3</block>
+  <block id="6b4d16571162a69eb03c99cb132a69ec" category="section-title">AppVault CR 예</block>
+  <block id="d05c8b60cfd355fccac41017c33ca892" category="paragraph">다음 CR 예제를 사용하여 각 클라우드 공급자에 대한 AppVault 개체를 만들 수 있습니다.</block>
+  <block id="59264d37bdf7f6cbf4f94ad00dacdce1" category="section-title">Trident Protect CLI를 사용한 AppVault 생성 예</block>
+  <block id="4db09810b323e73b4041a65c99bb14f8" category="paragraph">다음 CLI 명령 예제를 사용하여 각 공급자에 대해 AppVault CRS를 만들 수 있습니다.</block>
 </blocks>

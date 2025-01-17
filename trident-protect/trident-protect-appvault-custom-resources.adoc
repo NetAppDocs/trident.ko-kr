@@ -24,19 +24,64 @@ AppVault CR을 정의할 때 공급자가 호스팅하는 리소스에 액세스
 
 
 
-=== Google 클라우드
+=== 키 생성 예
 
-키 생성 예:
-
-[source, console]
-----
-kubectl create secret generic gcp-creds --from-file=credentials=<mycreds-file.json> -n trident-protect
-----
-다음 AppVault 정의 예는 사용 및 수정할 수 있는 CR 또는 Trident Protect CLI 명령의 예를 통해 AppVault CR을 생성합니다.
+다음 예제를 사용하여 각 클라우드 공급자의 자격 증명에 대한 키를 생성할 수 있습니다.
 
 [role="tabbed-block"]
 ====
-.AppVault CR 예
+.Google 클라우드
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-file=credentials=<mycreds-file.json> -n trident-protect
+----
+--
+.Amazon S3(AWS)
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+.Microsoft Azure를 참조하십시오
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accountKey=<secret-name> -n trident-protect
+----
+--
+.일반 S3
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+.ONTAP S3 를 참조하십시오
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+.StorageGRID S3
+--
+[source, console]
+----
+kubectl create secret generic  <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+====
+
+
+=== AppVault CR 예
+
+다음 CR 예제를 사용하여 각 클라우드 공급자에 대한 AppVault 개체를 만들 수 있습니다.
+
+[role="tabbed-block"]
+====
+.Google 클라우드
 --
 [source, yaml]
 ----
@@ -58,29 +103,7 @@ spec:
         name: gcp-trident-protect-src-bucket-secret
 ----
 --
-.Trident Protect CLI를 사용한 AppVault CR 생성 예
---
-[source, console]
-----
-tridentctl protect create vault gcp my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
-----
---
-====
-
-
-=== Amazon S3
-
-키 생성 예:
-
-[source, console]
-----
-kubectl create secret generic -n trident-protect s3 --from-literal=accessKeyID=<secret-name> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret>
-----
-다음 AppVault 정의 예는 사용 및 수정할 수 있는 CR 또는 Trident Protect CLI 명령의 예를 통해 AppVault CR을 생성합니다.
-
-[role="tabbed-block"]
-====
-.AppVault CR 예
+.Amazon S3(AWS)
 --
 [source, yaml]
 ----
@@ -106,29 +129,7 @@ spec:
         name: s3
 ----
 --
-.CLI를 사용한 AppVault 작성 예제
---
-[source, console]
-----
-tridentctl protect create vault GenericS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
-----
---
-====
-
-
-=== Microsoft Azure를 참조하십시오
-
-키 생성 예:
-
-[source, console]
-----
-kubectl create secret generic <secret-name> --from-literal=accountKey=<secret-name> -n trident-protect
-----
-다음 AppVault 정의 예는 사용 및 수정할 수 있는 CR 또는 Trident Protect CLI 명령의 예를 통해 AppVault CR을 생성합니다.
-
-[role="tabbed-block"]
-====
-.AppVault CR 예
+.Microsoft Azure를 참조하십시오
 --
 [source, yaml]
 ----
@@ -150,42 +151,136 @@ spec:
         name: azure-trident-protect-src-bucket-secret
 ----
 --
-.CLI를 사용한 AppVault 작성 예제
+.일반 S3
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: generic-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: GenericS3
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+.ONTAP S3 를 참조하십시오
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: ontap-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: OntapS3
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+.StorageGRID S3
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: storagegrid-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: StorageGridS3
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+====
+
+
+=== Trident Protect CLI를 사용한 AppVault 생성 예
+
+다음 CLI 명령 예제를 사용하여 각 공급자에 대해 AppVault CRS를 만들 수 있습니다.
+
+[role="tabbed-block"]
+====
+.Google 클라우드
+--
+[source, console]
+----
+tridentctl protect create vault GCP my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
+----
+--
+.Amazon S3(AWS)
+--
+[source, console]
+----
+tridentctl protect create vault AWS <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+.Microsoft Azure를 참조하십시오
 --
 [source, console]
 ----
 tridentctl protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
 ----
 --
+.일반 S3
+--
+[source, console]
+----
+tridentctl protect create vault GenericS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+.ONTAP S3 를 참조하십시오
+--
+[source, console]
+----
+tridentctl protect create vault OntapS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+.StorageGRID S3
+--
+[source, console]
+----
+tridentctl protect create vault StorageGridS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
 ====
-
-
-=== providerType 및 providerConfig 에 대해 지원되는 값입니다
-
- `providerType`AppVault CR의 및 `providerConfig` 키에는 특정 값이 필요합니다. 다음 표에서는 키에 대해 지원되는 값과 각 값에 사용해야 하는 관련 `providerConfig` 키를 `providerType` 보여 `providerType` 줍니다.
-
-[cols="2,2"]
-|===
-| 지원되는 `providerType` 값입니다 | 연결된 `providerConfig` 키 
-
-
-| 설치하고 | s3를 참조하십시오 
-
-
-| Azure를 지원합니다 | Azure를 지원합니다 
-
-
-| GCP | GCP 
-
-
-| GenericS3를 참조하십시오 | s3를 참조하십시오 
-
-
-| OntapS3를 참조하십시오 | s3를 참조하십시오 
-
-
-| StorageGridS3를 참조하십시오 | s3를 참조하십시오 
-|===
 
 
 == AppVault 브라우저를 사용하여 AppVault 정보를 봅니다
