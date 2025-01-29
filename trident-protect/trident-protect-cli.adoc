@@ -104,7 +104,7 @@ cp ./tridentctl-protect ~/bin/
 +
 [source, console]
 ----
-tridentctl protect help
+tridentctl-protect help
 ----
 
 
@@ -178,4 +178,4 @@ source ~/.zsh/completions/tridentctl-completion.zsh
 --
 ====
 .결과
-다음 쉘 로그인 시 tridentctl Protect 플러그인으로 명령 자동 완성 기능을 사용할 수 있습니다.
+다음 쉘 로그인 시 tridentctl-protect 플러그인으로 명령 자동 완성 기능을 사용할 수 있습니다.
