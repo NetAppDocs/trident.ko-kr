@@ -4379,7 +4379,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="b64b2077b896969e7810dbb0a2de2f1a" category="open-title">Linux ARM64 CPU용 플러그인을 다운로드합니다</block>
   <block id="d58e744bd40cf0f8373ee5b2c7d11387" category="open-title">Mac AMD64 CPU용 플러그인을 다운로드합니다</block>
   <block id="fd3e558ef6c1af851bddabf0eb1945d7" category="open-title">Mac ARM64 CPU용 플러그인을 다운로드합니다</block>
-  <block id="412a5def83fe5329b38679035cfea675" category="list-text">바이너리에 대한 실행 권한을 활성화합니다.</block>
   <block id="b23c395acc963a69b0a5f06a20bb4887" category="section-title">Trident CLI 플러그인 도움말을 봅니다</block>
   <block id="305f79cb740685921820521a57e525e5" category="paragraph">내장 플러그인 도움말 기능을 사용하여 플러그인 기능에 대한 자세한 도움말을 얻을 수 있습니다.</block>
   <block id="09b4818c610e8f967a9f5257455a3a2a" category="list-text">도움말 기능을 사용하여 사용 지침을 봅니다.</block>
@@ -4911,7 +4910,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="aa2fd96b8dfdeb6aaaf2bb11da1413aa" category="list-text">기존 FC-PVC를 복제합니다.</block>
   <block id="de35bb06ba09c90d091b31450c61efd7" category="list-text">이미 구축한 볼륨의 크기를 조정합니다.</block>
   <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">PATH 변수에 정의된 위치에 플러그인 바이너리를 복사합니다. 예를<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block> 들어, 또는<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block> (Elevated Privileges가 필요할 수 있음):</block>
-  <block id="b3062a04e26d499596575c6767c02c16" category="list-text">필요한 경우 홈 디렉토리의 위치에 바이너리를 복사할 수 있습니다. 이 경우 PATH 변수에 위치를 추가해야 할 수 있습니다.</block>
   <block id="cff063350a0daf1b0ee4c6c97eb2e2de" category="admonition">기존 리소스가 있는 다른 네임스페이스로 백업을 복원해도 백업의 리소스와 이름을 공유하는 리소스는 변경되지 않습니다. 백업의 모든 리소스를 복구하려면 타겟 네임스페이스를 삭제하고 다시 생성하거나 백업을 새 네임스페이스로 복원하십시오.</block>
   <block id="e8e7bb3124435135f9fc5dab713148e1" category="list-text">FC PVS와 함께 RHEL/RedHat CoreOS를 실행하는 작업자 노드를 사용하는 경우<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> 인라인 공간 재확보를 수행하려면 StorageClass에 mount옵션을 지정합니다. 을<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>참조하십시오.</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">가<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block> 실행 중인지 확인합니다.</block>
@@ -5020,4 +5018,7 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="0708d6413707329d6051a0456f0810ac" category="admonition">을 사용하여<block ref="deb04333ae980bc0147681e476e1941c" prefix=" " category="inline-code"></block> 이 명령에 대한 자세한 도움말 정보를 볼 수 있습니다.</block>
   <block id="b0e7049d5aeb967991b6b3a21db08de3" category="paragraph">BackupRestore CR을 사용하여 다른 네임스페이스로 백업을 복원하면 Trident Protect는 새 네임스페이스에서 응용 프로그램을 복원하고 복원된 응용 프로그램에 대한 응용 프로그램 CR을 만듭니다. 복원된 애플리케이션을 보호하려면 필요 시 백업 또는 스냅샷을 생성하거나 보호 일정을 설정합니다.</block>
   <block id="4b405223d9feceac91c5ef8df77b1961" category="paragraph">사용자 지정 리소스(CR) 파일을 사용하여 스냅샷에서 데이터를 다른 네임스페이스 또는 원래 소스 네임스페이스로 복원할 수 있습니다. SnapshotRestore CR을 사용하여 스냅샷을 다른 네임스페이스로 복구할 경우 Trident Protect는 새 네임스페이스에서 애플리케이션을 복원하고 복원된 애플리케이션에 대한 애플리케이션 CR을 생성합니다. 복원된 애플리케이션을 보호하려면 필요 시 백업 또는 스냅샷을 생성하거나 보호 일정을 설정합니다.</block>
+  <block id="375efef64643c8aa6bb8e0ba2159a82a" category="list-text">플러그인 바이너리에 대한 실행 권한 활성화:</block>
+  <block id="eefd51253afc93c1ad54658882a65dec" category="list-text">선택적으로 플러그인 바이너리를 홈 디렉토리의 위치로 복사할 수 있습니다. 이 경우 위치가 PATH 변수의 일부인지 확인하는 것이 좋습니다.</block>
+  <block id="75b0e724fe59ed9d6eda0fcd4679bfee" category="admonition">PATH 변수의 위치에 플러그인을 복사하면 또는<block ref="e89ec374c6edc886ea12d28524834e68" prefix=" " category="inline-code"></block> 임의의 위치에서 플러그인을 사용할 수<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block> 있습니다.</block>
 </blocks>

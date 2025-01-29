@@ -73,7 +73,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 
 --
 ====
-. 바이너리에 대한 실행 권한을 활성화합니다.
+. 플러그인 바이너리에 대한 실행 권한 활성화:
 +
 [source, console]
 ----
@@ -85,13 +85,16 @@ chmod +x tridentctl-protect
 ----
 cp ./tridentctl-protect /usr/local/bin/
 ----
-. 필요한 경우 홈 디렉토리의 위치에 바이너리를 복사할 수 있습니다. 이 경우 PATH 변수에 위치를 추가해야 할 수 있습니다.
+. 선택적으로 플러그인 바이너리를 홈 디렉토리의 위치로 복사할 수 있습니다. 이 경우 위치가 PATH 변수의 일부인지 확인하는 것이 좋습니다.
 +
 [source, console]
 ----
 cp ./tridentctl-protect ~/bin/
 ----
 
+
+
+NOTE: PATH 변수의 위치에 플러그인을 복사하면 또는 `tridentctl protect` 임의의 위치에서 플러그인을 사용할 수 `tridentctl-protect` 있습니다.
 
 
 
