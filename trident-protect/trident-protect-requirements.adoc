@@ -18,7 +18,7 @@ summary: 운영 환경, 애플리케이션 클러스터, 애플리케이션 및 
 
 
 
-== Trident는 Kubernetes 호환성을 보호합니다
+== Trident는 Kubernetes 클러스터 호환성을 보호합니다
 
 Trident Protect는 다음과 같은 완전관리형 및 자가 관리형 Kubernetes 오퍼링과 호환됩니다.
 
@@ -30,6 +30,9 @@ Trident Protect는 다음과 같은 완전관리형 및 자가 관리형 Kuberne
 * VMware Tanzu 포트폴리오
 * 업스트림 Kubernetes
 
+
+
+NOTE: Trident Protect를 설치하는 클러스터가 실행 중인 스냅샷 컨트롤러와 관련 CRD로 구성되어 있는지 확인합니다. 스냅샷 컨트롤러를 설치하려면 을 https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["참조하십시오"]참조하십시오.
 
 
 

@@ -4537,7 +4537,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="77c9498d5c74a08af1c5918bd5fd8ee1" category="paragraph">스냅샷 디렉토리가 활성화되지 않은 경우 Trident Protect는 일반 백업 기능을 선택하여 백업 프로세스 중에 용량 풀의 공간을 일시적으로 사용합니다. 이 경우 용량 풀에서 백업 중인 볼륨 크기의 임시 볼륨을 생성할 수 있는 충분한 공간이 있는지 확인합니다.</block>
   <block id="2efd4c8775ce47d6aa29183091d2a4e2" category="paragraph">Trident Protect를 통해 애플리케이션이 백업 및 복원 준비가 되어 있습니다. 각 PVC는 백업 및 복원을 위해 다른 응용 프로그램에서 사용할 수도 있습니다.</block>
   <block id="697f51e8965440d487236d46d469510d" category="summary">운영 환경, 애플리케이션 클러스터, 애플리케이션 및 라이센스의 준비 상태를 확인하는 것으로 시작하십시오. Trident Protect를 배포 및 운영하기 위해 사용자 환경이 이러한 요구 사항을 충족하는지 확인합니다.</block>
-  <block id="f52842953ff751bb11c3849b84337de2" category="section-title">Trident는 Kubernetes 호환성을 보호합니다</block>
   <block id="c8f91050b5ec3e677d9c7e16e424f9bc" category="paragraph">Trident Protect는 다음과 같은 완전관리형 및 자가 관리형 Kubernetes 오퍼링과 호환됩니다.</block>
   <block id="480c9b5f979d1ce95ea2a58b09826d1b" category="list-text">Amazon Elastic Kubernetes Service(EKS)</block>
   <block id="974030a30a48754684d05541fd5e96c9" category="list-text">Google Kubernetes Engine(GKE)</block>
@@ -5021,4 +5020,7 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="375efef64643c8aa6bb8e0ba2159a82a" category="list-text">플러그인 바이너리에 대한 실행 권한 활성화:</block>
   <block id="eefd51253afc93c1ad54658882a65dec" category="list-text">선택적으로 플러그인 바이너리를 홈 디렉토리의 위치로 복사할 수 있습니다. 이 경우 위치가 PATH 변수의 일부인지 확인하는 것이 좋습니다.</block>
   <block id="75b0e724fe59ed9d6eda0fcd4679bfee" category="admonition">PATH 변수의 위치에 플러그인을 복사하면 또는<block ref="e89ec374c6edc886ea12d28524834e68" prefix=" " category="inline-code"></block> 임의의 위치에서 플러그인을 사용할 수<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block> 있습니다.</block>
+  <block id="dc5b2d9ecd49d3e5ee37059e2d80512f" category="section-title">Trident는 Kubernetes 클러스터 호환성을 보호합니다</block>
+  <block id="9ac0dd27d420b7b48ca72e463ae95e18" category="inline-link">참조하십시오</block>
+  <block id="664d28801abc192d5c7dfd7bfa758e98" category="admonition">Trident Protect를 설치하는 클러스터가 실행 중인 스냅샷 컨트롤러와 관련 CRD로 구성되어 있는지 확인합니다. 스냅샷 컨트롤러를 설치하려면 을<block ref="5d66944a2971d1b9b5f332812a6e737b" category="inline-link-rx"></block>참조하십시오.</block>
 </blocks>
