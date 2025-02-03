@@ -5023,4 +5023,164 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="dc5b2d9ecd49d3e5ee37059e2d80512f" category="section-title">Trident는 Kubernetes 클러스터 호환성을 보호합니다</block>
   <block id="9ac0dd27d420b7b48ca72e463ae95e18" category="inline-link">참조하십시오</block>
   <block id="664d28801abc192d5c7dfd7bfa758e98" category="admonition">Trident Protect를 설치하는 클러스터가 실행 중인 스냅샷 컨트롤러와 관련 CRD로 구성되어 있는지 확인합니다. 스냅샷 컨트롤러를 설치하려면 을<block ref="5d66944a2971d1b9b5f332812a6e737b" category="inline-link-rx"></block>참조하십시오.</block>
+  <block id="9560d298aea880d389acf56a45410c4b" category="summary">Trident와 스토리지 백엔드 간의 트래픽을 보호하도록 암호화를 구성할 수 있습니다.</block>
+  <block id="c994f1e00d22f7d8d4e7b3e7f50f8002" category="doc">Kerberos 전송 중 암호화</block>
+  <block id="c8ea4672c0efc6fee26c8648f609a829" category="paragraph">Kerberos 전송 중 암호화를 사용하면 관리 클러스터와 스토리지 백엔드 사이의 트래픽에 암호화를 활성화하여 데이터 액세스 보안을 강화할 수 있습니다.</block>
+  <block id="420bac2406e93da0c7c791aca209017d" category="paragraph">Trident는 ONTAP를 스토리지 백엔드로 위해 Kerberos 암호화를 지원합니다.</block>
+  <block id="796f801ad41f96aeb2e1a1950ed629e4" category="list-text">* 온-프레미스 ONTAP * - Trident는 NFSv3 및 NFSv4 연결을 통해 Red Hat OpenShift 및 업스트림 Kubernetes 클러스터에서 온-프레미스 ONTAP 볼륨으로의 Kerberos 암호화를 지원합니다.</block>
+  <block id="0a710c309a5f6dc65b056833a5208521" category="paragraph">따라서 스냅샷을 생성하고, 삭제하고, 크기 조정하고, 스냅샷, 클론 읽기 전용 클론 생성 및 NFS 암호화를 사용하는 볼륨 가져오기</block>
+  <block id="2aff02c8ceb99a9445937af9d4d8f286" category="section-title">사내 ONTAP 볼륨을 사용하여 전송 중인 Kerberos 암호화를 구성합니다</block>
+  <block id="330282591e8caa9814eb88ec524b89cf" category="paragraph">관리 클러스터와 온프레미스 ONTAP 스토리지 백엔드 사이의 스토리지 트래픽에 Kerberos 암호화를 활성화할 수 있습니다.</block>
+  <block id="daf34fb0fcb74d9bcf85abcebcc8e1f2" category="admonition">온-프레미스 ONTAP 스토리지 백엔드를 사용하는 NFS 트래픽에 대한 Kerberos 암호화는 스토리지 드라이버를 사용하는 경우에만<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 지원됩니다.</block>
+  <block id="0ff02d27ae5cac1a12c6c403fd55443c" category="list-text">유틸리티에 액세스할 수 있는지<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 확인합니다.</block>
+  <block id="bef890ed7cc869346d4b483cd3e3ab00" category="list-text">ONTAP 스토리지 백엔드에 대한 관리자 액세스 권한이 있어야 합니다.</block>
+  <block id="160b05c1b85ce34d702a3568614baec1" category="list-text">ONTAP 스토리지 백엔드에서 공유할 볼륨의 이름을 알고 있어야 합니다.</block>
+  <block id="1a69d38f7b46901c58e85d024e87b034" category="inline-link">데이터 LIF에서 Kerberos를 사용하도록 설정합니다</block>
+  <block id="d4a594e9e05807f063e76ba8e5520ce8" category="list-text">NFS 볼륨에 대한 Kerberos 암호화를 지원하는 ONTAP 스토리지 VM을 준비했는지 확인합니다. 자세한 내용은 을<block ref="6585cfb6b510f588abb97add305c4508" category="inline-link-rx"></block> 참조하십시오.</block>
+  <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">NetApp NFSv4의 향상된 기능 및 모범 사례 가이드 를 참조하십시오</block>
+  <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">Kerberos 암호화로 사용하는 NFSv4 볼륨이 올바르게 구성되어 있는지 확인합니다. 의 NetApp NFSv4 도메인 구성 섹션(13페이지)을<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>참조하십시오.</block>
+  <block id="7c67bfc9153da2055f6d09209f9853c7" category="section-title">ONTAP 엑스포트 정책을 추가 또는 수정합니다</block>
+  <block id="3afa4a2a4546fcf1b9a361d1bff9763b" category="paragraph">기존 ONTAP 엑스포트 정책에 규칙을 추가하거나, ONTAP 스토리지 VM 루트 볼륨뿐 아니라 업스트림 Kubernetes 클러스터와 공유된 ONTAP 볼륨에 대해 Kerberos 암호화를 지원하는 새 엑스포트 정책을 생성해야 합니다. 추가한 내보내기 정책 규칙 또는 새로 만든 내보내기 정책은 다음 액세스 프로토콜 및 액세스 권한을 지원해야 합니다.</block>
+  <block id="e21233a7f0d7fedb5883aea1dfed27cf" category="paragraph-title">액세스 프로토콜</block>
+  <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">NFS, NFSv3 및 NFSv4 액세스 프로토콜을 사용하여 엑스포트 정책을 구성합니다.</block>
+  <block id="baedff73fdfff23f65e8b80727cd3088" category="paragraph-title">액세스 세부 정보</block>
+  <block id="892969be437eb53b05f372cc0ae74d6c" category="paragraph">볼륨에 대한 필요에 따라 세 가지 Kerberos 암호화 버전 중 하나를 구성할 수 있습니다.</block>
+  <block id="fda32d078836aa6e69a3497be5f9cdca" category="list-text">* Kerberos 5 * - (인증 및 암호화)</block>
+  <block id="7d55fc39e32469f330297f866ec40e41" category="list-text">* Kerberos 5i * - (인증 및 ID 보호 암호화)</block>
+  <block id="ec7a355c2dad88f01ddce6c662ff507f" category="list-text">* Kerberos 5p * - (인증 및 암호화, ID 및 개인 정보 보호)</block>
+  <block id="43c969c43b32e3dd3bcf607fcbe4eb43" category="paragraph">적절한 액세스 권한을 사용하여 ONTAP 엑스포트 정책 규칙을 구성합니다. 예를 들어, 클러스터가 Kerberos 5i 및 Kerberos 5p 암호화가 혼합된 NFS 볼륨을 마운트하는 경우 다음 액세스 설정을 사용합니다.</block>
+  <block id="0370275db54735bcb50d5bfce36de4e6" category="cell">읽기 전용 액세스</block>
+  <block id="dbdb2754b99a3cb725e62ef04c72ee06" category="cell">읽기/쓰기 권한</block>
+  <block id="a3a9521b6675631e988004e7b8ffe7b4" category="cell">고급 사용자 액세스</block>
+  <block id="15395d0642f86c5992abbca5e56e2b29" category="cell">Unix</block>
+  <block id="00d23a76e43b46dae9ec7aa9dcbebb32" category="cell">활성화됨</block>
+  <block id="f22873ba6efee4accc10bd5a3d3ca9eb" category="cell">Kerberos 5i</block>
+  <block id="a98fd9001be872cb9763c171625ee881" category="cell">Kerberos 5p</block>
+  <block id="9a83b6e7170a551799b737b273fde5e1" category="paragraph">ONTAP 엑스포트 정책과 엑스포트 정책 규칙을 생성하는 방법은 다음 문서를 참조하십시오.</block>
+  <block id="bb53c6c29f127a298da7dd86bf00bb89" category="inline-link">엑스포트 정책을 생성합니다</block>
+  <block id="2065c7b470f4d228b592158785fc8c0b" category="list-text"><block ref="2065c7b470f4d228b592158785fc8c0b" category="inline-link-rx"></block></block>
+  <block id="8c47b652d31bca921bb367b0e3c5ec6d" category="inline-link">엑스포트 정책에 규칙 추가</block>
+  <block id="249db3ace916cc1363d388978a8b6c5e" category="list-text"><block ref="249db3ace916cc1363d388978a8b6c5e" category="inline-link-rx"></block></block>
+  <block id="c21c2b66c343dfe9db6298e59c2cc767" category="section-title">스토리지 백엔드를 생성합니다</block>
+  <block id="449396632614b1e0731c51704890f8bd" category="paragraph">Kerberos 암호화 기능을 포함하는 Trident 스토리지 백엔드 구성을 만들 수 있습니다.</block>
+  <block id="0848c0a5d21711a3f8967a344553c492" category="paragraph">Kerberos 암호화를 구성하는 스토리지 백엔드 구성 파일을 만들 때 매개 변수를 사용하여 세 가지 Kerberos 암호화 버전 중 하나를 지정할 수<block ref="21f59c061af833af5de20556ce76052d" prefix=" " category="inline-code"></block> 있습니다.</block>
+  <block id="619885da64e4ba4b0df04a00d78079b7" category="list-text"><block ref="47587c842cb0a2574a5a4c7c644b006d" prefix="" category="inline-code"></block> (인증 및 암호화)</block>
+  <block id="aa734ef649b1255faccfc198980bf49a" category="list-text"><block ref="600550ee922e257041b75142ddab2319" prefix="" category="inline-code"></block> (인증 및 암호화, ID 보호)</block>
+  <block id="4197df0e0ac8f9480069ee1e0dc22543" category="list-text"><block ref="b148e7f5a01830ae530070588af5e9e6" prefix="" category="inline-code"></block> (인증 및 암호화, ID 및 개인 정보 보호)</block>
+  <block id="c99e9f5ade1b20705438ad6882d112c2" category="paragraph">Kerberos 수준을 하나만 지정하십시오. 매개 변수 목록에서 Kerberos 암호화 수준을 두 개 이상 지정하면 첫 번째 옵션만 사용됩니다.</block>
+  <block id="926a7d5402fb3ed0da8fcd630e3a8f8c" category="list-text">관리되는 클러스터에서 다음 예제를 사용하여 스토리지 백엔드 구성 파일을 생성합니다. 괄호 안의 값을 사용자 환경의 정보로 대체:</block>
+  <block id="2cd636101227e18554e5c5351bf5bbe3" category="list-text">이전 단계에서 생성한 구성 파일을 사용하여 백엔드를 생성합니다.</block>
+  <block id="3204b0a88f0c8e6cb89ef2653173ddf1" category="paragraph">스토리지 클래스를 만들어 Kerberos 암호화를 사용하여 볼륨을 프로비저닝할 수 있습니다.</block>
+  <block id="03111bbdda72125f143e084557265c1c" category="paragraph">저장소 클래스 개체를 만들 때 매개 변수를 사용하여 Kerberos 암호화의 세 가지 버전 중 하나를 지정할 수<block ref="e1d3d66c5926aa7fbc3186da8f9b476b" prefix=" " category="inline-code"></block> 있습니다.</block>
+  <block id="85eee746a5d30d5149d419a3dfd2fe4e" category="list-text"><block ref="ebd2fabd7ee9d78e670334fba38c5a6b" prefix="" category="inline-code"></block> (인증 및 암호화)</block>
+  <block id="24dac19871e9929a42267b538a60ebe5" category="list-text"><block ref="82f5845550ca9ab77ce797c16bd7bca1" prefix="" category="inline-code"></block> (인증 및 암호화, ID 보호)</block>
+  <block id="c36d9d41da2e174bfa8b3338450fb45c" category="list-text"><block ref="7a1dedb8f6c22fd4833b45267ad3b01a" prefix="" category="inline-code"></block> (인증 및 암호화, ID 및 개인 정보 보호)</block>
+  <block id="4a2e7c9ecf75ac18d4daec2783256280" category="paragraph">Kerberos 수준을 하나만 지정하십시오. 매개 변수 목록에서 Kerberos 암호화 수준을 두 개 이상 지정하면 첫 번째 옵션만 사용됩니다. 스토리지 백엔드 구성에서 지정한 암호화 수준이 스토리지 클래스 객체에 지정한 레벨과 다른 경우 스토리지 클래스 객체가 우선합니다.</block>
+  <block id="0bae6577bb0c45b6f2d82896713df9f9" category="list-text">다음 예제를 사용하여 StorageClass Kubernetes 개체를 생성합니다.</block>
+  <block id="bd9c5e9bd5f130a6fbdbcaeb04656652" category="list-text">스토리지 클래스를 생성합니다.</block>
+  <block id="2472867b1c2b8a486fe64cfc08afeba5" category="list-text">스토리지 클래스가 생성되었는지 확인합니다.</block>
+  <block id="0a44f30bac4e15e0464a80627bef5882" category="section-title">볼륨 프로비저닝</block>
+  <block id="37bd6ab74d66efd877ea77c0e69e593c" category="paragraph">스토리지 백엔드와 스토리지 클래스를 생성한 후 이제 볼륨을 프로비저닝할 수 있습니다. 자세한 내용은 을<block ref="70405bfb2744633a336a6c9abdd1df6e" category="inline-link-rx"></block>참조하십시오.</block>
+  <block id="fe10ad21eb1ce607c403a8d609d5ab3e" category="section-title">Azure NetApp Files 볼륨과 함께 전송 중인 Kerberos 암호화를 구성합니다</block>
+  <block id="cd21e25bc313d3805456542eac624499" category="paragraph">관리 클러스터와 단일 Azure NetApp Files 스토리지 백엔드 또는 Azure NetApp Files 스토리지 백엔드의 가상 풀 사이의 스토리지 트래픽에 Kerberos 암호화를 활성화할 수 있습니다.</block>
+  <block id="04379b5e9a5ec6b970752d2b8d0341c8" category="list-text">관리되는 Red Hat OpenShift 클러스터에서 Trident를 활성화했는지 확인합니다.</block>
+  <block id="6c32a3d0f1a665987b98dde5a0f96d7d" category="inline-link">Azure NetApp Files 설명서</block>
+  <block id="aa63a31f222305a4ce10d8c1020ab1fd" category="list-text">요구 사항을 확인하고 의 지침에 따라 Kerberos 암호화용 Azure NetApp Files 스토리지 백엔드를 준비했는지<block ref="54b351b1767d2d50eb8c87e19c20164c" category="inline-link-rx"></block>확인합니다.</block>
+  <block id="4f07c8d51fef64025d4b746305177733" category="paragraph">Kerberos 암호화 기능을 포함하는 Azure NetApp Files 스토리지 백엔드 구성을 만들 수 있습니다.</block>
+  <block id="5c6eaa8dd4c4134f6ad836e97ffdee13" category="paragraph">Kerberos 암호화를 구성하는 스토리지 백엔드 구성 파일을 만들 때 다음 두 가지 가능한 수준 중 하나에 적용되도록 정의할 수 있습니다.</block>
+  <block id="bc0557be41ea94e344d7ece1f311b7d4" category="list-text">필드를 사용하는 * 스토리지 백엔드 레벨 *<block ref="6a60a6d9955ef9fce24cf4e86efed7af" prefix=" " category="inline-code"></block></block>
+  <block id="e30ee9a2b9976217a5fe28b412fe04d6" category="list-text">필드를 사용하는 * 가상 풀 레벨 *<block ref="533988f6253fcffab6270c1aafb50970" prefix=" " category="inline-code"></block></block>
+  <block id="64864cec765a0e5c421369098904873c" category="paragraph">가상 풀 레벨에서 구성을 정의하면 스토리지 클래스의 레이블을 사용하여 풀이 선택됩니다.</block>
+  <block id="082ccae8192fda90d271d92200b3a7dd" category="paragraph">두 레벨에서 Kerberos 암호화의 세 가지 버전 중 하나를 지정할 수 있습니다.</block>
+  <block id="853434fc4aabccb1e3341f56ef2a9424" category="list-text"><block ref="9ce0da43b8420d1a89f0d00da04312a2" prefix="" category="inline-code"></block> (인증 및 암호화)</block>
+  <block id="44ea74e03aa9994870273996b8770ef6" category="list-text"><block ref="6bbaa5deea5e26abf8837d31bd265b6f" prefix="" category="inline-code"></block> (인증 및 암호화, ID 보호)</block>
+  <block id="e22427c81cd5155061fad66ed3f13f52" category="list-text"><block ref="42b55bed7d0514cd2e2189a3edc9d87b" prefix="" category="inline-code"></block> (인증 및 암호화, ID 및 개인 정보 보호)</block>
+  <block id="c51fc706f0eb21d747d3ff2e2bb6c38b" category="list-text">관리되는 클러스터에서 스토리지 백엔드(스토리지 백엔드 레벨 또는 가상 풀 레벨)를 정의해야 하는 위치에 따라 다음 예제 중 하나를 사용하여 스토리지 백엔드 구성 파일을 생성합니다. 괄호 안의 값을 사용자 환경의 정보로 대체:</block>
+  <block id="d51a5db438981d465f8fecc7ecbeb054" category="open-title">스토리지 백엔드 레벨의 예</block>
+  <block id="83aab9b6ffc8c65b79350e009c49e5f4" category="open-title">가상 풀 레벨 예</block>
+  <block id="1738a6ff1f0b418ce16cf74aabdceff1" category="section-title">스냅샷에서 전체 볼륨 복원</block>
+  <block id="f29961e077241efec95d259658aa48f1" category="paragraph">Trident는 (TASR) CR을 사용하여 스냅샷에서 제자리에서 신속하게 볼륨을 복원할 수 있도록<block ref="2aabb3b01d0d54317a9eeef910e001f6" prefix=" " category="inline-code"></block> 합니다. 이 CR은 필수 Kubernetes 조치로 작동하며 작업이 완료된 후에도 유지되지 않습니다.</block>
+  <block id="0219777660eb822cd45c74808c60e5e6" category="paragraph">Trident는<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> , ,<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>, , ,<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block><block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 에서 스냅샷 복구를<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 지원합니다.<block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block>,<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 및<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> 드라이버.</block>
+  <block id="e0bc0596a7d966cd8dab3ee0e924c9b5" category="paragraph">바인딩된 PVC 및 사용 가능한 볼륨 스냅샷이 있어야 합니다.</block>
+  <block id="d785d18f53979794a4ef9e08d186e3c4" category="list-text">PVC 상태가 Bound인지 확인한다.</block>
+  <block id="d0f2b7254060d8a37c98c1eb4289586d" category="list-text">볼륨 스냅샷을 사용할 준비가 되었는지 확인합니다.</block>
+  <block id="da6aadede1bc870c9042c660fdf93f25" category="list-text">TASR CR을 생성합니다. 이 예에서는 PVC 및 볼륨 스냅샷에 대한 CR을<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block><block ref="06f2874897d3ec8426ec85e0ffda5544" prefix=" " category="inline-code"></block>생성합니다.</block>
+  <block id="68fb76b60d3c1f9302a04ef3eb761c08" category="admonition">TASR CR은 PVC &amp; VS가 있는 네임스페이스에 있어야 합니다.</block>
+  <block id="0c9991859e53bf37c58a2fd1233eb478" category="list-text">CR을 적용하여 스냅샷에서 복원합니다. 이 예는 스냅샷에서<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block>복구합니다.</block>
+  <block id="5dfd751b8f6ed15f558be3e46812461b" category="paragraph">Trident는 스냅샷에서 데이터를 복원합니다. 스냅샷 복구 상태를 확인할 수 있습니다.</block>
+  <block id="91f853f4fc1dc83a1a2f28c65af59d28" category="list-text">대부분의 경우 Trident는 장애 발생 시 작업을 자동으로 재시도하지 않습니다. 작업을 다시 수행해야 합니다.</block>
+  <block id="c83b74c2020dd836f5b401ecda0da78c" category="list-text">관리자 권한이 없는 Kubernetes 사용자는 애플리케이션 네임스페이스에서 TASR CR을 생성할 수 있는 관리자의 권한을 받아야 할 수 있습니다.</block>
+  <block id="cff310c77e35cf2f693ebbb39c78e89f" category="summary">Trident에서는 소스 볼륨과 타겟 볼륨 간의 미러 관계를 생성하여 재해 복구용으로 볼륨을 복제할 수 있도록 지원합니다.</block>
+  <block id="50e2eea9ba53d70147772db1c5d25f79" category="doc">SnapMirror를 사용하여 볼륨을 복제합니다</block>
+  <block id="4f29610afffeab1dca63a82a40791008" category="paragraph">Trident은 재해 복구에 대비해 데이터를 복제하기 위해 한 클러스터의 소스 볼륨과 피어링된 클러스터의 타겟 볼륨 간의 미러링 관계를 지원합니다. 이름이 지정된 CRD(사용자 지정 리소스 정의)를 사용하여 다음 작업을 수행할 수 있습니다.</block>
+  <block id="a682d8ef86abcae6c5a1db6186c5f02b" category="list-text">볼륨 간 미러 관계 생성(PVC)</block>
+  <block id="31a8f98d3378661a5b8abf15438f0bca" category="list-text">볼륨 간 미러 관계를 제거합니다</block>
+  <block id="a6349012892be516e5729d501a9649a7" category="list-text">미러 관계를 해제합니다</block>
+  <block id="2597cb6d27f572bb6d7d2fd15f414795" category="list-text">재해 상태(페일오버) 중에 2차 볼륨 승격</block>
+  <block id="40f7c55be912a395aed2502927d3fcfa" category="list-text">계획된 페일오버 또는 마이그레이션 중에 클러스터에서 클러스터로 애플리케이션의 무손실 전환 수행</block>
+  <block id="d193cd9a2432eca22e5cf0d06dcee1e6" category="section-title">복제 사전 요구 사항</block>
+  <block id="55be807bf2be012ff44a04449cc5e8a8" category="paragraph">시작하기 전에 다음과 같은 사전 요구 사항이 충족되는지 확인하십시오.</block>
+  <block id="3404cce75db90acf6a9d52860721a139" category="list-title">ONTAP 클러스터</block>
+  <block id="fbcc2a3b7506e5e36eb6f61b69bb75da" category="list-text">* Trident *: Trident 버전 22.10 이상이 ONTAP를 백엔드로 활용하는 소스 및 대상 Kubernetes 클러스터 모두에 있어야 합니다.</block>
+  <block id="5cc8ada79224d850ecd22fd22e550c47" category="list-title">피어링</block>
+  <block id="02b05cdd8f0a8c426f307085cc1004f7" category="list-text">* 클러스터 및 SVM *: ONTAP 스토리지 백엔드를 피어링해야 합니다. 자세한 내용은 을<block ref="60333a598df416e49fbceb5a88dce370" category="inline-link-rx"></block> 참조하십시오.</block>
+  <block id="792f00dfd96560df18fe1c6b56861893" category="list-text">* Trident 및 SVM *: 피어링된 원격 SVM을 타겟 클러스터의 Trident에서 사용할 수 있어야 합니다.</block>
+  <block id="0c5e1b5bc54261ccadd2a72af1047ded" category="list-title">지원되는 드라이버</block>
+  <block id="57601c13c06c6ac6e23efaab44ced427" category="list-text">볼륨 복제는 ONTAP-NAS 및 ONTAP-SAN 드라이버에서 지원됩니다.</block>
+  <block id="3ce5b83f8896ef0d2e356d3972ec8898" category="section-title">대칭 복사된 PVC를 작성합니다</block>
+  <block id="427a1ab7f39ee4f2dd7a0b7e35f572da" category="paragraph">다음 단계를 수행하고 CRD 예제를 사용하여 운영 볼륨과 보조 볼륨 간의 미러 관계를 생성합니다.</block>
+  <block id="4dc69f665f0d76c17a577a352dd15b25" category="list-text">운영 Kubernetes 클러스터에서 다음 단계를 수행합니다.</block>
+  <block id="cffc5263be00a76539edeeff72190d54" category="list-text">매개 변수를 사용하여 StorageClass 개체를<block ref="23041ca302bab724a5a0a4ee923c745d" prefix=" " category="inline-code"></block> 만듭니다.</block>
+  <block id="f1fe26832c26eb686c85bd72da8a62f1" category="list-text">이전에 생성된 StorageClass를 사용하여 PVC를 생성합니다.</block>
+  <block id="a306778c7affcc4dd2329c7f1e9a6389" category="list-text">로컬 정보로 MirrorRelationship CR을 생성합니다.</block>
+  <block id="12551ccb4392cf7715384812c34ff7dc" category="paragraph">Trident는 볼륨의 내부 정보와 볼륨의 현재 데이터 보호(DP) 상태를 가져온 다음 MirrorRelationship의 상태 필드를 채웁니다.</block>
+  <block id="7e36329a511f28054ceb0cb2aba7de3a" category="list-text">TridentMirrorRelationship CR을 가져와 PVC의 내부 이름과 SVM을 얻습니다.</block>
+  <block id="ce01c03f932076e82348fc5aaefacc7d" category="list-text">보조 Kubernetes 클러스터에서 다음 단계를 수행합니다.</block>
+  <block id="dbe7fac150e57be9bc0d8e046792f4c3" category="list-text">trident.netapp.io/replication: true 매개 변수를 사용하여 StorageClass 를 만듭니다.</block>
+  <block id="01d68e0f9630c032dc8a33358e46e65b" category="list-text">대상 및 소스 정보를 사용하여 MirrorRelationship CR을 생성합니다.</block>
+  <block id="b4dcd7f617380594be36d544e6823841" category="paragraph">Trident에서 구성된 관계 정책 이름(또는 ONTAP의 경우 기본값)을 사용하여 SnapMirror 관계를 생성하고 초기화합니다.</block>
+  <block id="4ba5d2a91c95149a7ad924ebd0d9503d" category="list-text">이전에 생성한 StorageClass를 사용하여 PVC를 생성하여 보조(SnapMirror 대상) 역할을 합니다.</block>
+  <block id="14c271d9e62dcf6baaab0fde456f080f" category="paragraph">Trident는 TridentMirrorRelationship CRD를 확인하고 관계가 없는 경우 볼륨을 생성하지 못합니다. 이 관계가 있으면 Trident은 새로운 FlexVol volume을 MirrorRelationship에 정의된 원격 SVM과 피어링된 SVM에 배치하도록 보장합니다.</block>
+  <block id="e71d1a5cbaac30e63ed507e4b62c705f" category="section-title">볼륨 복제 상태입니다</block>
+  <block id="d802b3b47bb3c6b52714c9817598fcb8" category="paragraph">Trident Mirror Relationship(TMR)은 PVC 간 복제 관계의 한쪽 끝을 나타내는 CRD입니다. 대상 TMR에는 원하는 상태를 Trident에 알려주는 상태가 있습니다. 대상 TMR의 상태는 다음과 같습니다.</block>
+  <block id="546afd3b22376f948ae8d790e441d7da" category="list-text">* 설립 * : 로컬 PVC는 미러 관계의 대상 볼륨이며, 이것은 새로운 관계입니다.</block>
+  <block id="724cfb5ec8bac42a80699bb79c4eccb9" category="list-text">* 승진된 * : 로컬 PVC는 현재 유효한 미러 관계가 없는 ReadWrite 및 마운트 가능합니다.</block>
+  <block id="d323366aa32e60d08a0f93bda543af47" category="list-text">* 재설립 * : 로컬 PVC는 미러 관계의 대상 볼륨이며 이전에 해당 미러 관계에 있었습니다.</block>
+  <block id="4c3cd5b62a43e82e03fffa6b238ed918" category="list-text">대상 볼륨이 대상 볼륨 내용을 덮어쓰므로 대상 볼륨이 소스 볼륨과 관계가 있는 경우 다시 설정된 상태를 사용해야 합니다.</block>
+  <block id="b2e7dc07859cd924ca5706b299986e57" category="list-text">볼륨이 소스와 이전에 관계가 없는 경우 재설정된 상태가 실패합니다.</block>
+  <block id="93f9c6ccc7d85e709509db31891ae5eb" category="section-title">비계획 페일오버 중에 보조 PVC를 승격합니다</block>
+  <block id="4a76c8d930ec18b5aedc26b5d8e5246f" category="paragraph">보조 Kubernetes 클러스터에서 다음 단계를 수행합니다.</block>
+  <block id="78ac02218b5a9367bdcb4881538477cc" category="list-text">TridentMirrorRelationship의 _spec.state_field를 로<block ref="1fe57d6202c7cfbb0ee344b1e0a6fb37" prefix=" " category="inline-code"></block>업데이트합니다.</block>
+  <block id="ffe4cfc202d643b50342b93a4a11a82f" category="section-title">계획된 페일오버 중에 보조 PVC를 승격합니다</block>
+  <block id="1d60b89a076d7f30b8efdef50e842f68" category="paragraph">계획된 장애 조치(마이그레이션) 중에 다음 단계를 수행하여 보조 PVC를 승격합니다.</block>
+  <block id="3310d9a60c164accb7c262ab6e9fbc65" category="list-text">운영 Kubernetes 클러스터에서 PVC의 스냅샷을 생성하고 스냅샷이 생성될 때까지 기다립니다.</block>
+  <block id="8b17b79902950942165541a8ab704363" category="list-text">운영 Kubernetes 클러스터에서 SnapshotInfo CR을 생성하여 내부 세부 정보를 가져옵니다.</block>
+  <block id="678346d79faaa65b2da52e6d7ddce845" category="list-text">보조 Kubernetes 클러스터에서 _TridentMirrorRelationship_CR 의 _spec.state_field를 _promitted_ 및 _spec.promotedSnapshotHandle_ 으로 업데이트하여 스냅샷의 내부 이름으로 업데이트합니다.</block>
+  <block id="7b007b14980acd66e9301e02a5670f47" category="list-text">보조 Kubernetes 클러스터에서 승격될 TridentMirrorRelationship의 상태(status.state 필드)를 확인합니다.</block>
+  <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">페일오버 후 미러 관계를 복구합니다</block>
+  <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">미러 관계를 복구하기 전에 새 1차 사이트로 만들 측면을 선택합니다.</block>
+  <block id="1c7011adbcc0afa258396aff4f10266b" category="list-text">보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.remoteVolumeHandle_field 값이 업데이트되었는지 확인합니다.</block>
+  <block id="ffb25f01fda2538ae98bc0c4b4d465a6" category="list-text">보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.mirror_field를 로<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>업데이트합니다.</block>
+  <block id="41a593c0bede63aac2726a18e4599087" category="section-title">추가 작업</block>
+  <block id="567147b40ff26562a6dfcddbde29e62e" category="paragraph">Trident는 1차 볼륨과 2차 볼륨에서 다음 작업을 지원합니다.</block>
+  <block id="253093d00b66ff2357df5085c04b2758" category="section-title">1차 PVC를 새로운 2차 PVC로 복제합니다</block>
+  <block id="301dcece9e67241c29ebbbac8a94274e" category="paragraph">이미 1차 PVC와 2차 PVC가 있는지 확인하십시오.</block>
+  <block id="7f1c32cba6b98d1db7f3dfda1df76189" category="list-text">설정된 보조(대상) 클러스터에서 PersistentVolumeClaim 및 TridentMirrorRelationship CRD를 삭제합니다.</block>
+  <block id="e655fd5342cff178f54ae5f5b2a3b7b6" category="list-text">운영(소스) 클러스터에서 TridentMirrorRelationship CRD를 삭제합니다.</block>
+  <block id="3eb69a135044d3f308d140dccb1dbe5e" category="list-text">설정하려는 새 2차(대상) PVC에 대해 1차(소스) 클러스터에 새 TridentMirrorRelationship CRD를 생성합니다.</block>
+  <block id="92c650dfb6284b5d24ed0e83a2338fa0" category="section-title">대칭 복사, 1차 또는 2차 PVC의 크기를 조정합니다</block>
+  <block id="66990a43216d28b5b6818b021d397574" category="paragraph">PVC는 평소대로 크기를 조정할 수 있으며, 데이터 양이 현재 크기를 초과할 경우 ONTAP는 자동으로 대상 flevxols를 확장합니다.</block>
+  <block id="4e2626fed5da19a4be8255f16a331609" category="section-title">PVC에서 복제를 제거합니다</block>
+  <block id="e1abf7fa65d845d34c33d593ed070453" category="paragraph">복제를 제거하려면 현재 보조 볼륨에 대해 다음 작업 중 하나를 수행합니다.</block>
+  <block id="b3dd2c563dffb09f03c72bc16a72be62" category="list-text">2차 PVC에서 MirrorRelationship을 삭제합니다. 이렇게 하면 복제 관계가 끊어집니다.</block>
+  <block id="413ab8e64d0d4ccb3f08ef2a8653a525" category="list-text">또는 spec.state 필드를 _promessed_로 업데이트합니다.</block>
+  <block id="c00cff9971607d7a0409066a0ecc3bcd" category="section-title">PVC 삭제(이전에 미러링됨)</block>
+  <block id="e52ffc7f9894586bbf7c4260d92073c4" category="paragraph">Trident는 복제된 PVC를 확인하고 볼륨 삭제를 시도하기 전에 복제 관계를 해제합니다.</block>
+  <block id="8ec9c60105332c1be8facc42b496e14b" category="section-title">TMR을 삭제합니다</block>
+  <block id="a956a14d229badbbde1032651b3586fd" category="paragraph">미러링된 관계의 한 쪽에서 TMR을 삭제하면 Trident에서 삭제를 완료하기 전에 나머지 TMR이 _PROJED_STATE로 전환됩니다. 삭제하도록 선택한 TMR이 이미 _PROJED_STATE에 있는 경우 기존 미러 관계가 없으며 TMR이 제거되고 Trident가 로컬 PVC를 _ReadWrite_로 승격합니다. 이렇게 삭제하면 ONTAP의 로컬 볼륨에 대한 SnapMirror 메타데이터가 해제됩니다. 이 볼륨이 향후 미러 관계에 사용될 경우 새 미러 관계를 생성할 때 _establed_volume 복제 상태의 새 TMR을 사용해야 합니다.</block>
+  <block id="d41660149eb8930ad76a1dfe3dc5f2e3" category="section-title">ONTAP가 온라인 상태일 때 미러 관계를 업데이트합니다</block>
+  <block id="7079164c5ba86439b0719782591106dd" category="paragraph">미러 관계는 설정된 후 언제든지 업데이트할 수 있습니다. 또는 필드를 사용하여 관계를 업데이트할 수<block ref="abb3a949c6d70e3e5d92f4ad2bf143a3" prefix=" " category="inline-code"></block><block ref="ff0b4e3d4dfe8f6074b6943947345d4d" prefix=" " category="inline-code"></block> 있습니다. 대상 볼륨을 일반 ReadWrite 볼륨으로 승격할 때 _promotedSnapshotHandle_을 사용하여 현재 볼륨을 복구할 특정 스냅샷을 지정할 수 있습니다.</block>
+  <block id="4eecab048a7c90cfb92e0f04884686e8" category="section-title">ONTAP이 오프라인일 때 미러 관계를 업데이트합니다</block>
+  <block id="e782fcb9f3e7e8fa8b5ccdb3169c0e42" category="paragraph">Trident이 ONTAP 클러스터에 직접 연결되지 않은 상태에서 CRD를 사용하여 SnapMirror 업데이트를 수행할 수 있습니다. 다음 TridentActionMirrorUpdate 예제 형식을 참조하십시오.</block>
+  <block id="bc08468157c4a9e3a30eed7ba64cc309" category="paragraph"><block ref="1f9dfae8a369525bce4996df40963532" prefix="" category="inline-code"></block> TridentActionMirrorUpdate CRD의 상태를 반영합니다. 이 값은 _SUCCEEDED_,_In Progress_ 또는_Failed_에서 가져올 수 있습니다.</block>
 </blocks>
