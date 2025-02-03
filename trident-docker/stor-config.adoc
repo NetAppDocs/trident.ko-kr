@@ -311,7 +311,8 @@ Trident 사용자 지정 역할 생성에 대한 자세한 내용은 을 link:ht
 
 . Trident 사용자에 대한 사용 이름 만들기:
 +
-`security login create -username <user_name\> -application ontapi -authmethod <password\> -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application ontapi -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application http -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
 
 . 역할을 사용자에게 매핑:
 +

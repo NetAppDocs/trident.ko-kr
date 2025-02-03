@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/trident-fsx-install-trident.html 
-keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident add-on, Astra Trident EKS add-on, Trident AWS EKS add-on 
+keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident add-on, Trident EKS add-on, Trident AWS EKS add-on 
 summary: 'NetApp ONTAP용 Amazon FSx와 Astra Trident를 사용하면 Amazon EKS(Elastic Kubernetes Service)에서 실행되는 Kubernetes 클러스터가 ONTAP에서 지원하는 블록 및 파일 영구 볼륨을 프로비저닝할 수 있습니다.' 
 ---
-= Astra Trident를 설치합니다
+= Trident를 설치합니다
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,9 +12,9 @@ summary: 'NetApp ONTAP용 Amazon FSx와 Astra Trident를 사용하면 Amazon EKS
 
 
 [role="lead"]
-Astra Trident는 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다.
+Trident은 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다.
 
-다음 방법 중 하나를 사용하여 Astra Trident를 설치할 수 있습니다.
+다음 방법 중 하나를 사용하여 Trident를 설치할 수 있습니다.
 
 * 헬름
 * EKS 추가 기능
@@ -26,11 +26,11 @@ If you want to make use of the snapshot functionality, install the CSI snapshot 
 ----
 
 
-== Helm을 통해 Astra Trident을 설치합니다
+== Helm을 통해 Trident를 설치합니다
 
-. Astra Trident 설치 관리자 패키지를 다운로드합니다
+. Trident 설치 프로그램 패키지를 다운로드합니다
 +
-Astra Trident 설치 프로그램 패키지에는 Trident 운영자를 구축하고 Astra Trident를 설치하는 데 필요한 모든 것이 들어 있습니다. GitHub의 Assets 섹션에서 Astra Trident 설치 프로그램의 최신 버전을 다운로드하고 압축을 풉니다.
+Trident 설치 프로그램 패키지에는 Trident 운영자를 배포하고 Trident를 설치하는 데 필요한 모든 것이 포함되어 있습니다. GitHub의 자산 섹션에서 최신 버전의 Trident 설치 프로그램을 다운로드하고 압축을 풉니다.
 `wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.10.0.tar.gz`
 `tar -xf trident-installer-24.10.0.tar.gz`
 `cd trident-installer`
@@ -41,7 +41,7 @@ Astra Trident 설치 프로그램 패키지에는 Trident 운영자를 구축하
 `export CI="'eks.amazonaws.com/role-arn: arn:aws:iam::<accountID>:role/<AmazonEKS_FSxN_CSI_DriverRole>'"`
 
 +
-다음 예에서는 Astra Trident를 설치하고 플래그를 `$CP`, 및 `cloud-identity` 로 `$CI` 설정합니다 `cloud-provider`.
+다음 예에서는 Trident를 설치하고 플래그를 `$CP` , 및 `cloud-identity` 로 설정합니다 `cloud-provider`. `$CI`
 
 +
 [listing]
@@ -67,15 +67,15 @@ trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT
 
 
 
-== EKS 애드온을 통해 Astra Trident를 설치합니다
+== EKS 애드온을 통해 Trident를 설치합니다
 
-Astra Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것을 검증했습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.
+Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것이 검증되었습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.
 
 
 
 === 필수 구성 요소
 
-AWS EKS용 Astra Trident 애드온을 구성하기 전에 다음 사항을 확인하십시오.
+AWS EKS용 Trident 애드온을 구성하기 전에 다음 사항이 있는지 확인하십시오.
 
 * 애드온 가입이 있는 Amazon EKS 클러스터 계정입니다
 * AWS 마켓플레이스에 대한 AWS 권한:
@@ -89,13 +89,13 @@ AWS EKS용 Astra Trident 애드온을 구성하기 전에 다음 사항을 확�
 
 
 
-=== AWS용 Astra Trident 애드온 을 지원합니다
+=== AWS에 대해 Trident 애드온을 활성화합니다
 
 [role="tabbed-block"]
 ====
 .EKS 클러스터
 --
-다음 명령 예에서는 Astra Trident EKS 애드온을 설치합니다.
+다음 명령 예에서는 Trident EKS 추가 기능을 설치합니다.
 
 `eksctl create addon --cluster clusterName --name netapp_trident-operator --version v24.10.0-eksbuild`
 `eksctl create addon --cluster clusterName --name netapp_trident-operator --version v24.10.0-eksbuild.1` (전용 버전 포함)
@@ -148,7 +148,7 @@ add-on.json
    "cloudProvider": "AWS"}"
 }
 ----
-. Astra Trident EKS 애드온 설치"
+. Trident EKS 추가 기능 설치"
 +
 `aws eks create-addon --cli-input-json file://add-on.json`
 
@@ -158,7 +158,7 @@ add-on.json
 ====
 
 
-=== Astra Trident EKS 애드온을 업데이트합니다
+=== Trident EKS 추가 기능을 업데이트합니다
 
 [role="tabbed-block"]
 ====
@@ -212,7 +212,7 @@ netapp_trident-operator    v24.10.0-eksbuild.1    ACTIVE    0       {"cloudIdent
 ====
 
 
-=== Astra Trident EKS 애드온을 제거/제거합니다
+=== Trident EKS 추가 기능을 제거/제거합니다
 
 Amazon EKS 애드온을 제거하는 두 가지 옵션이 있습니다.
 
@@ -227,7 +227,7 @@ NOTE: 애드온에 IAM 계정이 연결되어 있으면 IAM 계정이 제거되�
 ====
 .EKS 클러스터
 --
-다음 명령을 실행하면 Astra Trident EKS 애드온이 제거됩니다.
+다음 명령을 실행하면 Trident EKS 추가 기능이 제거됩니다.
 `eksctl delete addon --cluster K8s-arm --name netapp_trident-operator`
 
 --
@@ -236,7 +236,7 @@ NOTE: 애드온에 IAM 계정이 연결되어 있으면 IAM 계정이 제거되�
 . 에서 Amazon EKS 콘솔을 엽니다 https://console.aws.amazon.com/eks/home#/clusters[].
 . 왼쪽 탐색 창에서 * 클러스터 * 를 클릭합니다.
 . NetApp Trident CSI 추가 기능을 제거할 클러스터의 이름을 클릭합니다.
-. Add-ons * 탭을 클릭한 다음 * Astra Trident by NetApp * 를 클릭합니다
+. 추가 기능 * 탭을 클릭한 다음 * Trident by NetApp * 를 클릭합니다
 . 제거 * 를 클릭합니다.
 . Remove netapp_trident-operator confirmation * 대화 상자에서 다음을 수행합니다.
 +

@@ -4066,7 +4066,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="dd0d8a6eeca2940c60cd0ac812afed1d" category="paragraph">클라우드 ID를 사용하면 Kubernetes Pod에서 명시적 Google Cloud 자격 증명을 제공하지 않고 워크로드 ID로 인증하여 Google Cloud 리소스에 액세스할 수 있습니다.</block>
   <block id="299b031aaa6fc8a06127791cf12decf9" category="paragraph">Google Cloud에서 클라우드 ID를 활용하려면 다음이 필요합니다.</block>
   <block id="df181b0b41273ec7065dab05b4a6da10" category="list-text">GKE를 사용하여 구축된 Kubernetes 클러스터</block>
-  <block id="6eb529d6f5187e24c957f3b133e1062f" category="list-text">GKE 클러스터에 구성된 워크로드 ID 및 oidc-발급자입니다.</block>
   <block id="fc31ccc09567730ecfa42419a1026aa9" category="paragraph"><block ref="9e6b25667a12ee82b7da8f90b3adfb4d" prefix="" category="inline-code"></block><block ref="c3acb2284e72e0995ef8792a482b13ee" prefix=" " category="inline-code"></block></block>
   <block id="ff87a1c47933f4d6895655dd61ad9d5c" category="summary">제공된 샘플 구성을 사용하여 Trident 설치를 위한 백엔드로 Cloud Volumes Service for Google Cloud를 구성하는 방법에 대해 알아보십시오.</block>
   <block id="6385dfeab6eb1cdf5e0b269b83c02870" category="paragraph">제공된 샘플 구성을 사용하여 Trident 설치를 위한 백엔드로 NetApp Cloud Volumes Service for Google Cloud를 구성하는 방법에 대해 알아보십시오.</block>
@@ -4294,7 +4293,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="4182ceafe6e7afa67be49e639a8fa3a9" category="sidebar">Trident 통합</block>
   <block id="e41a00202d1138f85f18e0c7afdb0955" category="sidebar">EKS 클러스터에 Trident EKS 추가 기능을 구성합니다</block>
   <block id="b89f71465b55ef1dc894a4364041d9f0" category="paragraph">이 예에서는 GKE 클러스터의 클라우드 ID와 함께 사용할 Trident를 설치합니다.</block>
-  <block id="307609ac4b5772929e57321613502a4c" category="list-text"><block ref="9856712fdf7563a4074fc130ed9f0755" prefix=" " category="inline-code"></block>워크로드 ID를 지정하고<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block> 지정하는 가 포함된 Trident가 설치되었습니다.<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block></block>
   <block id="3bd49228e6aff48852b023fa1ceaf62c" category="paragraph">Trident 연산자를 사용하여 Trident를 설치하려면<block ref="244895464fd1d6c7ff5a2044c324c0fc" prefix=" " category="inline-code"></block> 를<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block> 로<block ref="9856712fdf7563a4074fc130ed9f0755" prefix=" " category="inline-code"></block> 설정하고 를 로<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block><block ref="90f8fb110d694743ec7a069beef76b7b" prefix=" " category="inline-code"></block> 설정합니다.</block>
   <block id="7ba174e1291062b960ec1b8607b6e1e2" category="paragraph">다음 예에서는 환경 변수를 사용하여 Trident를 설치하고 를 GCP로<block ref="e7b51407a2bfaa34b58afce0107e9a5f" prefix=" " category="inline-code"></block> 설정하고<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block> 환경 변수를 사용하여<block ref="fab50dca589d1a68fdf56bd4ae0b4a83" prefix=" " category="inline-code"></block> 를<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block> 설정합니다.</block>
   <block id="bde178d22672aa38120646e529ed04b5" category="paragraph">다음 예에서는 Trident를 설치하고 플래그를<block ref="e7b51407a2bfaa34b58afce0107e9a5f" prefix=" " category="inline-code"></block> , 및<block ref="c5af480af77c330e04a1fce1f6c2b03a" prefix=" " category="inline-code"></block> 로 설정합니다<block ref="e33bb4eb32023da4a8ea7a1ba6927067" prefix=" " category="inline-code"></block>.<block ref="fab50dca589d1a68fdf56bd4ae0b4a83" prefix=" " category="inline-code"></block></block>
@@ -4819,34 +4817,12 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="a4ac350fb585f51020f747525f3175d8" category="paragraph"><block ref="2c7a14b5507108d57a83e6eb9858f03a" category="inline-link-macro-rx"></block>..</block>
   <block id="fd677451fcb2b9e12434f11dd81d463e" category="summary">Kubernetes 클러스터에 Astra Trident EKS 애드온 을 추가합니다.</block>
   <block id="264f54d7bb69e0d02e466e1cb2cf3f28" category="doc">EKS 클러스터에 Astra Trident EKS 애드온을 구성합니다</block>
-  <block id="fde605b45abe19dca0689ef0eaa6e384" category="paragraph">Astra Trident는 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다. Astra Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것을 검증했습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.</block>
-  <block id="2f2c25cde4f655e64149cdd745b67001" category="paragraph">AWS EKS용 Astra Trident 애드온을 구성하기 전에 다음 사항을 확인하십시오.</block>
-  <block id="0b95c9980ec3cd04cdefd538573b1be4" category="list-text">NetApp Trident * 를 찾아 Astra Trident 애드온의 확인란을 선택합니다.</block>
   <block id="c5bc7ac802b8e0a400d724239314a7bf" category="image-alt">AWS eks 06</block>
-  <block id="cec2926f3f12e3edd6577d4f1edd4e22" category="section-title">CLI를 사용하여 Astra Trident EKS 애드온을 설치/제거합니다</block>
-  <block id="64f82c86eee854db6eefc72dbf352f85" category="paragraph-title">CLI를 사용하여 Astra Trident EKS 애드온을 설치합니다.</block>
   <block id="aacf8a1c5f871dadd44e14addd9a995d" category="admonition">선택적 매개 변수를 구성할 때는<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block> EKS 추가 기능을 사용하여 Trident를 설치할 때 를 지정해야<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block> 합니다.</block>
-  <block id="5fef1c4f3767262a0ef823aaa69e1703" category="paragraph-title">CLI를 사용하여 Astra Trident EKS 애드온을 제거합니다.</block>
-  <block id="e1f272eb0b2aaba7b1cb689543f653e0" category="paragraph">다음 명령을 실행하면 Astra Trident EKS 애드온이 제거됩니다.<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
   <block id="00a9bbaf4185978435bd4d6cb7aba6c4" category="summary">NetApp ONTAP용 Amazon FSx와 Astra Trident를 사용하면 Amazon EKS(Elastic Kubernetes Service)에서 실행되는 Kubernetes 클러스터가 ONTAP에서 지원하는 블록 및 파일 영구 볼륨을 프로비저닝할 수 있습니다.</block>
-  <block id="f1fe71442cd08e74d342114df7ee1551" category="doc">Astra Trident를 설치합니다</block>
-  <block id="61ac31e67ac41a505c5226920f11c69b" category="paragraph">Astra Trident는 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다.</block>
-  <block id="d80675b866d3a3d3f54103565f996f91" category="paragraph">다음 방법 중 하나를 사용하여 Astra Trident를 설치할 수 있습니다.</block>
-  <block id="821a0be249c7e2b3f10ce8df4b75e1e0" category="section-title">Helm을 통해 Astra Trident을 설치합니다</block>
-  <block id="53551aefdb0100694b4e814be4a899f7" category="list-text">Astra Trident 설치 관리자 패키지를 다운로드합니다</block>
-  <block id="94f0eb48504ec4d55a96ca7989e2b26c" category="paragraph">Astra Trident 설치 프로그램 패키지에는 Trident 운영자를 구축하고 Astra Trident를 설치하는 데 필요한 모든 것이 들어 있습니다. GitHub의 Assets 섹션에서 Astra Trident 설치 프로그램의 최신 버전을 다운로드하고 압축을 풉니다.<block ref="b83fd8dbe61bcfc922e4844901de5b88" prefix=" " category="inline-code"></block><block ref="ced8cfb4a8ba9e0bbb7a8c14d53222ba" prefix=" " category="inline-code"></block><block ref="1600ccf6988d672a315af82be4e93709" prefix=" " category="inline-code"></block></block>
-  <block id="3fc26750f347130146b4c60fe1b7260b" category="paragraph">다음 예에서는 Astra Trident를 설치하고 플래그를<block ref="e7b51407a2bfaa34b58afce0107e9a5f" prefix=" " category="inline-code"></block>, 및<block ref="c5af480af77c330e04a1fce1f6c2b03a" prefix=" " category="inline-code"></block> 로<block ref="c9d280b28993d1d105c3fbafb5868a15" prefix=" " category="inline-code"></block> 설정합니다<block ref="e33bb4eb32023da4a8ea7a1ba6927067" prefix=" " category="inline-code"></block>.</block>
   <block id="c198f49680a4c22b6d731cdd7d7b513a" category="paragraph">명령을 사용하여 이름, 네임스페이스, 차트, 상태, 앱 버전 및 수정 번호와 같은 설치 세부 정보를 검토할 수<block ref="cd4140d3de30b520500459331d08d2bf" prefix=" " category="inline-code"></block> 있습니다.</block>
-  <block id="bc98cc711b3772fd9a044dd6fcbd1631" category="section-title">EKS 애드온을 통해 Astra Trident를 설치합니다</block>
-  <block id="0a77764215483fbccc22e1d77abfb50f" category="paragraph">Astra Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것을 검증했습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.</block>
-  <block id="7184de869a88c49faff4f6482457e5cb" category="section-title">AWS용 Astra Trident 애드온 을 지원합니다</block>
-  <block id="9ea02e0a94b03561cf2861dcac685125" category="paragraph">다음 명령 예에서는 Astra Trident EKS 애드온을 설치합니다.</block>
-  <block id="dbc0f27a2aa9fd3fbef77c25870f8248" category="list-text">Astra Trident EKS 애드온 설치"</block>
-  <block id="ee502e3f68953ecace683d05b827a6ae" category="section-title">Astra Trident EKS 애드온을 업데이트합니다</block>
-  <block id="8d995c3ade9702f8b3d41df18d276fc0" category="section-title">Astra Trident EKS 애드온을 제거/제거합니다</block>
   <block id="d43d72969793ea80734b71e9c2406b2a" category="list-text">* 클러스터에 애드온 소프트웨어 유지 * – 이 옵션은 모든 설정의 Amazon EKS 관리를 제거합니다. 또한 업데이트를 시작한 후 Amazon EKS에서 업데이트를 알리고 Amazon EKS 애드온을 자동으로 업데이트하는 기능도 제거합니다. 하지만 클러스터에 애드온 소프트웨어가 보존됩니다. 이 옵션을 사용하면 Amazon EKS 애드온이 아닌 자가 관리형 설치가 됩니다. 이 옵션을 사용하면 애드온에 대한 다운타임이 없습니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>명령의 옵션을 유지하여 추가 기능을 유지합니다.</block>
   <block id="4c467d48a00d885ea22b1e685b747492" category="list-text">* 클러스터에서 애드온 소프트웨어 완전히 제거 * – 클러스터에 종속된 리소스가 없는 경우에만 Amazon EKS 애드온을 클러스터에서 제거하는 것이 좋습니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>추가 기능을 제거하려면 명령에서 옵션을<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> 제거하십시오.</block>
-  <block id="8019e0dcd97c1bda9a4283c660df9424" category="list-text">Add-ons * 탭을 클릭한 다음 * Astra Trident by NetApp * 를 클릭합니다</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> 는 Google Cloud에서 제공하는 완전 관리형 파일 스토리지 서비스로서, 고성능 엔터프라이즈급 파일 스토리지를 제공합니다.</block>
   <block id="0ce84605b24873b2ee81987302d60089" category="paragraph"><block ref="bc468e9b0072cb6f1552f9bc0a3b6063" category="inline-link-rx"></block> 는 NFS를 통해 All-Flash 성능과 함께 NAS 볼륨을 제공하는 클라우드 네이티브 파일 서비스입니다. 이 서비스를 사용하면 기존 애플리케이션을 포함한 모든 워크로드를 GCP 클라우드에서 실행할 수 있습니다. GCE(Google Compute Engine) 인스턴스에 대한 일관된 고성능, 즉각적인 복제, 데이터 보호 및 보안 액세스를 제공하는 완전 관리형 서비스를 제공합니다.</block>
   <block id="afb432a9cb893dca3218bf5ed8f124b6" category="section-title">6단계: AppVault 객체에 대한 액세스 권한 부여</block>
@@ -4976,7 +4952,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="08810911e9a818361e28207072354bd4" category="list-text">해당하는 경우 파일 시스템 작동이 중지됩니다. <block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>..</block>
   <block id="caf47630bbafdc416f6b6ecdb585e83e" category="list-text">해당되는 경우 동결된 파일 시스템은 동결 해제됩니다.</block>
   <block id="1eb6c79d30a4cb086ad406cb25fec350" category="list-text">*resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.</block>
-  <block id="02bdfa3ac07784bdcb9a3ee996d74f7b" category="paragraph">다음 명령 예에서는 Astra Trident EKS 추가 기능을 설치합니다(전용 버전 포함).<block ref="f0ef0295c3aa6b3cec6297d6cd4ffbb0" prefix=" " category="inline-code"></block><block ref="7e9a9ed0bc982ca0ebe942eb94c1c6df" prefix=" " category="inline-code"></block></block>
   <block id="a22e5011a5a8410071eb4306d647c90e" category="paragraph"><block ref="12472a1be5dbf38f4ae352b193c3ddf9" prefix="" category="inline-code"></block><block ref="7e9a9ed0bc982ca0ebe942eb94c1c6df" prefix=" " category="inline-code"></block> (전용 버전 포함)</block>
   <block id="3a8f61f44f4f674928f31c4074b024b1" category="list-text">추가 기능 선택 * 페이지에서 다음을 수행합니다.</block>
   <block id="203d72b01273331f7805b46e308a1162" category="list-text">AWS Marketplace EKS-addons 섹션에서 * NetApp Trident * 확인란을 선택합니다.</block>
@@ -5183,4 +5158,29 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="4eecab048a7c90cfb92e0f04884686e8" category="section-title">ONTAP이 오프라인일 때 미러 관계를 업데이트합니다</block>
   <block id="e782fcb9f3e7e8fa8b5ccdb3169c0e42" category="paragraph">Trident이 ONTAP 클러스터에 직접 연결되지 않은 상태에서 CRD를 사용하여 SnapMirror 업데이트를 수행할 수 있습니다. 다음 TridentActionMirrorUpdate 예제 형식을 참조하십시오.</block>
   <block id="bc08468157c4a9e3a30eed7ba64cc309" category="paragraph"><block ref="1f9dfae8a369525bce4996df40963532" prefix="" category="inline-code"></block> TridentActionMirrorUpdate CRD의 상태를 반영합니다. 이 값은 _SUCCEEDED_,_In Progress_ 또는_Failed_에서 가져올 수 있습니다.</block>
+  <block id="84047e4e157c4540f79aedaede0a95f8" category="paragraph"><block ref="0f4a5d4e2b6742a467ace2ab6b64e704" prefix="" category="inline-code"></block><block ref="37e27d67480c8070fb88c6ed21f188a8" prefix=" " category="inline-code"></block></block>
+  <block id="239be7c008105ac7fd4ca34940e848dd" category="list-text">노드 풀에 구성된 GKE 클러스터 및 GKE 메타데이터 서버에 구성된 워크로드 ID입니다.</block>
+  <block id="cf1b0c32b7f8d889140a0a7a048bc29b" category="list-text">Google Cloud NetApp 볼륨 관리자(역할/NetApp.admin) 역할 또는 사용자 지정 역할이 있는 GCP 서비스 계정</block>
+  <block id="b70329a4cd0d7e433e8af087eebce89a" category="list-text">새 GCP 서비스 계정을 지정하는 "GCP"와 cloudIdentity를 지정하는 cloudProvider가 포함된 Trident가 설치되었습니다. 예를 들면 다음과 같습니다.</block>
+  <block id="eebdcab41822ad8bab30721a5175abf7" category="paragraph">Trident은 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다. Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것이 검증되었습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.</block>
+  <block id="73a8d79444c307e1446b60eb6a9ba8f1" category="paragraph">AWS EKS용 Trident 애드온을 구성하기 전에 다음 사항이 있는지 확인하십시오.</block>
+  <block id="8b02c3c4d362d7177472616948d293c4" category="list-text">NetApp Trident * 를 찾아 Trident 애드온의 확인란을 선택합니다.</block>
+  <block id="5c48b2cb013af0c5d292d6bc5659074c" category="section-title">CLI를 사용하여 Trident EKS 애드온을 설치/제거합니다</block>
+  <block id="6b88542b2a19cbfa3c0d79e98cae644a" category="paragraph-title">CLI를 사용하여 Trident EKS 추가 기능을 설치합니다.</block>
+  <block id="71930e5aa45536ffb4680c3968c3bce7" category="paragraph">다음 명령 예에서는 Trident EKS 추가 기능을 설치합니다(전용 버전 포함).<block ref="f0ef0295c3aa6b3cec6297d6cd4ffbb0" prefix=" " category="inline-code"></block><block ref="7e9a9ed0bc982ca0ebe942eb94c1c6df" prefix=" " category="inline-code"></block></block>
+  <block id="164dcdbca6562f0f9617b1d9c33a3e7f" category="paragraph-title">CLI를 사용하여 Trident EKS 애드온을 제거합니다.</block>
+  <block id="a241de540e9d861e242ac606150f4f07" category="paragraph">다음 명령을 실행하면 Trident EKS 추가 기능이 제거됩니다.<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
+  <block id="1095f7331744c1accf45762c2da50a60" category="paragraph">Trident은 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다.</block>
+  <block id="4da6a980473921dbef626d66a0df49e9" category="paragraph">다음 방법 중 하나를 사용하여 Trident를 설치할 수 있습니다.</block>
+  <block id="aa9c9ff1836c624104eb3a256a7b8b69" category="section-title">Helm을 통해 Trident를 설치합니다</block>
+  <block id="b3dc88ff9246a994ccb2a892f1ad7486" category="list-text">Trident 설치 프로그램 패키지를 다운로드합니다</block>
+  <block id="a1b0b9b00763182edfee20a78e72e927" category="paragraph">Trident 설치 프로그램 패키지에는 Trident 운영자를 배포하고 Trident를 설치하는 데 필요한 모든 것이 포함되어 있습니다. GitHub의 자산 섹션에서 최신 버전의 Trident 설치 프로그램을 다운로드하고 압축을 풉니다.<block ref="b83fd8dbe61bcfc922e4844901de5b88" prefix=" " category="inline-code"></block><block ref="ced8cfb4a8ba9e0bbb7a8c14d53222ba" prefix=" " category="inline-code"></block><block ref="1600ccf6988d672a315af82be4e93709" prefix=" " category="inline-code"></block></block>
+  <block id="b0e9da2f71a439472cddf0553ae43edc" category="section-title">EKS 애드온을 통해 Trident를 설치합니다</block>
+  <block id="03023c37f6d85929cf0151fe858d3183" category="paragraph">Trident EKS 애드온에는 최신 보안 패치 및 버그 수정이 포함되어 있으며 AWS에서 Amazon EKS와 함께 사용할 수 있다는 것이 검증되었습니다. EKS 애드온을 사용하면 Amazon EKS 클러스터의 보안과 안정성을 지속적으로 보장하고 애드온을 설치, 구성 및 업데이트하는 데 필요한 작업량을 줄일 수 있습니다.</block>
+  <block id="16a9eb0d1ef7d37ab7459bc9a67a8102" category="section-title">AWS에 대해 Trident 애드온을 활성화합니다</block>
+  <block id="09d1f48dea441d50b2e8ed6d864f3d22" category="paragraph">다음 명령 예에서는 Trident EKS 추가 기능을 설치합니다.</block>
+  <block id="d162a9d1a15f37d8ad83086d7178d93a" category="list-text">Trident EKS 추가 기능 설치"</block>
+  <block id="1d5144e260d8c4ece3c5d47a77d84c11" category="section-title">Trident EKS 추가 기능을 업데이트합니다</block>
+  <block id="ccab466451ff5a867710cce1b28c33a0" category="section-title">Trident EKS 추가 기능을 제거/제거합니다</block>
+  <block id="e75af04fb72882c1d735055059f1a557" category="list-text">추가 기능 * 탭을 클릭한 다음 * Trident by NetApp * 를 클릭합니다</block>
 </blocks>
