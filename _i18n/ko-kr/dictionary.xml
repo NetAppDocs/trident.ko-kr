@@ -3586,17 +3586,14 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="0fe713481395212a8eb358f4cb188c04" category="section-title">Trident에 대한 중요 정보입니다</block>
   <block id="8e7cb3d16dbeb8a9289495de8b479d1f" category="paragraph">*Trident에 대한 다음 중요 정보를 읽어야 합니다.*</block>
   <block id="04dc1d4246222d48d4348b40baef0aac" category="example-title">&lt;strong&gt; Trident &lt;/strong&gt;에 대한 중요 정보입니다</block>
-  <block id="09a48eb36bc4152ed8fe5c428d4ece05" category="list-text">Kubernetes 1.31가 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
   <block id="5e25fae885baef0275d27a764979b289" category="list-text">Trident은 multipath.conf 파일에서 권장 값을 값으로 하여 SAN 환경에서 다중 경로 구성을 엄격히 적용합니다<block ref="db729c5c8df447087e5a84b961df14f6" prefix=" " category="inline-code"></block>.</block>
   <block id="710f95d40d121f27f89b0faa6e178133" category="paragraph">Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레이터를 지원합니다.</block>
-  <block id="c3524924959417328a5c2d4797b71b8f" category="list-text">Kubernetes 1.25-1.31</block>
   <block id="76073f246cf758836f21035e15541803" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.28.5 + rke2r1</block>
   <block id="e42907190e2666646d57ade5c061e6e2" category="paragraph">Trident은 Google Kubernetes Engine(GKE), Amazon Elastic Kubernetes Services(EKS), Azure Kubernetes Service(AKS), Mirantis Kubernetes Engine(MKE), VMware Tanzu 포트폴리오를 포함한 기타 완전 관리형 Kubernetes 오퍼링도 지원합니다.</block>
   <block id="4cb56edacf6f40b0077e559878cb88a1" category="paragraph">Trident 및 ONTAP를 의 스토리지 공급자로 사용할 수 있습니다<block ref="98ab68800979b414641691275d2b9c15" category="inline-link-macro-rx"></block>.</block>
   <block id="029f0e10fd529e4a0fd06a03bd5b1eaf" category="admonition">Trident가 설치된 Kubernetes 클러스터를 1.24에서 1.25 이상으로 업그레이드하기 전에 을 참조하십시오.<block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block></block>
   <block id="90e5d592b7e0b2afb122e69c00372ddf" category="paragraph">Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이상 필요합니다.</block>
   <block id="6116c21c42b3138e811999de6433a0a6" category="paragraph">아래 표에는 이 Trident 릴리스에서 사용할 수 있는 기능과 이 기능이 지원하는 Kubernetes 버전이 요약되어 있습니다.</block>
-  <block id="cb6fdbc23b7af9715334e1bb04d2c4ac" category="paragraph">1.25-1.31</block>
   <block id="29fce9ae0f476afd36cf3ebf4de1d2a8" category="paragraph">Trident는 특정 운영 체제를 공식적으로 지원하지 않지만 다음과 같은 기능이 작동하는 것으로 알려져 있습니다.</block>
   <block id="779639a0216e7a8fd164ee8a7266d8b8" category="paragraph">기본적으로 Trident는 컨테이너에서 실행되므로 모든 Linux 작업자에서 실행됩니다. 그러나 이러한 작업자는 사용 중인 백엔드에 따라 표준 NFS 클라이언트 또는 iSCSI 이니시에이터를 사용하여 Trident에서 제공하는 볼륨을 마운트할 수 있어야 합니다.</block>
   <block id="ac65d911a6a42e3244db78a534db815a" category="paragraph">Trident를 사용하면 스토리지 시스템을 백엔드 구성에서 사용해야 할 수 있습니다.</block>
@@ -3604,7 +3601,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="31ae62dfe6cb254d32d0f67deda8d9ad" category="paragraph">Trident에서는 통신을 위해 특정 포트에 액세스해야 합니다.</block>
   <block id="2e442c7238666f1b73934ff5c2034b82" category="paragraph"><block ref="2e442c7238666f1b73934ff5c2034b82" category="inline-link-macro-rx"></block></block>
   <block id="ce8468ce4398f1403e56c8d07fbfbdff" category="paragraph">에어갭 설치의 경우 다음 목록은 Trident 설치에 필요한 컨테이너 이미지의 참조입니다. 명령을 사용하여<block ref="4ebf280824868255c952dc529072ecb9" prefix=" " category="inline-code"></block> 필요한 컨테이너 이미지 목록을 확인합니다.</block>
-  <block id="ecfc1eb0b20cc5ae8492fc90fcbf996d" category="cell">v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0</block>
   <block id="84164a090d4c4deb277c3eaee7be8933" category="list-text">Docker.IO/NetApp/트라이덴트:24.10.0</block>
   <block id="d32e454f258700e2a7e9bd38093759e7" category="list-text">Docker.IO/netapp/trident-autosupport:24.10</block>
   <block id="2008e365da289d546b62489addab8fe9" category="list-text">registry.k8s.io/sig-storage/csi-provisioner: v5.1.0</block>
@@ -5183,4 +5179,8 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="1d5144e260d8c4ece3c5d47a77d84c11" category="section-title">Trident EKS 추가 기능을 업데이트합니다</block>
   <block id="ccab466451ff5a867710cce1b28c33a0" category="section-title">Trident EKS 추가 기능을 제거/제거합니다</block>
   <block id="e75af04fb72882c1d735055059f1a557" category="list-text">추가 기능 * 탭을 클릭한 다음 * Trident by NetApp * 를 클릭합니다</block>
+  <block id="71daa7e0f7c4240ad5aa4024c97bafae" category="list-text">Kubernetes 1.32가 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
+  <block id="58830b43d96c301076f2636c9bb946d5" category="list-text">Kubernetes 1.25-1.32</block>
+  <block id="2d95fd2a9f3bf1dcac56e3de82d288ad" category="paragraph">1.25-1.32</block>
+  <block id="2ec43b8882dfc130c999d1ebfae88d87" category="cell">v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0</block>
 </blocks>
