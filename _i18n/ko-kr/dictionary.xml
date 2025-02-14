@@ -5183,4 +5183,17 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="58830b43d96c301076f2636c9bb946d5" category="list-text">Kubernetes 1.25-1.32</block>
   <block id="2d95fd2a9f3bf1dcac56e3de82d288ad" category="paragraph">1.25-1.32</block>
   <block id="2ec43b8882dfc130c999d1ebfae88d87" category="cell">v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0</block>
+  <block id="d1548585dadda37a28905a23e22cf65d" category="section-title">백업에서 다른 클러스터로 복원합니다</block>
+  <block id="7fa8874b1f645ca2af9d81b51985b8fb" category="paragraph">원래 클러스터에 문제가 있는 경우 백업을 다른 클러스터로 복구할 수 있습니다.</block>
+  <block id="17e2d63e3b45ecbfe13bcc32fec929d0" category="paragraph">* 시작하기 전에 *</block>
+  <block id="dd4ee610bd1d035c73bc0cbcd80e46da" category="paragraph">다음 필수 구성 요소가 충족되는지 확인합니다.</block>
+  <block id="1d6028c560c8f6dbee841737e60a3d9d" category="list-text">대상 클러스터에 Trident Protect가 설치되어 있습니다.</block>
+  <block id="b20f8883edb9068c67a2faeb3c083d38" category="list-text">대상 클러스터에는 백업이 저장되는 소스 클러스터와 동일한 AppVault의 버킷 경로에 대한 액세스 권한이 있습니다.</block>
+  <block id="0425d0358a4cba7a7cce5ddd727ab6a2" category="list-text">Trident Protect CLI 플러그인을 사용하여 대상 클러스터에서 AppVault CR의 가용성을 확인합니다.</block>
+  <block id="1ff83a5266e9e025c2984e0c10dea90e" category="admonition">응용 프로그램 복구용 네임스페이스가 대상 클러스터에 있는지 확인합니다.</block>
+  <block id="8d433ae9a21c49e9e5433ebd408605c0" category="list-text">대상 클러스터에서 사용 가능한 AppVault의 백업 컨텐츠를 봅니다.</block>
+  <block id="378e6f0ba7080535a4462b5311befb40" category="paragraph">이 명령을 실행하면 원래 클러스터, 해당 응용 프로그램 이름, 타임스탬프 및 아카이브 경로를 비롯하여 AppVault에 사용 가능한 백업이 표시됩니다.</block>
+  <block id="053aba80de03f3fdf626d1c858342330" category="list-text">AppVault 이름 및 보관 경로를 사용하여 응용 프로그램을 대상 클러스터로 복원합니다.</block>
+  <block id="fceebbe32c1f7b24c54d6a4e8a0fa776" category="admonition">BackupRestore CR을 사용할 수 없는 경우 2단계에서 언급한 명령을 사용하여 백업 내용을 볼 수 있습니다.</block>
+  <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">다음 명령을 사용하여 응용 프로그램을 복원하고 대괄호 안의 값을 사용자 환경의 정보로 바꿉니다. 네임스페이스 매핑 인수는 콜론으로 구분된 네임스페이스를 사용하여 소스 네임스페이스를 Source1:dest1, source2:dest2 형식으로 올바른 대상 네임스페이스에 매핑합니다. 예를 들면 다음과 같습니다.</block>
 </blocks>
