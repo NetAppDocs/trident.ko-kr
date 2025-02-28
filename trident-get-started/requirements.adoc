@@ -41,7 +41,7 @@ Trident를 설치하기 전에 다음과 같은 일반 시스템 요구 사항�
 Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레이터를 지원합니다.
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
-* Kubernetes 1.25-1.32
+* Kubernetes 1.26-1.32
 * OpenShift 4.10-4.17
 * Rancher Kubernetes Engine 2(RKE2) v1.28.5 + rke2r1
 
@@ -49,7 +49,7 @@ Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레
 Trident 연산자는 다음 릴리즈에서 지원됩니다.
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
-* Kubernetes 1.25-1.32
+* Kubernetes 1.26-1.32
 * OpenShift 4.10-4.17
 * Rancher Kubernetes Engine 2(RKE2) v1.28.5 + rke2r1
 
@@ -59,7 +59,7 @@ Trident은 Google Kubernetes Engine(GKE), Amazon Elastic Kubernetes Services(EKS
 Trident 및 ONTAP를 의 스토리지 공급자로 사용할 수 있습니다link:https://kubevirt.io/["KubeVirt"].
 
 
-WARNING: Trident가 설치된 Kubernetes 클러스터를 1.24에서 1.25 이상으로 업그레이드하기 전에 을 참조하십시오.link:../trident-managing-k8s/upgrade-operator.html#upgrade-a-helm-installation["Helm 설치를 업그레이드합니다"]
+WARNING: Trident가 설치된 Kubernetes 클러스터를 1.25에서 1.26 이상으로 업그레이드하기 전에 을 참조하십시오.link:../trident-managing-k8s/upgrade-operator.html#upgrade-a-helm-installation["Helm 설치를 업그레이드합니다"]
 
 
 
@@ -71,9 +71,35 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 * Azure NetApp Files
 * Cloud Volumes ONTAP
 * Google Cloud NetApp 볼륨
-* FAS/AFF/Select를 선택합니다
 * NetApp All SAN 어레이(ASA)
+* ONTAP 9.6 이상을 실행하는 온프레미스 FAS, AFF 또는 ASA 클러스터
 * NetApp HCI/Element 소프트웨어 11 이상
+
+
+
+
+== KubeVirt 및 OpenShift 가상화를 위한 Trident 지원
+
+.지원되는 스토리지 드라이버:
+Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.
+
+* ONTAP - NAS
+* ONTAP - NAS - 경제형
+* ONTAP-SAN(iSCSI, FCP, NVMe over TCP)
+* ONTAP - SAN - 경제성(iSCSI만 해당)
+
+
+.고려 사항:
+* OpenShift 가상화 환경에서 매개 변수(예 `fsType: "ext4"`:)를 포함하도록 스토리지 클래스를 업데이트합니다 `fsType`. 필요한 경우 의 매개 변수를 `dataVolumeTemplates` 사용하여 볼륨 모드를 명시적으로 차단하도록 `volumeMode=Block` 설정하여 CDI에 블록 데이터 볼륨을 생성하도록 알립니다.
+* 블록 스토리지 드라이버용 _rwx 액세스 모드_:ONTAP-SAN(iSCSI, NVMe/TCP, FC) 및 ONTAP-SAN-Economy(iSCSI) 드라이버는 "volumemode:Block"(원시 장치)에서만 지원됩니다. 이러한 드라이버의 경우 `fstype` 볼륨이 원시 장치 모드로 제공되므로 매개 변수를 사용할 수 없습니다.
+* rwx 액세스 모드가 필요한 라이브 마이그레이션 워크플로의 경우 다음 조합이 지원됩니다.
++
+** NFS+ `volumeMode=Filesystem`
+** iSCSI `volumeMode=Block` + (물리적 장치)
+** NVMe/TCP+ `volumeMode=Block`(원시 장치)
+** FC+ `volumeMode=Block`(물리적 장치)
+
+
 
 
 
@@ -88,56 +114,56 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 
 
 | 트라이던트  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
 
 
 | 볼륨 스냅샷  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
 
 
 | 체적 스냅샷의 PVC  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
 
 
 | iSCSI PV 크기 조정  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
 
 
 | ONTAP 양방향 CHAP  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
 
 
 | 동적 내보내기 정책  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
 
 
 | Trident 연산자  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
 
 
 | CSI 토폴로지  a| 
-1.25-1.32
+1.26-1.32
  a| 
 아니요
 
@@ -197,15 +223,15 @@ link:../trident-reference/ports.html["Trident 포트"]
 | Kubernetes 버전 | 컨테이너 이미지 
 
 
-| v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0  a| 
-* Docker.IO/NetApp/트라이덴트:24.10.0
-* Docker.IO/netapp/trident-autosupport:24.10
-* registry.k8s.io/sig-storage/csi-provisioner: v5.1.0
-* 레지스트리.k8s.io/sig-storage/csi-attacher:v4.7.0
-* 레지스트리.k8s.io/sig-storage/csi-resizer:v1.12.0
-* 레지스트리.k8s.io/sig-storage/csi-shotter:v8.1.0
-* registry.k8s.io/sig-storage/csi-node-driver-register: v2.12.0
-* Docker.IO/netapp/trident-operator:24.10.0 (선택 사항)
+| v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0  a| 
+* Docker.IO/NetApp/트라이덴트:25.02.0
+* Docker.IO/netapp/trident-autosupport:25.02
+* registry.k8s.io/sig-storage/csi-provisioner: v5.2.0
+* 레지스트리.k8s.io/sig-storage/csi-attacher:v4.8.0
+* 레지스트리.k8s.io/sig-storage/csi-resizer:v1.13.0
+* 레지스트리.k8s.io/sig-storage/csi-shotter:v8.2.0
+* registry.k8s.io/sig-storage/csi-node-driver-register: v2.13.0
+* Docker.IO/netapp/trident-operator:25.02.0 (선택 사항)
 
 
 |===

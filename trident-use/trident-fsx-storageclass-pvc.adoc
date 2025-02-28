@@ -22,7 +22,21 @@ Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성�
 
 === Kubernetes StorageClass 개체를 구성합니다
 
-에서는 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] Trident를 해당 클래스에 사용되는 Provisioner로 식별하여 Trident에 볼륨 프로비저닝 방법을 지시합니다. 예를 들면 다음과 같습니다.
+는 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] Trident를 해당 클래스에 사용되는 Provisioner로 식별하고 Trident에 볼륨 프로비저닝 방법을 지시합니다. 예를 들면 다음과 같습니다.
+
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-gold
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-nas"
+  provisioningType: "thin"
+  snapshots: "true"
+----
+AWS Bottlerocket에서 NFSv3 볼륨을 프로비저닝하려면 필요한 를 `mountOptions` 스토리지 클래스에 추가합니다.
 
 [listing]
 ----
@@ -36,6 +50,9 @@ parameters:
   media: "ssd"
   provisioningType: "thin"
   snapshots: "true"
+mountOptions:
+  - nfsvers=3
+  - nolock
 ----
 Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.
 
@@ -89,7 +106,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: basic-csi
+  storageClassName: ontap-gold
   capacity:
     storage: 10Gi
   accessModes:
@@ -103,7 +120,7 @@ spec:
 ====
 이러한 예는 기본적인 PVC 구성 옵션을 보여줍니다.
 
-.RWO 액세스 PVC
+.RWX 액세스 PVC
 이 예에서는 이름이 인 StorageClass와 연결된 rwx 액세스 권한이 있는 기본 PVC를 보여 `basic-csi`줍니다.
 
 [listing]
@@ -118,10 +135,10 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: basic-csi
+  storageClassName: ontap-gold
 ----
 .NVMe/TCP가 있는 PVC
-이 예에서는 이름이 인 StorageClass와 연결된 RWO 액세스 권한이 있는 NVMe/TCP용 기본 PVC를 보여 줍니다 `protection-gold`.
+이 예에서는 이름이 인 StorageClass와 연결된 RWX 액세스 권한이 있는 NVMe/TCP용 기본 PVC를 보여 `protection-gold` 줍니다.
 
 [listing]
 ----
@@ -132,7 +149,7 @@ metadata:
 name: pvc-san-nvme
 spec:
 accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
 resources:
   requests:
     storage: 300Mi

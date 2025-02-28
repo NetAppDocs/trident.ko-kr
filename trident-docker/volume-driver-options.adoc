@@ -20,7 +20,7 @@ summary: 각 스토리지 드라이버에는 다양한 옵션이 있으며, 볼�
 
 == ONTAP 볼륨 옵션
 
-NFS 및 iSCSI에 대한 볼륨 생성 옵션은 다음과 같습니다.
+NFS, iSCSI 및 FC 모두의 볼륨 생성 옵션에는 다음이 포함됩니다.
 
 [cols="2*"]
 |===
@@ -151,7 +151,7 @@ docker volume create -d netapp --name my_vol --opt snapshotPolicy=none --opt sna
 ----
 docker volume create -d netapp --name my_vol --opt snapshotPolicy=myPolicy --opt snapshotReserve=10
 ----
-* 스냅샷 정책을 사용하여 볼륨을 생성하고 ONTAP의 기본 스냅샷 예약 공간(일반적으로 5%)을 적용합니다.
+* 스냅샷 정책을 사용하여 볼륨을 생성하고 ONTAP의 기본 스냅숏 예비 공간을 수락합니다(일반적으로 5%).
 +
 [listing]
 ----

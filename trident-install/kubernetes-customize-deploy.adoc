@@ -46,7 +46,7 @@ WARNING: `spec.namespace` Trident가 설치된 네임스페이스를 나타내�
 | "버그" | Trident에 대해 디버깅을 활성화합니다 | 거짓입니다 
 
 
-| `enableForceDetach` | `ontap-san`, `ontap-san-economy` 및 `ontap-nas-economy` 만. Kubernetes Non-Graceful Node Shutdown(ngns)과 함께 작동하여 클러스터 관리자가 마운트된 볼륨이 있는 워크로드를 노드가 정상 상태가 아닌 경우 새 노드로 안전하게 마이그레이션할 수 있도록 합니다. | 거짓입니다 
+| `enableForceDetach` | `ontap-san` `ontap-san-economy`, , `ontap-nas` 및 `ontap-nas-economy` 만 해당. Kubernetes Non-Graceful Node Shutdown(ngns)과 함께 작동하여 클러스터 관리자가 마운트된 볼륨이 있는 워크로드를 노드가 정상 상태가 아닌 경우 새 노드로 안전하게 마이그레이션할 수 있도록 합니다. | 거짓입니다 
 
 
 | `windows` | 를 로 설정합니다 `true` Windows 작업자 노드에 설치할 수 있습니다. | 거짓입니다 
@@ -68,7 +68,7 @@ WARNING: `spec.namespace` Trident가 설치된 네임스페이스를 나타내�
 자동으로 계층화 | 거짓입니다 
 
 
-| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport:24.10"` 
+| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport:25.02"` 
 
 
 | 자동 지원 프록시 | AutoSupport를 보내는 프록시의 주소/포트입니다
@@ -81,7 +81,7 @@ WARNING: `spec.namespace` Trident가 설치된 네임스페이스를 나타내�
 | `logFormat` | 사용할 Trident 로깅 형식 [text, json] | `"text"` 
 
 
-| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:24.10"` 
+| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:25.02"` 
 
 
 | 'imageRegistry'입니다 | 형식의 내부 레지스트리 경로입니다
@@ -116,6 +116,9 @@ WARNING: `spec.namespace` Trident가 설치된 네임스페이스를 나타내�
 
 
 | `nodePrep` | Trident가 Kubernetes 클러스터의 노드를 준비하여 지정된 데이터 스토리지 프로토콜을 사용하여 볼륨을 관리할 수 있도록 합니다. * 현재 `iscsi` 지원되는 유일한 값입니다. * |  
+
+
+| `enableAutoBackendConfig` | 입력 매개 변수를 기반으로 백엔드 및 스토리지 클래스를 원활하게 생성하는 자동 백엔드 구성을 지원합니다. | 기본값 없음, 선택 사항 
 |===
 
 NOTE: POD 매개 변수 포맷에 대한 자세한 내용은 을 참조하십시오 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["노드에 Pod 할당"^].
@@ -124,10 +127,10 @@ NOTE: POD 매개 변수 포맷에 대한 자세한 내용은 을 참조하십시
 
 === 강제 분리에 대한 세부 정보
 
-강제 분리는, `ontap-san-economy` `onatp-nas-economy` 에서만 사용할 수 `ontap-san` 있습니다. 강제 분리를 활성화하기 전에 Kubernetes 클러스터에서 비정상 노드 종료(ngns)를 활성화해야 합니다. 자세한 내용은 을 link:https://kubernetes.io/docs/concepts/architecture/nodes/#non-graceful-node-shutdown["Kubernetes: 노드 정상 종료 아님"^]참조하십시오.
+강제 분리는, `ontap-san-economy`, `onatp-nas` 및 `onatp-nas-economy` 에서만 사용할 수 `ontap-san` 있습니다. 강제 분리를 활성화하기 전에 Kubernetes 클러스터에서 비정상 노드 종료(ngns)를 활성화해야 합니다. ngns는 Kubernetes 1.28 이상에서 기본적으로 사용하도록 설정되어 있습니다. 자세한 내용은 을 link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubernetes: 노드 정상 종료 아님"^]참조하십시오.
 
 
-NOTE: 드라이버를 사용할 때는 `ontap-nas-economy` Trident이 관리형 엑스포트 정책을 사용하여 적용된 태그로 인해 Kubernetes 노드에서 액세스를 제한할 수 있도록 백엔드 구성에서 매개 변수를 로 `true` 설정해야 `autoExportPolicy` 합니다.
+NOTE: 또는 `ontap-nas-economy` 드라이버를 사용할 경우 `ontap-nas`, Trident이 관리형 엑스포트 정책을 사용하여 적용된 태그로 인해 Kubernetes 노드에서 액세스를 제한할 수 있도록 백엔드 구성에서 매개 변수를 로 `true` 설정해야 `autoExportPolicy` 합니다.
 
 
 WARNING: Trident는 Kubernetes ngns를 사용하기 때문에 허용할 수 없는 모든 워크로드의 일정이 재조정될 때까지 비정상 노드에서 테인트를 제거하지 마십시오 `out-of-service`. 무모하게 타트를 적용하거나 제거하면 백엔드 데이터 보호가 위태롭게 될 수 있습니다.

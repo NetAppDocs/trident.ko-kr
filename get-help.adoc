@@ -27,11 +27,18 @@ Trident는 버전에 따라 세 가지 수준의 지원을 제공합니다. 을 
 
 [cols="1, 1, 1, 1"]
 |===
+
+
 | 버전 | 완벽한 지원 | 제한된 지원 | 자가 지원 
 
 
  a| 
-link:https://docs.netapp.com/us-en/trident/index.html["24.10"^]
+link:https://docs.netapp.com/us-en/trident/index.html["25.02"^]
+| 2026년 2월 | 2027년 2월 | 2028년 2월 
+
+
+ a| 
+link:https://docs.netapp.com/us-en/trident-2410/index.html["24.10"^]
 | 2025년 10월 | 2026년 10월 | 2027년 10월 
 
 
@@ -47,12 +54,12 @@ link:https://docs.netapp.com/us-en/trident-2402/index.html["24.02"^]
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2310/index.html["23.10"^]
-| 2024년 10월 | 2025년 10월 | 2026년 10월 
+| -- | 2025년 10월 | 2026년 10월 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2307/index.html["2007년 3월"^]
-| 2024년 7월 | 2025년 7월 | 2026년 7월 
+| -- | 2025년 7월 | 2026년 7월 
 
 
  a| 
@@ -62,27 +69,22 @@ link:https://docs.netapp.com/us-en/trident-2304/index.html["23.04"^]
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2301/index.html["23.01"^]
-| -- | 2025년 1월 | 2026년 1월 
+| -- | -- | 2026년 1월 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2210/index.html["22.10"^]
-| -- | 2024년 10월 | 2025년 10월 
+| -- | -- | 2025년 10월 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2207/index.html["22.07"^]
-| -- | 2024년 7월 | 2025년 7월 
+| -- | -- | 2025년 7월 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2204/index.html["22.04"^]
 | -- | -- | 2025년 4월 
-
-
- a| 
-link:https://docs.netapp.com/us-en/trident-2201/index.html["22.01"^]
-| -- | -- | 2025년 1월 
 |===
 
 

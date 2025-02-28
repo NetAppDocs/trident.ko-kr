@@ -28,10 +28,10 @@ Trident는 Kubernetes CRD를 사용하여 자체 상태를 저장 및 관리하�
 
 .단계
 . 를 사용하여 Kubernetes 클러스터를 백업합니다  link:https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster["Kubernetes: etcd 클러스터 백업"^].
-. FlexVol에 백업 아티팩트를 배치합니다.
+. FlexVol volume에 백업 아티팩트를 배치합니다
 +
 
-NOTE: FlexVol가 상주하는 SVM을 다른 SVM과 SnapMirror 관계로 보호할 것을 권장합니다.
+NOTE: NetApp은 FlexVol이 다른 SVM과 SnapMirror 관계를 맺고 있는 SVM을 보호하는 것이 좋습니다.
 
 
 

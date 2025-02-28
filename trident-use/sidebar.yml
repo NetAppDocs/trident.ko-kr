@@ -4,9 +4,6 @@ title: Trident를 사용합니다
 entries:
 - title: 작업자 노드를 준비합니다
   url: "/trident-use/worker-node-prep.html"
-  entries:
-  - title: FC(Fibre Channel을 통한 SCSI)
-    url: "/trident-use/fcp.html"
 - title: 백엔드 구성 및 관리
   entries:
   - title: 개요
@@ -91,6 +88,8 @@ entries:
     url: "/trident-use/vol-custom-name.html"
   - title: 네임스페이스 전체에서 NFS 볼륨을 공유합니다
     url: "/trident-use/volume-share.html"
+  - title: 네임스페이스 전체에 걸친 클론 볼륨
+    url: "/trident-use/vol-clone-cross-namespace.html"
   - title: SnapMirror를 사용하여 볼륨을 복제합니다
     url: "/trident-use/vol-volume-replicate.html"
   - title: CSI 토폴로지를 사용합니다

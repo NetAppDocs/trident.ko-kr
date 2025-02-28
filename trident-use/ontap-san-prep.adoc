@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-prep.html 
-keywords: trident backend, ontap san, ontap-san, ontap-san-economy 
+keywords: trident backend, ontap san, ontap-san, ontap-san-economy, asa r2 
 summary: ONTAP SAN 드라이버를 사용하여 ONTAP 백엔드를 구성하는 방법에 대해 알아보십시오. 
 ---
 = ONTAP SAN 드라이버를 사용하여 백엔드를 구성할 준비를 합니다
@@ -14,11 +14,16 @@ summary: ONTAP SAN 드라이버를 사용하여 ONTAP 백엔드를 구성하는 
 [role="lead"]
 ONTAP SAN 드라이버를 사용하여 ONTAP 백엔드를 구성하기 위한 요구 사항 및 인증 옵션을 이해합니다.
 
+25.02 릴리즈부터 Trident는 ONTAP 9.16.1 이상의 ASA R2 속성을 자동으로 감지하고 iSCSI 프로토콜을 통해 ASA R2의 스토리지 용량 할당 및 사용을 지원합니다.
+
 
 
 == 요구 사항
 
 모든 ONTAP 백엔드에 대해 Trident에는 SVM에 할당된 애그리게이트가 하나 이상 필요합니다.
+
+
+NOTE: Trident에서는 하나 이상의 애그리게이트가 SVM에 할당되어야 합니다. ASA R2를 사용하는 경우 이 작업은 모드에서 ONTAP CLI를 통해서만 사용할 수 `diag` 있습니다.
 
 또한 둘 이상의 드라이버를 실행하고 둘 중 하나를 가리키는 스토리지 클래스를 생성할 수도 있습니다. 예를 들어, ONTAP-SAN 드라이버와 ONTAP-SAN-이코노미 클래스를 사용하는 '기본 클래스'를 사용하는 'san-dev' 클래스를 구성할 수 있습니다.
 
@@ -306,7 +311,7 @@ useCHAP=true 외에, chapInitatorSecret, chapTargetInitialatorSecret, chapchTarg
 backend.json 파일에서 CHAP 파라미터를 업데이트하여 CHAP 자격 증명을 업데이트할 수 있다. 이렇게 하려면 CHAP 암호를 업데이트하고 "tridentctl update" 명령을 사용하여 이러한 변경 사항을 반영해야 합니다.
 
 
-WARNING: 백엔드의 CHAP 암호를 업데이트할 때 을 사용하여 백엔드를 업데이트해야 `tridentctl` 합니다. Trident은 이러한 변경 사항을 파악할 수 없으므로 CLI/ONTAP UI를 통해 스토리지 클러스터의 자격 증명을 업데이트하지 마십시오.
+WARNING: 백엔드의 CHAP 암호를 업데이트할 때 을 사용하여 백엔드를 업데이트해야 `tridentctl` 합니다. Trident은 이러한 변경 사항을 파악할 수 없으므로 ONTAP CLI 또는 ONTAP System Manager를 사용하여 스토리지 클러스터의 자격 증명을 업데이트하지 마십시오.
 
 [listing]
 ----

@@ -1,0 +1,124 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-clone-cross-namespace.html 
+keywords: volref, volume reference, clone, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing, volumesnapshots 
+summary: Trident를 사용하면 동일한 K8s 클러스터 안에 있는 다른 네임스페이스의 기존 볼륨 또는 볼륨스냅샷을 사용하여 새 볼륨을 생성할 수 있습니다. 
+---
+= 네임스페이스 전체에 걸친 클론 볼륨
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident를 사용하면 동일한 Kubernetes 클러스터 안에 있는 다른 네임스페이스의 기존 볼륨 또는 볼륨스냅샷을 사용하여 새 볼륨을 생성할 수 있습니다.
+
+
+
+== 필수 구성 요소
+
+볼륨을 클론 복제하기 전에 소스 및 대상 백엔드의 유형이 동일하고 스토리지 클래스가 동일한지 확인합니다.
+
+
+
+== 빠른 시작
+
+몇 단계만으로 NFS 볼륨 클론 복제를 설정할 수 있습니다.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["1개"] 볼륨을 복제하도록 소스 PVC를 구성합니다
+[role="quick-margin-para"]
+소스 네임스페이스 소유자는 소스 PVC의 데이터에 액세스할 수 있는 권한을 부여합니다.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["2개"] 대상 네임스페이스에서 CR을 만들 수 있는 권한을 부여합니다
+[role="quick-margin-para"]
+클러스터 관리자는 대상 네임스페이스의 소유자에게 트리엔VolumeReference CR을 생성할 수 있는 권한을 부여합니다.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["세 가지"] 대상 네임스페이스에서 트리젠VolumeReference 를 생성합니다
+[role="quick-margin-para"]
+대상 네임스페이스의 소유자는 소스 PVC를 참조하기 위해 트리엔VolumeReference CR을 생성합니다.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["네"] 대상 네임스페이스에 클론 PVC를 생성합니다
+[role="quick-margin-para"]
+대상 네임스페이스의 소유자는 PVC를 생성하여 소스 네임스페이스에서 PVC를 복제합니다.
+
+
+
+== 소스 및 대상 네임스페이스를 구성합니다
+
+보안을 보장하기 위해 네임스페이스 전체에서 볼륨을 클론 복제하려면 소스 네임스페이스 소유자, 클러스터 관리자 및 대상 네임스페이스 소유자의 협업과 작업이 필요합니다. 사용자 역할은 각 단계에서 지정됩니다.
+
+.단계
+. * 소스 네임스페이스 소유자: * (`pvc1`소스 네임스페이스에 PVC 생성(`namespace1`)(`namespace2`. 대상 네임스페이스와 공유할 수 있는 권한을 부여함) 주석을 사용합니다. `cloneToNamespace`
++
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc1
+  namespace: namespace1
+  annotations:
+    trident.netapp.io/cloneToNamespace: namespace2
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: trident-csi
+  resources:
+    requests:
+      storage: 100Gi
+----
++
+Trident은 PV와 백엔드 NFS 스토리지 볼륨을 생성합니다.
+
++
+[NOTE]
+====
+** 쉼표로 구분된 목록을 사용하여 PVC를 여러 네임스페이스에 공유할 수 있습니다.  `trident.netapp.io/cloneToNamespace: namespace2,namespace3,namespace4`예를 들어,
+** 을 사용하여 모든 네임스페이스에 공유할 수 `*` 있습니다. 예를 들면, 다음과 같습니다. `trident.netapp.io/cloneToNamespace: *`
+** 주석을 포함하도록 PVC를 업데이트할 수 `cloneToNamespace` 있습니다.
+
+
+====
+. * 클러스터 관리자: * 대상 네임스페이스 소유자에게 TridentVolumeReference CR을 만들 수 있는 권한을 부여하려면 사용자 지정 역할과 kubeconfig를(`namespace2` 만듭니다.)
+. * 대상 네임스페이스 소유자: * 소스 네임스페이스를 참조하는 대상 네임스페이스에서 트리젠VolumeReference CR을 만듭니다 `pvc1`.
++
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentVolumeReference
+metadata:
+  name: my-first-tvr
+  namespace: namespace2
+spec:
+  pvcName: pvc1
+  pvcNamespace: namespace1
+----
+. * 대상 네임스페이스 소유자: * (`pvc2`대상 네임스페이스에서 PVC 생성(`namespace2`) 또는 `cloneFromSnapshot`, `cloneFromNamespace` 주석을 사용하여 `cloneFromPVC` 소스 PVC를 지정합니다.
++
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    trident.netapp.io/cloneFromPVC: pvc1
+    trident.netapp.io/cloneFromNamespace: namespace1
+  name: pvc2
+  namespace: namespace2
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: trident-csi
+  resources:
+    requests:
+      storage: 100Gi
+----
++
+== 제한 사항
+
++
+** ONTAP-NAS-이코노미 드라이버를 사용하여 프로비저닝된 PVC의 경우 읽기 전용 클론은 지원되지 않습니다.
+
+
+

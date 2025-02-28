@@ -190,3 +190,76 @@ sudo modprobe nvme-tcp
 ----
 --
 ====
+
+
+== FC 도구
+
+운영 체제의 명령을 사용하여 FC 툴을 설치합니다.
+
+* FC PVS와 함께 RHEL/RedHat CoreOS를 실행하는 작업자 노드를 사용하는 경우 `discard` 인라인 공간 재확보를 수행하려면 StorageClass에 mount옵션을 지정합니다. 을 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["RedHat 설명서"^]참조하십시오.
+
+
+[role="tabbed-block"]
+====
+.RHEL 8+
+--
+. 다음 시스템 패키지를 설치합니다.
++
+[listing]
+----
+sudo yum install -y lsscsi device-mapper-multipath
+----
+. 다중 경로 설정:
++
+[listing]
+----
+sudo mpathconf --enable --with_multipathd y --find_multipaths n
+----
++
+
+NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
+
+. 가 `multipathd` 실행 중인지 확인합니다.
++
+[listing]
+----
+sudo systemctl enable --now multipathd
+----
+
+
+--
+.우분투
+--
+. 다음 시스템 패키지를 설치합니다.
++
+[listing]
+----
+sudo apt-get install -y lsscsi sg3-utils multipath-tools scsitools
+----
+. 다중 경로 설정:
++
+[listing]
+----
+sudo tee /etc/multipath.conf <<-EOF
+defaults {
+    user_friendly_names yes
+    find_multipaths no
+}
+EOF
+sudo systemctl enable --now multipath-tools.service
+sudo service multipath-tools restart
+----
++
+
+NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
+
+. 가 활성화되어 있고 실행 중인지 `multipath-tools` 확인합니다.
++
+[listing]
+----
+sudo systemctl status multipath-tools
+----
+
+
+--
+====

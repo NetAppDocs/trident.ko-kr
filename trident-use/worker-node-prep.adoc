@@ -30,11 +30,9 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#ins
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nvmetcp-volumes["NVMe 툴을 설치합니다"] 을 사용하는 경우 `ontap-san` NVMe/TCP(Nonvolatile Memory Express) 프로토콜을 통한 NVMe(Nonvolatile Memory Express)
 
 
-NOTE: NVMe/TCP에 ONTAP 9.12 이상을 사용하는 것이 좋습니다.
+NOTE: NetApp은 NVMe/TCP에 ONTAP 9.12 이상을 권장합니다.
 
 .SCSI over FC 도구
-*FC(SCSI over Fibre Channel)는 Trident 24.10 릴리스의 기술 미리 보기 기능입니다.*
-
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-fc-tools["FC 툴을 설치합니다"] sanType `fcp`(SCSI over FC)을 사용하는 경우 `ontap-san`
 
 자세한 내용은 을 link:https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["FC 및 AMP, FC-NVMe SAN 호스트를 구성하는 방법"] 참조하십시오.
@@ -264,7 +262,7 @@ iSCSI 자동 복구 설정을 구성하거나 변경하려면 를 전달합니�
 
 [listing]
 ----
-helm install trident trident-operator-100.2410.0.tgz --set iscsiSelfHealingInterval=3m0s --set iscsiSelfHealingWaitTime=6m0s -n trident
+helm install trident trident-operator-100.2502.0.tgz --set iscsiSelfHealingInterval=3m0s --set iscsiSelfHealingWaitTime=6m0s -n trident
 ----
 --
 .tridentctl 을 선택합니다
@@ -328,7 +326,42 @@ WARNING: Trident는 이 값을 수정하여 `ctrl_device_tmo` NVMe가 다운될 
 
 
 
-== FC 툴을 설치합니다
+== FC 볼륨을 통한 SCSI
+
+이제 Trident와 함께 파이버 채널(FC) 프로토콜을 사용하여 ONTAP 시스템에서 스토리지 리소스를 프로비저닝하고 관리할 수 있습니다.
+
+
+
+=== 필수 구성 요소
+
+FC에 필요한 네트워크 및 노드 설정을 구성합니다.
+
+
+
+==== 네트워크 설정
+
+. 대상 인터페이스의 WWPN을 가져옵니다. 자세한 내용은 을 https://docs.netapp.com/us-en/ontap-cli//network-interface-show.html["네트워크 인터페이스가 표시됩니다"^] 참조하십시오.
+. 이니시에이터(호스트)의 인터페이스에 대한 WWPN을 가져옵니다.
++
+해당 호스트 운영 체제 유틸리티를 참조하십시오.
+
+. 호스트와 대상의 WWPN을 사용하여 FC 스위치에서 조닝을 구성합니다.
++
+자세한 내용은 존경하는 스위치 공급업체 문서를 참조하십시오.
+
++
+자세한 내용은 다음 ONTAP 설명서를 참조하십시오.
+
++
+** https://docs.netapp.com/us-en/ontap/san-config/fibre-channel-fcoe-zoning-concept.html["파이버 채널 및 FCoE 조닝 개요"^]
+** https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["FC 및 AMP, FC-NVMe SAN 호스트를 구성하는 방법"^]
+
+
+
+
+
+
+=== FC 툴을 설치합니다
 
 운영 체제의 명령을 사용하여 FC 툴을 설치합니다.
 

@@ -12,7 +12,7 @@ summary: Google Cloud NetApp 볼륨에 대한 NFS 및 NFS 백엔드 구성 옵�
 
 
 [role="lead"]
-Google Cloud NetApp 볼륨에 대한 NFS 백엔드 구성 옵션에 대해 알아보고 구성 예제를 검토합니다.
+Google Cloud NetApp 볼륨의 백엔드 구성 옵션에 대해 알아보고 구성 예제를 검토합니다.
 
 
 
@@ -59,6 +59,9 @@ Google Cloud NetApp 볼륨에 대한 NFS 백엔드 구성 옵션에 대해 알�
 
 
 | debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: `{"api":false, "method":true}` 문제 해결 중이 아니며 자세한 로그 덤프가 필요한 경우가 아니면 이 방법을 사용하지 마십시오. | null입니다 
+
+
+| `nasType` | NFS 또는 SMB 볼륨 생성을 구성합니다. 옵션은 입니다 `nfs`, `smb` 또는 null입니다. Null로 설정하면 기본적으로 NFS 볼륨이 설정됩니다. | `nfs` 
 
 
 | `supportedTopologies` | 이 백엔드에서 지원하는 영역 및 영역의 목록을 나타냅니다. 자세한 내용은 을 link:../trident-use/csi-topology.html["CSI 토폴로지를 사용합니다"]참조하십시오. 예를 들면 다음과 같습니다.
@@ -165,6 +168,38 @@ spec:
     client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/myproject-prod%40my-gcnv-project.iam.gserviceaccount.com
   credentials:
     name: backend-tbc-gcnv-secret
+----
+====
+.SMB 볼륨을 위한 구성
+[%collapsible]
+====
+[listing]
+----
+
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-gcnv1
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes
+  projectNumber: '123456789'
+  location: asia-east1
+  serviceLevel: flex
+  nasType: smb
+  apiKey:
+    type: service_account
+    project_id: cloud-native-data
+    client_email: trident-sample@cloud-native-data.iam.gserviceaccount.com
+    client_id: '123456789737813416734'
+    auth_uri: https://accounts.google.com/o/oauth2/auth
+    token_uri: https://oauth2.googleapis.com/token
+    auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+    client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/trident-sample%40cloud-native-data.iam.gserviceaccount.com
+  credentials:
+    name: backend-tbc-gcnv-secret
+
 ----
 ====
 .StoragePools 필터를 사용하여 구성합니다
@@ -400,11 +435,7 @@ tridentctl logs
 
 
 
-== 추가 예제
-
-
-
-=== 스토리지 클래스 정의 예
+== 스토리지 클래스 정의
 
 다음은 위의 백엔드를 참조하는 기본 `StorageClass` 정의입니다.
 
@@ -454,6 +485,67 @@ parameters:
 
 ----
 스토리지 클래스에 대한 자세한 내용은 을 link:../trident-use/create-stor-class.html["스토리지 클래스를 생성합니다"^]참조하십시오.
+
+
+
+=== SMB 볼륨에 대한 정의의 예
+
+사용 `nasType`, `node-stage-secret-name`, 및  `node-stage-secret-namespace`, SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다.
+
+.기본 네임스페이스에 대한 기본 구성
+[%collapsible]
+====
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-sc-smb
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes"
+  trident.netapp.io/nasType: "smb"
+  csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
+  csi.storage.k8s.io/node-stage-secret-namespace: "default"
+
+----
+====
+.네임스페이스별로 다른 암호 사용
+[%collapsible]
+====
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-sc-smb
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes"
+  trident.netapp.io/nasType: "smb"
+  csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
+  csi.storage.k8s.io/node-stage-secret-namespace: ${pvc.namespace}
+----
+====
+.볼륨별로 다른 암호 사용
+[%collapsible]
+====
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-sc-smb
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes"
+  trident.netapp.io/nasType: "smb"
+  csi.storage.k8s.io/node-stage-secret-name: ${pvc.name}
+  csi.storage.k8s.io/node-stage-secret-namespace: ${pvc.namespace}
+----
+====
+
+NOTE: `nasType: smb` SMB 볼륨을 지원하는 풀에 대한 필터입니다. `nasType: nfs` 또는 `nasType: null` NFS 풀에 대한 필터입니다.
 
 
 

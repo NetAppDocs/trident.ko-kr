@@ -42,7 +42,7 @@ WARNING: Kubernetes가 이전 연결을 인식하지 못하고 활성 볼륨을 
 ** 스토리지 클래스의 부가세 반환 청구액 정책이 인 경우 `delete`, PV 삭제 시 저장 볼륨이 삭제된다.
 
 
-* 기본적으로 Trident는 PVC를 관리하고 백엔드에서 FlexVol 및 LUN의 이름을 바꿉니다. 플래그를 전달하여 관리되지 않는 볼륨을 가져올 수 `--no-manage` 있습니다. 을 `--no-manage`사용하면 Trident는 개체의 수명 주기 동안 PVC 또는 PV에 대한 추가 작업을 수행하지 않습니다. PV가 삭제되어도 스토리지 볼륨은 삭제되지 않으며 볼륨 클론 및 볼륨 크기 조정과 같은 다른 작업도 무시됩니다.
+* 기본적으로 Trident는 PVC를 관리하고 백엔드에서 FlexVol volume 및 LUN의 이름을 바꿉니다. 플래그를 전달하여 관리되지 않는 볼륨을 가져올 수 `--no-manage` 있습니다. 을 `--no-manage`사용하면 Trident는 개체의 수명 주기 동안 PVC 또는 PV에 대한 추가 작업을 수행하지 않습니다. PV가 삭제되어도 스토리지 볼륨은 삭제되지 않으며 볼륨 클론 및 볼륨 크기 조정과 같은 다른 작업도 무시됩니다.
 +
 
 TIP: 이 옵션은 컨테이너화된 워크로드에 Kubernetes를 사용하고, 그렇지 않고 Kubernetes 외부 스토리지 볼륨의 라이프사이클을 관리하려는 경우에 유용합니다.
@@ -105,7 +105,7 @@ Trident는 및 `ontap-nas-flexgroup` 드라이버를 사용하여 볼륨 가져�
 
 
 ====
-ONTAP-NAS 드라이버로 생성된 각 볼륨은 ONTAP 클러스터의 FlexVol입니다. ONTAP-NAS 드라이버를 사용하여 FlexVol을 가져오는 작업은 동일합니다. ONTAP 클러스터에 이미 존재하는 FlexVol은 ONTAP-NAS PVC로 수입할 수 있다. 마찬가지로 FlexGroup vols는 ONTAP-NAS-Flexgroup PVC로 가져올 수 있습니다.
+드라이버로 생성된 각 볼륨은 `ontap-nas` ONTAP 클러스터의 FlexVol volume입니다. 드라이버로 FlexVol 볼륨을 가져오는 `ontap-nas` 작업은 동일합니다. ONTAP 클러스터에 이미 있는 FlexVol 볼륨을 PVC로 가져올 수 `ontap-nas` 있습니다. 마찬가지로 FlexGroup 볼륨을 PVC로 가져올 수 `ontap-nas-flexgroup` 있습니다.
 
 .ONTAP NAS의 예
 다음은 관리되는 볼륨 및 관리되지 않는 볼륨 가져오기의 예입니다.
@@ -151,7 +151,7 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 
 Trident는 및 `ontap-san-economy` 드라이버를 사용하여 볼륨 가져오기를 `ontap-san` 지원합니다.
 
-Trident는 단일 LUN이 포함된 ONTAP SAN FlexVol을 가져올 수 있습니다. 이는 `ontap-san` 각 PVC 및 FlexVol 내의 LUN에 대한 FlexVol를 생성하는 드라이버와 일치합니다. Trident는 FlexVol를 가져와 PVC 정의와 연결합니다.
+Trident는 단일 LUN이 포함된 ONTAP SAN FlexVol 볼륨을 가져올 수 있습니다. 이는 `ontap-san` 각 PVC 및 FlexVol volume 내의 LUN에 대한 FlexVol volume를 생성하는 드라이버와 일치합니다. Trident는 FlexVol volume를 가져와 PVC 정의와 연결합니다.
 
 .ONTAP SAN 예
 다음은 관리되는 볼륨 및 관리되지 않는 볼륨 가져오기의 예입니다.
@@ -160,9 +160,9 @@ Trident는 단일 LUN이 포함된 ONTAP SAN FlexVol을 가져올 수 있습니�
 ====
 .관리 볼륨
 --
-관리되는 볼륨의 경우 Trident의 이름은 FlexVol의 이름을 형식으로, FlexVol 내의 LUN의 `lun0` 이름은 `pvc-<uuid>` 으로 바꿉니다.
+관리되는 볼륨의 경우 Trident의 이름은 FlexVol volume의 이름을 형식으로, FlexVol volume 내의 LUN의 `lun0` 이름은 `pvc-<uuid>` 으로 바꿉니다.
 
-다음 예제에서는 을 가져옵니다 `ontap-san-managed` 에 있는 FlexVol입니다 `ontap_san_default` 백엔드:
+다음 예에서는 `ontap-san-managed` 백엔드에 있는 FlexVol volume를 `ontap_san_default` 가져옵니다.
 
 [listing]
 ----
@@ -262,4 +262,35 @@ tridentctl import volume azurenetappfiles_40517 importvol1 -f <path-to-pvc-file>
 +------------------------------------------+---------+---------------+----------+--------------------------------------+--------+---------+
 | pvc-0ee95d60-fd5c-448d-b505-b72901b3a4ab | 100 GiB | anf-storage   | file     | 1c01274f-d94b-44a3-98a3-04c953c9a51e | online | true    |
 +------------------------------------------+---------+---------------+----------+--------------------------------------+--------+---------+
+----
+
+
+=== Google Cloud NetApp 볼륨
+
+Trident는 드라이버를 사용하여 볼륨 가져오기를 `google-cloud-netapp-volumes` 지원합니다.
+
+.Google Cloud NetApp 볼륨의 예입니다
+다음 예에서는 `google-cloud-netapp-volumes` 볼륨이 포함된 `testvoleasiaeast1` 백엔드에서 볼륨을 `backend-tbc-gcnv1` 가져옵니다.
+
+[listing]
+----
+tridentctl import volume backend-tbc-gcnv1 "testvoleasiaeast1" -f < path-to-pvc> -n trident
+
++------------------------------------------+---------+----------------------+----------+--------------------------------------+--------+---------+
+|                   NAME                   |  SIZE   | STORAGE CLASS        | PROTOCOL |             BACKEND UUID             | STATE  | MANAGED |
++------------------------------------------+---------+----------------------+----------+--------------------------------------+--------+---------+
+| pvc-a69cda19-218c-4ca9-a941-aea05dd13dc0 |  10 GiB | gcnv-nfs-sc-identity | file     | 8c18cdf1-0770-4bc0-bcc5-c6295fe6d837 | online | true    |
++------------------------------------------+---------+----------------------+----------+--------------------------------------+--------+---------+
+----
+다음 예에서는 동일한 영역에 두 개의 볼륨이 있을 때 볼륨을 가져옵니다 `google-cloud-netapp-volumes`.
+
+[listing]
+----
+tridentctl import volume backend-tbc-gcnv1 "projects/123456789100/locations/asia-east1-a/volumes/testvoleasiaeast1" -f <path-to-pvc> -n trident
+
++------------------------------------------+---------+----------------------+----------+--------------------------------------+--------+---------+
+|                   NAME                   |  SIZE   | STORAGE CLASS        | PROTOCOL |             BACKEND UUID             | STATE  | MANAGED |
++------------------------------------------+---------+----------------------+----------+--------------------------------------+--------+---------+
+| pvc-a69cda19-218c-4ca9-a941-aea05dd13dc0 |  10 GiB | gcnv-nfs-sc-identity | file     | 8c18cdf1-0770-4bc0-bcc5-c6295fe6d837 | online | true    |
++------------------------------------------+---------+----------------------+----------+--------------------------------------+--------+---------+
 ----

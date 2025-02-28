@@ -49,7 +49,7 @@ ONTAP 백엔드 드라이버는 사용된 프로토콜과 스토리지 시스템
 | 'ONTAP-NAS' | 예 | 예 | Yesfootnote: 5[] | 예 | Yesfootnote: 1[] | 예 | Yesfootnote: 1[] 
 
 
-| ONTAP-NAS-이코노미 | Yesfootnote: 3[] | Yesfootnote: 3[] | Yesfootnote: 5[] | 예 | Yesfootnote: 3[] | 예 | Yesfootnote: 3[] 
+| ONTAP-NAS-이코노미 | 메모:3[] | 메모:3[] | Yesfootnote: 5[] | 예 | 메모:3[] | 예 | 메모:3[] 
 
 
 | 'ONTAP-NAS-Flexgroup' | Yesfootnote: 1[] | 아니요 | Yesfootnote: 5[] | 예 | Yesfootnote: 1[] | 예 | Yesfootnote: 1[] 
@@ -64,10 +64,10 @@ Trident는 ONTAP용 SAN 드라이버 2개를 제공합니다. 이러한 드라�
 | 'ONTAP-SAN' | 예 | 예 | Yesfootnote: 4[] | 예 | Yesfootnote: 1[] | 예 | Yesfootnote: 1[] 
 
 
-| ONTAP-SAN-이코노미 | 예 | 예 | Yesfootnote: 4[] | 예 | Yesfootnote: 3[] | 예 | Yesfootnote: 3[] 
+| ONTAP-SAN-이코노미 | 예 | 예 | Yesfootnote: 4[] | 예 | 메모:3[] | 예 | 메모:3[] 
 |===
 [verse]
-위 표의 각주: Yesfootnote:1[]:Trident에서 관리되지 않음 예각주:2[]:Trident에서 관리하지만 PV 입상으로는 관리하지 않음 예각주:3[]:Trident에서 관리되지 않으며 PV 입상화가 아님 예각주:4[]: 원시 블록 볼륨에 대해 지원됨 예각주:5[]: Trident에서 지원
+위 표의 각주: Yesfootnote:1[]: Trident에서 관리되지 않음 Yesfootnote:2[]: Trident에서 관리하지만 PV 세밀한 NOfootnote:3[]: Trident에서 관리하지 않으며 PV 세밀한 예각주:4[]: 원시 블록 볼륨에 대해 지원됨 예: 5[]: Trident에서 지원합니다
 
 PV 세분화되지 않은 기능은 전체 FlexVolume에 적용되고 모든 PVS(즉, 공유 FlexVol의 qtree 또는 LUN)는 공통 스케줄을 공유합니다.
 
@@ -247,7 +247,7 @@ NFS 백엔드가 구성되지 않은 상태로 Trident 배포에 제출된 ReadW
 영구 볼륨은 Kubernetes에서 두 가지 예외, 영구적 객체입니다. 생성된 후에는 부가세 반환 청구액 정책 및 크기를 수정할 수 있습니다. 그러나 이렇게 해도 볼륨의 일부 측면이 Kubernetes 외부에서 수정되는 것을 방지할 수 없습니다. 특정 애플리케이션에 맞게 볼륨을 사용자 지정하거나, 실수로 용량이 소비되지 않도록 하거나, 어떠한 이유로든 볼륨을 다른 스토리지 컨트롤러로 이동하는 것이 좋을 수 있습니다.
 
 
-NOTE: 현재 Kubernetes 트리 프로비저닝 시 NFS 또는 iSCSI PVS의 볼륨 크기 조정 작업은 지원되지 않습니다. Trident는 NFS 및 iSCSI 볼륨의 확장을 지원합니다.
+NOTE: Kubernetes 트리 내 프로비저닝은 현재 NFS, iSCSI 또는 FC PVS에 대한 볼륨 크기 조정 작업을 지원하지 않습니다. Trident은 NFS, iSCSI 및 FC 볼륨의 확장을 지원합니다.
 
 PV의 접속 세부 정보는 생성 후 수정할 수 없습니다.
 
@@ -277,7 +277,7 @@ Trident는 또한 볼륨 스냅샷에서 PersistentVolumes 생성을 지원합�
 
 === 볼륨 확장
 
-Trident는 NFS 및 iSCSI PVS 크기 조정을 지원합니다. 따라서 사용자는 Kubernetes 계층을 통해 직접 볼륨의 크기를 조정할 수 있습니다. ONTAP, SolidFire/NetApp HCI 및 Cloud Volumes Service 백엔드를 포함한 모든 주요 NetApp 스토리지 플랫폼에서 볼륨 확장이 가능합니다. 나중에 확장을 허용하려면 `allowVolumeExpansion` 볼륨과 연결된 StorageClass에서 로 `true` 설정하십시오. 영구 볼륨의 크기를 조정해야 할 때마다 `spec.resources.requests.storage` 영구 볼륨 클레임의 주석을 필요한 볼륨 크기로 편집합니다. Trident는 스토리지 클러스터의 볼륨 크기를 자동으로 조정합니다.
+Trident는 NFS, iSCSI 및 FC PVS 크기 조정을 지원합니다. 따라서 사용자는 Kubernetes 계층을 통해 직접 볼륨의 크기를 조정할 수 있습니다. ONTAP, SolidFire/NetApp HCI 및 Cloud Volumes Service 백엔드를 포함한 모든 주요 NetApp 스토리지 플랫폼에서 볼륨 확장이 가능합니다. 나중에 확장을 허용하려면 `allowVolumeExpansion` 볼륨과 연결된 StorageClass에서 로 `true` 설정하십시오. 영구 볼륨의 크기를 조정해야 할 때마다 `spec.resources.requests.storage` 영구 볼륨 클레임의 주석을 필요한 볼륨 크기로 편집합니다. Trident는 스토리지 클러스터의 볼륨 크기를 자동으로 조정합니다.
 
 
 
@@ -292,12 +292,6 @@ ONTAP 및 드라이버를 사용할 `solidfire-san` 경우 명령을 `tridentctl
 위의 명령을 실행하면 Trident는 백엔드에서 볼륨을 찾고 크기를 읽습니다. 구성된 PVC 볼륨 크기를 자동으로 추가(필요한 경우 덮어쓰기)합니다. 그런 다음 Trident는 새 PV를 만들고 Kubernetes는 PV에 PVC를 바인딩합니다.
 
 특정 가져온 PVC가 필요한 컨테이너를 배포한 경우 PVC/PV 쌍이 볼륨 가져오기 프로세스를 통해 바인딩될 때까지 보류 상태로 유지됩니다. PVC/PV 쌍이 바인딩되면 다른 문제가 없는 한 컨테이너가 나타나야 합니다.
-
-
-
-== OpenShift 서비스를 배포합니다
-
-OpenShift 부가 가치 클러스터 서비스는 클러스터 관리자와 호스팅 중인 애플리케이션에 중요한 기능을 제공합니다. 이러한 서비스가 사용되는 스토리지는 노드 로컬 리소스를 사용하여 프로비저닝할 수 있지만, 이로 인해 서비스의 용량, 성능, 복구 가능성 및 지속 가능성이 제한되기도 합니다. 엔터프라이즈 스토리지 어레이를 활용하여 이러한 서비스에 필요한 용량을 제공하면 서비스를 대폭 향상시킬 수 있습니다. 그러나 모든 애플리케이션과 마찬가지로 OpenShift와 스토리지 관리자는 긴밀하게 협력하여 각 애플리케이션에 가장 적합한 옵션을 결정해야 합니다. Red Hat 문서는 요구 사항을 결정하고 사이징 및 성능 요구 사항을 충족할 수 있도록 적극 활용해야 합니다.
 
 
 
