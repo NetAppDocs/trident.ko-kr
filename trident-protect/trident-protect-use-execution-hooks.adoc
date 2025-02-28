@@ -58,6 +58,9 @@ NOTE: 위의 순서 예제는 기존 스냅샷을 사용하지 않는 백업을 
 NOTE: 운영 환경에서 실행 후크 스크립트를 사용하려면 항상 해당 스크립트를 테스트해야 합니다. 'kubbeck exec' 명령을 사용하여 스크립트를 편리하게 테스트할 수 있습니다. 운영 환경에서 실행 후크를 사용하도록 설정한 후 결과 스냅샷과 백업을 테스트하여 정합성이 보장되는지 확인합니다. 앱을 임시 네임스페이스에 클론 복제하고, 스냅샷 또는 백업을 복원한 다음 앱을 테스트하여 이 작업을 수행할 수 있습니다.
 
 
+NOTE: 스냅샷 사전 실행 후크가 Kubernetes 리소스를 추가, 변경 또는 제거하는 경우 스냅샷 또는 백업과 이후의 복원 작업에 변경 사항이 포함됩니다.
+
+
 
 == 사용자 정의 실행 후크에 대한 중요 참고 사항
 
@@ -196,4 +199,178 @@ tridentctl-protect create exechook <my_exec_hook_name> --action <action_type> --
 
 
 --
+====
+
+
+== 실행 후크를 수동으로 실행합니다
+
+테스트 목적으로 실행 후크를 수동으로 실행하거나 실패 후 수동으로 후크를 다시 실행해야 하는 경우 실행할 수 있습니다. 실행 후크를 수동으로 실행하려면 소유자, 관리자 또는 구성원 권한이 있어야 합니다.
+
+실행 후크를 수동으로 실행하는 작업은 다음 두 가지 기본 단계로 구성됩니다.
+
+. 리소스 백업을 생성하여 리소스를 수집하고 해당 백업을 생성하여 후크가 실행될 위치를 결정합니다
+. 백업에 대해 실행 후크를 실행합니다
+
+
+.1단계: 리소스 백업을 생성합니다
+[%collapsible]
+====
+[role="tabbed-block"]
+=====
+.CR을 사용합니다
+--
+.단계
+. CR(사용자 정의 리소스) 파일을 만들고 이름을 `trident-protect-resource-backup.yaml`지정합니다.
+. 다음 특성을 Trident Protect 환경과 클러스터 구성과 일치하도록 구성합니다.
++
+** *metadata.name*: (_required_) 이 사용자 정의 리소스의 이름입니다. 사용자 환경에 맞는 고유하고 합리적인 이름을 선택하십시오.
+** * spec.applicationRef *:(_required_) 리소스 백업을 생성할 애플리케이션의 Kubernetes 이름입니다.
+** * spec.appVaultRef *: (_required_) 백업 내용이 저장된 AppVault의 이름입니다.
+** * spec.appArchivePath * : 백업 컨텐츠가 저장되는 AppVault 내부의 경로입니다. 다음 명령을 사용하여 이 경로를 찾을 수 있습니다.
++
+[source, console]
+----
+kubectl get backups <BACKUP_NAME> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
++
+YAML 예:
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: ResourceBackup
+metadata:
+  name: example-resource-backup
+spec:
+  applicationRef: my-app-name
+  appVaultRef: my-appvault-name
+  appArchivePath: example-resource-backup
+----
+
+
+. CR 파일을 올바른 값으로 채운 후 CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-resource-backup.yaml
+----
+
+
+--
+.CLI를 사용합니다
+--
+.단계
+. 대괄호 안의 값을 사용자 환경의 정보로 대체하여 백업을 만듭니다. 예를 들면 다음과 같습니다.
++
+[source, console]
+----
+tridentctl protect create resourcebackup <my_backup_name> --app <my_app_name> --appvault <my_appvault_name> -n <my_app_namespace> --app-archive-path <app_archive_path>
+----
+. 백업 상태를 봅니다. 작업이 완료될 때까지 이 예제 명령을 반복해서 사용할 수 있습니다.
++
+[source, console]
+----
+tridentctl protect get resourcebackup -n <my_app_namespace> <my_backup_name>
+----
+. 백업이 성공했는지 확인합니다.
++
+[source, console]
+----
+kubectl describe resourcebackup <my_backup_name>
+----
+
+
+--
+=====
+====
+.단계 2: 실행 후크를 실행합니다
+[%collapsible]
+====
+[role="tabbed-block"]
+=====
+.CR을 사용합니다
+--
+.단계
+. CR(사용자 정의 리소스) 파일을 만들고 이름을 `trident-protect-hook-run.yaml`지정합니다.
+. 다음 특성을 Trident Protect 환경과 클러스터 구성과 일치하도록 구성합니다.
++
+** *metadata.name*: (_required_) 이 사용자 정의 리소스의 이름입니다. 사용자 환경에 맞는 고유하고 합리적인 이름을 선택하십시오.
+** * spec.applicationRef *: (_required_) 이 값이 1단계에서 만든 ResourceBackup CR의 응용 프로그램 이름과 일치하는지 확인합니다.
+** * spec.appVaultRef *: (_required_) 이 값이 1단계에서 작성한 ResourceBackup CR의 appVaultRef와 일치하는지 확인합니다.
+** *spec.appArchivePath*: 이 값이 1단계에서 만든 ResourceBackup CR의 appArchivePath 와 일치하는지 확인하십시오.
++
+[source, console]
+----
+kubectl get backups <BACKUP_NAME> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
+** * spec.action *:(_required_) 지정된 실행 후크 필터가 일치한다고 가정할 때 실행 후크가 수행할 작업을 나타내는 문자열입니다. 가능한 값:
++
+*** 스냅샷
+*** 백업
+*** 복원
+*** 페일오버
+
+
+** * spec.stage *: (_required_) 실행 후크가 실행되어야 하는 작업 중 단계를 나타내는 문자열입니다. 이 후크 실행은 다른 단계에서 후크를 실행하지 않습니다. 가능한 값:
++
+*** 사전
+*** 게시
++
+YAML 예:
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: ExecHooksRun
+metadata:
+  name: example-hook-run
+spec:
+  applicationRef: my-app-name
+  appVaultRef: my-appvault-name
+  appArchivePath: example-resource-backup
+  stage: Post
+  action: Failover
+----
+
+
+
+
+. CR 파일을 올바른 값으로 채운 후 CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-hook-run.yaml
+----
+
+
+--
+.CLI를 사용합니다
+--
+.단계
+. 수동 실행 후크 실행 요청을 생성합니다.
++
+[source, console]
+----
+tridentctl protect create exechooksrun <my_exec_hook_run_name> -n <my_app_namespace> --action snapshot --stage <pre_or_post> --app <my_app_name> --appvault <my_appvault_name> --path <my_backup_name>
+----
+. execution hook run의 상태를 확인한다. 작업이 완료될 때까지 이 명령을 반복적으로 실행할 수 있습니다.
++
+[source, console]
+----
+tridentctl protect get exechooksrun -n <my_app_namespace> <my_exec_hook_run_name>
+----
+. exechooksrun 객체를 설명하여 최종 세부 정보 및 상태를 확인합니다.
++
+[source, console]
+----
+kubectl -n <my_app_namespace> describe exechooksrun <my_exec_hook_run_name>
+----
+
+
+--
+=====
 ====

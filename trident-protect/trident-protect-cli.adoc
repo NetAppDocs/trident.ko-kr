@@ -31,7 +31,7 @@ Trident 유틸리티의 확장인 Trident Protect 명령줄 플러그인을 사�
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.1/tridentctl-protect-linux-amd64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/25.02.0/tridentctl-protect-linux-amd64
 ----
 
 
@@ -43,7 +43,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.1/tridentctl-protect-linux-arm64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/25.02.0/tridentctl-protect-linux-arm64
 ----
 
 
@@ -55,7 +55,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.1/tridentctl-protect-macos-amd64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/25.02.0/tridentctl-protect-macos-amd64
 ----
 
 
@@ -67,7 +67,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.1/tridentctl-protect-macos-arm64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/25.02.0/tridentctl-protect-macos-arm64
 ----
 
 
@@ -126,7 +126,7 @@ Trident Protect CLI 플러그인을 설치한 후 특정 명령에 대해 자동
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.1/tridentctl-completion.bash
+curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.02.0/tridentctl-completion.bash
 ----
 . 스크립트를 포함할 홈 디렉토리에 새 디렉토리를 만듭니다.
 +
@@ -156,7 +156,7 @@ source ~/.bash/completions/tridentctl-completion.bash
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.1/tridentctl-completion.zsh
+curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.02.0/tridentctl-completion.zsh
 ----
 . 스크립트를 포함할 홈 디렉토리에 새 디렉토리를 만듭니다.
 +

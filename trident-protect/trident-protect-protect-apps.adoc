@@ -25,6 +25,9 @@ NOTE: 데이터 보호 작업 중에 파일 시스템을 고정 및 고정 해�
 
 언제든지 주문형 스냅샷을 생성할 수 있습니다.
 
+
+NOTE: 클러스터 범위 리소스는 애플리케이션 정의에 명시적으로 참조되거나 애플리케이션 네임스페이스에 대한 참조가 있는 경우 백업, 스냅샷 또는 클론에 포함됩니다.
+
 [role="tabbed-block"]
 ====
 .CR을 사용하여 스냅샷을 생성합니다
@@ -86,6 +89,16 @@ tridentctl-protect create snapshot <my_snapshot_name> --appvault <my_appvault_na
 
 언제든지 앱을 백업할 수 있습니다.
 
+
+NOTE: 클러스터 범위 리소스는 애플리케이션 정의에 명시적으로 참조되거나 애플리케이션 네임스페이스에 대한 참조가 있는 경우 백업, 스냅샷 또는 클론에 포함됩니다.
+
+.시작하기 전에
+AWS 세션 토큰의 만료가 장시간 실행되는 S3 백업 작업에 충분한지 확인합니다. 백업 작업 중에 토큰이 만료되면 작업이 실패할 수 있습니다.
+
+* 현재 세션 토큰 만료 확인에 대한 자세한 내용은 를 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API 설명서"^] 참조하십시오.
+* AWS 리소스의 자격 증명에 대한 자세한 내용은 를 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["AWS IAM 설명서"^] 참조하십시오.
+
+
 [role="tabbed-block"]
 ====
 .CR을 사용하여 백업을 생성합니다
@@ -142,7 +155,7 @@ kubectl apply -f trident-protect-backup-cr.yaml
 +
 [source, console]
 ----
-tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --app <name_of_app_to_back_up> -n <application_namespace>
+tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --app <name_of_app_to_back_up> --data-mover <Kopia_or_Restic> -n <application_namespace>
 ----
 
 
@@ -153,6 +166,16 @@ tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --a
 == 데이터 보호 스케줄을 생성합니다
 
 보호 정책은 정의된 일정에 따라 스냅샷, 백업 또는 둘 다를 생성하여 앱을 보호합니다. 시간별, 일별, 주별 및 월별 스냅샷과 백업을 생성하도록 선택할 수 있으며, 보존할 복제본 수를 지정할 수 있습니다.
+
+
+NOTE: 클러스터 범위 리소스는 애플리케이션 정의에 명시적으로 참조되거나 애플리케이션 네임스페이스에 대한 참조가 있는 경우 백업, 스냅샷 또는 클론에 포함됩니다.
+
+.시작하기 전에
+AWS 세션 토큰의 만료가 장시간 실행되는 S3 백업 작업에 충분한지 확인합니다. 백업 작업 중에 토큰이 만료되면 작업이 실패할 수 있습니다.
+
+* 현재 세션 토큰 만료 확인에 대한 자세한 내용은 를 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API 설명서"^] 참조하십시오.
+* AWS 리소스의 자격 증명에 대한 자세한 내용은 를 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["AWS IAM 설명서"^] 참조하십시오.
+
 
 [role="tabbed-block"]
 ====
@@ -228,7 +251,7 @@ NOTE: 을 사용하여 `tridentctl-protect create schedule --help` 이 명령에
 +
 [source, console]
 ----
-tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <kopia_or_restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace>
+tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace>
 ----
 
 

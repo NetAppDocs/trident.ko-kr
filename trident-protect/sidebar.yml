@@ -12,6 +12,8 @@ entries:
     url: "/trident-protect/trident-protect-installation.html"
   - title: Trident Protect CLI 플러그인을 설치합니다
     url: "/trident-protect/trident-protect-cli.html"
+  - title: Trident Protect 설치를 사용자 지정합니다
+    url: "/trident-protect/trident-protect-customize-installation.html"
 - title: Trident Protect를 관리합니다
   entries:
   - title: 권한 부여 및 액세스 제어 관리
