@@ -26,7 +26,7 @@ AppVault 객체를 생성하기 전에 AppVault 및 선택한 Data Mover가 공�
 
 === Data Mover 저장소 암호입니다
 
-CRS 또는 Trident Protect CLI 플러그인을 사용하여 AppVault 개체를 만들 때 선택적으로 Trident Protect에 Restic 및 Kopia 저장소 암호화에 대한 사용자 지정 암호가 포함된 Kubernetes 암호를 사용하도록 지시할 수 있습니다. 암호를 지정하지 않으면 Trident Protect에서 `password` 두 암호를 모두 사용합니다.
+CRS 또는 Trident Protect CLI 플러그인을 사용하여 AppVault 개체를 만들 때 선택적으로 Trident Protect에 Restic 및 Kopia 저장소 암호화에 대한 사용자 지정 암호가 포함된 Kubernetes 암호를 사용하도록 지시할 수 있습니다. 암호를 지정하지 않으면 Trident Protect에서 기본 암호를 사용합니다.
 
 * AppVault CRS를 수동으로 만들 때 * spec.properties.dataMoverPasswordSecretRef* 필드를 사용하여 암호를 지정할 수 있습니다.
 * Trident Protect CLI를 사용하여 AppVault 개체를 만들 때 인수를 사용하여 암호를 지정할 수 `--data-mover-password-secret-ref` 있습니다.

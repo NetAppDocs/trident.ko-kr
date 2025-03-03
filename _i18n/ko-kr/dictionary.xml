@@ -5331,7 +5331,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">AppVault 인증 및 암호를 구성합니다</block>
   <block id="27d0259b1ba2ddf3e1540b7e284626ca" category="paragraph">AppVault 객체를 생성하기 전에 AppVault 및 선택한 Data Mover가 공급자 및 관련 리소스를 통해 인증할 수 있는지 확인해야 합니다.</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">Data Mover 저장소 암호입니다</block>
-  <block id="4cd15a28ae8649b5dc81e950978b86be" category="paragraph">CRS 또는 Trident Protect CLI 플러그인을 사용하여 AppVault 개체를 만들 때 선택적으로 Trident Protect에 Restic 및 Kopia 저장소 암호화에 대한 사용자 지정 암호가 포함된 Kubernetes 암호를 사용하도록 지시할 수 있습니다. 암호를 지정하지 않으면 Trident Protect에서<block ref="5f4dcc3b5aa765d61d8327deb882cf99" prefix=" " category="inline-code"></block> 두 암호를 모두 사용합니다.</block>
   <block id="821c1dc7cb99d19026af83809b8224a2" category="list-text">AppVault CRS를 수동으로 만들 때 * spec.properties.dataMoverPasswordSecretRef* 필드를 사용하여 암호를 지정할 수 있습니다.</block>
   <block id="12ae6793b05f84758a85b289757c4f34" category="list-text">Trident Protect CLI를 사용하여 AppVault 개체를 만들 때 인수를 사용하여 암호를 지정할 수<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block> 있습니다.</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">Data Mover 리포지토리 암호 암호를 생성합니다</block>
@@ -5419,4 +5418,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="42e563c466d27e9d4943ef1acd3703b7" category="list-text">execution hook run의 상태를 확인한다. 작업이 완료될 때까지 이 명령을 반복적으로 실행할 수 있습니다.</block>
   <block id="8430f2c56dfc9e79fcaf741392d54499" category="list-text">exechooksrun 객체를 설명하여 최종 세부 정보 및 상태를 확인합니다.</block>
   <block id="b343abb76f62f4eef4afa255e885eee4" category="paragraph">Trident 25.02부터 Trident 및 Trident Protect 릴리스의 향상된 기능, 수정 사항 및 사용 중단에 대한 자세한 내용은 새로운 기능 요약을 참조하십시오.</block>
+  <block id="5674eb46caea5efcff5615daf30ab92d" category="paragraph">CRS 또는 Trident Protect CLI 플러그인을 사용하여 AppVault 개체를 만들 때 선택적으로 Trident Protect에 Restic 및 Kopia 저장소 암호화에 대한 사용자 지정 암호가 포함된 Kubernetes 암호를 사용하도록 지시할 수 있습니다. 암호를 지정하지 않으면 Trident Protect에서 기본 암호를 사용합니다.</block>
 </blocks>
