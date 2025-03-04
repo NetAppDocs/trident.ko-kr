@@ -69,7 +69,6 @@ Trident 25.02부터 Trident 및 Trident Protect 릴리스의 향상된 기능, �
 ** 사용 가능한 모든 AWS ARN 파티션을 지원하기 위해 백엔드 구성 자격 증명을 수정했습니다(link:https://github.com/NetApp/trident/issues/913["문제 #913"]).
 ** Trident 연산자에서 자동 구성기 조정을 비활성화하는 옵션이 추가되었습니다(link:https://github.com/NetApp/trident/issues/924["문제 #924"]).
 ** CSI-resizer 컨테이너에 대한 securityContext가 추가되었습니다(link:https://github.com/NetApp/trident/issues/976["문제 #976"]).
-** iSCSI 자동 복구 중 간헐적으로 비CHAP 포털에 대한 로그아웃을 제거했습니다link:https://github.com/NetApp/trident/issues/961["문제 #961"]().
 
 
 
