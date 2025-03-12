@@ -18,6 +18,8 @@ entries:
   entries:
   - title: 권한 부여 및 액세스 제어 관리
     url: "/trident-protect/manage-authorization-access-control.html"
+  - title: Trident Protect 리소스 모니터링
+    url: "/trident-protect/monitor-trident-protect-resources.html"
   - title: Trident Protect 지원 번들을 생성합니다
     url: "/trident-protect/trident-protect-generate-support-bundle.html"
   - title: Trident Protect를 업그레이드합니다

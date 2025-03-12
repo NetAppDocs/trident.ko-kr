@@ -1,0 +1,214 @@
+---
+permalink: trident-protect/monitor-trident-protect-resources.html 
+sidebar: sidebar 
+keywords: manage, authentication, rbac 
+summary: kube-state-metrics 및 Prometheus를 사용하여 Trident Protect 리소스의 상태를 모니터링할 수 있습니다. 이 서비스는 배포, 노드 및 Pod에 대한 상태 정보를 제공합니다. 
+---
+= Trident Protect 리소스 모니터링
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+kube-state-metrics, Prometheus 및 Alertmanager 오픈 소스 툴을 사용하여 Trident Protect로 보호되는 리소스의 상태를 모니터링할 수 있습니다.
+
+kube-state-metrics 서비스는 Kubernetes API 통신에서 메트릭을 생성합니다. Trident Protect와 함께 사용하면 사용자 환경의 리소스 상태에 대한 유용한 정보를 얻을 수 있습니다.
+
+Prometheus는 kube-state-metrics에 의해 생성된 데이터를 수집하여 이러한 객체에 대해 쉽게 읽을 수 있는 정보로 제공할 수 있는 툴킷입니다. kube-state-metrics와 Prometheus를 함께 사용하여 Trident Protect를 통해 관리하고 있는 리소스의 상태와 상태를 모니터링할 수 있습니다.
+
+Alertmanager는 Prometheus와 같은 도구에서 보낸 경고를 수집하여 구성한 대상으로 라우팅하는 서비스입니다.
+
+[NOTE]
+====
+이 단계에 포함된 구성 및 지침은 예일 뿐입니다. 환경에 맞게 사용자 지정해야 합니다. 구체적인 지침 및 지원은 다음 공식 문서를 참조하십시오.
+
+* https://github.com/kubernetes/kube-state-metrics/tree/main["Kudbe-state-metrics 문서"^]
+* https://prometheus.io/docs/introduction/overview/["Prometheus 설명서"^]
+* https://github.com/prometheus/alertmanager["Alertmanager 설명서"^]
+
+
+====
+
+
+== 1단계: 모니터링 도구를 설치합니다
+
+Trident Protect에서 리소스 모니터링을 활성화하려면 kube-state-metrics, Promethus 및 Alertmanager를 설치하고 구성해야 합니다.
+
+
+
+=== kube-state-metrics를 설치합니다
+
+Helm을 사용하여 kube-state-metrics를 설치할 수 있습니다.
+
+.단계
+. kube-state-metrics Helm 차트를 추가합니다. 예를 들면 다음과 같습니다.
++
+[source, console]
+----
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+----
+. Helm 차트에 대한 구성 파일을 만듭니다(예: `metrics-config.yaml`). 다음 예제 구성을 사용자 환경에 맞게 사용자 지정할 수 있습니다.
++
+.metrics-config.yaml:kube-state-metrics Helm 차트 구성
+[source, yaml]
+----
+---
+extraArgs:
+  # Collect only custom metrics
+  - --custom-resource-state-only=true
+
+customResourceState:
+  enabled: true
+  config:
+    kind: CustomResourceStateMetrics
+    spec:
+      resources:
+      - groupVersionKind:
+          group: astra.netapp.io
+          kind: "Backup"
+          version: "v1"
+        labelsFromPath:
+          backup_uid: [metadata, uid]
+          backup_name: [metadata, name]
+          creation_time: [metadata, creationTimestamp]
+        metrics:
+        - name: backup_info
+          help: "Exposes details about the Backup state"
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                appVaultReference: ["spec", "appVaultRef"]
+                appReference: ["spec", "applicationRef"]
+rbac:
+  extraRules:
+  - apiGroups: ["backups.protect.trident.netapp.io"]
+    resources: ["backups"]
+    verbs: ["list", "watch"]
+
+# Collect metrics from all namespaces
+namespaces: ""
+
+# Ensure that the metrics are collected by Prometheus
+prometheus:
+  monitor:
+    enabled: true
+----
+. Helm 차트를 배포하여 kube-state-metrics를 설치합니다. 예를 들면 다음과 같습니다.
++
+[source, console]
+----
+helm install custom-resource -f metrics-config.yaml prometheus-community/kube-state-metrics --version 5.21.0
+----
+. 의 지침에 따라 Trident Protect에서 사용하는 사용자 지정 리소스에 대한 메트릭을 생성하도록 kube-state-metrics https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md#custom-resource-state-metrics["kube-state-metrics 맞춤형 리소스 문서화"^]를 구성합니다.
+
+
+
+
+=== Prometheus를 설치합니다
+
+의 지침에 따라 Prometheus를 설치할 수 https://prometheus.io/docs/prometheus/latest/installation/["Prometheus 설명서"^] 있습니다.
+
+
+
+=== Alertmanager를 설치합니다
+
+의 지침에 따라 Alertmanager를 설치할 수 https://github.com/prometheus/alertmanager?tab=readme-ov-file#install["Alertmanager 설명서"^] 있습니다.
+
+
+
+== 2단계: 함께 작동하도록 모니터링 도구를 구성합니다
+
+모니터링 도구를 설치한 후에는 함께 작동하도록 구성해야 합니다.
+
+.단계
+. kube-state-metrics를 Prometheus와 통합합니다. Prometheus 구성 파일을 (`prometheus.yml`편집하고 kube-state-metrics 서비스 정보를 추가합니다. 예를 들면 다음과 같습니다.
++
+.Prometheus.yml: kube-state-metrics 서비스와 Prometheus의 통합
+[source, yaml]
+----
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: astra-connector
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'kube-state-metrics'
+        static_configs:
+          - targets: ['kube-state-metrics.astra-connector.svc:8080']
+----
+. 알림을 Alertmanager로 라우팅하도록 Prometheus를 구성합니다. Prometheus 구성 파일을 (`prometheus.yml`편집하고 다음 섹션을 추가합니다.
++
+.Prometheus.yml: Alertmanager에 알림을 보냅니다
+[source, yaml]
+----
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager.astra-connector.svc:9093
+----
+
+
+.결과
+Prometheus는 이제 kube 상태 메트릭에서 메트릭을 수집하고 Alertmanager에 경고를 전송할 수 있습니다. 이제 알림을 트리거하는 조건과 알림을 보낼 위치를 구성할 준비가 되었습니다.
+
+
+
+== 3단계: 경고 및 경고 대상을 구성합니다
+
+함께 작동하도록 도구를 구성한 후에는 알림을 트리거할 정보 유형과 알림을 보낼 위치를 구성해야 합니다.
+
+
+
+=== 경고 예: 백업 실패
+
+다음 예에서는 백업 사용자 지정 리소스의 상태가 5초 이상 으로 설정된 경우 트리거되는 중요 알림을 `Error` 정의합니다. 이 예제를 사용자 환경에 맞게 사용자 지정하고 이 YAML 스니펫을 구성 파일에 포함할 수 `prometheus.yml` 있습니다.
+
+.rules.yml: 실패한 백업에 대한 Prometheus 알림을 정의합니다
+[source, yaml]
+----
+rules.yml: |
+  groups:
+    - name: fail-backup
+        rules:
+          - alert: BackupFailed
+            expr: kube_customresource_backup_info{status="Error"}
+            for: 5s
+            labels:
+              severity: critical
+            annotations:
+              summary: "Backup failed"
+              description: "A backup has failed."
+----
+
+
+=== 알림을 다른 채널로 보내도록 Alertmanager를 구성합니다
+
+파일에 각 구성을 지정하여 전자 메일, PagerDuty, Microsoft Teams 또는 기타 알림 서비스와 같은 다른 채널에 알림을 보내도록 Alertmanager를 구성할 수 `alertmanager.yml` 있습니다.
+
+다음 예에서는 알림 메시지를 Slack 채널에 보내도록 Alertmanager를 구성합니다. 이 예제를 환경에 맞게 사용자 지정하려면 키 값을 사용자 환경에서 사용되는 Slack Webhook URL로 바꿉니다 `api_url`.
+
+.alertmanager.yml: Slack 채널에 알림을 보냅니다
+[source, yaml]
+----
+data:
+  alertmanager.yml: |
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: 'slack-notifications'
+    receivers:
+      - name: 'slack-notifications'
+        slack_configs:
+          - api_url: '<your-slack-webhook-url>'
+            channel: '#failed-backups-channel'
+            send_resolved: false
+----
