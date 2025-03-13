@@ -5462,4 +5462,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">다음 예에서는 알림 메시지를 Slack 채널에 보내도록 Alertmanager를 구성합니다. 이 예제를 환경에 맞게 사용자 지정하려면 키 값을 사용자 환경에서 사용되는 Slack Webhook URL로 바꿉니다<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>.</block>
   <block id="4b437b03cad5e359b0e810e6dc330afc" category="listing-title">alertmanager.yml: Slack 채널에 알림을 보냅니다</block>
   <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect는 선택한 리소스와의 관계에 따라 일부 리소스를 자동으로 선택합니다. 예를 들어, 영구 볼륨 클레임 리소스를 선택했고 이 리소스에 연결된 Pod가 있는 경우 Trident Protect는 연결된 Pod도 복원합니다.</block>
+  <block id="d110d36251c4dd04b7da5ef237ac6063" category="inline-link">코피아 문서</block>
+  <block id="2cd3acbff016f03ffcfe72208e450647" category="admonition">Kopia를 Data Mover로 사용하여 백업을 복구하는 경우 CR에서 주석을 지정하거나 CLI를 사용하여 Kopia에서 사용하는 최상위 스토리지의 동작을 제어할 수 있습니다. 구성할 수 있는 옵션에 대한 자세한 내용은 를<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block> 참조하십시오. <block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>Trident Protect CLI에서 주석을 지정하는 방법에 대한 자세한 내용은 명령을 사용하십시오.</block>
 </blocks>
