@@ -492,7 +492,7 @@ IMPORTANT: Kubernetes 1.27가 이제 Trident에서 지원됩니다. Kubernetes�
 === 사용 중단
 
 * Kubernetes: 지원되는 최소 Kubernetes를 1.21로 업데이트했습니다.
-* 구성 시 데이터 LIF를 더 이상 지정하지 않아야 합니다 `ontap-san` 또는 `ontap-san-economy` 드라이버.
+* 또는 `ontap-san-economy` 드라이버를 구성할 때 DataLIF를 더 이상 지정하지 `ontap-san` 않아야 합니다.
 
 
 
@@ -518,7 +518,7 @@ IMPORTANT: Kubernetes 1.27가 이제 Trident에서 지원됩니다. Kubernetes�
 
 * 을 사용하여 생성된 ONTAP 백엔드에 대한 특정 문제를 해결했습니다 `credentials` 22.07.0 업그레이드 중 온라인 상태로 전환되지 않는 필드(link:https://github.com/NetApp/trident/issues/759["문제 #759"^])를 클릭합니다.
 * Docker**:** 일부 환경에서 Docker 볼륨 플러그인을 시작하지 못하는 문제 해결(link:https://github.com/NetApp/trident/issues/548["문제 #548"^] 및 link:https://github.com/NetApp/trident/issues/760["문제 # 760"^])를 클릭합니다.
-* 보고 노드에 속하는 데이터 LIF의 일부만 게시되도록 ONTAP SAN 백엔드에 특정한 SLM 문제를 수정했습니다.
+* 보고 노드에 속하는 데이터 LIF의 하위 집합만 게시되도록 ONTAP SAN 백엔드와 관련된 SLM 문제를 수정했습니다.
 * 볼륨을 연결할 때 iSCSI LUN에 대한 불필요한 검사가 발생하는 성능 문제를 해결했습니다.
 * Trident iSCSI 워크플로우 내에서 세분화된 재시도를 제거하여 빠르게 실패하고 외부 재시도 간격을 줄입니다.
 * 해당 다중 경로 장치가 이미 플러시되었을 때 iSCSI 장치를 플러싱할 때 오류가 반환되는 문제를 해결했습니다.
@@ -665,7 +665,7 @@ E-Series 드라이버(20.07 이후 비활성화됨)가 제거되었습니다.
 
 * * Kubernetes: * 대규모 클러스터의 노드 등록 백오프 재시도 시간을 늘립니다.
 * 동일한 이름의 여러 리소스가 Azure-NetApp-files 드라이버를 혼동할 수 있는 문제 해결
-* ONTAP SAN IPv6 데이터 LIF는 이제 대괄호와 함께 지정된 경우 작동합니다.
+* ONTAP SAN IPv6 DataLIF는 이제 대괄호로 지정된 경우 작동합니다.
 * 이미 가져온 볼륨을 가져오려고 하면 PVC가 보류 상태로 남겨둔 EOF가 반환되는 문제가 해결되었습니다. (link:https://github.com/NetApp/trident/issues/489["GitHub 문제 #489"])
 * SolidFire 볼륨에 32개가 넘는 스냅샷이 생성될 때 Trident 성능이 저하되는 문제가 해결되었습니다.
 * SHA-1을 SSL 인증서 생성에서 SHA-256으로 교체했습니다.

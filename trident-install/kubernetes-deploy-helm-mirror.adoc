@@ -112,7 +112,7 @@ nodePrep 값을 추가하려면 다음 명령을 실행합니다.
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2406.0  --create-namespace --namespace trident --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2502.0  --create-namespace --namespace trident --set nodePrep={iscsi}
 ----
 
 

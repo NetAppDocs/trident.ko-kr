@@ -76,13 +76,13 @@ spec:
 다음 환경 변수를 사용하여 * 클라우드 공급자(CP) * 및 * 클라우드 ID(CI) * 플래그의 값을 설정합니다.
 
 `export CP="GCP"`
-`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+`export ANNOTATION="'iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com'"`
 
 다음 예에서는 환경 변수를 사용하여 Trident를 설치하고 를 GCP로 `$CP` 설정하고 `cloudProvider` 환경 변수를 사용하여 `$ANNOTATION` 를 `cloudIdentity` 설정합니다.
 
 [listing]
 ----
-helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
+helm install trident trident-operator-100.2502.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
 ----
 --
 .<code>tridentctl</code>
@@ -90,7 +90,7 @@ helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --s
 다음 환경 변수를 사용하여 * 클라우드 공급자 * 및 * 클라우드 ID * 플래그의 값을 설정합니다.
 
 `export CP="GCP"`
-`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+`export ANNOTATION="'iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com'"`
 
 다음 예에서는 Trident를 설치하고 플래그를 `$CP` , 및 `cloud-identity` 로 설정합니다 `cloud-provider`. `$ANNOTATION`
 

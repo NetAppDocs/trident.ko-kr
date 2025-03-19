@@ -331,7 +331,7 @@ NOTE: 아래 표에는 로깅 서비스와 관련된 스토리지 구성과 관�
 | "openshift_logging_storage_kind" | 설치 프로그램이 로깅 서비스에 대한 NFS PV를 생성하도록 'NFS'로 설정합니다. 
 
 
-| "openshift_logging_storage_host"를 선택합니다 | NFS 호스트의 호스트 이름 또는 IP 주소입니다. 이 경우 가상 머신의 데이터 LIF로 설정해야 합니다. 
+| "openshift_logging_storage_host"를 선택합니다 | NFS 호스트의 호스트 이름 또는 IP 주소입니다. 가상 머신의 데이터 LIF로 설정해야 합니다. 
 
 
 | 'openshift_logging_storage_nfs_directory | NFS 내보내기의 마운트 경로입니다. 예를 들어 볼륨이 '/openshift_logging'으로 가정되는 경우 이 변수에 해당 경로를 사용합니다. 
@@ -399,7 +399,7 @@ NOTE: 아래 표에는 메트릭 서비스와 관련된 스토리지 구성과 �
 | "openshift_metrics_storage_kind" | 설치 프로그램이 로깅 서비스에 대한 NFS PV를 생성하도록 'NFS'로 설정합니다. 
 
 
-| 'openshift_metrics_storage_host | NFS 호스트의 호스트 이름 또는 IP 주소입니다. SVM을 위한 데이터 LIF로 설정해야 합니다. 
+| 'openshift_metrics_storage_host | NFS 호스트의 호스트 이름 또는 IP 주소입니다. SVM의 데이터 LIF로 설정해야 합니다. 
 
 
 | 'openshift_metrics_storage_nfs_directory | NFS 내보내기의 마운트 경로입니다. 예를 들어, 볼륨이 '/openshift_metrics'로 가정되는 경우 이 변수에 해당 경로를 사용합니다. 
