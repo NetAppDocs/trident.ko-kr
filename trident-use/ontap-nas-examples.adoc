@@ -118,7 +118,7 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 | `smbShare` | Microsoft 관리 콘솔 또는 ONTAP CLI를 사용하여 생성된 SMB 공유의 이름, Trident에서 SMB 공유를 생성할 수 있는 이름, 볼륨에 대한 일반적인 공유 액세스를 방지하기 위해 매개 변수를 비워 둘 수 있습니다. 이 매개 변수는 사내 ONTAP의 경우 선택 사항입니다. 이 매개변수는 ONTAP 백엔드에 대한 아마존 FSx에 필요하며 비워둘 수 없습니다. | `smb-share` 
 
 
-| 'useREST' | ONTAP REST API를 사용하는 부울 매개 변수입니다.  `useREST` 로 설정된 `true` 경우 Trident는 ONTAP REST API를 사용하여 백엔드와 통신합니다. 로 설정된 경우 `false` Trident는 ONTAPI(ZAPI) 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야 `ontap` 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다. `vsadmin` `cluster-admin` Trident 24.06 릴리스 및 ONTAP 9.15.1 이상부터 는 `useREST` 기본적으로 로 설정되어 `true` 있습니다. ONTAPI(ZAPI) 호출을 사용하도록 로 `false` 변경합니다 `useREST`. | `true` ONTAP 9.15.1 이상, 그렇지 않은 경우 `false`. 
+| 'useREST' | ONTAP REST API를 사용하는 부울 매개 변수입니다.  `useREST` 로 설정된 `true` 경우 Trident는 ONTAP REST API를 사용하여 백엔드와 통신합니다. 로 설정된 경우 `false` Trident는 ONTAPI(ZAPI) 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야 `ontapi` 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다. `vsadmin` `cluster-admin` Trident 24.06 릴리스 및 ONTAP 9.15.1 이상부터 는 `useREST` 기본적으로 로 설정되어 `true` 있습니다. ONTAPI(ZAPI) 호출을 사용하도록 로 `false` 변경합니다 `useREST`. | `true` ONTAP 9.15.1 이상, 그렇지 않은 경우 `false`. 
 
 
 | `limitVolumePoolSize` | ONTAP-NAS-이코노미 백엔드에서 Qtree를 사용할 때 가장 필요한 최대 FlexVol 크기입니다. | ""(기본적으로 적용되지 않음) 
@@ -223,7 +223,7 @@ defaults:
 ----
 Total volume size = (PVC requested size) / (1 - (snapshotReserve percentage) / 100)
 ----
-snapshotReserve = 50%, PVC request = 5GiB의 경우, 총 볼륨 크기는 2/.5 = 10GiB이고 사용 가능한 크기는 5GiB입니다. 이는 사용자가 PVC 요청에서 요청한 것입니다. 'volume show' 명령은 다음 예와 유사한 결과를 표시합니다.
+snapshotReserve = 50%, PVC request = 5GiB의 경우, 총 볼륨 크기는 5/.5 = 10GiB이고 사용 가능한 크기는 5GiB입니다. 이는 사용자가 PVC 요청에서 요청한 것입니다. 이 `volume show` 명령은 다음 예제와 유사한 결과를 표시해야 합니다.
 
 image::../media/volume-show-nas.png[에는 volume show 명령의 출력이 나와 있습니다.]
 

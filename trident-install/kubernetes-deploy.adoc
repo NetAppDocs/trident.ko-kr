@@ -49,7 +49,7 @@ NetApp는 다양한 환경 및 조직에 Trident를 설치할 수 있도록 다�
 
 
 
-TIP: 에 익숙하지 않은 경우 link:../trident-concepts/intro.html["기본 개념"^]이제 아주 좋은 시간입니다.
+TIP: 에 익숙지 않은 경우 link:../trident-get-started/intro.html["기본 개념"^]지금이 바로 익숙해질 때입니다.
 
 
 

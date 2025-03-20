@@ -30,7 +30,7 @@ Trident를 설치하고 업그레이드할 수 있는 툴 중 link:../trident-ge
 
 
 
-TIP: Kubernetes 클러스터의 Trident 아키텍처에 대한 자세한 내용은 을 참조하십시오link:trident-concepts/intro.html#trident-architecture["Trident 아키텍처"].
+TIP: Kubernetes 클러스터의 Trident 아키텍처에 대한 자세한 내용은 을 참조하십시오link:../trident-get-started/architecture.html["Trident 아키텍처"^].
 
 
 
