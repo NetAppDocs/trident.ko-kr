@@ -42,16 +42,16 @@ Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
 * Kubernetes 1.26-1.32
-* OpenShift 4.10-4.17
-* Rancher Kubernetes Engine 2(RKE2) v1.28.5 + rke2r1
+* OpenShift 4.10-4.18
+* Rancher Kubernetes Engine 2(RKE2) v1.26.7 + rke2r1, v1.28.5 + rke2r1
 
 
 Trident 연산자는 다음 릴리즈에서 지원됩니다.
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
 * Kubernetes 1.26-1.32
-* OpenShift 4.10-4.17
-* Rancher Kubernetes Engine 2(RKE2) v1.28.5 + rke2r1
+* OpenShift 4.10-4.18
+* Rancher Kubernetes Engine 2(RKE2) v1.26.7 + rke2r1, v1.28.5 + rke2r1
 
 
 Trident은 Google Kubernetes Engine(GKE), Amazon Elastic Kubernetes Services(EKS), Azure Kubernetes Service(AKS), Mirantis Kubernetes Engine(MKE), VMware Tanzu 포트폴리오를 포함한 기타 완전 관리형 Kubernetes 오퍼링도 지원합니다.
