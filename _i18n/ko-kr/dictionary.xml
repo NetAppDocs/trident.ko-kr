@@ -5103,7 +5103,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="60b04b91abae29736bd23b21579be5cb" category="list-text">CSI-resizer 컨테이너에 대한 securityContext가 추가되었습니다(<block ref="a97be45bfcdf3eeaee81dc9917811f8f" category="inline-link-macro-rx"></block>).</block>
   <block id="cb1f1e88b6db83dc715d1cb1d8733445" category="section-title">Trident 보호</block>
   <block id="b094c3f306a844e9e49992f69a84cfa4" category="paragraph">NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저닝 프로그램을 통해 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 개선하는 고급 애플리케이션 데이터 관리 기능을 제공합니다.</block>
-  <block id="38fc414fc29442833eb9eb53cc2e1d14" category="list-text">AppMirrorRelationship을 통해 이미 사용 가능한 스토리지 복제에 볼륨:파일 및 볼륨:블록(원시 장치) 스토리지를 위한 KubeVirt/OpenShift 가상화 VM에 대한 백업 및 복구 지원 추가</block>
   <block id="7df125a00671c08a40e0225c8e7bfe51" category="list-text">Kubevirt 환경의 애플리케이션 수준에서 동결 동작을 제어하는 기능이 추가되었습니다.</block>
   <block id="bde8e1e3de96ead9884d920004bad3bf" category="list-text">AutoSupport 프록시 연결 구성에 대한 지원이 추가되었습니다.</block>
   <block id="3a3a7f688efad3284b8088de98d9c990" category="list-text">Data Mover 암호화에 대한 암호를 정의하는 기능이 추가되었습니다(Kopia/Restic).</block>
@@ -5466,4 +5465,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="29faa5f5c2de3c7a4ab9c78562616cdd" category="admonition">RedHat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 주목해야 합니다. 네임스페이스 주석을 사용하면 복원된 Pod가 OpenShift SCC(Security Context Constraint)에서 정의한 적절한 권한 및 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있습니다. 자세한 내용은 를<block ref="9c33d4f1fa6e1f731baeaf3a5fe229cd" category="inline-link-rx"></block>참조하십시오.</block>
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4.10-4.18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.26.7 + rke2r1, v1.28.5 + rke2r1</block>
+  <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">볼륨 모드: 파일 및 볼륨 모드: 블록(원시 장치) 스토리지 모두에 대한 KubeVirt/OpenShift Virtualization VM에 대한 백업 및 복구 지원 추가 이 지원은 모든 Trident 드라이버와 호환되며, Trident Protect와 함께 NetApp SnapMirror를 사용하여 스토리지를 복제할 때 기존 보호 기능이 향상됩니다.</block>
 </blocks>
