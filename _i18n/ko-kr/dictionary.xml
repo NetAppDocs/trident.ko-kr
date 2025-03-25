@@ -5004,7 +5004,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="90de0fd1d09f4fc27d99667555a8a12f" category="paragraph">ONTAP 시스템은 All-Flash, 하이브리드 또는 All-HDD 구성을 가지며 온프레미스 FAS, AFA, ASA 클러스터, ONTAP Select, Cloud Volumes ONTAP 등 다양한 구축 모델을 제공합니다. Trident는 이러한 ONTAP 구축 모델을 지원합니다.</block>
   <block id="30712450d512dae0e7becb73c6a439fb" category="list-text">Kubernetes 1.26-1.32</block>
   <block id="bde4e01f8df98626e0dc1c36a8e06a5a" category="admonition">Trident가 설치된 Kubernetes 클러스터를 1.25에서 1.26 이상으로 업그레이드하기 전에 을 참조하십시오.<block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block></block>
-  <block id="2322d8185ec207b8d8522a92de761c94" category="list-text">ONTAP 9.6 이상을 실행하는 온프레미스 FAS, AFF 또는 ASA 클러스터</block>
   <block id="4cd3b50237790ab53e31a7a9fbd28583" category="section-title">KubeVirt 및 OpenShift 가상화를 위한 Trident 지원</block>
   <block id="8f323a9e5c0c5162cc6e0d48e0cb1850" category="paragraph-title">지원되는 스토리지 드라이버:</block>
   <block id="0c30a28f9129b866c1d3cdcfa8c2fe15" category="paragraph">Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.</block>
@@ -5466,4 +5465,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4.10-4.18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.26.7 + rke2r1, v1.28.5 + rke2r1</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">볼륨 모드: 파일 및 볼륨 모드: 블록(원시 장치) 스토리지 모두에 대한 KubeVirt/OpenShift Virtualization VM에 대한 백업 및 복구 지원 추가 이 지원은 모든 Trident 드라이버와 호환되며, Trident Protect와 함께 NetApp SnapMirror를 사용하여 스토리지를 복제할 때 기존 보호 기능이 향상됩니다.</block>
+  <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">소프트웨어 버전 지원</block>
+  <block id="ee19283e867cf4e5840d2811a74b89e5" category="list-text">NetApp가 제한적으로 지원하는 온프레미스 FAS, AFF 또는 ASA R2 클러스터 버전 을 <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block>참조하십시오.</block>
 </blocks>

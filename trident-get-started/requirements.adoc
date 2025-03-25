@@ -72,7 +72,7 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 * Cloud Volumes ONTAP
 * Google Cloud NetApp 볼륨
 * NetApp All SAN 어레이(ASA)
-* ONTAP 9.6 이상을 실행하는 온프레미스 FAS, AFF 또는 ASA 클러스터
+* NetApp가 제한적으로 지원하는 온프레미스 FAS, AFF 또는 ASA R2 클러스터 버전 을 link:https://mysupport.netapp.com/site/info/version-support["소프트웨어 버전 지원"]참조하십시오.
 * NetApp HCI/Element 소프트웨어 11 이상
 
 
