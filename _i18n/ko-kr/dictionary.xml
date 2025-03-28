@@ -5467,4 +5467,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">볼륨 모드: 파일 및 볼륨 모드: 블록(원시 장치) 스토리지 모두에 대한 KubeVirt/OpenShift Virtualization VM에 대한 백업 및 복구 지원 추가 이 지원은 모든 Trident 드라이버와 호환되며, Trident Protect와 함께 NetApp SnapMirror를 사용하여 스토리지를 복제할 때 기존 보호 기능이 향상됩니다.</block>
   <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">소프트웨어 버전 지원</block>
   <block id="ee19283e867cf4e5840d2811a74b89e5" category="list-text">NetApp가 제한적으로 지원하는 온프레미스 FAS, AFF 또는 ASA R2 클러스터 버전 을 <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block>참조하십시오.</block>
+  <block id="8456fc955091af12a31da6fc68123005" category="list-text">NVE 암호화 플랫 을 로 설정하여 NAE 지원 볼륨을 생성할 수 있습니다<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>.</block>
 </blocks>
