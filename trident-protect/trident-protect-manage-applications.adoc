@@ -39,7 +39,13 @@ Trident Protect로 관리하려는 각 애플리케이션을 정의해야 합니
 .. 다음 특성을 구성합니다.
 +
 *** *metadata.name*: (_required_) 응용 프로그램 사용자 정의 리소스의 이름입니다. 보호 작업에 필요한 다른 CR 파일이 이 값을 참조하기 때문에 선택하는 이름을 확인합니다.
-*** *spec.includedNamespaces*: (_required_) 네임스페이스 레이블이나 네임스페이스 이름을 사용하여 응용 프로그램 리소스가 있는 네임스페이스를 지정합니다. 응용 프로그램 네임스페이스는 이 목록의 일부여야 합니다.
+*** *spec.includedNamespaces*: (_required_) 네임스페이스 및 레이블 선택기를 사용하여 응용 프로그램에서 사용하는 네임스페이스와 리소스를 지정합니다. 응용 프로그램 네임스페이스는 이 목록의 일부여야 합니다. 레이블 선택기는 선택 사항이며 지정된 각 네임스페이스 내에서 리소스를 필터링하는 데 사용할 수 있습니다.
+*** *spec.includedClusterScopedResources*: (_Optional_) 이 속성을 사용하여 응용 프로그램 정의에 포함될 클러스터 범위 리소스를 지정합니다. 이 속성을 사용하면 해당 그룹, 버전, 종류 및 레이블을 기반으로 이러한 리소스를 선택할 수 있습니다.
++
+**** *groupVersionKind*: (_required_) 클러스터 범위 리소스의 API 그룹, 버전 및 종류를 지정합니다.
+**** *labelSelector*: (_Optional_) 레이블을 기반으로 클러스터 범위 리소스를 필터링합니다.
+
+
 *** *metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_Optional_) 이 주석은 KubeVirt 환경과 같이 스냅샷 전에 파일 시스템이 정지되는 가상 머신에서 정의된 애플리케이션에만 적용됩니다. 이 애플리케이션이 스냅샷 중에 파일 시스템에 쓸 수 있는지 여부를 지정합니다. true로 설정하면 응용 프로그램은 전역 설정을 무시하고 스냅샷 중에 파일 시스템에 쓸 수 있습니다. false로 설정하면 응용 프로그램에서 전역 설정을 무시하고 스냅샷 중에 파일 시스템이 고정됩니다. 지정되었지만 응용 프로그램에 가상 머신이 애플리케이션 정의에 없는 경우 주석은 무시됩니다. 지정하지 않으면 응용 프로그램이 을 link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Global Trident Protect Freeze(전체 고정 보호) 설정입니다"]따릅니다.
 +
 [NOTE]
@@ -66,10 +72,23 @@ metadata:
   namespace: my-app-namespace
 spec:
   includedNamespaces:
-  - labelSelector: {}
-    namespace: namespace-1
-  - labelSelector: {}
-    namespace: namespace-2
+    - namespace: namespace-1
+      labelSelector:
+        matchLabels:
+          app: example-app
+    - namespace: namespace-2
+      labelSelector:
+        matchLabels:
+          app: another-example-app
+  includedClusterScopedResources:
+    - groupVersionKind:
+        group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      labelSelector:
+        matchLabels:
+          mylabel: test
+
 ----
 
 

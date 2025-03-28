@@ -55,8 +55,8 @@ indexpage:
       url: https://media.netapp.com/video-detail/c5bebae0-aab6-5fed-ae16-df6a3a8b260d/netapp-trident-advanced-data-protection-for-kubernetes-applications
   - title: 블로그 커뮤니티
     links:
-    - title: 쿠버네티스 허브
-      url: https://cloud.netapp.com/kubernetes-hub
+    - title: Trident 및 Trident 보호 블로그
+      url: "/blog-posts.html"
     - title: NetApp.IO를 참조하십시오
       url: https://netapp.io/
     - title: 불화
