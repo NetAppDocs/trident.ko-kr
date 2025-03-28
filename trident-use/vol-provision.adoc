@@ -12,45 +12,70 @@ summary: '구성된 Kubernetes StorageClass를 사용하여 PV에 대한 액세�
 
 
 [role="lead"]
-구성된 Kubernetes StorageClass를 사용하여 PV에 대한 액세스를 요청하는 PersistentVolume(PV) 및 PersistentVolumeClaim(PVC)을 생성합니다. 그런 다음 PV를 포드에 장착할 수 있습니다.
+구성된 Kubernetes StorageClass를 사용하여 PV에 대한 액세스를 요청하는 PersistentVolumeClaim(PVC)을 생성합니다. 그런 다음 PV를 포드에 장착할 수 있습니다.
 
 
 
 == 개요
 
-A link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/["_지속성 볼륨 _"^] (PV)는 Kubernetes 클러스터에서 클러스터 관리자가 프로비저닝한 물리적 스토리지 리소스입니다. 를 클릭합니다 https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersistentVolumeClaim_"^] (PVC)는 클러스터의 PersistentVolume에 대한 액세스 요청입니다.
+A https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersistentVolumeClaim_"^](PVC)는 클러스터의 PersistentVolume에 대한 액세스 요청입니다.
 
 PVC는 특정 크기 또는 액세스 모드의 저장을 요청하도록 구성할 수 있습니다. 클러스터 관리자는 연결된 StorageClass를 사용하여 PersistentVolume 크기 및 액세스 모드(예: 성능 또는 서비스 수준)를 제어할 수 있습니다.
 
-PV 및 PVC를 생성한 후 포드에 볼륨을 장착할 수 있습니다.
+PVC를 생성한 후 포드에 볼륨을 마운트할 수 있습니다.
+
+
+
+== PVC를 작성합니다
+
+.단계
+. PVC를 작성합니다.
++
+[listing]
+----
+kubectl create -f pvc.yaml
+----
+. PVC 상태를 확인합니다.
++
+[listing]
+----
+kubectl get pvc
+----
+
+
+[listing]
+----
+NAME        STATUS  VOLUME     CAPACITY   ACCESS MODES  STORAGECLASS AGE
+pvc-storage Bound   pv-name    1Gi        RWO                  5m
+----
+. 볼륨을 Pod에 마운트합니다.
++
+[listing]
+----
+kubectl create -f pv-pod.yaml
+----
++
+
+NOTE: 을 사용하여 진행 상황을 모니터링할 수 있습니다 `kubectl get pod --watch`.
+
+. 볼륨이 에 마운트되어 있는지 확인합니다 `/my/mount/path`.
++
+[listing]
+----
+kubectl exec -it task-pv-pod -- df -h /my/mount/path
+----
+. 이제 Pod를 삭제할 수 있습니다. Pod 응용 프로그램은 더 이상 존재하지 않지만 볼륨은 유지됩니다.
++
+[listing]
+----
+kubectl delete pod pv-pod
+----
+
 
 
 
 === 샘플 매니페스트
 
-.PersistentVolume 샘플 매니페스트
-[%collapsible]
-====
-이 샘플 매니페스트는 StorageClass와 연결된 10Gi의 기본 PV를 보여 줍니다 `basic-csi`.
-
-[listing]
-----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-storage
-  labels:
-    type: local
-spec:
-  storageClassName: basic-csi
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/my/host/path"
-----
-====
 .PersistentVolumeClaim 샘플 매니페스트
 [%collapsible]
 ====
@@ -78,7 +103,6 @@ spec:
 
 [listing]
 ----
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -106,9 +130,9 @@ metadata:
   name: pv-pod
 spec:
   volumes:
-    - name: pv-storage
+    - name: storage
       persistentVolumeClaim:
-       claimName: basic
+       claimName: pvc-storage
   containers:
     - name: pv-container
       image: nginx
@@ -117,90 +141,26 @@ spec:
           name: "http-server"
       volumeMounts:
         - mountPath: "/my/mount/path"
-          name: pv-storage
+          name: storage
 ----
 .기본 NVMe/TCP 구성
 [listing]
 ----
----
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    run: nginx
-  name: nginx
+  name: pod-nginx
 spec:
-  containers:
-    - image: nginx
-      name: nginx
-      resources: {}
-      volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: task-pv-storage
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
   volumes:
-    - name: task-pv-storage
+    - name: basic-pvc
       persistentVolumeClaim:
-      claimName: pvc-san-nvme
+        claimName: pvc-san-nvme
+  containers:
+    - name: task-pv-container
+      image: nginx
+      volumeMounts:
+        - mountPath: "/my/mount/path"
+          name: basic-pvc
 ----
 ====
-
-
-== PV 및 PVC를 작성합니다
-
-.단계
-. PV를 만듭니다.
-+
-[listing]
-----
-kubectl create -f pv.yaml
-----
-. PV 상태를 확인한다.
-+
-[listing]
-----
-kubectl get pv
-NAME        CAPACITY  ACCESS MODES  RECLAIM POLICY  STATUS    CLAIM  STORAGECLASS  REASON  AGE
-pv-storage  4Gi       RWO           Retain          Available                              7s
-----
-. PVC를 작성합니다.
-+
-[listing]
-----
-kubectl create -f pvc.yaml
-----
-. PVC 상태를 확인합니다.
-+
-[listing]
-----
-kubectl get pvc
-NAME        STATUS VOLUME     CAPACITY ACCESS MODES STORAGECLASS AGE
-pvc-storage Bound  pv-name 2Gi      RWO                       5m
-----
-. 볼륨을 Pod에 마운트합니다.
-+
-[listing]
-----
-kubectl create -f pv-pod.yaml
-----
-+
-
-NOTE: 을 사용하여 진행 상황을 모니터링할 수 있습니다 `kubectl get pod --watch`.
-
-. 볼륨이 에 마운트되어 있는지 확인합니다 `/my/mount/path`.
-+
-[listing]
-----
-kubectl exec -it task-pv-pod -- df -h /my/mount/path
-----
-. 이제 Pod를 삭제할 수 있습니다. Pod 응용 프로그램은 더 이상 존재하지 않지만 볼륨은 유지됩니다.
-+
-[listing]
-----
-kubectl delete pod pv-pod
-----
-
-
 Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.
