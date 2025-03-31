@@ -3159,40 +3159,27 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="77f6e3db9b70538186091595d9c8c9e8" category="list-text">EKS 추가 기능</block>
   <block id="e477faed39be08642267684bb501d931" category="open-title">관리 콘솔과 직접 연결되어 있습니다</block>
   <block id="e8d532dbf6904e2793dbda6fd0d03818" category="list-text">에서 Amazon EKS 콘솔을 엽니다<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>.</block>
-  <block id="8d1588a59bc508adad8a62ccaaa1c610" category="list-text">왼쪽 탐색 창에서 * 클러스터 * 를 클릭합니다.</block>
-  <block id="32d9b71b3fc3fad1385ba62a9bf6bf46" category="list-text">NetApp Trident CSI 추가 기능을 구성할 클러스터의 이름을 클릭합니다.</block>
-  <block id="91e45a55d3dd23153429aac3c45c53ae" category="list-text">추가 기능 * 을 클릭한 다음 * 추가 기능 얻기 * 를 클릭합니다.</block>
-  <block id="5a378b18f7bf0c4cabc6c655cd2f535e" category="list-text">다음 * 을 클릭합니다.</block>
   <block id="cacc1ddf612923b1c73b0a9a76659f42" category="list-text">선택한 추가 기능 구성 * 설정 페이지에서 다음을 수행합니다.</block>
   <block id="149e81257342cd05b0256d010b0b4a37" category="list-text">사용할 * 버전 * 을 선택합니다.</block>
   <block id="1df543472a35a3acfd632037832987f6" category="list-text">IAM 역할 선택 * 의 경우 * NOT SET * 으로 두십시오.</block>
-  <block id="e873d41466e1383d951643c07a043d80" category="list-text">선택적 구성 설정 * 을 확장하고 * 추가 기능 구성 스키마 * 를 따라 * 구성 값 * 섹션의 configurationValues 매개 변수를 이전 단계에서 만든 role-arn으로 설정합니다(값은 다음 형식이어야 함<block ref="ee1eb31b5aebe5472fc52cb0ae20b077" prefix=" " category="inline-code"></block>). 충돌 해결 방법으로 재정의 를 선택한 경우 기존 애드온에 대한 하나 이상의 설정을 Amazon EKS 애드온 설정으로 덮어쓸 수 있습니다. 이 옵션을 사용하지 않고 기존 설정과 충돌하는 경우 작업이 실패합니다. 결과 오류 메시지를 사용하여 충돌 문제를 해결할 수 있습니다. 이 옵션을 선택하기 전에 Amazon EKS 추가 기능이 자체 관리해야 하는 설정을 관리하지 않는지 확인하십시오.</block>
   <block id="dfe4bfc5bd8b8d180411468fbdbb4033" category="list-text">다음 * 을 선택합니다.</block>
   <block id="fbadf292f84bef20d7678936dbe4c4ce" category="list-text">검토 및 추가 * 페이지에서 * 만들기 * 를 선택합니다.</block>
   <block id="46bfc11fb8f185d278ea910b0052a317" category="paragraph">추가 기능 설치가 완료되면 설치된 추가 기능이 표시됩니다.</block>
   <block id="7820fdb5d8b3ebe0c69c86cf8bd2d0cf" category="open-title">AWS CLI를 참조하십시오</block>
   <block id="375fe5880d846c5b389735de8ae80b0a" category="list-text">파일을 만듭니다.<block ref="feef18acfb11dc53b7100577c6d640c4" prefix=" " category="inline-code"></block></block>
-  <block id="e907c98f301b06586956529abca9e22c" category="paragraph"><block ref="f9c32cfc7736c461770afa4dd4053bda" prefix="" category="inline-code"></block></block>
   <block id="41c9d4e34cce02a882f325b51fa9d2f4" category="list-text">FSxN Trident CSI 추가 기능의 현재 버전을 확인합니다. 클러스터 이름으로 교체합니다<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> .<block ref="7b5be2809a3021f978155d101cf059cf" prefix=" " category="inline-code"></block></block>
   <block id="52b5830420efb96c3a91beb52bac3b23" category="paragraph">* 출력 예: *</block>
   <block id="b3f252777a69b110667756babe83a98f" category="inline-link-macro">추가 기능</block>
   <block id="25626757a73152ece7fdadb90ede4b7c" category="inline-link-macro">Kubernetes 현장 관리</block>
   <block id="751f793ade8de1ed590e0f90ac05d8e1" category="paragraph">옵션을 제거하고 Amazon EKS 추가 기능 설정이 기존 설정과 충돌하는 경우<block ref="c23ab3adaec8ca15ff3ffd0971be6152" prefix=" " category="inline-code"></block> Amazon EKS 추가 기능 업데이트가 실패하고 충돌 문제를 해결하는 데 도움이 되는 오류 메시지가 표시됩니다. 이 옵션을 지정하기 전에 Amazon EKS 애드온이 관리해야 하는 설정을 관리하지 않는지 확인하십시오. 이러한 설정은 이 옵션으로 덮어써지기 때문입니다. 이 설정의 다른 옵션에 대한 자세한 내용은 을 참조하십시오 <block ref="aea621f0e078efb8367c5d5e894674cd" category="inline-link-macro-rx"></block>. Amazon EKS Kubernetes 필드 관리에 대한 자세한 내용은 를 참조하십시오 <block ref="97bdcfd76d2ff3e4855f6b36ebad236e" category="inline-link-macro-rx"></block>.</block>
   <block id="b0c6845b636be8c810182f985c930fed" category="list-text">Amazon EKS 콘솔을<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>엽니다.</block>
-  <block id="69bd32cd7d6c3b5f9de30250cec1b478" category="list-text">NetApp Trident CSI 추가 기능을 업데이트할 클러스터의 이름을 클릭합니다.</block>
-  <block id="a02487427219ab03773fe3c66fa96556" category="list-text">추가 기능 * 탭을 클릭합니다.</block>
-  <block id="3dca1b912e3d43e2a746fbcde32a6018" category="list-text">변경 내용 저장 * 을 클릭합니다.</block>
   <block id="5f06738a5749e735a4681f5c09e2bafc" category="paragraph">다음 예에서는 EKS 추가 기능을 업데이트합니다.</block>
   <block id="d8c918c170a0768203b4c2a6218e22bf" category="paragraph">Amazon EKS 애드온을 제거하는 두 가지 옵션이 있습니다.</block>
   <block id="577a7d77fb14f745abf0c5ee04b72879" category="admonition">애드온에 IAM 계정이 연결되어 있으면 IAM 계정이 제거되지 않습니다.</block>
-  <block id="ae7c26e7d90f669e27bf9a36527336ec" category="list-text">왼쪽 탐색 창에서 * 클러스터 * 를 클릭합니다.</block>
-  <block id="99e7173540f126412137b25a0caaf2d1" category="list-text">NetApp Trident CSI 추가 기능을 제거할 클러스터의 이름을 클릭합니다.</block>
-  <block id="03b194a23dcb353466fbfb7acff64363" category="list-text">제거 * 를 클릭합니다.</block>
   <block id="c8e9b5ea2470965edac225c56a879d07" category="list-text">Remove netapp_trident-operator confirmation * 대화 상자에서 다음을 수행합니다.</block>
   <block id="10aba138eb518a0cc15662934a1f6e18" category="list-text">Amazon EKS가 애드온에 대한 설정 관리를 중지하도록 하려면 * 클러스터에서 유지 * 를 선택합니다. 추가 기능의 모든 설정을 직접 관리할 수 있도록 클러스터에 추가 소프트웨어를 유지하려는 경우 이 작업을 수행합니다.</block>
   <block id="ecca191ac54751ba8120816fbe45777e" category="list-text">netapp_trident-operator * 를 입력합니다.</block>
   <block id="bb7c6bde1fc26965ada02923bac65350" category="paragraph">클러스터 이름으로 바꾸고<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> 다음 명령을 실행합니다.</block>
-  <block id="3f0c01bb690234ddb3284c5ce5c26da2" category="paragraph"><block ref="c2f1a783b03bad400b0ebf4321b8a171" prefix="" category="inline-code"></block></block>
   <block id="23e0e5bfdd7b1fef2ab4d932aae742e5" category="doc">스토리지 백엔드를 구성합니다</block>
   <block id="c3e86b30fe8148143701324ae1595af8" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block>: 프로비저닝된 각 PV는 자체 Amazon FSx for NetApp ONTAP 볼륨 내의 LUN입니다. 블록 스토리지에 권장됩니다.</block>
   <block id="3878a0c92e55dbd3cdd9458330c2f1c3" category="list-text"><block ref="8321592ce24c8a122ecf26a63cfca407" prefix="" category="inline-code"></block>: 프로비저닝된 각 PV는 전체 Amazon FSx for NetApp ONTAP 볼륨입니다. NFS 및 SMB에 권장됩니다.</block>
@@ -4945,7 +4932,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="b70329a4cd0d7e433e8af087eebce89a" category="list-text">새 GCP 서비스 계정을 지정하는 "GCP"와 cloudIdentity를 지정하는 cloudProvider가 포함된 Trident가 설치되었습니다. 예를 들면 다음과 같습니다.</block>
   <block id="73a8d79444c307e1446b60eb6a9ba8f1" category="paragraph">AWS EKS용 Trident 애드온을 구성하기 전에 다음 사항이 있는지 확인하십시오.</block>
   <block id="5c48b2cb013af0c5d292d6bc5659074c" category="section-title">CLI를 사용하여 Trident EKS 애드온을 설치/제거합니다</block>
-  <block id="a241de540e9d861e242ac606150f4f07" category="paragraph">다음 명령을 실행하면 Trident EKS 추가 기능이 제거됩니다.<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
   <block id="1095f7331744c1accf45762c2da50a60" category="paragraph">Trident은 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다.</block>
   <block id="aa9c9ff1836c624104eb3a256a7b8b69" category="section-title">Helm을 통해 Trident를 설치합니다</block>
   <block id="b3dc88ff9246a994ccb2a892f1ad7486" category="list-text">Trident 설치 프로그램 패키지를 다운로드합니다</block>
@@ -5190,15 +5176,12 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="bc04665b1c712547a7dcc87033ae7152" category="paragraph">다음 방법 중 하나를 사용하여 Trident를 설치할 수 있습니다.</block>
   <block id="a01b2c45a64c7d0c2a2aa3ce418eaa04" category="inline-link-macro">CSI 볼륨에 대해 스냅샷 기능을 활성화합니다</block>
   <block id="9adc02aa546c3838bddb73a67ebaa4e2" category="paragraph">스냅샷 기능을 사용하려면 CSI 스냅샷 컨트롤러 애드온을 설치하십시오. 자세한 내용은 을 <block ref="d2fce68a585fb4c517040885fb7393e9" category="inline-link-macro-rx"></block> 참조하십시오.</block>
-  <block id="6ba41cf97f4e906d09aa6843f1ed9454" category="paragraph">Trident 설치 프로그램 패키지에는 Trident 운영자를 배포하고 Trident를 설치하는 데 필요한 모든 것이 포함되어 있습니다. GitHub의 자산 섹션에서 최신 버전의 Trident 설치 프로그램을 다운로드하고 압축을 풉니다.<block ref="e8c87a263e5870f710a0a586ca803df2" prefix=" " category="inline-code"></block><block ref="b58dc755603e4aae34e32d22a572af73" prefix=" " category="inline-code"></block><block ref="1600ccf6988d672a315af82be4e93709" prefix=" " category="inline-code"></block></block>
   <block id="cae9d6c5ad1015a95a7e9dd5e473837a" category="list-text">25.02 릴리즈부터 Trident는 자동 백엔드 구성을 지원합니다. Trident은 Trident 설치 후에 백엔드 및 스토리지 클래스를 완벽하게 생성합니다. 자동 백엔드 구성을 활성화하려면<block ref="4c65cbb4d2559a68fba50cf196427b85" prefix=" " category="inline-code"></block><block ref="ac590318582c1d8275a50180aba8a35c" prefix=" " category="inline-code"></block><block ref="66203c461b36a2af573149f0aa6164ff" prefix=" " category="inline-code"></block> 설치 중에 매개 변수를 추가하고 를 지정합니다<block ref="280fa711b12d488436b7cdcbfb2543fc" prefix=" " category="inline-code"></block>.</block>
   <block id="df5baf46554bffd06bf1e8e9ae5e6b52" category="paragraph">다음 명령 예에서는 Trident EKS 추가 기능을 설치합니다.</block>
   <block id="9149c64ca750a0bdd666354b3bbb7170" category="list-text">AWS Marketplace EKS-addons 섹션에서 * Trident by NetApp * 확인란을 선택합니다.</block>
   <block id="9c41f50f85f97003fc3d5010449c3a08" category="list-text">Trident EKS 애드온을 설치합니다.</block>
-  <block id="33a60a0cdf016b1736b4b0ea747bcb0f" category="list-text">Trident by NetApp * 를 클릭한 다음 * 편집 * 을 클릭합니다.</block>
   <block id="87d54c3153674640af4f36dd72f8953a" category="list-text">Trident by NetApp * 구성 페이지에서 다음을 수행합니다.</block>
   <block id="7d91a8c58620fc2b878600d5ab834bda" category="list-text">* 클러스터에서 애드온 소프트웨어 완전히 제거 * – NetApp는 클러스터에 종속된 리소스가 없는 경우에만 클러스터에서 Amazon EKS 애드온을 제거할 것을 권장합니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>추가 기능을 제거하려면 명령에서 옵션을<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> 제거하십시오.</block>
-  <block id="8d86b9c4fd938269229a9ccc306de933" category="list-text">추가 기능 * 탭을 클릭한 다음 * Trident by NetApp * 를 클릭합니다</block>
   <block id="996d0bc5ff30cfbcef97caeaf2c6b353" category="paragraph">스토리지 백엔드를 생성하려면 JSON 또는 YAML 형식으로 구성 파일을 만들어야 합니다. 파일에서 원하는 스토리지 유형(NAS 또는 SAN), 파일 시스템, SVM을 가져와 인증 방법을 지정해야 합니다. 다음 예제는 NAS 기반 스토리지를 정의하고 AWS 암호를 사용하여 사용하려는 SVM에 자격 증명을 저장하는 방법을 보여줍니다.</block>
   <block id="301909df91f724e7a48b15a1b5d05fa2" category="paragraph">다음 명령을 실행하여 Trident TBC(백엔드 구성)를 생성하고 검증합니다.</block>
   <block id="d072ff8aa34f8a629a86f50ed8e738e5" category="list-text">YAML 파일에서 TBC(Trident 백엔드 구성)를 생성하고 다음 명령을 실행합니다.</block>
@@ -5492,4 +5475,18 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="06034bca671a3028021f1a722aac7b41" category="paragraph">Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성하여 Trident에 볼륨 프로비저닝 방법을 지시합니다. 구성된 Kubernetes StorageClass를 사용하여 PV에 대한 액세스를 요청하는 PersistentVolumeClaim(PVC)을 생성합니다. 그런 다음 PV를 포드에 장착할 수 있습니다.</block>
   <block id="5de805965faeb85a54098223ea3a3334" category="paragraph">PVC를 생성한 후 포드에 볼륨을 장착할 수 있습니다.</block>
   <block id="06489d7f99c3b214c8b9a539006a642c" category="list-text">레지스트리.k8s.io/sig-storage/csi-resizer:v1.13.2</block>
+  <block id="65fec8b0751214bea1821a56ae85cf6b" category="paragraph">Trident 설치 프로그램 패키지에는 Trident 운영자를 배포하고 Trident를 설치하는 데 필요한 모든 것이 포함되어 있습니다. GitHub의 자산 섹션에서 최신 버전의 Trident 설치 프로그램을 다운로드하고 압축을 풉니다.</block>
+  <block id="89fb75fa5ae260c326092b78970469ed" category="list-text">왼쪽 탐색 창에서 * 클러스터 * 를 선택합니다.</block>
+  <block id="abdaa0762abc2037a71287c94bceae14" category="list-text">NetApp Trident CSI 추가 기능을 구성할 클러스터의 이름을 선택합니다.</block>
+  <block id="691da62871e09bf9c944f36b9de07889" category="list-text">Add-ons * 를 선택한 다음 * Get more add-ons * 를 선택합니다.</block>
+  <block id="e6cd86d61f4639c8a27006c6c29b3e9f" category="list-text">다음 * 을 선택합니다.</block>
+  <block id="156546d6235c5f4068fefc5cac8a5068" category="list-text">선택적 구성 설정 * 을 확장하고 * 추가 기능 구성 스키마 * 를 따라 * 구성 값 * 섹션의 configurationValues 매개 변수를 이전 단계에서 만든 role-arn으로 설정합니다(값은 다음 형식이어야 함).<block ref="2830f9a9af39ef8725d6362f632214e1" prefix=" " category="inline-code"></block> 충돌 해결 방법으로 재정의 를 선택한 경우 기존 애드온에 대한 하나 이상의 설정을 Amazon EKS 애드온 설정으로 덮어쓸 수 있습니다. 이 옵션을 사용하지 않고 기존 설정과 충돌하는 경우 작업이 실패합니다. 결과 오류 메시지를 사용하여 충돌 문제를 해결할 수 있습니다. 이 옵션을 선택하기 전에 Amazon EKS 추가 기능이 자체 관리해야 하는 설정을 관리하지 않는지 확인하십시오.</block>
+  <block id="ce7f62393ec7cbcc106793e2c9ab41e8" category="list-text">NetApp Trident CSI 애드온을 업데이트할 클러스터의 이름을 선택합니다.</block>
+  <block id="f90a2b79ab21cae46f34d96bb4501334" category="list-text">Add-ons * 탭을 선택합니다.</block>
+  <block id="38b15bc2ab2d3588a9a19b123eaec1b5" category="list-text">Trident by NetApp * 를 선택한 다음 * 편집 * 을 선택합니다.</block>
+  <block id="302ef561e28f7d7cd13d1042cece78e1" category="list-text">변경 내용 저장 * 을 선택합니다.</block>
+  <block id="b7cd6be51eaf277b357ed1c976d66d06" category="list-text">왼쪽 탐색 창에서 * 클러스터 * 를 선택합니다.</block>
+  <block id="1ca28d22337393f531c7c8028230ed76" category="list-text">NetApp Trident CSI 추가 기능을 제거할 클러스터의 이름을 선택합니다.</block>
+  <block id="85f27397ddcaf9ec996f312d1d89ecf9" category="list-text">추가 기능 * 탭을 선택한 다음 * Trident by NetApp *. * 를 선택합니다</block>
+  <block id="6f99fa9b2e1f4893851a8aeb82d171f9" category="list-text">제거 * 를 선택합니다.</block>
 </blocks>
