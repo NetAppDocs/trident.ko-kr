@@ -228,7 +228,7 @@ link:../trident-reference/ports.html["Trident 포트"]
 * Docker.IO/netapp/trident-autosupport:25.02
 * registry.k8s.io/sig-storage/csi-provisioner: v5.2.0
 * 레지스트리.k8s.io/sig-storage/csi-attacher:v4.8.0
-* 레지스트리.k8s.io/sig-storage/csi-resizer:v1.13.0
+* 레지스트리.k8s.io/sig-storage/csi-resizer:v1.13.2
 * 레지스트리.k8s.io/sig-storage/csi-shotter:v8.2.0
 * registry.k8s.io/sig-storage/csi-node-driver-register: v2.13.0
 * Docker.IO/netapp/trident-operator:25.02.0 (선택 사항)
