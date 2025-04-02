@@ -52,38 +52,16 @@ image::../media/aws-eks-03.png[AWS eks 03]
 +
 image::../media/aws-eks-04.png[AWS eks 04]
 
-. 필요에 따라 옵션 구성 설정을 구성하고 * 다음 * 을 선택합니다.
+. 추가 기능 구성 스키마 * 에 따라 * 구성 값 * 섹션의 구성 값 매개 변수를 이전 단계(1단계)에서 만든 역할 아른으로 설정합니다.
 +
-추가 기능 구성 스키마 * 에 따라 * 구성 값 * 섹션의 구성 값 매개 변수를 이전 단계(1단계)에서 만든 역할 아른으로 설정합니다(값은 다음 형식이어야 함). `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole` 참고: 충돌 해결 방법으로 재정의 를 선택한 경우 기존 추가 기능에 대한 하나 이상의 설정을 Amazon EKS 추가 기능 설정으로 덮어쓸 수 있습니다. 이 옵션을 사용하지 않고 기존 설정과 충돌하는 경우 작업이 실패합니다. 결과 오류 메시지를 사용하여 충돌 문제를 해결할 수 있습니다. 이 옵션을 선택하기 전에 Amazon EKS 추가 기능이 자체 관리해야 하는 설정을 관리하지 않는지 확인하십시오.
+값은 다음 형식이어야 합니다 `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`.
+
++
+
+NOTE: 충돌 해결 방법으로 재정의 를 선택한 경우 기존 애드온에 대한 하나 이상의 설정을 Amazon EKS 애드온 설정으로 덮어쓸 수 있습니다. 이 옵션을 사용하지 않고 기존 설정과 충돌하는 경우 작업이 실패합니다. 결과 오류 메시지를 사용하여 충돌 문제를 해결할 수 있습니다. 이 옵션을 선택하기 전에 Amazon EKS 추가 기능이 자체 관리해야 하는 설정을 관리하지 않는지 확인하십시오.
 
 +
 image::../media/aws-eks-06.png[AWS eks 06]
-
-+
-** 25.02 릴리즈부터 Trident는 자동 백엔드 구성을 지원합니다. Trident은 Trident 설치 후에 백엔드 및 스토리지 클래스를 완벽하게 생성합니다. 자동 백엔드 구성을 활성화하려면 `ontapConfigurator` 설치 중에 매개 변수를 추가하고 추가 기능 구성 스키마에 `cloudIdentity`, `fsxnID` 및 `protocols` 를 지정합니다 `authType`.
-+
-[listing]
-----
-"ontapConfigurator": {
-        "enabled": true,
-        "svms": [
-          {
-            "authType": "awsarn",
-            "fsxnID": "fs-0dfeaa884a68b1cab",
-            "protocols": [
-              "nfs",
-              "iscsi"
-            ]
-          }
-        ]
-      }}"
-
-----
-+
-
-NOTE: 자동 백엔드 구성을 비활성화하려면 Trident 릴리스 버전을 업그레이드하고 * ontapConfigurator * 를 * false * 로 설정합니다.
-
-
 
 . Create * 를 선택합니다.
 . 애드온의 상태가 _Active_인지 확인합니다.

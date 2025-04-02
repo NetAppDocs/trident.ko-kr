@@ -21,7 +21,7 @@ summary: 'Trident를 Amazon FSx for NetApp ONTAP와 함께 사용하면 Amazon E
 ====
 .YAML
 --
-[listing]
+[source, YAML]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -42,7 +42,7 @@ spec:
 --
 .JSON을 참조하십시오
 --
-[listing]
+[source, JSON]
 ----
 {
   "apiVersion": "trident.netapp.io/v1",
@@ -74,7 +74,7 @@ spec:
 
 * YAML 파일에서 TBC(Trident 백엔드 구성)를 생성하고 다음 명령을 실행합니다.
 +
-[listing]
+[source, console]
 ----
 kubectl create -f backendconfig.yaml -n trident
 ----
@@ -85,7 +85,7 @@ tridentbackendconfig.trident.netapp.io/backend-tbc-ontap-nas created
 ----
 * Trident 백엔드 구성(TBC)이 성공적으로 생성되었는지 확인:
 +
-[listing]
+[source, console]
 ----
 Kubectl get tbc -n trident
 ----
@@ -115,13 +115,13 @@ backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d91
 
 구성 파일이 생성되면 다음 명령을 실행하여 EKS 내에 구성 파일을 생성합니다.
 
-[listing]
+[source, console]
 ----
 kubectl create -f configuration_file
 ----
 상태를 확인하려면 다음 명령을 실행합니다.
 
-[listing]
+[source, console]
 ----
 kubectl get tbc -n trident
 ----
@@ -226,10 +226,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 `""` 
 
 
-| `credentials` | AWS Secret Manager에 저장할 FSx SVM 자격 증명을 지정합니다.
-- `name`: SVM의 자격 증명이 포함된 비밀의 ARN(Amazon Resource Name).
-- `type`: 로 설정합니다 `awsarn`.
-을 참조하십시오 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["AWS Secrets Manager 암호를 생성합니다"^] 를 참조하십시오. |  
+| `credentials` | AWS Secrets Manager에 저장할 FSx SVM 자격 증명을 지정합니다. - `name`: SVM의 자격 증명이 포함된 비밀의 ARN(Amazon Resource Name).  `type`-: 로 `awsarn`설정합니다. 자세한 내용은 을 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["AWS Secrets Manager 암호를 생성합니다"^] 참조하십시오. |  
 |===
 
 
@@ -289,7 +286,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 * Linux 컨트롤러 노드 및 Windows Server 2019를 실행하는 Windows 작업자 노드가 있는 Kubernetes 클러스터 Trident는 Windows 노드에서만 실행되는 Pod에 마운트된 SMB 볼륨을 지원합니다.
 * Active Directory 자격 증명이 포함된 Trident 암호가 하나 이상 있습니다. 비밀 생성하기 `smbcreds`:
 +
-[listing]
+[source, console]
 ----
 kubectl create secret generic smbcreds --from-literal username=user --from-literal password='password'
 ----
@@ -305,13 +302,13 @@ kubectl create secret generic smbcreds --from-literal username=user --from-liter
 
 .. 지정된 SVM과 연결된 SMB 공유를 생성합니다.
 +
-[listing]
+[source, console]
 ----
 vserver cifs share create -vserver vserver_name -share-name share_name -path path [-share-properties share_properties,...] [other_attributes] [-comment text]
 ----
 .. 공유가 생성되었는지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 vserver cifs share show -share-name share_name
 ----

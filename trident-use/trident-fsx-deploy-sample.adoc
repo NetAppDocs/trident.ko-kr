@@ -17,7 +17,7 @@ summary: Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십�
 .단계
 . 볼륨을 Pod에 마운트합니다.
 +
-[listing]
+[source, console]
 ----
 kubectl create -f pv-pod.yaml
 ----
@@ -25,7 +25,7 @@ kubectl create -f pv-pod.yaml
 다음 예는 PVC를 포드에 부착하기 위한 기본 구성을 보여줍니다. * 기본 구성 *:
 
 +
-[listing]
+[source, console]
 ----
 kind: Pod
 apiVersion: v1
@@ -52,7 +52,7 @@ NOTE: 을 사용하여 진행 상황을 모니터링할 수 있습니다 `kubect
 
 . 볼륨이 에 마운트되어 있는지 확인합니다 `/my/mount/path`.
 +
-[listing]
+[source, console]
 ----
 kubectl exec -it pv-pod -- df -h /my/mount/path
 ----
@@ -65,7 +65,7 @@ Filesystem                                                        Size  Used  Av
 ----
 이제 Pod를 삭제할 수 있습니다. Pod 응용 프로그램은 더 이상 존재하지 않지만 볼륨은 유지됩니다.
 
-[listing]
+[source, console]
 ----
 kubectl delete pod pv-pod
 ----

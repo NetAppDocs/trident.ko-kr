@@ -110,10 +110,7 @@ Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십시오. �
 `""` 
 
 
-| `credentials` | AWS Secret Manager에 저장할 FSx SVM 자격 증명을 지정합니다.
-- `name`: SVM의 자격 증명이 포함된 비밀의 ARN(Amazon Resource Name).
-- `type`: 로 설정합니다 `awsarn`.
-을 참조하십시오 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["AWS Secrets Manager 암호를 생성합니다"^] 를 참조하십시오. |  
+| `credentials` | AWS Secrets Manager에 저장할 FSx SVM 자격 증명을 지정합니다. - `name`: SVM의 자격 증명이 포함된 비밀의 ARN(Amazon Resource Name).  `type`-: 로 `awsarn`설정합니다. 자세한 내용은 을 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["AWS Secrets Manager 암호를 생성합니다"^] 참조하십시오. |  
 |===
 
 
@@ -121,7 +118,7 @@ Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십시오. �
 
 초기 구성 후 다음 명령을 실행하여 새 백엔드 JSON 파일에 업데이트된 데이터 LIF를 제공할 수 있습니다.
 
-[listing]
+[source, console]
 ----
 tridentctl update backend <backend-name> -f <path-to-backend-json-file-with-updated-dataLIF>
 ----
@@ -183,7 +180,7 @@ NOTE: PVC가 하나 또는 여러 개의 Pod에 연결된 경우, 새로운 데�
 ====
 사용 `nasType`, `node-stage-secret-name`, 및 `node-stage-secret-namespace`, SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다. SMB 볼륨은 를 사용하여 지원됩니다 `ontap-nas` 드라이버만 해당.
 
-[listing]
+[source, console]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -197,10 +194,10 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-namespace: "default"
 ----
 ====
-.비밀 관리자가 있는 AWS FSx for ONTAP 구성
+.Secrets Manager가 포함된 AWS FSx for ONTAP에 대한 구성
 [%collapsible]
 ====
-[listing]
+[source, console]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
