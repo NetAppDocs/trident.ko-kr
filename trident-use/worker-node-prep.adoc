@@ -33,9 +33,11 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nvm
 NOTE: NetApp은 NVMe/TCP에 ONTAP 9.12 이상을 권장합니다.
 
 .SCSI over FC 도구
+ 자세한 내용은 을 link:https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["FC 및 AMP, FC-NVMe SAN 호스트를 구성하는 방법"]FC 및 FC-NVMe SAN 호스트 구성에 대한참조하십시오.
+
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-fc-tools["FC 툴을 설치합니다"] sanType `fcp`(SCSI over FC)을 사용하는 경우 `ontap-san`
 
-자세한 내용은 을 link:https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["FC 및 AMP, FC-NVMe SAN 호스트를 구성하는 방법"] 참조하십시오.
+* 고려해야 할 점 *: * OpenShift 및 KubeVirt 환경에서 FC 기반 SCSI가 지원됩니다. *SCSI over FC는 Docker에서 지원되지 않습니다. *iSCSI 자동 복구는 FC를 통한 SCSI에는 적용되지 않습니다.
 
 
 
@@ -165,7 +167,7 @@ sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
 +
 
-NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
+NOTE:  `/etc/multipath.conf`아래 내용을 `defaults` 포함해야 `find_multipaths no` 합니다.
 
 . iscsid와 multipathd가 실행 중인지 확인합니다.
 +
@@ -217,7 +219,7 @@ sudo service multipath-tools restart
 ----
 +
 
-NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
+NOTE:  `/etc/multipath.conf`아래 내용을 `defaults` 포함해야 `find_multipaths no` 합니다.
 
 . 'open-iscsi'와 'multirpath-tools'가 활성화되어 실행되고 있는지 확인합니다.
 +
@@ -386,7 +388,7 @@ sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
 +
 
-NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
+NOTE:  `/etc/multipath.conf`아래 내용을 `defaults` 포함해야 `find_multipaths no` 합니다.
 
 . 가 `multipathd` 실행 중인지 확인합니다.
 +
@@ -420,7 +422,7 @@ sudo service multipath-tools restart
 ----
 +
 
-NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어 있는지 확인합니다.
+NOTE:  `/etc/multipath.conf`아래 내용을 `defaults` 포함해야 `find_multipaths no` 합니다.
 
 . 가 활성화되어 있고 실행 중인지 `multipath-tools` 확인합니다.
 +

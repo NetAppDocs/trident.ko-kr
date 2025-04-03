@@ -4080,7 +4080,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="39e92ae6d270535c1cad298373650560" category="list-text">Trident는 대상 네임스페이스가 공유 볼륨에 쓰는 것을 방지할 수 없습니다. 파일 잠금 또는 기타 프로세스를 사용하여 공유 볼륨 데이터를 덮어쓰지 않도록 해야 합니다.</block>
   <block id="b709b82e3d76fa5433fd3117387424b7" category="paragraph-title">SCSI over FC 도구</block>
   <block id="867cf4bbcb92ecc7017612aafa765813" category="inline-link-macro">FC 및 AMP, FC-NVMe SAN 호스트를 구성하는 방법</block>
-  <block id="fb42223c0808d27492a06be4e773dc26" category="paragraph">자세한 내용은 을 <block ref="ee9d56c9130a1d3814c95b35eb7c82a4" category="inline-link-macro-rx"></block> 참조하십시오.</block>
   <block id="16649adc62ed952ba4dac811c548cbfb" category="paragraph">Trident는 노드에서 iSCSI 또는 NFS 서비스를 실행할 수 있는지 여부를 자동으로 감지합니다.</block>
   <block id="ff577472362d5ec5388791cc868e283e" category="paragraph">Trident는 검색된 서비스를 식별하기 위해 노드에 대한 이벤트를 생성합니다. 이러한 이벤트를 검토하려면 다음을 실행합니다.</block>
   <block id="e0dbb340725a054b795eaa2c5ce9925a" category="paragraph">Trident는 Trident 노드 CR의 각 노드에 대해 활성화된 서비스를 식별합니다. 검색된 서비스를 보려면 다음을 실행합니다.</block>
@@ -5481,4 +5480,7 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="44308ffe82692c268b99d3caefca907e" category="list-text">FSxN Trident CSI 추가 기능의 현재 버전을 확인합니다. 클러스터 이름으로 교체합니다<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block>.</block>
   <block id="a1dc4a2136ed260b34021d64aaa6980a" category="list-text">이전 단계의 출력에서 사용할 수 있는 업데이트 아래에 반환된 버전으로 추가 기능을 업데이트합니다.</block>
   <block id="0ca34892a0e67f37b07d196ec272007d" category="list-text">NetApp은 ONTAP-SAN을 제외한 모든 ONTAP 드라이버에서 FlexVol 자동 확장을 사용하지 않는 것이 좋습니다. 이 문제를 해결하려면 Trident에서 스냅숏 예비 공간 사용을 지원하고 그에 따라 FlexVol 볼륨의 크기를 조정합니다.</block>
+  <block id="67ed8fb72dc668ae9c7c1114df8f02ed" category="paragraph"> 자세한 내용은 을 <block ref="ee9d56c9130a1d3814c95b35eb7c82a4" category="inline-link-macro-rx"></block>FC 및 FC-NVMe SAN 호스트 구성에 대한참조하십시오.</block>
+  <block id="1b9fede0aad66dda6d8b01b66280fff4" category="paragraph">* 고려해야 할 점 *: * OpenShift 및 KubeVirt 환경에서 FC 기반 SCSI가 지원됩니다. *SCSI over FC는 Docker에서 지원되지 않습니다. *iSCSI 자동 복구는 FC를 통한 SCSI에는 적용되지 않습니다.</block>
+  <block id="5e6c49c79d451ce5d17472c430c69454" category="admonition"><block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>아래 내용을<block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block> 포함해야<block ref="2a81b35478c9ccb4f9392dcc40edb8e6" prefix=" " category="inline-code"></block> 합니다.</block>
 </blocks>
