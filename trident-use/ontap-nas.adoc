@@ -65,6 +65,7 @@ RWO, ROX, rwx, RWOP
 * 사용 `ontap-san-economy` 영구 볼륨 사용 수가 보다 높을 것으로 예상되는 경우에만 link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["지원되는 ONTAP 볼륨 제한"^].
 * 사용 `ontap-nas-economy` 영구 볼륨 사용 수가 보다 높을 것으로 예상되는 경우에만 link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["지원되는 ONTAP 볼륨 제한"^] 및 `ontap-san-economy` 드라이버를 사용할 수 없습니다.
 * 사용하지 마십시오 `ontap-nas-economy` 데이터 보호, 재해 복구 또는 이동성이 필요할 것으로 예상되는 경우
+* NetApp은 ONTAP-SAN을 제외한 모든 ONTAP 드라이버에서 FlexVol 자동 확장을 사용하지 않는 것이 좋습니다. 이 문제를 해결하려면 Trident에서 스냅숏 예비 공간 사용을 지원하고 그에 따라 FlexVol 볼륨의 크기를 조정합니다.
 
 
 ====

@@ -5480,4 +5480,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="fa1c8065dc4d2b862bfba881472c0aac" category="admonition"><block ref="2befb7722283d545949c6220c6548fe4" prefix=" " category="inline-code"></block>이전 단계에서 생성한 역할의 ARN으로 바꿉니다.</block>
   <block id="44308ffe82692c268b99d3caefca907e" category="list-text">FSxN Trident CSI 추가 기능의 현재 버전을 확인합니다. 클러스터 이름으로 교체합니다<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block>.</block>
   <block id="a1dc4a2136ed260b34021d64aaa6980a" category="list-text">이전 단계의 출력에서 사용할 수 있는 업데이트 아래에 반환된 버전으로 추가 기능을 업데이트합니다.</block>
+  <block id="0ca34892a0e67f37b07d196ec272007d" category="list-text">NetApp은 ONTAP-SAN을 제외한 모든 ONTAP 드라이버에서 FlexVol 자동 확장을 사용하지 않는 것이 좋습니다. 이 문제를 해결하려면 Trident에서 스냅숏 예비 공간 사용을 지원하고 그에 따라 FlexVol 볼륨의 크기를 조정합니다.</block>
 </blocks>
