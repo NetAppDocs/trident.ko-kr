@@ -15,6 +15,9 @@ summary: Trident를 설치하고 사용하는 동안 발생할 수 있는 문제
 Trident를 설치하고 사용하는 동안 발생할 수 있는 문제를 해결하려면 여기에 제공된 포인터를 사용하십시오.
 
 
+NOTE: Trident에 대한 도움이 필요하면 를 사용하여 지원 번들을 만든 `tridentctl logs -a -n trident` 후 NetApp 지원 팀에 보내십시오.
+
+
 
 == 일반 문제 해결
 
