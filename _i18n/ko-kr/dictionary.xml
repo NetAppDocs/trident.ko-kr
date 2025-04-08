@@ -5243,7 +5243,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="dd298b4e9bfcd54db2048c92819679ad" category="section-title">대용량 파일의 임시 백업을 복원하지 못할 수 있습니다</block>
   <block id="beca1b1ae9141eb4cf9a371088911e0f" category="paragraph">Restic을 사용하여 생성된 Amazon S3 백업에서 30GB 이상의 파일을 복원하는 경우 복원 작업이 실패할 수 있습니다. 이 문제를 해결하려면 Kopia를 Data Mover로 사용하여 데이터를 백업합니다(Kopia는 백업의 기본 Data Mover입니다). 자세한 내용은 을<block ref="1e108e5c10b0ba51ea4cfaf507765efb" category="inline-link-rx"></block> 참조하십시오.</block>
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">AppVault 인증 및 암호를 구성합니다</block>
-  <block id="27d0259b1ba2ddf3e1540b7e284626ca" category="paragraph">AppVault 객체를 생성하기 전에 AppVault 및 선택한 Data Mover가 공급자 및 관련 리소스를 통해 인증할 수 있는지 확인해야 합니다.</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">Data Mover 저장소 암호입니다</block>
   <block id="12ae6793b05f84758a85b289757c4f34" category="list-text">Trident Protect CLI를 사용하여 AppVault 개체를 만들 때 인수를 사용하여 암호를 지정할 수<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block> 있습니다.</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">Data Mover 리포지토리 암호 암호를 생성합니다</block>
@@ -5484,4 +5483,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="ce3d3f85c4d1d4dd7826863d9428b4e5" category="admonition">Trident에 대한 도움이 필요하면 를 사용하여 지원 번들을 만든<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block> 후 NetApp 지원 팀에 보내십시오.</block>
   <block id="8ef3114bf1395e8f04d7b3404982499e" category="list-text">NVE 암호화 플래그를 로 설정하여 NAE 지원 볼륨을 생성할 수 있습니다<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>.</block>
   <block id="351e2b20bd9ea864b69cd832f3a4a5df" category="list-text">백엔드에서 NAE가 사용되지 않는 경우, 백엔드 구성에서 NVE 암호화 플래그가 (기본값)로 설정되지 않은 경우 Trident에서 프로비저닝된 모든 볼륨은 NVE가<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> 사용됩니다.</block>
+  <block id="39fb9551310e8e28d64d0e2b94913f7a" category="paragraph">응용 프로그램에서 데이터 보호 작업을 수행할 때 수동으로 또는 명령줄을 사용하여 AppVault CR을 만들어야 하며 AppVault CR은 Trident Protect가 설치된 클러스터에 있어야 합니다. AppVault CR은 사용자 환경에 따라 다르며, AppVault CRS를 생성할 때 이 페이지의 예제를 지침으로 사용할 수 있습니다.</block>
+  <block id="8b70987187655cedeb971520a2170b2d" category="paragraph">AppVault CR을 생성하기 전에 AppVault 및 선택한 Data Mover가 공급자 및 관련 리소스를 통해 인증될 수 있는지 확인해야 합니다.</block>
 </blocks>

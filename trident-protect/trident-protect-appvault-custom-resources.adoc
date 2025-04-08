@@ -16,11 +16,13 @@ summary: 'Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault�
 [role="lead"]
 Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault라고 합니다. AppVault 개체는 스토리지 버킷의 선언적 Kubernetes 워크플로우 표현입니다. AppVault CR에는 백업, 스냅샷, 복원 작업 및 SnapMirror 복제와 같은 보호 작업에 사용되는 버킷에 필요한 구성이 포함되어 있습니다. 관리자만 AppVaults를 만들 수 있습니다.
 
+응용 프로그램에서 데이터 보호 작업을 수행할 때 수동으로 또는 명령줄을 사용하여 AppVault CR을 만들어야 하며 AppVault CR은 Trident Protect가 설치된 클러스터에 있어야 합니다. AppVault CR은 사용자 환경에 따라 다르며, AppVault CRS를 생성할 때 이 페이지의 예제를 지침으로 사용할 수 있습니다.
+
 
 
 == AppVault 인증 및 암호를 구성합니다
 
-AppVault 객체를 생성하기 전에 AppVault 및 선택한 Data Mover가 공급자 및 관련 리소스를 통해 인증할 수 있는지 확인해야 합니다.
+AppVault CR을 생성하기 전에 AppVault 및 선택한 Data Mover가 공급자 및 관련 리소스를 통해 인증될 수 있는지 확인해야 합니다.
 
 
 
