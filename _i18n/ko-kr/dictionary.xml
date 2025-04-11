@@ -3142,7 +3142,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="b9a641d903e611a87a5e68ac7fdb0b84" category="list-text">Trident AutoSupport는 개인 식별 정보(PII) 또는 개인 정보를 수집하거나 전송하지 않습니다. 에는 Trident 컨테이너 이미지 자체에 적용할 수 없는 가<block ref="173a360b412944768c2ab13e6c8fd1c7" category="inline-link-rx"></block> 포함되어 있습니다. 데이터 보안 및 신뢰에 대한 NetApp의 노력에 대해 더 자세히 알아볼 수<block ref="d3cc55401bc8303e01c6b0c43ba0733f" category="inline-link-rx"></block>있습니다.</block>
   <block id="5ff83dbc70e496ea22b38ea61bb69f05" category="list-text">데모를 시청해보시기 <block ref="c27441bbbe62adf51ae6ecec41fde8bd" category="inline-link-macro-rx"></block>바랍니다.</block>
   <block id="533a7baf9026dddae6baef47ea605b08" category="doc">샘플 응용 프로그램을 배포합니다</block>
-  <block id="fae865e1123e24de7eca1790ec73dc32" category="paragraph">샘플 응용 프로그램을 배포합니다.</block>
   <block id="c09ee63e688125cf9517a66bb5a0a5a6" category="paragraph">다음 예는 PVC를 포드에 부착하기 위한 기본 구성을 보여줍니다. * 기본 구성 *:</block>
   <block id="f477db05998ad8420119de646e2ff290" category="doc">IAM 역할 및 AWS Secret을 생성합니다</block>
   <block id="98c3c9acd444d11890d48438db3c165e" category="paragraph">AWS 자격 증명을 명시적으로 제공하는 대신 AWS IAM 역할로 인증하여 Kubernetes Pod를 구성하여 AWS 리소스에 액세스할 수 있습니다.</block>
@@ -5494,4 +5493,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="9355f48a9876fcaefe0351294df4e05c" category="list-text">파일을 올바른 값으로 채운 후<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block> CR:</block>
   <block id="1bd9850ddb901f0e741293ec737c5de6" category="list-text">대괄호 안의 값을 사용자 환경의 정보로 대체하여 백업 일정을 만듭니다. 예를 들면 다음과 같습니다.</block>
   <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">고정 전체 백업을 위해 플래그를<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block> 설정하거나 요구 사항에 따라 사용자 지정할 수<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block> 있습니다. 예를 들어, 매일 세분화를 선택하는 경우 전체 백업이 수행되는 요일을 지정할 수 있습니다. 예를 들어 월요일과 목요일에 전체 백업을 예약하려면 을<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block> 사용합니다.</block>
+  <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">저장 클래스 및 PVC가 생성되면 PV를 포드에 장착할 수 있습니다. 이 섹션에는 PV를 Pod에 연결하기 위한 명령 및 구성의 예가 나와 있습니다.</block>
 </blocks>
