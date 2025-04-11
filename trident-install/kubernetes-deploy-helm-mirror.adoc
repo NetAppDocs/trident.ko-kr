@@ -53,7 +53,7 @@ IMPORTANT: 전용 리포지토리에 Trident를 설치할 때 스위치를 사�
 +
 [listing]
 ----
-helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+helm repo add netapp-trident https://artifacthub.io/packages/helm/netapp-trident/trident-operator
 ----
 .  `helm install`배포 및 이미지 레지스트리 위치의 이름을 사용하고 지정합니다. 는 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident 및 CSI 이미지"] 하나의 레지스트리 또는 다른 레지스트리에 위치할 수 있지만 모든 CSI 이미지는 동일한 레지스트리에 위치해야 합니다. 이 예에서 는 `100.2502.0` 설치할 Trident 버전입니다.
 +
