@@ -160,28 +160,27 @@ Trident는 다음 2가지 중 하나로 Cloud Volumes Service 볼륨을 생성�
 ====
 기본 CVS - 성능 서비스 유형과 기본 "표준" 서비스 수준을 사용하는 최소 백엔드 구성입니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
 storageDriverName: gcp-cvs
-projectNumber: '012345678901'
+projectNumber: "012345678901"
 apiRegion: us-west2
 apiKey:
   type: service_account
   project_id: my-gcp-project
-  private_key_id: "<id_value>"
+  private_key_id: <id_value>
   private_key: |
     -----BEGIN PRIVATE KEY-----
     <key_value>
     -----END PRIVATE KEY-----
   client_email: cloudvolumes-admin-sa@my-gcp-project.iam.gserviceaccount.com
-  client_id: '123456789012345678901'
+  client_id: "123456789012345678901"
   auth_uri: https://accounts.google.com/o/oauth2/auth
   token_uri: https://oauth2.googleapis.com/token
   auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
   client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/cloudvolumes-admin-sa%40my-gcp-project.iam.gserviceaccount.com
-
 ----
 ====
 .예 2: 서비스 수준 구성
@@ -189,7 +188,7 @@ apiKey:
 ====
 이 샘플에서는 서비스 수준 및 볼륨 기본값을 포함한 백엔드 구성 옵션을 보여 줍니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -219,7 +218,6 @@ defaults:
   snapshotReserve: '5'
   exportRule: 10.0.0.0/24,10.0.1.0/24,10.0.2.100
   size: 5Ti
-
 ----
 ====
 .예 3: 가상 풀 구성
@@ -229,7 +227,7 @@ defaults:
 
 이 경우 를 설정하는 모든 가상 풀에 대해 특정 기본값이 설정됩니다 `snapshotReserve` 5% 및 에서 `exportRule` 를 0.0.0.0/0으로 설정합니다. 가상 풀은 에 정의되어 있습니다 `storage` 섹션을 참조하십시오. 각 개별 가상 풀은 고유한 가상 풀을 정의합니다 `serviceLevel`그리고 일부 풀은 기본값을 덮어씁니다. 가상 풀 레이블을 사용하여 에 따라 풀을 구분했습니다 `performance` 및 `protection`.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -296,15 +294,16 @@ storage:
 .스토리지 클래스 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
+---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: cvs-extreme-extra-protection
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=extreme; protection=extra"
+  selector: performance=extreme; protection=extra
 allowVolumeExpansion: true
 ---
 apiVersion: storage.k8s.io/v1
@@ -313,7 +312,7 @@ metadata:
   name: cvs-extreme-standard-protection
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=premium; protection=standard"
+  selector: performance=premium; protection=standard
 allowVolumeExpansion: true
 ---
 apiVersion: storage.k8s.io/v1
@@ -322,7 +321,7 @@ metadata:
   name: cvs-premium-extra-protection
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=premium; protection=extra"
+  selector: performance=premium; protection=extra
 allowVolumeExpansion: true
 ---
 apiVersion: storage.k8s.io/v1
@@ -331,7 +330,7 @@ metadata:
   name: cvs-premium
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=premium; protection=standard"
+  selector: performance=premium; protection=standard
 allowVolumeExpansion: true
 ---
 apiVersion: storage.k8s.io/v1
@@ -340,7 +339,7 @@ metadata:
   name: cvs-standard
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=standard"
+  selector: performance=standard
 allowVolumeExpansion: true
 ---
 apiVersion: storage.k8s.io/v1
@@ -349,8 +348,9 @@ metadata:
   name: cvs-extra-protection
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "protection=extra"
+  selector: protection=extra
 allowVolumeExpansion: true
+
 ----
 ====
 * 첫 번째 StorageClass입니다 (`cvs-extreme-extra-protection`)가 첫 번째 가상 풀에 매핑됩니다. 이 풀은 스냅샷 예약 공간이 10%인 최고 성능을 제공하는 유일한 풀입니다.
@@ -368,7 +368,7 @@ allowVolumeExpansion: true
 ====
 을 사용하는 최소 백엔드 구성입니다 `storageClass` CVS 서비스 유형과 기본값을 지정합니다 `standardsw` 서비스 레벨:
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -398,7 +398,7 @@ serviceLevel: standardsw
 ====
 이 백엔드 구성은 를 사용합니다 `storagePools` 스토리지 풀을 구성하려면 다음을 수행합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1

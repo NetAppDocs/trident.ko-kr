@@ -106,7 +106,7 @@ NOTE: 네트워크 기능에 대한 자세한 내용은 을 참조하십시오 l
 
 === 필요한 권한 및 리소스
 
-PVC를 생성할 때 "No capacity pool found" 오류가 발생하는 경우 앱 등록에 필요한 권한 및 리소스(서브넷, 가상 네트워크, 용량 풀)가 없는 것일 수 있습니다. DEBUG가 활성화된 경우 Trident는 백엔드가 생성될 때 검색된 Azure 리소스를 기록합니다. 적절한 역할이 사용되고 있는지 확인합니다.
+PVC 생성 시 "No capacity pool found" 오류가 발생하는 경우 앱 등록에 필요한 권한 및 리소스(서브넷, 가상 네트워크, 용량 풀)가 없는 것일 수 있습니다. DEBUG가 활성화된 경우 Trident는 백엔드가 생성될 때 검색된 Azure 리소스를 기록합니다. 적절한 역할이 사용되고 있는지 확인합니다.
 
 의 값 `resourceGroups`, `netappAccounts`, `capacityPools`, `virtualNetwork`, 및 `subnet` 간단한 이름 또는 정규화된 이름을 사용하여 지정할 수 있습니다. 이름이 같은 여러 리소스와 이름이 일치할 수 있으므로 대부분의 경우 정규화된 이름을 사용하는 것이 좋습니다.
 
@@ -167,7 +167,7 @@ PVC를 생성할 때 "No capacity pool found" 오류가 발생하는 경우 앱 
 
 이 구성은 Azure NetApp Files를 시작하여 시험할 때 이상적이지만, 실제로는 프로비저닝한 볼륨에 대해 추가 범위를 제공하고 싶을 것입니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 apiVersion: trident.netapp.io/v1
@@ -190,7 +190,7 @@ spec:
 ====
 이 백엔드 구성은 생략됩니다 `subscriptionID`, `tenantID`, `clientID`, 및 `clientSecret`관리되는 ID를 사용할 경우 선택 사항입니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -200,9 +200,12 @@ metadata:
 spec:
   version: 1
   storageDriverName: azure-netapp-files
-  capacityPools: ["ultra-pool"]
-  resourceGroups: ["aks-ami-eastus-rg"]
-  netappAccounts: ["smb-na"]
+  capacityPools:
+    - ultra-pool
+  resourceGroups:
+    - aks-ami-eastus-rg
+  netappAccounts:
+    - smb-na
   virtualNetwork: eastus-prod-vnet
   subnet: eastus-anf-subnet
 ----
@@ -212,7 +215,7 @@ spec:
 ====
 이 백엔드 구성은 생략됩니다 `tenantID`, `clientID`, 및 `clientSecret`클라우드 ID를 사용할 경우 선택 사항입니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -222,9 +225,12 @@ metadata:
 spec:
   version: 1
   storageDriverName: azure-netapp-files
-  capacityPools: ["ultra-pool"]
-  resourceGroups: ["aks-ami-eastus-rg"]
-  netappAccounts: ["smb-na"]
+  capacityPools:
+    - ultra-pool
+  resourceGroups:
+    - aks-ami-eastus-rg
+  netappAccounts:
+    - smb-na
   virtualNetwork: eastus-prod-vnet
   subnet: eastus-anf-subnet
   location: eastus
@@ -236,7 +242,7 @@ spec:
 ====
 이 백엔드 구성은 Azure의 용량 풀 위치에 `Ultra` 볼륨을 `eastus` 배치합니다. Trident은 해당 위치에서 Azure NetApp Files에 위임된 모든 서브넷을 자동으로 검색하여 임의로 새 볼륨을 배치합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -248,8 +254,8 @@ clientSecret: SECRET
 location: eastus
 serviceLevel: Ultra
 capacityPools:
-- application-group-1/account-1/ultra-1
-- application-group-1/account-1/ultra-2
+  - application-group-1/account-1/ultra-1
+  - application-group-1/account-1/ultra-2
 ----
 ====
 .고급 구성
@@ -257,7 +263,7 @@ capacityPools:
 ====
 이 백엔드 구성은 단일 서브넷에 대한 볼륨 배치 범위를 더욱 줄여주고 일부 볼륨 프로비저닝 기본값도 수정합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -269,8 +275,8 @@ clientSecret: SECRET
 location: eastus
 serviceLevel: Ultra
 capacityPools:
-- application-group-1/account-1/ultra-1
-- application-group-1/account-1/ultra-2
+  - application-group-1/account-1/ultra-1
+  - application-group-1/account-1/ultra-2
 virtualNetwork: my-virtual-network
 subnet: my-subnet
 networkFeatures: Standard
@@ -278,9 +284,9 @@ nfsMountOptions: vers=3,proto=tcp,timeo=600
 limitVolumeSize: 500Gi
 defaults:
   exportRule: 10.0.0.0/24,10.0.1.0/24,10.0.2.100
-  snapshotDir: 'true'
+  snapshotDir: "true"
   size: 200Gi
-  unixPermissions: '0777'
+  unixPermissions: "0777"
 
 ----
 ====
@@ -289,7 +295,7 @@ defaults:
 ====
 이 백엔드 구성은 단일 파일에 여러 스토리지 풀을 정의합니다. 다양한 서비스 수준을 지원하는 여러 용량 풀이 있고 이를 나타내는 Kubernetes의 스토리지 클래스를 생성하려는 경우에 유용합니다. 가상 풀 레이블을 사용하여 에 따라 풀을 구분했습니다 `performance`.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -300,30 +306,30 @@ clientID: dd043f63-bf8e-fake-8076-8de91e5713aa
 clientSecret: SECRET
 location: eastus
 resourceGroups:
-- application-group-1
+  - application-group-1
 networkFeatures: Basic
 nfsMountOptions: vers=3,proto=tcp,timeo=600
 labels:
   cloud: azure
 storage:
-- labels:
-    performance: gold
-  serviceLevel: Ultra
-  capacityPools:
-  - ultra-1
-  - ultra-2
-  networkFeatures: Standard
-- labels:
-    performance: silver
-  serviceLevel: Premium
-  capacityPools:
-  - premium-1
-- labels:
-    performance: bronze
-  serviceLevel: Standard
-  capacityPools:
-  - standard-1
-  - standard-2
+  - labels:
+      performance: gold
+    serviceLevel: Ultra
+    capacityPools:
+      - ultra-1
+      - ultra-2
+    networkFeatures: Standard
+  - labels:
+      performance: silver
+    serviceLevel: Premium
+    capacityPools:
+      - premium-1
+  - labels:
+      performance: bronze
+    serviceLevel: Standard
+    capacityPools:
+      - standard-1
+      - standard-2
 
 ----
 ====
@@ -332,7 +338,7 @@ storage:
 ====
 Trident은 지역 및 가용 영역을 기준으로 워크로드에 대한 볼륨을 손쉽게 프로비저닝할 수 있도록 지원합니다.  `supportedTopologies`이 백엔드 구성의 블록은 백엔드당 영역 및 영역 목록을 제공하는 데 사용됩니다. 여기에 지정한 지역 및 영역 값은 각 Kubernetes 클러스터 노드의 레이블에 있는 지역 및 영역 값과 일치해야 합니다. 이러한 영역 및 영역은 스토리지 클래스에서 제공할 수 있는 허용 가능한 값 목록을 나타냅니다. 백엔드에서 제공되는 영역 및 영역의 하위 집합이 포함된 스토리지 클래스의 경우 Trident는 언급한 영역 및 영역에 볼륨을 생성합니다. 자세한 내용은 을 link:../trident-use/csi-topology.html["CSI 토폴로지를 사용합니다"]참조하십시오.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -344,13 +350,13 @@ clientSecret: SECRET
 location: eastus
 serviceLevel: Ultra
 capacityPools:
-- application-group-1/account-1/ultra-1
-- application-group-1/account-1/ultra-2
+  - application-group-1/account-1/ultra-1
+  - application-group-1/account-1/ultra-2
 supportedTopologies:
-- topology.kubernetes.io/region: eastus
-  topology.kubernetes.io/zone: eastus-1
-- topology.kubernetes.io/region: eastus
-  topology.kubernetes.io/zone: eastus-2
+  - topology.kubernetes.io/region: eastus
+    topology.kubernetes.io/zone: eastus-1
+  - topology.kubernetes.io/region: eastus
+    topology.kubernetes.io/zone: eastus-2
 ----
 ====
 
@@ -365,16 +371,18 @@ supportedTopologies:
 
 사용 `parameter.selector` 각각에 대해 지정할 수 있습니다 `StorageClass` 볼륨을 호스팅하는 데 사용되는 가상 풀입니다. 볼륨은 선택한 풀에 정의된 측면을 갖습니다.
 
-[listing]
+[source, yaml]
 ----
+---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: gold
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=gold"
+  selector: performance=gold
 allowVolumeExpansion: true
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -382,8 +390,9 @@ metadata:
   name: silver
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=silver"
+  selector: performance=silver
 allowVolumeExpansion: true
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -391,7 +400,7 @@ metadata:
   name: bronze
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=bronze"
+  selector: performance=bronze
 allowVolumeExpansion: true
 ----
 
@@ -403,7 +412,7 @@ allowVolumeExpansion: true
 .기본 네임스페이스에 대한 기본 구성
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -415,13 +424,12 @@ parameters:
   trident.netapp.io/nasType: "smb"
   csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
   csi.storage.k8s.io/node-stage-secret-namespace: "default"
-
 ----
 ====
 .네임스페이스별로 다른 암호 사용
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -438,7 +446,7 @@ parameters:
 .볼륨별로 다른 암호 사용
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass

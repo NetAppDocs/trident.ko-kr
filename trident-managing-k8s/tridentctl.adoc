@@ -260,14 +260,14 @@ WARNING: Trident REST 인터페이스는 127.0.0.1(IPv4의 경우) 또는 [::1](
 [listing]
 ----
 {
-    "version": 1,
-    "storageDriverName": "ontap-nas",
-    "managementLIF": "<redacted>",
-    "svm": "nas-svm",
-    "backendName": "customBackend",
-    "username": "<redacted>",
-    "password": "<redacted>",
-    "userState": "suspended",
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "<redacted>",
+  "svm": "nas-svm",
+  "backendName": "customBackend",
+  "username": "<redacted>",
+  "password": "<redacted>",
+  "userState": "suspended"
 }
 
 ----
@@ -276,7 +276,7 @@ WARNING: Trident REST 인터페이스는 127.0.0.1(IPv4의 경우) 또는 [::1](
 --
 명령을 사용하여 tbc를 적용한 후 편집할 수 `kubectl edit <tbc-name> -n <namespace>` 있습니다. 다음 예에서는 옵션을 사용하여 백엔드 상태를 일시 중단하도록 업데이트합니다 `userState: suspended` .
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -288,7 +288,7 @@ spec:
   storageDriverName: ontap-nas
   managementLIF: <redacted>
   svm: nas-svm
-userState: suspended
+  userState: suspended
   credentials:
     name: backend-tbc-ontap-nas-secret
 ----

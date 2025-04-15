@@ -20,13 +20,13 @@ summary: 여러 스토리지 구성을 동시에 사용할 수 있도록 하려�
 
 . 별칭 및 구성 파일을 지정하는 첫 번째 인스턴스를 시작합니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin install --grant-all-permissions --alias silver netapp/trident-plugin:21.07 config=silver.json
 ----
 . 다른 별칭과 구성 파일을 지정하여 두 번째 인스턴스를 시작합니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin install --grant-all-permissions --alias gold netapp/trident-plugin:21.07 config=gold.json
 ----
@@ -35,7 +35,7 @@ docker plugin install --grant-all-permissions --alias gold netapp/trident-plugin
 예를 들어 금괴 볼륨의 경우:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d gold --name ntapGold
 ----
@@ -43,7 +43,7 @@ docker volume create -d gold --name ntapGold
 예를 들어, 은 볼륨의 경우:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d silver --name ntapSilver
 ----
@@ -55,13 +55,13 @@ docker volume create -d silver --name ntapSilver
 
 . 사용자 지정 드라이버 ID를 사용하여 NFS 구성으로 플러그인을 시작합니다.
 +
-[listing]
+[source, console]
 ----
 sudo trident --volume-driver=netapp-nas --config=/path/to/config-nfs.json
 ----
 . 사용자 지정 드라이버 ID를 사용하여 iSCSI 구성으로 플러그인을 시작합니다.
 +
-[listing]
+[source, console]
 ----
 sudo trident --volume-driver=netapp-san --config=/path/to/config-iscsi.json
 ----
@@ -70,7 +70,7 @@ sudo trident --volume-driver=netapp-san --config=/path/to/config-iscsi.json
 예를 들어, NFS의 경우:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d netapp-nas --name my_nfs_vol
 ----
@@ -78,7 +78,7 @@ docker volume create -d netapp-nas --name my_nfs_vol
 예를 들어 iSCSI의 경우:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d netapp-san --name my_iscsi_vol
 ----

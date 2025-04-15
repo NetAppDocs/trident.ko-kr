@@ -20,7 +20,7 @@ Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성�
 
 는 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] Trident를 해당 클래스에 사용되는 Provisioner로 식별하고 Trident에 볼륨 프로비저닝 방법을 지시합니다. 예를 들면 다음과 같습니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -50,13 +50,23 @@ kubectl create -f sample-input/storage-class-basic-csi.yaml
 ----
 . 이제 Kubernetes와 Trident 모두에서 * BASIC-CSI * 스토리지 클래스가 표시되고 Trident는 백엔드에서 풀을 검색해야 합니다.
 +
-[listing]
+[source, console]
 ----
 kubectl get sc basic-csi
+----
+
+
+[listing]
+----
 NAME         PROVISIONER             AGE
 basic-csi    csi.trident.netapp.io   15h
-
+----
+[source, console]
+----
 ./tridentctl -n trident get storageclass basic-csi -o json
+----
+[source, json]
+----
 {
   "items": [
     {
@@ -81,8 +91,6 @@ basic-csi    csi.trident.netapp.io   15h
   ]
 }
 ----
-
-
 
 
 === 보관 클래스 샘플

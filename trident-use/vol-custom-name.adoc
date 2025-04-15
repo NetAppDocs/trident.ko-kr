@@ -48,25 +48,7 @@ Trident를 사용하면 생성한 볼륨에 의미 있는 이름과 레이블을
 사용자 지정 이름 템플릿은 루트 및/또는 풀 레벨에서 정의할 수 있습니다.
 
 .루트 수준의 예
-[listing]
-----
-{
-"version": 1,
-"storageDriverName": "ontap-nas",
-"backendName": "ontap-nfs-backend",
-"managementLIF": "<ip address>",
-"svm": "svm0",
-"username": "<admin>",
-"password": "<password>",
-"defaults": {
-    "nameTemplate": "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.volume.RequestName}}"
-},
-"labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
-}
-
-----
-.풀 레벨 예
-[listing]
+[source, json]
 ----
 {
   "version": 1,
@@ -74,24 +56,48 @@ Trident를 사용하면 생성한 볼륨에 의미 있는 이름과 레이블을
   "backendName": "ontap-nfs-backend",
   "managementLIF": "<ip address>",
   "svm": "svm0",
- "username": "<admin>",
+  "username": "<admin>",
+  "password": "<password>",
+  "defaults": {
+    "nameTemplate": "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.volume.RequestName}}"
+  },
+  "labels": {
+    "cluster": "ClusterA",
+    "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"
+  }
+}
+----
+.풀 레벨 예
+[source, json]
+----
+{
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "backendName": "ontap-nfs-backend",
+  "managementLIF": "<ip address>",
+  "svm": "svm0",
+  "username": "<admin>",
   "password": "<password>",
   "useREST": true,
   "storage": [
-  {
-      "labels":{"labelname":"label1", "name": "{{ .volume.Name }}"},
-      "defaults":
-      {
-          "nameTemplate": "pool01_{{ .volume.Name }}_{{ .labels.cluster }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
+    {
+      "labels": {
+        "labelname": "label1",
+        "name": "{{ .volume.Name }}"
+      },
+      "defaults": {
+        "nameTemplate": "pool01_{{ .volume.Name }}_{{ .labels.cluster }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
       }
-   },
-  {
-      "labels":{"cluster":"label2", "name": "{{ .volume.Name }}"},
-      "defaults":
-      {
-          "nameTemplate": "pool02_{{ .volume.Name }}_{{ .labels.cluster }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
+    },
+    {
+      "labels": {
+        "cluster": "label2",
+        "name": "{{ .volume.Name }}"
+      },
+      "defaults": {
+        "nameTemplate": "pool02_{{ .volume.Name }}_{{ .labels.cluster }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
       }
-}
+    }
   ]
 }
 ----

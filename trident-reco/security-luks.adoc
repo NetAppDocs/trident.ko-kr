@@ -38,28 +38,34 @@ ONTAP SAN 및 ONTAP SAN 이코노미 볼륨에 대해 Linux 통합 키 설정(LU
 .단계
 . 백엔드 구성에서 LUKS 암호화 속성을 정의합니다. ONTAP SAN의 백엔드 구성 옵션에 대한 자세한 내용은 을 참조하십시오 link:../trident-use/ontap-san-examples.html["ONTAP SAN 구성 옵션"].
 +
-[listing]
+[source, json]
 ----
-"storage": [
+{
+  "storage": [
     {
-        "labels":{"luks": "true"},
-        "zone":"us_east_1a",
-        "defaults": {
-            "luksEncryption": "true"
-        }
+      "labels": {
+        "luks": "true"
+      },
+      "zone": "us_east_1a",
+      "defaults": {
+        "luksEncryption": "true"
+      }
     },
     {
-        "labels":{"luks": "false"},
-        "zone":"us_east_1a",
-        "defaults": {
-            "luksEncryption": "false"
-        }
-    },
-]
+      "labels": {
+        "luks": "false"
+      },
+      "zone": "us_east_1a",
+      "defaults": {
+        "luksEncryption": "false"
+      }
+    }
+  ]
+}
 ----
 . 사용 `parameters.selector` LUKS 암호화를 사용하여 스토리지 풀을 정의합니다. 예를 들면 다음과 같습니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -73,7 +79,7 @@ parameters:
 ----
 . LUKS 암호를 포함하는 암호를 생성합니다. 예를 들면 다음과 같습니다.
 +
-[listing]
+[source, yaml]
 ----
 kubectl -n trident create -f luks-pvc1.yaml
 apiVersion: v1
@@ -98,7 +104,7 @@ LUKS - 암호화된 볼륨은 ONTAP 중복 제거 및 압축을 활용할 수 �
 
 LUKS 볼륨을 가져오려면 백엔드에서 로(`true` 설정해야 `luksEncryption` 합니다. 이 `luksEncryption` 옵션은 볼륨이 LUKS 호환(`true`) 또는 LUKS 규격이 아닌 경우 Trident에 지시합니다.(`false`
 
-[listing]
+[source, yaml]
 ----
 version: 1
 storageDriverName: ontap-san
@@ -119,7 +125,7 @@ defaults:
 
 LUKS 볼륨을 동적으로 가져오려면 `trident.netapp.io/luksEncryption` `true` 이 예제에 표시된 대로 주석을 로 설정하고 PVC에 LUKS 사용 스토리지 클래스를 포함합니다.
 
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -155,7 +161,7 @@ LUKS 암호 회전은 새 LUKS 암호를 지정한 후 볼륨을 마운트하는
 .단계
 . 를 추가합니다 `node-publish-secret-name` 및 `node-publish-secret-namespace` StorageClass 매개 변수입니다. 예를 들면 다음과 같습니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -190,7 +196,7 @@ GET http://127.0.0.1:8000/trident/v1/volume/<volumeID>/<snapshotID>
 ----
 . 볼륨에 대한 LUKS 암호를 업데이트하여 새 암호 및 이전 암호 문구를 지정합니다. 확인합니다  `previous-luke-passphrase-name` 및 `previous-luks-passphrase` 이전 패스프레이즈를 일치시킵니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: v1
 kind: Secret
@@ -240,7 +246,7 @@ LUKS 암호화 볼륨에서 볼륨 확장을 활성화할 수 있습니다.
 . 를 활성화합니다 `CSINodeExpandSecret` 기능 게이트(베타 1.25+). 을 참조하십시오 link:https://kubernetes.io/blog/2022/09/21/kubernetes-1-25-use-secrets-while-expanding-csi-volumes-on-node-alpha/["Kubernetes 1.25: CSI 볼륨의 노드 기반 확장에 비밀을 사용합니다"^] 를 참조하십시오.
 . 를 추가합니다 `node-expand-secret-name` 및 `node-expand-secret-namespace` StorageClass 매개 변수입니다. 예를 들면 다음과 같습니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass

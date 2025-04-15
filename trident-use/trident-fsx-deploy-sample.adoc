@@ -25,7 +25,7 @@ kubectl create -f pv-pod.yaml
 다음 예는 PVC를 포드에 부착하기 위한 기본 구성을 보여줍니다. * 기본 구성 *:
 
 +
-[source, console]
+[source, yaml]
 ----
 kind: Pod
 apiVersion: v1

@@ -34,7 +34,7 @@ Trident 설치 시 ONTAP NAS 드라이버를 생성하고 사용하는 방법에
 | 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + "_" + dataLIF 
 
 
-| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소 정규화된 도메인 이름(FQDN)을 지정할 수 있습니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 과 같이 대괄호로 정의해야 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` 합니다. 원활한 MetroCluster 전환은 를 <<mcc-best>>참조하십시오. | “10.0.0.1”, “[2001:1234:ABCD::fee]” 
+| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소 정규화된 도메인 이름(FQDN)을 지정할 수 있습니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 과 같이 대괄호로 정의해야 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` 합니다. 원활한 MetroCluster 전환은 를 <<mcc-best>>참조하십시오. | "10.0.0.1"," [2001:1234:ABCD::fefe]" 
 
 
 | 다타LIF | 프로토콜 LIF의 IP 주소입니다. NetApp에서는 을 지정할 것을 `dataLIF` 권장합니다. 제공되지 않는 경우 Trident는 SVM에서 데이터 LIF를 가져옵니다. NFS 마운트 작업에 사용할 FQDN(정규화된 도메인 이름)을 지정할 수 있습니다. 이렇게 하면 라운드 로빈 DNS를 생성하여 여러 데이터 LIF의 로드 밸런싱을 수행할 수 있습니다. 초기 설정 후에 변경할 수 있습니다. 을 참조하십시오. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 과 같이 대괄호로 정의해야 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` 합니다. * MetroCluster의 경우 생략합니다. * 를 <<mcc-best>>참조하십시오. | 지정되지 않은 경우 SVM에서 지정 주소 또는 파생(권장하지 않음) 
@@ -187,7 +187,7 @@ NOTE: Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 �
 
 다음은 기본값이 정의된 예입니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -212,8 +212,7 @@ defaults:
   qosPolicy: premium
   exportPolicy: myk8scluster
   snapshotPolicy: default
-  snapshotReserve: '10'
-
+  snapshotReserve: "10"
 ----
 및 `ontap-nas-flexgroups` 의 경우 `ontap-nas` Trident는 이제 새로운 계산을 사용하여 FlexVol의 크기가 snapshotReserve 비율 및 PVC로 올바르게 지정되도록 합니다. 사용자가 PVC를 요청하면 Trident는 새 계산을 사용하여 더 많은 공간을 가진 원래 FlexVol를 생성합니다. 이 계산을 통해 사용자는 PVC에서 요청한 쓰기 가능 공간을 확보할 수 있으며 요청된 공간보다 적은 공간을 확보할 수 있습니다. v21.07 이전에는 사용자가 스냅샷 보존 공간을 50%로 하여 PVC(예: 5GiB)를 요청할 때 쓰기 가능한 공간은 2.5GiB에 불과합니다. 이는 사용자가 요청한 볼륨이 전체 볼륨에 해당하고 그 비율이기 `snapshotReserve` 때문입니다. Trident 21.07에서 사용자가 요청하는 것은 쓰기 가능 공간이며 Trident는 이 `snapshotReserve` 수를 전체 볼륨의 백분율로 정의합니다. 에는 적용되지 `ontap-nas-economy` 않습니다. 이 작동 방식을 보려면 다음 예를 참조하십시오.
 
@@ -241,7 +240,7 @@ NOTE: Trident가 있는 NetApp ONTAP에서 Amazon FSx를 사용하는 경우 IP 
 .ONTAP NAS 경제도 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -256,7 +255,7 @@ password: password
 .ONTAP NAS FlexGroup 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -275,7 +274,7 @@ password: password
 
 원활한 스위치오버 및 스위치백의 경우 를 사용하여 SVM을 지정합니다 `managementLIF` 를 생략합니다 `dataLIF` 및 `svm` 매개 변수. 예를 들면 다음과 같습니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -288,9 +287,8 @@ password: password
 .SMB 볼륨의 예입니다
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
-
 ---
 version: 1
 backendName: ExampleBackend
@@ -310,7 +308,7 @@ password: password
 ====
 이는 최소 백엔드 구성의 예입니다. `clientCertificate`, `clientPrivateKey`, 및 `trustedCACertificate` (신뢰할 수 있는 CA를 사용하는 경우 선택 사항)는 에 채워집니다 `backend.json` 그리고 각각 클라이언트 인증서, 개인 키 및 신뢰할 수 있는 CA 인증서의 base64로 인코딩된 값을 사용합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -330,7 +328,7 @@ storagePrefix: myPrefix_
 ====
 이 예에서는 Trident에서 동적 엑스포트 정책을 사용하여 엑스포트 정책을 자동으로 생성 및 관리하도록 하는 방법을 보여 줍니다. 및 `ontap-nas-flexgroup` 드라이버에도 동일하게 `ontap-nas-economy` 작동합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -354,7 +352,7 @@ nfsMountOptions: nfsvers=4
 ====
 이 예에서는 를 보여 줍니다 `managementLIF` IPv6 주소 사용.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -374,7 +372,7 @@ password: password
 ====
 를 클릭합니다 `smbShare` SMB 볼륨을 사용하는 ONTAP용 FSx에 매개 변수가 필요합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -394,7 +392,7 @@ storagePrefix: myPrefix_
 .nameTemplate이 포함된 백엔드 구성 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -404,10 +402,12 @@ managementLIF: <ip address>
 svm: svm0
 username: <admin>
 password: <password>
-defaults: {
-    "nameTemplate": "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.volume.RequestName}}"
-},
-"labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
+defaults:
+  nameTemplate: "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.vo\
+    lume.RequestName}}"
+labels:
+  cluster: ClusterA
+  PVC: "{{.volume.Namespace}}_{{.volume.RequestName}}"
 ----
 ====
 
@@ -423,7 +423,7 @@ Trident는 "Comments" 필드에 프로비저닝 레이블을 설정합니다. �
 .ONTAP NAS의 예
 [%collapsible%open]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -435,60 +435,61 @@ password: <password>
 nfsMountOptions: nfsvers=4
 defaults:
   spaceReserve: none
-  encryption: 'false'
+  encryption: "false"
   qosPolicy: standard
 labels:
   store: nas_store
   k8scluster: prod-cluster-1
 region: us_east_1
 storage:
-- labels:
-    app: msoffice
-    cost: '100'
-  zone: us_east_1a
-  defaults:
-    spaceReserve: volume
-    encryption: 'true'
-    unixPermissions: '0755'
-    adaptiveQosPolicy: adaptive-premium
-- labels:
-    app: slack
-    cost: '75'
-  zone: us_east_1b
-  defaults:
-    spaceReserve: none
-    encryption: 'true'
-    unixPermissions: '0755'
-- labels:
-    department: legal
-    creditpoints: '5000'
-  zone: us_east_1b
-  defaults:
-    spaceReserve: none
-    encryption: 'true'
-    unixPermissions: '0755'
-- labels:
-    app: wordpress
-    cost: '50'
-  zone: us_east_1c
-  defaults:
-    spaceReserve: none
-    encryption: 'true'
-    unixPermissions: '0775'
-- labels:
-    app: mysqldb
-    cost: '25'
-  zone: us_east_1d
-  defaults:
-    spaceReserve: volume
-    encryption: 'false'
-    unixPermissions: '0775'
+  - labels:
+      app: msoffice
+      cost: "100"
+    zone: us_east_1a
+    defaults:
+      spaceReserve: volume
+      encryption: "true"
+      unixPermissions: "0755"
+      adaptiveQosPolicy: adaptive-premium
+  - labels:
+      app: slack
+      cost: "75"
+    zone: us_east_1b
+    defaults:
+      spaceReserve: none
+      encryption: "true"
+      unixPermissions: "0755"
+  - labels:
+      department: legal
+      creditpoints: "5000"
+    zone: us_east_1b
+    defaults:
+      spaceReserve: none
+      encryption: "true"
+      unixPermissions: "0755"
+  - labels:
+      app: wordpress
+      cost: "50"
+    zone: us_east_1c
+    defaults:
+      spaceReserve: none
+      encryption: "true"
+      unixPermissions: "0775"
+  - labels:
+      app: mysqldb
+      cost: "25"
+    zone: us_east_1d
+    defaults:
+      spaceReserve: volume
+      encryption: "false"
+      unixPermissions: "0775"
+
 ----
 ====
 .ONTAP NAS FlexGroup의 예
 [%collapsible%open]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -499,50 +500,51 @@ username: vsadmin
 password: <password>
 defaults:
   spaceReserve: none
-  encryption: 'false'
+  encryption: "false"
 labels:
   store: flexgroup_store
   k8scluster: prod-cluster-1
 region: us_east_1
 storage:
-- labels:
-    protection: gold
-    creditpoints: '50000'
-  zone: us_east_1a
-  defaults:
-    spaceReserve: volume
-    encryption: 'true'
-    unixPermissions: '0755'
-- labels:
-    protection: gold
-    creditpoints: '30000'
-  zone: us_east_1b
-  defaults:
-    spaceReserve: none
-    encryption: 'true'
-    unixPermissions: '0755'
-- labels:
-    protection: silver
-    creditpoints: '20000'
-  zone: us_east_1c
-  defaults:
-    spaceReserve: none
-    encryption: 'true'
-    unixPermissions: '0775'
-- labels:
-    protection: bronze
-    creditpoints: '10000'
-  zone: us_east_1d
-  defaults:
-    spaceReserve: volume
-    encryption: 'false'
-    unixPermissions: '0775'
+  - labels:
+      protection: gold
+      creditpoints: "50000"
+    zone: us_east_1a
+    defaults:
+      spaceReserve: volume
+      encryption: "true"
+      unixPermissions: "0755"
+  - labels:
+      protection: gold
+      creditpoints: "30000"
+    zone: us_east_1b
+    defaults:
+      spaceReserve: none
+      encryption: "true"
+      unixPermissions: "0755"
+  - labels:
+      protection: silver
+      creditpoints: "20000"
+    zone: us_east_1c
+    defaults:
+      spaceReserve: none
+      encryption: "true"
+      unixPermissions: "0775"
+  - labels:
+      protection: bronze
+      creditpoints: "10000"
+    zone: us_east_1d
+    defaults:
+      spaceReserve: volume
+      encryption: "false"
+      unixPermissions: "0775"
+
 ----
 ====
 .ONTAP NAS 경제도 예
 [%collapsible%open]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -553,43 +555,44 @@ username: vsadmin
 password: <password>
 defaults:
   spaceReserve: none
-  encryption: 'false'
+  encryption: "false"
 labels:
   store: nas_economy_store
 region: us_east_1
 storage:
-- labels:
-    department: finance
-    creditpoints: '6000'
-  zone: us_east_1a
-  defaults:
-    spaceReserve: volume
-    encryption: 'true'
-    unixPermissions: '0755'
-- labels:
-    protection: bronze
-    creditpoints: '5000'
-  zone: us_east_1b
-  defaults:
-    spaceReserve: none
-    encryption: 'true'
-    unixPermissions: '0755'
-- labels:
-    department: engineering
-    creditpoints: '3000'
-  zone: us_east_1c
-  defaults:
-    spaceReserve: none
-    encryption: 'true'
-    unixPermissions: '0775'
-- labels:
-    department: humanresource
-    creditpoints: '2000'
-  zone: us_east_1d
-  defaults:
-    spaceReserve: volume
-    encryption: 'false'
-    unixPermissions: '0775'
+  - labels:
+      department: finance
+      creditpoints: "6000"
+    zone: us_east_1a
+    defaults:
+      spaceReserve: volume
+      encryption: "true"
+      unixPermissions: "0755"
+  - labels:
+      protection: bronze
+      creditpoints: "5000"
+    zone: us_east_1b
+    defaults:
+      spaceReserve: none
+      encryption: "true"
+      unixPermissions: "0755"
+  - labels:
+      department: engineering
+      creditpoints: "3000"
+    zone: us_east_1c
+    defaults:
+      spaceReserve: none
+      encryption: "true"
+      unixPermissions: "0775"
+  - labels:
+      department: humanresource
+      creditpoints: "2000"
+    zone: us_east_1d
+    defaults:
+      spaceReserve: volume
+      encryption: "false"
+      unixPermissions: "0775"
+
 ----
 ====
 
@@ -600,7 +603,7 @@ storage:
 
 * 를 클릭합니다 `protection-gold` StorageClass는 의 첫 번째 및 두 번째 가상 풀에 매핑됩니다 `ontap-nas-flexgroup` 백엔드. 골드 레벨 보호 기능을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -613,7 +616,7 @@ parameters:
 ----
 * 를 클릭합니다 `protection-not-gold` StorageClass는 의 세 번째 및 네 번째 가상 풀에 매핑됩니다 `ontap-nas-flexgroup` 백엔드. 금 이외의 보호 수준을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -626,7 +629,7 @@ parameters:
 ----
 * 를 클릭합니다 `app-mysqldb` StorageClass는 의 네 번째 가상 풀에 매핑됩니다 `ontap-nas` 백엔드. mysqldb 유형 앱에 대한 스토리지 풀 구성을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -639,7 +642,7 @@ parameters:
 ----
 * 를 누릅니다 `protection-silver-creditpoints-20k` StorageClass는 의 세 번째 가상 풀에 매핑됩니다 `ontap-nas-flexgroup` 백엔드. 실버 레벨 보호 및 20,000포인트 적립을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -652,7 +655,7 @@ parameters:
 ----
 * 를 클릭합니다 `creditpoints-5k` StorageClass는 의 세 번째 가상 풀에 매핑됩니다 `ontap-nas` 의 백엔드 및 두 번째 가상 풀입니다 `ontap-nas-economy` 백엔드. 5000 크레딧 포인트를 보유한 유일한 풀 서비스입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass

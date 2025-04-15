@@ -21,7 +21,7 @@ Trident를 배포하기 전에 호스트에 필요한 프로토콜 사전 요구
 * 배포가 모든 를 충족하는지 확인합니다 link:../trident-get-started/requirements.html["요구 사항"].
 * 지원되는 버전의 Docker가 설치되어 있는지 확인합니다. Docker 버전이 오래되었으면 https://docs.docker.com/engine/install/["설치 또는 업데이트합니다"^].
 +
-[listing]
+[source, console]
 ----
 docker --version
 ----
@@ -38,14 +38,14 @@ docker --version
 ====
 .RHEL 8+
 --
-[listing]
+[source, console]
 ----
 sudo yum install -y nfs-utils
 ----
 --
 .우분투
 --
-[listing]
+[source, console]
 ----
 sudo apt-get install -y nfs-common
 ----
@@ -66,25 +66,25 @@ WARNING: 볼륨에 연결할 때 오류가 발생하지 않도록 NFS 툴을 설
 --
 . 다음 시스템 패키지를 설치합니다.
 +
-[listing]
+[source, console]
 ----
 sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
 ----
 . iscsi-initiator-utils 버전이 6.2.0.874-2.el7 이상인지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 rpm -q iscsi-initiator-utils
 ----
 . 스캔을 수동으로 설정합니다.
 +
-[listing]
+[source, console]
 ----
 sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . 다중 경로 설정:
 +
-[listing]
+[source, console]
 ----
 sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
@@ -94,13 +94,13 @@ NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어
 
 . iscsid와 multipathd가 실행 중인지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now iscsid multipathd
 ----
 . "iSCSI" 활성화 및 시작:
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now iscsi
 ----
@@ -111,25 +111,25 @@ sudo systemctl enable --now iscsi
 --
 . 다음 시스템 패키지를 설치합니다.
 +
-[listing]
+[source, console]
 ----
 sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
 ----
 . open-iscsi 버전이 2.0.874-5ubuntu2.10 이상(bionic) 또는 2.0.874-7.1uubuttu6.1 이상(focal)인지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 dpkg -l open-iscsi
 ----
 . 스캔을 수동으로 설정합니다.
 +
-[listing]
+[source, console]
 ----
 sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . 다중 경로 설정:
 +
-[listing]
+[source, console]
 ----
 sudo tee /etc/multipath.conf <<-EOF
 defaults {
@@ -146,7 +146,7 @@ NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어
 
 . 'open-iscsi'와 'multirpath-tools'가 활성화되어 실행되고 있는지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 sudo systemctl status multipath-tools
 sudo systemctl enable --now open-iscsi.service
@@ -173,7 +173,7 @@ sudo systemctl status open-iscsi
 ====
 .RHEL 9 를 참조하십시오
 --
-[listing]
+[source, console]
 ----
 sudo yum install nvme-cli
 sudo yum install linux-modules-extra-$(uname -r)
@@ -182,7 +182,7 @@ sudo modprobe nvme-tcp
 --
 .우분투
 --
-[listing]
+[source, console]
 ----
 sudo apt install nvme-cli
 sudo apt -y install linux-modules-extra-$(uname -r)
@@ -205,13 +205,13 @@ sudo modprobe nvme-tcp
 --
 . 다음 시스템 패키지를 설치합니다.
 +
-[listing]
+[source, console]
 ----
 sudo yum install -y lsscsi device-mapper-multipath
 ----
 . 다중 경로 설정:
 +
-[listing]
+[source, console]
 ----
 sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
@@ -221,7 +221,7 @@ NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어
 
 . 가 `multipathd` 실행 중인지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now multipathd
 ----
@@ -232,13 +232,13 @@ sudo systemctl enable --now multipathd
 --
 . 다음 시스템 패키지를 설치합니다.
 +
-[listing]
+[source, console]
 ----
 sudo apt-get install -y lsscsi sg3-utils multipath-tools scsitools
 ----
 . 다중 경로 설정:
 +
-[listing]
+[source, console]
 ----
 sudo tee /etc/multipath.conf <<-EOF
 defaults {
@@ -255,7 +255,7 @@ NOTE: etc/multipath.conf에 debrofs 아래에 find_multiprohs no가 포함되어
 
 . 가 활성화되어 있고 실행 중인지 `multipath-tools` 확인합니다.
 +
-[listing]
+[source, console]
 ----
 sudo systemctl status multipath-tools
 ----

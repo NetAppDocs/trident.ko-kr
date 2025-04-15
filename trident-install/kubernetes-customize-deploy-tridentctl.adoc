@@ -40,7 +40,7 @@ kubelet이 평소 하던 /var/lib/kubelet가 아닌 다른 경로에 데이터�
 
 이러한 파일을 생성한 후 필요에 따라 수정한 다음 '--use-custom-YAML'을 사용하여 사용자 지정 배포를 설치할 수 있습니다.
 
-[listing]
+[source, console]
 ----
 ./tridentctl install -n trident --use-custom-yaml
 ----

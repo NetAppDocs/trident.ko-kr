@@ -31,10 +31,10 @@ Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십시오. �
 | 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다 | `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `ontap-san`, `ontap-san-economy` 
 
 
-| 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + “_” + dataLIF 
+| 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + "_" + dataLIF 
 
 
-| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소 정규화된 도메인 이름(FQDN)을 지정할 수 있습니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]). | “10.0.0.1”, “[2001:1234:ABCD::fee]” 
+| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소 정규화된 도메인 이름(FQDN)을 지정할 수 있습니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]). | "10.0.0.1"," [2001:1234:ABCD::fefe]" 
 
 
 | 다타LIF | 프로토콜 LIF의 IP 주소입니다. * ONTAP NAS 드라이버 *: NetApp는 dataLIF를 지정할 것을 권장합니다. 제공되지 않는 경우 Trident는 SVM에서 데이터 LIF를 가져옵니다. NFS 마운트 작업에 사용할 FQDN(정규화된 도메인 이름)을 지정할 수 있습니다. 이렇게 하면 라운드 로빈 DNS를 생성하여 여러 데이터 LIF의 로드 밸런싱을 수행할 수 있습니다. 초기 설정 후에 변경할 수 있습니다. 을 참조하십시오. * ONTAP SAN 드라이버 *: iSCSI에 대해 지정하지 마십시오. Trident는 ONTAP 선택적 LUN 맵을 사용하여 다중 경로 세션을 설정하는 데 필요한 iSCI LIF를 검색합니다. 데이터 LIF가 명시적으로 정의되어 있으면 경고가 생성됩니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]). |  
@@ -43,7 +43,7 @@ Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십시오. �
 | 자동 내보내기 정책 | 자동 엑스포트 정책 생성 및 업데이트 [Boolean] 활성화 Trident는 및 `autoExportCIDRs` 옵션을 사용하여 `autoExportPolicy` 엑스포트 정책을 자동으로 관리할 수 있습니다. | 거짓입니다 
 
 
-| 자동 내보내기 | 이 설정된 경우에 대해 Kubernetes 노드 IP를 필터링하는 CIDR `autoExportPolicy` 목록입니다. Trident는 및 `autoExportCIDRs` 옵션을 사용하여 `autoExportPolicy` 엑스포트 정책을 자동으로 관리할 수 있습니다. | "["0.0.0.0/0", "::/0"]" 
+| 자동 내보내기 | 이 설정된 경우에 대해 Kubernetes 노드 IP를 필터링하는 CIDR `autoExportPolicy` 목록입니다. Trident는 및 `autoExportCIDRs` 옵션을 사용하여 `autoExportPolicy` 엑스포트 정책을 자동으로 관리할 수 있습니다. | "["0.0.0.0/0",":/0"]" 
 
 
 | '라벨' | 볼륨에 적용할 임의의 JSON 형식 레이블 세트입니다 | "" 
@@ -73,13 +73,15 @@ Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십시오. �
 | 제한선태사용법 | * NetApp ONTAP * 용 아마존 FSx에 대해서는 지정하지 마십시오 제공된 및 `vsadmin` 에는 `fsxadmin` 애그리게이트 사용량을 검색하고 Trident를 사용하여 제한하는 데 필요한 권한이 포함되어 있지 않습니다. | 사용하지 마십시오. 
 
 
-| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에서 관리하는 볼륨의 최대 크기를 제한하고, `qtreesPerFlexvol` 옵션을 통해 FlexVol volume당 최대 qtree 수를 사용자 지정할 수 있습니다 | “”(기본적으로 적용되지 않음) 
+| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에서 관리하는 볼륨의 최대 크기를 제한하고, `qtreesPerFlexvol` 옵션을 통해 FlexVol volume당 최대 qtree 수를 사용자 지정할 수 있습니다 | ""(기본적으로 적용되지 않음) 
 
 
 | '오만유연한' | FlexVol당 최대 LUN 수는 [50, 200] 범위 내에 있어야 합니다. SAN만 해당. | `100` 
 
 
-| debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: {“api”:false, “method”:true} 사용하지 마십시오 `debugTraceFlags` 문제 해결 및 자세한 로그 덤프가 필요한 경우를 제외하고 | null입니다 
+| debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: {"api":false, "method":true}
+
+사용하지 마십시오 `debugTraceFlags` 문제 해결 및 자세한 로그 덤프가 필요한 경우를 제외하고 | null입니다 
 
 
 | nfsMountOptions를 선택합니다 | 쉼표로 구분된 NFS 마운트 옵션 목록입니다. Kubernetes 영구 볼륨의 마운트 옵션은 일반적으로 스토리지 클래스에 지정되어 있지만, 스토리지 클래스에 마운트 옵션이 지정되지 않은 경우 Trident는 스토리지 백엔드의 구성 파일에 지정된 마운트 옵션을 사용하도록 폴백합니다. 스토리지 클래스 또는 구성 파일에 마운트 옵션이 지정되지 않은 경우 Trident는 연결된 영구 볼륨에 마운트 옵션을 설정하지 않습니다. | "" 
@@ -145,13 +147,13 @@ NOTE: PVC가 하나 또는 여러 개의 Pod에 연결된 경우, 새로운 데�
 | 냅샷정책 | 사용할 스냅샷 정책입니다 | "없음" 
 
 
-| "qosPolicy" | 생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다. | “” 
+| "qosPolicy" | 생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다. | "" 
 
 
-| 적응성 QosPolicy | 생성된 볼륨에 할당할 적응형 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. ONTAP에서 지원되지 않음 - NAS - 이코노미 | “” 
+| 적응성 QosPolicy | 생성된 볼륨에 할당할 적응형 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. ONTAP에서 지원되지 않음 - NAS - 이코노미 | "" 
 
 
-| 안산예비역 | 스냅샷 "0"에 예약된 볼륨의 백분율 | If(경우 `snapshotPolicy` 있습니다 `none`, `else` “” 
+| 안산예비역 | 스냅샷 "0"에 대해 예약된 볼륨의 백분율 |  `snapshotPolicy` `none`있다면, `else`"" 
 
 
 | 'plitOnClone'을 선택합니다 | 생성 시 상위 클론에서 클론을 분할합니다 | 거짓입니다 
@@ -180,7 +182,7 @@ NOTE: PVC가 하나 또는 여러 개의 Pod에 연결된 경우, 새로운 데�
 ====
 사용 `nasType`, `node-stage-secret-name`, 및 `node-stage-secret-namespace`, SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다. SMB 볼륨은 를 사용하여 지원됩니다 `ontap-nas` 드라이버만 해당.
 
-[source, console]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -197,7 +199,7 @@ parameters:
 .Secrets Manager가 포함된 AWS FSx for ONTAP에 대한 구성
 [%collapsible]
 ====
-[source, console]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig

@@ -29,20 +29,20 @@ NOTE: 기존 데몬 메서드에서 Trident pre Docker 1.13/17.03을 사용한 �
 
 . 실행 중인 모든 인스턴스 중지:
 +
-[listing]
+[source, console]
 ----
 pkill /usr/local/bin/netappdvp
 pkill /usr/local/bin/trident
 ----
 . Docker를 다시 시작합니다.
 +
-[listing]
+[source, console]
 ----
 systemctl restart docker
 ----
 . Docker Engine 17.03(새로운 1.13) 이상이 설치되어 있는지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 docker --version
 ----
@@ -60,24 +60,28 @@ docker --version
 +
 ... 구성 파일의 위치를 생성합니다.
 +
-[listing]
+[source, console]
 ----
 sudo mkdir -p /etc/netappdvp
 ----
 ... 구성 파일을 생성합니다.
 +
-[listing]
+[source, console]
 ----
 cat << EOF > /etc/netappdvp/config.json
+----
++
+[source, json]
+----
 {
-    "version": 1,
-    "storageDriverName": "ontap-nas",
-    "managementLIF": "10.0.0.1",
-    "dataLIF": "10.0.0.2",
-    "svm": "svm_nfs",
-    "username": "vsadmin",
-    "password": "password",
-    "aggregate": "aggr1"
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "vsadmin",
+  "password": "password",
+  "aggregate": "aggr1"
 }
 EOF
 ----
@@ -87,7 +91,7 @@ EOF
 
 . 관리되는 플러그인 시스템을 사용하여 Trident를 시작합니다.  `<version>`사용 중인 플러그인 버전(xxx.xx.x)으로 바꿉니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin install --grant-all-permissions --alias netapp netapp/trident-plugin:<version> config=myConfigFile.json
 ----
@@ -95,19 +99,19 @@ docker plugin install --grant-all-permissions --alias netapp netapp/trident-plug
 +
 .. "firstVolume"이라는 이름의 볼륨을 생성합니다.
 +
-[listing]
+[source, console]
 ----
 docker volume create -d netapp --name firstVolume
 ----
 .. 컨테이너가 시작될 때 기본 볼륨을 생성합니다.
 +
-[listing]
+[source, console]
 ----
 docker run --rm -it --volume-driver netapp --volume secondVolume:/my_vol alpine ash
 ----
 .. "firstVolume" 볼륨을 제거합니다.
 +
-[listing]
+[source, console]
 ----
 docker volume rm firstVolume
 ----
@@ -122,7 +126,7 @@ docker volume rm firstVolume
 .시작하기 전에
 . Docker 버전 1.10 이상이 설치되어 있는지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 docker --version
 ----
@@ -130,7 +134,7 @@ docker --version
 버전이 최신 버전이 아니면 설치를 업데이트하십시오.
 
 +
-[listing]
+[source, console]
 ----
 curl -fsSL https://get.docker.com/ | sh
 ----
@@ -145,14 +149,14 @@ curl -fsSL https://get.docker.com/ | sh
 +
 .. 응용 프로그램 다운로드 및 압축 풀기:
 +
-[listing]
+[source, console]
 ----
 wget https://github.com/NetApp/trident/releases/download/v25.02.0/trident-installer-25.02.0.tar.gz
 tar zxf trident-installer-25.02.0.tar.gz
 ----
 .. 용지함 경로의 위치로 이동:
 +
-[listing]
+[source, console]
 ----
 sudo mv trident-installer/extras/bin/trident /usr/local/bin/
 sudo chown root:root /usr/local/bin/trident
@@ -160,24 +164,28 @@ sudo chmod 755 /usr/local/bin/trident
 ----
 .. 구성 파일의 위치를 생성합니다.
 +
-[listing]
+[source, console]
 ----
 sudo mkdir -p /etc/netappdvp
 ----
 .. 구성 파일을 생성합니다.
 +
-[listing]
+[source, console]
 ----
 cat << EOF > /etc/netappdvp/ontap-nas.json
+----
++
+[source, json]
+----
 {
-    "version": 1,
-    "storageDriverName": "ontap-nas",
-    "managementLIF": "10.0.0.1",
-    "dataLIF": "10.0.0.2",
-    "svm": "svm_nfs",
-    "username": "vsadmin",
-    "password": "password",
-    "aggregate": "aggr1"
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "vsadmin",
+  "password": "password",
+  "aggregate": "aggr1"
 }
 EOF
 ----
@@ -185,7 +193,7 @@ EOF
 
 . 바이너리를 배치하고 구성 파일을 생성한 후 원하는 구성 파일을 사용하여 Trident 데몬을 시작합니다.
 +
-[listing]
+[source, console]
 ----
 sudo trident --config=/etc/netappdvp/ontap-nas.json
 ----
@@ -194,25 +202,29 @@ sudo trident --config=/etc/netappdvp/ontap-nas.json
 NOTE: 지정되지 않은 경우 볼륨 드라이버의 기본 이름은 "NetApp"입니다.
 
 +
-데몬이 시작된 후에는 Docker CLI 인터페이스를 사용하여 볼륨을 생성하고 관리할 수 있습니다
+데몬을 시작한 후 Docker CLI 인터페이스를 사용하여 볼륨을 생성 및 관리할 수 있습니다.
 
 . 볼륨 생성:
 +
-[listing]
+[source, console]
 ----
 docker volume create -d netapp --name trident_1
 ----
 . 컨테이너를 시작할 때 Docker 볼륨 프로비저닝:
 +
-[listing]
+[source, console]
 ----
 docker run --rm -it --volume-driver netapp --volume trident_2:/my_vol alpine ash
 ----
 . Docker 볼륨 제거:
 +
-[listing]
+[source, console]
 ----
 docker volume rm trident_1
+----
++
+[source, console]
+----
 docker volume rm trident_2
 ----
 
@@ -228,14 +240,14 @@ docker volume rm trident_2
 실행 중인 인스턴스가 두 개 이상인 경우 단위 파일에 고유한 이름을 사용해야 합니다.
 
 +
-[listing]
+[source, console]
 ----
 cp contrib/trident.service.example /usr/lib/systemd/system/trident.service
 ----
 . 파일을 편집하고 설명(행 2)을 드라이버 이름과 구성 파일 경로(줄 9)에 맞게 변경하여 환경을 반영합니다.
 . IT 부서에서 변경 사항을 수집하도록 시스템 다시 로드:
 +
-[listing]
+[source, console]
 ----
 systemctl daemon-reload
 ----
@@ -244,19 +256,19 @@ systemctl daemon-reload
 이 이름은 '/usr/lib/systemd/system' 디렉토리에 있는 파일의 이름에 따라 달라집니다.
 
 +
-[listing]
+[source, console]
 ----
 systemctl enable trident
 ----
 . 서비스를 시작합니다.
 +
-[listing]
+[source, console]
 ----
 systemctl start trident
 ----
 . 상태를 봅니다.
 +
-[listing]
+[source, console]
 ----
 systemctl status trident
 ----

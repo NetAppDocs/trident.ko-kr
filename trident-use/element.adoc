@@ -73,10 +73,10 @@ Element 백엔드를 생성하기 전에 다음이 필요합니다.
 | '내전' |  | 항상 1 
 
 
-| 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다 | 항상 "solidfire-san" 
+| 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다 | 항상 "SolidFire-SAN" 
 
 
-| 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | “SolidFire_” + 스토리지(iSCSI) IP 주소입니다 
+| 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | "SolidFire_" + 스토리지(iSCSI) IP 주소입니다 
 
 
 | 끝점 | 테넌트 자격 증명이 있는 SolidFire 클러스터의 MVIP입니다 |  
@@ -85,28 +85,28 @@ Element 백엔드를 생성하기 전에 다음이 필요합니다.
 | 'VIP' | 스토리지(iSCSI) IP 주소 및 포트 |  
 
 
-| '라벨' | 볼륨에 적용할 임의의 JSON 형식 레이블 세트입니다. | “” 
+| '라벨' | 볼륨에 적용할 임의의 JSON 형식 레이블 세트입니다. | "" 
 
 
 | 테난트이름 | 사용할 테넌트 이름(찾을 수 없는 경우 생성됨) |  
 
 
-| 이니토IFace | iSCSI 트래픽을 특정 호스트 인터페이스로 제한합니다 | “기본값” 
+| 이니토IFace | iSCSI 트래픽을 특정 호스트 인터페이스로 제한합니다 | "기본값" 
 
 
 | 'UseCHAP'입니다 | CHAP를 사용하여 iSCSI를 인증합니다. Trident는 CHAP를 사용합니다. | 참 
 
 
-| "액세스 그룹" | 사용할 액세스 그룹 ID 목록입니다 | "트리덴트"라는 액세스 그룹의 ID를 찾습니다. 
+| "액세스 그룹" | 사용할 액세스 그룹 ID 목록입니다 | "Trident"라는 액세스 그룹의 ID를 찾습니다. 
 
 
 | '유형' | QoS 사양 |  
 
 
-| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다 | “”(기본적으로 적용되지 않음) 
+| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다 | ""(기본적으로 적용되지 않음) 
 
 
-| debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: {“api”:false, “method”:true} | null입니다 
+| debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: {"api":false, "method":true} | null입니다 
 |===
 
 WARNING: 문제 해결 및 자세한 로그 덤프가 필요한 경우가 아니면 debugTraceFlags를 사용하지 마십시오.
@@ -117,35 +117,34 @@ WARNING: 문제 해결 및 자세한 로그 덤프가 필요한 경우가 아니
 
 이 예에서는 CHAP 인증을 사용하는 백엔드 파일을 보여 주고 특정 QoS 보장을 포함하는 세 가지 볼륨 유형을 모델링합니다. 그런 다음 "IOPS" 스토리지 클래스 매개 변수를 사용하여 각 스토리지 클래스를 사용할 스토리지 클래스를 정의할 가능성이 높습니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
 storageDriverName: solidfire-san
 Endpoint: https://<user>:<password>@<mvip>/json-rpc/8.0
-SVIP: "<svip>:3260"
-TenantName: "<tenant>"
+SVIP: <svip>:3260
+TenantName: <tenant>
 labels:
   k8scluster: dev1
   backend: dev1-element-cluster
 UseCHAP: true
 Types:
-- Type: Bronze
-  Qos:
-    minIOPS: 1000
-    maxIOPS: 2000
-    burstIOPS: 4000
-- Type: Silver
-  Qos:
-    minIOPS: 4000
-    maxIOPS: 6000
-    burstIOPS: 8000
-- Type: Gold
-  Qos:
-    minIOPS: 6000
-    maxIOPS: 8000
-    burstIOPS: 10000
-
+  - Type: Bronze
+    Qos:
+      minIOPS: 1000
+      maxIOPS: 2000
+      burstIOPS: 4000
+  - Type: Silver
+    Qos:
+      minIOPS: 4000
+      maxIOPS: 6000
+      burstIOPS: 8000
+  - Type: Gold
+    Qos:
+      minIOPS: 6000
+      maxIOPS: 8000
+      burstIOPS: 10000
 ----
 
 
@@ -157,63 +156,64 @@ Trident는 용량 할당 시 스토리지 풀에 있는 레이블을 백엔드 �
 
 아래 표시된 샘플 백엔드 정의 파일에서 특정 기본값은 를 설정하는 모든 스토리지 풀에 대해 설정됩니다 `type` 실버. 가상 풀은 에 정의되어 있습니다 `storage` 섹션을 참조하십시오. 이 예에서는 일부 스토리지 풀이 자체 유형을 설정하고 일부 풀은 위에 설정된 기본값을 재정의합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
 storageDriverName: solidfire-san
 Endpoint: https://<user>:<password>@<mvip>/json-rpc/8.0
-SVIP: "<svip>:3260"
-TenantName: "<tenant>"
+SVIP: <svip>:3260
+TenantName: <tenant>
 UseCHAP: true
 Types:
-- Type: Bronze
-  Qos:
-    minIOPS: 1000
-    maxIOPS: 2000
-    burstIOPS: 4000
-- Type: Silver
-  Qos:
-    minIOPS: 4000
-    maxIOPS: 6000
-    burstIOPS: 8000
-- Type: Gold
-  Qos:
-    minIOPS: 6000
-    maxIOPS: 8000
-    burstIOPS: 10000
+  - Type: Bronze
+    Qos:
+      minIOPS: 1000
+      maxIOPS: 2000
+      burstIOPS: 4000
+  - Type: Silver
+    Qos:
+      minIOPS: 4000
+      maxIOPS: 6000
+      burstIOPS: 8000
+  - Type: Gold
+    Qos:
+      minIOPS: 6000
+      maxIOPS: 8000
+      burstIOPS: 10000
 type: Silver
 labels:
   store: solidfire
   k8scluster: dev-1-cluster
 region: us-east-1
 storage:
-- labels:
-    performance: gold
-    cost: '4'
-  zone: us-east-1a
-  type: Gold
-- labels:
-    performance: silver
-    cost: '3'
-  zone: us-east-1b
-  type: Silver
-- labels:
-    performance: bronze
-    cost: '2'
-  zone: us-east-1c
-  type: Bronze
-- labels:
-    performance: silver
-    cost: '1'
-  zone: us-east-1d
+  - labels:
+      performance: gold
+      cost: "4"
+    zone: us-east-1a
+    type: Gold
+  - labels:
+      performance: silver
+      cost: "3"
+    zone: us-east-1b
+    type: Silver
+  - labels:
+      performance: bronze
+      cost: "2"
+    zone: us-east-1c
+    type: Bronze
+  - labels:
+      performance: silver
+      cost: "1"
+    zone: us-east-1d
+
 
 ----
 다음 StorageClass 정의는 위의 가상 풀을 참조합니다. 를 사용합니다 `parameters.selector` 필드에서 각 StorageClass는 볼륨을 호스팅하는 데 사용할 수 있는 가상 풀을 호출합니다. 선택한 가상 풀에 볼륨이 정의되어 있습니다.
 
 첫 번째 StorageClass(`solidfire-gold-four`)가 첫 번째 가상 풀에 매핑됩니다. 이 수영장은 금색 연주를 제공하는 유일한 수영장입니다. `Volume Type QoS` Last StorageClass(`solidfire-silver`)는 은색 성능을 제공하는 모든 스토리지 풀을 호출합니다. Trident는 어떤 가상 풀이 선택되었는지 결정하고 스토리지 요구 사항이 충족되는지 확인합니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -221,8 +221,9 @@ metadata:
   name: solidfire-gold-four
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=gold; cost=4"
-  fsType: "ext4"
+  selector: performance=gold; cost=4
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -230,8 +231,9 @@ metadata:
   name: solidfire-silver-three
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=silver; cost=3"
-  fsType: "ext4"
+  selector: performance=silver; cost=3
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -239,8 +241,9 @@ metadata:
   name: solidfire-bronze-two
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=bronze; cost=2"
-  fsType: "ext4"
+  selector: performance=bronze; cost=2
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -248,8 +251,9 @@ metadata:
   name: solidfire-silver-one
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=silver; cost=1"
-  fsType: "ext4"
+  selector: performance=silver; cost=1
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -257,8 +261,8 @@ metadata:
   name: solidfire-silver
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=silver"
-  fsType: "ext4"
+  selector: performance=silver
+  fsType: ext4
 ----
 
 

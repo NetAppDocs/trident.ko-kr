@@ -42,6 +42,10 @@ NOTE: GKE 환경에서 필요 시 볼륨 스냅샷을 생성할 경우 스냅샷
 [listing]
 ----
 cat snap-sc.yaml
+----
++
+[source, yaml]
+----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
@@ -59,6 +63,10 @@ deletionPolicy: Delete
 [listing]
 ----
 cat snap.yaml
+----
++
+[source, yaml]
+----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -86,9 +94,7 @@ pvc1-snap              50s
 kubectl describe volumesnapshots pvc1-snap
 Name:         pvc1-snap
 Namespace:    default
-.
-.
-.
+...
 Spec:
   Snapshot Class Name:    pvc1-snap
   Snapshot Content Name:  snapcontent-e8d8a0ca-9826-11e9-9807-525400f3f660
@@ -100,8 +106,7 @@ Status:
   Creation Time:  2019-06-26T15:27:29Z
   Ready To Use:   true
   Restore Size:   3Gi
-.
-.
+...
 ----
 
 
@@ -121,6 +126,9 @@ WARNING: PVC는 소스 볼륨과 동일한 백엔드에서 생성됩니다. 을 
 [listing]
 ----
 cat pvc-from-snap.yaml
+----
+[source, yaml]
+----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -160,7 +168,7 @@ NOTE: 를 클릭합니다 `<volumeSnapshotContentName>` CR 명명 제한으로 �
 다음 예제에서는 을 만듭니다 `VolumeSnapshotContent` 백엔드 스냅샷을 참조하는 객체입니다 `snap-01`.
 
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotContent
@@ -185,7 +193,7 @@ spec:
 다음 예제에서는 을 만듭니다 `VolumeSnapshot` CR 이름 `import-snap` 을 참조합니다 `VolumeSnapshotContent` 이름 지정 `import-snap-content`.
 
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
@@ -208,7 +216,7 @@ spec:
 다음 예에서는 를 참조하는 PVC를 작성합니다 `VolumeSnapshot` 이름 지정 `import-snap`.
 
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -256,13 +264,13 @@ Trident는 `ontap-san-economy` , , `ontap-nas`, , , `ontap-nas-flexgroup` `azure
 
 * PVC 상태가 Bound인지 확인한다.
 +
-[listing]
+[source, console]
 ----
 kubectl get pvc
 ----
 * 볼륨 스냅샷을 사용할 준비가 되었는지 확인합니다.
 +
-[listing]
+[source, console]
 ----
 kubectl get vs
 ----
@@ -274,12 +282,14 @@ kubectl get vs
 
 NOTE: TASR CR은 PVC & VS가 있는 네임스페이스에 있어야 합니다.
 
-
-
-[listing]
++
+[source, console]
 ----
 cat tasr-pvc1-snapshot.yaml
-
+----
++
+[source, yaml]
+----
 apiVersion: trident.netapp.io/v1
 kind: TridentActionSnapshotRestore
 metadata:
@@ -291,10 +301,13 @@ spec:
 ----
 . CR을 적용하여 스냅샷에서 복원합니다. 이 예는 스냅샷에서 `pvc1`복구합니다.
 +
-[listing]
+[source, console]
 ----
 kubectl create -f tasr-pvc1-snapshot.yaml
-
+----
++
+[listing]
+----
 tridentactionsnapshotrestore.trident.netapp.io/trident-snap created
 ----
 
@@ -302,10 +315,12 @@ tridentactionsnapshotrestore.trident.netapp.io/trident-snap created
 .결과
 Trident는 스냅샷에서 데이터를 복원합니다. 스냅샷 복구 상태를 확인할 수 있습니다.
 
-[listing]
+[source, console]
 ----
 kubectl get tasr -o yaml
-
+----
+[source, yaml]
+----
 apiVersion: trident.netapp.io/v1
 items:
 - apiVersion: trident.netapp.io/v1
@@ -353,6 +368,10 @@ Kubernetes 배포 시 스냅샷 컨트롤러와 CRD가 포함되지 않은 경�
 [listing]
 ----
 cat snapshot-setup.sh
+----
++
+[source, sh]
+----
 #!/bin/bash
 # Create volume snapshot CRDs
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
@@ -361,9 +380,13 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
 ----
 . 스냅샷 컨트롤러를 생성합니다.
 +
-[listing]
+[source, console]
 ----
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
+----
++
+[source, console]
+----
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml
 ----
 +

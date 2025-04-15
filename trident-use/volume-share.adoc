@@ -60,7 +60,7 @@ image::cross-namespace-sharing.png[네임스페이스 간 공유의 개념적 �
 .단계
 . * 원본 네임스페이스 소유자: * PVC를 만듭니다 (`pvc1`)를 대상 네임스페이스와 공유할 수 있는 권한을 부여하는 소스 네임스페이스의 경우 (`namespace2`)를 사용합니다 `shareToNamespace` 주석.
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -92,7 +92,7 @@ Trident은 PV와 백엔드 NFS 스토리지 볼륨을 생성합니다.
 . * 클러스터 관리자: * 대상 네임스페이스 소유자에게 대상 네임스페이스에서 트리젠VolumeReference CR을 생성할 수 있는 권한을 부여하기 위해 사용자 지정 역할을 생성하고 kubecon무화하십시오.
 . * 대상 네임스페이스 소유자: * 소스 네임스페이스를 참조하는 대상 네임스페이스에서 트리젠VolumeReference CR을 만듭니다 `pvc1`.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentVolumeReference
@@ -105,7 +105,7 @@ spec:
 ----
 . * 대상 네임스페이스 소유자: * PVC를 만듭니다 (`pvc2`)를 대상 네임스페이스에서 사용합니다 (`namespace2`)를 사용합니다 `shareFromPVC` 원본 PVC를 지정하는 주석.
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1

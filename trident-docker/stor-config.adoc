@@ -134,7 +134,7 @@ ONTAP 관리 LIF의 IP 주소입니다. FQDN(정규화된 도메인 이름)을 �
 
 
 | nfsMountOptions를 선택합니다  a| 
-NFS 마운트 옵션을 세밀하게 제어합니다. 기본값은 "-o nfsvers=3"입니다. * ONTAP-NAS 및 ONTAP-NAS-이코노미 드라이버에만 사용 가능 *. https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf["NFS 호스트 구성 정보는 여기 를 참조하십시오"^].
+NFS 마운트 옵션을 세부적으로 제어하고 기본값은 "-o nfsvers=3"입니다. *및 `ontap-nas-economy` 드라이버에서만 사용 가능 `ontap-nas`*. https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf["NFS 호스트 구성 정보는 여기 를 참조하십시오"^]..
  a| 
 `-o nfsvers=4`
 
@@ -198,7 +198,7 @@ FlexVol당 최대 qtree는 범위 [50, 300]에 있어야 하며 기본값은 200
 
 
 | 안산예비역  a| 
-스냅숏 예비 공간 비율, 기본값은 ""이며 ONTAP 기본값을 사용합니다
+스냅샷 예약 비율입니다. 기본값은 ""이며 ONTAP 기본값을 적용합니다
  a| 
 `10`
 
@@ -273,12 +273,12 @@ SAN 옵션 - 파일 시스템 유형을 선택합니다. 기본값은 입니다 
 
 FlexVol에 허용 가능한 것보다 더 많은 Docker 볼륨이 필요한 경우 ONTAP-NAS-이코노미 또는 ONTAP-SAN-이코노미 드라이버를 선택합니다.
 
- `ontap-nas-economy`드라이버는 자동으로 관리되는 FlexVol 볼륨 qtree의 풀 내에서 ONTAP 볼륨을 생성하여 클러스터 노드당 최대 100,000개, 클러스터당 2,400,000개 정도로 확장성이 크게 향상되며 일부 기능은 제공하지 않습니다.  `ontap-nas-economy`드라이버는 Docker 볼륨 단위의 세분화된 스냅샷 또는 클론 복제를 지원하지 않습니다.
+ `ontap-nas-economy`드라이버는 자동으로 관리되는 FlexVol 볼륨 풀 내에서 Docker 볼륨을 ONTAP Qtree로 생성합니다. qtree는 일부 기능을 희생하여 클러스터 노드당 최대 100,000 및 클러스터당 2,400,000까지 훨씬 더 뛰어난 확장을 제공합니다.  `ontap-nas-economy`드라이버는 Docker 볼륨 단위의 세분화된 스냅샷 또는 클론 복제를 지원하지 않습니다.
 
 
-NOTE: Swarm은 여러 노드에서 볼륨 생성을 조율하지 않으므로 현재 Docker Swarm에서 ONTAP-NAS-이코노미 드라이버가 지원되지 않습니다.
+NOTE: Docker Swarm은 여러 노드 간의 볼륨 생성을 오케스트레이션하지 않으므로 이 `ontap-nas-economy` 드라이버는 현재 Docker Swarm에서 지원되지 않습니다.
 
- `ontap-san-economy`드라이버는 자동으로 관리되는 FlexVol 볼륨의 공유 풀 내에서 Docker 볼륨을 ONTAP LUN으로 생성합니다. 따라서 각 FlexVol는 하나의 LUN에만 국한되지 않으며 SAN 워크로드에 대해 더 나은 확장성을 제공합니다. 스토리지 시스템에 따라 ONTAP는 클러스터당 최대 16384개의 LUN을 지원합니다. 볼륨이 그 아래에 LUN이 있으므로 이 드라이버는 Docker 볼륨 세부 스냅샷 및 클론 복제를 지원합니다.
+ `ontap-san-economy`드라이버는 자동으로 관리되는 FlexVol 볼륨의 공유 풀 내에 Docker 볼륨을 ONTAP LUN으로 생성합니다. 이렇게 하면 각 FlexVol가 하나의 LUN에만 제한되지 않으며 SAN 워크로드에 더 나은 확장성을 제공합니다. 스토리지 시스템에 따라 ONTAP는 클러스터당 최대 16384개의 LUN을 지원합니다. 볼륨이 그 아래에 LUN이 있으므로 이 드라이버는 Docker 볼륨 세부 스냅샷 및 클론 복제를 지원합니다.
 
  `ontap-nas-flexgroup`병렬 처리 수를 수십 억 개의 파일로 구성된 페타바이트 범위로 확장할 수 있는 단일 볼륨으로 늘리려면 드라이버를 선택하십시오. FlexGroups의 이상적인 사용 사례로는 AI/ML/DL, 빅데이터 및 분석, 소프트웨어 빌드, 스트리밍, 파일 저장소 등이 있습니다. Trident는 FlexGroup 볼륨을 프로비저닝할 때 SVM에 할당된 모든 애그리게이트를 사용합니다. Trident의 FlexGroup 지원에도 다음과 같은 고려 사항이 있습니다.
 
@@ -289,9 +289,9 @@ NOTE: Swarm은 여러 노드에서 볼륨 생성을 조율하지 않으므로 �
 * FlexGroup 볼륨에는 클론 복제가 지원되지 않습니다.
 
 
-FlexGroups에 적합한 FlexGroups 및 워크로드에 대한 자세한 내용은 를 참조하십시오 https://www.netapp.com/pdf.html?item=/media/12385-tr4571pdf.pdf["NetApp FlexGroup 볼륨 모범 사례 및 구축 가이드 를 참조하십시오"^].
+FlexGroups에 적합한 FlexGroups 및 워크로드에 대한 자세한 내용은 을 https://www.netapp.com/pdf.html?item=/media/12385-tr4571pdf.pdf["NetApp FlexGroup 볼륨 모범 사례 및 구축 가이드 를 참조하십시오"^] 참조하십시오.
 
-같은 환경에서 고급 기능과 대규모 확장을 위해 ONTAP-NAS를 사용하는 Docker Volume Plugin과 ONTAP-NAS-E경제적인 인스턴스를 여러 개 실행할 수 있습니다.
+동일한 환경에서 고급 기능과 대규모 확장을 사용하려면 Docker Volume Plugin의 여러 인스턴스를 를 사용하고 을 사용하여 `ontap-nas-economy` 인스턴스를 하나씩 실행할 수 `ontap-nas` 있습니다.
 
 
 
@@ -307,16 +307,16 @@ Trident 사용자 지정 역할 생성에 대한 자세한 내용은 을 link:ht
 --
 . 다음 명령을 사용하여 새 역할을 생성합니다.
 +
-`security login role create <role_name\> -cmddirname "command" -access all –vserver <svm_name\>`
+`security login role create <role_name\> -cmddirname "command" -access all -vserver <svm_name\>`
 
 . Trident 사용자에 대한 사용 이름 만들기:
 +
-`security login create -username <user_name\> -application ontapi -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
-`security login create -username <user_name\> -application http -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application ontapi -authmethod password -role <name_of_role_in_step_1\> -vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application http -authmethod password -role <name_of_role_in_step_1\> -vserver <svm_name\> -comment "user_description"`
 
 . 역할을 사용자에게 매핑:
 +
-`security login modify username <user_name\> –vserver <svm_name\> -role <role_name\> -application ontapi -application console -authmethod <password\>`
+`security login modify username <user_name\> -vserver <svm_name\> -role <role_name\> -application ontapi -application console -authmethod <password\>`
 
 
 
@@ -360,103 +360,103 @@ SVM 레벨에서 사용자 지정 역할을 생성하려면 * 스토리지 > 스
 .드라이버에 대한 NFS 예 <code>ontap-nas</code>
 [%collapsible]
 ====
-[listing]
+[source, json]
 ----
 {
-    "version": 1,
-    "storageDriverName": "ontap-nas",
-    "managementLIF": "10.0.0.1",
-    "dataLIF": "10.0.0.2",
-    "svm": "svm_nfs",
-    "username": "vsadmin",
-    "password": "password",
-    "aggregate": "aggr1",
-    "defaults": {
-      "size": "10G",
-      "spaceReserve": "none",
-      "exportPolicy": "default"
-    }
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "vsadmin",
+  "password": "password",
+  "aggregate": "aggr1",
+  "defaults": {
+    "size": "10G",
+    "spaceReserve": "none",
+    "exportPolicy": "default"
+  }
 }
 ----
 ====
 .드라이버에 대한 NFS 예 <code>ontap-nas-flexgroup</code>
 [%collapsible]
 ====
-[listing]
+[source, json]
 ----
 {
-    "version": 1,
-    "storageDriverName": "ontap-nas-flexgroup",
-    "managementLIF": "10.0.0.1",
-    "dataLIF": "10.0.0.2",
-    "svm": "svm_nfs",
-    "username": "vsadmin",
-    "password": "password",
-    "defaults": {
-      "size": "100G",
-      "spaceReserve": "none",
-      "exportPolicy": "default"
-    }
+  "version": 1,
+  "storageDriverName": "ontap-nas-flexgroup",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "vsadmin",
+  "password": "password",
+  "defaults": {
+    "size": "100G",
+    "spaceReserve": "none",
+    "exportPolicy": "default"
+  }
 }
 ----
 ====
 .드라이버에 대한 NFS 예 <code>ontap-nas-economy</code>
 [%collapsible]
 ====
-[listing]
+[source, json]
 ----
 {
-    "version": 1,
-    "storageDriverName": "ontap-nas-economy",
-    "managementLIF": "10.0.0.1",
-    "dataLIF": "10.0.0.2",
-    "svm": "svm_nfs",
-    "username": "vsadmin",
-    "password": "password",
-    "aggregate": "aggr1"
+  "version": 1,
+  "storageDriverName": "ontap-nas-economy",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "vsadmin",
+  "password": "password",
+  "aggregate": "aggr1"
 }
 ----
 ====
 .드라이버에 대한 iSCSI 예 <code>ontap-san</code>
 [%collapsible]
 ====
-[listing]
+[source, json]
 ----
 {
-    "version": 1,
-    "storageDriverName": "ontap-san",
-    "managementLIF": "10.0.0.1",
-    "dataLIF": "10.0.0.3",
-    "svm": "svm_iscsi",
-    "username": "vsadmin",
-    "password": "password",
-    "aggregate": "aggr1",
-    "igroupName": "netappdvp"
+  "version": 1,
+  "storageDriverName": "ontap-san",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.3",
+  "svm": "svm_iscsi",
+  "username": "vsadmin",
+  "password": "password",
+  "aggregate": "aggr1",
+  "igroupName": "netappdvp"
 }
 ----
 ====
 .드라이버에 대한 NFS 예 <code>ontap-san-economy</code>
 [%collapsible]
 ====
-[listing]
+[source, json]
 ----
 {
-    "version": 1,
-    "storageDriverName": "ontap-san-economy",
-    "managementLIF": "10.0.0.1",
-    "dataLIF": "10.0.0.3",
-    "svm": "svm_iscsi_eco",
-    "username": "vsadmin",
-    "password": "password",
-    "aggregate": "aggr1",
-    "igroupName": "netappdvp"
+  "version": 1,
+  "storageDriverName": "ontap-san-economy",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.3",
+  "svm": "svm_iscsi_eco",
+  "username": "vsadmin",
+  "password": "password",
+  "aggregate": "aggr1",
+  "igroupName": "netappdvp"
 }
 ----
 ====
 .드라이버에 대한 NVMe/TCP 예 <code>ontap-san</code>
 [%collapsible]
 ====
-[listing]
+[source, json]
 ----
 {
   "version": 1,
@@ -464,8 +464,8 @@ SVM 레벨에서 사용자 지정 역할을 생성하려면 * 스토리지 > 스
   "storageDriverName": "ontap-san",
   "managementLIF": "10.0.0.1",
   "svm": "svm_nvme",
-  "username":"vsadmin",
-  "password":"password",
+  "username": "vsadmin",
+  "password": "password",
   "sanType": "nvme",
   "useREST": true
 }
@@ -474,7 +474,7 @@ SVM 레벨에서 사용자 지정 역할을 생성하려면 * 스토리지 > 스
 .<code> ONTAP-SAN </code> 드라이버에 대한 SCSI over FC 예
 [%collapsible]
 ====
-[listing]
+[source, json]
 ----
 {
   "version": 1,
@@ -483,8 +483,8 @@ SVM 레벨에서 사용자 지정 역할을 생성하려면 * 스토리지 > 스
   "managementLIF": "10.0.0.1",
   "sanType": "fcp",
   "svm": "trident_svm",
-  "username":"vsadmin",
-  "password":"password",
+  "username": "vsadmin",
+  "password": "password",
   "useREST": true
 }
 ----
@@ -547,40 +547,40 @@ QoS 사양
 
 === Element 소프트웨어 구성 파일의 예
 
-[listing]
+[source, json]
 ----
 {
-    "version": 1,
-    "storageDriverName": "solidfire-san",
-    "Endpoint": "https://admin:admin@192.168.160.3/json-rpc/8.0",
-    "SVIP": "10.0.0.7:3260",
-    "TenantName": "docker",
-    "InitiatorIFace": "default",
-    "Types": [
-        {
-            "Type": "Bronze",
-            "Qos": {
-                "minIOPS": 1000,
-                "maxIOPS": 2000,
-                "burstIOPS": 4000
-            }
-        },
-        {
-            "Type": "Silver",
-            "Qos": {
-                "minIOPS": 4000,
-                "maxIOPS": 6000,
-                "burstIOPS": 8000
-            }
-        },
-        {
-            "Type": "Gold",
-            "Qos": {
-                "minIOPS": 6000,
-                "maxIOPS": 8000,
-                "burstIOPS": 10000
-            }
-        }
-    ]
+  "version": 1,
+  "storageDriverName": "solidfire-san",
+  "Endpoint": "https://admin:admin@192.168.160.3/json-rpc/8.0",
+  "SVIP": "10.0.0.7:3260",
+  "TenantName": "docker",
+  "InitiatorIFace": "default",
+  "Types": [
+    {
+      "Type": "Bronze",
+      "Qos": {
+        "minIOPS": 1000,
+        "maxIOPS": 2000,
+        "burstIOPS": 4000
+      }
+    },
+    {
+      "Type": "Silver",
+      "Qos": {
+        "minIOPS": 4000,
+        "maxIOPS": 6000,
+        "burstIOPS": 8000
+      }
+    },
+    {
+      "Type": "Gold",
+      "Qos": {
+        "minIOPS": 6000,
+        "maxIOPS": 8000,
+        "burstIOPS": 10000
+      }
+    }
+  ]
 }
 ----

@@ -57,7 +57,7 @@ Trident 연산자를 사용하여 Trident를 설치하려면 `tridentorchestrato
 
 예를 들면 다음과 같습니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator

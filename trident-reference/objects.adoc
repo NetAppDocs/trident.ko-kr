@@ -118,7 +118,7 @@ Kubernetes의 torageClass 객체는 속성 세트를 사용하여 스토리지�
 
 Trident를 사용하는 Kubernetes의 torageClass 개체는 다음과 같습니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -126,8 +126,7 @@ metadata:
   name: <Name>
 provisioner: csi.trident.netapp.io
 mountOptions: <Mount Options>
-parameters:
-  <Trident Parameters>
+parameters: <Trident Parameters>
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
 ----
@@ -245,7 +244,7 @@ NFS 스토리지 드라이버의 경우 파일 시스템이 NFS 내보내기의 
 
 스냅샷을 생성하려면 관리자가 VolumeSnapshotClass를 정의해야 합니다. 볼륨 스냅샷 클래스는 다음과 같은 정의로 생성됩니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
@@ -452,7 +451,7 @@ Trident deamonset은 `system-node-critical` Trident가 정상적인 노드 종�
 
 다음은 Trident 데모의 우선 순위를 지정하는 'ResourceQuota' 개체의 예입니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: <version>
 kind: ResourceQuota
@@ -462,10 +461,11 @@ metadata:
     app: node.csi.trident.netapp.io
 spec:
   scopeSelector:
-     matchExpressions:
-       - operator : In
-         scopeName: PriorityClass
-         values: ["system-node-critical"]
+    matchExpressions:
+      - operator: In
+        scopeName: PriorityClass
+        values:
+          - system-node-critical
 ----
 리소스 할당량에 대한 자세한 내용은 을 참조하십시오 link:https://kubernetes.io/docs/concepts/policy/resource-quotas/["Kubernetes: 리소스 할당량"^].
 

@@ -51,7 +51,7 @@ Trident를 사용하면 동일한 Kubernetes 클러스터 안에 있는 다른 �
 .단계
 . * 소스 네임스페이스 소유자: * (`pvc1`소스 네임스페이스에 PVC 생성(`namespace1`)(`namespace2`. 대상 네임스페이스와 공유할 수 있는 권한을 부여함) 주석을 사용합니다. `cloneToNamespace`
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -83,7 +83,7 @@ Trident은 PV와 백엔드 NFS 스토리지 볼륨을 생성합니다.
 . * 클러스터 관리자: * 대상 네임스페이스 소유자에게 TridentVolumeReference CR을 만들 수 있는 권한을 부여하려면 사용자 지정 역할과 kubeconfig를(`namespace2` 만듭니다.)
 . * 대상 네임스페이스 소유자: * 소스 네임스페이스를 참조하는 대상 네임스페이스에서 트리젠VolumeReference CR을 만듭니다 `pvc1`.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentVolumeReference
@@ -96,7 +96,7 @@ spec:
 ----
 . * 대상 네임스페이스 소유자: * (`pvc2`대상 네임스페이스에서 PVC 생성(`namespace2`) 또는 `cloneFromSnapshot`, `cloneFromNamespace` 주석을 사용하여 `cloneFromPVC` 소스 PVC를 지정합니다.
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -114,11 +114,11 @@ spec:
     requests:
       storage: 100Gi
 ----
-+
+
+
+
+
 == 제한 사항
 
-+
-** ONTAP-NAS-이코노미 드라이버를 사용하여 프로비저닝된 PVC의 경우 읽기 전용 클론은 지원되지 않습니다.
-
-
+* ONTAP-NAS-이코노미 드라이버를 사용하여 프로비저닝된 PVC의 경우 읽기 전용 클론은 지원되지 않습니다.
 

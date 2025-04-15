@@ -21,9 +21,13 @@ summary: 문제 해결에 도움이 되는 로그를 수집할 수 있습니다.
 .단계
 . 권장되는 관리되는 플러그인 방법(예: 명령 사용)을 사용하여 Trident를 실행하는 경우 `docker plugin` 다음과 같이 봅니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin ls
+----
++
+[listing]
+----
 ID                  NAME                DESCRIPTION                          ENABLED
 4fb97d2b956b        netapp:latest       nDVP - NetApp Docker Volume Plugin   false
 journalctl -u docker | grep 4fb97d2b956b
@@ -33,7 +37,7 @@ journalctl -u docker | grep 4fb97d2b956b
 
 . 디버그 로깅을 사용하려면 디버그 로깅을 사용하도록 설정한 플러그인을 설치합니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin install netapp/trident-plugin:<version> --alias <alias> debug=true
 ----
@@ -41,10 +45,18 @@ docker plugin install netapp/trident-plugin:<version> --alias <alias> debug=true
 또는 플러그인이 이미 설치된 경우 디버그 로깅을 활성화합니다.
 
 +
-[listing]
+[source, console]
 ----
 docker plugin disable <plugin>
+----
++
+[source, console]
+----
 docker plugin set <plugin> debug=true
+----
++
+[source, console]
+----
 docker plugin enable <plugin>
 ----
 . 호스트에서 바이너리 자체를 실행하는 경우 호스트의 에서 로그를 사용할 수 있습니다 `/var/log/netappdvp` 디렉토리. 디버그 로깅을 활성화하려면 를 지정합니다 `-debug` 플러그인을 실행할 때

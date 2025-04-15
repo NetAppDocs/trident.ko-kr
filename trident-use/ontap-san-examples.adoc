@@ -44,8 +44,8 @@ IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용
 원활한 MetroCluster 전환은 를 <<mcc-best>>참조하십시오.
 
 
-NOTE: "vsadmin" 자격 증명을 사용하는 경우, 은 `managementLIF` SVM의 자격 증명이어야 하며, "admin" 자격 증명을 사용하는 경우에는 클러스터의 자격 증명이어야 `managementLIF` 합니다.
-| “10.0.0.1”, “[2001:1234:ABCD::fee]” 
+NOTE: "vsadmin" 자격 증명을 사용하는 경우, 은 `managementLIF` SVM의 자격 증명이어야 합니다. "admin" 자격 증명을 사용하는 경우에는 이 클러스터의 자격 증명이어야 `managementLIF` 합니다.
+| "10.0.0.1"," [2001:1234:ABCD::fefe]" 
 
 
 | 다타LIF | 프로토콜 LIF의 IP 주소입니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 과 같이 대괄호로 정의해야 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` 합니다. *iSCSI에 대해 지정하지 마십시오.* Trident는 을 사용하여 link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 선택적 LUN 맵"^]다중 경로 세션을 설정하는 데 필요한 iSCSI LIF를 검색합니다. 이 명시적으로 정의된 경우 경고가 `dataLIF` 생성됩니다. * MetroCluster의 경우 생략합니다. * 를 <<mcc-best>>참조하십시오. | SVM에서 파생됩니다 
@@ -154,7 +154,7 @@ Trident에서는 다음 옵션을 사용하여 서식 프로세스를 신속하�
 
 * -E nobiscard: *
 
-* 유지, mkfs 시간에 블록 삭제를 시도하지 마십시오(처음에는 솔리드 스테이트 디바이스 및 스파스/씬 프로비저닝된 스토리지에서 블록 삭제가 유용함). 이 옵션은 사용되지 않는 "-K" 옵션을 대체하며 모든 파일 시스템(xfs, ext3 및 ext4)에 적용됩니다.
+* 유지, mkfs 시간에 블록 삭제를 시도하지 마십시오(처음에는 솔리드 스테이트 디바이스 및 스파스/씬 프로비저닝된 스토리지에서 블록 삭제가 유용함). 이 옵션은 더 이상 사용되지 않는 옵션 "-K"를 대체하며 모든 파일 시스템(xfs, ext3 및 ext4)에 적용됩니다.
 
 
 
@@ -208,7 +208,7 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다. | ASA R2�
 
 다음은 기본값이 정의된 예입니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -261,7 +261,7 @@ NOTE: NetApp ONTAP on Trident와 함께 Amazon FSx를 사용하는 경우, NetAp
 ====
 이것은 를 사용하는 기본 구성입니다 `ontap-san` 드라이버.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -282,7 +282,7 @@ password: <password>
 
 원활한 스위치오버 및 스위치백의 경우 를 사용하여 SVM을 지정하고 `managementLIF` 매개 변수를 생략합니다. `svm` 예를 들면 다음과 같습니다.
 
-[listing]
+[source, yaml]
 ----
 version: 1
 storageDriverName: ontap-san
@@ -294,7 +294,7 @@ password: password
 .ONTAP SAN 경제 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 version: 1
 storageDriverName: ontap-san-economy
@@ -309,7 +309,7 @@ password: <password>
 ====
 이 기본 구성 예에서 `clientCertificate`, `clientPrivateKey`, 및 `trustedCACertificate` (신뢰할 수 있는 CA를 사용하는 경우 선택 사항)는 에 채워집니다 `backend.json` 그리고 각각 클라이언트 인증서, 개인 키 및 신뢰할 수 있는 CA 인증서의 base64로 인코딩된 값을 사용합니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -333,7 +333,7 @@ trustedCACertificate: zcyBbaG...b3Igb3duIGNsYXNz
 이 예에서는 를 사용하여 백엔드를 생성합니다 `useCHAP` 를 로 설정합니다 `true`.
 
 .ONTAP SAN CHAP의 예
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -352,7 +352,7 @@ username: vsadmin
 password: <password>
 ----
 .ONTAP SAN 이코노미 CHAP의 예
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -373,7 +373,7 @@ password: <password>
 ====
 ONTAP 백엔드에서 NVMe로 구성된 SVM이 있어야 합니다. NVMe/TCP에 대한 기본 백엔드 구성입니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -392,7 +392,7 @@ useREST: true
 ====
 ONTAP 백엔드에서 FC로 SVM을 구성해야 합니다. FC에 대한 기본 백엔드 구성입니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -409,7 +409,7 @@ useREST: true
 .nameTemplate이 포함된 백엔드 구성 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -419,29 +419,32 @@ managementLIF: <ip address>
 svm: svm0
 username: <admin>
 password: <password>
-defaults: {
-    "nameTemplate": "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.volume.RequestName}}"
-},
-"labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
+defaults:
+  nameTemplate: "{{.volume.Name}}_{{.labels.cluster}}_{{.volume.Namespace}}_{{.vo\
+    lume.RequestName}}"
+labels:
+  cluster: ClusterA
+  PVC: "{{.volume.Namespace}}_{{.volume.RequestName}}"
 ----
 ====
 .ONTAP-SAN-이코노미 드라이버에 대한 옵션 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
+---
 version: 1
 storageDriverName: ontap-san-economy
-managementLIF: ''
+managementLIF: ""
 svm: svm1
-username: ''
+username: ""
 password: "!"
 storagePrefix: whelk_
 debugTraceFlags:
   method: true
   api: true
 defaults:
-  formatOptions: "-E nodiscard"
+  formatOptions: -E nodiscard
 ----
 ====
 
@@ -457,7 +460,7 @@ Trident는 "Comments" 필드에 프로비저닝 레이블을 설정합니다. Fl
 .ONTAP SAN의 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -472,43 +475,44 @@ chapUsername: uh2aNCLSd6cNwxyz
 username: vsadmin
 password: <password>
 defaults:
-  spaceAllocation: 'false'
-  encryption: 'false'
+  spaceAllocation: "false"
+  encryption: "false"
   qosPolicy: standard
 labels:
   store: san_store
   kubernetes-cluster: prod-cluster-1
 region: us_east_1
 storage:
-- labels:
-    protection: gold
-    creditpoints: '40000'
-  zone: us_east_1a
-  defaults:
-    spaceAllocation: 'true'
-    encryption: 'true'
-    adaptiveQosPolicy: adaptive-extreme
-- labels:
-    protection: silver
-    creditpoints: '20000'
-  zone: us_east_1b
-  defaults:
-    spaceAllocation: 'false'
-    encryption: 'true'
-    qosPolicy: premium
-- labels:
-    protection: bronze
-    creditpoints: '5000'
-  zone: us_east_1c
-  defaults:
-    spaceAllocation: 'true'
-    encryption: 'false'
+  - labels:
+      protection: gold
+      creditpoints: "40000"
+    zone: us_east_1a
+    defaults:
+      spaceAllocation: "true"
+      encryption: "true"
+      adaptiveQosPolicy: adaptive-extreme
+  - labels:
+      protection: silver
+      creditpoints: "20000"
+    zone: us_east_1b
+    defaults:
+      spaceAllocation: "false"
+      encryption: "true"
+      qosPolicy: premium
+  - labels:
+      protection: bronze
+      creditpoints: "5000"
+    zone: us_east_1c
+    defaults:
+      spaceAllocation: "true"
+      encryption: "false"
+
 ----
 ====
 .ONTAP SAN 경제 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -523,46 +527,47 @@ chapUsername: uh2aNCLSd6cNwxyz
 username: vsadmin
 password: <password>
 defaults:
-  spaceAllocation: 'false'
-  encryption: 'false'
+  spaceAllocation: "false"
+  encryption: "false"
 labels:
   store: san_economy_store
 region: us_east_1
 storage:
-- labels:
-    app: oracledb
-    cost: '30'
-  zone: us_east_1a
-  defaults:
-    spaceAllocation: 'true'
-    encryption: 'true'
-- labels:
-    app: postgresdb
-    cost: '20'
-  zone: us_east_1b
-  defaults:
-    spaceAllocation: 'false'
-    encryption: 'true'
-- labels:
-    app: mysqldb
-    cost: '10'
-  zone: us_east_1c
-  defaults:
-    spaceAllocation: 'true'
-    encryption: 'false'
-- labels:
-    department: legal
-    creditpoints: '5000'
-  zone: us_east_1c
-  defaults:
-    spaceAllocation: 'true'
-    encryption: 'false'
+  - labels:
+      app: oracledb
+      cost: "30"
+    zone: us_east_1a
+    defaults:
+      spaceAllocation: "true"
+      encryption: "true"
+  - labels:
+      app: postgresdb
+      cost: "20"
+    zone: us_east_1b
+    defaults:
+      spaceAllocation: "false"
+      encryption: "true"
+  - labels:
+      app: mysqldb
+      cost: "10"
+    zone: us_east_1c
+    defaults:
+      spaceAllocation: "true"
+      encryption: "false"
+  - labels:
+      department: legal
+      creditpoints: "5000"
+    zone: us_east_1c
+    defaults:
+      spaceAllocation: "true"
+      encryption: "false"
+
 ----
 ====
 .NVMe/TCP 예
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -574,15 +579,16 @@ username: vsadmin
 password: <password>
 useREST: true
 defaults:
-  spaceAllocation: 'false'
-  encryption: 'true'
+  spaceAllocation: "false"
+  encryption: "true"
 storage:
-- labels:
-    app: testApp
-    cost: '20'
-  defaults:
-    spaceAllocation: 'false'
-    encryption: 'false'
+  - labels:
+      app: testApp
+      cost: "20"
+    defaults:
+      spaceAllocation: "false"
+      encryption: "false"
+
 ----
 ====
 
@@ -593,7 +599,7 @@ storage:
 
 * 를 클릭합니다 `protection-gold` StorageClass는 의 첫 번째 가상 풀에 매핑됩니다 `ontap-san` 백엔드. 골드 레벨 보호 기능을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -606,7 +612,7 @@ parameters:
 ----
 * 를 클릭합니다 `protection-not-gold` StorageClass는 의 두 번째 및 세 번째 가상 풀에 매핑됩니다 `ontap-san` 백엔드. 금 이외의 보호 수준을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -619,7 +625,7 @@ parameters:
 ----
 * 를 클릭합니다 `app-mysqldb` StorageClass는 의 세 번째 가상 풀에 매핑됩니다 `ontap-san-economy` 백엔드. mysqldb 유형 앱에 대한 스토리지 풀 구성을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -632,7 +638,7 @@ parameters:
 ----
 * 를 클릭합니다 `protection-silver-creditpoints-20k` StorageClass는 의 두 번째 가상 풀에 매핑됩니다 `ontap-san` 백엔드. 실버 레벨 보호 및 20,000포인트 적립을 제공하는 유일한 풀입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -645,7 +651,7 @@ parameters:
 ----
 * 를 클릭합니다 `creditpoints-5k` StorageClass는 의 세 번째 가상 풀에 매핑됩니다 `ontap-san` 에 있는 백엔드 및 네 번째 가상 풀입니다 `ontap-san-economy` 백엔드. 5000 크레딧 포인트를 보유한 유일한 풀 서비스입니다.
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -658,7 +664,7 @@ parameters:
 ----
 * 를 클릭합니다 `my-test-app-sc` StorageClass 가 에 매핑됩니다 `testAPP` 의 가상 풀입니다 `ontap-san` 를 사용하여 운전합니다 `sanType: nvme`. 이것은 유일한 풀 제안입니다 `testApp`.
 +
-[listing]
+[source, yaml]
 ----
 ---
 apiVersion: storage.k8s.io/v1

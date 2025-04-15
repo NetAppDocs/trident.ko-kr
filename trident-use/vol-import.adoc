@@ -62,7 +62,7 @@ TIP: 이 옵션은 컨테이너화된 워크로드에 Kubernetes를 사용하고
 다음은 최소 사양의 예입니다.
 
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1

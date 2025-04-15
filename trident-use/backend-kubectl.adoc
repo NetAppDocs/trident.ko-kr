@@ -33,7 +33,7 @@ WARNING: `TridentBackend` CRS는 Trident에 의해 자동으로 생성됩니다.
 
 '트리엔백엔드구성' CR의 형식은 다음 예를 참조하십시오.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -91,6 +91,9 @@ kubbeck을 사용하여 새 백엔드를 생성하려면 다음을 수행해야 
 [listing]
 ----
 kubectl -n trident create -f backend-tbc-ontap-san-secret.yaml
+----
+[source, yaml]
+----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -195,7 +198,7 @@ CHAP 타겟 이니시에이터 암호입니다. useCHAP = TRUE인 경우 필수�
 ----
 kubectl -n trident create -f backend-tbc-ontap-san.yaml
 ----
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -262,14 +265,14 @@ backend-tbc-ontap-san   ontap-san-backend   8d24fce7-6f60-4d4a-8ef6-bab2699e6ab8
 ----
 kubectl -n trident get tbc backend-tbc-ontap-san -o yaml
 ----
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
-  creationTimestamp: "2021-04-21T20:45:11Z"
+  creationTimestamp: 2021-04-21T20:45:11Z
   finalizers:
-  - trident.netapp.io
+    - trident.netapp.io
   generation: 1
   name: backend-tbc-ontap-san
   namespace: trident

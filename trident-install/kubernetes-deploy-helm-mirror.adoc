@@ -51,7 +51,7 @@ IMPORTANT: 전용 리포지토리에 Trident를 설치할 때 스위치를 사�
 .단계
 . Trident Helm 저장소 추가:
 +
-[listing]
+[source, console]
 ----
 helm repo add netapp-trident https://artifacthub.io/packages/helm/netapp-trident/trident-operator
 ----
@@ -61,14 +61,14 @@ helm repo add netapp-trident https://artifacthub.io/packages/helm/netapp-trident
 ====
 .하나의 레지스트리에 있는 이미지
 --
-[listing]
+[source, console]
 ----
 helm install <name> netapp-trident/trident-operator --version 100.2502.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 .다른 레지스트리의 이미지
 --
-[listing]
+[source, console]
 ----
 helm install <name> netapp-trident/trident-operator --version 100.2502.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:25.02.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:25.02 --set tridentImage=<your-registry>/trident:25.02.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
@@ -104,13 +104,13 @@ NOTE: Trident에 대한 네임스페이스를 이미 만든 경우에는 '--crea
 |===
 예를 들어, 의 기본값을 `debug` 변경하려면 다음 명령을 실행합니다. 여기서 는 설치 중인 Trident의 버전입니다. `100.2502.0`
 
-[listing]
+[source, console]
 ----
 helm install <name> netapp-trident/trident-operator --version 100.2502.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 nodePrep 값을 추가하려면 다음 명령을 실행합니다.
 
-[listing]
+[source, console]
 ----
 helm install <name> netapp-trident/trident-operator --version 100.2502.0  --create-namespace --namespace trident --set nodePrep={iscsi}
 ----

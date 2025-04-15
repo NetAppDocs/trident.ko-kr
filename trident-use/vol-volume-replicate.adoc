@@ -54,7 +54,7 @@ IMPORTANT: 두 ONTAP 클러스터 간의 복제 관계에 사용되는 SVM 이�
 .. 매개 변수를 사용하여 StorageClass 개체를 `trident.netapp.io/replication: true` 만듭니다.
 +
 .예
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -69,7 +69,7 @@ parameters:
 .. 이전에 생성된 StorageClass를 사용하여 PVC를 생성합니다.
 +
 .예
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -86,7 +86,7 @@ spec:
 .. 로컬 정보로 MirrorRelationship CR을 생성합니다.
 +
 .예
-[listing]
+[source, yaml]
 ----
 kind: TridentMirrorRelationship
 apiVersion: trident.netapp.io/v1
@@ -107,7 +107,7 @@ Trident는 볼륨의 내부 정보와 볼륨의 현재 데이터 보호(DP) 상�
 kubectl get tmr csi-nas
 ----
 +
-[listing]
+[source, yaml]
 ----
 kind: TridentMirrorRelationship
 apiVersion: trident.netapp.io/v1
@@ -132,7 +132,7 @@ status:
 .. trident.netapp.io/replication: true 매개 변수를 사용하여 StorageClass 를 만듭니다.
 +
 .예
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -145,7 +145,7 @@ parameters:
 .. 대상 및 소스 정보를 사용하여 MirrorRelationship CR을 생성합니다.
 +
 .예
-[listing]
+[source, yaml]
 ----
 kind: TridentMirrorRelationship
 apiVersion: trident.netapp.io/v1
@@ -163,7 +163,7 @@ Trident에서 구성된 관계 정책 이름(또는 ONTAP의 경우 기본값)�
 .. 이전에 생성한 StorageClass를 사용하여 PVC를 생성하여 보조(SnapMirror 대상) 역할을 합니다.
 +
 .예
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -222,7 +222,7 @@ Trident Mirror Relationship(TMR)은 PVC 간 복제 관계의 한쪽 끝을 나�
 . 운영 Kubernetes 클러스터에서 SnapshotInfo CR을 생성하여 내부 세부 정보를 가져옵니다.
 +
 .예
-[listing]
+[source, yaml]
 ----
 kind: SnapshotInfo
 apiVersion: trident.netapp.io/v1
@@ -305,7 +305,7 @@ Trident는 복제된 PVC를 확인하고 볼륨 삭제를 시도하기 전에 �
 Trident이 ONTAP 클러스터에 직접 연결되지 않은 상태에서 CRD를 사용하여 SnapMirror 업데이트를 수행할 수 있습니다. 다음 TridentActionMirrorUpdate 예제 형식을 참조하십시오.
 
 .예
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentActionMirrorUpdate

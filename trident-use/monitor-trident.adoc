@@ -46,7 +46,7 @@ Prometheus 타겟을 정의하여 메트릭을 수집하고 Trident가 관리하
 
 Trident 메트릭을 소비하려면 트리덴트 CSI 서비스를 감시하고 메티우스 포트에서 수신 대기하는 프로메테우스 서비스 모니터를 만들어야 합니다. 샘플 ServiceMonitor의 모양은 다음과 같습니다.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -54,7 +54,7 @@ metadata:
   name: trident-sm
   namespace: monitoring
   labels:
-      release: prom-operator
+    release: prom-operator
 spec:
   jobLabel: trident
   selector:
@@ -62,10 +62,10 @@ spec:
       app: controller.csi.trident.netapp.io
   namespaceSelector:
     matchNames:
-    - trident
+      - trident
   endpoints:
-  - port: metrics
-    interval: 15s
+    - port: metrics
+      interval: 15s
 ----
 이 ServiceMonitor 정의는 서비스에서 `metrics` 반환된 메트릭을 검색하여 `trident-csi` 서비스의 끝점을 찾습니다. 그 결과, Prometheus는 이제 Trident의 메트릭을 이해할 수 있도록 구성되었습니다.
 
@@ -151,24 +151,23 @@ kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes * 100
 
 Trident에서 보낸 페이로드의 예는 다음과 같습니다.
 
-[listing]
+[source, yaml]
 ----
 ---
 items:
-- backendUUID: ff3852e1-18a5-4df4-b2d3-f59f829627ed
-  protocol: file
-  config:
-    version: 1
-    storageDriverName: ontap-nas
-    debug: false
-    debugTraceFlags:
-    disableDelete: false
-    serialNumbers:
-    - nwkvzfanek_SN
-    limitVolumeSize: ''
-  state: online
-  online: true
-
+  - backendUUID: ff3852e1-18a5-4df4-b2d3-f59f829627ed
+    protocol: file
+    config:
+      version: 1
+      storageDriverName: ontap-nas
+      debug: false
+      debugTraceFlags: null
+      disableDelete: false
+      serialNumbers:
+        - nwkvzfanek_SN
+      limitVolumeSize: ""
+    state: online
+    online: true
 ----
 * AutoSupport 메시지는 NetApp의 AutoSupport 엔드포인트로 전송됩니다. 개인 레지스트리를 사용하여 컨테이너 이미지를 저장하는 경우 '--image-registry' 플래그를 사용할 수 있습니다.
 * 또한 설치 YAML 파일을 생성하여 프록시 URL을 구성할 수도 있습니다. 이는 트라이덴트ctl install --generate-custom-YAML을 이용해 YAML 파일을 생성하고 트리덴트 배포(trident-deployment)의 트리덴트 자동 지원 컨테이너에 대한 '--proxy-url' 주장을 추가하는 방식으로 가능하다.

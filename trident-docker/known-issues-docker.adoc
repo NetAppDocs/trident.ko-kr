@@ -21,19 +21,19 @@ Trident를 Docker와 함께 사용할 때 알려진 문제 및 제한 사항에 
 .해결 방법
 . 플러그인을 비활성화합니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin disable -f netapp:latest
 ----
 . 플러그인을 제거합니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin rm -f netapp:latest
 ----
 . 추가 'config' 매개 변수를 제공하여 플러그인을 다시 설치합니다.
 +
-[listing]
+[source, console]
 ----
 docker plugin install netapp/trident-plugin:20.10 --alias netapp --grant-all-permissions config=config.json
 ----
@@ -55,7 +55,7 @@ NOTE: 이는 Docker 클라이언트의 제한 사항입니다. 클라이언트�
 * 볼륨 플러그인(Trident 포함)은 Swarm 클러스터의 각 노드에서 독립적으로 실행되어야 합니다. ONTAP의 작동 방식 및 및 및 `ontap-san` 드라이버의 작동 방식 때문에 `ontap-nas` 이러한 제한 내에서 작동할 수 있는 것은 오직 한 가지뿐입니다.
 
 
-나머지 드라이버에는 명확한 "승자" 없이 단일 요청에 대해 대량의 볼륨을 생성할 수 있는 경합 상태와 같은 문제가 있습니다. 예를 들어, Element에는 볼륨의 이름이 같지만 ID가 다를 수 있는 기능이 있습니다.
+나머지 드라이버는 경합 조건과 같이 명확한 "승자"가 없는 단일 요청에 대해 대량의 볼륨을 생성할 수 있는 문제가 발생합니다. 예를 들어 Element에는 볼륨이 동일한 이름을 갖지만 ID를 가질 수 있는 기능이 있습니다.
 
 NetApp은 Docker 팀에 피드백을 제공했지만, 향후 소구에 대한 표시는 제공하지 않습니다.
 
