@@ -110,7 +110,7 @@ NOTE: 데이터 보호 작업 중에 파일 시스템을 고정 및 고정 해�
 
 
 .단계
-. 소스 클러스터에서 소스 애플리케이션에 대한 AppVault를 생성합니다. 스토리지 공급자에 따라 의 예를 link:trident-protect-appvault-custom-resources.html["AppVault 사용자 지정 리소스"]환경에 맞게 수정합니다.
+. 소스 클러스터에서 소스 응용 프로그램에 대한 AppVault를 생성합니다. 스토리지 공급자에 따라 의 예를 link:trident-protect-appvault-custom-resources.html["AppVault 사용자 지정 리소스"]환경에 맞게 수정합니다.
 +
 [role="tabbed-block"]
 ====
@@ -165,7 +165,7 @@ tridentctl-protect create vault Azure <vault-name> --account <account-name> --bu
 
 --
 ====
-. 소스 응용 프로그램 생성 CR:
+. 소스 클러스터에서 소스 애플리케이션 CR:
 +
 [role="tabbed-block"]
 ====
@@ -216,11 +216,13 @@ tridentctl-protect create app <my-app-name> --namespaces <namespaces-to-be-inclu
 
 --
 ====
-. 필요한 경우 소스 애플리케이션의 스냅샷을 생성합니다. 이 스냅샷은 대상 클러스터에서 애플리케이션의 기반으로 사용됩니다. 이 단계를 건너뛸 경우 다음 예약된 스냅샷이 실행될 때까지 기다려야 최신 스냅샷이 생성됩니다.
+
+
+. 필요에 따라 소스 클러스터에서 소스 애플리케이션의 종료 스냅샷을 생성합니다. 이 스냅샷은 대상 클러스터에서 애플리케이션의 기반으로 사용됩니다. 이 단계를 건너뛸 경우 다음 예약된 스냅샷이 실행될 때까지 기다려야 최신 스냅샷이 생성됩니다.
 +
 [role="tabbed-block"]
 ====
-.CR을 사용하여 스냅샷을 촬영합니다
+.CR을 사용하여 종료 스냅샷을 촬영합니다
 --
 .. 소스 애플리케이션에 대한 복제 스케줄을 생성합니다.
 +
@@ -271,7 +273,7 @@ kubectl apply -f trident-protect-schedule.yaml -n my-app-namespace
 
 
 --
-.CLI를 사용하여 스냅샷을 생성합니다
+.CLI를 사용하여 종료 스냅샷을 생성합니다
 --
 .. 대괄호 안의 값을 사용자 환경의 정보로 대체하여 스냅샷을 생성합니다. 예를 들면 다음과 같습니다.
 +
@@ -283,14 +285,14 @@ tridentctl-protect create snapshot <my_snapshot_name> --appvault <my_appvault_na
 
 --
 ====
-. 소스 클러스터에 적용한 AppVault CR과 동일한 소스 응용 프로그램 AppVault CR을 대상 클러스터에 생성하고 이름을 지정합니다(예: `trident-protect-appvault-primary-destination.yaml`).
+. 대상 클러스터에서 소스 클러스터에 적용한 AppVault CR과 동일한 소스 응용 프로그램 AppVault CR을 생성하고 이름을 지정합니다(예: `trident-protect-appvault-primary-destination.yaml`).
 . CR 적용:
 +
 [source, console]
 ----
 kubectl apply -f trident-protect-appvault-primary-destination.yaml -n my-app-namespace
 ----
-. 대상 클러스터에서 대상 응용 프로그램에 대한 AppVault를 생성합니다. 스토리지 공급자에 따라 의 예를 link:trident-protect-appvault-custom-resources.html["AppVault 사용자 지정 리소스"]환경에 맞게 수정합니다.
+. 대상 클러스터에서 대상 응용 프로그램에 대한 대상 AppVault CR을 생성합니다. 스토리지 공급자에 따라 의 예를 link:trident-protect-appvault-custom-resources.html["AppVault 사용자 지정 리소스"]환경에 맞게 수정합니다.
 +
 .. 사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예: `trident-protect-appvault-secondary-destination.yaml`).
 .. 다음 특성을 구성합니다.
@@ -328,7 +330,7 @@ kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n my-app-n
 ----
 
 
-. AppMirrorRelationship CR 파일 만들기:
+. 대상 클러스터에서 AppMirrorRelationship CR 파일을 생성합니다.
 +
 [role="tabbed-block"]
 ====
@@ -393,7 +395,7 @@ tridentctl-protect create appmirrorrelationship <name_of_appmirorrelationship> -
 
 --
 ====
-. (_선택 사항_) 복제 관계의 상태 및 상태를 확인합니다.
+. (_선택 사항_) 대상 클러스터에서 복제 관계의 상태 및 상태를 확인합니다.
 +
 [source, console]
 ----
@@ -408,7 +410,7 @@ kubectl get amr -n my-app-namespace <relationship name> -o=jsonpath='{.status}' 
 Trident Protect를 사용하면 복제된 애플리케이션을 대상 클러스터로 페일오버할 수 있습니다. 이 절차는 복제 관계를 중지하고 대상 클러스터에서 앱을 온라인으로 전환합니다. Trident Protect는 소스 클러스터의 앱이 작동 중이었다면 중지하지 않습니다.
 
 .단계
-. AppMirrorRelationship CR 파일(예 `trident-protect-relationship.yaml`:)을 열고 * spec.desiredState* 값을 로 변경합니다 `Promoted`.
+. 대상 클러스터에서 AppMirrorRelationship CR 파일(예 `trident-protect-relationship.yaml`:)을 편집하고 * spec.desiredState* 값을 로 변경합니다. `Promoted`
 . CR 파일을 저장합니다.
 . CR 적용:
 +
@@ -437,8 +439,8 @@ kubectl get amr -n my-app-namespace <relationship name> -o=jsonpath='{.status}' 
 IMPORTANT: 페일오버 중에 대상 애플리케이션에 기록된 모든 데이터가 손실됩니다.
 
 .단계
-. 소스 애플리케이션의 스냅샷을 생성합니다.
-. AppMirrorRelationship CR 파일(예: `trident-protect-relationship.yaml`)을 열고 spec.desiredState 값을 로 변경합니다 `Established`.
+. 선택 사항: 소스 클러스터에서 소스 애플리케이션의 스냅샷을 생성합니다. 이렇게 하면 소스 클러스터의 최신 변경 사항이 캡처됩니다.
+. 대상 클러스터에서 AppMirrorRelationship CR 파일(예 `trident-protect-relationship.yaml`:)을 편집하고 spec.desiredState 값을 로 변경합니다. `Established`
 . CR 파일을 저장합니다.
 . CR 적용:
 +
@@ -458,7 +460,7 @@ kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
 .단계
 . 원래 대상 클러스터에서 AppMirrorRelationship CR을 삭제합니다. 그러면 대상이 원본이 됩니다. 새 대상 클러스터에 남아 있는 보호 스케줄이 있는 경우 제거합니다.
 . 관계를 설정할 때 원래 사용했던 CR 파일을 반대 클러스터에 적용하여 복제 관계를 설정합니다.
-. AppVault CRS가 각 클러스터에 준비되어 있는지 확인합니다.
+. 새 대상(원래 소스 클러스터)이 두 AppVault CRS로 구성되어 있는지 확인합니다.
 . 반대 클러스터에서 복제 관계를 설정하여 반대 방향에 대한 값을 구성합니다.
 
 
@@ -471,7 +473,7 @@ kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
 이 경우 소스와 대상을 스와핑합니다.
 
 .단계
-. 종료 스냅샷 생성:
+. 소스 클러스터에서 종료 스냅샷을 생성합니다.
 +
 [role="tabbed-block"]
 ====
@@ -527,19 +529,19 @@ tridentctl-protect create shutdownsnapshot <my_shutdown_snapshot> --appvault <my
 
 --
 ====
-. 스냅샷이 완료되면 스냅샷의 상태를 가져옵니다.
+. 소스 클러스터에서 종료 스냅샷이 완료된 후 종료 스냅샷의 상태를 가져옵니다.
 +
 [source, console]
 ----
 kubectl get shutdownsnapshot -n my-app-namespace <shutdown_snapshot_name> -o yaml
 ----
-. 다음 명령을 사용하여 * shutdownsnapshot.status.appArchivePath * 의 값을 찾고 파일 경로의 마지막 부분(basename라고도 함. 이것은 마지막 슬래시 다음에 모두 있음)을 기록합니다.
+. 소스 클러스터에서 다음 명령을 사용하여 * shutdownsnapshot.status.appArchivePath * 의 값을 찾고 파일 경로의 마지막 부분(basename라고도 함. 이것은 마지막 슬래시 다음에 모두 있음)을 기록합니다.
 +
 [source, console]
 ----
 k get shutdownsnapshot -n my-app-namespace <shutdown_snapshot_name> -o jsonpath='{.status.appArchivePath}'
 ----
-. 다음과 같이 변경하여 대상 클러스터에서 소스 클러스터로 페일오버를 수행합니다.
+. 다음 변경 사항을 적용하여 새 대상 클러스터에서 새 소스 클러스터로 페일오버를 수행합니다.
 +
 
 NOTE: 페일오버 절차의 2단계에서 AppMirrorRelationship CR 파일에 필드를 포함하고 `spec.promotedSnapshot` 위의 3단계에서 기록한 기본 이름으로 값을 설정합니다.
@@ -591,7 +593,7 @@ CAUTION: 일반 재동기화 작업을 수행하지 마십시오. 그러면 페�
 언제든지 복제 관계를 삭제할 수 있습니다. 애플리케이션 복제 관계를 삭제하면 서로 관계가 없는 두 개의 개별 애플리케이션이 생성됩니다.
 
 .단계
-. AppMirrorRelationship CR 삭제:
+. 현재 대상 클러스터에서 AppMirrorRelationship CR을 삭제합니다.
 +
 [source, console]
 ----

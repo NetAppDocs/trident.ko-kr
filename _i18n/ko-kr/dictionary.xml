@@ -4459,7 +4459,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="cc37bc9830a1edb8e50e296af8ade03b" category="list-text">복제 일정 선택(Kubernetes 리소스 및 영구 볼륨 데이터 포함)</block>
   <block id="55960a396448d8f19fb182dfd2b04d90" category="list-text">스냅샷을 생성할 시간을 설정합니다</block>
   <block id="7fe804bb721f10861ae38239b332f774" category="inline-link-macro">AppVault 사용자 지정 리소스</block>
-  <block id="38886c5d59d709a7506113ab8fa737eb" category="list-text">소스 클러스터에서 소스 애플리케이션에 대한 AppVault를 생성합니다. 스토리지 공급자에 따라 의 예를 <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>환경에 맞게 수정합니다.</block>
   <block id="bb557baccf285d1ab6b4cdc32daf5848" category="open-title">CR을 사용하여 AppVault를 작성합니다</block>
   <block id="32429298e62d70d6afc71defdbdd3c42" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block>).</block>
   <block id="4b60a832776a25dfdf74d5dac3d3111f" category="list-text">*metadata.name*: (_required_) AppVault 사용자 정의 리소스의 이름입니다. 복제 관계에 필요한 다른 CR 파일은 이 값을 참조하므로 선택한 이름을 기록해 둡니다.</block>
@@ -4477,7 +4476,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="8af3a24bfad8f2e7a06abec1e5bc710e" category="list-text">파일을 올바른 값으로 채운 후<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block> CR:</block>
   <block id="65b1402ebaf9b35766ab033225a55f41" category="open-title">CLI를 사용하여 AppVault를 작성합니다</block>
   <block id="d686d91628b89b1ba45ca8bf5274eece" category="list-text">대괄호 안의 값을 사용자 환경의 정보로 대체하여 AppVault를 작성합니다.</block>
-  <block id="c244d23f9be6389c5ac873426253b152" category="list-text">소스 응용 프로그램 생성 CR:</block>
   <block id="93b7f025ad50fefb3f6b0c5ee86d6162" category="open-title">CR을 사용하여 소스 응용 프로그램을 만듭니다</block>
   <block id="793bc477cba966a8d3771d018030c3c4" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block>).</block>
   <block id="3bf6684ac69fda7ed549f87ecb72678d" category="list-text">*metadata.name*: (_required_) 응용 프로그램 사용자 정의 리소스의 이름입니다. 복제 관계에 필요한 다른 CR 파일은 이 값을 참조하므로 선택한 이름을 기록해 둡니다.</block>
@@ -4486,8 +4484,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="948be8a05d305f0b3dece0e8dcaf4546" category="list-text">파일을 올바른 값으로 채운 후<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block> CR:</block>
   <block id="677aa747b5e08444532c7cc040384124" category="open-title">CLI를 사용하여 소스 애플리케이션을 생성합니다</block>
   <block id="feaddb5b204f8f8f1226cc6f02275f5c" category="list-text">소스 응용 프로그램을 만듭니다. 예를 들면 다음과 같습니다.</block>
-  <block id="2111432c46f82ea9d065a1168a7bca3d" category="list-text">필요한 경우 소스 애플리케이션의 스냅샷을 생성합니다. 이 스냅샷은 대상 클러스터에서 애플리케이션의 기반으로 사용됩니다. 이 단계를 건너뛸 경우 다음 예약된 스냅샷이 실행될 때까지 기다려야 최신 스냅샷이 생성됩니다.</block>
-  <block id="84caf200e79d5962bc7f3516e9ad328c" category="open-title">CR을 사용하여 스냅샷을 촬영합니다</block>
   <block id="929d5ad53cad5d51ead7578004e2d5e5" category="list-text">소스 애플리케이션에 대한 복제 스케줄을 생성합니다.</block>
   <block id="57cc31c4785dfe52bb22cc8d375a3b67" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block>).</block>
   <block id="87918fdbe5607aeceec3ec53bc40a2f8" category="list-text">*metadata.name*: (_required_) 일정 사용자 정의 리소스의 이름입니다.</block>
@@ -4499,14 +4495,10 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="8c33ed4b89c2cd001ffad0203fe3c3b6" category="list-text">*spec.recurrenceRule*: UTC 시간과 반복 간격으로 시작 날짜를 정의합니다.</block>
   <block id="35ef995e5b9fe2ba99491ff849d63302" category="list-text">*spec.snapshotRetention*: 2로 설정해야 합니다.</block>
   <block id="7c6d1c687b69c90909ec8375ac84883e" category="list-text">파일을 올바른 값으로 채운 후<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block> CR:</block>
-  <block id="3feb4a62c8b59cd52ae22845d363c901" category="open-title">CLI를 사용하여 스냅샷을 생성합니다</block>
-  <block id="a1e2bc47f1a3bfef13f10398ea862ec3" category="list-text">소스 클러스터에 적용한 AppVault CR과 동일한 소스 응용 프로그램 AppVault CR을 대상 클러스터에 생성하고 이름을 지정합니다(예:<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block>).</block>
   <block id="04a53b4d2f7e20d9df207bfb6beb6ee7" category="list-text">CR 적용:</block>
-  <block id="b90466d65b799b761b892272fec2c528" category="list-text">대상 클러스터에서 대상 응용 프로그램에 대한 AppVault를 생성합니다. 스토리지 공급자에 따라 의 예를 <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>환경에 맞게 수정합니다.</block>
   <block id="d5ab09bc69c7800783bce2e14f2e456f" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block>).</block>
   <block id="7fab67e3c762a0a044dd84f11a740dd7" category="list-text">*spec.providerConfig*: (_required_) 지정된 공급자를 사용하여 AppVault에 액세스하는 데 필요한 구성을 저장합니다. <block ref="070a97dcde31faecac1fc843e205039c" prefix=" " category="inline-code"></block>와 공급자에게 필요한 기타 세부 정보를 선택합니다. 복제 관계에 필요한 다른 CR 파일은 이러한 값을 참조하므로 선택한 값을 기록해 둡니다. 다른 공급자의 AppVault CRS에 대한 예는 을 <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="4758f7c104e1f75364dadc9f8310e51d" category="list-text">파일을 올바른 값으로 채운 후<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block> CR:</block>
-  <block id="852c44e158b3265857137f38ef65ac49" category="list-text">AppMirrorRelationship CR 파일 만들기:</block>
   <block id="15e5c4ea8565e669f02393ab1d7b1021" category="open-title">CR을 사용하여 AppMirrorRelationship을 생성합니다</block>
   <block id="3ca407ea70946200511f8d2e1008f20f" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>).</block>
   <block id="52e868ab750f66344086c9bc5d6dadeb" category="list-text">*metadata.name:* (필수) AppMirrorRelationship 사용자 정의 리소스의 이름입니다.</block>
@@ -4520,26 +4512,20 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="86d47ead9019d8e9c93c863f7ab4e41b" category="list-text">(_선택 사항_) 복제 관계의 상태 및 상태를 확인합니다.</block>
   <block id="70cc2bec279e168711b67e789468c45c" category="section-title">대상 클러스터로 페일오버합니다</block>
   <block id="196c4df78e5add7c9590d6a1c18367ec" category="paragraph">Trident Protect를 사용하면 복제된 애플리케이션을 대상 클러스터로 페일오버할 수 있습니다. 이 절차는 복제 관계를 중지하고 대상 클러스터에서 앱을 온라인으로 전환합니다. Trident Protect는 소스 클러스터의 앱이 작동 중이었다면 중지하지 않습니다.</block>
-  <block id="ffb2e8a8e2a97e36799531c053229941" category="list-text">AppMirrorRelationship CR 파일(예<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>:)을 열고 * spec.desiredState* 값을 로 변경합니다<block ref="2c42d7d277f63fcbe64b041b997ceaed" prefix=" " category="inline-code"></block>.</block>
   <block id="2d258c624d61d2388efacfc246d2439e" category="list-text">CR 파일을 저장합니다.</block>
   <block id="66ccf267a388b1a30a7530a93ea5ce18" category="list-text">(_선택 사항_) 페일오버된 애플리케이션에 필요한 보호 스케줄을 생성합니다.</block>
   <block id="ea7117a895b98283737d3855ef6a2adc" category="section-title">페일오버된 복제 관계를 다시 동기화합니다</block>
   <block id="c91dda18aff454993264381ffa25993f" category="paragraph">재동기화 작업은 복제 관계를 다시 설정합니다. 재동기화 작업을 수행하면 원래 소스 애플리케이션이 실행 중인 애플리케이션이 되고 대상 클러스터에서 실행 중인 애플리케이션에 대한 변경 내용은 모두 삭제됩니다.</block>
   <block id="86e073f24d64b270ed8fd6bac00280eb" category="paragraph">이 프로세스는 복제를 다시 설정하기 전에 대상 클러스터에서 앱을 중지합니다.</block>
   <block id="63a5fb6889ac843fec3c274399995a88" category="admonition">페일오버 중에 대상 애플리케이션에 기록된 모든 데이터가 손실됩니다.</block>
-  <block id="40b77bd147004d34167c59a33489e3ca" category="list-text">소스 애플리케이션의 스냅샷을 생성합니다.</block>
-  <block id="b0952495915865cc8c4cee9f26959545" category="list-text">AppMirrorRelationship CR 파일(예:<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>)을 열고 spec.desiredState 값을 로 변경합니다<block ref="072f9734fceb02f516b50d4174ac0f18" prefix=" " category="inline-code"></block>.</block>
   <block id="c7e41946fafafcb541aaa5a67635b607" category="list-text">대상 클러스터에서 페일오버된 애플리케이션을 보호하기 위해 보호 스케줄을 생성한 경우 제거하십시오. 남아 있는 스케줄은 볼륨 스냅숏에 장애를 일으킵니다.</block>
   <block id="6e81bcb9e218ada350c173457300a0ed" category="section-title">페일오버된 복제 관계를 역방향으로 재동기화합니다</block>
   <block id="b29e882c5e41f060c9261101cb1cab06" category="paragraph">페일오버된 복제 관계를 역동기화하는 경우 대상 애플리케이션은 소스 애플리케이션이 되고 소스는 대상이 됩니다. 페일오버 중에 대상 애플리케이션에 대한 변경 사항은 유지됩니다.</block>
-  <block id="6916d76a20f4ca4fffa219680ae6e418" category="list-text">원래 대상 클러스터에서 AppMirrorRelationship CR을 삭제합니다. 그러면 대상이 원본이 됩니다. 새 대상 클러스터에 남아 있는 보호 스케줄이 있는 경우 제거합니다.</block>
   <block id="3c890586eb43d0d71cdcb47011358420" category="list-text">관계를 설정할 때 원래 사용했던 CR 파일을 반대 클러스터에 적용하여 복제 관계를 설정합니다.</block>
-  <block id="e4d13c88dbb2196550655288d4cf351a" category="list-text">AppVault CRS가 각 클러스터에 준비되어 있는지 확인합니다.</block>
   <block id="8a427fa57d96e74516c008754320b521" category="list-text">반대 클러스터에서 복제 관계를 설정하여 반대 방향에 대한 값을 구성합니다.</block>
   <block id="792322eb4a0bf1a122100fc009041d9b" category="section-title">애플리케이션 복제 방향을 반대로 전환합니다</block>
   <block id="eb89cf8a1850f41e41a65f7b65ec9c87" category="paragraph">복제 방향을 반대로 바꾸면 Trident Protect는 애플리케이션을 대상 스토리지 백엔드로 이동하고 계속해서 원래 소스 스토리지 백엔드로 복제합니다. Trident Protect는 소스 애플리케이션을 중지하고 타겟 앱으로 페일오버하기 전에 데이터를 대상에 복제합니다.</block>
   <block id="4625c1e6ccf2351ad9a08dcee33270c8" category="paragraph">이 경우 소스와 대상을 스와핑합니다.</block>
-  <block id="06275f61faab68bc1c01a07a41aadfed" category="list-text">종료 스냅샷 생성:</block>
   <block id="4f902591d45de06985f0af6d869c8a04" category="open-title">CR을 사용하여 종료 스냅샷을 생성합니다</block>
   <block id="1f6c30c2bcecec90eda54cd7038f326b" category="list-text">소스 애플리케이션에 대한 보호 정책 일정을 해제합니다.</block>
   <block id="4a4cfa535eb9cd705b5999ffaa6a738b" category="list-text">ShutdownSnapshot CR 파일 생성:</block>
@@ -4549,9 +4535,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="4390dd9bb73a0c56ac3c54b54b1fe51a" category="list-text">파일을 올바른 값으로 채운 후<block ref="9bab8384d1fd26e8737f71771039462f" prefix=" " category="inline-code"></block> CR:</block>
   <block id="f450395b52edc310f6e53fe1a9e24477" category="open-title">CLI를 사용하여 종료 스냅샷을 생성합니다</block>
   <block id="01eb7f0adf446989c265a6179909de7b" category="list-text">괄호 안의 값을 사용자 환경의 정보로 대체하여 종료 스냅샷을 만듭니다. 예를 들면 다음과 같습니다.</block>
-  <block id="5c29a32288e71f1820e4af984e4616d6" category="list-text">스냅샷이 완료되면 스냅샷의 상태를 가져옵니다.</block>
-  <block id="eae3a231fcdd07328a039c0bd1b3ebdf" category="list-text">다음 명령을 사용하여 * shutdownsnapshot.status.appArchivePath * 의 값을 찾고 파일 경로의 마지막 부분(basename라고도 함. 이것은 마지막 슬래시 다음에 모두 있음)을 기록합니다.</block>
-  <block id="9facdd349a186c792ec6a26f5b938472" category="list-text">다음과 같이 변경하여 대상 클러스터에서 소스 클러스터로 페일오버를 수행합니다.</block>
   <block id="bdd0666b03fe73dd725c0376fdb435e0" category="admonition">페일오버 절차의 2단계에서 AppMirrorRelationship CR 파일에 필드를 포함하고<block ref="60464bee8fcac84cb209df68a2b05fba" prefix=" " category="inline-code"></block> 위의 3단계에서 기록한 기본 이름으로 값을 설정합니다.</block>
   <block id="ab486212bb19e45c8e71532739574a22" category="list-text">새 소스 클러스터에서 보호 스케줄을 설정합니다.</block>
   <block id="aea4fd534bd3152673956c6bbd7c115c" category="paragraph">역방향 복제 때문에 다음 작업이 발생합니다.</block>
@@ -4567,7 +4550,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">페일오버된 상태로 시작합니다.</block>
   <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">복제 관계를 삭제합니다</block>
   <block id="a6c87e2b66308cd117a39af0fdac9885" category="paragraph">언제든지 복제 관계를 삭제할 수 있습니다. 애플리케이션 복제 관계를 삭제하면 서로 관계가 없는 두 개의 개별 애플리케이션이 생성됩니다.</block>
-  <block id="146012b834b7d1f68305ff2495a1beb7" category="list-text">AppMirrorRelationship CR 삭제:</block>
   <block id="c4407b1cc5192fe600872654a5ffe223" category="list-text">Kubernetes 네이티브 워크플로우를 위한 새로운 Trident 기능 추가:</block>
   <block id="7e7397a7b79323762c61941fc0e6b5f9" category="list-text">데이터 보호</block>
   <block id="5866b98c049a53ea6dc7f50f9349f434" category="list-text">데이터 마이그레이션</block>
@@ -5488,4 +5470,23 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="5a71b77feca506fc8eba218b4e65048b" category="paragraph">Trident는 스냅샷에서 데이터를 복원합니다. 스냅샷 복구 상태를 확인할 수 있습니다.</block>
   <block id="9d577c00c4cbb5d99e7a8a6589113669" category="paragraph">연결된 스냅샷이 있는 영구 볼륨을 삭제하면 해당 Trident 볼륨이 "삭제 상태"로 업데이트됩니다. 볼륨 스냅샷을 제거하여 Trident 볼륨을 삭제합니다.</block>
   <block id="27e9bd9989c090489f69126b9910d7d8" category="list-text">백엔드 정의에 포함하여 각 백엔드에 대한 디버그 로그를 얻을 수도<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block> 있습니다. 예를 들어, Trident 로그에 API 호출 및 메서드 트래버스를 가져오려면 를<block ref="825a719baa5b5b7445c98535815fac39" prefix=" " category="inline-code"></block> 포함합니다. 기존 백엔드는 로<block ref="ad782b779edfd8199198bed41b3e3b6b" prefix=" " category="inline-code"></block>구성할 수<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block> 있습니다.</block>
+  <block id="1e8493e925b9f37d24c0573c08c6643a" category="list-text">소스 클러스터에서 소스 응용 프로그램에 대한 AppVault를 생성합니다. 스토리지 공급자에 따라 의 예를 <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>환경에 맞게 수정합니다.</block>
+  <block id="a42a308559809e0fc20b13ea51d5d3d4" category="list-text">소스 클러스터에서 소스 애플리케이션 CR:</block>
+  <block id="75ffc8eca312c20c922ba2b9df1fde04" category="list-text">필요에 따라 소스 클러스터에서 소스 애플리케이션의 종료 스냅샷을 생성합니다. 이 스냅샷은 대상 클러스터에서 애플리케이션의 기반으로 사용됩니다. 이 단계를 건너뛸 경우 다음 예약된 스냅샷이 실행될 때까지 기다려야 최신 스냅샷이 생성됩니다.</block>
+  <block id="663f822dd7baf35b6905a0333070ed81" category="open-title">CR을 사용하여 종료 스냅샷을 촬영합니다</block>
+  <block id="15b08a67c1cea1e1d7463ca2d0c98610" category="open-title">CLI를 사용하여 종료 스냅샷을 생성합니다</block>
+  <block id="85d88f09b637997959adc6d50a42d56f" category="list-text">대상 클러스터에서 소스 클러스터에 적용한 AppVault CR과 동일한 소스 응용 프로그램 AppVault CR을 생성하고 이름을 지정합니다(예:<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block>).</block>
+  <block id="8af8219e9797756f7e348dd40e365632" category="list-text">대상 클러스터에서 대상 응용 프로그램에 대한 대상 AppVault CR을 생성합니다. 스토리지 공급자에 따라 의 예를 <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>환경에 맞게 수정합니다.</block>
+  <block id="f454fc9c64d31c07a352c043fe184940" category="list-text">대상 클러스터에서 AppMirrorRelationship CR 파일을 생성합니다.</block>
+  <block id="3d9dc864aeb5b914422a6a665c53ceeb" category="list-text">(_선택 사항_) 대상 클러스터에서 복제 관계의 상태 및 상태를 확인합니다.</block>
+  <block id="fe07abfd92e0d0809a7eb71ce3f79b4b" category="list-text">대상 클러스터에서 AppMirrorRelationship CR 파일(예<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>:)을 편집하고 * spec.desiredState* 값을 로 변경합니다.<block ref="2c42d7d277f63fcbe64b041b997ceaed" prefix=" " category="inline-code"></block></block>
+  <block id="2ebd442ba9080ba8f10b660fd69bb379" category="list-text">선택 사항: 소스 클러스터에서 소스 애플리케이션의 스냅샷을 생성합니다. 이렇게 하면 소스 클러스터의 최신 변경 사항이 캡처됩니다.</block>
+  <block id="4d77fef9f6bd1f87593e41a1d32a7ea4" category="list-text">대상 클러스터에서 AppMirrorRelationship CR 파일(예<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>:)을 편집하고 spec.desiredState 값을 로 변경합니다.<block ref="072f9734fceb02f516b50d4174ac0f18" prefix=" " category="inline-code"></block></block>
+  <block id="cd7eea117bba074d0250983f81bb10e4" category="list-text">원래 대상 클러스터에서 AppMirrorRelationship CR을 삭제합니다. 그러면 대상이 원본이 됩니다. 새 대상 클러스터에 남아 있는 보호 스케줄이 있는 경우 제거합니다.</block>
+  <block id="5ca8234bb17898bdaa8421e9bab83a0b" category="list-text">새 대상(원래 소스 클러스터)이 두 AppVault CRS로 구성되어 있는지 확인합니다.</block>
+  <block id="e319bd320145e358af8fd5dbada2d800" category="list-text">소스 클러스터에서 종료 스냅샷을 생성합니다.</block>
+  <block id="47d8460d4aa2253d733ecb9b355e4319" category="list-text">소스 클러스터에서 종료 스냅샷이 완료된 후 종료 스냅샷의 상태를 가져옵니다.</block>
+  <block id="00e7f88da8b7690738f8546262d2fe54" category="list-text">소스 클러스터에서 다음 명령을 사용하여 * shutdownsnapshot.status.appArchivePath * 의 값을 찾고 파일 경로의 마지막 부분(basename라고도 함. 이것은 마지막 슬래시 다음에 모두 있음)을 기록합니다.</block>
+  <block id="579f2feb3d9edaa336d3ccb69c3fb855" category="list-text">다음 변경 사항을 적용하여 새 대상 클러스터에서 새 소스 클러스터로 페일오버를 수행합니다.</block>
+  <block id="23b4dec181e41ab3962cf73b28ffe58c" category="list-text">현재 대상 클러스터에서 AppMirrorRelationship CR을 삭제합니다.</block>
 </blocks>
