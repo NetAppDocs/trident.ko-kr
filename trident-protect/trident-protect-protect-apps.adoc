@@ -123,17 +123,6 @@ AWS 세션 토큰의 만료가 장시간 실행되는 S3 백업 작업에 충분
 
 
 ** * Spec.snapshotRef *: (_Optional_): 백업 소스로 사용할 스냅샷의 이름입니다. 제공하지 않으면 임시 스냅샷이 생성되고 백업됩니다.
-** *metadata.annotations.protect.trident.netapp.io/full-backup-rule*: (_Optional_) 이 주석은 백업이 비증분 백업이어야 하는지 여부를 지정하는 데 사용됩니다. 기본적으로 모든 백업은 증분 백업입니다. 그러나 이 주석을 로 `true` 설정하면 백업이 비증분 백업이 됩니다. 지정하지 않으면 백업이 기본 증분 백업 설정을 따릅니다. 전체 백업을 주기적으로 수행한 다음 전체 백업 사이에 증분 백업을 수행하여 복원과 관련된 위험을 최소화하는 것이 좋습니다.
-+
-[NOTE]
-====
-응용 프로그램이 이미 생성된 후에 이 주석을 적용해야 하는 경우 다음 명령을 사용할 수 있습니다.
-
-[source, console]
-----
-kubectl annotate backup -n <backup CR namespace> <backup CR name> protect.trident.netapp.io/full-backup-rule="true"
-----
-====
 +
 YAML 예:
 
@@ -146,8 +135,6 @@ kind: Backup
 metadata:
   namespace: my-app-namespace
   name: my-cr-name
-  annotations:
-    protect.trident.netapp.io/full-backup-rule: "true"
 spec:
   applicationRef: my-application
   appVaultRef: appvault-name
@@ -173,111 +160,6 @@ kubectl apply -f trident-protect-backup-cr.yaml
 ----
 tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --app <name_of_app_to_back_up> --data-mover <Kopia_or_Restic> -n <application_namespace>
 ----
-+
-필요에 따라 플래그를 사용하여 백업이 비증분 백업이어야 하는지 여부를 지정할 수 `--full-backup` 있습니다. 기본적으로 모든 백업은 증분 백업입니다. 이 플래그를 사용하면 백업이 비증분 백업이 됩니다. 전체 백업을 주기적으로 수행한 다음 전체 백업 사이에 증분 백업을 수행하여 복원과 관련된 위험을 최소화하는 것이 좋습니다.
-
-
-
---
-====
-
-
-== 백업 일정을 생성합니다
-
-비증분 전체 백업을 예약할 수 있습니다. 기본적으로 모든 백업은 증분 백업입니다. 정기적으로 전체 백업을 수행하고 중간에 증분 백업을 수행하면 복원과 관련된 위험을 줄일 수 있습니다.
-
-
-NOTE: 클러스터 범위 리소스는 애플리케이션 정의에 명시적으로 참조되거나 애플리케이션 네임스페이스에 대한 참조가 있는 경우 백업, 스냅샷 또는 클론에 포함됩니다.
-
-.시작하기 전에
-AWS 세션 토큰의 만료가 장시간 실행되는 S3 백업 작업에 충분한지 확인합니다. 백업 작업 중에 토큰이 만료되면 작업이 실패할 수 있습니다.
-
-* 현재 세션 토큰 만료 확인에 대한 자세한 내용은 를 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API 설명서"^] 참조하십시오.
-* AWS 리소스의 자격 증명에 대한 자세한 내용은 를 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["AWS IAM 설명서"^] 참조하십시오.
-
-
-[role="tabbed-block"]
-====
-.CR을 사용하여 일정을 생성합니다
---
-.단계
-. CR(사용자 정의 리소스) 파일을 만들고 이름을 `trident-backup-schedule-cr.yaml`지정합니다.
-. 생성한 파일에서 다음 속성을 구성합니다.
-+
-** *metadata.name*: (_required_) 이 사용자 정의 리소스의 이름입니다. 사용자 환경에 맞는 고유하고 합리적인 이름을 선택하십시오.
-** * spec.datamover *: (_Optional_) 백업 작업에 사용할 백업 도구를 나타내는 문자열입니다. 가능한 값(대소문자 구분):
-+
-*** `Restic`
-*** `Kopia` (기본값)
-
-
-** * spec.applicationRef *: 백업할 응용 프로그램의 Kubernetes 이름입니다.
-** * spec.appVaultRef *: (_required_) 백업 내용을 저장할 AppVault의 이름입니다.
-** * spec.backupRetention *: 보존할 백업 수입니다. 0은 백업을 생성하지 않아야 함을 나타냅니다.
-** * spec.snapshotRetention *: 보존할 스냅샷 수입니다. 0은 스냅샷을 생성하지 않아야 함을 나타냅니다.
-** *spec.granularity*: 일정이 실행되는 빈도. 가능한 값과 필수 관련 필드:
-+
-*** `hourly` (지정 필요 `spec.minute`)
-*** `daily` (및 을 지정해야 함 `spec.minute` `spec.hour`)
-*** `weekly` (, 및 을 `spec.dayOfWeek` 지정해야 함 `spec.minute, spec.hour`)
-*** `monthly` (, 및 을 `spec.dayOfMonth` 지정해야 함 `spec.minute, spec.hour`)
-
-
-** * spec.dayOfMonth *: (_Optional_) 스케줄을 실행할 요일(1-31). 세분화가 로 설정된 경우 이 필드는 `monthly`필수입니다.
-** *spec.dayOfWeek*: (_Optional_) 일정이 실행되는 요일(0-7)입니다. 0 또는 7의 값은 일요일을 나타냅니다. 세분화가 로 설정된 경우 이 필드는 `weekly`필수입니다.
-** * spec.hour *: (_Optional_) 스케줄을 실행할 시간(0-23)입니다. 세분화가, 또는 로 설정된 경우 이 필드는 `daily` `weekly` `monthly`필수입니다.
-** * spec.minute *: (_Optional_) 스케줄을 실행할 분(0-59)입니다. 세분화가 , , 또는 로 설정된 경우 이 필드가 `hourly` `daily` `weekly` `monthly`필요합니다.
-** *metadata.annotations.protect.trident.netapp.io/full-backup-rule*: (_Optional_) 이 주석은 전체 백업 예약 규칙을 지정하는 데 사용됩니다. 지속적인 전체 백업을 위해 을 설정하거나 요구 사항에 따라 사용자 지정할 수 `always` 있습니다. 예를 들어, 매일 세분화를 선택하는 경우 전체 백업이 수행되는 요일을 지정할 수 있습니다.
-+
-[source, yaml]
-----
----
-apiVersion: protect.trident.netapp.io/v1
-kind: Schedule
-metadata:
-  namespace: my-app-namespace
-  name: my-cr-name
-  annotations:
-    protect.trident.netapp.io/full-backup-rule: "Monday,Thursday"
-spec:
-  dataMover: Kopia
-  applicationRef: my-application
-  appVaultRef: appvault-name
-  backupRetention: "15"
-  snapshotRetention: "15"
-  granularity: daily
-  dayOfMonth: "1"
-  dayOfWeek: "0"
-  hour: "0"
-  minute: "0"
-----
-
-
-. 파일을 올바른 값으로 채운 후 `trident-backup-schedule-cr.yaml` CR:
-+
-[source, console]
-----
-kubectl apply -f trident-backup-schedule-cr.yaml
-----
-
-
---
-.CLI를 사용하여 일정을 생성합니다
---
-.단계
-. 대괄호 안의 값을 사용자 환경의 정보로 대체하여 백업 일정을 만듭니다. 예를 들면 다음과 같습니다.
-+
-
-NOTE: 을 사용하여 `tridentctl-protect create schedule --help` 이 명령에 대한 자세한 도움말 정보를 볼 수 있습니다.
-
-+
-[source, console]
-----
-tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace> --full-backup-rule <string>
-----
-+
-고정 전체 백업을 위해 플래그를 `always` 설정하거나 요구 사항에 따라 사용자 지정할 수 `--full-backup-rule` 있습니다. 예를 들어, 매일 세분화를 선택하는 경우 전체 백업이 수행되는 요일을 지정할 수 있습니다. 예를 들어 월요일과 목요일에 전체 백업을 예약하려면 을 `--full-backup-rule "Monday,Thursday"` 사용합니다.
-
 
 
 --
