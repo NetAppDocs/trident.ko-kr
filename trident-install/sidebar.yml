@@ -22,3 +22,9 @@ entries:
     url: "/trident-get-started/kubernetes-deploy-tridentctl.html"
   - title: tridentctl 설치를 사용자 지정합니다
     url: "/trident-get-started/kubernetes-customize-deploy-tridentctl.html"
+- title: OpenShift 인증 운영자를 사용하여 설치합니다
+  entries:
+  - title: OpenShift OperatorHub를 사용하여 Trident를 설치합니다
+    url: "/trident-get-started/openshift-operator-deploy.html"
+  - title: Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환
+    url: "/trident-get-started/openshift-certified-operator-deploy.html"

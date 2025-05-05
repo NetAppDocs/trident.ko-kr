@@ -5424,15 +5424,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="351e2b20bd9ea864b69cd832f3a4a5df" category="list-text">백엔드에서 NAE가 사용되지 않는 경우, 백엔드 구성에서 NVE 암호화 플래그가 (기본값)로 설정되지 않은 경우 Trident에서 프로비저닝된 모든 볼륨은 NVE가<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> 사용됩니다.</block>
   <block id="39fb9551310e8e28d64d0e2b94913f7a" category="paragraph">응용 프로그램에서 데이터 보호 작업을 수행할 때 수동으로 또는 명령줄을 사용하여 AppVault CR을 만들어야 하며 AppVault CR은 Trident Protect가 설치된 클러스터에 있어야 합니다. AppVault CR은 사용자 환경에 따라 다르며, AppVault CRS를 생성할 때 이 페이지의 예제를 지침으로 사용할 수 있습니다.</block>
   <block id="8b70987187655cedeb971520a2170b2d" category="paragraph">AppVault CR을 생성하기 전에 AppVault 및 선택한 Data Mover가 공급자 및 관련 리소스를 통해 인증될 수 있는지 확인해야 합니다.</block>
-  <block id="329e129e6c733f5d2b0f685c631d5254" category="list-text">*metadata.annotations.protect.trident.netapp.io/full-backup-rule*: (_Optional_) 이 주석은 백업이 비증분 백업이어야 하는지 여부를 지정하는 데 사용됩니다. 기본적으로 모든 백업은 증분 백업입니다. 그러나 이 주석을 로<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 설정하면 백업이 비증분 백업이 됩니다. 지정하지 않으면 백업이 기본 증분 백업 설정을 따릅니다. 전체 백업을 주기적으로 수행한 다음 전체 백업 사이에 증분 백업을 수행하여 복원과 관련된 위험을 최소화하는 것이 좋습니다.</block>
-  <block id="93b1107cde6ba041513cd9ccf7b4bae0" category="paragraph">필요에 따라 플래그를 사용하여 백업이 비증분 백업이어야 하는지 여부를 지정할 수<block ref="53f5240b338c91a0568f15e2562a35de" prefix=" " category="inline-code"></block> 있습니다. 기본적으로 모든 백업은 증분 백업입니다. 이 플래그를 사용하면 백업이 비증분 백업이 됩니다. 전체 백업을 주기적으로 수행한 다음 전체 백업 사이에 증분 백업을 수행하여 복원과 관련된 위험을 최소화하는 것이 좋습니다.</block>
-  <block id="99cd57e28c97c0577c8e6d701de91b88" category="section-title">백업 일정을 생성합니다</block>
-  <block id="46773fe21c0cf6451e8de9f6a18da51f" category="paragraph">비증분 전체 백업을 예약할 수 있습니다. 기본적으로 모든 백업은 증분 백업입니다. 정기적으로 전체 백업을 수행하고 중간에 증분 백업을 수행하면 복원과 관련된 위험을 줄일 수 있습니다.</block>
-  <block id="2c26e9a03dd91b6eafe57094f8245ad8" category="list-text">CR(사용자 정의 리소스) 파일을 만들고 이름을<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block>지정합니다.</block>
-  <block id="1770a13eba6600496a86d2f1cf357813" category="list-text">*metadata.annotations.protect.trident.netapp.io/full-backup-rule*: (_Optional_) 이 주석은 전체 백업 예약 규칙을 지정하는 데 사용됩니다. 지속적인 전체 백업을 위해 을 설정하거나 요구 사항에 따라 사용자 지정할 수<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block> 있습니다. 예를 들어, 매일 세분화를 선택하는 경우 전체 백업이 수행되는 요일을 지정할 수 있습니다.</block>
-  <block id="9355f48a9876fcaefe0351294df4e05c" category="list-text">파일을 올바른 값으로 채운 후<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block> CR:</block>
-  <block id="1bd9850ddb901f0e741293ec737c5de6" category="list-text">대괄호 안의 값을 사용자 환경의 정보로 대체하여 백업 일정을 만듭니다. 예를 들면 다음과 같습니다.</block>
-  <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">고정 전체 백업을 위해 플래그를<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block> 설정하거나 요구 사항에 따라 사용자 지정할 수<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block> 있습니다. 예를 들어, 매일 세분화를 선택하는 경우 전체 백업이 수행되는 요일을 지정할 수 있습니다. 예를 들어 월요일과 목요일에 전체 백업을 예약하려면 을<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block> 사용합니다.</block>
   <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">저장 클래스 및 PVC가 생성되면 PV를 포드에 장착할 수 있습니다. 이 섹션에는 PV를 Pod에 연결하기 위한 명령 및 구성의 예가 나와 있습니다.</block>
   <block id="f253a45a33bc62e467efd426699d9025" category="paragraph">데몬을 시작한 후 Docker CLI 인터페이스를 사용하여 볼륨을 생성 및 관리할 수 있습니다.</block>
   <block id="a0ba0b0d751124c646a352594c7e9d7b" category="paragraph">나머지 드라이버는 경합 조건과 같이 명확한 "승자"가 없는 단일 요청에 대해 대량의 볼륨을 생성할 수 있는 문제가 발생합니다. 예를 들어 Element에는 볼륨이 동일한 이름을 갖지만 ID를 가질 수 있는 기능이 있습니다.</block>
@@ -5488,4 +5479,36 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="90abe2b6c39f51adea4c5aabff2df094" category="list-text">추가 기능 구성 스키마 * 에 따라 * 구성 값 * 섹션의 구성 값 매개 변수를 이전 단계(1단계)에서 만든 역할 아른으로 설정합니다. 값은 다음 형식이어야 합니다.</block>
   <block id="be88c7e0502cadac6eccdbb309610a77" category="paragraph">다음 명령 예에서는 Trident EKS 추가 기능을 설치합니다(전용 버전 포함).<block ref="a5b33d95c2beda5bdc154ff0b946fffe" prefix=" " category="inline-code"></block></block>
   <block id="23773f4cc30b766e1a2846ff0e0ec8ba" category="list-text">추가 기능 구성 스키마 * 에 따라 * 구성 값 * 섹션의 configurationValues 매개 변수를 이전 단계에서 만든 역할-arn으로 설정합니다. 값은 다음 형식으로 설정해야 합니다.</block>
+  <block id="6935ea1d99a0c26f0e4cddb80f444849" category="summary">Red Hat OpenShift를 사용하는 경우 운영자를 사용하여 Trident를 설치할 수 있습니다.</block>
+  <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환</block>
+  <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">NetApp 커뮤니티 Trident 운영자에서 Red Hat OpenShift Certified Trident 운영자로 전환하려면 커뮤니티 운영자를 제거한 다음 OperatorHub를 사용하여 인증된 운영자를 설치해야 합니다.</block>
+  <block id="cec1c482e499b4748371d5e19359dacd" category="inline-link-macro">Trident 설치 환경을 준비합니다</block>
+  <block id="32bc521a76f74eeb913f8006ab760ef5" category="paragraph">설치를 시작하기 전에 <block ref="77baaa0182ec347ebf1b91f8f0f5fa8c" category="inline-link-macro-rx"></block>를 참조하십시오.</block>
+  <block id="82c3da1e712e572f424c3b7bf7dafcaf" category="section-title">NetApp Trident 커뮤니티 운영자를 제거합니다</block>
+  <block id="ae76609b28371ddbc9f46be837040994" category="list-text">OpenShift 콘솔을 사용하여 OperatorHub로 이동합니다.</block>
+  <block id="349838fb1d851d3e2014b9fe39203275" category="image-alt">설치합니다</block>
+  <block id="2d8d10c295f87a1f17d2f37a4df9688d" category="list-text">NetApp Trident 커뮤니티 운영자를 찾습니다.</block>
+  <block id="e1b3a07c6ba67335c1564ff539f1f885" category="admonition">이 연산자에서 모든 피연산자 인스턴스 삭제 * 를 선택하지 마십시오.</block>
+  <block id="615da270425b5ecb4fe6ddeed9358880" category="list-text">제거 * 를 클릭합니다.</block>
+  <block id="c7afcce8432c7e249a80e803d2a81180" category="section-title">OpenShift Certified Operator를 설치합니다</block>
+  <block id="6eaf33f9c2387a07f89fc20e19acffaa" category="list-text">Red Hat OperatorHub 로 이동합니다.</block>
+  <block id="cccebca328e4674a8888d5dc22f61e0d" category="list-text">NetApp Trident 연산자를 검색하여 선택합니다.</block>
+  <block id="9872de8cf3e5ac67cae81e5c17eaa5cc" category="list-text">화면의 지침에 따라 작업자를 설치합니다.</block>
+  <block id="52b8ffce119fe77b28034f2fdd35eb5f" category="section-title">검증</block>
+  <block id="ba8b537f098a607b7119fc78961300eb" category="list-text">콘솔에서 OperatorHub 를 확인하여 새 인증 운영자가 성공적으로 설치되었는지 확인합니다.</block>
+  <block id="838483eae18a7bca44c25a90dc7f55c3" category="doc">OpenShift OperatorHub를 사용하여 Trident를 설치합니다</block>
+  <block id="d569da5fb14cad502f71e232cdfcb4e4" category="paragraph">Red Hat OpenShift를 사용하는 경우 Red Hat 공인 운영자를 사용하여 NetApp Trident를 설치할 수 있습니다. 다음 절차를 사용하여 Red Hat OpenShift Container Platform에서 Trident를 설치합니다.</block>
+  <block id="516a493e6df274ac5512ffaab7234ebf" category="section-title">Trident 운영자를 찾아 설치합니다</block>
+  <block id="7a200e69eab0d67b215ea6e3c6081797" category="list-text">OpenShift OperatorHub로 이동하여 NetApp Trident를 검색합니다.</block>
+  <block id="f19e5d93360a2cdbfe64b6c513e8d263" category="list-text">설치 * 를 클릭합니다.</block>
+  <block id="86499c179913093d38f20a089bb4967f" category="list-text">필요한 옵션을 선택하고 * 설치 * 를 클릭합니다.</block>
+  <block id="301a8f7d2ea6785da5f183d668f629b2" category="list-text">설치가 완료되면 운전자가 설치된 운영자 목록에 표시됩니다.</block>
+  <block id="daf49607bdd50d5294748814ce67ed21" category="list-text">오퍼레이터 번들 설치처럼 Torc를 생성합니다.</block>
+  <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">Trident 운영자를 제거합니다</block>
+  <block id="9838ab5306db947832d94d1cd49a486a" category="list-text">설치된 운영자 목록에서 Trident 운영자를 선택합니다.</block>
+  <block id="b5a7424a278ddd01fa4e381b58d1e00d" category="list-text">연산자에서 모든 피연산자 인스턴스를 삭제하려면 선택합니다.</block>
+  <block id="28ed84868f638999e59e306d6b87b07c" category="admonition">이 연산자에서 모든 피연산자 인스턴스 삭제 * 확인란을 선택하지 않으면 Trident가 제거되지 않습니다.</block>
+  <block id="0e9e7400617f4a815b5ec92f2030b580" category="sidebar">OpenShift 인증 운영자를 사용하여 설치합니다</block>
+  <block id="93e4eff1c01241084bfc9427074bacea" category="sidebar">OpenShift OperatorHub를 사용하여 Trident를 설치합니다</block>
+  <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환</block>
 </blocks>
