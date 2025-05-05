@@ -5144,7 +5144,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="fc61af20b92225aae2a169587940eb14" category="doc">네임스페이스 전체에 걸친 클론 볼륨</block>
   <block id="7d3b4ba16dd9908f0a9572976f62cb92" category="paragraph">Trident를 사용하면 동일한 Kubernetes 클러스터 안에 있는 다른 네임스페이스의 기존 볼륨 또는 볼륨스냅샷을 사용하여 새 볼륨을 생성할 수 있습니다.</block>
   <block id="12bf911acc3865647e24aa6cc61fad9d" category="paragraph">볼륨을 클론 복제하기 전에 소스 및 대상 백엔드의 유형이 동일하고 스토리지 클래스가 동일한지 확인합니다.</block>
-  <block id="0338234dde0d63169da560597ab080e5" category="paragraph">몇 단계만으로 NFS 볼륨 클론 복제를 설정할 수 있습니다.</block>
   <block id="9e556d1188a1d7d3f911546d9c8f70f1" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block> 볼륨을 복제하도록 소스 PVC를 구성합니다</block>
   <block id="4f371bbe8ba542b2ca00eb9f3a3a2716" category="paragraph-title"><block ref="beadfa85a2fdca06b91edc1131c603e6" category="inline-image-macro-rx" type="image"></block> 대상 네임스페이스에 클론 PVC를 생성합니다</block>
   <block id="a77fe76c8980416f14767484ab56a324" category="paragraph">대상 네임스페이스의 소유자는 PVC를 생성하여 소스 네임스페이스에서 PVC를 복제합니다.</block>
@@ -5511,4 +5510,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="0e9e7400617f4a815b5ec92f2030b580" category="sidebar">OpenShift 인증 운영자를 사용하여 설치합니다</block>
   <block id="93e4eff1c01241084bfc9427074bacea" category="sidebar">OpenShift OperatorHub를 사용하여 Trident를 설치합니다</block>
   <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환</block>
+  <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">몇 단계만 거치면 볼륨 복제를 설정할 수 있습니다.</block>
+  <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident은 PV와 백엔드 스토리지 볼륨을 생성합니다.</block>
 </blocks>
