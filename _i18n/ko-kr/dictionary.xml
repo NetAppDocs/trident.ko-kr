@@ -5482,7 +5482,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환</block>
   <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">NetApp 커뮤니티 Trident 운영자에서 Red Hat OpenShift Certified Trident 운영자로 전환하려면 커뮤니티 운영자를 제거한 다음 OperatorHub를 사용하여 인증된 운영자를 설치해야 합니다.</block>
   <block id="cec1c482e499b4748371d5e19359dacd" category="inline-link-macro">Trident 설치 환경을 준비합니다</block>
-  <block id="32bc521a76f74eeb913f8006ab760ef5" category="paragraph">설치를 시작하기 전에 <block ref="77baaa0182ec347ebf1b91f8f0f5fa8c" category="inline-link-macro-rx"></block>를 참조하십시오.</block>
   <block id="82c3da1e712e572f424c3b7bf7dafcaf" category="section-title">NetApp Trident 커뮤니티 운영자를 제거합니다</block>
   <block id="ae76609b28371ddbc9f46be837040994" category="list-text">OpenShift 콘솔을 사용하여 OperatorHub로 이동합니다.</block>
   <block id="349838fb1d851d3e2014b9fe39203275" category="image-alt">설치합니다</block>
@@ -5512,4 +5511,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환</block>
   <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">몇 단계만 거치면 볼륨 복제를 설정할 수 있습니다.</block>
   <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident은 PV와 백엔드 스토리지 볼륨을 생성합니다.</block>
+  <block id="9f965f02f635b760a84c43d43aba854f" category="paragraph">설치를 시작하기 전에 <block ref="a24ee29cd883cbf52de58a68b0fed1a7" category="inline-link-macro-rx"></block>를 참조하십시오.</block>
 </blocks>

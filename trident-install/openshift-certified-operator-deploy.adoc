@@ -15,7 +15,7 @@ summary: Red Hat OpenShift를 사용하는 경우 운영자를 사용하여 Trid
 NetApp 커뮤니티 Trident 운영자에서 Red Hat OpenShift Certified Trident 운영자로 전환하려면 커뮤니티 운영자를 제거한 다음 OperatorHub를 사용하여 인증된 운영자를 설치해야 합니다.
 
 .시작하기 전에
-설치를 시작하기 전에 link:../trident-get-started/requirements.html/["Trident 설치 환경을 준비합니다"]를 참조하십시오.
+설치를 시작하기 전에 link:../trident-get-started/requirements.html["Trident 설치 환경을 준비합니다"]를 참조하십시오.
 
 
 
