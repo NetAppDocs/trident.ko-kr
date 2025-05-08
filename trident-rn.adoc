@@ -19,7 +19,27 @@ WARNING: 설치 프로그램 zip 파일에 제공되는 Linux용 tridentctl 바�
 
 
 
-== 25.02의 새로운 기능
+== 25.02.1의 새로운 기능
+
+
+
+=== 트라이던트
+
+
+
+==== 수정
+
+* * Kubernetes *:
++
+** 기본 이미지 레지스트리()를 사용할 때 사이드카 이미지 이름 및 버전이 잘못 채워지는 Trident-연산자의 문제를 해결했습니다link:https://github.com/NetApp/trident/issues/983["문제 #983"].
+** ONTAP 페일오버 반환 중에 다중 경로 세션이 복구되지 않는 문제를 해결했습니다link:https://github.com/NetApp/trident/issues/961["문제 #961"]( ).
+
+
+
+
+
+
+== 25.02의 변경 사항
 
 Trident 25.02부터 Trident 및 Trident Protect 릴리스의 향상된 기능, 수정 사항 및 사용 중단에 대한 자세한 내용은 새로운 기능 요약을 참조하십시오.
 
@@ -103,6 +123,28 @@ NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident 
 * 이제 SCC 주석이 원래 값으로 복원됩니다.
 * 병렬 작업 지원으로 복원 효율성 향상
 * 대규모 애플리케이션의 실행 후크 시간 초과에 대한 지원이 향상되었습니다.
+
+
+
+
+== 24.10.1의 변경 사항
+
+
+
+=== 향상된 기능
+
+* * Kubernetes *: Kubernetes 1.32에 대한 지원이 추가되었습니다.
+* iSCSI 세션이 로그인되어야 하지만 () 로그인되지 않은 경우 iSCSI 연결 상태 검색 및 로깅이 추가되었습니다link:https://github.com/NetApp/trident/issues/961["문제 #961"].
+
+
+
+
+=== 수정
+
+* 자동 엑스포트 정책에서 누락된 노드 IP 주소를 수정했습니다link:https://github.com/NetApp/trident/issues/965["문제 #965"]().
+* ONTAP-NAS-Economy의 경우 조기에 볼륨별 정책으로 전환되는 고정 자동 엑스포트 정책
+* CVE-2024-45337 및 CVE-2024-45310을 해결하기 위해 Trident 및 Trident-ASUP 종속성이 업데이트되었습니다.
+* iSCSI 자동 복구 중 간헐적으로 비CHAP 포털에 대한 로그아웃을 제거했습니다link:https://github.com/NetApp/trident/issues/961["문제 #961"]().
 
 
 

@@ -4983,7 +4983,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="cd2793aaeed5e7f0429f516ecf5eb130" category="list-text"><block ref="8a4b824281db82475bec9857f32bde41" category="inline-link-rx"></block> (iSCSI용)</block>
   <block id="23db1fababbb1ae99bf5bf19e6f6f47b" category="list-text">NetApp은 유휴 볼륨을 클론 복제할 것을 권장합니다.</block>
   <block id="3ca0a694ceba360e6f67566a611b37fb" category="paragraph">볼륨은 프로비저닝의 기본 단위로, NFS 공유, iSCSI 및 FC LUN 등의 백엔드 엔드포인트를 구성합니다. Kubernetes에서 이러한 항목은 에 직접<block ref="3f91308865b7567ae097573f6d0519e9" prefix=" " category="inline-code"></block> 대응합니다. 볼륨을 생성할 때 볼륨의 용량을 할당할 수 있는 위치와 크기를 결정하는 스토리지 클래스가 있는지 확인합니다.</block>
-  <block id="5a8746628add05005005c4b1b98f52a6" category="section-title">25.02의 새로운 기능</block>
   <block id="f732fd09d1f97b63aaad6d5a80382f0c" category="list-text">iSCSI에 대한 ONTAP ASA R2 지원이 추가되었습니다.</block>
   <block id="87959ecf0c52ae4baca9f7e962286ec1" category="list-text">비원활한 노드 종료 시나리오 중 ONTAP-NAS 볼륨에 대한 강제 분리 지원 추가 새로운 ONTAP-NAS 볼륨은 이제 Trident에서 관리하는 볼륨별 엑스포트 정책을 활용합니다. 활성 워크로드에 영향을 주지 않고 게시 취소 시 기존 볼륨을 새로운 엑스포트 정책 모델로 전환할 수 있는 업그레이드 경로를 제공했습니다.</block>
   <block id="09abe7a508b1461d2b42cd082e9680aa" category="list-text">cloneFromSnapshot 주석이 추가되었습니다.</block>
@@ -5512,4 +5511,13 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">몇 단계만 거치면 볼륨 복제를 설정할 수 있습니다.</block>
   <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident은 PV와 백엔드 스토리지 볼륨을 생성합니다.</block>
   <block id="9f965f02f635b760a84c43d43aba854f" category="paragraph">설치를 시작하기 전에 <block ref="a24ee29cd883cbf52de58a68b0fed1a7" category="inline-link-macro-rx"></block>를 참조하십시오.</block>
+  <block id="c9611d3f195e70e59294887ffd815bd1" category="section-title">25.02.1의 새로운 기능</block>
+  <block id="d72c3d84865c2955b89cbf6e0ec00ada" category="inline-link-macro">문제 #983</block>
+  <block id="ac76c3fcac41a10bd5f709108875e6c6" category="list-text">기본 이미지 레지스트리()를 사용할 때 사이드카 이미지 이름 및 버전이 잘못 채워지는 Trident-연산자의 문제를 해결했습니다<block ref="524f95fe3800e5d3ef82e615d679c539" category="inline-link-macro-rx"></block>.</block>
+  <block id="7bc2d7846b2e95d3f64a4d4f4b53cc3c" category="list-text">ONTAP 페일오버 반환 중에 다중 경로 세션이 복구되지 않는 문제를 해결했습니다<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>( ).</block>
+  <block id="212dff1a74c955a52357c5a67478720d" category="section-title">25.02의 변경 사항</block>
+  <block id="ef5363598e9b6f09c42a4f11b7798e31" category="section-title">24.10.1의 변경 사항</block>
+  <block id="fe28e2a5f749261aca15de7b9e5841d0" category="list-text">* Kubernetes *: Kubernetes 1.32에 대한 지원이 추가되었습니다.</block>
+  <block id="3da21bcb163e7e142caada3e22ac014f" category="list-text">CVE-2024-45337 및 CVE-2024-45310을 해결하기 위해 Trident 및 Trident-ASUP 종속성이 업데이트되었습니다.</block>
+  <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">iSCSI 자동 복구 중 간헐적으로 비CHAP 포털에 대한 로그아웃을 제거했습니다<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>().</block>
 </blocks>
