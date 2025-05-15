@@ -319,7 +319,7 @@ CAUTION: Red Hat OpenShift 버전 3.9를 기준으로 공식 문서는 데이터
 기본 서비스에서 올바른 스토리지를 활용하기 위해서는 배포 방법에 따라 Ansible 변수를 구성하는 것이 중요합니다. 각 배포 방법에 대한 옵션을 살펴보겠습니다.
 
 
-NOTE: 아래 표에는 로깅 서비스와 관련된 스토리지 구성과 관련된 변수만 나와 있습니다. 에서 다른 옵션을 찾을 수 있습니다 link:https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html["RedHat OpenShift 로깅 설명서"^] 배포 내용에 따라 검토, 구성 및 사용해야 합니다.
+NOTE: 아래 표에는 로깅 서비스와 관련된 스토리지 구성과 관련된 변수만 나와 있습니다. 배포에 따라 검토, 구성 및 사용해야 하는 다른 옵션을 찾을 수 link:https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html["Red Hat OpenShift 로깅 문서"^]있습니다.
 
 아래 표의 변수는 제공된 세부 정보를 사용하여 로깅 서비스에 대한 PV 및 PVC를 생성하는 Ansible 플레이북을 만듭니다. 이 방법은 OpenShift 설치 후 구성 요소 설치 플레이북을 사용하는 것보다 훨씬 덜 유연하지만, 기존 볼륨을 사용할 수 있는 경우 옵션으로 제공됩니다.
 
@@ -378,7 +378,7 @@ OpenShift 클러스터가 이미 실행 중이고 Trident가 배포 및 구성�
 
 초기 OpenShift 설치 프로세스의 일부로 로깅을 배포하는 경우 표준 배포 프로세스만 따르면 됩니다. Ansible이 완료되는 즉시 서비스를 이용할 수 있도록 필요한 서비스와 OpenShift 개체를 구성 및 배포합니다.
 
-하지만 초기 설치 후에 구축할 경우 구성 요소 플레이북을 Ansible에서 사용해야 합니다. 이 프로세스는 다른 버전의 OpenShift에서 약간 변경될 수 있으므로 반드시 읽고 따라야 합니다 link:https://docs.openshift.com/container-platform/3.11/welcome/index.html["RedHat OpenShift Container Platform 3.11 설명서"^] 를 참조하십시오.
+하지만 초기 설치 후에 구축할 경우 구성 요소 플레이북을 Ansible에서 사용해야 합니다. 이 프로세스는 OpenShift의 다른 버전에 따라 약간 변경될 수 있으므로 해당 버전에 대해 읽고 link:https://docs.openshift.com/container-platform/3.11/welcome/index.html["Red Hat OpenShift Container Platform 3.11 설명서"^]따르십시오.
 
 
 
@@ -434,4 +434,4 @@ OpenShift 클러스터가 이미 실행 중이고 Trident가 배포 및 구성�
 
 호스트/인벤토리 파일에 정의된 적절한 Ansible 변수를 사용하여 서비스를 구축하십시오. OpenShift 설치 시 배포하는 경우 PV가 자동으로 생성되고 사용됩니다. 구성 요소 플레이북을 사용하여 배포하려는 경우 OpenShift 설치 후 Ansible은 필요한 PVC를 생성하고 Trident에서 이를 위해 스토리지를 프로비저닝한 후 서비스를 배포합니다.
 
-위의 변수와 배포 프로세스는 각 OpenShift 버전에 따라 변경될 수 있습니다. 검토 후 준수해야 합니다 link:https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html["RedHat의 OpenShift 배포 가이드"^] 사용자 환경에 맞게 구성되도록 사용자의 버전에 대해.
+위의 변수와 배포 프로세스는 각 OpenShift 버전에 따라 변경될 수 있습니다. 사용자 환경에 맞게 구성할 수 있도록 버전을 검토하고 그에 따라 link:https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html["Red Hat의 OpenShift 배포 가이드"^]수행하십시오.

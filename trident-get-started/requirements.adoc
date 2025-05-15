@@ -90,7 +90,7 @@ Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드
 
 
 .고려 사항:
-* OpenShift 가상화 환경에서 매개 변수(예 `fsType: "ext4"`:)를 포함하도록 스토리지 클래스를 업데이트합니다 `fsType`. 필요한 경우 의 매개 변수를 `dataVolumeTemplates` 사용하여 볼륨 모드를 명시적으로 차단하도록 `volumeMode=Block` 설정하여 CDI에 블록 데이터 볼륨을 생성하도록 알립니다.
+* OpenShift Virtualization 환경에서 매개 변수(예 `fsType: "ext4"`:)를 갖도록 스토리지 클래스를 업데이트합니다 `fsType`. 필요한 경우 의 매개 변수를 `dataVolumeTemplates` 사용하여 볼륨 모드를 명시적으로 차단하도록 `volumeMode=Block` 설정하여 CDI에 블록 데이터 볼륨을 생성하도록 알립니다.
 * 블록 스토리지 드라이버용 _rwx 액세스 모드_:ONTAP-SAN(iSCSI, NVMe/TCP, FC) 및 ONTAP-SAN-Economy(iSCSI) 드라이버는 "volumemode:Block"(원시 장치)에서만 지원됩니다. 이러한 드라이버의 경우 `fstype` 볼륨이 원시 장치 모드로 제공되므로 매개 변수를 사용할 수 없습니다.
 * rwx 액세스 모드가 필요한 라이브 마이그레이션 워크플로의 경우 다음 조합이 지원됩니다.
 +
@@ -174,7 +174,7 @@ Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드
 
 Trident는 특정 운영 체제를 공식적으로 지원하지 않지만 다음과 같은 기능이 작동하는 것으로 알려져 있습니다.
 
-* OpenShift Container Platform(AMD64 및 ARM64)에서 지원하는 RedHat CoreOS(RHCOS) 버전
+* OpenShift Container Platform(AMD64 및 ARM64)에서 지원하는 Red Hat Enterprise Linux CoreOS(RHCOS) 버전
 * RHEL 8+(AMD64 및 ARM64)
 +
 

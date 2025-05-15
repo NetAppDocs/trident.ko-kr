@@ -123,7 +123,6 @@
   <block id="57cad4852c9c2e439f61728e0391fe7b" category="paragraph">로깅 서비스에서 NFS를 사용하도록 선택한 경우 설치 관리자의 실패를 방지하려면 Ansible 변수 "openshift_enable_unsupported_configurations"를 "true"로 설정해야 합니다.</block>
   <block id="be11c74c1dd7f307bb80183a90dc2067" category="section-title">시작하십시오</block>
   <block id="16e90b2336fdfec64b19194247422194" category="paragraph">로깅 서비스는 필요에 따라 두 애플리케이션 및 OpenShift 클러스터 자체의 핵심 운영에 구축할 수 있습니다. 작업 로깅을 배포하려는 경우 변수 "openshift_logging_use_ops"를 "true"로 지정하면 서비스의 인스턴스 두 개가 만들어집니다. 작업에 대한 로깅 인스턴스를 제어하는 변수에는 "ops"가 포함되어 있지만 응용 프로그램의 인스턴스는 그렇지 않습니다.</block>
-  <block id="c5c09113a6a6ae4b75868a9e96ea3cc3" category="inline-link-macro">RedHat OpenShift 로깅 설명서</block>
   <block id="02098b11f876fe10c40b6106bd9864da" category="paragraph">아래 표의 변수는 제공된 세부 정보를 사용하여 로깅 서비스에 대한 PV 및 PVC를 생성하는 Ansible 플레이북을 만듭니다. 이 방법은 OpenShift 설치 후 구성 요소 설치 플레이북을 사용하는 것보다 훨씬 덜 유연하지만, 기존 볼륨을 사용할 수 있는 경우 옵션으로 제공됩니다.</block>
   <block id="47c14840d8e15331fa420b9b2f757cd9" category="cell">변수</block>
   <block id="3ec365dd533ddb7ef3d1c111186ce872" category="cell">세부 정보</block>
@@ -155,8 +154,6 @@
   <block id="2a8f254749a466654f556c6466051133" category="cell">ops instance PVCs(ops 인스턴스 PVC)의 접두사입니다.</block>
   <block id="e1b2d0d3228c29c069bcd139de306709" category="section-title">로깅 스택을 배포합니다</block>
   <block id="0409a0cfdfa4f3b3033503b8309442ff" category="paragraph">초기 OpenShift 설치 프로세스의 일부로 로깅을 배포하는 경우 표준 배포 프로세스만 따르면 됩니다. Ansible이 완료되는 즉시 서비스를 이용할 수 있도록 필요한 서비스와 OpenShift 개체를 구성 및 배포합니다.</block>
-  <block id="210ecadaccb6088b0dfbd2e6a0b5d0a0" category="inline-link-macro">RedHat OpenShift Container Platform 3.11 설명서</block>
-  <block id="67f3e99678cc7c568f4ed29074cdc41c" category="paragraph">하지만 초기 설치 후에 구축할 경우 구성 요소 플레이북을 Ansible에서 사용해야 합니다. 이 프로세스는 다른 버전의 OpenShift에서 약간 변경될 수 있으므로 반드시 읽고 따라야 합니다 <block ref="a2226808e95b8487c66dd3b8cbea118e" category="inline-link-macro-rx"></block> 를 참조하십시오.</block>
   <block id="3dbf527ac3caf41ab150ec99a1737217" category="section-title">메트릭 서비스</block>
   <block id="69aa4440020e49c654aeb910f38c6bb9" category="admonition">아래 표에는 메트릭 서비스와 관련된 스토리지 구성과 관련된 변수만 포함되어 있습니다. 문서에 나와 있는 다른 많은 옵션은 배포 내용에 따라 검토, 구성 및 사용해야 합니다.</block>
   <block id="4f692d78f978a73b157571022c1d1ba7" category="cell">"openshift_metrics_storage_kind"</block>
@@ -175,8 +172,6 @@
   <block id="460aaf3805271ec2e5dc35755fe317b1" category="cell">'openshift_metrics_cassanda_pvc_storage_class_name'</block>
   <block id="0c55ca33e89539cd67eb0be3796547c5" category="cell">사용할 스토리지 클래스의 이름입니다.</block>
   <block id="6c13e62eb53f29e7794d3807369299d2" category="section-title">메트릭 서비스를 구축합니다</block>
-  <block id="bf1cadd7aa4e541e255df26af5451d85" category="inline-link-macro">RedHat의 OpenShift 배포 가이드</block>
-  <block id="eb502d6483a644e9b6f61ca4719276d8" category="paragraph">위의 변수와 배포 프로세스는 각 OpenShift 버전에 따라 변경될 수 있습니다. 검토 후 준수해야 합니다 <block ref="5ad72ffc1eda2c257c8947a0ad66dddb" category="inline-link-macro-rx"></block> 사용자 환경에 맞게 구성되도록 사용자의 버전에 대해.</block>
   <block id="6e8775bd755a8835ce86806d669677ea" category="doc">스토리지 구성</block>
   <block id="ac5112696fd64ee051846c666ebebebe" category="paragraph">활용 중인 프로토콜을 사용하여 호스트 운영 체제의 기준 모범 사례를 따라야 합니다. 필요에 따라 특정 애플리케이션에 맞게 스토리지를 최적화할 수 있도록 백엔드, 스토리지 클래스 및 PVC 설정과 함께 사용 가능한 경우 애플리케이션 Best Practice를 통합하는 것을 고려할 수 있습니다.</block>
   <block id="efc9d085ca2f3a152c786357e9359c03" category="section-title">ONTAP 및 Cloud Volumes ONTAP 모범 사례</block>
@@ -864,7 +859,6 @@
   <block id="95dc0391ce7b396d7dd5622284e8fc3e" category="section-title">알려진 문제</block>
   <block id="64a8f71bee95a6635e88bce00f1a2d3c" category="paragraph">알려진 문제점은 제품을 성공적으로 사용하지 못하게 만들 수 있는 문제를 식별합니다.</block>
   <block id="6d791d3b45515fd8619e489b938f39e8" category="inline-link">마운트 옵션</block>
-  <block id="a5c785ee36f0f2d14349653f744c8e3b" category="list-text">iSCSI PVS에 대해 온라인 공간 재확보를 수행하려면 작업자 노드의 기본 OS에 볼륨에 마운트 옵션을 전달해야 할 수 있습니다. 이는 디카드(disscard)가 필요한 RHEL/RedHat CoreOS 인스턴스에 적용됩니다<block ref="2ee633fb26bfccf07d490458d29f92a2" category="inline-link-rx"></block>에 mountmounted 폐기 옵션이 포함되어 있는지 확인합니다<block ref="b44436f062a8f5a535d8cafcffeb70b2" category="inline-link-rx"></block> 온라인 블록 삭제를 지원합니다.</block>
   <block id="0821431aba133adbfa7fa0ca1781eedd" category="list-text">FlexGroup은 애그리게이트 세트가 각 프로비저닝 요청에서 고유하지 않으면 한 번에 둘 이상의 ONTAP를 동시에 프로비저닝할 수 없습니다.</block>
   <block id="7d4fab76513c90b603a722620cde60fe" category="doc">명령줄 옵션</block>
   <block id="8db7df66ab1d7ab5f1dc947acdb5fae4" category="section-title">로깅</block>
@@ -1265,7 +1259,6 @@
   <block id="8e95ae46f32b05cf983c93e608530e36" category="list-text">운영자와 함께 설치됩니다</block>
   <block id="79b91d0489c081de6794796638793787" category="list-text">헬름과 함께 설치</block>
   <block id="d356d628089d439d75e3f85564372658" category="list-text">tridentctl과 함께 설치됩니다</block>
-  <block id="6cc37a0664d7f97f87d34eadef23dbad" category="list-text">RedHat CoreOS를 사용할 때는 작업자 노드에서 iscsid가 활성화되어 있고 기본적으로 시작되는지 확인합니다. 이 작업은 OpenShift MachineConfigs를 사용하거나 점화 템플릿을 수정하여 수행할 수 있습니다.</block>
   <block id="7f0ecdfa510b31b01d331c2760643b83" category="list-text">PV를 컨테이너에 마운트하는 데 문제가 있는 경우 rpcbind가 설치되어 실행되고 있는지 확인합니다. 호스트 OS에 필요한 패키지 관리자를 사용하고 rpcbind가 실행 중인지 확인합니다. 'stemctl status rpcbind' 또는 이와 동등한 기능을 실행하여 rpcbind 서비스의 상태를 확인할 수 있습니다.</block>
   <block id="78aeadc89feb4cf244398a7d35a0d656" category="list-text">Trident 백엔드가 이전에 작업을 수행했음에도 불구하고 "실패" 상태에 있다고 보고할 경우 백엔드와 연결된 SVM/관리 자격 증명을 변경하면 원인일 수 있습니다. 'tridentctl update backend'를 사용하여 백엔드 정보를 업데이트하거나 Trident POD를 바운딩하면 이 문제가 해결됩니다.</block>
   <block id="b851cfc28cd6e5cb9aaf87bdb59a68aa" category="list-text">Docker를 컨테이너 런타임으로 사용하여 Trident를 설치할 때 권한 문제가 발생하면 '--in cluster=false' 플래그를 사용하여 Trident를 설치해 보십시오. 설치자 포드는 사용하지 않고 설치자 이용으로 인한 권한 문제를 피한다.</block>
@@ -2201,7 +2194,6 @@
   <block id="1dedbfd605df8b562acc8f759a8e9acc" category="list-text">를 실행하는 Kubernetes 클러스터 <block ref="229e1052bb9ecd8cf2680d6f44691174" category="inline-link-macro-rx"></block></block>
   <block id="17c5eeb01739643b5aef94fe18b6c849" category="paragraph">버전 선택기를 사용하여 최신 버전과 이전 버전 4개를 탐색하거나 아래 링크를 사용할 수 있습니다.</block>
   <block id="2122a8acb599837078e6b76436e892c4" category="list-text">이제 Trident에서 Kubernetes 1.27이 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
-  <block id="362997bacf08e019288e372d8ae1f070" category="list-text">OpenShift Container Platform(AMD64 및 ARM64)에서 지원하는 RedHat CoreOS(RHCOS) 버전</block>
   <block id="a3460163c4a2854c79a419dda57ac917" category="list-text">RHEL 8+(AMD64 및 ARM64)</block>
   <block id="f51a58a0cffb9f9953edce6411578b53" category="list-text">Ubuntu 22.04 이상(AMD64 및 ARM64)</block>
   <block id="c5b5b00ff1b3a892c8694ab932cbf9ca" category="paragraph">강제 분리에 대한 자세한 내용은 을 참조하십시오 <block ref="63cac71755fb6ef1f1fea34cf4037121" category="inline-link-macro-rx"></block>.</block>
@@ -2595,7 +2587,6 @@
   <block id="62486fa65fc31c383ace8989549632ad" category="sidebar">스냅샷을 사용합니다</block>
   <block id="475fb21c20bb54ea8ac6cb1756aba565" category="inline-link-macro">KB: Trident PVC 스냅샷에서 PVC를 생성하는 것은 대체 백엔드에서 생성할 수 없습니다</block>
   <block id="18051638f30f342b517379b11f0442f9" category="admonition">PVC는 소스 볼륨과 동일한 백엔드에서 생성됩니다. 을 참조하십시오 <block ref="0d4d7e7a69b413699039bc9b916a37d5" category="inline-link-macro-rx"></block>.</block>
-  <block id="cd9179614936afe6f50612f0cf8c5615" category="inline-link">RedHat 설명서</block>
   <block id="7ba8d326bd3ffe1308f04d8ab5bf3d1a" category="paragraph">백엔드에 대한 액세스 자격 증명이 포함된 암호를 생성합니다. 이는 각 스토리지 서비스/플랫폼마다 다릅니다. 예를 들면 다음과 같습니다.</block>
   <block id="afad9414d1bc420e58e3a72442b8f495" category="list-text"><block ref="685d1f2146dd079015e81918414e8971" prefix="" category="inline-code"></block>:<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> CR은 백엔드에 연결되어 있으며 해당 백엔드에는 가 포함되어 있습니다<block ref="217026e5af08bfde5815657113dbfc82" prefix=" " category="inline-code"></block> 로 설정합니다<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> Cr'uid(CR'uid)</block>
   <block id="5008913e7135c645ebbfbd67112d3184" category="list-text"><block ref="ffbb410a55bb31f801dea6387e2745ac" prefix="" category="inline-code"></block>:<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> CR의<block ref="98e7d6463271d7848db255ae6467817a" prefix=" " category="inline-code"></block> 이(가) 삭제되도록 설정되었습니다. 를 누릅니다<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> CR이 삭제되어 삭제 상태로 전환됩니다.</block>
@@ -2616,7 +2607,6 @@
   <block id="7439c9a99660382e94c16c5272b9bfb0" category="paragraph">영구 볼륨은 Kubernetes에서 두 가지 예외, 영구적 객체입니다. 생성된 후에는 부가세 반환 청구액 정책 및 크기를 수정할 수 있습니다. 그러나 이렇게 해도 볼륨의 일부 측면이 Kubernetes 외부에서 수정되는 것을 방지할 수 없습니다. 특정 애플리케이션에 맞게 볼륨을 사용자 지정하거나, 실수로 용량이 소비되지 않도록 하거나, 어떠한 이유로든 볼륨을 다른 스토리지 컨트롤러로 이동하는 것이 좋을 수 있습니다.</block>
   <block id="3e01fdf7f18117c92347492814d988ee" category="admonition">Red Hat OpenShift 버전 3.9를 기준으로 공식 문서는 데이터 손상 관련 우려 때문에 로깅 서비스에 NFS를 사용할 것을 권장합니다. 이는 제품에 대한 Red Hat 테스트를 기반으로 합니다. ONTAP NFS 서버에는 이러한 문제가 없으며 로깅 구축을 쉽게 되돌릴 수 있습니다. 궁극적으로, 로깅 서비스를 위한 프로토콜을 선택할 수 있습니다. 두 가지 모두 NetApp 플랫폼을 사용할 때 효과가 있으며 원할 경우 NFS를 피할 이유가 없습니다.</block>
   <block id="643f15e2581a728cb2a6d66953a357d7" category="paragraph">기본 서비스에서 올바른 스토리지를 활용하기 위해서는 배포 방법에 따라 Ansible 변수를 구성하는 것이 중요합니다. 각 배포 방법에 대한 옵션을 살펴보겠습니다.</block>
-  <block id="00b454d2ba2e8d34f65f8a714304a598" category="admonition">아래 표에는 로깅 서비스와 관련된 스토리지 구성과 관련된 변수만 나와 있습니다. 에서 다른 옵션을 찾을 수 있습니다 <block ref="e81826ec3b15492352776daada114990" category="inline-link-macro-rx"></block> 배포 내용에 따라 검토, 구성 및 사용해야 합니다.</block>
   <block id="b8e4ea2ed30f2f3a9f05ef8e1cc243db" category="paragraph">로깅 서비스 및 OpenShift와 마찬가지로 Ansible을 사용하여 메트릭 서비스를 배포합니다. 또한 로깅 서비스와 마찬가지로 클러스터 초기 설정 중에 또는 구성 요소 설치 방법을 사용하여 작동 후에 메트릭 서비스를 구축할 수 있습니다. 다음 표에는 메트릭 서비스에 대한 영구 스토리지를 구성할 때 중요한 변수가 나와 있습니다.</block>
   <block id="8198f2a0f41303e214bcb5ab7d9e9ef4" category="section-title">ONTAP NAS 드라이버 세부 정보입니다</block>
   <block id="2b5fc47d5a68b6070472f3a239fc77f3" category="paragraph">"",<block ref="2521ef5d58fc027d3121662b7d8f9ac2" prefix=" " category="inline-code"></block>,<block ref="79e0f325804dafbdaef73b3b17c0fd8d" prefix=" " category="inline-code"></block></block>
@@ -2741,7 +2731,6 @@
   <block id="e80aabfb35c98e66a71baf6a3c90a7df" category="paragraph">전체 기능을 복원하려면 dataLIFS를 불러옵니다.</block>
   <block id="5afe86ac983ac04ac6d9268beb2bc024" category="section-title">네임스페이스 매핑을 삭제했습니다</block>
   <block id="9b0dbff182f270b33423b281f92bddc2" category="paragraph">를 추가합니다<block ref="a564a902c12941efa27c1d2ea4a19f8e" prefix=" " category="inline-code"></block> 하위 시스템으로 돌아갑니다.</block>
-  <block id="2994aa6a94d7af57a2fb9663129866a9" category="paragraph">드라이버 조합을 사용하는 경우 드라이버에 필요한 모든 도구를 설치해야 합니다. 최신 버전의 RedHat CoreOS에는 기본적으로 도구가 설치되어 있습니다.</block>
   <block id="4771a9c521a7d39c2dcf6ee71d0ef032" category="section-title">NVMe/TCP 볼륨</block>
   <block id="b15a013c4977a2a96afedafe316664b2" category="section-title">설치를 확인합니다</block>
   <block id="d777ba5e4b1ff43d3668b14ef7200bad" category="paragraph">설치 후 명령을 사용하여 Kubernetes 클러스터의 각 노드에 고유한 NQN이 있는지 확인합니다.</block>
@@ -2980,7 +2969,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="919b714a25b423ceadcf231ff05b607b" category="paragraph">다음 환경 변수를 사용하여 * 클라우드 공급자(CP) * 및 * 클라우드 ID(CI) * 플래그의 값을 설정합니다.</block>
   <block id="91a7e225ea23690e36a162b9c8a45058" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="a5f4eea4d47cf2db58f43a66329ecf1e" prefix=" " category="inline-code"></block></block>
   <block id="d7e54271baba05c2253c5c79a6155965" category="list-text">모든 Kubernetes 작업자 노드에 적절한 NFS 툴이 설치되어 있어야 합니다. 을 참조하십시오 <block ref="f1f954e59a21e3ffe189e77dd2ee9f86" category="inline-link-macro-rx"></block> 를 참조하십시오.</block>
-  <block id="65a83523719e1f7b2daf393eda16321a" category="list-text">iSCSI PVS에서 RHEL/RedHat CoreOS를 실행하는 작업자 노드를 사용하는 경우 를 지정합니다<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> StorageClass의 mountOption을 사용하여 인라인 공간 재확보를 수행합니다. 을 참조하십시오<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>.</block>
   <block id="d1b5b194ace83d9f896d8f8b6765def5" category="list-text">모든 Kubernetes 작업자 노드에 적절한 iSCSI 툴이 설치되어 있어야 합니다. 을 참조하십시오 <block ref="073953144b84efd85603bb3d49521e06" category="inline-link-macro-rx"></block>.</block>
   <block id="5c0a5e9c97099065874a650cf8c67a66" category="list-text"><block ref="bc54592d6183695b841c6d1880ec0bf8" prefix="" category="inline-code"></block>,<block ref="93c5bebdea9c94a0740fe6fd9bb250f0" prefix=" " category="inline-code"></block>, 및<block ref="2b53761249254ce6b502f521e5cc0683" prefix=" " category="inline-code"></block> AKS 클러스터에서 클라우드 ID를 사용할 때는 선택 사항입니다.</block>
   <block id="9837781971083d3fe119b0217014d301" category="list-text">Azure를 선택합니다<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> 하나 이상의 항목이 포함되어 있습니다<block ref="c5f14b2142014dc234282a513132bad4" category="inline-link-rx"></block>. Trident 22.01부터<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> 매개 변수는 백엔드 구성 파일의 최상위 수준에 있는 필수 필드입니다. 가상 풀에 지정된 위치 값은 무시됩니다.</block>
@@ -4609,7 +4597,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
   <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">PATH 변수에 정의된 위치에 플러그인 바이너리를 복사합니다. 예를<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block> 들어, 또는<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block> (Elevated Privileges가 필요할 수 있음):</block>
   <block id="cff063350a0daf1b0ee4c6c97eb2e2de" category="admonition">기존 리소스가 있는 다른 네임스페이스로 백업을 복원해도 백업의 리소스와 이름을 공유하는 리소스는 변경되지 않습니다. 백업의 모든 리소스를 복구하려면 타겟 네임스페이스를 삭제하고 다시 생성하거나 백업을 새 네임스페이스로 복원하십시오.</block>
-  <block id="e8e7bb3124435135f9fc5dab713148e1" category="list-text">FC PVS와 함께 RHEL/RedHat CoreOS를 실행하는 작업자 노드를 사용하는 경우<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> 인라인 공간 재확보를 수행하려면 StorageClass에 mount옵션을 지정합니다. 을<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>참조하십시오.</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">가<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block> 실행 중인지 확인합니다.</block>
   <block id="69eeaf73fccab6d6abcba46bd6a3a3bf" category="list-text">가 활성화되어 있고 실행 중인지<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block> 확인합니다.</block>
   <block id="00ea3f7016d7b9a4ad023b106cc1e6d3" category="paragraph"><block ref="7e7b7908484dc2cebc13ec93d8042bd0" category="inline-link-macro-rx"></block> sanType<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block>(SCSI over FC)을 사용하는 경우<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block></block>
@@ -4918,15 +4905,12 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="90de0fd1d09f4fc27d99667555a8a12f" category="paragraph">ONTAP 시스템은 All-Flash, 하이브리드 또는 All-HDD 구성을 가지며 온프레미스 FAS, AFA, ASA 클러스터, ONTAP Select, Cloud Volumes ONTAP 등 다양한 구축 모델을 제공합니다. Trident는 이러한 ONTAP 구축 모델을 지원합니다.</block>
   <block id="30712450d512dae0e7becb73c6a439fb" category="list-text">Kubernetes 1.26-1.32</block>
   <block id="bde4e01f8df98626e0dc1c36a8e06a5a" category="admonition">Trident가 설치된 Kubernetes 클러스터를 1.25에서 1.26 이상으로 업그레이드하기 전에 을 참조하십시오.<block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block></block>
-  <block id="4cd3b50237790ab53e31a7a9fbd28583" category="section-title">KubeVirt 및 OpenShift 가상화를 위한 Trident 지원</block>
   <block id="8f323a9e5c0c5162cc6e0d48e0cb1850" category="paragraph-title">지원되는 스토리지 드라이버:</block>
-  <block id="0c30a28f9129b866c1d3cdcfa8c2fe15" category="paragraph">Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.</block>
   <block id="8321592ce24c8a122ecf26a63cfca407" category="list-text">ONTAP - NAS</block>
   <block id="caafdf62a2c609bfa5316118231a1007" category="list-text">ONTAP - NAS - 경제형</block>
   <block id="188c0d870c5f930d042bdaa1f1fc3573" category="list-text">ONTAP-SAN(iSCSI, FCP, NVMe over TCP)</block>
   <block id="1bbe28a8ef9b1c85d07b013af0628d36" category="list-text">ONTAP - SAN - 경제성(iSCSI만 해당)</block>
   <block id="db526afc657fdfec1ca176eb9d281f89" category="list-title">고려 사항:</block>
-  <block id="749d892e342a5e3346877c1b76b9d9ee" category="list-text">OpenShift 가상화 환경에서 매개 변수(예<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>:)를 포함하도록 스토리지 클래스를 업데이트합니다<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block>. 필요한 경우 의 매개 변수를<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block> 사용하여 볼륨 모드를 명시적으로 차단하도록<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block> 설정하여 CDI에 블록 데이터 볼륨을 생성하도록 알립니다.</block>
   <block id="f97169869bcbff98d85a1b7ec1d7b5f8" category="list-text">rwx 액세스 모드가 필요한 라이브 마이그레이션 워크플로의 경우 다음 조합이 지원됩니다.</block>
   <block id="d3701dd5a7c831a74d496a90c3a65f13" category="list-text">NFS+<block ref="7f5db5e0500761cacd6f89838e2ebdc5" prefix=" " category="inline-code"></block></block>
   <block id="42c7d371004c0674ae717618c4a08508" category="list-text">iSCSI<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block> + (물리적 장치)</block>
@@ -4991,7 +4975,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="c2653fd16e9e4da4d4d738616dcb956a" category="list-text">Kubernetes 1.32에 대한 지원 추가</block>
   <block id="2e110255627afe2fff57458d9bb2205b" category="list-text">* OpenShift *:</block>
   <block id="ddbeca6e89eb34fdc94eeec79b9f6a43" category="list-text">ROSA 클러스터에서 RHCOS에 대한 자동 iSCSI 노드 준비 지원 추가</block>
-  <block id="e372f544148934d9aa953a8a14719875" category="list-text">ONTAP 드라이버용 OpenShift 가상화 지원 추가</block>
   <block id="e5f47a8bc4c6e320936843808b4b8392" category="list-text">ONTAP-SAN 드라이버에 대한 파이버 채널 지원이 추가되었습니다.</block>
   <block id="00a0b47f2d2eb76897798a0b983daf88" category="list-text">NVMe LUKS 지원이 추가되었습니다.</block>
   <block id="890fc08a388302375744ade0476c1409" category="list-text">모든 기본 이미지의 스크래치 이미지로 전환되었습니다.</block>
@@ -5349,7 +5332,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="50a4fd89cedf0068776b972ce96fcceb" category="cell">ONTAP REST API를 사용하는 부울 매개 변수입니다. <block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> 로 설정된<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 경우 Trident는 ONTAP REST API를 사용하여 백엔드와 통신합니다. 로 설정된 경우<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> Trident는 ONTAPI(ZAPI) 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다.<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block><block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> Trident 24.06 릴리스 및 ONTAP 9.15.1 이상부터 는<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> 기본적으로 로 설정되어<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 있습니다. ONTAPI(ZAPI) 호출을 사용하도록 로<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> 변경합니다<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>.</block>
   <block id="43086d9a7f35d289c190a6d377be9418" category="paragraph">snapshotReserve = 50%, PVC request = 5GiB의 경우, 총 볼륨 크기는 5/.5 = 10GiB이고 사용 가능한 크기는 5GiB입니다. 이는 사용자가 PVC 요청에서 요청한 것입니다. 이<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block> 명령은 다음 예제와 유사한 결과를 표시해야 합니다.</block>
   <block id="01f46441d2a65849d403adec609ee5fb" category="cell">ONTAP REST API를 사용하는 부울 매개 변수입니다. <block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> 로 설정된<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 경우 Trident는 ONTAP REST API를 사용하여 백엔드와 통신합니다. 로 설정된 경우<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> Trident는 ONTAPI(ZAPI) 호출을 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다.<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block><block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> Trident 24.06 릴리스 및 ONTAP 9.15.1 이상부터 는<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> 기본적으로 로 설정되어<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 있습니다. ONTAPI(ZAPI) 호출을 사용하도록 로<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> 변경합니다<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>. <block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> NVMe/TCP에 대해 완전한 자격을 갖추고 있음 * 지정된 경우 ASA R2에 대해 항상 로<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 설정합니다 *.</block>
-  <block id="29faa5f5c2de3c7a4ab9c78562616cdd" category="admonition">RedHat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 주목해야 합니다. 네임스페이스 주석을 사용하면 복원된 Pod가 OpenShift SCC(Security Context Constraint)에서 정의한 적절한 권한 및 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있습니다. 자세한 내용은 를<block ref="9c33d4f1fa6e1f731baeaf3a5fe229cd" category="inline-link-rx"></block>참조하십시오.</block>
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4.10-4.18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.26.7 + rke2r1, v1.28.5 + rke2r1</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">볼륨 모드: 파일 및 볼륨 모드: 블록(원시 장치) 스토리지 모두에 대한 KubeVirt/OpenShift Virtualization VM에 대한 백업 및 복구 지원 추가 이 지원은 모든 Trident 드라이버와 호환되며, Trident Protect와 함께 NetApp SnapMirror를 사용하여 스토리지를 복제할 때 기존 보호 기능이 향상됩니다.</block>
@@ -5520,4 +5502,22 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="fe28e2a5f749261aca15de7b9e5841d0" category="list-text">* Kubernetes *: Kubernetes 1.32에 대한 지원이 추가되었습니다.</block>
   <block id="3da21bcb163e7e142caada3e22ac014f" category="list-text">CVE-2024-45337 및 CVE-2024-45310을 해결하기 위해 Trident 및 Trident-ASUP 종속성이 업데이트되었습니다.</block>
   <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">iSCSI 자동 복구 중 간헐적으로 비CHAP 포털에 대한 로그아웃을 제거했습니다<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>().</block>
+  <block id="93898a0aff94da797ef263a35d0ba2f8" category="admonition">Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 주목해야 합니다. 네임스페이스 주석을 사용하면 복원된 Pod가 OpenShift SCC(Security Context Constraint)에서 정의한 적절한 권한 및 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있습니다. 자세한 내용은 를<block ref="9c33d4f1fa6e1f731baeaf3a5fe229cd" category="inline-link-rx"></block>참조하십시오.</block>
+  <block id="78937357687a7b0292ed689d4e420485" category="inline-link">Red Hat 설명서</block>
+  <block id="89e30b0f2c0e48835ff872a994fc749c" category="list-text">RHEL/Red Hat Enterprise Linux CoreOS(RHCOS)를 실행하는 작업자 노드를 FC PVS와 함께 사용하는 경우 StorageClass에서 mount옵션을 지정하여<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> 인라인 공간 재확보를 수행합니다. 을<block ref="65c95aeda8cb0b26307f9839dd3fefbf" category="inline-link-rx"></block>참조하십시오.</block>
+  <block id="e80b6a304e29d5dfcb9150f47d69db94" category="section-title">KubeVirt 및 OpenShift 가상화를 위한 Trident 지원</block>
+  <block id="cffd29fb8e17cb30625130ee24cd667d" category="paragraph">Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.</block>
+  <block id="0ae326ef84f2a6bc4be48951f88c0162" category="list-text">OpenShift Virtualization 환경에서 매개 변수(예<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>:)를 갖도록 스토리지 클래스를 업데이트합니다<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block>. 필요한 경우 의 매개 변수를<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block> 사용하여 볼륨 모드를 명시적으로 차단하도록<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block> 설정하여 CDI에 블록 데이터 볼륨을 생성하도록 알립니다.</block>
+  <block id="daa6a182f8035711e9635994f572c7bc" category="list-text">OpenShift Container Platform(AMD64 및 ARM64)에서 지원하는 Red Hat Enterprise Linux CoreOS(RHCOS) 버전</block>
+  <block id="2bf380408feee0a9443f217c907f0681" category="inline-link-macro">Red Hat OpenShift 로깅 문서</block>
+  <block id="796814ebd3d324fe438f0c699c37c89e" category="admonition">아래 표에는 로깅 서비스와 관련된 스토리지 구성과 관련된 변수만 나와 있습니다. 배포에 따라 검토, 구성 및 사용해야 하는 다른 옵션을 찾을 수 <block ref="202ad309c67a74272d432350a2d0cf76" category="inline-link-macro-rx"></block>있습니다.</block>
+  <block id="3a298688c4d78e1b7532d3859cd16a57" category="inline-link-macro">Red Hat OpenShift Container Platform 3.11 설명서</block>
+  <block id="620fb6046d1af07a3df48b291902887c" category="paragraph">하지만 초기 설치 후에 구축할 경우 구성 요소 플레이북을 Ansible에서 사용해야 합니다. 이 프로세스는 OpenShift의 다른 버전에 따라 약간 변경될 수 있으므로 해당 버전에 대해 읽고 <block ref="87091f5bcd27af3d8592e461d451be85" category="inline-link-macro-rx"></block>따르십시오.</block>
+  <block id="95c7854cff26589ad1555baa8672c001" category="inline-link-macro">Red Hat의 OpenShift 배포 가이드</block>
+  <block id="757eaf1f1a551aabeb24f57705261f85" category="paragraph">위의 변수와 배포 프로세스는 각 OpenShift 버전에 따라 변경될 수 있습니다. 사용자 환경에 맞게 구성할 수 있도록 버전을 검토하고 그에 따라 <block ref="1b29818189b1aff318eccaee960b09cb" category="inline-link-macro-rx"></block>수행하십시오.</block>
+  <block id="4e602d306baa843baf9ed9bd9ce452b1" category="list-text">OpenShift Virtualization for ONTAP 드라이버에 대한 지원이 추가되었습니다.</block>
+  <block id="814077b936b9bc9d2731d0f5fd50fde3" category="list-text">iSCSI PVS에 대해 온라인 공간 재확보를 수행하려면 작업자 노드의 기본 OS에 볼륨에 마운트 옵션을 전달해야 할 수 있습니다. 이는 가 필요한 RHEL/Red Hat Enterprise Linux CoreOS(RHCOS) 인스턴스의<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block><block ref="2ee633fb26bfccf07d490458d29f92a2" category="inline-link-rx"></block> 경우에도 마찬가지입니다. 온라인 블록 폐기를 지원하기 위해 discard mountoption이 사용자의 에 포함되어<block ref="15699dd651c6fec3ed329f2bf55d54b4" category="inline-link-rx"></block><block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix="[" category="inline-code"></block> 있는지 확인하십시오.</block>
+  <block id="de6d7aa94730ba882f7284ac8e07a0d1" category="paragraph">드라이버 조합을 사용하는 경우 드라이버에 필요한 모든 도구를 설치해야 합니다. 최신 버전의 Red Hat Enterprise Linux CoreOS(RHCOS)에는 기본적으로 도구가 설치되어 있습니다.</block>
+  <block id="ce557c2f93da665463decf7b19e61b7b" category="list-text">iSCSI PVS와 함께 RHEL/Red Hat Enterprise Linux CoreOS(RHCOS)를 실행하는 작업자 노드를 사용하는 경우 StorageClass에서 mount옵션을 지정하여<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> 인라인 공간 재확보를 수행합니다. 을<block ref="65c95aeda8cb0b26307f9839dd3fefbf" category="inline-link-rx"></block>참조하십시오.</block>
+  <block id="3992b498f2510c20f4dc0df9804e6038" category="list-text">RHCOS(Red Hat Enterprise Linux CoreOS)를 사용하는 경우 작업자 노드에서 이<block ref="3fe4dc8de876aca2c78fa0cd9c6d0b65" prefix=" " category="inline-code"></block> 활성화되고 기본적으로 시작되는지 확인합니다. 이 작업은 OpenShift MachineConfigs를 사용하거나 점화 템플릿을 수정하여 수행할 수 있습니다.</block>
 </blocks>
