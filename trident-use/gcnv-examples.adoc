@@ -418,7 +418,7 @@ parameters:
 
 === SMB 볼륨에 대한 정의의 예
 
-사용 `nasType`, `node-stage-secret-name`, 및  `node-stage-secret-namespace`, SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다.
+ `node-stage-secret-name`, 및 를 사용하여 `nasType` `node-stage-secret-namespace` SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다. 사용 권한이 있거나 없는 모든 Active Directory 사용자/암호는 노드 단계 비밀에 사용할 수 있습니다.
 
 .기본 네임스페이스에 대한 기본 구성
 [%collapsible]
