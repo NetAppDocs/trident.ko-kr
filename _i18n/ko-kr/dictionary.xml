@@ -5422,7 +5422,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="8c1fabda63909c966d5b02c908178af2" category="paragraph">명령을 실행한 후 생성된 이 예제는<block ref="6108feb94d9d09a19e33648dcce80003" prefix=" " category="inline-code"></block> 기본 사용자 지정 설치를 나타냅니다.</block>
   <block id="a687cccb5ef434dd8df6734253a09535" category="paragraph">이 예제는 명령을 실행한 후 생성되며<block ref="2241cac556b278d16d0bb5f94117277a" prefix=" " category="inline-code"></block> Windows 작업자 노드에 Trident를 설치합니다.</block>
   <block id="de4b458ce26c7e2479c45bb915c621b5" category="paragraph">PVC 생성 시 "No capacity pool found" 오류가 발생하는 경우 앱 등록에 필요한 권한 및 리소스(서브넷, 가상 네트워크, 용량 풀)가 없는 것일 수 있습니다. DEBUG가 활성화된 경우 Trident는 백엔드가 생성될 때 검색된 Azure 리소스를 기록합니다. 적절한 역할이 사용되고 있는지 확인합니다.</block>
-  <block id="6f7026a013dd10088e6f2464a6e1768b" category="admonition">Trident가 이 백엔드에서 아직 존재하는 볼륨 및 스냅샷을 프로비저닝한 경우 백엔드를 삭제하면 새 볼륨이 프로비저닝되지 않습니다. 백엔드는 계속해서 "삭제 중" 상태로 유지되며 Trident는 해당 볼륨 및 스냅샷을 삭제할 때까지 계속 관리합니다.</block>
   <block id="1c52b877ebb92e642f84ee1628240247" category="cell">항상 "SolidFire-SAN"</block>
   <block id="31079062306e509fbecf7a2bd9485187" category="cell">"SolidFire_" + 스토리지(iSCSI) IP 주소입니다</block>
   <block id="1ed25c6118740d8ddd80ea0ce520e808" category="cell">"Trident"라는 액세스 그룹의 ID를 찾습니다.</block>
@@ -5521,4 +5520,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="ce557c2f93da665463decf7b19e61b7b" category="list-text">iSCSI PVS와 함께 RHEL/Red Hat Enterprise Linux CoreOS(RHCOS)를 실행하는 작업자 노드를 사용하는 경우 StorageClass에서 mount옵션을 지정하여<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> 인라인 공간 재확보를 수행합니다. 을<block ref="65c95aeda8cb0b26307f9839dd3fefbf" category="inline-link-rx"></block>참조하십시오.</block>
   <block id="3992b498f2510c20f4dc0df9804e6038" category="list-text">RHCOS(Red Hat Enterprise Linux CoreOS)를 사용하는 경우 작업자 노드에서 이<block ref="3fe4dc8de876aca2c78fa0cd9c6d0b65" prefix=" " category="inline-code"></block> 활성화되고 기본적으로 시작되는지 확인합니다. 이 작업은 OpenShift MachineConfigs를 사용하거나 점화 템플릿을 수정하여 수행할 수 있습니다.</block>
   <block id="aaa0c40b2c8011bdffe750a1ba36c398" category="paragraph"><block ref="e12fdd044232e643620eed06bf33c7af" prefix=" " category="inline-code"></block>, 및 를 사용하여<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block><block ref="1ad68a6a046942b7c1666aed825df70a" prefix=" " category="inline-code"></block> SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다. 사용 권한이 있거나 없는 모든 Active Directory 사용자/암호는 노드 단계 비밀에 사용할 수 있습니다.</block>
+  <block id="1e0e0f35966b4297310419e9023a837b" category="admonition">Trident가 이 백엔드에서 아직 존재하는 볼륨 및 스냅샷을 프로비저닝한 경우 백엔드를 삭제하면 새 볼륨이 프로비저닝되지 않습니다. 백엔드는 계속해서 "삭제 중" 상태로 유지됩니다.</block>
 </blocks>
