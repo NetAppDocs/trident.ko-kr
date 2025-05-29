@@ -66,7 +66,7 @@ customResourceState:
     spec:
       resources:
       - groupVersionKind:
-          group: astra.netapp.io
+          group: protect.trident.netapp.io
           kind: "Backup"
           version: "v1"
         labelsFromPath:
@@ -84,7 +84,7 @@ customResourceState:
                 appReference: ["spec", "applicationRef"]
 rbac:
   extraRules:
-  - apiGroups: ["backups.protect.trident.netapp.io"]
+  - apiGroups: ["protect.trident.netapp.io"]
     resources: ["backups"]
     verbs: ["list", "watch"]
 
@@ -124,9 +124,9 @@ helm install custom-resource -f metrics-config.yaml prometheus-community/kube-st
 모니터링 도구를 설치한 후에는 함께 작동하도록 구성해야 합니다.
 
 .단계
-. kube-state-metrics를 Prometheus와 통합합니다. Prometheus 구성 파일을 (`prometheus.yml`편집하고 kube-state-metrics 서비스 정보를 추가합니다. 예를 들면 다음과 같습니다.
+. kube-state-metrics를 Prometheus와 통합합니다. Prometheus 구성 파일을 (`prometheus.yaml`편집하고 kube-state-metrics 서비스 정보를 추가합니다. 예를 들면 다음과 같습니다.
 +
-.Prometheus.yml: kube-state-metrics 서비스와 Prometheus의 통합
+.prometheus.yaml: Prometheus와 kube-state-metrics 서비스 통합
 [source, yaml]
 ----
 ---
@@ -134,26 +134,26 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
-  namespace: astra-connector
+  namespace: trident-protect
 data:
-  prometheus.yml: |
+  prometheus.yaml: |
     global:
       scrape_interval: 15s
     scrape_configs:
       - job_name: 'kube-state-metrics'
         static_configs:
-          - targets: ['kube-state-metrics.astra-connector.svc:8080']
+          - targets: ['kube-state-metrics.trident-protect.svc:8080']
 ----
-. 알림을 Alertmanager로 라우팅하도록 Prometheus를 구성합니다. Prometheus 구성 파일을 (`prometheus.yml`편집하고 다음 섹션을 추가합니다.
+. 알림을 Alertmanager로 라우팅하도록 Prometheus를 구성합니다. Prometheus 구성 파일을 (`prometheus.yaml`편집하고 다음 섹션을 추가합니다.
 +
-.Prometheus.yml: Alertmanager에 알림을 보냅니다
+.prometheus.yaml: Alertmanager에 알림 보내기
 [source, yaml]
 ----
 alerting:
   alertmanagers:
     - static_configs:
         - targets:
-            - alertmanager.astra-connector.svc:9093
+            - alertmanager.trident-protect.svc:9093
 ----
 
 
@@ -170,12 +170,12 @@ Prometheus는 이제 kube 상태 메트릭에서 메트릭을 수집하고 Alert
 
 === 경고 예: 백업 실패
 
-다음 예에서는 백업 사용자 지정 리소스의 상태가 5초 이상 으로 설정된 경우 트리거되는 중요 알림을 `Error` 정의합니다. 이 예제를 사용자 환경에 맞게 사용자 지정하고 이 YAML 스니펫을 구성 파일에 포함할 수 `prometheus.yml` 있습니다.
+다음 예에서는 백업 사용자 지정 리소스의 상태가 5초 이상 으로 설정된 경우 트리거되는 중요 알림을 `Error` 정의합니다. 이 예제를 사용자 환경에 맞게 사용자 지정하고 이 YAML 스니펫을 구성 파일에 포함할 수 `prometheus.yaml` 있습니다.
 
-.rules.yml: 실패한 백업에 대한 Prometheus 알림을 정의합니다
+.rules.yaml: 실패한 백업에 대한 Prometheus 알림 정의
 [source, yaml]
 ----
-rules.yml: |
+rules.yaml: |
   groups:
     - name: fail-backup
         rules:
@@ -192,15 +192,15 @@ rules.yml: |
 
 === 알림을 다른 채널로 보내도록 Alertmanager를 구성합니다
 
-파일에 각 구성을 지정하여 전자 메일, PagerDuty, Microsoft Teams 또는 기타 알림 서비스와 같은 다른 채널에 알림을 보내도록 Alertmanager를 구성할 수 `alertmanager.yml` 있습니다.
+파일에 각 구성을 지정하여 전자 메일, PagerDuty, Microsoft Teams 또는 기타 알림 서비스와 같은 다른 채널에 알림을 보내도록 Alertmanager를 구성할 수 `alertmanager.yaml` 있습니다.
 
 다음 예에서는 알림 메시지를 Slack 채널에 보내도록 Alertmanager를 구성합니다. 이 예제를 환경에 맞게 사용자 지정하려면 키 값을 사용자 환경에서 사용되는 Slack Webhook URL로 바꿉니다 `api_url`.
 
-.alertmanager.yml: Slack 채널에 알림을 보냅니다
+.alertmanager.yaml: Slack 채널에 알림 보내기
 [source, yaml]
 ----
 data:
-  alertmanager.yml: |
+  alertmanager.yaml: |
     global:
       resolve_timeout: 5m
     route:
