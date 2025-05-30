@@ -506,6 +506,10 @@ kubectl get snapshots <SNAPHOT_NAME> -n my-app-namespace -o jsonpath='{.status.a
 ** *spec.namespaceMapping*: 복구 작업의 소스 네임스페이스를 대상 네임스페이스에 매핑하는 것입니다.  `my-source-namespace`및 를 `my-destination-namespace` 사용자 환경의 정보로 바꿉니다.
 ** *spec.storageClassMapping*: 복원 작업의 소스 스토리지 클래스를 대상 스토리지 클래스로 매핑하는 것입니다.  `destinationStorageClass`및 를 `sourceStorageClass` 사용자 환경의 정보로 바꿉니다.
 +
+
+NOTE: 그만큼  `storageClassMapping` 속성은 원본과 새 속성이 모두 작동하는 경우에만 작동합니다.  `StorageClass` 동일한 저장소 백엔드를 사용합니다. 복원을 시도하는 경우  `StorageClass` 다른 스토리지 백엔드를 사용하는 경우 복원 작업이 실패합니다.
+
++
 [source, yaml]
 ----
 ---
