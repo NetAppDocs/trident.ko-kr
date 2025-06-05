@@ -30,8 +30,8 @@ AppVault CR을 생성하기 전에 AppVault 및 선택한 Data Mover가 공급�
 
 CRS 또는 Trident Protect CLI 플러그인을 사용하여 AppVault 개체를 만들 때 선택적으로 Trident Protect에 Restic 및 Kopia 저장소 암호화에 대한 사용자 지정 암호가 포함된 Kubernetes 암호를 사용하도록 지시할 수 있습니다. 암호를 지정하지 않으면 Trident Protect에서 기본 암호를 사용합니다.
 
-* AppVault CRS를 수동으로 만들 때 * spec.dataMoverPasswordSecretRef * 필드를 사용하여 암호를 지정할 수 있습니다.
-* Trident Protect CLI를 사용하여 AppVault 개체를 만들 때 인수를 사용하여 암호를 지정할 수 `--data-mover-password-secret-ref` 있습니다.
+* AppVault CR을 수동으로 생성할 때 *spec.dataMoverPasswordSecretRef* 필드를 사용하여 비밀번호를 지정합니다.
+* Trident Protect CLI를 사용하여 AppVault 객체를 생성할 때 다음을 사용하십시오.  `--data-mover-password-secret-ref` 비밀을 지정하는 인수입니다.
 
 
 
@@ -72,6 +72,32 @@ kubectl create secret generic my-optional-data-mover-secret \
 ----
 --
 ====
+
+
+=== S3 호환 스토리지 IAM 권한
+
+Amazon S3, Generic S3 등 S3 호환 스토리지에 접속할 경우  https://docs.netapp.com/us-en/storagegrid/s3/index.html["StorageGRID S3"^] , 또는  https://docs.netapp.com/us-en/ontap/s3-config/["ONTAP S3 를 참조하십시오"^] Trident Protect를 사용하는 경우, 제공하는 사용자 자격 증명에 버킷 액세스에 필요한 권한이 있는지 확인해야 합니다. 다음은 Trident Protect를 사용하여 액세스하는 데 필요한 최소 권한을 부여하는 정책의 예입니다. 이 정책은 S3 호환 버킷 정책을 관리하는 사용자에게 적용할 수 있습니다.
+
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:DeleteObject"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+----
+Amazon S3 정책에 대한 자세한 내용은 다음 예제를 참조하세요.  https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html["Amazon S3 문서"^] .
+
 
 
 === 클라우드 공급자를 위한 AppVault 키 생성 예

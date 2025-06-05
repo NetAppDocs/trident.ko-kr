@@ -5166,7 +5166,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="beca1b1ae9141eb4cf9a371088911e0f" category="paragraph">Restic을 사용하여 생성된 Amazon S3 백업에서 30GB 이상의 파일을 복원하는 경우 복원 작업이 실패할 수 있습니다. 이 문제를 해결하려면 Kopia를 Data Mover로 사용하여 데이터를 백업합니다(Kopia는 백업의 기본 Data Mover입니다). 자세한 내용은 을<block ref="1e108e5c10b0ba51ea4cfaf507765efb" category="inline-link-rx"></block> 참조하십시오.</block>
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">AppVault 인증 및 암호를 구성합니다</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">Data Mover 저장소 암호입니다</block>
-  <block id="12ae6793b05f84758a85b289757c4f34" category="list-text">Trident Protect CLI를 사용하여 AppVault 개체를 만들 때 인수를 사용하여 암호를 지정할 수<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block> 있습니다.</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">Data Mover 리포지토리 암호 암호를 생성합니다</block>
   <block id="fc114cb2ee6c7bff559d58e2a7454cab" category="paragraph">다음 예제를 사용하여 암호 암호를 만듭니다. AppVault 개체를 생성할 때 Trident Protect에서 이 암호를 사용하여 Data Mover 리포지토리를 인증하도록 지시할 수 있습니다.</block>
   <block id="571768fad7edd9c4f57173c592c1f86c" category="section-title">클라우드 공급자를 위한 AppVault 키 생성 예</block>
@@ -5251,7 +5250,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="8430f2c56dfc9e79fcaf741392d54499" category="list-text">exechooksrun 객체를 설명하여 최종 세부 정보 및 상태를 확인합니다.</block>
   <block id="b343abb76f62f4eef4afa255e885eee4" category="paragraph">Trident 25.02부터 Trident 및 Trident Protect 릴리스의 향상된 기능, 수정 사항 및 사용 중단에 대한 자세한 내용은 새로운 기능 요약을 참조하십시오.</block>
   <block id="5674eb46caea5efcff5615daf30ab92d" category="paragraph">CRS 또는 Trident Protect CLI 플러그인을 사용하여 AppVault 개체를 만들 때 선택적으로 Trident Protect에 Restic 및 Kopia 저장소 암호화에 대한 사용자 지정 암호가 포함된 Kubernetes 암호를 사용하도록 지시할 수 있습니다. 암호를 지정하지 않으면 Trident Protect에서 기본 암호를 사용합니다.</block>
-  <block id="3703eceb9535f8a68e38a00f0ed1092d" category="list-text">AppVault CRS를 수동으로 만들 때 * spec.dataMoverPasswordSecretRef * 필드를 사용하여 암호를 지정할 수 있습니다.</block>
   <block id="4fc9faf161c64ed80d0fb8ca9aa0882e" category="admonition">사용 중인 Data Mover에 따라 해당 Data Mover에 대한 암호만 포함하면 됩니다. 예를 들어, Restic을 사용하고 있고 나중에 Kopia를 사용할 계획이 없는 경우 암호를 만들 때 Restic 암호만 포함할 수 있습니다.</block>
   <block id="6a346946ba0777d650b6e41a4c30c7b6" category="paragraph">삭제하려는 AppVault에서 사용 중인 모든 스냅샷 및 백업 CRS를 삭제했는지 확인합니다.</block>
   <block id="b00fc94596cde685c68e0bedddb72ec6" category="summary">kube-state-metrics 및 Prometheus를 사용하여 Trident Protect 리소스의 상태를 모니터링할 수 있습니다. 이 서비스는 배포, 노드 및 Pod에 대한 상태 정보를 제공합니다.</block>
@@ -5522,4 +5520,10 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="fb72ca78c839cefc52d39ebcecaf6827" category="paragraph">볼륨 스냅샷은 다음에서 지원됩니다. <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> , <block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> , <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> , <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> , <block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> , <block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block> , <block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> , 그리고 <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 운전자.</block>
   <block id="173f808fc086ccd7ca8b43512be2cd48" category="admonition">그만큼 <block ref="e28ab870e47892fbd81eca8fc84c45ac" prefix=" " category="inline-code"></block> 속성은 원본과 새 속성이 모두 작동하는 경우에만 작동합니다. <block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> 동일한 저장소 백엔드를 사용합니다. 복원을 시도하는 경우 <block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> 다른 스토리지 백엔드를 사용하는 경우 복원 작업이 실패합니다.</block>
   <block id="a42f76d82e8a868d79d9c1663c081ae0" category="list-text">레지스트리.k8s.io/sig-storage/csi-resizer:v1.13.1</block>
+  <block id="02c19b7bc038d2af238bbd729bc3d9c4" category="list-text">AppVault CR을 수동으로 생성할 때 *spec.dataMoverPasswordSecretRef* 필드를 사용하여 비밀번호를 지정합니다.</block>
+  <block id="0a636ed0406fe1d7ddf9db59b32011b3" category="list-text">Trident Protect CLI를 사용하여 AppVault 객체를 생성할 때 다음을 사용하십시오. <block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block> 비밀을 지정하는 인수입니다.</block>
+  <block id="d2a7dc5804ec844f3f7bfb903e97693f" category="section-title">S3 호환 스토리지 IAM 권한</block>
+  <block id="48f73146a4944adc8ee8fb44ba954d59" category="paragraph">Amazon S3, Generic S3 등 S3 호환 스토리지에 접속할 경우 <block ref="3d0b4c23d9ed62ec7d7cd16273ca2521" category="inline-link-rx"></block> , 또는 <block ref="3a31dfad8c316380b9a5542d694c5833" category="inline-link-rx"></block> Trident Protect를 사용하는 경우, 제공하는 사용자 자격 증명에 버킷 액세스에 필요한 권한이 있는지 확인해야 합니다. 다음은 Trident Protect를 사용하여 액세스하는 데 필요한 최소 권한을 부여하는 정책의 예입니다. 이 정책은 S3 호환 버킷 정책을 관리하는 사용자에게 적용할 수 있습니다.</block>
+  <block id="d9b7f314625fb7dcf35c741afe65b676" category="inline-link">Amazon S3 문서</block>
+  <block id="51ef32359424209f7163e58a5b1ab92e" category="paragraph">Amazon S3 정책에 대한 자세한 내용은 다음 예제를 참조하세요. <block ref="61017e44ea21b481e69f04f8ac510768" category="inline-link-rx"></block> .</block>
 </blocks>
