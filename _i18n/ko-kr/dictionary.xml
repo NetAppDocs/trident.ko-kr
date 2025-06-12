@@ -3917,7 +3917,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="04475efebba67943de12a2269d2e0a7b" category="paragraph">이 예에서는 Trident에서 동적 엑스포트 정책을 사용하여 엑스포트 정책을 자동으로 생성 및 관리하도록 하는 방법을 보여 줍니다. 및<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 드라이버에도 동일하게<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 작동합니다.</block>
   <block id="917b750655d8fd1d6c961e661535fa99" category="paragraph">Trident는 "Comments" 필드에 프로비저닝 레이블을 설정합니다. 설명은 의 FlexVol<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 또는 의 FlexGroup에<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 설정됩니다. Trident는 프로비저닝 시 가상 풀에 있는 모든 레이블을 스토리지 볼륨에 복제합니다. 편의를 위해 스토리지 관리자는 가상 풀 및 그룹 볼륨별로 레이블을 레이블별로 정의할 수 있습니다.</block>
   <block id="fb66862ac33cf61ecc10382c3a42dee3" category="paragraph">Trident는 어떤 가상 풀이 선택되었는지 결정하고 스토리지 요구 사항이 충족되는지 확인합니다.</block>
-  <block id="05a22e6a579b05ed202716e4f439d475" category="list-text">모든 ONTAP 백엔드에 대해 Trident에는 SVM에 할당된 애그리게이트가 하나 이상 필요합니다.</block>
   <block id="3791349e449ca2bc9a8b7b7ed4c843de" category="list-text">Trident는 Windows 노드에서만 실행되는 Pod에 마운트된 SMB 볼륨을 지원합니다. 자세한 내용은 을 <block ref="688177e6b45c5d27a545463079c58d82" category="inline-xref-macro-rx"></block> 참조하십시오.</block>
   <block id="bef1bdf06ff1fb19147e51880974a6c5" category="paragraph">Trident는 ONTAP 백엔드를 인증하는 두 가지 모드를 제공합니다.</block>
   <block id="c3ac6347a688cffd729947263e3387fb" category="list-text">인증서 기반: 이 모드에서는 Trident가 ONTAP 클러스터와 통신하기 위해 백엔드에 인증서가 설치되어 있어야 합니다. 이 경우 백엔드 정의에는 클라이언트 인증서, 키 및 사용할 경우 신뢰할 수 있는 CA 인증서의 Base64로 인코딩된 값이 있어야 합니다(권장).</block>
@@ -5045,8 +5044,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="aecb281656d93e34b85fc03341498ff2" category="paragraph">ONTAP 백엔드에서 FC로 SVM을 구성해야 합니다. FC에 대한 기본 백엔드 구성입니다.</block>
   <block id="d502f4db20ef2dbccab335781e870976" category="example-title">ONTAP-SAN-이코노미 드라이버에 대한 옵션 예</block>
   <block id="54ed52257df13a4cb85caecc569dfeff" category="paragraph">Trident는 "Comments" 필드에 프로비저닝 레이블을 설정합니다. FlexVol volume Trident에 주석이 설정됨 용량 할당 시 가상 풀에 있는 모든 레이블을 스토리지 볼륨으로 복제합니다. 편의를 위해 스토리지 관리자는 가상 풀 및 그룹 볼륨별로 레이블을 레이블별로 정의할 수 있습니다.</block>
-  <block id="4e18c1645b4b67b418a76a6692256f62" category="paragraph">25.02 릴리즈부터 Trident는 ONTAP 9.16.1 이상의 ASA R2 속성을 자동으로 감지하고 iSCSI 프로토콜을 통해 ASA R2의 스토리지 용량 할당 및 사용을 지원합니다.</block>
-  <block id="4e759832f9d60e8c80e9d392f33b28c9" category="admonition">Trident에서는 하나 이상의 애그리게이트가 SVM에 할당되어야 합니다. ASA R2를 사용하는 경우 이 작업은 모드에서 ONTAP CLI를 통해서만 사용할 수<block ref="776e6c3d14fd9df9fc13e130d598c448" prefix=" " category="inline-code"></block> 있습니다.</block>
   <block id="684e3a49585228dba75783996b7b6fe7" category="admonition">백엔드의 CHAP 암호를 업데이트할 때 을 사용하여 백엔드를 업데이트해야<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 합니다. Trident은 이러한 변경 사항을 파악할 수 없으므로 ONTAP CLI 또는 ONTAP System Manager를 사용하여 스토리지 클러스터의 자격 증명을 업데이트하지 마십시오.</block>
   <block id="1f04e6944e16311a300b742aa0cfb55c" category="paragraph">FC를 통한 iSCSI SCSI</block>
   <block id="acb2e9160652c3e412ead9e870d11c9b" category="summary">Kubernetes 클러스터에 Trident EKS 추가 기능을 추가합니다.</block>
@@ -5526,4 +5523,7 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="48f73146a4944adc8ee8fb44ba954d59" category="paragraph">Amazon S3, Generic S3 등 S3 호환 스토리지에 접속할 경우 <block ref="3d0b4c23d9ed62ec7d7cd16273ca2521" category="inline-link-rx"></block> , 또는 <block ref="3a31dfad8c316380b9a5542d694c5833" category="inline-link-rx"></block> Trident Protect를 사용하는 경우, 제공하는 사용자 자격 증명에 버킷 액세스에 필요한 권한이 있는지 확인해야 합니다. 다음은 Trident Protect를 사용하여 액세스하는 데 필요한 최소 권한을 부여하는 정책의 예입니다. 이 정책은 S3 호환 버킷 정책을 관리하는 사용자에게 적용할 수 있습니다.</block>
   <block id="d9b7f314625fb7dcf35c741afe65b676" category="inline-link">Amazon S3 문서</block>
   <block id="51ef32359424209f7163e58a5b1ab92e" category="paragraph">Amazon S3 정책에 대한 자세한 내용은 다음 예제를 참조하세요. <block ref="61017e44ea21b481e69f04f8ac510768" category="inline-link-rx"></block> .</block>
+  <block id="46d663191f16f782a681e5f6702a09d4" category="list-text">모든 ONTAP 백엔드의 경우 Trident에서는 최소한 하나의 집계가 SVM에 할당되어야 합니다.</block>
+  <block id="46e450e4589332ce4a9f5ac86fea49f4" category="inline-link-macro">SVM 관리자가 CLI를 사용하여 생성한 스토리지 유닛이 "스토리지 서비스에 사용 가능한 후보 집계가 없습니다" 오류와 함께 실패합니다.</block>
+  <block id="aa20618193df98acd225cc1003a906ff" category="paragraph">ASA r2 시스템에서 SVM에 집계를 할당하는 방법에 대한 이 기술 자료 문서를 참조하세요. <block ref="537835ac1ae737799b9c1a1bff131746" category="inline-link-macro-rx"></block> .</block>
 </blocks>
