@@ -49,12 +49,9 @@ Trident Protect는 다음 스토리지 백엔드를 지원합니다.
 
 스토리지 백엔드가 다음 요구 사항을 충족하는지 확인합니다.
 
-* 클러스터에 연결된 NetApp 스토리지가 Astra Trident 24.02 이상을 사용하는지 확인합니다(Trident 24.10 권장).
-+
-** Astra Trident가 24.06.1 이전 버전이고 NetApp SnapMirror 재해 복구 기능을 사용하려면 Astra Control Provisioner를 수동으로 활성화해야 합니다.
+* 클러스터에 연결된 NetApp 스토리지가 Trident 24.02 이상(Trident 24.10 권장)을 사용하는지 확인하세요.
 
 
-* 최신 Astra Control Provisioner(Astra Trident 24.06.1 기준으로 기본적으로 설치 및 활성화됨)가 있는지 확인합니다.
 * NetApp ONTAP 스토리지 백엔드가 있는지 확인합니다.
 * 백업을 저장할 오브젝트 스토리지 버킷을 구성했는지 확인합니다.
 * 응용 프로그램 또는 응용 프로그램 데이터 관리 작업에 사용할 응용 프로그램 네임스페이스를 만듭니다. Trident Protect는 이러한 네임스페이스를 자동으로 만들지 않습니다. 사용자 지정 리소스에 존재하지 않는 네임스페이스를 지정하면 작업이 실패합니다.
@@ -90,6 +87,9 @@ NOTE: Trident 백엔드 구성 옵션을 로 `true` 설정하면 기본적으로
 
 KubeVirt VM에서 실행 중인 애플리케이션을 보호할 때 Trident Protect 24.10 및 24.10.1 이상의 동작이 다릅니다. 두 버전의 경우 모두 데이터 보호 작업 중에 파일 시스템 고정 및 고정 해제를 설정하거나 해제할 수 있습니다.
 
+
+NOTE: 복원 작업 중에  `VirtualMachineSnapshots` 가상 머신(VM)에 대해 생성된 항목은 복원되지 않습니다.
+
 .Trident Protect 24.10
 Trident Protect 24.10은 데이터 보호 작업 중에 KubeVirt VM 파일 시스템의 일관된 상태를 자동으로 보장하지 않습니다. Trident Protect 24.10을 사용하여 KubeVirt VM 데이터를 보호하려면 데이터 보호 작업 전에 파일 시스템에 대해 고정/고정 해제 기능을 수동으로 활성화해야 합니다. 이렇게 하면 파일 시스템이 정합성 보장 상태가 됩니다.
 
@@ -124,13 +124,22 @@ NetApp SnapMirror 복제는 다음 ONTAP 솔루션의 Trident Protect와 함께 
 
 SnapMirror 복제를 사용하려는 경우 ONTAP 클러스터가 다음 요구 사항을 충족하는지 확인하십시오.
 
-* * Astra Control Provisioner 또는 Trident *: Astra Control Provisioner 또는 Trident는 ONTAP를 백엔드로 활용하는 소스 및 대상 Kubernetes 클러스터 모두에 존재해야 합니다. Trident Protect는 다음 드라이버를 통해 지원되는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 복제를 지원합니다.
+* *NetApp Trident*: NetApp Trident는 백엔드로 ONTAP을 활용하는 소스 및 대상 Kubernetes 클러스터 모두에 존재해야 합니다. Trident Protect는 다음 드라이버를 통해 지원되는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 복제를 지원합니다.
 +
-** 'ONTAP-NAS'
-** 'ONTAP-SAN'
+** `ontap-nas` : NFS
+** `ontap-san` : iSCSI
+** `ontap-san` : FC
+** `ontap-san` : NVMe/TCP(최소 ONTAP 버전 9.15.1 필요)
 
 
 * * 라이센스 *: 소스 및 대상 ONTAP 클러스터 모두에서 데이터 보호 번들을 사용하는 ONTAP SnapMirror 비동기 라이센스를 활성화해야 합니다. 자세한 내용은 을 https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["ONTAP의 SnapMirror 라이센스 개요"^] 참조하십시오.
++
+ONTAP 9.10.1부터 모든 라이센스는 여러 기능을 사용할 수 있는 단일 파일인 NetApp 라이센스 파일(NLF)로 제공됩니다. 자세한 내용은 을 link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html#licenses-included-with-ontap-one["ONTAP One에 포함된 라이선스"^] 참조하십시오.
+
++
+
+NOTE: SnapMirror 비동기 보호만 지원됩니다.
+
 
 
 
@@ -144,9 +153,8 @@ SnapMirror 복제를 사용하려는 경우 ONTAP 클러스터가 다음 요구 
 
 NOTE: 두 ONTAP 클러스터 간의 복제 관계에 사용되는 SVM 이름이 고유한지 확인합니다.
 
-* * Astra Control Provisioner 또는 Trident 및 SVM *: 피어링된 원격 SVM을 대상 클러스터의 Astra Control Provisioner 또는 Trident에서 사용할 수 있어야 합니다.
+* *NetApp Trident 및 SVM*: 피어링된 원격 SVM은 대상 클러스터의 NetApp Trident에서 사용할 수 있어야 합니다.
 * * 관리되는 백엔드 *: 복제 관계를 만들려면 Trident Protect에서 ONTAP 스토리지 백엔드를 추가 및 관리해야 합니다.
-* * over TCP *: Trident Protect는 NVMe over TCP 프로토콜을 사용하는 스토리지 백엔드에 대해 NetApp SnapMirror 복제를 지원하지 않습니다.
 
 
 

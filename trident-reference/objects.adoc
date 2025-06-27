@@ -264,7 +264,7 @@ Kubernetes 'VolumeSnapshot' 개체는 볼륨의 스냅샷을 생성하는 요청
 볼륨 스냅샷 요청이 들어오면 Trident는 백엔드의 볼륨에 대한 스냅샷 생성을 자동으로 관리하고 고유한 'VolumeSnapshotContent' 객체를 생성하여 스냅샷을 표시합니다. 기존 PVC에서 스냅샷을 생성하고 새 PVC를 생성할 때 스냅샷을 DataSource로 사용할 수 있습니다.
 
 
-NOTE: VolumeSnapshot의 생수는 소스 PVC와는 독립적입니다. 소스 PVC가 삭제된 후에도 스냅샷이 지속됩니다. 연관된 스냅샷이 있는 PVC를 삭제할 때 Trident는 이 PVC에 대한 백업 볼륨을 * Deleting * 상태로 표시하지만 완전히 제거하지는 않습니다. 연결된 모든 스냅샷이 삭제되면 볼륨이 제거됩니다.
+NOTE: VolumeSnapshot의 수명 주기는 소스 PVC와 무관합니다. 즉, 소스 PVC가 삭제된 후에도 스냅샷은 유지됩니다. 연관된 스냅샷이 있는 PVC를 삭제할 때 Trident는 이 PVC에 대한 백업 볼륨을 * Deleting * 상태로 표시하지만 완전히 제거하지는 않습니다. 연결된 모든 스냅샷이 삭제되면 볼륨이 제거됩니다.
 
 
 
@@ -278,6 +278,48 @@ VolumeSnapshotContent 객체에는 스냅샷 스냅샷(스냅샷 핸들 등)을 
 
 
 NOTE: 일반적으로 오브젝트를 관리할 필요가 `VolumeSnapshotContent` 없습니다. Trident 외부에서 만들려는 경우는 link:../trident-use/vol-snapshots.html#import-a-volume-snapshot["볼륨 스냅샷을 가져옵니다"]예외입니다.
+
+
+
+== Kubernetes `VolumeGroupSnapshotClass` 오브젝트
+
+Kubernetes `VolumeGroupSnapshotClass` 오브젝트는 과 `VolumeSnapshotClass`유사합니다. 이러한 스냅샷은 여러 스토리지 클래스를 정의하는 데 도움이 되며, 볼륨 그룹 스냅샷에서 참조되어 스냅샷을 필요한 스냅샷 클래스와 연결합니다. 각 볼륨 그룹 스냅샷은 단일 볼륨 그룹 스냅샷 클래스와 연결됩니다.
+
+에이  `VolumeGroupSnapshotClass` 스냅샷 그룹을 생성하려면 관리자가 정의해야 합니다. 볼륨 그룹 스냅샷 클래스는 다음 정의를 사용하여 생성됩니다.
+
+[source, yaml]
+----
+apiVersion: groupsnapshot.storage.k8s.io/v1beta1
+kind: VolumeGroupSnapshotClass
+metadata:
+  name: csi-group-snap-class
+  annotations:
+    kubernetes.io/description: "Trident group snapshot class"
+driver: csi.trident.netapp.io
+deletionPolicy: Delete
+----
+는 Trident에서 처리합니다.  `deletionPolicy` 그룹 스냅샷을 삭제해야 할 때 수행할 작업을 지정합니다 .  `deletionPolicy` 로 설정됩니다  `Delete` 스냅샷이 삭제되면 볼륨 그룹 스냅샷 개체와 스토리지 클러스터의 기본 스냅샷도 제거됩니다. 또는 로 설정하면 `Retain` `VolumeGroupSnapshotContent` 및 물리적 스냅샷이 보존됩니다.
+
+
+
+== Kubernetes `VolumeGroupSnapshot` 오브젝트
+
+쿠버네티스  `VolumeGroupSnapshot` 객체는 여러 볼륨의 스냅샷을 생성하라는 요청입니다. PVC가 사용자가 볼륨에 대해 요청한 것을 나타내는 것처럼, 볼륨 그룹 스냅샷은 사용자가 기존 PVC의 스냅샷을 생성하라는 요청입니다.
+
+볼륨 그룹 스냅샷 요청이 들어오면 Trident는 백엔드의 볼륨에 대한 그룹 스냅샷 생성을 자동으로 관리하고 고유한 스냅샷을 생성하여 스냅샷을 노출합니다.  `VolumeGroupSnapshotContent` 물체. 기존 PVC에서 스냅샷을 생성하고 새 PVC를 생성할 때 스냅샷을 DataSource로 사용할 수 있습니다.
+
+
+NOTE: VolumeGroupSnapshot의 수명 주기는 소스 PVC와 무관합니다. 즉, 소스 PVC가 삭제된 후에도 스냅샷은 유지됩니다. 연관된 스냅샷이 있는 PVC를 삭제할 때 Trident는 이 PVC에 대한 백업 볼륨을 * Deleting * 상태로 표시하지만 완전히 제거하지는 않습니다. 연결된 모든 스냅샷이 삭제되면 볼륨 그룹 스냅샷도 제거됩니다.
+
+
+
+== Kubernetes `VolumeGroupSnapshotContent` 오브젝트
+
+쿠버네티스  `VolumeGroupSnapshotContent` 개체는 이미 프로비저닝된 볼륨에서 가져온 그룹 스냅샷을 나타냅니다. 이 스냅샷은 A와 유사하며 `PersistentVolume` 스토리지 클러스터에서 프로비저닝된 스냅샷을 나타냅니다. 및 `PersistentVolume` 객체와 마찬가지로 `PersistentVolumeClaim` 스냅샷이 생성될 때 `VolumeSnapshotContent` 객체는 스냅샷 생성을 요청한 객체에 대한 일대일 매핑을 `VolumeSnapshot` 유지합니다.
+
+그만큼  `VolumeGroupSnapshotContent` 개체에는 스냅샷 그룹을 식별하는 세부 정보(예:  `volumeGroupSnapshotHandle` 그리고 개별 볼륨 스냅샷이 스토리지 시스템에 존재합니다.
+
+스냅샷 요청이 들어오면 Trident는 백엔드에 볼륨 그룹 스냅샷을 생성합니다. 볼륨 그룹 스냅샷이 생성된 후 Trident는  `VolumeGroupSnapshotContent` 객체를 생성하여 Kubernetes API에 스냅샷을 노출합니다.
 
 
 

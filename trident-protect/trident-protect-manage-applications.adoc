@@ -94,6 +94,51 @@ spec:
 
 
 
+. (_선택 사항_) 특정 레이블이 표시된 리소스를 포함하거나 제외하는 필터링을 추가합니다.
++
+** *resourceFilter.resourceSelectionCriteria*:(필터링에 필요) `Include` resourceMatchers에 정의된 리소스를 포함하거나 제외하려면 또는 을 `Exclude` 사용합니다. 다음 resourceMatchers 매개 변수를 추가하여 포함하거나 제외할 리소스를 정의합니다.
++
+*** *resourceFilter.resourceMatchers*: resourceMatcher 개체의 배열입니다. 이 배열에서 여러 요소를 정의하는 경우 해당 요소는 OR 연산으로 일치하고 각 요소(그룹, 종류, 버전) 내의 필드는 AND 연산으로 일치합니다.
++
+**** *resourceMatchers[].group*:(_Optional_) 필터링할 리소스의 그룹입니다.
+**** * resourceMatchers [].kind *: (_Optional_) 필터링할 리소스의 종류입니다.
+**** *resourceMatchers [ ].version*: (_Optional_) 필터링할 리소스의 버전입니다.
+**** *resourceMatchers[].names*:(_Optional_) 필터링할 리소스의 Kubernetes metadata.name 필드에 있는 이름입니다.
+**** *resourceMatchers [].namespaces *: (_Optional_) 필터링할 리소스의 Kubernetes metadata.name 필드에 있는 네임스페이스입니다.
+**** *resourceMatchers [ ].labelSelectors*: (_Optional_) 에 정의된 대로 리소스의 Kubernetes metadata.name 필드에 있는 레이블 선택기 문자열입니다. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors["Kubernetes 문서"^] 예를 들면 다음과 `"trident.netapp.io/os=linux"`같습니다.
++
+
+NOTE: 둘 다  `resourceFilter` 그리고  `labelSelector` 사용됩니다,  `resourceFilter` 먼저 실행한 다음  `labelSelector` 결과 리소스에 적용됩니다.
+
++
+예를 들면 다음과 같습니다.
+
++
+[source, yaml]
+----
+spec:
+  resourceFilter:
+    resourceSelectionCriteria: "Include"
+    resourceMatchers:
+      - group: my-resource-group-1
+        kind: my-resource-kind-1
+        version: my-resource-version-1
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-2
+        kind: my-resource-kind-2
+        version: my-resource-version-2
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+----
+
+
+
+
+
+
 . 환경에 맞게 응용 프로그램 CR을 만든 후 CR을 적용합니다. 예를 들면 다음과 같습니다.
 +
 [source, console]
@@ -125,6 +170,14 @@ tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespa
 [source, console]
 ----
 tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include> --namespace <my-app-namespace> --annotation protect.trident.netapp.io/skip-vm-freeze=<"true"|"false">
+----
++
+사용할 수 있습니다  `--resource-filter-include` 그리고  `--resource-filter-exclude` 리소스를 포함하거나 제외하기 위한 플래그  `resourceSelectionCriteria` 다음 예에서 볼 수 있듯이 그룹, 종류, 버전, 레이블, 이름 및 네임스페이스와 같은 것들이 있습니다.
+
++
+[source, console]
+----
+tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include> --namespace <my-app-namespace> --resource-filter-include "group=my-resource-group,kind=my-resource-kind,version=my-resource-version,names=my-resource-names,namespaces=my-resource-namespaces,labelSelectors=trident.netapp.io/os=linux"
 ----
 
 

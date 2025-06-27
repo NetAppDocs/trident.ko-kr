@@ -16,6 +16,9 @@ Linux LUKS(통합 키 설정)를 활성화하여 Trident에서 ONTAP SAN 및 ONT
 
 Trident에서 LUKS로 암호화된 볼륨은 에서 권장하는 AES-XTS-plar64 사이퍼 및 모드를 link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^]사용합니다.
 
+
+NOTE: ASA r2 시스템에서는 LUKS 암호화가 지원되지 않습니다. ASA r2 시스템에 대한 자세한 내용은 다음을 참조하세요. link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA R2 스토리지 시스템에 대해 알아보십시오"^] .
+
 .시작하기 전에
 * 작업자 노드에는 Cryptsetup 2.1 이상(3.0 이하)이 설치되어 있어야 합니다. 자세한 내용은 를 참조하십시오 link:https://gitlab.com/cryptsetup/cryptsetup["Gitlab: cryptsetup"^].
 * 성능상의 이유로 NetApp에서는 작업자 노드가 AES-NI(Advanced Encryption Standard New Instructions)를 지원하는 것이 좋습니다. AES-NI 지원을 확인하려면 다음 명령을 실행합니다.

@@ -16,6 +16,13 @@ summary: Trident Protect를 최신 버전으로 업그레이드하여 새로운 
 [role="lead"]
 Trident Protect를 최신 버전으로 업그레이드하여 새로운 기능 또는 버그 수정을 활용할 수 있습니다.
 
+[NOTE]
+====
+24.10 버전에서 업그레이드하는 경우, 업그레이드 중 실행 중인 스냅샷이 실패할 수 있습니다. 이 실패는 향후 수동 또는 예약된 스냅샷 생성을 방해하지 않습니다. 업그레이드 중 스냅샷이 실패할 경우, 수동으로 새 스냅샷을 생성하여 애플리케이션을 보호할 수 있습니다.
+
+잠재적인 오류를 방지하려면 업그레이드 전에 모든 스냅샷 일정을 비활성화했다가 나중에 다시 활성화할 수 있습니다. 하지만 이렇게 하면 업그레이드 기간 동안 예약된 스냅샷이 모두 손실될 수 있습니다.
+
+====
 Trident Protect를 업그레이드하려면 다음 단계를 수행하십시오.
 
 .단계
@@ -27,14 +34,32 @@ helm repo update
 ----
 . Trident Protect CRD 업그레이드:
 +
+
+NOTE: 25.06 이전 버전에서 업그레이드하는 경우 CRD가 이제 Trident Protect Helm 차트에 포함되었으므로 이 단계가 필요합니다.
+
++
+.. CRD 관리를 전환하려면 이 명령을 실행하세요.  `trident-protect-crds` 에게  `trident-protect` :
++
 [source, console]
 ----
-helm upgrade trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2502.0  --namespace trident-protect
+kubectl get crd | grep protect.trident.netapp.io | awk '{print $1}' | xargs -I {} kubectl patch crd {} --type merge -p '{"metadata":{"annotations":{"meta.helm.sh/release-name": "trident-protect"}}}'
 ----
+.. Helm 비밀을 삭제하려면 이 명령을 실행하세요.  `trident-protect-crds` 차트:
++
+
+NOTE: 제거하지 마십시오  `trident-protect-crds` Helm을 사용하여 차트를 만들면 CRD와 관련 데이터가 제거될 수 있습니다.
+
++
+[source, console]
+----
+kubectl delete secret -n trident-protect -l name=trident-protect-crds,owner=helm
+----
+
+
 . Trident Protect 업그레이드:
 +
 [source, console]
 ----
-helm upgrade trident-protect netapp-trident-protect/trident-protect --version 100.2502.0 --namespace trident-protect
+helm upgrade trident-protect netapp-trident-protect/trident-protect --version 100.2506.0 --namespace trident-protect
 ----
 

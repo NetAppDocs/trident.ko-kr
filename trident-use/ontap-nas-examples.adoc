@@ -87,7 +87,7 @@ NOTE: SVM에서 Aggregate를 업데이트하면 Trident 컨트롤러를 다시 �
 
 
 
-| 제한선태사용법 | 사용량이 이 비율을 초과하면 프로비저닝이 실패합니다. ONTAP * 용 아마존 FSx에는 * 가 적용되지 않습니다 | ""(기본적으로 적용되지 않음) 
+| 제한선태사용법 | 사용량이 이 비율을 초과하면 프로비저닝이 실패합니다. *Amazon FSx for ONTAP에는 적용되지 않습니다*. | ""(기본적으로 적용되지 않음) 
 
 
 | flexgroupAggregateList 를 참조하십시오  a| 
@@ -125,6 +125,9 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 
 
 | `denyNewVolumePools` |  못하도록백 엔드가 새 FlexVol 볼륨을 생성하지 포함하도록 `ontap-nas-economy` 해당 qtree를 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다. |  
+
+
+| `adAdminUser` | SMB 공유에 대한 전체 액세스 권한을 가진 Active Directory 관리자 사용자 또는 사용자 그룹입니다. 이 매개변수를 사용하여 SMB 공유에 대한 모든 권한을 가진 관리자 권한을 부여할 수 있습니다. |  
 |===
 
 
@@ -682,3 +685,185 @@ tridentctl update backend <backend-name> -f <path-to-backend-json-file-with-upda
 ----
 
 NOTE: PVC가 하나 또는 여러 개의 Pod에 연결된 경우, 새로운 데이터 LIF가 적용되려면 해당하는 모든 Pod를 종료한 다음 다시 불러와야 합니다.
+
+
+
+== 보안 SMB 예시
+
+
+
+=== ontap-nas 드라이버를 사용한 백엔드 구성
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  managementLIF: 10.0.0.1
+  svm: svm2
+  nasType: smb
+  defaults:
+    adAdminUser: tridentADtest
+  credentials:
+    name: backend-tbc-ontap-invest-secret
+----
+
+
+=== ontap-nas-economy 드라이버를 사용한 백엔드 구성
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas-economy
+  managementLIF: 10.0.0.1
+  svm: svm2
+  nasType: smb
+  defaults:
+    adAdminUser: tridentADtest
+  credentials:
+    name: backend-tbc-ontap-invest-secret
+----
+
+
+=== 스토리지 풀을 사용한 백엔드 구성
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  managementLIF: 10.0.0.1
+  svm: svm0
+  useREST: false
+  storage:
+  - labels:
+      app: msoffice
+    defaults:
+      adAdminUser: tridentADuser
+  nasType: smb
+  credentials:
+    name: backend-tbc-ontap-invest-secret
+
+----
+
+
+=== ontap-nas 드라이버를 사용한 스토리지 클래스 예제
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-smb-sc
+  annotations:
+    trident.netapp.io/smbShareAdUserPermission: change
+    trident.netapp.io/smbShareAdUser: tridentADtest
+parameters:
+  backendType: ontap-nas
+  csi.storage.k8s.io/node-stage-secret-name: smbcreds
+  csi.storage.k8s.io/node-stage-secret-namespace: trident
+  trident.netapp.io/nasType: smb
+provisioner: csi.trident.netapp.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+
+NOTE: 추가했는지 확인하세요  `annotations` 보안 SMB를 활성화합니다. 보안 SMB는 백엔드 또는 PVC에 설정된 구성과 관계없이 주석 없이는 작동하지 않습니다.
+
+
+
+=== ontap-nas-economy 드라이버를 사용한 스토리지 클래스 예제
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-smb-sc
+  annotations:
+    trident.netapp.io/smbShareAdUserPermission: change
+    trident.netapp.io/smbShareAdUser: tridentADuser3
+parameters:
+  backendType: ontap-nas-economy
+  csi.storage.k8s.io/node-stage-secret-name: smbcreds
+  csi.storage.k8s.io/node-stage-secret-namespace: trident
+  trident.netapp.io/nasType: smb
+provisioner: csi.trident.netapp.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+
+
+=== 단일 AD 사용자가 있는 PVC 예
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc4
+  namespace: trident
+  annotations:
+    trident.netapp.io/smbShareAccessControl: |
+      change:
+        - tridentADtest
+      read:
+        - tridentADuser
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ontap-smb-sc
+----
+
+
+=== 여러 AD 사용자가 있는 PVC 예
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-test-pvc
+  annotations:
+    trident.netapp.io/smbShareAccessControl: |
+      full_control:
+        - tridentTestuser
+        - tridentuser
+        - tridentTestuser1
+        - tridentuser1
+      change:
+        - tridentADuser
+        - tridentADuser1
+        - tridentADuser4
+        - tridentTestuser2
+      read:
+        - tridentTestuser2
+        - tridentTestuser3
+        - tridentADuser2
+        - tridentADuser3
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+----

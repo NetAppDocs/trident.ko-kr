@@ -12,14 +12,117 @@ summary: NetApp은 제품과 서비스를 지속적으로 개선 및 개선하�
 
 
 [role="lead"]
-릴리즈 노트는 최신 버전의 Trident에서 새로운 기능, 개선 사항 및 버그 수정에 대한 정보를 제공합니다.
+릴리스 노트는 NetApp Trident 최신 버전의 새로운 기능, 향상된 기능 및 버그 수정에 대한 정보를 제공합니다.
 
 
 WARNING: 설치 프로그램 zip 파일에 제공되는 Linux용 tridentctl 바이너리는 테스트되고 지원되는 버전입니다. zip 파일의 '/Extras' 부분에 제공된 'macos' 바이너리는 테스트되거나 지원되지 않습니다.
 
 
 
-== 25.02.1의 새로운 기능
+== 25.06의 새로운 기능
+
+새로운 기능 요약에서는 Trident와 Trident Protect 릴리스에 대한 향상된 기능, 수정 사항 및 사용 중단에 대한 세부 정보를 제공합니다.
+
+
+
+=== 트라이던트
+
+
+
+==== 향상된 기능
+
+* * Kubernetes *:
++
+** CSI 볼륨 그룹 스냅샷에 대한 지원이 추가되었습니다.  `v1beta1` ONTAP-SAN iSCSI 드라이버를 위한 볼륨 그룹 스냅샷 Kubernetes API입니다. 을 link:../trident-use/vol-group-snapshots.html["볼륨 그룹 스냅샷 작업"^]참조하십시오.
+** iSCSI 외에도 NVMe/TCP용 ONTAP ASA r2에 대한 지원이 추가되었습니다. 을 link:../trident-use/ontap-san-examples.html["ONTAP SAN 구성 옵션 및 예"^]참조하십시오.
+** ONTAP-NAS 및 ONTAP-NAS-Economy 볼륨에 대한 보안 SMB 지원이 추가되었습니다. 이제 Active Directory 사용자 및 그룹을 SMB 볼륨과 함께 사용하여 보안을 강화할 수 있습니다. 을 link:../trident-use/ontap-nas-prep.html#enable-secure-smb["보안 SMB 활성화"^]참조하십시오.
+** iSCSI 볼륨의 노드 작업에서 더 높은 확장성을 제공하기 위해 향상된 Trident 노드 동시성을 제공합니다.
+** 추가됨  `--allow-discards` LUKS 볼륨을 열어 공간 회수를 위한 삭제/TRIM 명령을 허용할 때.
+** LUKS로 암호화된 볼륨을 포맷할 때 성능이 향상되었습니다.
+** 오류가 발생했지만 부분적으로 포맷된 LUKS 장치에 대한 향상된 LUKS 정리 기능입니다.
+** NVMe 볼륨 연결 및 분리를 위한 향상된 Trident 노드 멱등성.
+** 추가됨  `internalID` ONTAP-SAN-Economy 드라이버에 대한 Trident 볼륨 구성에 대한 필드입니다.
+** NVMe 백엔드에 SnapMirror를 사용한 볼륨 복제 지원이 추가되었습니다. 을 link:../trident-use/vol-volume-replicate.html["SnapMirror를 사용하여 볼륨을 복제합니다"^]참조하십시오.
+
+
+
+
+
+
+==== 실험적 개선 사항
+
+
+NOTE: 프로덕션 환경에서는 사용할 수 없습니다.
+
+* [기술 미리보기] 다음을 통해 동시 Trident 컨트롤러 작업이 활성화되었습니다.  `--enable-concurrency` 기능 플래그입니다. 이를 통해 컨트롤러 작업을 병렬로 실행할 수 있어 작업량이 많거나 대규모 환경에서 성능이 향상됩니다.
++
+
+NOTE: 이 기능은 실험적이며 현재 ONTAP-SAN 드라이버(iSCSI 및 FCP 프로토콜)를 사용하여 제한된 병렬 워크플로를 지원합니다.
+
+* [기술 미리보기] ANF 드라이버에 수동 QOS 지원이 추가되었습니다.
+
+
+
+
+==== 수정
+
+* * Kubernetes *:
++
+** 기본 SCSI 디스크를 사용할 수 없는 경우 멀티패스 장치의 크기가 일치하지 않는 CSI NodeExpandVolume의 문제를 해결했습니다.
+** ONTAP-NAS 및 ONTAP-NAS-Economy 드라이버에 대한 중복된 내보내기 정책을 정리하지 못하는 문제가 수정되었습니다.
+** NFSv3 및 NFSv4 프로토콜이 모두 지원됩니다.  `nfsMountOptions` 제공되지 않으면 호스트의 기본 NFS 버전(NFSv3 또는 NFSv4)이 사용됩니다.
+** Kustomize를 사용하여 Trident를 설치할 때 고정된 배포 문제( link:https://github.com/NetApp/trident/issues/831["문제 #831"] ).
+** 스냅샷에서 생성된 PVC에 대한 누락된 내보내기 정책이 수정되었습니다. link:https://github.com/NetApp/trident/issues/1016["문제 #1016"] ).
+** ANF 볼륨 크기가 1GiB 단위로 자동 정렬되지 않는 문제가 해결되었습니다.
+** Bottlerocket과 함께 NFSv3를 사용할 때 발생하는 문제가 해결되었습니다.
+
+
+* SolidFire 백엔드를 사용하여 볼륨을 복제할 때 고정된 시간 초과( link:https://github.com/NetApp/trident/issues/1008["문제 #1008"] ).
+* 크기 조정에 실패했음에도 불구하고 ONTAP-NAS-Economy 볼륨이 최대 300TB까지 확장되는 문제가 해결되었습니다.
+* ONTAP REST API를 사용할 때 복제 분할 작업이 동기적으로 수행되는 문제가 해결되었습니다.
+
+
+
+
+==== 사용 중단:
+
+* *Kubernetes*: 지원되는 최소 Kubernetes 버전이 v1.27로 업데이트되었습니다.
+
+
+
+
+=== 트라이던트 프로텍트
+
+NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저닝 프로그램을 통해 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 개선하는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
+
+
+
+==== 향상된 기능
+
+* 더 자주 전체 백업을 수행할 수 있는 옵션을 제공하여 복구 시간이 개선되었습니다.
+* GVK(그룹-버전-종류) 필터링을 통해 애플리케이션 정의의 세분성이 향상되고 선택적 복원이 가능해졌습니다.
+* NetApp SnapMirror와 함께 AppMirrorRelationship(AMR)을 사용하면 전체 PVC 복제를 방지하기 위해 효율적인 재동기화 및 역방향 복제가 가능합니다.
+* EKS Pod Identity를 사용하여 AppVault 버킷을 생성하는 기능이 추가되어 EKS 클러스터의 버킷 자격 증명으로 비밀을 지정할 필요가 없습니다.
+* 필요한 경우 복원 네임스페이스에서 라벨과 주석 복원을 건너뛸 수 있는 기능이 추가되었습니다.
+* AppMirrorRelationship(AMR)은 이제 소스 PVC 확장을 확인하고 필요에 따라 대상 PVC에서 적절한 확장을 수행합니다.
+
+
+
+
+==== 수정
+
+* 이전 스냅샷의 스냅샷 주석 값이 새 스냅샷에 적용되는 버그를 수정했습니다. 이제 모든 스냅샷 주석이 정상적으로 적용됩니다.
+* 기본적으로 데이터 이동자 암호화(Kopia/Restic)를 위한 비밀이 정의되어 있습니다(정의되어 있지 않은 경우).
+* S3 AppVault 생성에 대한 검증 및 오류 메시지가 개선되었습니다.
+* AppMirrorRelationship(AMR)은 이제 실패한 시도를 방지하기 위해 Bound 상태의 PV만 복제합니다.
+* 대량의 백업이 있는 AppVault에서 AppVaultContent를 가져올 때 오류가 표시되는 문제가 해결되었습니다.
+* KubeVirt VMSnapshot은 장애를 방지하기 위해 복원 및 장애 조치 작업에서 제외됩니다.
+* Kopia의 기본 보존 일정이 사용자가 일정에 설정한 내용을 무시하고, 이로 인해 스냅샷이 조기에 제거되는 문제가 해결되었습니다.
+
+
+
+
+== 25.02.1의 변경 사항
 
 
 

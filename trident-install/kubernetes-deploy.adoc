@@ -16,7 +16,7 @@ NetApp는 다양한 환경 및 조직에 Trident를 설치할 수 있도록 다�
 
 
 
-== Trident 25.02에 대한 중요 정보
+== Trident 25.06에 대한 중요 정보
 
 *Trident에 대한 다음 중요 정보를 읽어야 합니다.*
 
@@ -25,7 +25,7 @@ NetApp는 다양한 환경 및 조직에 Trident를 설치할 수 있도록 다�
 ====
 []
 =====
-* Kubernetes 1.32가 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.
+* Kubernetes 1.33가 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.
 * Trident은 multipath.conf 파일에서 권장 값을 값으로 하여 SAN 환경에서 다중 경로 구성을 엄격히 적용합니다 `find_multipaths: no`.
 +
 비 경로 다중화 구성 또는 의 사용 `find_multipaths: yes` 또는 `find_multipaths: smart` multipath.conf 파일의 값으로 인해 마운트 오류가 발생합니다. Trident에서 의 사용을 권장했습니다 `find_multipaths: no` 21.07 릴리스 이후.

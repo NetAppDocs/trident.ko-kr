@@ -18,6 +18,9 @@ summary: 훌륭한 NetApp Trident 및 Trident Protect 블로그를 찾을 수 �
 
 == Trident 블로그
 
+* 2925년 5월 9일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Automatic-Trident-backend-configuration-for-FSx-for-ONTAP-with-the-Amazon-EKS/ba-p/460586["Amazon EKS 애드온을 사용한 FSx for ONTAP에 대한 자동 Trident 백엔드 구성"^]
+* 2025년 4월 15일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/NetApp-Trident-with-Google-Cloud-NetApp-Volumes-for-SMB-Protocol/ba-p/460118["Google Cloud NetApp Volumes for SMB Protocol을 갖춘 NetApp Trident"^]
+* 2025년 4월 14일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Unlocking-the-power-of-NetApp-ASA-r2-systems-for-Kubernetes-block-storage/ba-p/460113["Kubernetes 블록 스토리지를 위한 NetApp ASA r2 시스템의 잠재력 활용"^]
 * 2025년 3월 5일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Unlock-Seamless-iSCSI-Storage-Integration-A-Guide-to-FSxN-on-ROSA-Clusters-for/ba-p/459124["원활한 iSCSI 스토리지 통합의 실현: AWS용 Rosa Cluster의 FSxN에 대한 가이드"^]
 * 2024년 12월 12일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Introducing-Fibre-Channel-support-in-Trident/ba-p/457427["Trident에서 파이버 채널 지원을 소개합니다"^]
 

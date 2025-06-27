@@ -9,7 +9,7 @@ summary: Trident에서는 소스 볼륨과 타겟 볼륨 간의 미러 관계를
 
 
 [role="lead"]
-Trident은 재해 복구에 대비해 데이터를 복제하기 위해 한 클러스터의 소스 볼륨과 피어링된 클러스터의 타겟 볼륨 간의 미러링 관계를 지원합니다. 이름이 지정된 CRD(사용자 지정 리소스 정의)를 사용하여 다음 작업을 수행할 수 있습니다.
+Trident은 재해 복구에 대비해 데이터를 복제하기 위해 한 클러스터의 소스 볼륨과 피어링된 클러스터의 타겟 볼륨 간의 미러링 관계를 지원합니다.  Trident Mirror Relationship(TMR)이라고 하는 네임스페이스가 지정된 사용자 지정 리소스 정의(CRD)를 사용하여 다음 작업을 수행할 수 있습니다.
 
 * 볼륨 간 미러 관계 생성(PVC)
 * 볼륨 간 미러 관계를 제거합니다
@@ -27,6 +27,13 @@ Trident은 재해 복구에 대비해 데이터를 복제하기 위해 한 클�
 .ONTAP 클러스터
 * * Trident *: Trident 버전 22.10 이상이 ONTAP를 백엔드로 활용하는 소스 및 대상 Kubernetes 클러스터 모두에 있어야 합니다.
 * * 라이센스 *: 소스 및 대상 ONTAP 클러스터 모두에서 데이터 보호 번들을 사용하는 ONTAP SnapMirror 비동기 라이센스를 활성화해야 합니다. 자세한 내용은 을 https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["ONTAP의 SnapMirror 라이센스 개요"^] 참조하십시오.
++
+ONTAP 9.10.1부터 모든 라이센스는 여러 기능을 사용할 수 있는 단일 파일인 NetApp 라이센스 파일(NLF)로 제공됩니다. 자세한 내용은 을 link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html#licenses-included-with-ontap-one["ONTAP One에 포함된 라이선스"^] 참조하십시오.
+
++
+
+NOTE: SnapMirror 비동기 보호만 지원됩니다.
+
 
 
 .피어링
@@ -39,8 +46,10 @@ IMPORTANT: 두 ONTAP 클러스터 간의 복제 관계에 사용되는 SVM 이�
 
 
 .지원되는 드라이버
-* 볼륨 복제는 ONTAP-NAS 및 ONTAP-SAN 드라이버에서 지원됩니다.
+NetApp Trident는 다음 드라이버가 지원하는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 볼륨 복제를 지원합니다.**  `ontap-nas` : NFS **  `ontap-san` : iSCSI **  `ontap-san` : FC **  `ontap-san` : NVMe/TCP(최소 ONTAP 버전 9.15.1 필요)
 
+
+NOTE: SnapMirror를 사용한 볼륨 복제는 ASA r2 시스템에서는 지원되지 않습니다. ASA r2 시스템에 대한 자세한 내용은 다음을 참조하세요. link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA R2 스토리지 시스템에 대해 알아보십시오"^] .
 
 
 

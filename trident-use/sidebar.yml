@@ -96,3 +96,5 @@ entries:
     url: "/trident-use/csi-topology.html"
   - title: 스냅샷을 사용합니다
     url: "/trident-use/vol-snapshots.html"
+  - title: 볼륨 그룹 스냅샷 생성
+    url: "/trident-use/vol-group-snapshots.html"

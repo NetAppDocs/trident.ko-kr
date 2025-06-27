@@ -1,0 +1,175 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-group-snapshots.html 
+keywords: volumes, on-demand volume group snapshots, csi, csi snapshots, create snapshots, backends, kubernetes, create PVCs, PVCs, snapshot, volume snapshot, import snapshot, recover data 
+summary: '영구 볼륨(PVS)의 Kubernetes 볼륨 스냅샷은 볼륨의 시점 복사본을 지원합니다. Trident를 사용하여 생성된 볼륨의 스냅샷을 생성하고, Trident 외부에서 생성된 스냅샷을 가져오고, 기존 스냅샷에서 새 볼륨을 생성하고, 스냅샷에서 볼륨 데이터를 복구할 수 있습니다.' 
+---
+= 볼륨 그룹 스냅샷 작업
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+영구 볼륨(PV)의 Kubernetes 볼륨 그룹 스냅샷 NetApp Trident는 여러 볼륨의 스냅샷(볼륨 스냅샷 그룹)을 생성할 수 있는 기능을 제공합니다. 이 볼륨 그룹 스냅샷은 동일 시점에 생성된 여러 볼륨의 복사본을 나타냅니다.
+
+
+NOTE: VolumeGroupSnapshot은 베타 API를 갖춘 쿠버네티스의 베타 기능입니다. VolumeGroupSnapshot을 사용하려면 쿠버네티스 1.32 버전이 필요합니다.
+
+
+
+== 볼륨 그룹 스냅샷 생성
+
+볼륨 그룹 스냅샷은 다음과 같이 지원됩니다.  `ontap-san` 드라이버는 iSCSI 프로토콜에만 적용되며 아직 Fibre Channel(FCP)이나 NVMe/TCP에서는 지원되지 않습니다. 시작하기 전에
+
+* Kubernetes 버전이 K8s 1.32 이상인지 확인하세요.
+* 스냅샷을 사용하려면 외부 스냅샷 컨트롤러와 CRD(사용자 정의 리소스 정의)가 있어야 합니다. Kubernetes Orchestrator의 책임입니다(예: Kubeadm, GKE, OpenShift).
++
+Kubernetes 배포판에 외부 스냅샷 컨트롤러 및 CRD가 포함되어 있지 않은 경우 다음을 참조하세요. <<볼륨 스냅샷 컨트롤러를 배포합니다>> .
+
++
+
+NOTE: GKE 환경에서 주문형 볼륨 그룹 스냅샷을 생성하는 경우 스냅샷 컨트롤러를 생성하지 마세요. GKE는 내장된 숨겨진 스냅샷 컨트롤러를 사용합니다.
+
+* 스냅샷 컨트롤러 YAML에서 다음을 설정합니다.  `CSIVolumeGroupSnapshot` 볼륨 그룹 스냅샷이 활성화되도록 기능 게이트를 'true'로 설정합니다.
+* 볼륨 그룹 스냅샷을 생성하기 전에 필요한 볼륨 그룹 스냅샷 클래스를 생성합니다.
+* VolumeGroupSnapshot을 생성하려면 모든 PVC/볼륨이 동일한 SVM에 있는지 확인하세요.
+
+
+.단계
+* VolumeGroupSnapshot을 생성하기 전에 VolumeGroupSnapshotClass를 생성하세요. 자세한 내용은 을 link:../trident-reference/objects.html#kubernetes-volumegroupsnapshotclass-objects["볼륨 그룹 스냅샷 클래스"]참조하십시오.
++
+[source, yaml]
+----
+apiVersion: groupsnapshot.storage.k8s.io/v1beta1
+kind: VolumeGroupSnapshotClass
+metadata:
+  name: csi-group-snap-class
+  annotations:
+    kubernetes.io/description: "Trident group snapshot class"
+driver: csi.trident.netapp.io
+deletionPolicy: Delete
+----
+* 기존 저장 클래스를 사용하여 필요한 라벨이 있는 PVC를 만들거나, 이러한 라벨을 기존 PVC에 추가합니다.
++
+다음 예제에서는 다음을 사용하여 PVC를 생성합니다.  `pvc1-group-snap` 데이터 소스 및 레이블로  `consistentGroupSnapshot: groupA` . 요구 사항에 따라 레이블 키와 값을 정의합니다.
+
+
+
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc1-group-snap
+  labels:
+    consistentGroupSnapshot: groupA
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+  storageClassName: sc1-1
+----
+* 동일한 레이블로 VolumeGroupSnapshot을 만듭니다. (`consistentGroupSnapshot: groupA` ) PVC에 지정됨.
++
+이 예제에서는 볼륨 그룹 스냅샷을 생성합니다.
+
+
+
+[listing]
+----
+apiVersion: groupsnapshot.storage.k8s.io/v1beta1
+kind: VolumeGroupSnapshot
+metadata:
+  name: "vgs1"
+  namespace: trident
+spec:
+  volumeGroupSnapshotClassName: csi-group-snap-class
+  source:
+    selector:
+      matchLabels:
+        consistentGroupSnapshot: groupA
+----
+
+
+== 그룹 스냅샷을 사용하여 볼륨 데이터 복구
+
+볼륨 그룹 스냅샷의 일부로 생성된 개별 스냅샷을 사용하여 개별 영구 볼륨을 복원할 수 있습니다. 볼륨 그룹 스냅샷을 하나의 단위로 복구할 수는 없습니다.
+
+볼륨 스냅샷 복원 ONTAP CLI를 사용하여 볼륨을 이전 스냅숏에 기록된 상태로 복원합니다.
+
+[listing]
+----
+cluster1::*> volume snapshot restore -vserver vs0 -volume vol3 -snapshot vol3_snap_archive
+----
+
+NOTE: 스냅샷 복사본을 복원하면 기존 볼륨 구성이 덮어쓰여집니다. 스냅샷 복사본이 생성된 후 볼륨 데이터에 대한 변경 사항은 손실됩니다.
+
+
+
+== 스냅샷에서 전체 볼륨 복원
+
+Trident는 (TASR) CR을 사용하여 스냅샷에서 제자리에서 신속하게 볼륨을 복원할 수 있도록 `TridentActionSnapshotRestore` 합니다. 이 CR은 필수 Kubernetes 조치로 작동하며 작업이 완료된 후에도 유지되지 않습니다.
+
+자세한 내용은 을 link:../trident-use/vol-snapshots.html#in-place-volume-restoration-from-a-snapshot["스냅샷에서 전체 볼륨 복원"]참조하십시오.
+
+
+
+== 연관된 그룹 스냅샷이 있는 PV 삭제
+
+그룹 볼륨 스냅샷을 삭제할 때:
+
+* 그룹의 개별 스냅샷이 아닌 VolumeGroupSnapshots 전체를 삭제할 수 있습니다.
+* 스냅샷이 있는 동안 해당 PersistentVolume이 삭제되면 Trident는 해당 볼륨을 "삭제 중" 상태로 전환합니다. 볼륨을 안전하게 제거하기 전에 스냅샷을 제거해야 하기 때문입니다.
+* 그룹화된 스냅샷을 사용하여 복제본을 만든 다음 그룹을 삭제하려는 경우 복제본 분할 작업이 시작되고 분할이 완료될 때까지 그룹을 삭제할 수 없습니다.
+
+
+
+
+== 볼륨 스냅샷 컨트롤러를 배포합니다
+
+Kubernetes 배포 시 스냅샷 컨트롤러와 CRD가 포함되지 않은 경우 다음과 같이 배포할 수 있습니다.
+
+.단계
+. 볼륨 스냅샷 CRD를 생성합니다.
++
+[listing]
+----
+cat snapshot-setup.sh
+----
++
+[source, sh]
+----
+#!/bin/bash
+# Create volume snapshot CRDs
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
+----
+. 스냅샷 컨트롤러를 생성합니다.
++
+[source, console]
+----
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
+----
++
+[source, console]
+----
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-6.1/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml
+----
++
+
+NOTE: 필요한 경우 를 엽니다 `deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml` 및 업데이트 `namespace` 네임스페이스로.
+
+
+
+
+
+== 관련 링크
+
+* link:../trident-reference/objects.html#kubernetes-volumegroupsnapshotclass-objects["볼륨 그룹 스냅샷 클래스"]
+* link:../trident-concepts/snapshots.html["볼륨 스냅숏"]
+

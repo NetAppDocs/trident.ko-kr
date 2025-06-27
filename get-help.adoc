@@ -33,7 +33,12 @@ Trident는 버전에 따라 세 가지 수준의 지원을 제공합니다. 을 
 
 
  a| 
-link:https://docs.netapp.com/us-en/trident/index.html["25.02"^]
+link:https://docs.netapp.com/us-en/trident/index.html["25.06"^]
+| 2026년 6월 | 2027년 6월 | 2028년 6월 
+
+
+ a| 
+link:https://docs.netapp.com/us-en/trident-2502/index.html["25.02"^]
 | 2026년 2월 | 2027년 2월 | 2028년 2월 
 
 
@@ -80,11 +85,6 @@ link:https://docs.netapp.com/us-en/trident-2210/index.html["22.10"^]
  a| 
 link:https://docs.netapp.com/us-en/trident-2207/index.html["22.07"^]
 | -- | -- | 2025년 7월 
-
-
- a| 
-link:https://docs.netapp.com/us-en/trident-2204/index.html["22.04"^]
-| -- | -- | 2025년 4월 
 |===
 
 

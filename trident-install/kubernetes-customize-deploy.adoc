@@ -72,7 +72,7 @@ AKS 클러스터에서 클라우드 ID를 사용할 때 워크로드 ID("Azure.w
 자동으로 계층화 | 거짓입니다 
 
 
-| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport:25.02"` 
+| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport:25.06"` 
 
 
 | 자동 지원 프록시 | AutoSupport를 보내는 프록시의 주소/포트입니다
@@ -85,7 +85,7 @@ AKS 클러스터에서 클라우드 ID를 사용할 때 워크로드 ID("Azure.w
 | `logFormat` | 사용할 Trident 로깅 형식 [text, json] | `"text"` 
 
 
-| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:25.02"` 
+| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:25.06"` 
 
 
 | 'imageRegistry'입니다 | 형식의 내부 레지스트리 경로입니다
