@@ -75,14 +75,83 @@ aws iam create-policy --policy-name AmazonFSxNCSIDriverPolicy --policy-document 
 ----
 
 
-=== 서비스 계정에 대한 IAM 역할을 생성합니다
+=== 서비스 계정 연결(IRSA)을 위한 Pod ID 또는 IAM 역할 생성
 
-정책을 만든 후에는 Trident가 실행할 서비스 계정에 할당될 역할을 생성할 때 사용합니다.
+Kubernetes 서비스 계정이 EKS Pod Identity를 사용하는 AWS Identity and Access Management(IAM) 역할 또는 서비스 계정 연결(IRSA)을 위한 IAM 역할을 맡도록 구성할 수 있습니다. 서비스 계정을 사용하도록 구성된 모든 Pod는 해당 역할에 액세스 권한이 있는 모든 AWS 서비스에 액세스할 수 있습니다.
 
 [role="tabbed-block"]
 ====
-.AWS CLI를 참조하십시오
+.포드 아이덴티티
 --
+Amazon EKS Pod Identity 연결은 Amazon EC2 인스턴스 프로필이 Amazon EC2 인스턴스에 자격 증명을 제공하는 방식과 유사하게 애플리케이션의 자격 증명을 관리하는 기능을 제공합니다.
+
+*EKS 클러스터에 Pod Identity 설치*:
+
+AWS 콘솔을 통해 또는 다음 AWS CLI 명령을 사용하여 Pod ID를 생성할 수 있습니다.
+
+[listing]
+----
+aws eks create-addon --cluster-name <EKS_CLUSTER_NAME> --addon-name eks-pod-identity-agent
+----
+자세한 내용은 다음을 참조하세요. link:https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html["Amazon EKS Pod Identity Agent 설정"] .
+
+*trust-relationship.json을 생성합니다*:
+
+EKS 서비스 주체가 Pod Identity에 대한 이 역할을 수행할 수 있도록 trust-relationship.json 파일을 생성하세요. 그런 다음 다음 신뢰 정책을 사용하여 역할을 생성하세요.
+
+[listing]
+----
+aws iam create-role \
+  --role-name fsxn-csi-role --assume-role-policy-document file://trust-relationship.json \
+  --description "fsxn csi pod identity role"
+----
+*trust-relationship.json 파일*:
+
+[source, JSON]
+----
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "pods.eks.amazonaws.com"
+      },
+      "Action": [
+        "sts:AssumeRole",
+        "sts:TagSession"
+      ]
+    }
+  ]
+}
+----
+*IAM 역할에 역할 정책 첨부*:
+
+이전 단계의 역할 정책을 생성된 IAM 역할에 연결합니다.
+
+[listing]
+----
+aws iam attach-role-policy \
+  --policy-arn arn:aws:iam::aws:111122223333:policy/fsxn-csi-policy \
+  --role-name fsxn-csi-role
+----
+*포드 ID 연결 생성*:
+
+IAM 역할과 Trident 서비스 계정(trident-controller) 간에 Pod ID 연결을 생성합니다.
+
+[listing]
+----
+aws eks create-pod-identity-association \
+  --cluster-name <EKS_CLUSTER_NAME> \
+  --role-arn arn:aws:iam::111122223333:role/fsxn-csi-role \
+  --namespace trident --service-account trident-controller
+----
+--
+.서비스 계정 연결(IRSA)을 위한 IAM 역할
+--
+*AWS CLI 사용*:
+
 [listing]
 ----
 aws iam create-role --role-name AmazonEKS_FSxN_CSI_DriverRole \
@@ -145,10 +214,7 @@ aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 ----
 eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve
 ----
---
-.eksctl입니다
---
-다음 예에서는 EKS에서 서비스 계정에 대한 IAM 역할을 생성합니다.
+*eksctl을 사용하는 경우* 다음 예를 사용하여 EKS의 서비스 계정에 대한 IAM 역할을 생성하세요.
 
 [source, console]
 ----

@@ -69,6 +69,13 @@ NOTE: 충돌 해결 방법으로 재정의 를 선택한 경우 기존 애드온
 +
 image::../media/aws-eks-06.png[AWS eks 06]
 
+
+
+
+NOTE: Pod Identity 연결을 사용하는 경우 이 단계를 건너뜁니다.
+
+를 누릅니다
+
 . Create * 를 선택합니다.
 . 애드온의 상태가 _Active_인지 확인합니다.
 +
