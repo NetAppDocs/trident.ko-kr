@@ -5447,7 +5447,6 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="c49aaf233c16f1193a8d683c17866eea" category="admonition">주석 값이 0보다 작거나 같으면 작업이 즉시 실패합니다.</block>
   <block id="5ac5b84505fffb8149e9d0cb84ddedbe" category="admonition">복원 작업 중에 <block ref="890b633d48ac6398f14ae722463da08b" prefix=" " category="inline-code"></block> 가상 머신(VM)에 대해 생성된 항목은 복원되지 않습니다.</block>
   <block id="4d1a32c0e466ff9011c60655b98dbf71" category="inline-link-macro">Amazon EKS 애드온을 사용한 FSx for ONTAP에 대한 자동 Trident 백엔드 구성</block>
-  <block id="751ccca2e7c6e085455cc5d721ff8b39" category="list-text">2925년 5월 9일: <block ref="86b6d8d044348a051fe7477baf34debb" category="inline-link-macro-rx"></block></block>
   <block id="607ed18429282657fb3f6b377df32f8c" category="inline-link-macro">Google Cloud NetApp Volumes for SMB Protocol을 갖춘 NetApp Trident</block>
   <block id="9455e2bd0c8a4dfe041579b6feac6833" category="list-text">2025년 4월 15일: <block ref="1d74efb61b1c97b9032a1222a24185b1" category="inline-link-macro-rx"></block></block>
   <block id="ee031d295c711ed3119e4ca1bf2829b1" category="inline-link-macro">Kubernetes 블록 스토리지를 위한 NetApp ASA r2 시스템의 잠재력 활용</block>
@@ -5564,10 +5563,7 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="d8789e2b2a964b430285afd098847d7e" category="section-title">25.06의 새로운 기능</block>
   <block id="08f1535b065719df5968364b00b95026" category="paragraph">새로운 기능 요약에서는 Trident와 Trident Protect 릴리스에 대한 향상된 기능, 수정 사항 및 사용 중단에 대한 세부 정보를 제공합니다.</block>
   <block id="b73e3aa94514d51e32ca4c9fa306ce1e" category="inline-link-macro">볼륨 그룹 스냅샷 작업</block>
-  <block id="80ac93976d2619f3f309ef5bc482d2c7" category="list-text">CSI 볼륨 그룹 스냅샷에 대한 지원이 추가되었습니다. <block ref="ee21100dace47d83bcefcb7dea09cdd3" prefix=" " category="inline-code"></block> ONTAP-SAN iSCSI 드라이버를 위한 볼륨 그룹 스냅샷 Kubernetes API입니다. 을 <block ref="fd476c7303c38c20a34c94b791c3665b" category="inline-link-macro-rx"></block>참조하십시오.</block>
-  <block id="f4d7441ee86cf8ef89cc31b8d13be595" category="list-text">iSCSI 외에도 NVMe/TCP용 ONTAP ASA r2에 대한 지원이 추가되었습니다. 을 <block ref="a13549ce70a240751f16cafbcac6ef24" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="d5bb517310bc551b239857e32401ac1f" category="inline-link-macro">보안 SMB 활성화</block>
-  <block id="54c4f7fee9982c2ea03f1e81bbea3182" category="list-text">ONTAP-NAS 및 ONTAP-NAS-Economy 볼륨에 대한 보안 SMB 지원이 추가되었습니다. 이제 Active Directory 사용자 및 그룹을 SMB 볼륨과 함께 사용하여 보안을 강화할 수 있습니다. 을 <block ref="85df2556237eff5f1420974cc8e4c414" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="6bcdf917188bd0a976b410952a796d4b" category="list-text">iSCSI 볼륨의 노드 작업에서 더 높은 확장성을 제공하기 위해 향상된 Trident 노드 동시성을 제공합니다.</block>
   <block id="03384ffa27aceef186890eaae584f3c4" category="list-text">추가됨 <block ref="b5073479eb6368548b299ea4d08aa8b7" prefix=" " category="inline-code"></block> LUKS 볼륨을 열어 공간 회수를 위한 삭제/TRIM 명령을 허용할 때.</block>
   <block id="f216940dceac21552e55089b0f450059" category="list-text">LUKS로 암호화된 볼륨을 포맷할 때 성능이 향상되었습니다.</block>
@@ -5731,4 +5727,8 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="7f38f183170855059fc5861d18334928" category="list-text">*** Trident 버전 25.02에서는 NFSv3에서 작동하지 않지만, 버전 24.10에서는 작동합니다. 두 버전 모두 NFSv4.1에서 작동합니다.</block>
   <block id="e5d0cb04635aeb2a6f06f54da8303683" category="admonition">원하는 AMI가 여기에 나열되지 않은 경우 지원되지 않는다는 의미는 아닙니다. 단순히 테스트를 거치지 않았음을 의미합니다. 이 목록은 AMI가 작동하는 방법에 대한 가이드 역할을 합니다.</block>
   <block id="e30e4df15168b6dd1eefaa4f4590a961" category="list-text">EKS 버전: 1.31</block>
+  <block id="324844cd8fa64fd82920fe6f11dc588d" category="list-text">2025년 5월 9일: <block ref="86b6d8d044348a051fe7477baf34debb" category="inline-link-macro-rx"></block></block>
+  <block id="cbe74dc7c890979d924675df2fa27a35" category="list-text">CSI 볼륨 그룹 스냅샷에 대한 지원이 추가되었습니다. <block ref="ee21100dace47d83bcefcb7dea09cdd3" prefix=" " category="inline-code"></block> ONTAP-SAN iSCSI 드라이버를 위한 볼륨 그룹 스냅샷 Kubernetes API입니다. 을 <block ref="b136941d5c2c98d5e9ff86fd07e97048" category="inline-link-macro-rx"></block>참조하십시오.</block>
+  <block id="5e93028f6e11493fcce0c15271413cc3" category="list-text">iSCSI 외에도 NVMe/TCP용 ONTAP ASA r2에 대한 지원이 추가되었습니다. 을 <block ref="0ffed2115293f61a0df2b3c8f01851e1" category="inline-link-macro-rx"></block>참조하십시오.</block>
+  <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">ONTAP-NAS 및 ONTAP-NAS-Economy 볼륨에 대한 보안 SMB 지원이 추가되었습니다. 이제 Active Directory 사용자 및 그룹을 SMB 볼륨과 함께 사용하여 보안을 강화할 수 있습니다. 을 <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block>참조하십시오.</block>
 </blocks>
