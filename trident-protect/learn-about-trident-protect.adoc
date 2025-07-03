@@ -7,7 +7,7 @@ summary: Trident Protect를 사용하면 Trident를 사용하여 애플리케이
 = Trident Protect에 대해 자세히 알아보십시오
 :allow-uri-read: 
 :icons: font
-:imagesdir: ./media/
+:imagesdir: ../media/
 
 
 [role="lead"]

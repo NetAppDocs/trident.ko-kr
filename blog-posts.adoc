@@ -8,7 +8,7 @@ summary: 훌륭한 NetApp Trident 및 Trident Protect 블로그를 찾을 수 �
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

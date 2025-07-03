@@ -8,7 +8,7 @@ summary: 다음은 이 릴리스의 알려진 문제입니다.
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

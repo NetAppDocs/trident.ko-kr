@@ -8,7 +8,7 @@ summary: 버전 선택기를 사용하여 최신 버전과 이전 버전 4개를
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

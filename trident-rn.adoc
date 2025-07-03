@@ -8,7 +8,7 @@ summary: NetApp은 제품과 서비스를 지속적으로 개선 및 개선하�
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]
@@ -91,7 +91,7 @@ NOTE: 이 기능은 실험적이며 현재 ONTAP-SAN 드라이버(iSCSI 및 FCP 
 
 
 
-=== 트라이던트 프로텍트
+=== Trident 보호
 
 NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저닝 프로그램을 통해 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 개선하는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
 
