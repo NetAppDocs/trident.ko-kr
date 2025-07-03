@@ -42,7 +42,7 @@ WARNING: 설치 프로그램 zip 파일에 제공되는 Linux용 tridentctl 바�
 ** 오류가 발생했지만 부분적으로 포맷된 LUKS 장치에 대한 향상된 LUKS 정리 기능입니다.
 ** NVMe 볼륨 연결 및 분리를 위한 향상된 Trident 노드 멱등성.
 ** 추가됨  `internalID` ONTAP-SAN-Economy 드라이버에 대한 Trident 볼륨 구성에 대한 필드입니다.
-** NVMe 백엔드에 SnapMirror를 사용한 볼륨 복제 지원이 추가되었습니다. 을 link:../trident-use/vol-volume-replicate.html["SnapMirror를 사용하여 볼륨을 복제합니다"^]참조하십시오.
+** NVMe 백엔드에 SnapMirror를 사용한 볼륨 복제 지원이 추가되었습니다. 을 link:https://docs.netapp.com/us-en/trident/trident-use/vol-volume-replicate.html["SnapMirror를 사용하여 볼륨을 복제합니다"^]참조하십시오.
 
 
 
