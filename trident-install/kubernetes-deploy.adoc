@@ -46,6 +46,7 @@ NetApp는 다양한 환경 및 조직에 Trident를 설치할 수 있도록 다�
 * 가 설치된 Linux 호스트 `kubectl` (또는 `oc`, OpenShift를 사용하는 경우) 사용하려는 Kubernetes 클러스터를 관리하도록 설치 및 구성한 것입니다.
 * 를 클릭합니다 `KUBECONFIG` Kubernetes 클러스터 구성을 가리키도록 설정된 환경 변수입니다.
 * Docker Enterprise와 함께 Kubernetes를 사용하는 경우, https://docs.docker.com/ee/ucp/user-access/cli/["다음 단계에 따라 CLI 액세스를 설정합니다"^].
+* 클러스터는 권한이 있는 워크로드를 지원해야 합니다.
 
 
 
@@ -214,7 +215,6 @@ link:kubernetes-deploy-tridentctl.html["표준 또는 오프라인 설치"]
 
 VMware Tanzu 포트폴리오 제품에 Trident를 설치하는 경우:
 
-* 클러스터는 권한이 있는 워크로드를 지원해야 합니다.
 * kubelet-dir 플래그는 kubelet 디렉토리의 위치로 설정해야 합니다. 기본적으로 이 값은 '/var/vcap/data/kubelet'입니다.
 +
 Trident 연산자, Hrom 및 tridentctl 배포에서는 -kubelet -dir 을 사용하여 kubelet 위치를 지정하는 작업이 알려져 있습니다.
