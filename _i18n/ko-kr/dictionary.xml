@@ -5730,4 +5730,5 @@ NVMe/TCP에 대해서는 LUKS 암호화가 지원되지 않습니다.</block>
   <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">ONTAP-NAS 및 ONTAP-NAS-Economy 볼륨에 대한 보안 SMB 지원이 추가되었습니다. 이제 Active Directory 사용자 및 그룹을 SMB 볼륨과 함께 사용하여 보안을 강화할 수 있습니다. 을 <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">NVMe 백엔드에 SnapMirror를 사용한 볼륨 복제 지원이 추가되었습니다. 을 <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="afce633f05d99c109d2b0429ee891495" category="admonition">25.06 이전 버전에서 업그레이드하는 경우 CRD가 이제 Trident Protect Helm 차트에 포함되었으므로 이 단계가 필요합니다.</block>
+  <block id="78ba3dee1dfae1136825fa94b594e8b0" category="paragraph"><block ref="b370fec489f67cf82a40d70295a9ea9a" category="inline-xref-macro-rx"></block></block>
 </blocks>
