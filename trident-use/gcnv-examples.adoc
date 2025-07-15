@@ -55,6 +55,9 @@ Google Cloud NetApp 볼륨의 백엔드 구성 옵션에 대해 알아보고 구
 | '저급' | 스토리지 풀 및 해당 볼륨의 서비스 레벨입니다. 값은 `flex`, `standard`, `premium`또는 `extreme`입니다. |  
 
 
+| '라벨' | 볼륨에 적용할 임의의 JSON 형식 레이블 세트입니다 | "" 
+
+
 | 네트워크 | GCNV 볼륨에 사용되는 Google Cloud 네트워크입니다. |  
 
 
