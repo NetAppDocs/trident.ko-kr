@@ -108,8 +108,6 @@ Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드
 
 아래 표에는 이 Trident 릴리스에서 사용할 수 있는 기능과 이 기능이 지원하는 Kubernetes 버전이 요약되어 있습니다.
 
-<<check for 25.06>>
-
 [cols="3"]
 |===
 | 피처 | Kubernetes 버전 | 기능 게이트가 필요합니까? 
@@ -219,8 +217,6 @@ link:../trident-reference/ports.html["Trident 포트"]
 == 컨테이너 이미지 및 해당 Kubernetes 버전
 
 에어갭 설치의 경우 다음 목록은 Trident 설치에 필요한 컨테이너 이미지의 참조입니다. 명령을 사용하여 `tridentctl images` 필요한 컨테이너 이미지 목록을 확인합니다.
-
-<<check for 25.06>>
 
 [cols="2"]
 |===
