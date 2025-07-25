@@ -141,6 +141,7 @@ NOTE: 예를 들어, 스토리지 컨트롤러에서 CHAP 암호를 회전시키
 sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.conf
 ----
 * iSCSI PVS와 함께 RHEL/Red Hat Enterprise Linux CoreOS(RHCOS)를 실행하는 작업자 노드를 사용하는 경우 StorageClass에서 mount옵션을 지정하여 `discard` 인라인 공간 재확보를 수행합니다. 을 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 설명서"^]참조하십시오.
+* 최신 버전으로 업그레이드했는지 확인하세요.  `multipath-tools` .
 
 
 [role="tabbed-block"]
