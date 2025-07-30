@@ -34,7 +34,7 @@ docker volume create -d ntap_bronze --name bronzeVolume
 
 NOTE: 지정하지 않은 경우 link:volume-driver-options.html["옵션"^], 드라이버 기본값이 사용됩니다.
 
-* 기본 볼륨 크기를 재정의합니다. 다음 예를 참조하여 드라이버로 20GiB 볼륨을 생성합니다.
+* 기본 볼륨 크기를 재정의합니다. 드라이버를 사용하여 20GiB 볼륨을 생성하는 다음 예를 참조하세요.
 +
 [source, console]
 ----

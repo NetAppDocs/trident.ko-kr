@@ -246,7 +246,7 @@ NOTE: 드라이버를 사용하여 생성된 모든 볼륨의 경우 `ontap-san`
 ----
 Total volume size = [(PVC requested size) / (1 - (snapshotReserve percentage) / 100)] * 1.1
 ----
-1.1은 LUN 메타데이터를 수용하기 위해 FlexVol에 추가되는 10%의 Trident입니다. = 5%, PVC 요청 = 5GiB의 경우 `snapshotReserve` 총 볼륨 크기는 5.79GiB이고 사용 가능한 크기는 5.5GiB입니다. 이 `volume show` 명령은 다음 예제와 유사한 결과를 표시해야 합니다.
+Trident FlexVol 에 추가하는 10%입니다.  `snapshotReserve` = 5%, PVC 요청 = 5GiB인 경우 총 볼륨 크기는 5.79GiB이고 사용 가능한 크기는 5.5GiB입니다 .  `volume show` 명령을 실행하면 다음 예와 비슷한 결과가 표시됩니다.
 
 image::../media/vol-show-san.png[에는 volume show 명령의 출력이 나와 있습니다.]
 

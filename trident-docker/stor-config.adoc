@@ -285,7 +285,7 @@ NOTE: Docker Swarm은 여러 노드 간의 볼륨 생성을 오케스트레이�
 * ONTAP 버전 9.2 이상이 필요합니다.
 * 이번 작부터 FlexGroups는 NFS v3만 지원합니다.
 * SVM에 대해 64비트 NFSv3 식별자를 사용하는 것이 좋습니다.
-* 최소 권장 FlexGroup 구성원/볼륨 크기는 100GiB입니다.
+* 권장되는 최소 FlexGroup 멤버/볼륨 크기는 100GiB입니다.
 * FlexGroup 볼륨에는 클론 복제가 지원되지 않습니다.
 
 

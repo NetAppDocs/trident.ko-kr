@@ -109,13 +109,13 @@ NFS, iSCSI 및 FC 모두의 볼륨 생성 옵션에는 다음이 포함됩니다
 
 아래 예를 참조하십시오.
 
-* 10GiB 볼륨 생성:
+* 10GiB 볼륨을 생성합니다.
 +
 [listing]
 ----
 docker volume create -d netapp --name demo -o size=10G -o encryption=true
 ----
-* 스냅샷을 사용하여 100GiB 볼륨 생성:
+* 스냅샷으로 100GiB 볼륨을 만듭니다.
 +
 [listing]
 ----
@@ -175,7 +175,7 @@ Element 드라이버로 QoS 서비스 수준을 정의하는 첫 번째 단계�
 
 
 | '크기'입니다  a| 
-볼륨 크기, 기본값 1GiB 또는 구성 항목... "기본값":{"크기":"5G"}.
+볼륨 크기는 기본적으로 1GiB 또는 구성 항목 ... "defaults": {"size": "5G"}입니다.
 
 
 
@@ -222,13 +222,13 @@ QoS 정의가 포함된 다음 샘플 구성 파일을 참조하십시오.
 ----
 위 구성에서는 Bronze, Silver, Gold의 세 가지 정책 정의가 있습니다. 이러한 이름은 임의로 지정됩니다.
 
-* 10GiB 골드 볼륨 생성:
+* 10GiB Gold 볼륨을 생성합니다.
 +
 [listing]
 ----
 docker volume create -d solidfire --name sfGold -o type=Gold -o size=10G
 ----
-* 100GiB Bronze 볼륨 생성:
+* 100GiB Bronze 볼륨을 생성합니다.
 +
 [listing]
 ----

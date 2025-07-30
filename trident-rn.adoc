@@ -374,7 +374,7 @@ link:./trident-protect/learn-about-trident-protect.html["Trident Protect에 대�
 * 오래된 트랜잭션으로 인한 Trident 설치 실패 해결
 * Kubernetes()의 경고 메시지를 무시하도록 Tridentctl을 수정했습니다link:https://github.com/NetApp/trident/issues/892["문제 #892"].
 * Trident 컨트롤러 우선 순위가 (link:https://github.com/NetApp/trident/issues/887["문제 #887"])로 `0` 변경되었습니다 `SecurityContextConstraint`.
-* 이제 ONTAP 드라이버에서 20MiB() 미만의 볼륨 크기를 사용할 수link:https://github.com/NetApp/trident/issues/885["문제 [#885"]있습니다.
+* ONTAP 드라이버는 이제 20MiB 이하의 볼륨 크기를 허용합니다. link:https://github.com/NetApp/trident/issues/885["문제 [#885"] ).
 * ONTAP-SAN 드라이버에 대한 크기 조정 작업 중에 FlexVol 볼륨이 축소되지 않도록 Trident를 수정했습니다.
 * NFS v4.1에서 ANF 볼륨 가져오기 실패 수정.
 
