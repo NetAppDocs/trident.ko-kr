@@ -241,13 +241,6 @@ WARNING: values.yaml 파일에서 기본 선호도를 제거하지 마십시오.
 
 
 | `nodePrep` | Trident가 Kubernetes 클러스터의 노드를 준비하여 지정된 데이터 스토리지 프로토콜을 사용하여 볼륨을 관리할 수 있도록 합니다. * 현재 `iscsi` 지원되는 유일한 값입니다. * |  
-
-
-| `ontapConfigurator`  a| 
-Amazon FSx에 대한 Trident 백엔드 및 스토리지 클래스의 자동 구성을 사용하거나 사용하지 않도록 설정합니다. 자동 백엔드 구성을 설정하려면 와 함께 다음 매개 변수를 `ontapConfigurator` 사용합니다
-`enabled`. 자동 백엔드 구성을 사용하려면 로 `true` 설정하십시오.
-`svms`: 자동 백엔드 구성을 생성할 파일 시스템 ID 목록을 포함합니다.  `authType`-: SVM 인증을 위한 인증 유형을 설정합니다. AWS의 경우 현재 arn 기반 인증("awsarn")이 지원됩니다. - `fsxnID`:AWS FSx의 파일 시스템 ID를 설정합니다. 예: "fs-0dfea884a68b1cab".  `protocols`-- 자동 백엔드 구성에 대해 지원되는 프로토콜 목록을 지정합니다. "NFS", "iSCSI" 또는 둘 다.
-|  
 |===
 
 
