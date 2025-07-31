@@ -58,7 +58,8 @@ image::../media/aws-eks-04.png[AWS eks 04]
 ----
 {
 
-  "cloudIdentity": "'eks.amazonaws.com/role-arn: <role ARN>'"
+  "cloudIdentity": "'eks.amazonaws.com/role-arn: <role ARN>'",
+  "cloudProvider": "AWS"
 
 }
 ----
@@ -95,8 +96,8 @@ kubectl get pods -n trident
 == CLI를 사용하여 Trident EKS 애드온을 설치/제거합니다
 
 .CLI를 사용하여 NetApp Trident EKS 추가 기능을 설치합니다.
-다음 명령 예에서는 Trident EKS 추가 기능을 설치합니다(전용 버전 포함).
-`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v25.02.1-eksbuild.1`
+다음 예제 명령은 Trident EKS 추가 기능을 설치합니다.
+`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v25.6.0-eksbuild.1` (전용 버전 포함)
 
 .CLI를 사용하여 NetApp Trident EKS 애드온을 제거합니다.
 다음 명령을 실행하면 Trident EKS 추가 기능이 제거됩니다.
