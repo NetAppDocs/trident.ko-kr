@@ -40,12 +40,10 @@ image::../media/openshift-operator-03.png[설치합니다]
 +
 image::../media/openshift-operator-04.png[설치되어 있습니다]
 
-. 오퍼레이터 번들 설치처럼 Torc를 생성합니다.
++
+== Trident 운영자 제거
 
 
-
-
-== Trident 운영자를 제거합니다
 
 .단계
 . 설치된 운영자 목록에서 Trident 운영자를 선택합니다.
