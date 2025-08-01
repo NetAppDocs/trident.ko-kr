@@ -55,24 +55,6 @@ NOTE: Trident에 IAM 역할을 지정하는 경우, `apiKey` 및 `secretKey` 필
 
 
 
-=== Trident SAN/iSCSI 및 EBS-CSI 드라이버의 병렬 사용
-
-사용하려는 경우 `ontap-san` 드라이버(예: iSCSI)의 경우 노드에 필요한 다중 경로 설정이 Amazon Elastic Block Store(EBS) CSI 드라이버와 충돌할 수 있습니다.  동일한 노드에 있는 EBS 디스크에 영향을 주지 않고 멀티패스가 작동하도록 하려면 멀티패스 설정에서 EBS를 제외해야 합니다.  다음은 다음의 예입니다. `multipath.conf` 필수 Trident 설정을 포함하고 EBS 디스크를 다중 경로에서 제외하는 파일:
-
-[listing]
-----
-defaults {
-    find_multipaths no
-}
-blacklist {
-    device {
-        vendor "NVME"
-        product "Amazon Elastic Block Store"
-    }
-}
-----
-
-
 == 인증
 
 Trident는 두 가지 인증 모드를 제공합니다.
