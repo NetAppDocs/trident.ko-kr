@@ -30,7 +30,7 @@ Trident은 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 �
 ====
 .포드 아이덴티티
 --
-. NetApp Trident repo에 helm 구성을 추가합니다.
+. Trident Helm 저장소 추가:
 +
 [source, console]
 ----
@@ -62,7 +62,7 @@ trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT
 --
 .서비스 계정 연결(IRSA)
 --
-. NetApp Trident repo에 helm 구성을 추가합니다.
+. Trident Helm 저장소 추가:
 +
 [source, console]
 ----
