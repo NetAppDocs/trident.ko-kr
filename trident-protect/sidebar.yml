@@ -33,7 +33,11 @@ entries:
   - title: 애플리케이션 보호
     url: "/trident-protect/trident-protect-protect-apps.html"
   - title: 응용 프로그램을 복원합니다
-    url: "/trident-protect/trident-protect-restore-apps.html"
+    entries:
+    - title: Trident Protect를 사용하여 애플리케이션을 복원합니다
+      url: "/trident-protect/trident-protect-restore-apps.html"
+    - title: 고급 설정 사용
+      url: "/trident-protect/trident-protect-restore-settings.html"
   - title: NetApp SnapMirror를 사용하여 애플리케이션 복제
     url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
   - title: 애플리케이션을 마이그레이션합니다

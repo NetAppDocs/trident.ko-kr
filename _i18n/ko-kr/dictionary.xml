@@ -4153,7 +4153,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="edb32c41feaaffb2d7ff10dac9d80312" category="open-title">CLI를 사용하여 애플리케이션을 추가합니다</block>
   <block id="0ef657dffb550796349fff7260ee7b1f" category="summary">백업 또는 스냅샷 데이터를 다른 클러스터 또는 스토리지 클래스로 복원할 수 있습니다</block>
   <block id="5d23a9c0c55a80ece74daa65c04f1d66" category="doc">애플리케이션을 마이그레이션합니다</block>
-  <block id="f0947115fd72dc8926d993b03e13a329" category="paragraph">백업 또는 스냅샷 데이터를 다른 클러스터 또는 스토리지 클래스로 복원하여 클러스터 또는 스토리지 클래스 간에 애플리케이션을 마이그레이션할 수 있습니다.</block>
   <block id="85ff05ce333a3cc83e4b1bece0b1a885" category="admonition">애플리케이션을 마이그레이션하면 애플리케이션에 대해 구성된 모든 실행 후크가 앱과 함께 마이그레이션됩니다. 복원 후 실행 후크가 있는 경우 복구 작업의 일부로 자동으로 실행됩니다.</block>
   <block id="dea2f94d534ebdd522c0137cd11f63bf" category="section-title">백업 및 복원 작업</block>
   <block id="b21f1727ed04fb70c8e47cb11cdfb2bb" category="paragraph">다음 시나리오에 대한 백업 및 복원 작업을 수행하려면 특정 백업 및 복원 작업을 자동화할 수 있습니다.</block>
@@ -4171,7 +4170,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e27031b9d0bffffcf2abd2136eed21f5" category="list-text"><block ref="71bc4096317f8eb78a9951851bc1165b" category="inline-link-macro-rx"></block>..</block>
   <block id="403ecb1db6fa0f1bb20e787bb5f5dacd" category="section-title">다른 클러스터에 클론 복제</block>
   <block id="181aa092ab965b34bcee90e25056f876" category="section-title">한 스토리지 클래스에서 다른 스토리지 클래스로 애플리케이션을 마이그레이션합니다</block>
-  <block id="97a1f17d0c2154050e8ba2ecfd07ecf4" category="paragraph">스냅샷을 다른 대상 스토리지 클래스로 복원하여 한 스토리지 클래스에서 다른 스토리지 클래스로 애플리케이션을 마이그레이션할 수 있습니다.</block>
   <block id="f1ad7bca566917ee78958caa78fab3f5" category="paragraph">예를 들어 복원 CR에서 비밀 제외):</block>
   <block id="daf2d2aebeca09dea5ece5c9c1513383" category="open-title">CR을 사용하여 스냅샷을 복원합니다</block>
   <block id="a35b06511e032bee46bbed064afa12dc" category="list-text">CR(사용자 정의 리소스) 파일을 만들고 이름을<block ref="fac6dff7f801a4983f4a536dbcbd40d7" prefix=" " category="inline-code"></block>지정합니다.</block>
@@ -4299,7 +4297,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="0334c5d881452d9144d4edf93d44ff85" category="list-text">CR(사용자 정의 리소스) 파일을 만들고 이름을<block ref="aa3356b96c40153ef83fe9854ede7a70" prefix=" " category="inline-code"></block>지정합니다.</block>
   <block id="8ebefb3e84a05b2e3bf54824870d776d" category="list-text">* spec.appArchivePath * : 백업 컨텐츠가 저장되는 AppVault 내부의 경로입니다. 다음 명령을 사용하여 이 경로를 찾을 수 있습니다.</block>
   <block id="3f1db1c30ba33e5d04499f000ed77f97" category="list-text">* spec.appVaultRef *: (_required_) 백업 내용이 저장된 AppVault의 이름입니다.</block>
-  <block id="3e209c1619d0c38cf60c13838ca4cf72" category="list-text">*spec.storageClassMapping*: 복원 작업의 소스 스토리지 클래스를 대상 스토리지 클래스로 매핑하는 것입니다. <block ref="6d4164a2db4b8f123f2f4666f47d1304" prefix=" " category="inline-code"></block>및 를<block ref="cb3a1d54728d178b537383d31afb4b53" prefix=" " category="inline-code"></block> 사용자 환경의 정보로 바꿉니다.</block>
   <block id="a5085953f7b15a312b4e12827abc66e5" category="list-text">(_선택 사항_) 복원할 응용 프로그램의 특정 리소스만 선택해야 하는 경우 특정 레이블로 표시된 리소스를 포함하거나 제외하는 필터링을 추가합니다.</block>
   <block id="be16b6e14200639734fb9694e3c0f655" category="list-text">*resourceMatchers[].group*:(_Optional_) 필터링할 리소스의 그룹입니다.</block>
   <block id="2162d9f0c97d87c37f838ea27ecb393a" category="list-text">* resourceMatchers [].kind *: (_Optional_) 필터링할 리소스의 종류입니다.</block>
@@ -5186,7 +5183,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">다음 예에서는 알림 메시지를 Slack 채널에 보내도록 Alertmanager를 구성합니다. 이 예제를 환경에 맞게 사용자 지정하려면 키 값을 사용자 환경에서 사용되는 Slack Webhook URL로 바꿉니다<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>.</block>
   <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect는 선택한 리소스와의 관계에 따라 일부 리소스를 자동으로 선택합니다. 예를 들어, 영구 볼륨 클레임 리소스를 선택했고 이 리소스에 연결된 Pod가 있는 경우 Trident Protect는 연결된 Pod도 복원합니다.</block>
   <block id="d110d36251c4dd04b7da5ef237ac6063" category="inline-link">코피아 문서</block>
-  <block id="2cd3acbff016f03ffcfe72208e450647" category="admonition">Kopia를 Data Mover로 사용하여 백업을 복구하는 경우 CR에서 주석을 지정하거나 CLI를 사용하여 Kopia에서 사용하는 최상위 스토리지의 동작을 제어할 수 있습니다. 구성할 수 있는 옵션에 대한 자세한 내용은 를<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block> 참조하십시오. <block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>Trident Protect CLI에서 주석을 지정하는 방법에 대한 자세한 내용은 명령을 사용하십시오.</block>
   <block id="7491b3d3a4aa89a2dd6445477c6b6e0a" category="list-text">Amazon S3(AWS) AppVault 객체의 경우 선택적으로 sessionToken을 지정할 수 있습니다. 이는 인증에 SSO(Single Sign-On)를 사용하는 경우에 유용합니다. 이 토큰은 에서 공급자에 대한 키를 생성할 때 <block ref="cd932e77bb3df9634d58b2fd34398b6f" category="inline-xref-macro-rx"></block>생성됩니다.</block>
   <block id="620026f954fdad541c9d19554476345c" category="list-text">AppVault 개체를 제거하고<block ref="bf09cf3bd2a9288a0bdf3d1b89b770a1" prefix=" " category="inline-code"></block> 제거할 AppVault 개체의 이름으로 바꿉니다.</block>
   <block id="35d393329a969d87338f26cd6fe42238" category="list-text">Helm을 사용하여 Trident Protect를 설치합니다. 클러스터에 할당되고 클러스터의 백업 및 스냅샷을 식별하는 데 사용되는 클러스터 이름으로 바꿉니다<block ref="ecc79c99c4f86f0db5cc7f200415205f" prefix=" " category="inline-code"></block>.</block>
@@ -5394,7 +5390,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="70694773feb2b23c45e7ff7a6a3c3c8b" category="paragraph">파일에 각 구성을 지정하여 전자 메일, PagerDuty, Microsoft Teams 또는 기타 알림 서비스와 같은 다른 채널에 알림을 보내도록 Alertmanager를 구성할 수<block ref="9001eaececb0884cbeb80659e81340ad" prefix=" " category="inline-code"></block> 있습니다.</block>
   <block id="965357e3c90ccf3fba01174c6508d562" category="listing-title">alertmanager.yaml: Slack 채널에 알림 보내기</block>
   <block id="fb72ca78c839cefc52d39ebcecaf6827" category="paragraph">볼륨 스냅샷은 다음에서 지원됩니다. <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> , <block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> , <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> , <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> , <block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> , <block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block> , <block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> , 그리고 <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 운전자.</block>
-  <block id="173f808fc086ccd7ca8b43512be2cd48" category="admonition">그만큼 <block ref="e28ab870e47892fbd81eca8fc84c45ac" prefix=" " category="inline-code"></block> 속성은 원본과 새 속성이 모두 작동하는 경우에만 작동합니다. <block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> 동일한 저장소 백엔드를 사용합니다. 복원을 시도하는 경우 <block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> 다른 스토리지 백엔드를 사용하는 경우 복원 작업이 실패합니다.</block>
   <block id="02c19b7bc038d2af238bbd729bc3d9c4" category="list-text">AppVault CR을 수동으로 생성할 때 *spec.dataMoverPasswordSecretRef* 필드를 사용하여 비밀번호를 지정합니다.</block>
   <block id="0a636ed0406fe1d7ddf9db59b32011b3" category="list-text">Trident Protect CLI를 사용하여 AppVault 객체를 생성할 때 다음을 사용하십시오. <block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block> 비밀을 지정하는 인수입니다.</block>
   <block id="d2a7dc5804ec844f3f7bfb903e97693f" category="section-title">S3 호환 스토리지 IAM 권한</block>
@@ -5770,4 +5765,17 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="f0fbfac7ddb67830c39dcddb2e0101aa" category="list-text">밑줄<block ref="b14a7b8059d9c055954c92674ce60032" prefix=" " category="inline-code"></block></block>
   <block id="c76231732eebaec2e2411ed7cfd30e2c" category="list-text">하이픈<block ref="336d5ebc5436534e61d16e63ddfca327" prefix=" " category="inline-code"></block></block>
   <block id="3304691bb80d9d42f8bae0707e46c701" category="paragraph">== Trident 운영자 제거</block>
+  <block id="e2cc5e54cd44b8315b1324dec48b3d79" category="paragraph">백업 데이터를 복원하여 클러스터 간이나 다른 스토리지 클래스로 애플리케이션을 마이그레이션할 수 있습니다.</block>
+  <block id="259898c4a16b145b9fb12c18949c2e58" category="paragraph">대상 스토리지 클래스에 백업을 복원하여 애플리케이션을 한 스토리지 클래스에서 다른 스토리지 클래스로 마이그레이션할 수 있습니다.</block>
+  <block id="b34476802a6b2dff98e6f97e309970b2" category="inline-link-macro">고급 Trident 보호 복원 설정 사용</block>
+  <block id="22d9eb2f3982698c6f5c93edae216a51" category="list-text">고급 설정을 사용하여 복원 작업을 사용자 정의할 수 있습니다. 자세한 내용은 다음을 참조하세요.<block ref="80b4b5e2c832cc4fcff1f69711f1c808" category="inline-link-macro-rx"></block> .</block>
+  <block id="3efe6f70bb45e527ed991c55df7d621d" category="admonition">Kopia를 데이터 이동자로 사용하여 백업을 복원하는 경우 CR이나 CLI에서 주석을 지정하여 Kopia에서 사용하는 임시 저장소의 동작을 제어할 수 있습니다.  를 참조하세요<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block> 구성할 수 있는 옵션에 대한 자세한 내용은 다음을 참조하세요.  사용하세요<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block> Trident Protect CLI로 주석을 지정하는 방법에 대한 자세한 내용은 명령을 참조하세요.</block>
+  <block id="15910dd29963e5df5f2b5879472bcc00" category="admonition">SnapshotRestore는 다음을 지원합니다.<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block> 속성이지만 소스 및 대상 저장소 클래스가 동일한 저장소 백엔드를 사용하는 경우에만 해당됩니다.  복원을 시도하는 경우<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> 다른 스토리지 백엔드를 사용하는 경우 복원 작업이 실패합니다.</block>
+  <block id="4c2451a6dd1d1ce7a84476069f101573" category="summary">주석, 네임스페이스 설정 및 스토리지 옵션을 사용하여 Trident Protect 복원 작업을 사용자 정의할 수 있습니다.</block>
+  <block id="3fbccf21ba46fe754417d45e7396e0e4" category="paragraph">주석, 네임스페이스 설정, 스토리지 옵션 등의 고급 설정을 사용하여 복원 작업을 사용자 정의하여 특정 요구 사항을 충족할 수 있습니다.</block>
+  <block id="52391deb129507aac52d6fb22aaf137c" category="section-title">지원되는 필드</block>
+  <block id="c87f7398b288400e3d2c984a3d997d7b" category="paragraph">이 섹션에서는 복원 작업에 사용할 수 있는 추가 필드에 대해 설명합니다.</block>
+  <block id="11162de38772a3876602bb4d9d213f43" category="section-title">스토리지 클래스 매핑</block>
+  <block id="b48c8c7ca3eb5e63afdfe6bbd74a35c9" category="paragraph">그만큼<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block> 속성은 소스 애플리케이션에 있는 스토리지 클래스에서 대상 클러스터의 새 스토리지 클래스로의 매핑을 정의합니다.  서로 다른 스토리지 클래스를 사용하는 클러스터 간에 애플리케이션을 마이그레이션하거나 BackupRestore 작업에 대한 스토리지 백엔드를 변경할 때 이 기능을 사용할 수 있습니다.</block>
+  <block id="27f5153068cecd37b6fa4a136586658d" category="sidebar">고급 설정 사용</block>
 </blocks>

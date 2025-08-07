@@ -20,104 +20,10 @@ Trident Protect를 사용하여 스냅샷 또는 백업에서 애플리케이션
 ====
 * Application Restore 시 해당 Application에 설정된 모든 execution hook이 App으로 복구된다. 복원 후 실행 후크가 있는 경우 복구 작업의 일부로 자동으로 실행됩니다.
 * Qtree 볼륨의 경우 백업에서 다른 네임스페이스 또는 원래 네임스페이스로 복원하는 기능이 지원됩니다. 그러나 Qtree 볼륨의 경우 스냅샷에서 다른 네임스페이스 또는 원래 네임스페이스로 복원하는 기능은 지원되지 않습니다.
+* 고급 설정을 사용하여 복원 작업을 사용자 정의할 수 있습니다. 자세한 내용은 다음을 참조하세요.link:../trident-protect/trident-protect-restore-settings.html["고급 Trident 보호 복원 설정 사용"] .
 
 
 ====
-
-
-== 복원 및 페일오버 작업 중 네임스페이스 주석 및 레이블
-
-복원 및 페일오버 작업 중에 대상 네임스페이스의 레이블과 주석이 소스 네임스페이스의 레이블 및 주석과 일치하도록 만듭니다. 대상 네임스페이스에 없는 소스 네임스페이스의 레이블 또는 주석이 추가되고 이미 존재하는 모든 레이블 또는 주석이 소스 네임스페이스의 값과 일치하도록 덮어쓰여집니다. 대상 네임스페이스에만 있는 레이블이나 주석은 변경되지 않습니다.
-
-
-NOTE: Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 주목해야 합니다. 네임스페이스 주석을 사용하면 복원된 Pod가 OpenShift SCC(Security Context Constraint)에서 정의한 적절한 권한 및 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있습니다. 자세한 내용은 를 https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/authentication_and_authorization/managing-pod-security-policies["OpenShift 보안 컨텍스트 제약 조건 문서"^]참조하십시오.
-
-복원 또는 페일오버 작업을 수행하기 전에 Kubernetes 환경 변수를 설정하여 타겟 네임스페이스의 특정 주석을 덮어쓰지 않도록 할 수 있습니다 `RESTORE_SKIP_NAMESPACE_ANNOTATIONS`. 예를 들면 다음과 같습니다.
-
-[source, console]
-----
-kubectl set env -n trident-protect deploy/trident-protect-controller-manager RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
-----
-플래그가 있는 Helm을 사용하여 소스 애플리케이션을 설치한 경우 `--create-namespace` 레이블 키에 특수 치료가 `name` 제공됩니다. 복구 또는 페일오버 프로세스 중에 Trident Protect는 이 레이블을 대상 네임스페이스에 복제하지만 소스의 값이 소스 네임스페이스와 일치하면 대상 네임스페이스 값으로 업데이트합니다. 이 값이 소스 네임스페이스와 일치하지 않으면 변경 없이 대상 네임스페이스로 복사됩니다.
-
-
-
-=== 예
-
-다음 예제에서는 각각 다른 주석과 레이블이 있는 소스 및 대상 네임스페이스를 보여 줍니다. 작업 전후에 대상 네임스페이스의 상태와 대상 네임스페이스에서 주석과 레이블이 결합되거나 덮어써지는 방법을 확인할 수 있습니다.
-
-
-
-==== 복구 또는 페일오버 작업 전
-
-다음 표에서는 복구 또는 페일오버 작업 이전의 예제 소스 및 대상 네임스페이스의 상태를 보여 줍니다.
-
-[cols="1,2a,2a"]
-|===
-| 네임스페이스 | 주석 | 라벨 
-
-
-| 네임스페이스 ns-1(소스)  a| 
-* annotation.one/key:"updatedvalue"(주석 1개/키)
-* Annotation.two/key(주석.two/키):
-
- a| 
-* 환경 = 운영
-* 규정 준수 = HIPAA
-* 이름 = ns-1
-
-
-
-
-| 네임스페이스 ns-2(대상)  a| 
-* Annotation.one/key(주석. 하나/키):"true"
-* Annotation.Three/key:"false"
-
- a| 
-* 역할 = 데이터베이스
-
-
-|===
-
-
-==== 복구 작업 후
-
-다음 표에서는 복구 또는 페일오버 작업 후의 예제 대상 네임스페이스의 상태를 보여 줍니다. 일부 키가 추가되고, 일부 키가 덮어쓰여졌으며, `name` 대상 네임스페이스와 일치하도록 레이블이 업데이트되었습니다.
-
-[cols="1,2a,2a"]
-|===
-| 네임스페이스 | 주석 | 라벨 
-
-
-| 네임스페이스 ns-2(대상)  a| 
-* annotation.one/key:"updatedvalue"(주석 1개/키)
-* Annotation.two/key(주석.two/키):
-* Annotation.Three/key:"false"
-
- a| 
-* 이름 = ns-2
-* 규정 준수 = HIPAA
-* 환경 = 운영
-* 역할 = 데이터베이스
-
-
-|===
-
-
-== 지원되는 주석
-
-이 섹션에서는 시스템의 다양한 동작을 구성하는 데 지원되는 애노테이션을 나열합니다. 사용자가 애노테이션을 명시적으로 설정하지 않으면 시스템은 기본값을 사용합니다.
-
-[cols="1,1,3,1"]
-|===
-| 주석 | 유형 | 설명 | 기본값 
-
-
-| 보호.트라이던트.넷앱.io/데이터-무버-타임아웃-초 | 문자열 | 데이터 이동 작업이 중단되는 데 허용되는 최대 시간(초)입니다. | 300 
-
-
-| 보호.트라이던트.넷앱.io/코피아-콘텐츠-캐시-크기-제한-mb | 정수 | Kopia 콘텐츠 캐시의 최대 크기 제한(메가바이트)입니다. | 1000 
-|===
 
 
 == 백업에서 다른 네임스페이스로 복원합니다
@@ -135,7 +41,7 @@ AWS 세션 토큰의 만료가 장시간 실행되는 S3 복원 작업에 충분
 
 
 
-NOTE: Kopia를 Data Mover로 사용하여 백업을 복구하는 경우 CR에서 주석을 지정하거나 CLI를 사용하여 Kopia에서 사용하는 최상위 스토리지의 동작을 제어할 수 있습니다. 구성할 수 있는 옵션에 대한 자세한 내용은 를 https://kopia.io/docs/getting-started/["코피아 문서"^] 참조하십시오.  `tridentctl-protect create --help`Trident Protect CLI에서 주석을 지정하는 방법에 대한 자세한 내용은 명령을 사용하십시오.
+NOTE: Kopia를 데이터 이동자로 사용하여 백업을 복원하는 경우 CR이나 CLI에서 주석을 지정하여 Kopia에서 사용하는 임시 저장소의 동작을 제어할 수 있습니다.  를 참조하세요 https://kopia.io/docs/getting-started/["코피아 문서"^] 구성할 수 있는 옵션에 대한 자세한 내용은 다음을 참조하세요.  사용하세요 `tridentctl-protect create --help` Trident Protect CLI로 주석을 지정하는 방법에 대한 자세한 내용은 명령을 참조하세요.
 
 [role="tabbed-block"]
 ====
@@ -154,7 +60,6 @@ kubectl get backups <BACKUP_NAME> -n my-app-namespace -o jsonpath='{.status.appA
 ----
 ** * spec.appVaultRef *: (_required_) 백업 내용이 저장된 AppVault의 이름입니다.
 ** *spec.namespaceMapping*: 복구 작업의 소스 네임스페이스를 대상 네임스페이스에 매핑하는 것입니다.  `my-source-namespace`및 를 `my-destination-namespace` 사용자 환경의 정보로 바꿉니다.
-** *spec.storageClassMapping*: 복원 작업의 소스 스토리지 클래스를 대상 스토리지 클래스로 매핑하는 것입니다.  `destinationStorageClass`및 를 `sourceStorageClass` 사용자 환경의 정보로 바꿉니다.
 +
 [source, yaml]
 ----
@@ -164,15 +69,10 @@ kind: BackupRestore
 metadata:
   name: my-cr-name
   namespace: my-destination-namespace
-  annotations: # Optional annotations for Kopia data mover
-    protect.trident.netapp.io/kopia-content-cache-size-limit-mb: 1000
 spec:
   appArchivePath: my-backup-path
   appVaultRef: appvault-name
   namespaceMapping: [{"source": "my-source-namespace", "destination": "my-destination-namespace"}]
-  storageClassMapping:
-    destination: "${destinationStorageClass}"
-    source: "${sourceStorageClass}"
 ----
 
 
@@ -260,7 +160,7 @@ AWS 세션 토큰의 만료가 장시간 실행되는 S3 복원 작업에 충분
 
 
 
-NOTE: Kopia를 Data Mover로 사용하여 백업을 복구하는 경우 CR에서 주석을 지정하거나 CLI를 사용하여 Kopia에서 사용하는 최상위 스토리지의 동작을 제어할 수 있습니다. 구성할 수 있는 옵션에 대한 자세한 내용은 를 https://kopia.io/docs/getting-started/["코피아 문서"^] 참조하십시오.  `tridentctl-protect create --help`Trident Protect CLI에서 주석을 지정하는 방법에 대한 자세한 내용은 명령을 사용하십시오.
+NOTE: Kopia를 데이터 이동자로 사용하여 백업을 복원하는 경우 CR이나 CLI에서 주석을 지정하여 Kopia에서 사용하는 임시 저장소의 동작을 제어할 수 있습니다.  를 참조하세요 https://kopia.io/docs/getting-started/["코피아 문서"^] 구성할 수 있는 옵션에 대한 자세한 내용은 다음을 참조하세요.  사용하세요 `tridentctl-protect create --help` Trident Protect CLI로 주석을 지정하는 방법에 대한 자세한 내용은 명령을 참조하세요.
 
 [role="tabbed-block"]
 ====
@@ -290,8 +190,6 @@ kind: BackupInplaceRestore
 metadata:
   name: my-cr-name
   namespace: my-app-namespace
-  annotations: # Optional annotations for Kopia data mover
-    protect.trident.netapp.io/kopia-content-cache-size-limit-mb: 1000
 spec:
   appArchivePath: my-backup-path
   appVaultRef: appvault-name
@@ -374,7 +272,7 @@ tridentctl-protect create backupinplacerestore <my_restore_name> \
 원래 클러스터에 문제가 있는 경우 백업을 다른 클러스터로 복구할 수 있습니다.
 
 
-NOTE: Kopia를 Data Mover로 사용하여 백업을 복구하는 경우 CR에서 주석을 지정하거나 CLI를 사용하여 Kopia에서 사용하는 최상위 스토리지의 동작을 제어할 수 있습니다. 구성할 수 있는 옵션에 대한 자세한 내용은 를 https://kopia.io/docs/getting-started/["코피아 문서"^] 참조하십시오.  `tridentctl-protect create --help`Trident Protect CLI에서 주석을 지정하는 방법에 대한 자세한 내용은 명령을 사용하십시오.
+NOTE: Kopia를 데이터 이동자로 사용하여 백업을 복원하는 경우 CR이나 CLI에서 주석을 지정하여 Kopia에서 사용하는 임시 저장소의 동작을 제어할 수 있습니다.  를 참조하세요 https://kopia.io/docs/getting-started/["코피아 문서"^] 구성할 수 있는 옵션에 대한 자세한 내용은 다음을 참조하세요.  사용하세요 `tridentctl-protect create --help` Trident Protect CLI로 주석을 지정하는 방법에 대한 자세한 내용은 명령을 참조하세요.
 
 .시작하기 전에
 다음 필수 구성 요소가 충족되는지 확인합니다.
@@ -459,8 +357,6 @@ kind: BackupRestore
 metadata:
   name: my-cr-name
   namespace: my-destination-namespace
-  annotations: # Optional annotations for Kopia data mover
-    protect.trident.netapp.io/kopia-content-cache-size-limit-mb: 1000
 spec:
   appVaultRef: appvault-name
   appArchivePath: my-backup-path
@@ -500,6 +396,9 @@ tridentctl-protect create backuprestore <restore_name> \
 
 사용자 지정 리소스(CR) 파일을 사용하여 스냅샷에서 데이터를 다른 네임스페이스 또는 원래 소스 네임스페이스로 복원할 수 있습니다. SnapshotRestore CR을 사용하여 스냅샷을 다른 네임스페이스로 복구할 경우 Trident Protect는 새 네임스페이스에서 애플리케이션을 복원하고 복원된 애플리케이션에 대한 애플리케이션 CR을 생성합니다. 복원된 애플리케이션을 보호하려면 필요 시 백업 또는 스냅샷을 생성하거나 보호 일정을 설정합니다.
 
+
+NOTE: SnapshotRestore는 다음을 지원합니다. `spec.storageClassMapping` 속성이지만 소스 및 대상 저장소 클래스가 동일한 저장소 백엔드를 사용하는 경우에만 해당됩니다.  복원을 시도하는 경우 `StorageClass` 다른 스토리지 백엔드를 사용하는 경우 복원 작업이 실패합니다.
+
 .시작하기 전에
 AWS 세션 토큰의 만료가 장시간 실행되는 S3 복원 작업에 충분한지 확인합니다. 복구 작업 중에 토큰이 만료되면 작업이 실패할 수 있습니다.
 
@@ -524,11 +423,6 @@ AWS 세션 토큰의 만료가 장시간 실행되는 S3 복원 작업에 충분
 kubectl get snapshots <SNAPHOT_NAME> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
 ----
 ** *spec.namespaceMapping*: 복구 작업의 소스 네임스페이스를 대상 네임스페이스에 매핑하는 것입니다.  `my-source-namespace`및 를 `my-destination-namespace` 사용자 환경의 정보로 바꿉니다.
-** *spec.storageClassMapping*: 복원 작업의 소스 스토리지 클래스를 대상 스토리지 클래스로 매핑하는 것입니다.  `destinationStorageClass`및 를 `sourceStorageClass` 사용자 환경의 정보로 바꿉니다.
-+
-
-NOTE: 그만큼  `storageClassMapping` 속성은 원본과 새 속성이 모두 작동하는 경우에만 작동합니다.  `StorageClass` 동일한 저장소 백엔드를 사용합니다. 복원을 시도하는 경우  `StorageClass` 다른 스토리지 백엔드를 사용하는 경우 복원 작업이 실패합니다.
-
 +
 [source, yaml]
 ----
@@ -542,9 +436,6 @@ spec:
   appVaultRef: appvault-name
   appArchivePath: my-snapshot-path
   namespaceMapping: [{"source": "my-source-namespace", "destination": "my-destination-namespace"}]
-  storageClassMapping:
-    destination: "${destinationStorageClass}"
-    source: "${sourceStorageClass}"
 ----
 
 
