@@ -119,7 +119,12 @@ AKS 클러스터에서 클라우드 ID를 사용할 때 워크로드 ID("Azure.w
 | 노드 PluginTolerations | Pod에 대한 Kubernetes 허용 설정을 재정의합니다. 는 와 동일한 형식을 따릅니다 `pod.spec.Tolerations`. | 기본값 없음, 선택 사항 
 
 
-| `nodePrep` | Trident가 Kubernetes 클러스터의 노드를 준비하여 지정된 데이터 스토리지 프로토콜을 사용하여 볼륨을 관리할 수 있도록 합니다. * 현재 `iscsi` 지원되는 유일한 값입니다. * |  
+| `nodePrep`  a| 
+Trident가 Kubernetes 클러스터의 노드를 준비하여 지정된 데이터 스토리지 프로토콜을 사용하여 볼륨을 관리할 수 있도록 합니다. * 현재 `iscsi` 지원되는 유일한 값입니다. *
+
+
+NOTE: OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.
+|  
 
 
 | `enableAutoBackendConfig` | 입력 매개 변수를 기반으로 백엔드 및 스토리지 클래스를 원활하게 생성하는 자동 백엔드 구성을 지원합니다. | 기본값 없음, 선택 사항 

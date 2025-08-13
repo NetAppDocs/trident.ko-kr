@@ -23,7 +23,7 @@ Trident Protect를 사용하면 NetApp SnapMirror 기술의 비동기식 복제 
 복원 및 페일오버 작업 중에 대상 네임스페이스의 레이블과 주석이 소스 네임스페이스의 레이블 및 주석과 일치하도록 만듭니다. 대상 네임스페이스에 없는 소스 네임스페이스의 레이블 또는 주석이 추가되고 이미 존재하는 모든 레이블 또는 주석이 소스 네임스페이스의 값과 일치하도록 덮어쓰여집니다. 대상 네임스페이스에만 있는 레이블이나 주석은 변경되지 않습니다.
 
 
-NOTE: Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 주목해야 합니다. 네임스페이스 주석을 사용하면 복원된 Pod가 OpenShift SCC(Security Context Constraint)에서 정의한 적절한 권한 및 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있습니다. 자세한 내용은 를 https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/authentication_and_authorization/managing-pod-security-policies["OpenShift 보안 컨텍스트 제약 조건 문서"^]참조하십시오.
+NOTE: Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 알아두는 것이 중요합니다.  네임스페이스 주석은 복원된 포드가 OpenShift 보안 컨텍스트 제약(SCC)에 의해 정의된 적절한 권한과 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있도록 보장합니다.  자세한 내용은 다음을 참조하세요. https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/authentication_and_authorization/managing-pod-security-policies["OpenShift 보안 컨텍스트 제약 조건 문서"^] .
 
 복원 또는 페일오버 작업을 수행하기 전에 Kubernetes 환경 변수를 설정하여 타겟 네임스페이스의 특정 주석을 덮어쓰지 않도록 할 수 있습니다 `RESTORE_SKIP_NAMESPACE_ANNOTATIONS`. 예를 들면 다음과 같습니다.
 
