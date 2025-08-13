@@ -14,8 +14,6 @@ summary: Red Hat OpenShift를 사용하는 경우 운영자를 사용하여 Trid
 [role="lead"]
 Red Hat OpenShift를 사용하는 경우 Red Hat 공인 운영자를 사용하여 NetApp Trident를 설치할 수 있습니다. 다음 절차를 사용하여 Red Hat OpenShift Container Platform에서 Trident를 설치합니다.
 
-<<Updating screens on this page>>
-
 .시작하기 전에
 설치를 시작하기 전에 link:../trident-get-started/requirements.html["Trident 설치 환경을 준비합니다"]를 참조하십시오.
 
@@ -28,22 +26,67 @@ Red Hat OpenShift를 사용하는 경우 Red Hat 공인 운영자를 사용하�
 +
 image::../media/openshift-operator-01.png[Trident 연산자]
 
-. 설치 * 를 클릭합니다.
+. * NetApp Trident*를 클릭하여 설치 설정을 엽니다.
+. 필요한 옵션을 선택하고 *설치*를 클릭하여 운영자 구성을 엽니다.
 +
 image::../media/openshift-operator-02.png[설치합니다]
 
-. 필요한 옵션을 선택하고 * 설치 * 를 클릭합니다.
++
+
+NOTE: 최신 운영자 버전을 선택했는지 확인하세요.
+
+. 모든 매개변수를 그대로 두고 *설치*를 클릭합니다.
 +
 image::../media/openshift-operator-03.png[설치합니다]
 
-. 설치가 완료되면 운전자가 설치된 운영자 목록에 표시됩니다.
++
+설치가 완료되면 설치된 운영자 목록에 해당 운영자가 표시되고 사용할 준비가 됩니다.
+
+. 운영자 세부 정보를 보려면 *운영자 보기*를 클릭하세요.
 +
 image::../media/openshift-operator-04.png[설치되어 있습니다]
 
+. * Trident Orchestrator*에서 *인스턴스 만들기*를 클릭합니다.
 +
+image::../media/openshift-operator-07.png[설치되어 있습니다]
+
+. *YAML 보기*를 클릭하고 다음을 양식에 붙여넣습니다.
++
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+  namespace: openshift-operators
+spec:
+  IPv6: false
+  debug: false
+  nodePrep:
+  - iscsi
+  imageRegistry: ''
+  k8sTimeout: 30
+  namespace: trident
+  silenceAutosupport: false
+----
++
+[]
+====
+** Red Hat Enterprise Linux CoreOS(RHCOS)에서는 iSCSI가 활성화되어 있지 않고 구성되어 있지 않습니다.
+** 추가할 수 있습니다 `nodePrep` 모든 OpenShift 워커 노드에서 iSCSI 및 Multipath 서비스를 구성하고 활성화하기 위한 매개변수입니다.
+** OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.
+
+
+====
+. *만들기*를 클릭하면 Trident Orchestrator가 완전히 설치됩니다.
++
+image::../media/openshift-operator-08.png[설치되어 있습니다]
+
+
+
+
+
 == Trident 운영자 제거
-
-
 
 .단계
 . 설치된 운영자 목록에서 Trident 운영자를 선택합니다.

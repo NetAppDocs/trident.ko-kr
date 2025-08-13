@@ -5340,9 +5340,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="d569da5fb14cad502f71e232cdfcb4e4" category="paragraph">Red Hat OpenShift를 사용하는 경우 Red Hat 공인 운영자를 사용하여 NetApp Trident를 설치할 수 있습니다. 다음 절차를 사용하여 Red Hat OpenShift Container Platform에서 Trident를 설치합니다.</block>
   <block id="516a493e6df274ac5512ffaab7234ebf" category="section-title">Trident 운영자를 찾아 설치합니다</block>
   <block id="7a200e69eab0d67b215ea6e3c6081797" category="list-text">OpenShift OperatorHub로 이동하여 NetApp Trident를 검색합니다.</block>
-  <block id="f19e5d93360a2cdbfe64b6c513e8d263" category="list-text">설치 * 를 클릭합니다.</block>
-  <block id="86499c179913093d38f20a089bb4967f" category="list-text">필요한 옵션을 선택하고 * 설치 * 를 클릭합니다.</block>
-  <block id="301a8f7d2ea6785da5f183d668f629b2" category="list-text">설치가 완료되면 운전자가 설치된 운영자 목록에 표시됩니다.</block>
   <block id="9838ab5306db947832d94d1cd49a486a" category="list-text">설치된 운영자 목록에서 Trident 운영자를 선택합니다.</block>
   <block id="b5a7424a278ddd01fa4e381b58d1e00d" category="list-text">연산자에서 모든 피연산자 인스턴스를 삭제하려면 선택합니다.</block>
   <block id="28ed84868f638999e59e306d6b87b07c" category="admonition">이 연산자에서 모든 피연산자 인스턴스 삭제 * 확인란을 선택하지 않으면 Trident가 제거되지 않습니다.</block>
@@ -5674,7 +5671,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">ONTAP-NAS 및 ONTAP-NAS-Economy 볼륨에 대한 보안 SMB 지원이 추가되었습니다. 이제 Active Directory 사용자 및 그룹을 SMB 볼륨과 함께 사용하여 보안을 강화할 수 있습니다. 을 <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">NVMe 백엔드에 SnapMirror를 사용한 볼륨 복제 지원이 추가되었습니다. 을 <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="afce633f05d99c109d2b0429ee891495" category="admonition">25.06 이전 버전에서 업그레이드하는 경우 CRD가 이제 Trident Protect Helm 차트에 포함되었으므로 이 단계가 필요합니다.</block>
-  <block id="78ba3dee1dfae1136825fa94b594e8b0" category="paragraph"><block ref="b370fec489f67cf82a40d70295a9ea9a" category="inline-xref-macro-rx"></block></block>
   <block id="b71ccf1062cee8c376a7eb37e3c42603" category="cell">LUKS 암호화를 사용합니다. 을 <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="af4e755c6284fa61e563c93320e97aaa" category="paragraph">Trident Kubernetes 내부 통신에 다음 포트를 사용합니다.</block>
   <block id="ef46cb32ba76d79fbc7bfb7586fff578" category="list-text">최신 버전으로 업그레이드했는지 확인하세요. <block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block> .</block>
@@ -5760,7 +5756,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="99be75de31964ff7afed59629c2827c9" category="list-text">숫자<block ref="415d01607bfb64fa0b7efaf0fe064e86" prefix=" " category="inline-code"></block></block>
   <block id="f0fbfac7ddb67830c39dcddb2e0101aa" category="list-text">밑줄<block ref="b14a7b8059d9c055954c92674ce60032" prefix=" " category="inline-code"></block></block>
   <block id="c76231732eebaec2e2411ed7cfd30e2c" category="list-text">하이픈<block ref="336d5ebc5436534e61d16e63ddfca327" prefix=" " category="inline-code"></block></block>
-  <block id="3304691bb80d9d42f8bae0707e46c701" category="paragraph">== Trident 운영자 제거</block>
   <block id="e2cc5e54cd44b8315b1324dec48b3d79" category="paragraph">백업 데이터를 복원하여 클러스터 간이나 다른 스토리지 클래스로 애플리케이션을 마이그레이션할 수 있습니다.</block>
   <block id="259898c4a16b145b9fb12c18949c2e58" category="paragraph">대상 스토리지 클래스에 백업을 복원하여 애플리케이션을 한 스토리지 클래스에서 다른 스토리지 클래스로 마이그레이션할 수 있습니다.</block>
   <block id="b34476802a6b2dff98e6f97e309970b2" category="inline-link-macro">고급 Trident 보호 복원 설정 사용</block>
@@ -5786,4 +5781,16 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="4f8bdbf86c4afec9c1de4e403735e1df" category="list-text">*OpenShift*: OCP 4.19에서 iSCSI 노드 준비가 실패하는 문제를 해결했습니다.</block>
   <block id="4437218698cd37b58221a09f0b779bab" category="list-text">SolidFire 백엔드를 사용하여 볼륨을 복제할 때 시간 초과가 증가했습니다.<block ref="ff387119bc332768d9a3831513d005d5" category="inline-link-macro-rx"></block> ).</block>
   <block id="3dca4d7450a120a0a20749c485d209b2" category="section-title">25.06의 변경 사항</block>
+  <block id="70fec01f1a76dbea74bd12ad8fb20151" category="list-text">* NetApp Trident*를 클릭하여 설치 설정을 엽니다.</block>
+  <block id="1ad8c45e73d79fb1d5606c962d0f3cda" category="list-text">필요한 옵션을 선택하고 *설치*를 클릭하여 운영자 구성을 엽니다.</block>
+  <block id="3bcd8afe0d2e66ac8ee08b64d8ab5aa9" category="admonition">최신 운영자 버전을 선택했는지 확인하세요.</block>
+  <block id="e1834934410991eaa116cd9cffd2e554" category="list-text">모든 매개변수를 그대로 두고 *설치*를 클릭합니다.</block>
+  <block id="a1e30a9991b9e8abb01ef39a2da53ae9" category="paragraph">설치가 완료되면 설치된 운영자 목록에 해당 운영자가 표시되고 사용할 준비가 됩니다.</block>
+  <block id="8b29df4adf6fbbaec0828beed4564d1b" category="list-text">운영자 세부 정보를 보려면 *운영자 보기*를 클릭하세요.</block>
+  <block id="7c7ed74fe0c2134a4029358fd7840eaa" category="list-text">* Trident Orchestrator*에서 *인스턴스 만들기*를 클릭합니다.</block>
+  <block id="7b61a3bcc8bbd41470bf0de7fcfd839e" category="list-text">*YAML 보기*를 클릭하고 다음을 양식에 붙여넣습니다.</block>
+  <block id="9152cfa618e086866a5af7caaed0d2bd" category="list-text">Red Hat Enterprise Linux CoreOS(RHCOS)에서는 iSCSI가 활성화되어 있지 않고 구성되어 있지 않습니다.</block>
+  <block id="5df2f935f2bc3df2c6378f665b3d6659" category="list-text">추가할 수 있습니다<block ref="e9a7558decb5e432d8b7c4d536cc9876" prefix=" " category="inline-code"></block> 모든 OpenShift 워커 노드에서 iSCSI 및 Multipath 서비스를 구성하고 활성화하기 위한 매개변수입니다.</block>
+  <block id="f61306bfa8c6de676059739358d4479f" category="list-text">*만들기*를 클릭하면 Trident Orchestrator가 완전히 설치됩니다.</block>
+  <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">Trident 운영자 제거</block>
 </blocks>
