@@ -251,9 +251,9 @@ WARNING: Trident REST 인터페이스는 127.0.0.1(IPv4의 경우) 또는 [::1](
 파일을 사용하여 를 업데이트하려면 다음 단계를 `userState` `backend.json` 수행하십시오.
 
 .  `backend.json`값이 'uspended'로 설정된 필드를 포함하도록 파일을 `userState` 편집합니다.
-. 업데이트된 파일의 경로와 명령을 사용하여 백엔드를 `tridentctl backend update` `backend.json` 업데이트합니다.
+. 백엔드를 업데이트하려면 다음을 사용하세요. `tridentctl update backend` 명령 및 업데이트 경로 `backend.json` 파일.
 +
-* 예 *: `tridentctl backend update -f /<path to backend JSON file>/backend.json`
+*예*: `tridentctl update backend  -f /<path to backend JSON file>/backend.json -n trident`
 
 
 
