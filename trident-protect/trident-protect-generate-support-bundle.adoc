@@ -14,7 +14,7 @@ summary: 'Trident Protect를 사용하면 관리자가 관리 중인 클러스�
 
 
 [role="lead"]
-Trident Protect를 사용하면 관리자가 관리 중인 클러스터 및 앱에 대한 로그, 메트릭, 토폴로지 정보 등 NetApp 지원에 유용한 정보를 포함하는 번들을 생성할 수 있습니다. 인터넷에 연결되어 있는 경우 CR(사용자 지정 리소스) 파일을 사용하여 NSS(NetApp 지원 사이트)에 지원 번들을 업로드할 수 있습니다.
+Trident Protect를 사용하면 관리자는 관리 중인 클러스터와 앱에 대한 로그, 메트릭, 토폴로지 정보 등 NetApp 지원에 유용한 정보가 포함된 번들을 생성할 수 있습니다.  인터넷에 연결되어 있는 경우 사용자 정의 리소스(CR) 파일을 사용하여 NetApp 지원 사이트(NSS)에 지원 번들을 업로드할 수 있습니다.
 
 [role="tabbed-block"]
 ====
@@ -56,11 +56,11 @@ spec:
 ----
 
 
-. 파일을 올바른 값으로 채운 후 `astra-support-bundle.yaml` CR:
+. 다음을 채운 후 `trident-protect-support-bundle.yaml` 올바른 값으로 파일을 만들고 CR을 적용하세요.
 +
 [source, console]
 ----
-kubectl apply -f trident-protect-support-bundle.yaml
+kubectl apply -f trident-protect-support-bundle.yaml -n trident-protect
 ----
 
 
@@ -75,9 +75,32 @@ kubectl apply -f trident-protect-support-bundle.yaml
 +
 [source, console]
 ----
-tridentctl-protect create autosupportbundle <my-bundle-name> --trigger-type <trigger-type>
+tridentctl-protect create autosupportbundle <my-bundle-name> --trigger-type <trigger-type> -n trident-protect
 ----
 
 
 --
 ====
+
+
+== 지원 번들을 모니터링하고 검색합니다.
+
+두 가지 방법 중 하나를 사용하여 지원 번들을 만든 후에는 생성 진행 상황을 모니터링하고 로컬 시스템으로 검색할 수 있습니다.
+
+.단계
+. 기다리다 `status.generationState` 도달하다 `Completed` 상태.  다음 명령을 사용하여 생성 진행 상황을 모니터링할 수 있습니다.
++
+[source, console]
+----
+kubectl get autosupportbundle trident-protect-support-bundle -n trident-protect
+----
+. 지원 번들을 로컬 시스템으로 가져옵니다.  완성된 AutoSupport 번들에서 복사 명령을 가져옵니다.
++
+[source, console]
+----
+kubectl describe autosupportbundle trident-protect-support-bundle -n trident-protect
+----
++
+찾아라 `kubectl cp` 출력에서 명령을 선택하여 실행하고, 대상 인수를 원하는 로컬 디렉토리로 바꿉니다.
+
+

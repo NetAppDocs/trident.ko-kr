@@ -125,16 +125,6 @@ AWS 세션 토큰의 만료가 장시간 실행되는 S3 백업 작업에 충분
 ** *spec.snapshotRef*: (_선택 사항_): 백업 소스로 사용할 스냅샷의 이름입니다. 제공하지 않으면 임시 스냅샷이 생성되고 백업됩니다.
 ** *metadata.annotations.protect.trident.netapp.io/full-backup* : (_선택 사항_) 이 주석은 백업이 증분 방식이 아니어야 하는지 여부를 지정하는 데 사용됩니다. 기본적으로 모든 백업은 증분 백업입니다. 그러나 이 주석을 로 `true` 설정하면 백업이 비증분 백업이 됩니다. 지정하지 않으면 백업이 기본 증분 백업 설정을 따릅니다. 전체 백업을 주기적으로 수행한 다음 전체 백업 사이에 증분 백업을 수행하여 복원과 관련된 위험을 최소화하는 것이 좋습니다.
 +
-[NOTE]
-====
-응용 프로그램이 이미 생성된 후에 이 주석을 적용해야 하는 경우 다음 명령을 사용할 수 있습니다.
-
-[source, console]
-----
-kubectl annotate backup -n <backup CR namespace> <backup CR name> protect.trident.netapp.io/full-backup="true"
-----
-====
-+
 YAML 예:
 
 +
