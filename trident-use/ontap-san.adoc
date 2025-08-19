@@ -136,7 +136,7 @@ Trident는 다음과 같은 드라이버를 사용하여 비휘발성 메모리 
 
 Trident는 다음을 지원하지 않습니다.
 
-* NVMe에서 기본적으로 지원하는 DH-HMAC-CHAP입니다
+* NVMe에서 기본적으로 지원되는 DH-HMAC-CHAP
 * DM(Device Mapper) 경로 다중화
 * LUKS 암호화
 
