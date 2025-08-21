@@ -5702,7 +5702,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="afd55df73a814282b1a34c79040d709a" category="inline-link-macro">Trident 25.01: 새로운 기능과 향상된 기능으로 Kubernetes 스토리지 환경 향상</block>
   <block id="13c401b1f27132099b945b95025ca748" category="list-text">2024년 11월 26일: <block ref="4a1bf3162dde1793089483cf7682fb86" category="inline-link-macro-rx"></block></block>
   <block id="0d5eeacaefc73b7986c8f85945c72129" category="inline-link-macro">Google Cloud NetApp Volumes 탑재한 NetApp Trident</block>
-  <block id="76227bcfad23cc6957b8b7e9357c9269" category="list-text">2024년 11월 11일: <block ref="8701d0c1e4315119a2dc9de106eb2681" category="inline-link-macro-rx"></block></block>
   <block id="02104a16ef3fcf06a78872f4f5aea5d2" category="inline-link-macro">Trident 사용하여 AWS(ROSA)에서 Red Hat OpenShift 서비스를 사용하는 Amazon FSx for NetApp ONTAP</block>
   <block id="e2218d0205cdf02ed15039a9eb215920" category="list-text">2024년 10월 29일: <block ref="ecf88162cd631914aa447c7edeaa2e6e" category="inline-link-macro-rx"></block></block>
   <block id="e7eb7f68cb5a04d95a6152e9d6ab37ec" category="inline-link-macro">ROSA 및 Amazon FSx for NetApp ONTAP 에서 OpenShift Virtualization을 사용한 VM 라이브 마이그레이션</block>
@@ -5802,4 +5801,7 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="81f2df0265026a1a04bda5484798a10d" category="section-title">자격 증명을 순환하고 백엔드를 업데이트합니다.</block>
   <block id="4bdb23ea513714e3ddde2986c05c669f" category="inline-link-macro">데이터 일관성 향상: Trident 사용한 OpenShift 가상화의 볼륨 그룹 스냅샷</block>
   <block id="299fb00578f305c7fc8cabf601fd1c80" category="list-text">2025년 8월 19일:<block ref="e5b6bdace6eea699ef0d8738f7d6c354" category="inline-link-macro-rx"></block></block>
+  <block id="a21cecd213989d401167ec6cfba8d998" category="list-text">2024년 11월 11일: <block ref="daed3e0cfbeb06368e36167c5fc4f468" category="inline-link-macro-rx"></block></block>
+  <block id="dcae39a3bdbd6a2685507ccc14623d62" category="list-text">클러스터에 Prometheus ServiceMonitor CRD를 적용합니다.</block>
+  <block id="e95fc483374f2aa2997fb27e7235f723" category="list-text">AppVault CR에 정의된 개체 저장소 버킷에 로컬 환경이 연결할 수 있는지 확인하십시오.<block ref="f9adf231483d5dde9cfc10a610b748d3" prefix=" " category="inline-code"></block> 명령.  네트워크 제한으로 인해 액세스할 수 없는 경우 대상 클러스터의 포드 내에서 Trident Protect CLI를 실행하세요.</block>
 </blocks>

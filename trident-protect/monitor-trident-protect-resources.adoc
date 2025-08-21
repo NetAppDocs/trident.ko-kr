@@ -49,6 +49,12 @@ Helm을 사용하여 kube-state-metrics를 설치할 수 있습니다.
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ----
+. 클러스터에 Prometheus ServiceMonitor CRD를 적용합니다.
++
+[source, console]
+----
+kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
+----
 . Helm 차트에 대한 구성 파일을 만듭니다(예: `metrics-config.yaml`). 다음 예제 구성을 사용자 환경에 맞게 사용자 지정할 수 있습니다.
 +
 .metrics-config.yaml:kube-state-metrics Helm 차트 구성
