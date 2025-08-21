@@ -5800,4 +5800,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="42f93278b0d15c8d0f6613813bf586d5" category="section-title">양방향 CHAP를 사용하여 연결 인증</block>
   <block id="9ffdb95250e26c7a6b468126ac7c75b0" category="section-title">작동 원리</block>
   <block id="81f2df0265026a1a04bda5484798a10d" category="section-title">자격 증명을 순환하고 백엔드를 업데이트합니다.</block>
+  <block id="4bdb23ea513714e3ddde2986c05c669f" category="inline-link-macro">데이터 일관성 향상: Trident 사용한 OpenShift 가상화의 볼륨 그룹 스냅샷</block>
+  <block id="299fb00578f305c7fc8cabf601fd1c80" category="list-text">2025년 8월 19일:<block ref="e5b6bdace6eea699ef0d8738f7d6c354" category="inline-link-macro-rx"></block></block>
 </blocks>

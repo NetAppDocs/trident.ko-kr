@@ -19,6 +19,7 @@ summary: 훌륭한 NetApp Trident 및 Trident Protect 블로그를 찾을 수 �
 == Trident 블로그
 
 * 2025년 5월 9일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Automatic-Trident-backend-configuration-for-FSx-for-ONTAP-with-the-Amazon-EKS/ba-p/460586["Amazon EKS 애드온을 사용한 FSx for ONTAP에 대한 자동 Trident 백엔드 구성"^]
+* 2025년 8월 19일:link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Enhancing-Data-Consistency-Volume-Group-Snapshots-in-OpenShift-virtualization/ba-p/462798["데이터 일관성 향상: Trident 사용한 OpenShift 가상화의 볼륨 그룹 스냅샷"]
 * 2025년 4월 15일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/NetApp-Trident-with-Google-Cloud-NetApp-Volumes-for-SMB-Protocol/ba-p/460118["Google Cloud NetApp Volumes for SMB Protocol을 갖춘 NetApp Trident"^]
 * 2025년 4월 14일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Leveraging-Fiber-Channel-Protocol-with-Trident-25-02-for-Persistent-Storage-on/ba-p/460091["Kubernetes에서 영구 저장소를 위해 Trident 25.02와 함께 파이버 채널 프로토콜 활용"^]
 * 2025년 4월 14일: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Unlocking-the-power-of-NetApp-ASA-r2-systems-for-Kubernetes-block-storage/ba-p/460113["Kubernetes 블록 스토리지를 위한 NetApp ASA r2 시스템의 잠재력 활용"^]
