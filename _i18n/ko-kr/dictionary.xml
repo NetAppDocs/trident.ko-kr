@@ -5589,14 +5589,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="d716a23a6e731bf750989a45cf32a804" category="cell">"없음"을 사용하는 계층화 정책 *ASA r2 시스템에는 지정하지 마세요*.</block>
   <block id="9e925e9341b490bfd3b4c4ca3b0c1ef2" category="inline-link-macro">여기</block>
   <block id="5a401de4946c2175a17ad6fda3a04781" category="admonition"><block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block> 다른 ONTAP 시스템(ASA, AFF, FAS)과 스토리지 계층 구현 방식이 다릅니다. 대신 스토리지 가용 영역(AZ)을 사용합니다. <block ref="261295ed43e7c9d663fb0a84ba5b2157" category="inline-link-macro-rx"></block> ASA r2 시스템에서 SVM에 집계를 할당하는 방법에 대한 지식 기반 문서입니다.</block>
-  <block id="d3a94db6693be8414be239f55df31b37" category="paragraph">== ONTAP 백엔드 인증</block>
-  <block id="f16fbd9bb3dcbec83ca559e0320bc245" category="paragraph">=== 자격 증명 기반 인증 활성화</block>
-  <block id="222449e5312c55d5a234569ae308041a" category="paragraph">=== 인증서 기반 인증 활성화</block>
-  <block id="9a86918a1cd754d4c3e7a1745efe18dc" category="paragraph">=== 인증 방법 업데이트 또는 자격 증명 순환</block>
-  <block id="f33ff792ccf735be92ad60ca85333619" category="paragraph">=== Trident에 대한 사용자 정의 ONTAP 역할 생성</block>
-  <block id="1e86eeb01cf8def6f697ea2c64e7df45" category="paragraph">== 양방향 CHAP로 연결 인증</block>
-  <block id="1c47399fc1153044c4efc19db3115ddf" category="paragraph">=== 작동 원리</block>
-  <block id="0cc88844e21c5adec6036d2a3e35f523" category="paragraph">=== 자격 증명을 순환하고 백엔드를 업데이트합니다.</block>
   <block id="6fddcf0bbb95fe4fb7de4f5f2e53ee74" category="paragraph">영구 볼륨(PV)의 Kubernetes 볼륨 그룹 스냅샷 NetApp Trident는 여러 볼륨의 스냅샷(볼륨 스냅샷 그룹)을 생성할 수 있는 기능을 제공합니다. 이 볼륨 그룹 스냅샷은 동일 시점에 생성된 여러 볼륨의 복사본을 나타냅니다.</block>
   <block id="9c3e7c7a7d7349669946d43b4988c3ed" category="admonition">VolumeGroupSnapshot은 베타 API를 갖춘 쿠버네티스의 베타 기능입니다. VolumeGroupSnapshot을 사용하려면 쿠버네티스 1.32 버전이 필요합니다.</block>
   <block id="54100cbc57b96027d8dd74891c09bf53" category="section-title">볼륨 그룹 스냅샷 생성</block>
@@ -5804,4 +5796,8 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="6f95f26584cb2bbbc9c25ed197bf9234" category="admonition">NVMe는 ONTAP REST API에서만 지원되며 ONTAPI(ZAPI)에서는 지원되지 않습니다.</block>
   <block id="32653402e1251f3e6f9db04a67492d01" category="paragraph">*지정된 경우 항상 다음으로 설정됩니다.<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> ASA r2 시스템*용.</block>
   <block id="e1b6f2a617a63649b238c99a6557a915" category="list-text">NVMe에서 기본적으로 지원되는 DH-HMAC-CHAP</block>
+  <block id="7fbe6e40125b7d1b2f5c5c05044e7526" category="section-title">인증서 기반 인증 활성화</block>
+  <block id="42f93278b0d15c8d0f6613813bf586d5" category="section-title">양방향 CHAP를 사용하여 연결 인증</block>
+  <block id="9ffdb95250e26c7a6b468126ac7c75b0" category="section-title">작동 원리</block>
+  <block id="81f2df0265026a1a04bda5484798a10d" category="section-title">자격 증명을 순환하고 백엔드를 업데이트합니다.</block>
 </blocks>
