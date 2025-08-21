@@ -138,9 +138,6 @@ ONTAP REST API를 사용하기 위한 부울 매개변수입니다.
 
 NOTE: NVMe는 ONTAP REST API에서만 지원되며 ONTAPI(ZAPI)에서는 지원되지 않습니다.
 
-
-NOTE: NVMe는 ONTAP REST API에서만 지원되며 ONTAPI(ZAPI)에서는 지원되지 않습니다.
-
 *지정된 경우 항상 다음으로 설정됩니다. `true` ASA r2 시스템*용.
 | `true` ONTAP 9.15.1 이상, 그렇지 않은 경우 `false`. 
 
