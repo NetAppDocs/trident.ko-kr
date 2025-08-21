@@ -140,3 +140,6 @@ Trident는 다음을 지원하지 않습니다.
 * DM(Device Mapper) 경로 다중화
 * LUKS 암호화
 
+
+
+NOTE: NVMe는 ONTAP REST API에서만 지원되며 ONTAPI(ZAPI)에서는 지원되지 않습니다.
