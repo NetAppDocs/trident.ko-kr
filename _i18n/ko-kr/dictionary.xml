@@ -1816,7 +1816,6 @@
   <block id="9e244fc5020d1137289c0c34c2944ac4" category="paragraph"><block ref="9e244fc5020d1137289c0c34c2944ac4" category="inline-link-macro-rx"></block></block>
   <block id="dd341f866eaefb939dc86608773c909d" category="section-title">설치 방법 간 이동</block>
   <block id="84dfae02381a00cf11d01c571e3e3e0f" category="paragraph">설치 방법을 변경할 수 있습니다. 이렇게 하기 전에 다음 사항을 고려하십시오.</block>
-  <block id="e77325ac6e155cf5d14c756f1d64333f" category="list-text">작업자 기반의 수동 배포를 사용하고 H제어 기반 Trident 연산자 배포를 사용하려는 경우 먼저 수동으로 연산자를 제거한 다음 Helm 설치를 수행해야 합니다. 이를 통해 Helm은 필요한 레이블 및 주석을 사용하여 Trident 연산자를 배포할 수 있습니다. 이렇게 하지 않으면 레이블 유효성 검사 오류 및 주석 유효성 검사 오류와 함께 H제어 기반 Trident 연산자 배포가 실패합니다. 가 있는 경우<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>기반 배포에서는 문제 없이 Helm 기반 배포를 사용할 수 있습니다.</block>
   <block id="f36d25716a4b2c466ddcb8065bef3ae6" category="paragraph"><block ref="f36d25716a4b2c466ddcb8065bef3ae6" category="inline-link-macro-rx"></block></block>
   <block id="50823ee9226376c44bfb71c334ee2f3f" category="paragraph"><block ref="50823ee9226376c44bfb71c334ee2f3f" category="inline-link-macro-rx"></block></block>
   <block id="44e21d73aa8bd7200fceac6671723524" category="doc">Trident 연산자 수동 배포(오프라인 모드)</block>
@@ -5806,4 +5805,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="710d51eba716c95765550f52a1c4fd61" category="cell"><block ref="4aff31f193e6ea4df2a1c4f841bad5d6" prefix="" category="inline-code"></block></block>
   <block id="68087b4c898b9466dc989d8086e173dc" category="cell">대부분의 Kubernetes API 작업에 대한 기본 180초 시간 제한을 재정의합니다(0이 아닌 경우 초 단위).</block>
   <block id="bd3dd99c8eae44e2ae2bfc8f00dc3db0" category="cell"><block ref="045117b0e0a11a242b9765e79cbf113f" prefix="" category="inline-code"></block></block>
+  <block id="44a97f581d6467983edc4e5900722f32" category="list-text">수동 운영자 기반 배포가 있고 Helm 기반 Trident 운영자 배포를 사용하려는 경우 먼저 운영자를 수동으로 제거한 다음 Helm을 설치해야 합니다.  이를 통해 Helm은 필요한 레이블과 주석을 사용하여 Trident 연산자를 배포할 수 있습니다.  이렇게 하지 않으면 Helm 기반 Trident 운영자 배포가 실패하고 레이블 검증 오류와 주석 검증 오류가 발생합니다.</block>
+  <block id="96fa331785e435bbddfc7f404fa5ce84" category="list-text">만약 당신이 가지고 있다면<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 기반 배포의 경우 Trident 제거하지 않고도 Helm 기반 또는 Operator 기반 배포를 수행할 수 있습니다.</block>
 </blocks>
