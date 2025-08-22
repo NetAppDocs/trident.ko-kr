@@ -65,7 +65,7 @@ AKS 클러스터에서 클라우드 ID를 사용할 때 워크로드 ID("Azure.w
 | `IPv6` | IPv6를 통해 Trident를 설치합니다 | 거짓 
 
 
-| `k8sTimeout` | Kubernetes 작업 시간이 초과되었습니다 | `30sec` 
+| `k8sTimeout` | Kubernetes 작업 시간이 초과되었습니다 | `180sec` 
 
 
 | `silenceAutosupport` | AutoSupport 번들을 NetApp로 보내지 마십시오
