@@ -202,7 +202,12 @@ WARNING: values.yaml 파일에서 기본 선호도를 제거하지 마십시오.
 | `tridentIPv6` | Trident가 IPv6 클러스터에서 작동하도록 설정합니다. | 거짓입니다 
 
 
-| `tridentK8sTimeout` | 대부분의 Kubernetes API 작업에 대한 기본 180초 시간 제한을 재정의합니다(0이 아닌 경우 초 단위). | `180` 
+| `tridentK8sTimeout`  a| 
+대부분의 Kubernetes API 작업에 대한 기본 180초 시간 제한을 재정의합니다(0이 아닌 경우 초 단위).
+
+
+NOTE: 그만큼 `tridentK8sTimeout` 매개변수는 Trident 설치에만 적용됩니다.
+| `180` 
 
 
 | `tridentHttpRequestTimeout` | 에서는 HTTP 요청에 대한 기본 90초 제한 시간을 재정의합니다 `0s` 제한 시간 동안 무한 지속 시간입니다. 음수 값은 허용되지 않습니다. | `"90s"` 
