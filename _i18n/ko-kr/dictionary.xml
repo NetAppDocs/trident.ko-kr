@@ -5053,7 +5053,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">Data Mover 리포지토리 암호 암호를 생성합니다</block>
   <block id="fc114cb2ee6c7bff559d58e2a7454cab" category="paragraph">다음 예제를 사용하여 암호 암호를 만듭니다. AppVault 개체를 생성할 때 Trident Protect에서 이 암호를 사용하여 Data Mover 리포지토리를 인증하도록 지시할 수 있습니다.</block>
   <block id="571768fad7edd9c4f57173c592c1f86c" category="section-title">클라우드 공급자를 위한 AppVault 키 생성 예</block>
-  <block id="4d813fb6887e4d4533c00424efc22903" category="paragraph">AppVault CR을 정의할 때 공급자가 호스팅하는 리소스에 액세스하려면 자격 증명을 포함해야 합니다. 자격 증명에 대한 키를 생성하는 방법은 공급자에 따라 다릅니다. 다음은 여러 공급자에 대한 명령줄 키 생성 예제입니다. 다음 예제를 사용하여 각 클라우드 공급자의 자격 증명에 대한 키를 생성할 수 있습니다.</block>
   <block id="3e2db83ddd4087c64413cfd7c14100b6" category="section-title">AppVault 생성 예</block>
   <block id="80b938565b2e1ff14bd06e780149b085" category="paragraph">다음은 각 공급자에 대한 AppVault 정의의 예입니다.</block>
   <block id="dd180e899bea0f9a0eb538e256c19673" category="list-text">선택적으로 Restic 및 Kopia 저장소 암호화에 대한 사용자 지정 암호가 포함된 Kubernetes 암호를 지정할 수 있습니다. 자세한 내용은 을 <block ref="7bf3b37360a9f432b37d8ac6c9f10cd4" category="inline-xref-macro-rx"></block> 참조하십시오.</block>
@@ -5815,4 +5814,20 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="fc7791ffb26e7154ff5b48ab1b14bf8b" category="list-text">다음 명령을 사용하십시오.<block ref="8b5806248570dbb13e7d3bc5e6c0ee37" prefix=" " category="inline-code"></block> 개별 매개변수를 지정하는 플래그:</block>
   <block id="b3d3f9a2121425d368b2e48af67d611a" category="list-text">*클러스터 관리자:* 대상 네임스페이스 소유자에게 대상 네임스페이스에서 TridentVolumeReference CR을 생성할 수 있는 권한을 부여하기 위해 적절한 RBAC가 있는지 확인하십시오.<block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block> ).</block>
   <block id="74e502e81d780e5b5d204969a0d44635" category="list-text">*클러스터 관리자:* 대상 네임스페이스 소유자에게 대상 네임스페이스에 TridentVolumeReference CR을 생성할 수 있는 권한을 부여하기 위해 적절한 RBAC가 있는지 확인하세요.</block>
+  <block id="955d6e7ec20d5d3fcf83f82552f7d6e0" category="section-title">Amazon S3(AWS) 인증을 위한 EKS Pod ID</block>
+  <block id="67165804f666601e4155d69a62d46a7d" category="paragraph">Trident Protect는 Kopia 데이터 이동 작업을 위한 EKS Pod Identity를 지원합니다.  이 기능을 사용하면 Kubernetes 비밀에 AWS 자격 증명을 저장하지 않고도 S3 버킷에 안전하게 액세스할 수 있습니다.</block>
+  <block id="3c0f2c9a4c9b9d63ff7db27d3c3732d2" category="paragraph">* Trident 프로텍트가 포함된 EKS 포드 아이덴티티에 대한 요구 사항*</block>
+  <block id="e674398aa14fe057d6f89aae4be1955a" category="paragraph">Trident Protect와 함께 EKS Pod Identity를 사용하기 전에 다음 사항을 확인하세요.</block>
+  <block id="6aa9f6ea95e8a0a226da6a3727f18bb1" category="list-text">EKS 클러스터에 Pod Identity가 활성화되어 있습니다.</block>
+  <block id="ecadca4297640c38809298ae5d418fff" category="list-text">필요한 S3 버킷 권한이 있는 IAM 역할을 생성했습니다. 자세한 내용은 다음을 참조하세요.<block ref="d40f70e9b63b2ee09271e4f02ea6bf6d" category="inline-link-macro-rx"></block> .</block>
+  <block id="af030ad9c72e341fd6b3331215a88c19" category="list-text">IAM 역할은 다음 Trident Protect 서비스 계정과 연결됩니다.</block>
+  <block id="5b71e41c96f404db1afa2e12eecd6500" category="list-text"><block ref="91bb592c84ad55997a90ac08be4392a4" prefix="" category="inline-code"></block></block>
+  <block id="1aa00347a52b15ca93b318123bc06e86" category="list-text"><block ref="f7466ebc5710cc1f7aebdb3c2347f9e6" prefix="" category="inline-code"></block></block>
+  <block id="7a9c1f2789b528ff73c69693fde3ecba" category="list-text"><block ref="12cb7c67caac3126c1f43145ffe66ca6" prefix="" category="inline-code"></block></block>
+  <block id="71f3c1257dc9ab0b34ac201e2acb022c" category="list-text"><block ref="4853ba7c1c1c3978e9d7142231fc12a6" prefix="" category="inline-code"></block></block>
+  <block id="aeb8fd34d676c01d8d9e00ea6a66b661" category="inline-link">AWS EKS Pod Identity 문서</block>
+  <block id="a1c4fb1e42d1fc14a6fe64030e00a952" category="paragraph">Pod Identity를 활성화하고 IAM 역할을 서비스 계정과 연결하는 방법에 대한 자세한 지침은 다음을 참조하세요.<block ref="66ae84e756b5258fa5896e42189a8ba2" category="inline-link-rx"></block> .</block>
+  <block id="cedc87a271db7f699ec07464bfd0a9ee" category="paragraph">*AppVault 구성* EKS Pod Identity를 사용하는 경우 AppVault CR을 다음과 같이 구성합니다.<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block> 명시적 자격 증명 대신 플래그:</block>
+  <block id="ed69194cde8739a857f51b02498a0c27" category="paragraph">AppVault CR을 정의할 때 IAM 인증을 사용하지 않는 한 공급자가 호스팅하는 리소스에 액세스하기 위한 자격 증명을 포함해야 합니다.  자격 증명에 대한 키를 생성하는 방법은 공급자에 따라 다릅니다.  다음은 여러 공급자에 대한 명령줄 키 생성 예입니다.  다음 예를 사용하여 각 클라우드 공급자의 자격 증명에 대한 키를 생성할 수 있습니다.</block>
+  <block id="0d96febdd171c11830ca8b96c7a4f8e4" category="admonition">Kopia 데이터 무버와 함께 Pod Identity를 사용하는 EKS 환경의 경우 다음을 제거할 수 있습니다.<block ref="84695890ad88faf0bb2d6cdae8c01d51" prefix=" " category="inline-code"></block> 섹션을 추가하고 추가하세요<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block> 아래에<block ref="c0828e0381730befd1f7a025057c74fb" prefix=" " category="inline-code"></block> 대신 구성을 선택하세요.</block>
 </blocks>

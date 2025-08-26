@@ -107,9 +107,50 @@ Amazon S3 정책에 대한 자세한 내용은 다음 예제를 참조하세요.
 
 
 
+=== Amazon S3(AWS) 인증을 위한 EKS Pod ID
+
+Trident Protect는 Kopia 데이터 이동 작업을 위한 EKS Pod Identity를 지원합니다.  이 기능을 사용하면 Kubernetes 비밀에 AWS 자격 증명을 저장하지 않고도 S3 버킷에 안전하게 액세스할 수 있습니다.
+
+* Trident 프로텍트가 포함된 EKS 포드 아이덴티티에 대한 요구 사항*
+
+Trident Protect와 함께 EKS Pod Identity를 사용하기 전에 다음 사항을 확인하세요.
+
+* EKS 클러스터에 Pod Identity가 활성화되어 있습니다.
+* 필요한 S3 버킷 권한이 있는 IAM 역할을 생성했습니다. 자세한 내용은 다음을 참조하세요.link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-appvault-custom-resources.html#s3-compatible-storage-iam-permissions["S3 호환 스토리지 IAM 권한"] .
+* IAM 역할은 다음 Trident Protect 서비스 계정과 연결됩니다.
++
+** `<trident-protect>-controller-manager`
+** `<trident-protect>-resource-backup`
+** `<trident-protect>-resource-restore`
+** `<trident-protect>-resource-delete`
+
+
+
+
+Pod Identity를 활성화하고 IAM 역할을 서비스 계정과 연결하는 방법에 대한 자세한 지침은 다음을 참조하세요. https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html["AWS EKS Pod Identity 문서"^] .
+
+*AppVault 구성* EKS Pod Identity를 사용하는 경우 AppVault CR을 다음과 같이 구성합니다. `useIAM: true` 명시적 자격 증명 대신 플래그:
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: eks-protect-vault
+  namespace: trident-protect
+spec:
+  providerType: AWS
+  providerConfig:
+    s3:
+      bucketName: trident-protect-aws
+      endpoint: s3.example.com
+      useIAM: true
+----
+
+
 === 클라우드 공급자를 위한 AppVault 키 생성 예
 
-AppVault CR을 정의할 때 공급자가 호스팅하는 리소스에 액세스하려면 자격 증명을 포함해야 합니다. 자격 증명에 대한 키를 생성하는 방법은 공급자에 따라 다릅니다. 다음은 여러 공급자에 대한 명령줄 키 생성 예제입니다. 다음 예제를 사용하여 각 클라우드 공급자의 자격 증명에 대한 키를 생성할 수 있습니다.
+AppVault CR을 정의할 때 IAM 인증을 사용하지 않는 한 공급자가 호스팅하는 리소스에 액세스하기 위한 자격 증명을 포함해야 합니다.  자격 증명에 대한 키를 생성하는 방법은 공급자에 따라 다릅니다.  다음은 여러 공급자에 대한 명령줄 키 생성 예입니다.  다음 예를 사용하여 각 클라우드 공급자의 자격 증명에 대한 키를 생성할 수 있습니다.
 
 [role="tabbed-block"]
 ====
@@ -249,6 +290,9 @@ spec:
         key: sessionToken
         name: s3-secret
 ----
+
+NOTE: Kopia 데이터 무버와 함께 Pod Identity를 사용하는 EKS 환경의 경우 다음을 제거할 수 있습니다. `providerCredentials` 섹션을 추가하고 추가하세요 `useIAM: true` 아래에 `s3` 대신 구성을 선택하세요.
+
 --
 .Microsoft Azure를 참조하십시오
 --

@@ -15,7 +15,7 @@ NOTE: Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스�
 
 [source, console]
 ----
-kubectl set env -n trident-protect deploy/trident-protect-controller-manager RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
+helm install trident-protect --set tridentProtectControllerManager.env.RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
 ----
 
 NOTE: 복원 또는 장애 조치 작업을 수행할 때 지정된 네임스페이스 주석 및 레이블 `restoreSkipNamespaceAnnotations` 그리고 `restoreSkipNamespaceLabels` 복구 또는 장애 조치 작업에서 제외됩니다.  이러한 설정은 Helm을 처음 설치할 때 구성되어야 합니다. 자세한 내용은 다음을 참조하세요.link:../trident-protect/trident-protect-customize-installation.html#configure-autoSupport-and-namespace-filtering-options["AutoSupport 및 네임스페이스 필터링 옵션 구성"] .
