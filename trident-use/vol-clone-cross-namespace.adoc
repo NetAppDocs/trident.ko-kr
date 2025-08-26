@@ -80,7 +80,7 @@ Trident은 PV와 백엔드 스토리지 볼륨을 생성합니다.
 
 
 ====
-. * 클러스터 관리자: * 대상 네임스페이스 소유자에게 TridentVolumeReference CR을 만들 수 있는 권한을 부여하려면 사용자 지정 역할과 kubeconfig를(`namespace2` 만듭니다.)
+. *클러스터 관리자:* 대상 네임스페이스 소유자에게 대상 네임스페이스에서 TridentVolumeReference CR을 생성할 수 있는 권한을 부여하기 위해 적절한 RBAC가 있는지 확인하십시오.(`namespace2` ).
 . * 대상 네임스페이스 소유자: * 소스 네임스페이스를 참조하는 대상 네임스페이스에서 트리젠VolumeReference CR을 만듭니다 `pvc1`.
 +
 [source, yaml]
