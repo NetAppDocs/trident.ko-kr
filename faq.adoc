@@ -86,7 +86,7 @@ Trident는 애플리케이션이 새로운 PVC를 요청하는 시기를 결정�
 
 === Trident에서 사용하는 역할 및 Privileges는 무엇입니까?
 
-Trident 설치 프로그램은 Kubernetes 클러스터의 PersistentVolume, PersistentVolumeClaim, StorageClass 및 Secret 리소스에 대한 특정 액세스 권한을 가진 Kubernetes ClusterRole을 생성합니다. 을 참조하십시오 link:../trident-get-started/kubernetes-customize-deploy-tridentctl.html["tridentctl 설치를 사용자 지정합니다"^].
+Trident 설치 프로그램은 Kubernetes 클러스터의 PersistentVolume, PersistentVolumeClaim, StorageClass 및 Kubernetes 클러스터의 Secret 리소스에 대한 특정 액세스 권한이 있는 Kubernetes ClusterRole을 생성합니다. link:trident-get-started/kubernetes-customize-deploy-tridentctl.html["tridentctl 설치를 사용자 지정합니다"^] .
 
 
 
