@@ -22,7 +22,7 @@ Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성�
 
 === Kubernetes StorageClass 개체를 구성합니다
 
-는 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] Trident를 해당 클래스에 사용되는 Provisioner로 식별하고 Trident에 볼륨 프로비저닝 방법을 지시합니다. 예를 들면 다음과 같습니다.
+그만큼 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] 객체는 Trident 해당 클래스에 사용되는 프로비저너로 식별하고 Trident 볼륨을 프로비저닝하는 방법을 지시합니다.  NFS를 사용하여 볼륨에 대한 Storageclass를 설정하려면 이 예제를 사용하세요(전체 속성 목록은 아래의 Trident 속성 섹션을 참조하세요).
 
 [source, YAML]
 ----
@@ -33,6 +33,20 @@ metadata:
 provisioner: csi.trident.netapp.io
 parameters:
   backendType: "ontap-nas"
+  provisioningType: "thin"
+  snapshots: "true"
+----
+iSCSI를 사용하여 볼륨에 대한 Storageclass를 설정하려면 다음 예를 사용하세요.
+
+[source, YAML]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-gold
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-san"
   provisioningType: "thin"
   snapshots: "true"
 ----
@@ -95,29 +109,6 @@ PVC를 생성한 후 포드에 볼륨을 장착할 수 있습니다.
 
 === 샘플 매니페스트
 
-.PersistentVolume 샘플 매니페스트
-[%collapsible]
-====
-이 샘플 매니페스트는 StorageClass와 연결된 10Gi의 기본 PV를 보여 줍니다 `basic-csi`.
-
-[source, YAML]
-----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-storage
-  labels:
-    type: local
-spec:
-  storageClassName: ontap-gold
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/my/host/path"
-----
-====
 .PersistentVolumeClaim 샘플 매니페스트
 [%collapsible]
 ====
@@ -140,27 +131,27 @@ spec:
       storage: 1Gi
   storageClassName: ontap-gold
 ----
-.NVMe/TCP가 있는 PVC
-이 예에서는 이름이 인 StorageClass와 연결된 RWX 액세스 권한이 있는 NVMe/TCP용 기본 PVC를 보여 `protection-gold` 줍니다.
+.iSCSI를 사용한 PVC 예제
+이 예에서는 RWO 액세스가 있는 iSCSI용 기본 PVC를 보여줍니다. 이 PVC는 StorageClass와 연결되어 있습니다. `protection-gold` .
 
 [source, YAML]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-name: pvc-san-nvme
+name: pvc-san
 spec:
 accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
 resources:
   requests:
-    storage: 300Mi
+    storage: 1Gi
 storageClassName: protection-gold
 ----
 ====
 
 
-=== PV 및 PVC를 작성합니다
+=== PVC 생성
 
 .단계
 . PVC를 작성합니다.

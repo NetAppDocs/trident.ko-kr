@@ -2383,10 +2383,7 @@
   <block id="2d63b64b84c821bc810927f7ca7fa993" category="inline-link">_PersistentVolumeClaim_</block>
   <block id="d948cda211eadd3a86a406b43ee0d5fa" category="paragraph">PVC는 특정 크기 또는 액세스 모드의 저장을 요청하도록 구성할 수 있습니다. 클러스터 관리자는 연결된 StorageClass를 사용하여 PersistentVolume 크기 및 액세스 모드(예: 성능 또는 서비스 수준)를 제어할 수 있습니다.</block>
   <block id="35e98ba80f6254a33de7a37ab113316e" category="section-title">샘플 매니페스트</block>
-  <block id="3c5f9191f489dbdd8d950bafc3dea6e0" category="example-title">PersistentVolume 샘플 매니페스트</block>
-  <block id="a992ed82e7964281386cdd46c0c21da6" category="paragraph">이 샘플 매니페스트는 StorageClass와 연결된 10Gi의 기본 PV를 보여 줍니다<block ref="1c62ceba602064183a6346b85fe26c96" prefix=" " category="inline-code"></block>.</block>
   <block id="cdeec5159e0548de993d76d7d1dcc992" category="paragraph">이 예에서는 이름이 인 StorageClass와 연결된 RWO 액세스 권한이 있는 기본 PVC를 보여 줍니다<block ref="1c62ceba602064183a6346b85fe26c96" prefix=" " category="inline-code"></block>.</block>
-  <block id="bb970cb0639998faceb4ab3a67e3f1e3" category="section-title">PV 및 PVC를 작성합니다</block>
   <block id="e1f83bd8f580cc9a48311142d551b3cf" category="list-text">PVC를 작성합니다.</block>
   <block id="150f6f248f009f461b84862124e2b499" category="list-text">PVC 상태를 확인합니다.</block>
   <block id="6a308a8072d1cf8c73629852d7f0b1af" category="list-text">볼륨을 Pod에 마운트합니다.</block>
@@ -2893,7 +2890,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="2b1131719d4d8198515b53a0132411fb" category="image-alt">AWS eks 02</block>
   <block id="5bab8196b750f3260d005a4548bc5de0" category="list-text">원하는 추가 기능 버전을 선택합니다.</block>
   <block id="92f63954b2feb520d9a85c6ac6087ad8" category="image-alt">AWS eks 03</block>
-  <block id="165c328c69599353c4797fde7429e5b5" category="list-text">노드에서 상속할 IAM 역할 옵션을 선택합니다.</block>
   <block id="b64079b8570f34f88bca59be352b20e2" category="image-alt">AWS eks 04</block>
   <block id="bf18811faac9b8e4fcaebab51afd1113" category="list-text">Create * 를 선택합니다.</block>
   <block id="fa883f8fcd252ea2995457cd82515d03" category="list-text">애드온의 상태가 _Active_인지 확인합니다.</block>
@@ -4495,7 +4491,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="1ae067a03c56065918252f36c73024d1" category="sidebar">애플리케이션을 관리하고 보호합니다</block>
   <block id="793ba052e921b84a44dd053d68f45012" category="sidebar">Trident Protect로 실행 후크를 관리합니다</block>
   <block id="a4ac350fb585f51020f747525f3175d8" category="paragraph"><block ref="2c7a14b5507108d57a83e6eb9858f03a" category="inline-link-macro-rx"></block>..</block>
-  <block id="c5bc7ac802b8e0a400d724239314a7bf" category="image-alt">AWS eks 06</block>
   <block id="c198f49680a4c22b6d731cdd7d7b513a" category="paragraph">명령을 사용하여 이름, 네임스페이스, 차트, 상태, 앱 버전 및 수정 번호와 같은 설치 세부 정보를 검토할 수<block ref="cd4140d3de30b520500459331d08d2bf" prefix=" " category="inline-code"></block> 있습니다.</block>
   <block id="d43d72969793ea80734b71e9c2406b2a" category="list-text">* 클러스터에 애드온 소프트웨어 유지 * – 이 옵션은 모든 설정의 Amazon EKS 관리를 제거합니다. 또한 업데이트를 시작한 후 Amazon EKS에서 업데이트를 알리고 Amazon EKS 애드온을 자동으로 업데이트하는 기능도 제거합니다. 하지만 클러스터에 애드온 소프트웨어가 보존됩니다. 이 옵션을 사용하면 Amazon EKS 애드온이 아닌 자가 관리형 설치가 됩니다. 이 옵션을 사용하면 애드온에 대한 다운타임이 없습니다. <block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block>명령의 옵션을 유지하여 추가 기능을 유지합니다.</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> 는 Google Cloud에서 제공하는 완전 관리형 파일 스토리지 서비스로서, 고성능 엔터프라이즈급 파일 스토리지를 제공합니다.</block>
@@ -4984,7 +4979,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="9a30deaecbfde403e36a8a700d09e3e1" category="cell">ONTAP REST API를 사용하는 부울 매개 변수입니다. 로<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 설정하면 Trident에서 ONTAP REST API를 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야<block ref="a9ba4dc88fa11d44cc7c0c918d174778" prefix=" " category="inline-code"></block> 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다.<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block><block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block></block>
   <block id="43d8d272a15eda3f1fbfcedc2408b697" category="paragraph">AWS Bottlerocket에서 NFSv3 볼륨을 프로비저닝하려면 필요한 를<block ref="e1d3d66c5926aa7fbc3186da8f9b476b" prefix=" " category="inline-code"></block> 스토리지 클래스에 추가합니다.</block>
   <block id="2b00559f1e8a052e6ec27fd2da2fc0ef" category="paragraph-title">RWX 액세스 PVC</block>
-  <block id="808a149c66a46569dfd8eda4200e5b28" category="paragraph">이 예에서는 이름이 인 StorageClass와 연결된 RWX 액세스 권한이 있는 NVMe/TCP용 기본 PVC를 보여<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> 줍니다.</block>
   <block id="627d563f4445675e960fd39150a292ba" category="paragraph">파일 시스템은 Amazon FSx의 주요 리소스이며, 이는 사내 ONTAP 클러스터와 유사합니다. 각 SVM 내에서 파일 시스템에 파일과 폴더를 저장하는 데이터 컨테이너인 하나 이상의 볼륨을 생성할 수 있습니다. Amazon FSx for NetApp ONTAP은 클라우드에서 관리형 파일 시스템으로 제공됩니다. 새로운 파일 시스템 유형을 * NetApp ONTAP * 라고 합니다.</block>
   <block id="e5fd3b07dfde2732fc5e3a9d4e7c5370" category="section-title">테스트된 아마존 머신 이미지(AMI)</block>
   <block id="af2fcef81914e3ce8b2cbe1ab832c879" category="cell">아미</block>
@@ -5293,7 +5287,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="00e7f88da8b7690738f8546262d2fe54" category="list-text">소스 클러스터에서 다음 명령을 사용하여 * shutdownsnapshot.status.appArchivePath * 의 값을 찾고 파일 경로의 마지막 부분(basename라고도 함. 이것은 마지막 슬래시 다음에 모두 있음)을 기록합니다.</block>
   <block id="579f2feb3d9edaa336d3ccb69c3fb855" category="list-text">다음 변경 사항을 적용하여 새 대상 클러스터에서 새 소스 클러스터로 페일오버를 수행합니다.</block>
   <block id="23b4dec181e41ab3962cf73b28ffe58c" category="list-text">현재 대상 클러스터에서 AppMirrorRelationship CR을 삭제합니다.</block>
-  <block id="90abe2b6c39f51adea4c5aabff2df094" category="list-text">추가 기능 구성 스키마 * 에 따라 * 구성 값 * 섹션의 구성 값 매개 변수를 이전 단계(1단계)에서 만든 역할 아른으로 설정합니다. 값은 다음 형식이어야 합니다.</block>
   <block id="6935ea1d99a0c26f0e4cddb80f444849" category="summary">Red Hat OpenShift를 사용하는 경우 운영자를 사용하여 Trident를 설치할 수 있습니다.</block>
   <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환</block>
   <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">NetApp 커뮤니티 Trident 운영자에서 Red Hat OpenShift Certified Trident 운영자로 전환하려면 커뮤니티 운영자를 제거한 다음 OperatorHub를 사용하여 인증된 운영자를 설치해야 합니다.</block>
@@ -5595,8 +5588,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="d075b47d76ffc95cce31e3ff1a3bf887" category="paragraph">Trident은 재해 복구에 대비해 데이터를 복제하기 위해 한 클러스터의 소스 볼륨과 피어링된 클러스터의 타겟 볼륨 간의 미러링 관계를 지원합니다.  Trident Mirror Relationship(TMR)이라고 하는 네임스페이스가 지정된 사용자 지정 리소스 정의(CRD)를 사용하여 다음 작업을 수행할 수 있습니다.</block>
   <block id="2d78d4f2531b53f3a4980133900540f7" category="paragraph">NetApp Trident는 다음 드라이버가 지원하는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 볼륨 복제를 지원합니다.** <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> : NFS ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : iSCSI ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : FC ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : NVMe/TCP(최소 ONTAP 버전 9.15.1 필요)</block>
   <block id="a6d2a1b8501003e74309a1ac77e249d4" category="admonition">SnapMirror를 사용한 볼륨 복제는 ASA r2 시스템에서는 지원되지 않습니다. ASA r2 시스템에 대한 자세한 내용은 다음을 참조하세요. <block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> .</block>
-  <block id="5bc634e5febd2967f50c152731ebe0e0" category="admonition">Pod Identity 연결을 사용하는 경우 이 단계를 건너뜁니다.</block>
-  <block id="26b17225b626fb9238849fd60eabdf60" category="paragraph">를 누릅니다</block>
   <block id="b2b0186a010875b0d453752a8aa06a4c" category="section-title">서비스 계정 연결(IRSA)을 위한 Pod ID 또는 IAM 역할 생성</block>
   <block id="152bceec6d4e34c053208d61763334bc" category="paragraph">Kubernetes 서비스 계정이 EKS Pod Identity를 사용하는 AWS Identity and Access Management(IAM) 역할 또는 서비스 계정 연결(IRSA)을 위한 IAM 역할을 맡도록 구성할 수 있습니다. 서비스 계정을 사용하도록 구성된 모든 Pod는 해당 역할에 액세스 권한이 있는 모든 AWS 서비스에 액세스할 수 있습니다.</block>
   <block id="0522426ad683048758e710700760f5a9" category="open-title">포드 아이덴티티</block>
@@ -5830,4 +5821,12 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="ed69194cde8739a857f51b02498a0c27" category="paragraph">AppVault CR을 정의할 때 IAM 인증을 사용하지 않는 한 공급자가 호스팅하는 리소스에 액세스하기 위한 자격 증명을 포함해야 합니다.  자격 증명에 대한 키를 생성하는 방법은 공급자에 따라 다릅니다.  다음은 여러 공급자에 대한 명령줄 키 생성 예입니다.  다음 예를 사용하여 각 클라우드 공급자의 자격 증명에 대한 키를 생성할 수 있습니다.</block>
   <block id="0d96febdd171c11830ca8b96c7a4f8e4" category="admonition">Kopia 데이터 무버와 함께 Pod Identity를 사용하는 EKS 환경의 경우 다음을 제거할 수 있습니다.<block ref="84695890ad88faf0bb2d6cdae8c01d51" prefix=" " category="inline-code"></block> 섹션을 추가하고 추가하세요<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block> 아래에<block ref="c0828e0381730befd1f7a025057c74fb" prefix=" " category="inline-code"></block> 대신 구성을 선택하세요.</block>
   <block id="3d939b5d63f5846e5d71053999d3972e" category="paragraph">Trident 설치 프로그램은 Kubernetes 클러스터의 PersistentVolume, PersistentVolumeClaim, StorageClass 및 Kubernetes 클러스터의 Secret 리소스에 대한 특정 액세스 권한이 있는 Kubernetes ClusterRole을 생성합니다. <block ref="ddc7df443077796093efdaf5a64d03cd" category="inline-link-macro-rx"></block> .</block>
+  <block id="65f1acff2714c57d7d22160c1e0604ae" category="list-text">필요한 추가 기능 설정을 구성합니다.</block>
+  <block id="a77e64d999da7477c22c11d171944968" category="list-text">IRSA(서비스 계정에 대한 IAM 역할)를 사용하는 경우 추가 구성 단계를 참조하세요.<block ref="75a5fb22d89ca2450e7a1cb8fb11e3d1" category="inline-link-macro-rx"></block> .</block>
+  <block id="b2a83c40e86c786c07c31acad2909e42" category="admonition">*Pod Identity 연결을 사용하는 경우 이 단계를 건너뜁니다.*</block>
+  <block id="346a92db06c8942d8b2bd2e2de5c2796" category="paragraph">그만큼<block ref="da3f7f170e13df7f56e057fc4226aa85" category="inline-link-rx"></block> 객체는 Trident 해당 클래스에 사용되는 프로비저너로 식별하고 Trident 볼륨을 프로비저닝하는 방법을 지시합니다.  NFS를 사용하여 볼륨에 대한 Storageclass를 설정하려면 이 예제를 사용하세요(전체 속성 목록은 아래의 Trident 속성 섹션을 참조하세요).</block>
+  <block id="7cb76a35f0ca09eacd7393285baf81df" category="paragraph">iSCSI를 사용하여 볼륨에 대한 Storageclass를 설정하려면 다음 예를 사용하세요.</block>
+  <block id="4789829a93714df585353f631620ef1d" category="paragraph-title">iSCSI를 사용한 PVC 예제</block>
+  <block id="325b282cbc15cc9dcde1a69271472526" category="paragraph">이 예에서는 RWO 액세스가 있는 iSCSI용 기본 PVC를 보여줍니다. 이 PVC는 StorageClass와 연결되어 있습니다.<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> .</block>
+  <block id="4aac510e801e497da3b150682838f5f7" category="section-title">PVC 생성</block>
 </blocks>
