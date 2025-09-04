@@ -130,9 +130,6 @@ Trident가 Kubernetes 클러스터의 노드를 준비하여 지정된 데이터
 
 NOTE: OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.
 |  
-
-
-| `enableAutoBackendConfig` | 입력 매개 변수를 기반으로 백엔드 및 스토리지 클래스를 원활하게 생성하는 자동 백엔드 구성을 지원합니다. | 기본값 없음, 선택 사항 
 |===
 
 NOTE: POD 매개 변수 포맷에 대한 자세한 내용은 을 참조하십시오 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["노드에 Pod 할당"^].
