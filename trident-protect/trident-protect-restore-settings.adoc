@@ -29,7 +29,7 @@ NOTE: Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스�
 
 [source, console]
 ----
-helm install trident-protect --set tridentProtectControllerManager.env.RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
+helm upgrade trident-protect --set restoreSkipNamespaceAnnotations=<annotation_key_to_skip_1>,<annotation_key_to_skip_2> --reuse-values
 ----
 
 NOTE: 복원 또는 장애 조치 작업을 수행할 때 지정된 네임스페이스 주석 및 레이블 `restoreSkipNamespaceAnnotations` 그리고 `restoreSkipNamespaceLabels` 복구 또는 장애 조치 작업에서 제외됩니다.  이러한 설정은 Helm을 처음 설치할 때 구성되어야 합니다. 자세한 내용은 다음을 참조하세요.link:../trident-protect/trident-protect-customize-installation.html#configure-autoSupport-and-namespace-filtering-options["AutoSupport 및 네임스페이스 필터링 옵션 구성"] .
@@ -131,8 +131,8 @@ storageClassMapping:
 | 주석 | 유형 | 설명 | 기본값 
 
 
-| 보호.트라이던트.넷앱.io/데이터-무버-타임아웃-초 | 문자열 | 데이터 이동 작업이 중단되는 데 허용되는 최대 시간(초)입니다. | 300 
+| 보호.트라이던트.넷앱.io/데이터-무버-타임아웃-초 | 문자열 | 데이터 이동 작업이 중단되는 데 허용되는 최대 시간(초)입니다. | "300" 
 
 
-| 보호.트라이던트.넷앱.io/코피아-콘텐츠-캐시-크기-제한-mb | 정수 | Kopia 콘텐츠 캐시의 최대 크기 제한(메가바이트)입니다. | 1000 
+| 보호.트라이던트.넷앱.io/코피아-콘텐츠-캐시-크기-제한-mb | 문자열 | Kopia 콘텐츠 캐시의 최대 크기 제한(메가바이트)입니다. | "1000" 
 |===

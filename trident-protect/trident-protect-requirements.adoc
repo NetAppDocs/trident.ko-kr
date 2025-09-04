@@ -31,9 +31,13 @@ Trident Protect는 다음과 같은 완전관리형 및 자가 관리형 Kuberne
 * 업스트림 Kubernetes
 
 
+[NOTE]
+====
+* Trident Protect 백업은 Linux 컴퓨트 노드에서만 지원됩니다.  Windows 컴퓨팅 노드에서는 백업 작업이 지원되지 않습니다.
+* Trident Protect를 설치하는 클러스터가 실행 중인 스냅샷 컨트롤러와 관련 CRD로 구성되어 있는지 확인합니다. 스냅샷 컨트롤러를 설치하려면 을 https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["참조하십시오"]참조하십시오.
 
-NOTE: Trident Protect를 설치하는 클러스터가 실행 중인 스냅샷 컨트롤러와 관련 CRD로 구성되어 있는지 확인합니다. 스냅샷 컨트롤러를 설치하려면 을 https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["참조하십시오"]참조하십시오.
 
+====
 
 
 == Trident는 스토리지 백엔드 호환성을 보호합니다
