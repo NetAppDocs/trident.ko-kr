@@ -50,7 +50,7 @@ Trident 사용 link:https://artifacthub.io/packages/helm/netapp-trident/trident-
 +
 [listing]
 ----
-helm repo add netapp-trident https://artifacthub.io/packages/helm/netapp-trident/trident-operator
+helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
 . 를 `helm install` 사용하고 다음 예제와 같이 배포 이름을 지정합니다. 여기서 는 설치 중인 Trident 버전입니다. `100.2506.0`
 +
