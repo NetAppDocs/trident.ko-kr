@@ -318,7 +318,7 @@ link:./trident-protect/learn-about-trident-protect.html["Trident Protect에 대�
 
 
 
-* Trident가 Kubernetes API 서버와 통신하는 데 사용하는 QPS 값을 설정하기 위해 설치 관리자에 새 플래그가 `--k8s_api_qps` 추가되었습니다.
+* 새로운 플래그를 추가했습니다 `--k8s-api-qps` Trident 가 Kubernetes API 서버와 통신하는 데 사용하는 QPS 값을 설정하도록 설치 프로그램에 요청합니다.
 * Kubernetes 클러스터 노드에서 스토리지 프로토콜 종속성을 자동으로 관리하기 위한 설치 관리자에 플래그가 추가되었습니다 `--node-prep`. Amazon Linux 2023 iSCSI 스토리지 프로토콜과의 호환성 테스트를 거쳐 검증되었습니다
 * 비원활한 노드 종료 시나리오 중 ONTAP-NAS-Economy 볼륨에 대한 강제 분리 지원 추가
 * 새로운 ONTAP-NAS-Economy NFS 볼륨은 백엔드 옵션을 사용할 때 qtree별 엑스포트 정책을 `autoExportPolicy` 사용합니다. qtree는 게시 시점에 노드 제한 엑스포트 정책에만 매핑되어 액세스 제어와 보안을 개선합니다. Trident이 활성 워크로드에 영향을 주지 않고 모든 노드에서 볼륨을 게시 해제하면 기존 qtree가 새로운 엑스포트 정책 모델로 전환됩니다.

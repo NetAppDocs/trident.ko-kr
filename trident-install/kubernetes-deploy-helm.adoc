@@ -246,6 +246,11 @@ Trident가 Kubernetes 클러스터의 노드를 준비하여 지정된 데이터
 
 NOTE: OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.
 |  
+
+
+| `k8sAPIQPS`  a| 
+Kubernetes API 서버와 통신하는 동안 컨트롤러가 사용하는 초당 쿼리 수(QPS) 제한입니다.  버스트 값은 QPS 값에 따라 자동으로 설정됩니다.
+| `100`; 선택 사항 
 |===
 
 
