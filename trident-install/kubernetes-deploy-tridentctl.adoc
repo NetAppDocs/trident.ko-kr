@@ -195,3 +195,16 @@ tridentctl install --windows -n trident
 tridentctl install --enable-force-detach=true -n trident
 ----
 ====
+.동시 Trident 컨트롤러 작업 활성화
+[%collapsible]
+====
+향상된 처리량을 위해 동시 Trident 컨트롤러 작업을 활성화하려면 다음을 추가하세요. `--enable-concurrency` 이 예에서 보듯이 설치 중에 옵션을 사용할 수 있습니다.
+
+
+NOTE: *기술 미리보기*: 이 기능은 NetApp Trident 25.06에서 실험적이며 현재 ONTAP-SAN 드라이버(iSCSI 및 FCP 프로토콜)를 사용하여 제한된 병렬 워크플로를 지원합니다.
+
+[listing]
+----
+tridentctl install --enable-concurrency -n trident
+----
+====
