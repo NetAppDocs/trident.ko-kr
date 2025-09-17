@@ -5705,7 +5705,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="27f5153068cecd37b6fa4a136586658d" category="sidebar">고급 설정 사용</block>
   <block id="2c9ccd5e8999c2c36f29069165f327c3" category="admonition">Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 알아두는 것이 중요합니다.  네임스페이스 주석은 복원된 포드가 OpenShift 보안 컨텍스트 제약(SCC)에 의해 정의된 적절한 권한과 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있도록 보장합니다.  자세한 내용은 다음을 참조하세요.<block ref="f3121e004cef0b92f500227025367589" category="inline-link-rx"></block> .</block>
   <block id="dcc6257f6685a427757ede81b2086cb2" category="admonition">OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.</block>
-  <block id="78b16a5d2427fb1cb647b8ff8e8936dd" category="section-title">25.06.1의 새로운 기능</block>
   <block id="56f0b7f1d902abcea5e9a924acc8cf68" category="list-text">하위 시스템에서 매핑 해제되기 전에 NQN이 확인되지 않는 문제가 해결되었습니다.</block>
   <block id="74ede3b036d836536636c89ae6208dc1" category="list-text">LUKS 장치를 닫으려고 여러 번 시도하면 볼륨 분리에 실패하는 문제가 해결되었습니다.</block>
   <block id="e593abd973cbfe8b821587be547d75a8" category="list-text">장치 경로가 생성된 이후 변경된 경우 고정 iSCSI 볼륨이 스테이지 해제됩니다.</block>
@@ -5840,4 +5839,11 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e6bd8d0922b2f21a4aea7439cad54ba6" category="paragraph">향상된 처리량을 위해 동시 Trident 컨트롤러 작업을 활성화하려면 다음을 추가하세요.<block ref="663f61c1cf47f8a531c8d769e8bf59f4" prefix=" " category="inline-code"></block> 이 예에서 보듯이 설치 중에 옵션을 사용할 수 있습니다.</block>
   <block id="6b37510d663e6eea4cd2d594f41e9e80" category="section-title">Trident SAN/iSCSI 및 EBS-CSI 드라이버 동시 사용</block>
   <block id="dd601ed3d730aa713757843173c1c8c5" category="paragraph">AWS(EKS, ROSA, EC2 또는 기타 인스턴스)에서 ontap-san 드라이버(예: iSCSI)를 사용하려는 경우 노드에 필요한 다중 경로 구성이 Amazon Elastic Block Store(EBS) CSI 드라이버와 충돌할 수 있습니다.  동일한 노드에 있는 EBS 디스크를 방해하지 않고 멀티패스 기능을 보장하려면 멀티패스 설정에서 EBS를 제외해야 합니다.  이 예에서는 다음을 보여줍니다.<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> EBS 디스크를 다중 경로에서 제외하면서 필수 Trident 설정을 포함하는 파일:</block>
+  <block id="f5df426ed26da0917a8092b8f0b273d7" category="section-title">Trident 25.06.2에 필요한 컨테이너 이미지</block>
+  <block id="2bf22bcd28ba853a9453f882ca5dd194" category="list-text">docker.io/netapp/trident:25.06.2</block>
+  <block id="1f8b4ae7badb9c9b5fd03f3770bf252f" category="list-text">docker.io/netapp/trident-operator:25.06.2 (선택 사항)</block>
+  <block id="543f0a02b84be74ac68a52c8fb383d86" category="section-title">Trident 25.06에 필요한 컨테이너 이미지</block>
+  <block id="c70a7b422c141acedc1060dd737c17a5" category="section-title">25.06.2의 새로운 기능</block>
+  <block id="3e49406f91b1756e000630d03496d0da" category="list-text">*Kubernetes*: Kubernetes 노드에서 볼륨을 분리할 때 잘못된 iSCSI 장치가 검색되는 심각한 문제가 해결되었습니다.</block>
+  <block id="76adb46eab5f5dd5b58c3c8a62320c12" category="section-title">25.06.1의 변경 사항</block>
 </blocks>
