@@ -5848,4 +5848,5 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="b162e08e74f97a30264a0b1a8c613b78" category="list-text">현재 Trident 인스턴스를 설치하는 데 사용된 Trident 연산자를 삭제합니다.  예를 들어, 25.02에서 업그레이드하는 경우 다음 명령을 실행합니다.</block>
   <block id="31bb2a9401efa36d10c52fa5f70fb6bc" category="list-text">_&lt;bundle.yaml&gt;_이 있는 환경에 맞는 올바른 번들 YAML 파일을 사용하여 Trident 설치하세요.<block ref="bd2cc8575fe69c7f775292759380c838" prefix=" " category="inline-code"></block> 또는<block ref="5a02ebff4889c2de0379a0fb10bed282" prefix=" " category="inline-code"></block> Kubernetes 버전에 따라 다릅니다.  예를 들어, Trident 25.06.0을 설치하는 경우 다음 명령을 실행합니다.</block>
   <block id="6c352d855b7a2a90e6e0514063875d1a" category="list-text">트라이던트 토크를 편집하여 이미지 25.06.0을 포함시킵니다.</block>
+  <block id="2094195fd55afe126d43ae0e716d1274" category="admonition">네임스페이스 간 복제는 다음에 대해서만 지원됩니다.<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 그리고<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 스토리지 드라이버.  읽기 전용 복제본은 지원되지 않습니다.</block>
 </blocks>
