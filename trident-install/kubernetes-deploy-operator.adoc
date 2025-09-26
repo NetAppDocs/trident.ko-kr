@@ -86,7 +86,7 @@ cd trident-installer
 
 === 2단계: 을 작성합니다 `TridentOrchestrator` CRD
 
- `TridentOrchestrator`CRD(사용자 정의 리소스 정의)를 만듭니다.  `TridentOrchestrator`나중에 사용자 지정 리소스를 만듭니다. 에서 적절한 CRD YAML 버전을 `TridentOrchestrator` 사용하여 `deploy/crds` CRD를 만듭니다.
+생성하다 `TridentOrchestrator` 사용자 정의 리소스 정의(CRD). 당신은 만들 것입니다 `TridentOrchestrator` 나중에 사용자 정의 리소스. 적절한 CRD YAML 버전을 사용하세요. `deploy/crds` 생성하기 위해 `TridentOrchestrator` CRD(크레디)
 
 [listing]
 ----

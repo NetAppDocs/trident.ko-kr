@@ -151,7 +151,7 @@ NOTE: POD 매개 변수 포맷에 대한 자세한 내용은 을 참조하십시
 
 === 강제 분리에 대한 세부 정보
 
-강제 분리는, `ontap-san-economy`, `onatp-nas` 및 `onatp-nas-economy` 에서만 사용할 수 `ontap-san` 있습니다. 강제 분리를 활성화하기 전에 Kubernetes 클러스터에서 비정상 노드 종료(ngns)를 활성화해야 합니다. ngns는 Kubernetes 1.28 이상에서 기본적으로 사용하도록 설정되어 있습니다. 자세한 내용은 을 link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubernetes: 노드 정상 종료 아님"^]참조하십시오.
+강제 분리가 가능합니다. `ontap-san` , `ontap-san-economy` , `ontap-nas` , 그리고 `ontap-nas-economy` 오직. 강제 분리를 활성화하기 전에 Kubernetes 클러스터에서 비정상적 노드 종료(NGNS)를 활성화해야 합니다. NGNS는 Kubernetes 1.28 이상에서 기본적으로 활성화되어 있습니다. 자세한 내용은 다음을 참조하세요. link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubernetes: 노드 정상 종료 아님"^] .
 
 
 NOTE: 또는 `ontap-nas-economy` 드라이버를 사용할 경우 `ontap-nas`, Trident이 관리형 엑스포트 정책을 사용하여 적용된 태그로 인해 Kubernetes 노드에서 액세스를 제한할 수 있도록 백엔드 구성에서 매개 변수를 로 `true` 설정해야 `autoExportPolicy` 합니다.
