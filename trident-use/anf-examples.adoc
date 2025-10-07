@@ -103,7 +103,7 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
 | `qosType` | QoS 유형(자동 또는 수동)을 나타냅니다. * Trident 25.06 기술 미리보기* | 자동 
 
 
-| `maxThroughput` | 허용되는 최대 처리량을 설정합니다. 수동 QoS 용량 풀에서만 지원됩니다. * Trident 25.06 기술 미리보기* | `4 MiB/sec` 
+| `maxThroughput` | 허용되는 최대 처리량을 MiB/초 단위로 설정합니다. 수동 QoS 용량 풀에서만 지원됩니다. * Trident 25.06 기술 미리보기* | `4 MiB/sec` 
 |===
 
 NOTE: 네트워크 기능에 대한 자세한 내용은 을 참조하십시오 link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/configure-network-features["Azure NetApp Files 볼륨에 대한 네트워크 기능을 구성합니다"^].
