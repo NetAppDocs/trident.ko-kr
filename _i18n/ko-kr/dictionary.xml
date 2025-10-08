@@ -5849,4 +5849,9 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="04bed90b9e7d65b6d7dd48211e0a9f6c" category="paragraph">생성하다<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 사용자 정의 리소스 정의(CRD). 당신은 만들 것입니다<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 사용자 정의 리소스는 나중에. 적절한 CRD YAML 버전을 사용하세요.<block ref="91ff3926f7c7983bb4a56689f631e6c9" prefix=" " category="inline-code"></block> 생성하기 위해<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> CRD:</block>
   <block id="ef2305a5dae85359e321280954448fc1" category="paragraph">생성하다<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 사용자 정의 리소스 정의(CRD). 당신은 만들 것입니다<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 나중에 사용자 정의 리소스. 적절한 CRD YAML 버전을 사용하세요.<block ref="91ff3926f7c7983bb4a56689f631e6c9" prefix=" " category="inline-code"></block> 생성하기 위해<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> CRD(크레디)</block>
   <block id="4fe2efdffc54aa536c8714ad9bab97a2" category="cell">허용되는 최대 처리량을 MiB/초 단위로 설정합니다. 수동 QoS 용량 풀에서만 지원됩니다. * Trident 25.06 기술 미리보기*</block>
+  <block id="62fd283f8b260923bfb8cde9c318b507" category="section-title">SnapMirror 복제를 위한 Kubernetes 클러스터 요구 사항</block>
+  <block id="03ba2e33bef23ce0f974f7521e636992" category="paragraph">Kubernetes 클러스터가 다음 요구 사항을 충족하는지 확인하세요.</block>
+  <block id="da635a644d2727b18debb9ea48c169b6" category="list-text">*AppVault 접근성*: 소스 클러스터와 대상 클러스터 모두 애플리케이션 개체 복제를 위해 AppVault에서 읽고 쓸 수 있는 네트워크 액세스 권한이 있어야 합니다.</block>
+  <block id="debae13e33c5f861b21b322eed48bf3f" category="list-text">*네트워크 연결*: WAN을 통해 클러스터와 AppVault 간의 통신을 활성화하기 위해 방화벽 규칙, 버킷 권한 및 IP 허용 목록을 구성합니다.</block>
+  <block id="35d8960b4053e461085ad015f6805d14" category="admonition">많은 기업 환경에서는 WAN 연결 전반에 걸쳐 엄격한 방화벽 정책을 구현합니다.  복제를 구성하기 전에 인프라 팀과 함께 이러한 네트워크 요구 사항을 확인하세요.</block>
 </blocks>
