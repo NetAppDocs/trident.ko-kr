@@ -4996,7 +4996,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="b49d0358b75283a3c4f7a2e7229fc097" category="list-text">* 대상 네임스페이스 소유자: * <block ref="3f6857fc20ae2372499a71869ac3fe7e" prefix="(" category="inline-code"></block>대상 네임스페이스에서 PVC 생성<block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block>) 또는<block ref="bfd2f3d7d043509924eaac702957a99d" prefix=" " category="inline-code"></block>,<block ref="2413b30c8869ee9ac5b416f44004a212" prefix=" " category="inline-code"></block> 주석을 사용하여<block ref="77167d63af133b47bca3bbacd580fa44" prefix=" " category="inline-code"></block> 소스 PVC를 지정합니다.</block>
   <block id="188811e4b8b33253d84403cd9a1fcfa9" category="list-text">ONTAP-NAS-이코노미 드라이버를 사용하여 프로비저닝된 PVC의 경우 읽기 전용 클론은 지원되지 않습니다.</block>
   <block id="18554a6310d1d501f5fdbbbc7a0cd7c6" category="summary">Trident를 사용하면 Kubernetes 사용자가 생성된 후에 볼륨을 확장할 수 있습니다. iSCSI, FC 및 NFS 볼륨을 확장하는 데 필요한 구성에 대한 정보를 확인할 수 있습니다.</block>
-  <block id="bda53ac9cab805b0770875d4365918b2" category="paragraph">Trident를 사용하면 Kubernetes 사용자가 생성된 후에 볼륨을 확장할 수 있습니다. iSCSI, NFS 및 FC 볼륨을 확장하는 데 필요한 구성에 대한 정보를 확인할 수 있습니다.</block>
   <block id="1dea918d41199b513b961287c6579f4f" category="section-title">FC 볼륨을 확장합니다</block>
   <block id="213524ddd0b0daf2a171ee47c3596e00" category="paragraph">CSI Provisioner를 사용하여 FC Persistent Volume(PV)을 확장할 수 있습니다.</block>
   <block id="7ff05a6f045c4cd794027d9a80f2ee93" category="admonition">FC 볼륨 확장은<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 드라이버에서 지원되며 Kubernetes 1.16 이상이 필요합니다.</block>
@@ -5854,4 +5853,5 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="da635a644d2727b18debb9ea48c169b6" category="list-text">*AppVault 접근성*: 소스 클러스터와 대상 클러스터 모두 애플리케이션 개체 복제를 위해 AppVault에서 읽고 쓸 수 있는 네트워크 액세스 권한이 있어야 합니다.</block>
   <block id="debae13e33c5f861b21b322eed48bf3f" category="list-text">*네트워크 연결*: WAN을 통해 클러스터와 AppVault 간의 통신을 활성화하기 위해 방화벽 규칙, 버킷 권한 및 IP 허용 목록을 구성합니다.</block>
   <block id="35d8960b4053e461085ad015f6805d14" category="admonition">많은 기업 환경에서는 WAN 연결 전반에 걸쳐 엄격한 방화벽 정책을 구현합니다.  복제를 구성하기 전에 인프라 팀과 함께 이러한 네트워크 요구 사항을 확인하세요.</block>
+  <block id="996b8601627b0cb893a41930ccbbeb4b" category="paragraph">Trident Kubernetes 사용자에게 볼륨을 생성한 후에 볼륨을 확장할 수 있는 기능을 제공합니다. iSCSI, NFS, SMB, NVMe/TCP 및 FC 볼륨을 확장하는 데 필요한 구성에 대한 정보를 찾아보세요.</block>
 </blocks>
