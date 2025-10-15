@@ -5356,7 +5356,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="1c14876f05b759f9c9be73a49c84ddd4" category="doc">Trident 25.06 설명서</block>
   <block id="7b64f90c10ba527f2f6b6f1e6fb0c9fe" category="list-text">Kubernetes 1.33가 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
   <block id="f39d8c359b3284c30097b65ae4e0dccf" category="list-text">Kubernetes 1.27-1.33</block>
-  <block id="d84962dc87f0a0b8de6c8bcc166c1868" category="list-text">NetApp의 제한된 지원 하에 온프레미스 FAS, AFF 또는 ASA r2(iSCSI 및 NVMe/TCP) 클러스터 버전이 제공됩니다. 을 <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="9f7ace1a0a4d64a8dfa14012ff8f7e8c" category="paragraph">1.27-1.33</block>
   <block id="006871bfbb54929c1e2b37d3ce36b37f" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0</block>
   <block id="3e711dbc16f3de48b46eca5b86572321" category="list-text">Docker.IO/NetApp/트라이덴트:25.06.0</block>
@@ -5854,4 +5853,5 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="1b4288d16f58084404fbffe338e680fb" category="paragraph">Trident 다음을 사용하여 볼륨 가져오기를 지원합니다.<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> (iSCSI, NVMe/TCP 및 FC) 및<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 운전자.</block>
   <block id="19cfd1d1df86c48cee153f9fbaa31f0f" category="paragraph">Trident 단일 LUN을 포함하는 ONTAP SAN FlexVol 볼륨을 가져올 수 있습니다. 이는 다음과 일치합니다.<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 각 PVC에 대한 FlexVol volume 과 FlexVol volume 내의 LUN을 생성하는 드라이버입니다. Trident FlexVol volume 가져와 PVC 정의와 연결합니다. Trident 수입이 가능합니다<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 여러 LUN을 포함하는 볼륨.</block>
   <block id="e214c4610b9128a251097b5d36c60e8b" category="list-text">Trident 다음을 사용하여 볼륨 가져오기를 지원하지 않습니다.<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 운전사.</block>
+  <block id="4afb8b760c67eab8ce5a9cf405163d78" category="list-text">NetApp의 제한된 지원 하에 온프레미스 FAS, AFF, Select 또는 ASA r2(iSCSI 및 NVMe/TCP) 클러스터 버전이 제공됩니다. 보다<block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block> .</block>
 </blocks>
