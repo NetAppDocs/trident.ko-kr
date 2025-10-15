@@ -100,7 +100,7 @@ Trident는 및 `ontap-nas-flexgroup` 드라이버를 사용하여 볼륨 가져�
 
 [NOTE]
 ====
-* 를 클릭합니다 `ontap-nas-economy` 드라이버가 qtree를 가져오고 관리할 수 없습니다.
+* Trident 다음을 사용하여 볼륨 가져오기를 지원하지 않습니다. `ontap-nas-economy` 운전사.
 * 를 클릭합니다 `ontap-nas` 및 `ontap-nas-flexgroup` 드라이버는 중복 볼륨 이름을 허용하지 않습니다.
 
 

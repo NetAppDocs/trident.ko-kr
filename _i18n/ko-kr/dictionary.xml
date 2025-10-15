@@ -2296,7 +2296,6 @@
   <block id="a9e31569460a0b133fdd97c5f482c04e" category="admonition">PV 이름 또는 볼륨 크기와 같은 추가 매개 변수는 포함하지 마십시오. 이로 인해 가져오기 명령이 실패할 수 있습니다.</block>
   <block id="37c0e0081d2fa3ebdf688df7e37ecd7a" category="paragraph">지원되는 드라이버에 대한 다음 볼륨 가져오기 예를 검토하십시오.</block>
   <block id="b8cd11aae04b2508e6cf401f43cdb4f9" category="section-title">ONTAP NAS 및 ONTAP NAS FlexGroup를 지원합니다</block>
-  <block id="6551d29114ca8e4ced094b1f68242124" category="list-text">를 클릭합니다<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 드라이버가 qtree를 가져오고 관리할 수 없습니다.</block>
   <block id="15f21f5d1f84f4b986a4db037c57333d" category="list-text">를 클릭합니다<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 및<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 드라이버는 중복 볼륨 이름을 허용하지 않습니다.</block>
   <block id="3fa3bc64b029b88f42b842bb7dc4e52d" category="paragraph-title">ONTAP NAS의 예</block>
   <block id="77fe25c67ee05760d58e91a98e3ff055" category="paragraph">다음은 관리되는 볼륨 및 관리되지 않는 볼륨 가져오기의 예입니다.</block>
@@ -5854,4 +5853,5 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="996b8601627b0cb893a41930ccbbeb4b" category="paragraph">Trident Kubernetes 사용자에게 볼륨을 생성한 후에 볼륨을 확장할 수 있는 기능을 제공합니다. iSCSI, NFS, SMB, NVMe/TCP 및 FC 볼륨을 확장하는 데 필요한 구성에 대한 정보를 찾아보세요.</block>
   <block id="1b4288d16f58084404fbffe338e680fb" category="paragraph">Trident 다음을 사용하여 볼륨 가져오기를 지원합니다.<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> (iSCSI, NVMe/TCP 및 FC) 및<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 운전자.</block>
   <block id="19cfd1d1df86c48cee153f9fbaa31f0f" category="paragraph">Trident 단일 LUN을 포함하는 ONTAP SAN FlexVol 볼륨을 가져올 수 있습니다. 이는 다음과 일치합니다.<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 각 PVC에 대한 FlexVol volume 과 FlexVol volume 내의 LUN을 생성하는 드라이버입니다. Trident FlexVol volume 가져와 PVC 정의와 연결합니다. Trident 수입이 가능합니다<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 여러 LUN을 포함하는 볼륨.</block>
+  <block id="e214c4610b9128a251097b5d36c60e8b" category="list-text">Trident 다음을 사용하여 볼륨 가져오기를 지원하지 않습니다.<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 운전사.</block>
 </blocks>
