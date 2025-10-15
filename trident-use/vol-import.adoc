@@ -149,9 +149,9 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 
 === ONTAP SAN
 
-Trident는 및 `ontap-san-economy` 드라이버를 사용하여 볼륨 가져오기를 `ontap-san` 지원합니다.
+Trident 다음을 사용하여 볼륨 가져오기를 지원합니다. `ontap-san` (iSCSI, NVMe/TCP 및 FC) 및 `ontap-san-economy` 운전자.
 
-Trident는 단일 LUN이 포함된 ONTAP SAN FlexVol 볼륨을 가져올 수 있습니다. 이는 `ontap-san` 각 PVC 및 FlexVol volume 내의 LUN에 대한 FlexVol volume를 생성하는 드라이버와 일치합니다. Trident는 FlexVol volume를 가져와 PVC 정의와 연결합니다.
+Trident 단일 LUN을 포함하는 ONTAP SAN FlexVol 볼륨을 가져올 수 있습니다. 이는 다음과 일치합니다. `ontap-san` 각 PVC에 대한 FlexVol volume 과 FlexVol volume 내의 LUN을 생성하는 드라이버입니다. Trident FlexVol volume 가져와 PVC 정의와 연결합니다. Trident 수입이 가능합니다 `ontap-san-economy` 여러 LUN을 포함하는 볼륨.
 
 .ONTAP SAN 예
 다음은 관리되는 볼륨 및 관리되지 않는 볼륨 가져오기의 예입니다.
