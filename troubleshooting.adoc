@@ -227,3 +227,9 @@ Pod에 Trident 관리 네임스페이스(NVMe 영구 볼륨)가 연결되어 있
  If you remove the `hostNQN` of the worker node from the corresponding subsystem, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
 .해결 방법
 를 추가합니다 `hostNQN` 하위 시스템으로 돌아갑니다.
+
+
+
+== ONTAP 업그레이드 후 "v4.2-xattrs"가 활성화될 것으로 예상할 때 NFSv4.2 클라이언트가 "잘못된 인수"를 보고합니다.
+
+ONTAP 업그레이드한 후 NFSv4.2 클라이언트가 NFSv4.2 내보내기를 마운트하려고 할 때 "잘못된 인수" 오류를 보고할 수 있습니다. 이 문제는 다음과 같은 경우에 발생합니다. `v4.2-xattrs` SVM에서는 옵션이 활성화되어 있지 않습니다. .해결 방법 활성화 `v4.2-xattrs` SVM에서 옵션을 선택하거나 ONTAP 9.12.1 이상으로 업그레이드하면 이 옵션이 기본적으로 활성화됩니다.
