@@ -25,7 +25,7 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 ====
 []
 =====
-* Kubernetes 1.33가 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.
+* Kubernetes 1.34가 이제 Trident 에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident 업그레이드하세요.
 * Trident은 multipath.conf 파일에서 권장 값을 값으로 하여 SAN 환경에서 다중 경로 구성을 엄격히 적용합니다 `find_multipaths: no`.
 +
 비 경로 다중화 구성 또는 의 사용 `find_multipaths: yes` 또는 `find_multipaths: smart` multipath.conf 파일의 값으로 인해 마운트 오류가 발생합니다. Trident에서 의 사용을 권장했습니다 `find_multipaths: no` 21.07 릴리스 이후.
