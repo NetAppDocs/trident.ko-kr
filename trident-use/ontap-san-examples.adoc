@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-examples.html 
-keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx, metrocluster 
+keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx, metrocluster, ad, active directory 
 summary: Trident 설치 시 ONTAP SAN 드라이버를 생성하고 사용하는 방법에 대해 알아봅니다. 이 섹션에서는 백엔드 구성 예제 및 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 
 ---
 = ONTAP SAN 구성 옵션 및 예
@@ -90,10 +90,10 @@ NOTE: "vsadmin" 자격 증명을 사용하는 경우, 은 `managementLIF` SVM의
 | 신탁인증서다 | Base64 - 신뢰할 수 있는 CA 인증서의 인코딩된 값입니다. 선택 사항. 인증서 기반 인증에 사용됩니다. | "" 
 
 
-| '사용자 이름' | ONTAP 클러스터와 통신하는 데 필요한 사용자 이름입니다. 자격 증명 기반 인증에 사용됩니다. | "" 
+| '사용자 이름' | ONTAP 클러스터와 통신하려면 사용자 이름이 필요합니다. 자격 증명 기반 인증에 사용됩니다. Active Directory 인증에 대해서는 다음을 참조하세요. link:../trident-use/ontap-san-examples.html#authenticate-trident-to-a-backend-svm-using-active-directory-credentials["Active Directory 자격 증명을 사용하여 백엔드 SVM에 Trident 인증"]. | "" 
 
 
-| "암호" | ONTAP 클러스터와 통신하는 데 필요한 암호입니다. 자격 증명 기반 인증에 사용됩니다. | "" 
+| "암호" | ONTAP 클러스터와 통신하려면 비밀번호가 필요합니다. 자격 증명 기반 인증에 사용됩니다. Active Directory 인증에 대해서는 다음을 참조하세요. link:../trident-use/ontap-san-examples.html#authenticate-trident-to-a-backend-svm-using-active-directory-credentials["Active Directory 자격 증명을 사용하여 백엔드 SVM에 Trident 인증"]. | "" 
 
 
 | 'VM'입니다 | 사용할 스토리지 가상 머신입니다 | SVM 'managementLIF'가 지정된 경우에 파생됩니다 
@@ -169,6 +169,28 @@ Trident에서는 다음 옵션을 사용하여 서식 프로세스를 신속하�
 * -E nobiscard: *
 
 * 유지, mkfs 시간에 블록 삭제를 시도하지 마십시오(처음에는 솔리드 스테이트 디바이스 및 스파스/씬 프로비저닝된 스토리지에서 블록 삭제가 유용함). 이 옵션은 더 이상 사용되지 않는 옵션 "-K"를 대체하며 모든 파일 시스템(xfs, ext3 및 ext4)에 적용됩니다.
+
+
+
+
+=== Active Directory 자격 증명을 사용하여 백엔드 SVM에 Trident 인증
+
+Active Directory(AD) 자격 증명을 사용하여 백엔드 SVM에 인증하도록 Trident 구성할 수 있습니다. AD 계정이 SVM에 액세스하려면 먼저 클러스터 또는 SVM에 대한 AD 도메인 컨트롤러 액세스를 구성해야 합니다. AD 계정으로 클러스터를 관리하려면 도메인 터널을 만들어야 합니다. 참조하다 link:https://docs.netapp.com/us-en/ontap/authentication/enable-ad-users-groups-access-cluster-svm-task.html["ONTAP 에서 Active Directory 도메인 컨트롤러 액세스 구성"^] 자세한 내용은.
+
+.단계
+. 백엔드 SVM에 대한 DNS(도메인 이름 시스템) 설정을 구성합니다.
++
+`vserver services dns create -vserver <svm_name> -dns-servers <dns_server_ip1>,<dns_server_ip2>`
+
+. Active Directory에서 SVM에 대한 컴퓨터 계정을 만들려면 다음 명령을 실행하세요.
++
+`vserver active-directory create -vserver DataSVM -account-name ADSERVER1 -domain demo.netapp.com`
+
+. 이 명령을 사용하여 클러스터 또는 SVM을 관리할 AD 사용자 또는 그룹을 만듭니다.
++
+`security login create -vserver <svm_name> -user-or-group-name <ad_user_or_group> -application <application> -authentication-method domain -role vsadmin`
+
+. Trident 백엔드 구성 파일에서 다음을 설정합니다. `username` 그리고 `password` 각각 AD 사용자 또는 그룹 이름과 비밀번호에 대한 매개변수입니다.
 
 
 

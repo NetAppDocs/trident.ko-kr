@@ -698,9 +698,7 @@
   <block id="b071cd8105f8f59b777098388b7a3322" category="cell">신탁인증서다</block>
   <block id="ffe4ce29fe1a6176d496c40332e9cb98" category="cell">Base64 - 신뢰할 수 있는 CA 인증서의 인코딩된 값입니다. 선택 사항. 인증서 기반 인증에 사용됩니다</block>
   <block id="6d77646a2fd9ab65f8e3344d7dce661a" category="cell">'사용자 이름'</block>
-  <block id="83425e975af1b2d60355aa4162300198" category="cell">클러스터/SVM에 연결할 사용자 이름입니다. 자격 증명 기반 인증에 사용됩니다</block>
   <block id="6aa91a7fbb8c9edcf4aa5f9411aec19c" category="cell">"암호"</block>
-  <block id="63d06d6cc41e485615f99a3aad0002b3" category="cell">클러스터/SVM에 연결하는 암호 자격 증명 기반 인증에 사용됩니다</block>
   <block id="afc423de2be5ca5ab3a6ae9548bbfcf3" category="cell">'VM'입니다</block>
   <block id="972abf48cbbadbcd573754140d35e19a" category="cell">사용할 스토리지 가상 머신입니다</block>
   <block id="ef65dd3301d78701f7cfcf8a01834f2f" category="cell">SVM 'managementLIF'가 지정된 경우에 파생됩니다</block>
@@ -1993,8 +1991,6 @@
   <block id="1928bae58ae496b53ef1a163c3dbeeb4" category="cell">모드를 선택합니다. SMB 볼륨에 대해서는 * 를 비워 두어야 합니다. *</block>
   <block id="3418e818bbbe397a49b7096a5ed87929" category="cell">SVM에서 파생됩니다</block>
   <block id="2da9f60cc5b99a5987580c38e6db0842" category="cell">Base64 - 신뢰할 수 있는 CA 인증서의 인코딩된 값입니다. 선택 사항. 인증서 기반 인증에 사용됩니다.</block>
-  <block id="394d848f17683e31e21f6cde5fd9e3e4" category="cell">ONTAP 클러스터와 통신하는 데 필요한 사용자 이름입니다. 자격 증명 기반 인증에 사용됩니다.</block>
-  <block id="6f0acf4836d44b03512e1caa0d774777" category="cell">ONTAP 클러스터와 통신하는 데 필요한 암호입니다. 자격 증명 기반 인증에 사용됩니다.</block>
   <block id="a0de2cc0c77c388210e1f48423eea29c" category="cell">SVM에서 새 볼륨을 프로비저닝할 때 사용되는 접두사 나중에 수정할 수 없습니다. 이 매개 변수를 업데이트하려면 새 백엔드를 생성해야 합니다.</block>
   <block id="c59183b2f668b355e81e7bb1256f92b3" category="paragraph">에서 이러한 옵션을 사용하여 기본 프로비저닝을 제어할 수 있습니다<block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block> 섹션을 참조하십시오. 예를 들어, 아래 구성 예제를 참조하십시오.</block>
   <block id="e62f5d0a5a95571e25197caafe78cd98" category="section-title">볼륨 프로비저닝의 예</block>
@@ -5856,4 +5852,19 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="844c50b4f1aab48821867a1209be687b" category="admonition">Trident 는 Rancher Kubernetes Engine 2(RKE2) 버전 1.27.x - 1.34.x에서 지원되지만, Trident 현재 RKE2 v1.28.5+rke2r1에서만 검증되었습니다._</block>
   <block id="27f15237580e8f85cd2846baf40ad83b" category="paragraph">1.27 - 1.34</block>
   <block id="73b1fe6d150d74c875ee4a368dd3b1a9" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0</block>
+  <block id="431f7ca0be64e2c321d4d4be79b721aa" category="inline-link-macro">Active Directory 자격 증명을 사용하여 백엔드 SVM에 Trident 인증</block>
+  <block id="ebce82cad933beb695765f374ca16800" category="cell">클러스터/SVM에 연결할 사용자 이름입니다. 자격 증명 기반 인증에 사용됩니다. Active Directory 인증에 대해서는 다음을 참조하세요. <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="c48567e30df98d399ca8a25594294caa" category="cell">클러스터/SVM에 연결하기 위한 비밀번호입니다. 자격 증명 기반 인증에 사용됩니다. Active Directory 인증에 대해서는 다음을 참조하세요. <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="50d0e6e4ea5256d25a55581de47b2a0f" category="cell">ONTAP 클러스터와 통신하려면 사용자 이름이 필요합니다. 자격 증명 기반 인증에 사용됩니다. Active Directory 인증에 대해서는 다음을 참조하세요. <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="dece0a70145f48ad3b540f19d6ed5df8" category="cell">ONTAP 클러스터와 통신하려면 비밀번호가 필요합니다. 자격 증명 기반 인증에 사용됩니다. Active Directory 인증에 대해서는 다음을 참조하세요. <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="27e5aeb0225e5a43e4c8c17f706a0a14" category="inline-link-macro">ONTAP 에서 Active Directory 도메인 컨트롤러 액세스 구성</block>
+  <block id="2d6f3231a7f0c1252294552c9ce9c1e0" category="paragraph">Active Directory(AD) 자격 증명을 사용하여 백엔드 SVM에 인증하도록 Trident 구성할 수 있습니다. AD 계정이 SVM에 액세스하려면 먼저 클러스터 또는 SVM에 대한 AD 도메인 컨트롤러 액세스를 구성해야 합니다. AD 계정으로 클러스터를 관리하려면 도메인 터널을 만들어야 합니다. 참조하다 <block ref="affb415ae65d1b8ff6d4848fb0c01200" category="inline-link-macro-rx"></block> 자세한 내용은.</block>
+  <block id="fca3ffea6534176432f58b5a22ed22e1" category="list-title">단계</block>
+  <block id="fa349cdbbc85b9c18e91508e377f8475" category="list-text">백엔드 SVM에 대한 DNS(도메인 이름 시스템) 설정을 구성합니다.</block>
+  <block id="1ffd05fea44ee961865d2fb5edc44bed" category="paragraph"><block ref="c3a0bdbd7b81f16edc3a67d3fbf4564b" prefix="" category="inline-code"></block></block>
+  <block id="c1ddcdee488a34a4b44c78f926dfee75" category="list-text">Active Directory에서 SVM에 대한 컴퓨터 계정을 만들려면 다음 명령을 실행하세요.</block>
+  <block id="1e1b13ed7ccf639907d02e773fed43f5" category="paragraph"><block ref="c53a082488a948b7a70806546ba7211d" prefix="" category="inline-code"></block></block>
+  <block id="34dd5efc5c883d290ed743abcc3fccb1" category="list-text">이 명령을 사용하여 클러스터 또는 SVM을 관리할 AD 사용자 또는 그룹을 만듭니다.</block>
+  <block id="82a5f11771bfe77a499bcb96a45ce13f" category="paragraph"><block ref="22ec37652eb447176b3d5645ac4a7dbb" prefix="" category="inline-code"></block></block>
+  <block id="743fda998716813dc210d0fd0c3f2b65" category="list-text">Trident 백엔드 구성 파일에서 다음을 설정합니다.<block ref="14c4b06b824ec593239362517f538b29" prefix=" " category="inline-code"></block> 그리고<block ref="5f4dcc3b5aa765d61d8327deb882cf99" prefix=" " category="inline-code"></block> 각각 AD 사용자 또는 그룹 이름과 비밀번호에 대한 매개변수입니다.</block>
 </blocks>
