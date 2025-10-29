@@ -223,7 +223,7 @@ defaults:
 
 [listing]
 ----
-Total volume size = (PVC requested size) / (1 - (snapshotReserve percentage) / 100)
+Total volume size = <PVC requested size> / (1 - (<snapshotReserve percentage> / 100))
 ----
 에서 요청한 5GiB입니다.  `volume show` 명령을 실행하면 다음 예와 비슷한 결과가 표시됩니다.
 
