@@ -49,16 +49,17 @@ Kubernetes 클러스터가 인터넷에 액세스할 수 없는 경우 개인 �
 +
 [source, console]
 ----
-netapp/controller:25.06.0
-netapp/restic:25.06.0
-netapp/kopia:25.06.0
-netapp/trident-autosupport:25.06.0
-netapp/exechook:25.06.0
-netapp/resourcebackup:25.06.0
-netapp/resourcerestore:25.06.0
-netapp/resourcedelete:25.06.0
-bitnami/kubectl:1.30.2
-kubebuilder/kube-rbac-proxy:v0.16.0
+docker.io/netapp/controller:25.06.0
+docker.io/netapp/restic:25.06.0
+docker.io/netapp/kopia:25.06.0
+docker.io/netapp/kopiablockrestore:25.06.0
+docker.io/netapp/trident-autosupport:25.06.0
+docker.io/netapp/exechook:25.06.0
+docker.io/netapp/resourcebackup:25.06.0
+docker.io/netapp/resourcerestore:25.06.0
+docker.io/netapp/resourcedelete:25.06.0
+docker.io/bitnami/kubectl:1.30.2
+gcr.io/kubebuilder/kube-rbac-proxy:v0.16.0
 ----
 +
 예를 들면 다음과 같습니다.
@@ -66,18 +67,22 @@ kubebuilder/kube-rbac-proxy:v0.16.0
 +
 [source, console]
 ----
-docker pull netapp/controller:25.06.0
+docker pull docker.io/netapp/controller:25.06.0
 ----
 +
 [source, console]
 ----
-docker tag netapp/controller:25.06.0 <private-registry-url>/controller:25.06.0
+docker tag docker.io/netapp/controller:25.06.0 <private-registry-url>/controller:25.06.0
 ----
 +
 [source, console]
 ----
 docker push <private-registry-url>/controller:25.06.0
 ----
++
+
+NOTE: Helm 차트를 얻으려면 먼저 인터넷 접속이 가능한 컴퓨터에서 Helm 차트를 다운로드하세요. `helm pull trident-protect --version 100.2506.0 --repo https://netapp.github.io/trident-protect-helm-chart`그런 다음 결과를 복사합니다. `trident-protect-100.2506.0.tgz` 오프라인 환경에 파일을 업로드하고 다음을 사용하여 설치하세요. `helm install trident-protect ./trident-protect-100.2506.0.tgz` 마지막 단계에서 저장소 참조 대신.
+
 . Trident Protect 시스템 네임스페이스를 생성합니다.
 +
 [source, console]
@@ -107,10 +112,6 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 [source, yaml]
 ----
 ---
-image:
-  registry: <private-registry-url>
-imagePullSecrets:
-  - name: regcred
 controller:
   image:
     registry: <private-registry-url>
@@ -124,6 +125,10 @@ webhooksCleanup:
   imagePullSecrets:
     - name: regcred
 ----
++
+
+NOTE: 그만큼 `controller.image.registry` 설정은 다음을 포함한 모든 구성 요소 이미지에 적용됩니다. `resourcebackup` 그리고 `resourcerestore`. 레지스트리 내의 특정 저장소 경로에 이미지를 푸시하는 경우(예: `example.com:443/my-repo`), 레지스트리 필드에 전체 경로를 포함합니다. 이렇게 하면 모든 이미지가 다음에서 가져오게 됩니다. `<private-registry-url>/<image-name>:<tag>`.
+
 . Helm을 사용하여 Trident Protect를 설치합니다. 클러스터에 할당되고 클러스터의 백업 및 스냅샷을 식별하는 데 사용되는 클러스터 이름으로 바꿉니다 `<name_of_cluster>`.
 +
 [source, console]
@@ -134,3 +139,5 @@ helm install trident-protect netapp-trident-protect/trident-protect --set cluste
 
 --
 ====
+
+NOTE: AutoSupport 설정 및 네임스페이스 필터링을 포함한 추가 Helm 차트 구성 옵션은 다음을 참조하세요. link:trident-protect-customize-installation.html#configure-additional-trident-protect-helm-chart-settings["Trident Protect 설치를 사용자 지정합니다"].
