@@ -5867,4 +5867,10 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="82a5f11771bfe77a499bcb96a45ce13f" category="paragraph"><block ref="22ec37652eb447176b3d5645ac4a7dbb" prefix="" category="inline-code"></block></block>
   <block id="743fda998716813dc210d0fd0c3f2b65" category="list-text">Trident 백엔드 구성 파일에서 다음을 설정합니다.<block ref="14c4b06b824ec593239362517f538b29" prefix=" " category="inline-code"></block> 그리고<block ref="5f4dcc3b5aa765d61d8327deb882cf99" prefix=" " category="inline-code"></block> 각각 AD 사용자 또는 그룹 이름과 비밀번호에 대한 매개변수입니다.</block>
   <block id="66896c99fb06e0b6c86498b249f8217a" category="cell">요청된 볼륨 크기가 이 값보다 크면 프로비저닝에 실패합니다.</block>
+  <block id="0a963df5db280495b1f394e5035b3ddd" category="cell"><block ref="fd94acda3d48b098f39b5364b959552d" prefix="" category="inline-code"></block></block>
+  <block id="0989a9fc8f98336f0d088b735c709a10" category="paragraph">볼륨을 삭제하는 동안 저장소의 복구 대기열을 우회하고 볼륨을 즉시 삭제합니다.</block>
+  <block id="fc9d6fd2d8db223be4a7484a8619f26b" category="paragraph">``</block>
+  <block id="7cf94358f605f1f7e8dbc9526c3af907" category="cell">트라이던트.넷앱.io/스킵리커버리큐</block>
+  <block id="fd94acda3d48b098f39b5364b959552d" category="cell">skipRecoveryQueue</block>
+  <block id="7ea9fc727097fba59345a8e9de8695fa" category="cell">온탑-나스, 온탑-나스-이코노미, 온탑-나스-플렉스그룹, 온탑-샌, 온탑-샌-이코노미</block>
 </blocks>
