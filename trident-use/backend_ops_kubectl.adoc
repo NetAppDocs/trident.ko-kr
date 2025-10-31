@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/backend_ops_kubectl.html 
-keywords: backends, storage system, anf, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, create backends, delete backends, update backends, view backends 
+keywords: backends, storage system, anf, cvs for aws, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, create backends, delete backends, update backends, view backends 
 summary: kubbtl을 사용하여 백엔드 관리 작업을 수행하는 방법에 대해 알아보십시오. 
 ---
 = kubeck을 사용하여 백엔드 관리 수행

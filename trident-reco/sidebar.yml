@@ -10,8 +10,6 @@ entries:
   url: "/trident-reco/integrate-trident.html"
 - title: 데이터 보호 및 재해 복구
   url: "/trident-reco/backup.html"
-- title: Trident 사용하여 상태 저장 애플리케이션의 장애 조치 자동화
-  url: "/trident-reco/force-detach.html"
 - title: 보안
   entries:
   - title: 보안 권장 사항

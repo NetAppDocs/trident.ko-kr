@@ -72,7 +72,7 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 * Cloud Volumes ONTAP
 * Google Cloud NetApp 볼륨
 * NetApp All SAN 어레이(ASA)
-* NetApp의 제한된 지원 하에 온프레미스 FAS, AFF 또는 ASA r2(iSCSI, NVMe/TCP 및 FC) 클러스터 버전이 제공됩니다. 보다link:https://mysupport.netapp.com/site/info/version-support["소프트웨어 버전 지원"] .
+* NetApp의 제한된 지원 하에 온프레미스 FAS, AFF, Select 또는 ASA r2(iSCSI 및 NVMe/TCP) 클러스터 버전이 제공됩니다. 보다link:https://mysupport.netapp.com/site/info/version-support["소프트웨어 버전 지원"] .
 * NetApp HCI/Element 소프트웨어 11 이상
 
 
@@ -220,7 +220,7 @@ link:../trident-reference/ports.html["Trident 포트"]
 
 
 
-=== Trident 25.10에 필요한 컨테이너 이미지
+=== Trident 25.06.2에 필요한 컨테이너 이미지
 
 [cols="2"]
 |===
@@ -228,14 +228,35 @@ link:../trident-reference/ports.html["Trident 포트"]
 
 
 | v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0  a| 
-* docker.io/netapp/trident:25.10.0
-* docker.io/netapp/trident-autosupport:25.10
-* registry.k8s.io/sig-storage/csi-provisioner:v5.3.0
-* registry.k8s.io/sig-storage/csi-attacher:v4.10.0
-* registry.k8s.io/sig-storage/csi-resizer:v1.14.0
-* registry.k8s.io/sig-storage/csi-snapshotter:v8.3.1
-* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
-* docker.io/netapp/trident-operator:25.10.0 (선택 사항)
+* docker.io/netapp/trident:25.06.2
+* docker.io/netapp/trident-autosupport:25.06
+* registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
+* registry.k8s.io/sig-storage/csi-attacher:v4.8.1
+* registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+* registry.k8s.io/sig-storage/csi-snapshotter:v8.2.1
+* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+* docker.io/netapp/trident-operator:25.06.2 (선택 사항)
+
+
+|===
+
+
+=== Trident 25.06에 필요한 컨테이너 이미지
+
+[cols="2"]
+|===
+| Kubernetes 버전 | 컨테이너 이미지 
+
+
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0  a| 
+* docker.io/netapp/trident:25.06.0
+* docker.io/netapp/trident-autosupport:25.06
+* registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
+* registry.k8s.io/sig-storage/csi-attacher:v4.8.1
+* registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+* registry.k8s.io/sig-storage/csi-snapshotter:v8.2.1
+* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+* docker.io/netapp/trident-operator:25.06.0 (선택 사항)
 
 
 |===

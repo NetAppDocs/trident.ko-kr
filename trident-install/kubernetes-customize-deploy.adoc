@@ -18,7 +18,7 @@ Trident 연산자를 사용하면 사양의 속성을 사용하여 Trident 설�
 
 == 컨트롤러 Pod 및 노드 포드 이해
 
-Trident 클러스터의 각 워커 노드에서 단일 컨트롤러 포드와 노드 포드로 실행됩니다. Trident 볼륨을 마운트하려는 모든 호스트에서 노드 포드를 실행해야 합니다.
+Trident는 단일 컨트롤러 Pod와 클러스터의 각 작업자 노드에서 노드 Pod로 실행됩니다. 노드 포드는 Trident 볼륨을 마운트하려는 호스트에서 실행되고 있어야 합니다.
 
 쿠버네티스 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["노드 선택기"^] 및 link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/["관용과 오해"^] 포드를 특정 노드 또는 기본 노드에서 실행하도록 제한하는 데 사용됩니다. ControllerPlugin과 을 사용합니다 `NodePlugin`구속 조건과 덮어쓰기를 지정할 수 있습니다.
 
@@ -46,7 +46,7 @@ WARNING: `spec.namespace` Trident가 설치된 네임스페이스를 나타내�
 | "버그" | Trident에 대해 디버깅을 활성화합니다 | 거짓입니다 
 
 
-| `enableForceDetach` | `ontap-san`, `ontap-san-economy` , `ontap-nas` , 그리고 `ontap-nas-economy` 오직. Kubernetes Non-Graceful Node Shutdown(NGNS)과 함께 작동하여 클러스터 관리자가 노드가 비정상적으로 될 경우 마운트된 볼륨이 있는 작업 부하를 새 노드로 안전하게 마이그레이션할 수 있는 기능을 제공합니다. 자세한 내용은 다음을 참조하세요.link:../trident-reco/force-detach.html["Trident 사용하여 상태 저장 애플리케이션의 장애 조치 자동화"] . | 거짓입니다 
+| `enableForceDetach` | `ontap-san`, `ontap-san-economy` , `ontap-nas` , 그리고 `ontap-nas-economy` 오직. Kubernetes Non-Graceful Node Shutdown(NGNS)과 함께 작동하여 클러스터 관리자가 노드가 비정상적으로 될 경우 마운트된 볼륨이 있는 작업 부하를 새 노드로 안전하게 마이그레이션할 수 있는 기능을 제공합니다. | 거짓입니다 
 
 
 | `windows` | 를 로 설정합니다 `true` Windows 작업자 노드에 설치할 수 있습니다. | 거짓입니다 
@@ -77,7 +77,7 @@ NOTE: 그만큼 `k8sTimeout` 매개변수는 Trident 설치에만 적용됩니�
 자동으로 계층화 | 거짓입니다 
 
 
-| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport10"` 
+| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport:25.06"` 
 
 
 | 자동 지원 프록시 | AutoSupport를 보내는 프록시의 주소/포트입니다
@@ -90,7 +90,7 @@ NOTE: 그만큼 `k8sTimeout` 매개변수는 Trident 설치에만 적용됩니�
 | `logFormat` | 사용할 Trident 로깅 형식 [text, json] | `"text"` 
 
 
-| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:25.10"` 
+| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:25.06"` 
 
 
 | 'imageRegistry'입니다 | 형식의 내부 레지스트리 경로입니다
@@ -141,119 +141,173 @@ Kubernetes API 서버와 통신하는 동안 컨트롤러가 사용하는 초당
 향상된 처리량을 위해 동시 Trident 컨트롤러 작업이 가능합니다.
 
 
-NOTE: *기술 미리보기*: 이 기능은 실험적이며 현재 ONTAP-NAS(NFS만 해당) 및 ONTAP-SAN(통합 ONTAP 9의 NVMe) 드라이버를 사용한 제한된 병렬 워크플로를 지원합니다. 또한, ONTAP-SAN 드라이버(통합 ONTAP 9의 iSCSI 및 FCP 프로토콜)에 대한 기존 기술 미리보기도 지원합니다.
+NOTE: *기술 미리보기*: 이 기능은 NetApp Trident 25.06에서 실험적이며 현재 ONTAP-SAN 드라이버(iSCSI 및 FCP 프로토콜)를 사용하여 제한된 병렬 워크플로를 지원합니다.
 | 거짓 
 |===
 
 NOTE: POD 매개 변수 포맷에 대한 자세한 내용은 을 참조하십시오 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["노드에 Pod 할당"^].
 
-[WARNING]
-====
-* 컨테이너나 필드의 이름을 변경하지 마세요.
-* 들여쓰기를 변경하지 마세요. YAML 들여쓰기는 올바른 구문 분석을 위해 중요합니다.
 
 
-====
-[NOTE]
-====
-* 기본적으로 제한은 적용되지 않습니다. 요청에만 기본값이 있으며, 지정하지 않으면 자동으로 적용됩니다.
-* 컨테이너 이름은 포드 사양에 나타나는 대로 나열됩니다.
-* 사이드카는 각 주요 컨테이너 아래에 나열되어 있습니다.
-* TORC를 확인하세요 `status.CurrentInstallationParams` 현재 적용된 값을 보려면 필드를 클릭하세요.
+=== 강제 분리에 대한 세부 정보
+
+강제 분리가 가능합니다. `ontap-san` , `ontap-san-economy` , `ontap-nas` , 그리고 `ontap-nas-economy` 오직. 강제 분리를 활성화하기 전에 Kubernetes 클러스터에서 비정상적 노드 종료(NGNS)를 활성화해야 합니다. NGNS는 Kubernetes 1.28 이상에서 기본적으로 활성화되어 있습니다. 자세한 내용은 다음을 참조하세요. link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubernetes: 노드 정상 종료 아님"^] .
 
 
+NOTE: 또는 `ontap-nas-economy` 드라이버를 사용할 경우 `ontap-nas`, Trident이 관리형 엑스포트 정책을 사용하여 적용된 태그로 인해 Kubernetes 노드에서 액세스를 제한할 수 있도록 백엔드 구성에서 매개 변수를 로 `true` 설정해야 `autoExportPolicy` 합니다.
+
+
+WARNING: Trident는 Kubernetes ngns를 사용하기 때문에 허용할 수 없는 모든 워크로드의 일정이 재조정될 때까지 비정상 노드에서 테인트를 제거하지 마십시오 `out-of-service`. 무모하게 타트를 적용하거나 제거하면 백엔드 데이터 보호가 위태롭게 될 수 있습니다.
+
+Kubernetes 클러스터 관리자가 노드에 태그를 `enableForceDetach` 적용하고 `node.kubernetes.io/out-of-service=nodeshutdown:NoExecute` 로 설정하면 `true` Trident이 노드 상태와 다음을 확인합니다.
+
+. 해당 노드에 마운트된 볼륨에 대한 백엔드 I/O 액세스를 중단합니다.
+. Trident 노드 개체를 로 `dirty` 표시합니다(새 발행물에 안전하지 않음).
++
+
+NOTE: Trident 컨트롤러는 Trident 노드 포드에 의해 노드가 다시 검증될 때까지(로 표시된 후) 새로운 게시 볼륨 요청을 거부합니다 `dirty`. Trident가 노드를 확인할 수 있을 때까지(새 발행물에 안전함) 마운트된 PVC로 예약된 모든 작업 부하(클러스터 노드가 정상 및 준비 상태임 이후에도)는 수락되지 `clean` 않습니다.
+
+
+
+노드 상태가 복원되고 정점이 제거되면 Trident는 다음을 수행합니다.
+
+. 노드에서 오래된 게시된 경로를 식별하고 제거합니다.
+. 노드가 상태(서비스 중단 시간이 제거되고 노드가 상태)이고 모든 오래되고 `Ready` 게시된 경로가 정리된 경우 `cleanable`, Trident는 노드를 로 재전송하고 게시된 새로운 볼륨을 노드에 허용합니다. `clean`
+
+
+
+
+== 샘플 구성
+
+속성을 사용할 수 있습니다<<구성 옵션>> 정의할 때 `TridentOrchestrator` 사용자 정의 설치를 위해.
+
+.기본 사용자 정의 구성
+[%collapsible]
 ====
-아|
+이 예제는 다음을 실행한 후에 생성됩니다. `cat deploy/crds/tridentorchestrator_cr_imagepullsecrets.yaml` 명령은 기본적인 사용자 정의 설치를 나타냅니다.
 
 [source, yaml]
 ----
-resources:
-  controller:
-    trident-main:
-      requests:
-        cpu: 10m
-        memory: 80Mi
-      limits:
-          cpu:
-          memory:
-    csi-provisioner:
-      requests:
-        cpu: 2m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    csi-attacher:
-      requests:
-        cpu: 2m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    csi-resizer:
-      requests:
-        cpu: 3m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    csi-snapshotter:
-      requests:
-        cpu: 2m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    trident-autosupport:
-      requests:
-        cpu: 1m
-        memory: 30Mi
-      limits:
-        cpu:
-        memory:
-  node:
-    linux:
-      trident-main:
-        requests:
-          cpu: 10m
-          memory: 60Mi
-        limits:
-          cpu:
-          memory:
-      node-driver-registrar:
-        requests:
-          cpu: 1m
-          memory: 10Mi
-        limits:
-          cpu:
-          memory:
-    windows:
-      trident-main:
-        requests:
-          cpu: 6m
-          memory: 40Mi
-        limits:
-          cpu:
-          memory:
-      node-driver-registrar:
-        requests:
-          cpu: 6m
-          memory: 40Mi
-        limits:
-          cpu:
-          memory:
-      liveness-probe:
-        requests:
-          cpu: 2m
-          memory: 40Mi
-        limits:
-          cpu:
-          memory:
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  imagePullSecrets:
+  - thisisasecret
 ----
-|`httpsMetrics`|Prometheus 메트릭 엔드포인트에 HTTPS를 활성화합니다.  |거짓|`hostNetwork` a| Trident 컨트롤러에 대한 호스트 네트워킹을 활성화합니다.  이 기능은 멀티 홈 네트워크에서 프런트엔드와 백엔드 트래픽을 분리할 때 유용합니다.  |거짓
+====
+.노드 선택기
+[%collapsible]
+====
+이 예제에서는 노드 선택기를 사용하여 Trident 설치합니다.
 
-|===
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  controllerPluginNodeSelector:
+    nodetype: master
+  nodePluginNodeSelector:
+    storage: netapp
+----
+====
+.Windows 작업자 노드
+[%collapsible]
+====
+이 예제는 다음을 실행한 후에 생성됩니다. `cat deploy/crds/tridentorchestrator_cr.yaml` 명령을 실행하면 Windows 작업자 노드에 Trident 설치됩니다.
 
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  windows: true
+----
+====
+.AKS 클러스터의 관리 ID
+[%collapsible]
+====
+이 예제에서는 AKS 클러스터에서 관리되는 ID를 활성화하기 위해 Trident 설치합니다.
 
-| [참고] Pod 매개변수 포맷에 대한 자세한 내용은 다음을 참조하세요.link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["노드에 Pod 할당"^] .  == 샘플 구성 속성을 사용할 수 있습니다.<<구성 옵션>> 정의할 때 `TridentOrchestrator` 사용자 정의 설치를 위해.  .기본 사용자 정의 구성 [%collapsible%closed] ==== 이 예제는 다음을 실행한 후 생성됩니다. `cat deploy/crds/tridentorchestrator_cr_imagepullsecrets.yaml` 명령은 기본 사용자 정의 설치를 나타냅니다. [source,yaml] ---- apiVersion: trident.netapp.io/v1 kind: TridentOrchestrator metadata: name: trident spec: debug: true namespace: trident imagePullSecrets: - thisisasecret ---- ==== .Node 선택기 [%collapsible%closed] ==== 이 예제에서는 노드 선택기를 사용하여 Trident 설치합니다.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 종류: TridentOrchestrator 메타데이터: 이름: trident 사양: 디버그: true 네임스페이스: trident controllerPluginNodeSelector: 노드 유형: 마스터 노드PluginNodeSelector: 저장소: netapp ---- ==== .Windows 작업자 노드 [%collapsible%closed] ==== 이 예제는 다음을 실행한 후 생성되었습니다. `cat deploy/crds/tridentorchestrator_cr.yaml` 명령을 실행하면 Windows 작업자 노드에 Trident 설치됩니다.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 kind: TridentOrchestrator metadata: name: trident spec: debug: true namespace: trident windows: true ---- ==== .AKS 클러스터의 관리되는 ID [%collapsible%closed] ==== 이 예제에서는 AKS 클러스터에서 관리되는 ID를 활성화하기 위해 Trident 설치합니다.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 kind: TridentOrchestrator metadata: name: trident spec: debug: true namespace: trident cloudProvider: "Azure" ---- ==== .AKS 클러스터의 클라우드 ID [%collapsible%closed] ==== 이 예제에서는 AKS 클러스터에서 클라우드 ID와 함께 사용할 Trident 설치합니다.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 kind: TridentOrchestrator metadata: name: trident spec: debug: true namespace: trident cloudProvider: "Azure" cloudIdentity: 'azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx' ---- ==== .EKS 클러스터의 클라우드 ID [%collapsible%closed] ==== 이 예제에서는 AKS 클러스터에서 클라우드 ID와 함께 사용할 Trident 설치합니다.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 kind: TridentOrchestrator metadata: name: trident spec: debug: true namespace: trident cloudProvider: "AWS" cloudIdentity: "'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/trident-role'" ---- ==== .GKE용 클라우드 ID [%collapsible%closed] ==== 이 예제에서는 GKE 클러스터에서 클라우드 ID와 함께 사용할 Trident 설치합니다.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 종류: TridentBackendConfig 메타데이터: 이름: backend-tbc-gcp-gcnv 사양: 버전: 1 storageDriverName: google-cloud-netapp-volumes 프로젝트 번호: '012345678901' 네트워크: gcnv-network 위치: us-west2 서비스 수준: 프리미엄 storagePool: pool-premium1 ---- ==== .Trident 컨트롤러 및 Trident Linux 노드 포드에 대한 Trident 요청 및 제한 구성 [%collapsible%closed] ==== 이 예제에서는 Trident 컨트롤러 및 Trident Linux 노드 포드에 대한 Kubernetes 리소스 요청 및 제한을 구성합니다.  경고: *면책 조항*: 이 예제에서 제공된 요청 및 제한 값은 데모 목적으로만 사용됩니다.  환경과 작업 부하 요구 사항에 따라 이러한 값을 조정하세요.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 종류: TridentOrchestrator 메타데이터: 이름: trident 사양: 디버그: true 네임스페이스: trident imagePullSecrets: - thisisasecret 리소스: 컨트롤러: trident-main: 요청: cpu: 10m 메모리: 80Mi 제한: cpu: 200m 메모리: 256Mi # 사이드카 csi-provisioner: 요청: cpu: 2m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi csi-attacher: 요청: cpu: 2m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi csi-resizer: 요청: cpu: 3m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi csi-snapshotter: 요청: cpu: 2m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi trident-autosupport: 요청: cpu: 1m 메모리: 30Mi 제한: cpu: 50m 메모리: 128Mi 노드: linux: trident-main: 요청: cpu: 10m 메모리: 60Mi 제한: cpu: 200m 메모리: 256Mi # 사이드카 node-driver-registrar: 요청: cpu: 1m 메모리: 10Mi 제한: cpu: 50m 메모리: 32Mi ---- ==== .Trident 컨트롤러와 Trident Windows 및 Linux 노드 포드에 대한 Trident 리소스 요청 및 제한 구성 [%collapsible%closed] ==== 이 예제에서는 Trident 컨트롤러와 Trident Windows 및 Linux 노드 포드에 대한 Kubernetes 리소스 요청 및 제한을 구성합니다.  경고: *면책 조항*: 이 예제에서 제공된 요청 및 제한 값은 데모 목적으로만 사용됩니다.  환경과 작업 부하 요구 사항에 따라 이러한 값을 조정하세요.  [소스, yaml] ---- apiVersion: trident.netapp.io/v1 종류: TridentOrchestrator 메타데이터: 이름: trident 사양: 디버그: true 네임스페이스: trident imagePullSecrets: - thisisasecret windows: true 리소스: 컨트롤러: trident-main: 요청: cpu: 10m 메모리: 80Mi 제한: cpu: 200m 메모리: 256Mi # 사이드카 csi-provisioner: 요청: cpu: 2m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi csi-attacher: 요청: cpu: 2m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi csi-resizer: 요청: cpu: 3m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi csi-snapshotter: 요청: cpu: 2m 메모리: 20Mi 제한: cpu: 100m 메모리: 64Mi trident-autosupport: 요청: cpu: 1m 메모리: 30Mi 제한: cpu: 50m 메모리: 128Mi 노드: linux: trident-main: 요청: cpu: 10m 메모리: 60Mi 제한: cpu: 200m 메모리: 256Mi # 사이드카 node-driver-registrar: 요청: cpu: 1m 메모리: 10Mi 제한: cpu: 50m 메모리: 32Mi windows: trident-main: 요청: cpu: 6m 메모리: 40Mi 제한: cpu: 200m 메모리: 128Mi # 사이드카 node-driver-registrar: 요청: cpu: 6m 메모리: 40Mi 제한: cpu: 100m 메모리: 128Mi liveness-probe: 요청: cpu: 2m 메모리: 40Mi 제한: cpu: 50m 메모리: 64Mi ---- ==== 
-|===
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  cloudProvider: "Azure"
+----
+====
+.AKS 클러스터의 클라우드 ID
+[%collapsible]
+====
+이 예제에서는 AKS 클러스터에서 클라우드 ID와 함께 사용할 Trident 설치합니다.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  cloudProvider: "Azure"
+  cloudIdentity: 'azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx'
+
+----
+====
+.EKS 클러스터의 클라우드 ID
+[%collapsible]
+====
+이 예제에서는 AKS 클러스터에서 클라우드 ID와 함께 사용할 Trident 설치합니다.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  cloudProvider: "AWS"
+  cloudIdentity: "'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/trident-role'"
+----
+====
+.GKE용 클라우드 ID
+[%collapsible]
+====
+이 예제에서는 GKE 클러스터에서 클라우드 ID와 함께 사용할 Trident 설치합니다.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-gcp-gcnv
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes
+  projectNumber: '012345678901'
+  network: gcnv-network
+  location: us-west2
+  serviceLevel: Premium
+  storagePool: pool-premium1
+----
+====

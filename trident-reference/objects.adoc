@@ -50,7 +50,7 @@ Trident는 표준 사양 외에도 사용자가 백엔드 구성에서 설정한
 | trident.netapp.io/fileSystem | 파일 시스템 | ONTAP-SAN, solidfire-SAN, ONTAP-SAN - 경제성 
 
 
-| trident.netapp.io/cloneFromPVC | CloneSourceVolume | ontap-nas, ontap-san, solidfire-san, azure-netapp-files, ontap-san-economy 
+| trident.netapp.io/cloneFromPVC | CloneSourceVolume | ontap-nas, ontap-san, solidfire-san, azure-netapp-files, gcp-cvs, ontap-san-economy 
 
 
 | trident.netapp.io/splitOnClone | SplitOnClone 을 참조하십시오 | ONTAP-NAS, ONTAP-SAN 
@@ -65,7 +65,7 @@ Trident는 표준 사양 외에도 사용자가 백엔드 구성에서 설정한
 | trident.netapp.io/snapshotPolicy | 스냅샷 정책 | ONTAP-NAS, ONTAP-NAS-이코노미, ONTAP-NAS-Flexgroup, ONTAP-SAN 
 
 
-| trident.netapp.io/snapshotReserve | snapshotReserve | 온탑나스, 온탑나스플렉스그룹, 온탑산 
+| trident.netapp.io/snapshotReserve | snapshotReserve | 온탭-나스, 온탭-나스-플렉스그룹, 온탭-산, GCP-CVS 
 
 
 | trident.netapp.io/snapshotDirectory | 스냅샷 디렉토리 | ONTAP-NAS, ONTAP-NAS-이코노미, ONTAP-NAS-Flexgroup 
@@ -173,14 +173,14 @@ volumeBindingMode: Immediate
 
 
 | 백엔드 유형 | 문자열  a| 
-ontap-nas, ontap-nas-economy, ontap-nas-flexgroup, ontap-san, solidfire-san, azure-netapp-files, ontap-san-economy
+ontap-nas, ontap-nas-economy, ontap-nas-flexgroup, ontap-san, solidfire-san, gcp-cvs, azure-netapp-files, ontap-san-economy
 | 풀이 이 백엔드 유형에 속합니다 | 백엔드가 지정되었습니다 | 모든 드라이버 
 
 
-| 스냅샷 수 | 불입니다 | 참, 거짓 | 풀은 스냅샷이 있는 볼륨을 지원합니다 | 스냅샷이 활성화된 볼륨 | 온탑나스, 온탑씨, 솔리드파이어씨 
+| 스냅샷 수 | 불입니다 | 참, 거짓 | 풀은 스냅샷이 있는 볼륨을 지원합니다 | 스냅샷이 활성화된 볼륨 | 온탭-나스, 온탭-산, 솔리드파이어-산, GCP-CVS 
 
 
-| 복제 | 불입니다 | 참, 거짓 | 풀은 볼륨 클론을 지원합니다 | 클론이 활성화된 볼륨 | 온탑나스, 온탑씨, 솔리드파이어씨 
+| 복제 | 불입니다 | 참, 거짓 | 풀은 볼륨 클론을 지원합니다 | 클론이 활성화된 볼륨 | 온탭-나스, 온탭-산, 솔리드파이어-산, GCP-CVS 
 
 
 | 암호화 | 불입니다 | 참, 거짓 | 풀은 암호화된 볼륨을 지원합니다 | 암호화가 활성화된 볼륨입니다 | ONTAP-NAS, ONTAP-NAS-이코노미, ONTAP-NAS-Flexgroups, ONTAP-SAN 
@@ -218,7 +218,7 @@ ontap-nas, ontap-nas-economy, ontap-nas-flexgroup, ontap-san, solidfire-san, azu
 | fsType입니다 | 문자열 | ext4, ext3, xfs | 블록 볼륨의 파일 시스템 유형입니다 | solidfire-SAN, ONTAP-NAS, ONTAP-NAS-이코노미, ONTAP-NAS-Flexgroup, ONTAP-SAN, ONTAP-SAN - 경제성 | 모두 
 
 
-| allowVolumeExpansion | 부울 | 참, 거짓 | PVC 크기 증가에 대한 지원을 활성화 또는 비활성화합니다 | ontap-nas, ontap-nas-economy, ontap-nas-flexgroup, ontap-san, ontap-san-economy, solidfire-san, azure-netapp-files | 1.11+ 
+| allowVolumeExpansion | 부울 | 참, 거짓 | PVC 크기 증가에 대한 지원을 활성화 또는 비활성화합니다 | ontap-nas, ontap-nas-economy, ontap-nas-flexgroup, ontap-san, ontap-san-economy, solidfire-san, gcp-cvs, azure-netapp-files | 1.11+ 
 
 
 | 볼륨BindingMode 를 선택합니다 | 문자열 | Immediate, WaitForFirstConsumer입니다 | 볼륨 바인딩 및 동적 프로비저닝이 수행될 시기를 선택합니다 | 모두 | 1.19-1.26 
@@ -370,7 +370,7 @@ NOTE: 이것은 직접 만들고 관리하는 두 가지 개체 유형 중 하�
 
 == Trident 개체 `StoragePool`
 
-스토리지 풀은 각 백엔드에서 프로비저닝에 사용할 수 있는 고유한 위치를 나타냅니다. ONTAP 의 경우 이는 SVM의 집계에 해당합니다. NetApp HCI/ SolidFire 의 경우 이는 관리자가 지정한 QoS 대역에 해당합니다. 각 스토리지 풀에는 성능 특성과 데이터 보호 특성을 정의하는 일련의 고유한 스토리지 속성이 있습니다.
+스토리지 풀은 각 백엔드에서 프로비저닝에 사용할 수 있는 고유한 위치를 나타냅니다. ONTAP 의 경우 이는 SVM의 집계에 해당합니다. NetApp HCI/ SolidFire 의 경우 이는 관리자가 지정한 QoS 대역에 해당합니다. Cloud Volumes Service 의 경우 이는 클라우드 공급자 지역에 해당합니다. 각 스토리지 풀에는 성능 특성과 데이터 보호 특성을 정의하는 일련의 고유한 스토리지 속성이 있습니다.
 
 다른 오브젝트와 달리 스토리지 풀 후보 는 항상 자동으로 검색되고 관리됩니다.
 

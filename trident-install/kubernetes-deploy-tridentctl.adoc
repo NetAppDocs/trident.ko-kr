@@ -16,7 +16,7 @@ summary: '을 사용하여 Trident를 설치할 수 `tridentctl` 있습니다. �
 
 
 
-== Trident10에 대한 중요 정보
+== Trident 25.06에 대한 중요 정보
 
 *Trident에 대한 다음 중요 정보를 읽어야 합니다.*
 
@@ -75,8 +75,8 @@ Trident 설치 프로그램 패키지는 Trident POD를 생성하고, 상태를 
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v25.10.0/trident-installer-25.10.0.tar.gz
-tar -xf trident-installer-25.10.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v25.06.0/trident-installer-25.06.0.tar.gz
+tar -xf trident-installer-25.06.0.tar.gz
 cd trident-installer
 ----
 
@@ -98,14 +98,14 @@ cd trident-installer
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.10 --trident-image <your-registry>/trident:25.10.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.06 --trident-image <your-registry>/trident:25.06.0
 ----
 --
 .다른 레지스트리의 이미지
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.10 --trident-image <your-registry>/trident:25.10.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.06 --trident-image <your-registry>/trident:25.06.0
 ----
 --
 ====
@@ -126,7 +126,7 @@ INFO Created Trident daemonset.
 INFO Waiting for Trident pod to start.
 INFO Trident pod started.                          namespace=trident pod=trident-controller-679648bd45-cv2mx
 INFO Waiting for Trident REST interface.
-INFO Trident REST interface is up.                 version=25.10.0
+INFO Trident REST interface is up.                 version=25.06.0
 INFO Trident installation succeeded.
 ....
 ----
@@ -166,7 +166,7 @@ NOTE: 설치 프로그램이 성공적으로 완료되지 않거나 `trident-con
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 25.10.0        | 25.10.0        |
+| 25.06.0        | 25.06.0        |
 +----------------+----------------+
 ----
 
@@ -188,7 +188,7 @@ tridentctl install --windows -n trident
 .강제 분리
 [%collapsible]
 ====
-자세한 내용은 다음을 참조하세요.link:../trident-reco/force-detach.html["Trident 사용하여 상태 저장 애플리케이션의 장애 조치 자동화"] .
+강제 분리에 대한 자세한 내용은 다음을 참조하세요.link:..trident-get-started/kubernetes-customize-deploy.html["Trident 운영자 설치를 사용자 지정합니다"] .
 
 [listing]
 ----
@@ -201,7 +201,7 @@ tridentctl install --enable-force-detach=true -n trident
 향상된 처리량을 위해 동시 Trident 컨트롤러 작업을 활성화하려면 다음을 추가하세요. `--enable-concurrency` 이 예에서 보듯이 설치 중에 옵션을 사용할 수 있습니다.
 
 
-NOTE: *기술 미리보기*: 이 기능은 실험적이며 현재 ONTAP-NAS(NFS만 해당) 및 ONTAP-SAN(통합 ONTAP 9의 NVMe) 드라이버를 사용한 제한된 병렬 워크플로를 지원합니다. 또한, ONTAP-SAN 드라이버(통합 ONTAP 9의 iSCSI 및 FCP 프로토콜)에 대한 기존 기술 미리보기도 지원합니다.
+NOTE: *기술 미리보기*: 이 기능은 NetApp Trident 25.06에서 실험적이며 현재 ONTAP-SAN 드라이버(iSCSI 및 FCP 프로토콜)를 사용하여 제한된 병렬 워크플로를 지원합니다.
 
 [listing]
 ----

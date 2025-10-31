@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-reco/integrate-trident.html 
-keywords: kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual pool 
+keywords: kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual pool, cvs, gcp, volumes 
 summary: Kubernetes 클러스터는 일반적으로 두 가지 유형의 노드로 구성되며, 각 노드는 다양한 기능의 측면을 담당합니다. 
 ---
 = Trident 통합
@@ -124,6 +124,37 @@ Trident는 드라이버를 link:https://azure.microsoft.com/en-us/services/netap
 
 
 
+=== Google Cloud 백엔드 드라이버의 Cloud Volumes Service
+
+Trident 다음을 사용합니다. `gcp-cvs` Google Cloud의 Cloud Volumes Service 에 연결하는 드라이버입니다.
+
+그만큼 `gcp-cvs` 드라이버는 가상 풀을 사용하여 백엔드를 추상화하고 Trident 볼륨 배치를 결정할 수 있도록 합니다. 관리자는 가상 풀을 정의합니다. `backend.json` 파일. 저장소 클래스는 선택기를 사용하여 레이블로 가상 풀을 식별합니다.
+
+* 백엔드에 가상 풀이 정의된 경우 Trident 해당 가상 풀이 제한된 Google Cloud 스토리지 풀에 볼륨을 생성하려고 시도합니다.
+* 백엔드에 가상 풀이 정의되어 있지 않으면 Trident 해당 지역의 사용 가능한 스토리지 풀 중에서 Google Cloud 스토리지 풀을 선택합니다.
+
+
+Trident 에서 Google Cloud 백엔드를 구성하려면 다음을 지정해야 합니다. `projectNumber` , `apiRegion` , 그리고 `apiKey` 백엔드 파일에서. 프로젝트 번호는 Google Cloud 콘솔에서 찾을 수 있습니다. API 키는 Google Cloud에서 Cloud Volumes Service 에 대한 API 액세스를 설정할 때 생성한 서비스 계정 개인 키 파일에서 가져옵니다.
+
+Google Cloud 서비스 유형 및 서비스 수준의 Cloud Volumes Service 에 대한 자세한 내용은 다음을 참조하세요.link:../trident-use/gcp.html["GCP용 CVS에 대한 Trident 지원에 대해 알아보세요"] .
+
+[cols="20,10,10,10,10,10,10"]
+|===
+| Google Cloud 드라이버용 Cloud Volumes Service | 스냅샷 수 | 복제 | 다중 연결 | QoS를 참조하십시오 | 비즈니스 | 복제 
+
+
+| `gcp-cvs` | 예 | 예 | 예 | 예 | 예 | CVS-Performance 서비스 유형에서만 사용 가능합니다. 
+|===
+[NOTE]
+====
+.복제 노트
+* 복제는 Trident 에서 관리되지 않습니다.
+* 복제본은 소스 볼륨과 동일한 스토리지 풀에 생성됩니다.
+
+
+====
+
+
 == 스토리지 클래스 설계
 
 Kubernetes Storage Class 객체를 생성하려면 개별 스토리지 클래스를 구성 및 적용해야 합니다. 이 섹션에서는 애플리케이션에 대한 스토리지 클래스를 설계하는 방법에 대해 설명합니다.
@@ -162,7 +193,7 @@ excludeStoragePools 매개 변수는 속성과 일치하는 나열된 풀 세트
 
 == 가상 풀 설계
 
-백엔드를 생성할 때 일반적으로 매개변수 집합을 지정할 수 있습니다. 이전에는 관리자가 동일한 스토리지 자격 증명과 다른 매개변수 집합을 사용하여 다른 백엔드를 생성하는 것이 불가능했습니다. 가상 풀이 도입되면서 이 문제가 해결되었습니다. 가상 풀은 백엔드와 Kubernetes 스토리지 클래스 사이에 도입된 레벨 추상화로, 관리자가 백엔드에 관계없이 Kubernetes 스토리지 클래스를 통해 선택기로 참조할 수 있는 레이블과 함께 매개변수를 정의할 수 있도록 합니다. 가상 풀은 Trident 를 통해 지원되는 모든 NetApp 백엔드에 대해 정의할 수 있습니다. 해당 목록에는 SolidFire/ NetApp HCI, ONTAP, Azure NetApp Files 포함됩니다.
+백엔드를 생성할 때 일반적으로 매개변수 집합을 지정할 수 있습니다. 이전에는 관리자가 동일한 스토리지 자격 증명과 다른 매개변수 집합을 사용하여 다른 백엔드를 생성하는 것이 불가능했습니다. 가상 풀이 도입되면서 이 문제가 해결되었습니다. 가상 풀은 백엔드와 Kubernetes 스토리지 클래스 사이에 도입된 레벨 추상화로, 관리자가 백엔드에 관계없이 Kubernetes 스토리지 클래스를 통해 선택기로 참조할 수 있는 레이블과 함께 매개변수를 정의할 수 있도록 합니다. 가상 풀은 Trident 를 통해 지원되는 모든 NetApp 백엔드에 대해 정의할 수 있습니다. 해당 목록에는 SolidFire/ NetApp HCI, ONTAP, GCP의 Cloud Volumes Service 및 Azure NetApp Files 포함됩니다.
 
 
 NOTE: 가상 풀을 정의할 때는 백엔드 정의에서 기존 가상 풀의 순서를 재정렬하지 않는 것이 좋습니다. 또한 기존 가상 풀의 속성을 편집/수정하고 대신 새 가상 풀을 정의하는 것이 좋습니다.
@@ -246,17 +277,17 @@ Trident는 또한 볼륨 스냅샷에서 PersistentVolumes 생성을 지원합�
 
 === 볼륨 확장
 
-Trident NFS, iSCSI, FC PV의 크기 조정을 지원합니다. 이를 통해 사용자는 Kubernetes 계층을 통해 볼륨 크기를 직접 조정할 수 있습니다. ONTAP, SolidFire/ NetApp HCI 백엔드를 포함한 모든 주요 NetApp 스토리지 플랫폼에서 볼륨 확장이 가능합니다. 나중에 확장이 가능하도록 설정하세요. `allowVolumeExpansion` 에게 `true` 볼륨과 연결된 StorageClass에서. 영구 볼륨의 크기를 조정해야 할 때마다 다음을 편집합니다. `spec.resources.requests.storage` 영구 볼륨 클레임에 필요한 볼륨 크기에 대한 주석을 추가합니다. Trident 스토리지 클러스터의 볼륨 크기를 자동으로 조정합니다.
+Trident NFS, iSCSI, FC PV의 크기 조정을 지원합니다. 이를 통해 사용자는 Kubernetes 계층을 통해 볼륨 크기를 직접 조정할 수 있습니다. ONTAP, SolidFire/ NetApp HCI 및 Cloud Volumes Service 백엔드를 포함한 모든 주요 NetApp 스토리지 플랫폼에서 볼륨 확장이 가능합니다. 나중에 확장이 가능하도록 설정하세요. `allowVolumeExpansion` 에게 `true` 볼륨과 연결된 StorageClass에서. 영구 볼륨의 크기를 조정해야 할 때마다 다음을 편집합니다. `spec.resources.requests.storage` 영구 볼륨 클레임에 필요한 볼륨 크기에 대한 주석을 추가합니다. Trident 스토리지 클러스터의 볼륨 크기를 자동으로 조정합니다.
 
 
 
 === 기존 볼륨을 Kubernetes로 임포트
 
-볼륨 가져오기는 기존 스토리지 볼륨을 Kubernetes 환경으로 가져오는 기능을 제공합니다. 이는 현재 다음에서 지원됩니다. `ontap-nas` , `ontap-nas-flexgroup` , `solidfire-san` , 그리고 `azure-netapp-files` 운전자. 이 기능은 기존 애플리케이션을 Kubernetes로 이식할 때나 재해 복구 시나리오에서 유용합니다.
+볼륨 가져오기는 기존 스토리지 볼륨을 Kubernetes 환경으로 가져오는 기능을 제공합니다. 이는 현재 다음에서 지원됩니다. `ontap-nas` , `ontap-nas-flexgroup` , `solidfire-san` , `azure-netapp-files` , 그리고 `gcp-cvs` 운전자. 이 기능은 기존 애플리케이션을 Kubernetes로 이식할 때나 재해 복구 시나리오에서 유용합니다.
 
 ONTAP 및 드라이버를 사용할 `solidfire-san` 경우 명령을 `tridentctl import volume <backend-name> <volume-name> -f /path/pvc.yaml` 사용하여 기존 볼륨을 Kubernetes로 임포트하여 Trident에서 관리할 수 있습니다. 가져오기 볼륨 명령에 사용된 PVC YAML 또는 JSON 파일은 Trident를 프로비저닝자로 식별하는 저장소 클래스를 가리킵니다. NetApp HCI/SolidFire 백엔드를 사용할 경우 볼륨 이름이 고유한지 확인합니다. 볼륨 이름이 중복되면 볼륨을 고유한 이름으로 복제하여 볼륨 가져오기 기능에서 볼륨 이름을 구분할 수 있도록 합니다.
 
-만약 `azure-netapp-files` 드라이버가 사용되면 명령을 사용하세요 `tridentctl import volume <backend-name> <volume path> -f /path/pvc.yaml` 볼륨을 Kubernetes로 가져와서 Trident 에서 관리하도록 합니다. 이를 통해 고유한 볼륨 참조가 보장됩니다.
+만약 `azure-netapp-files` 또는 `gcp-cvs` 드라이버가 사용되면 명령을 사용하세요 `tridentctl import volume <backend-name> <volume path> -f /path/pvc.yaml` 볼륨을 Kubernetes로 가져와서 Trident 에서 관리하도록 합니다. 이를 통해 고유한 볼륨 참조가 보장됩니다.
 
 위의 명령을 실행하면 Trident는 백엔드에서 볼륨을 찾고 크기를 읽습니다. 구성된 PVC 볼륨 크기를 자동으로 추가(필요한 경우 덮어쓰기)합니다. 그런 다음 Trident는 새 PV를 만들고 Kubernetes는 PV에 PVC를 바인딩합니다.
 

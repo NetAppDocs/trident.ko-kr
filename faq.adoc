@@ -114,6 +114,12 @@ Trident는 단순한 Kubernetes Pod로, Kubernetes가 실행 중인 모든 곳�
 
 
 
+=== Trident Cloud Volumes Services와 호환되나요?
+
+네, Trident Azure의 Azure NetApp Files 서비스와 GCP의 Cloud Volumes Service 지원합니다.
+
+
+
 == 문제 해결 및 지원
 
 
@@ -361,7 +367,7 @@ NetApp 스토리지의 용량이 있는 경우 Kubernetes 스토리지 리소스
 
 === Trident 볼륨 스냅샷을 지원하는 드라이버는 무엇입니까?
 
-오늘부터 주문형 스냅샷 지원이 가능합니다. `ontap-nas` , `ontap-nas-flexgroup` , `ontap-san` , `ontap-san-economy` , `solidfire-san` , 그리고 `azure-netapp-files` 백엔드 드라이버.
+오늘부터 주문형 스냅샷 지원이 가능합니다. `ontap-nas` , `ontap-nas-flexgroup` , `ontap-san` , `ontap-san-economy` , `solidfire-san` , `gcp-cvs` , 그리고 `azure-netapp-files` 백엔드 드라이버.
 
 
 

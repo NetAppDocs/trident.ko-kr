@@ -20,6 +20,9 @@ Azure NetApp Files에 대한 NFS 및 SMB 백엔드 구성 옵션에 대해 알�
 
 Trident은 백엔드 구성(서브넷, 가상 네트워크, 서비스 수준 및 위치)을 사용하여 요청된 위치에서 사용 가능하고 요청된 서비스 수준 및 서브넷과 일치하는 용량 풀에 Azure NetApp Files 볼륨을 생성합니다.
 
+
+NOTE: * NetApp Trident 25.06 릴리스부터 수동 QoS 용량 풀이 기술 미리 보기로 지원됩니다.*
+
 Azure NetApp Files 백엔드는 이러한 구성 옵션을 제공합니다.
 
 [cols="3"]
@@ -97,10 +100,10 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
 | `supportedTopologies` | 이 백엔드에서 지원하는 영역 및 영역의 목록을 나타냅니다. 자세한 내용은 을 link:../trident-use/csi-topology.html["CSI 토폴로지를 사용합니다"]참조하십시오. |  
 
 
-| `qosType` | QoS 유형(자동 또는 수동)을 나타냅니다. | 자동 
+| `qosType` | QoS 유형(자동 또는 수동)을 나타냅니다. * Trident 25.06 기술 미리보기* | 자동 
 
 
-| `maxThroughput` | 허용되는 최대 처리량을 MiB/초 단위로 설정합니다. 수동 QoS 용량 풀에서만 지원됩니다. | `4 MiB/sec` 
+| `maxThroughput` | 허용되는 최대 처리량을 MiB/초 단위로 설정합니다. 수동 QoS 용량 풀에서만 지원됩니다. * Trident 25.06 기술 미리보기* | `4 MiB/sec` 
 |===
 
 NOTE: 네트워크 기능에 대한 자세한 내용은 을 참조하십시오 link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/configure-network-features["Azure NetApp Files 볼륨에 대한 네트워크 기능을 구성합니다"^].
@@ -264,7 +267,7 @@ capacityPools:
 .수동 QoS 용량 풀을 사용한 백엔드 예제
 [%collapsible]
 ====
-이 백엔드 구성은 Azure의 볼륨을 배치합니다. `eastus` 수동 QoS 용량 풀이 있는 위치입니다.
+이 백엔드 구성은 Azure의 볼륨을 배치합니다. `eastus` 수동 QoS 용량 풀이 있는 위치입니다. * NetApp Trident 25.06의 기술 미리보기*.
 
 [source, yaml]
 ----

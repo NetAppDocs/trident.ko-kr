@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/backend_ops_tridentctl.html 
-keywords: backends, storage system, anf, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, tridentctl, create backends, delete backends, view backends, update backends 
+keywords: backends, storage system, anf, cvs for aws, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, tridentctl, create backends, delete backends, view backends, update backends 
 summary: tridentctl을 사용하여 백엔드 관리 작업을 수행하는 방법에 대해 알아보십시오. 
 ---
 = tridentctl을 사용하여 백엔드 관리를 수행합니다

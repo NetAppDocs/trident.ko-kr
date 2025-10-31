@@ -74,7 +74,7 @@ max-volumes 값은 개별 ONTAP 노드가 아닌 ONTAP 클러스터의 모든 �
 
 === 볼륨의 클론을 생성합니다
 
-NetApp Trident 다음을 사용할 때 볼륨 복제를 지원합니다. `ontap-nas` , `ontap-san` , 그리고 `solidfire-san` 스토리지 드라이버. 사용 시 `ontap-nas-flexgroup` 또는 `ontap-nas-economy` 드라이버, 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새로운 스냅샷이 생성됩니다.
+NetApp Trident 다음을 사용할 때 볼륨 복제를 지원합니다. `ontap-nas` , `ontap-san` , `solidfire-san` , 그리고 `gcp-cvs` 스토리지 드라이버. 사용 시 `ontap-nas-flexgroup` 또는 `ontap-nas-economy` 드라이버, 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새로운 스냅샷이 생성됩니다.
 
 
 WARNING: 다른 StorageClass와 연결된 PVC를 복제하지 마십시오. 호환성을 보장하고 예기치 않은 동작을 방지하려면 동일한 StorageClass 내에서 복제 작업을 수행하십시오.
