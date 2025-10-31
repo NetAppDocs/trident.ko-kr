@@ -22,7 +22,6 @@ Trident의 최신 릴리즈로 업그레이드할 때 다음 사항을 고려하
 
 * 특정 Kubernetes 클러스터의 모든 네임스페이스에 Trident 인스턴스는 하나만 설치해야 합니다.
 * Trident 23.07 이상에서는 v1 볼륨 스냅샷이 필요하며 알파 또는 베타 스냅샷을 더 이상 지원하지 않습니다.
-* Google Cloud에 대한 Cloud Volumes Service 생성한 경우link:../trident-use/gcp.html#learn-about-trident-support-for-cloud-volumes-service-for-google-cloud["CVS 서비스 유형"] , 백엔드 구성을 업데이트하여 사용해야 합니다. `standardsw` 또는 `zoneredundantstandardsw` Trident 23.01에서 업그레이드할 때의 서비스 수준. 업데이트 실패 `serviceLevel` 백엔드에서는 볼륨이 실패할 수 있습니다. 참조하다 link:../trident-use/gcp.html#cvs-service-type-examples["CVS 서비스 유형 샘플"] 자세한 내용은.
 * 업그레이드할 때 Trident에서 사용되는 를 `StorageClasses` 제공하는 것이 중요합니다 `parameter.fsType`. 기존 볼륨을 중단하지 않고 삭제 및 재생성할 수 `StorageClasses` 있습니다.
 +
 ** 이것은 시행에 대한 ** 요구 사항입니다 https://kubernetes.io/docs/tasks/configure-pod-container/security-context/["보안 컨텍스트"^] SAN 볼륨:

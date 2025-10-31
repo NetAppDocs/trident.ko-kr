@@ -2,9 +2,9 @@
 layout: landing-page 
 sidebar: sidebar 
 permalink: index.html 
-summary: Trident NetApp 에서 유지 관리하는 오픈 소스 스토리지 프로비저닝 및 오케스트레이터입니다. Docker와 Kubernetes가 관리하는 컨테이너화된 애플리케이션에 대한 스토리지 볼륨을 생성할 수 있습니다. ** Trident 25.06으로 업그레이드하는 데 필요한 중요 정보는 릴리스 노트를 읽어보세요.** 
+summary: Trident NetApp 에서 유지 관리하는 오픈 소스 스토리지 프로비저닝 및 오케스트레이터입니다. Docker와 Kubernetes가 관리하는 컨테이너화된 애플리케이션에 대한 스토리지 볼륨을 생성할 수 있습니다. ** Trident 25.10으로 업그레이드하는 데 필요한 중요 정보는 릴리스 노트를 읽어보세요.** 
 ---
-= Trident 25.06 설명서
+= Trident 25.10 설명서
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

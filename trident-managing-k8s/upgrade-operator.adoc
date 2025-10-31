@@ -88,11 +88,11 @@ helm mapkubeapis trident  --namespace trident
 . link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["Helm을 사용하여 Trident를 설치했습니다"]를 사용하여 한 단계로 업그레이드할 수 `helm upgrade trident netapp-trident/trident-operator --version 100.2506.0` 있습니다. Helm repo를 추가하지 않았거나 업그레이드에 사용할 수 없는 경우:
 +
 .. 에서 최신 Trident 릴리스를 link:https://github.com/NetApp/trident/releases/latest["GitHub의 _Assets_섹션"^]다운로드하십시오.
-.. 사용하다 `helm upgrade` 명령은 어디에 `trident-operator-25.06.0.tgz` 업그레이드하려는 버전을 나타냅니다.
+.. 사용하다 `helm upgrade` 명령은 어디에 `trident-operator-25.10.0.tgz` 업그레이드하려는 버전을 나타냅니다.
 +
 [listing]
 ----
-helm upgrade <name> trident-operator-25.06.0.tgz
+helm upgrade <name> trident-operator-25.10.0.tgz
 ----
 +
 
@@ -117,11 +117,11 @@ NOTE: 설치 방법 간에 전환하기 전에 를 참조하십시오 link:../tr
 +
 [listing]
 ----
-# Download the release required [25.06.0]
-mkdir 25.06.0
-cd 25.06.0
-wget https://github.com/NetApp/trident/releases/download/v25.06.0/trident-installer-25.06.0.tar.gz
-tar -xf trident-installer-25.06.0.tar.gz
+# Download the release required [25.10.0]
+mkdir 25.10.0
+cd 25.10.0
+wget https://github.com/NetApp/trident/releases/download/v25.10.0/trident-installer-25.10.0.tar.gz
+tar -xf trident-installer-25.10.0.tar.gz
 cd trident-installer
 ----
 . 매니페스트에서 트라이디오케스트레이터 CRD를 만듭니다.
@@ -178,6 +178,6 @@ kubectl describe torc trident | grep Message -A 3
 Message:                Trident installed
 Namespace:              trident
 Status:                 Installed
-Version:                v25.06.0
+Version:                v25.10.0
 ----
 

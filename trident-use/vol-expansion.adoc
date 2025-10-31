@@ -342,7 +342,7 @@ tridentctl get volumes -n trident
 
 == NFS 볼륨을 확장합니다
 
-Trident NFS PV에 대한 볼륨 확장을 지원합니다. `ontap-nas` , `ontap-nas-economy` , `ontap-nas-flexgroup` , `gcp-cvs` , 그리고 `azure-netapp-files` 백엔드.
+Trident NFS PV에 대한 볼륨 확장을 지원합니다. `ontap-nas` , `ontap-nas-economy` , `ontap-nas-flexgroup` , 그리고 `azure-netapp-files` 백엔드.
 
 
 

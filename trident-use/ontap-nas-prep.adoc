@@ -14,6 +14,13 @@ summary: ONTAP NAS 드라이버를 사용하여 ONTAP 백엔드를 구성하기 
 [role="lead"]
 ONTAP NAS 드라이버를 사용하여 ONTAP 백엔드를 구성하기 위한 요구 사항, 인증 옵션 및 엑스포트 정책을 이해합니다.
 
+25.10 릴리스부터 NetApp Trident 다음을 지원합니다.link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 스토리지 시스템"^] . NetApp AFX 스토리지 시스템은 스토리지 계층 구현 측면에서 다른 ONTAP 시스템(ASA, AFF, FAS)과 다릅니다.
+
+
+NOTE: 오직 `ontap-nas` 드라이버(NFS 프로토콜 포함)는 AFX 시스템에서 지원됩니다. SMB 프로토콜은 지원되지 않습니다.
+
+Trident 백엔드 구성에서는 시스템이 AFX라고 지정할 필요가 없습니다. 선택할 때 `ontap-nas` 로서 `storageDriverName` Trident AFX 시스템을 자동으로 감지합니다.
+
 
 
 == 요구 사항

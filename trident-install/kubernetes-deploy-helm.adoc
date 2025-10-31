@@ -16,7 +16,7 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 
 
 
-== Trident 25.06에 대한 중요 정보
+== Trident 25.10에 대한 중요 정보
 
 *Trident에 대한 다음 중요 정보를 읽어야 합니다.*
 
@@ -222,38 +222,161 @@ WARNING: values.yaml 파일에서 기본 선호도를 제거하지 마십시오.
 | `windows` | Windows 작업자 노드에 Trident를 설치할 수 있습니다. | 거짓입니다 
 
 
-| `enableForceDetach` | 힘 분리 기능을 활성화합니다. | 거짓입니다 
+| `enableForceDetach` | 힘 분리 기능을 활성화합니다. | 노드 상태 점검(NHC) 연산자와 통합하여 강제 분리 프로세스를 자동화할 수 있습니다. 자세한 내용은 다음을 참조하세요.link:../trident-reco/force-detach.html["Trident 사용하여 상태 저장 애플리케이션의 장애 조치 자동화"] . 
 
 
-| `excludePodSecurityPolicy` | 운영자 POD 보안 정책을 생성할 수 없습니다. | 거짓입니다 
+| 거짓입니다 | `excludePodSecurityPolicy` | 운영자 POD 보안 정책을 생성할 수 없습니다. 
 
 
-| `cloudProvider` | 를 로 설정합니다 `"Azure"` AKS 클러스터에서 관리되는 ID 또는 클라우드 ID를 사용하는 경우 EKS 클러스터에서 클라우드 ID를 사용하는 경우 "AWS"로 설정합니다. | `""` 
+| 거짓입니다 | `cloudProvider` | 를 로 설정합니다 `"Azure"` AKS 클러스터에서 관리되는 ID 또는 클라우드 ID를 사용하는 경우 EKS 클러스터에서 클라우드 ID를 사용하는 경우 "AWS"로 설정합니다. 
 
 
-| `cloudIdentity` | AKS 클러스터에서 클라우드 ID를 사용할 때 워크로드 ID("Azure.workload.identity/client-id: xxxxxxxxxxxx-xxxx-xxxx-xxxxxxxxxxxxx")로 설정합니다. EKS 클러스터에서 클라우드 ID를 사용할 때 AWS IAM 역할("'eks.amazonaws.com/role-arn: arn:AWS:IAM::123456:role/Trident-role'")로 설정합니다. | `""` 
+| `""` | `cloudIdentity` | AKS 클러스터에서 클라우드 ID를 사용할 때 워크로드 ID("Azure.workload.identity/client-id: xxxxxxxxxxxx-xxxx-xxxx-xxxxxxxxxxxxx")로 설정합니다. EKS 클러스터에서 클라우드 ID를 사용할 때 AWS IAM 역할("'eks.amazonaws.com/role-arn: arn:AWS:IAM::123456:role/Trident-role'")로 설정합니다. 
 
 
-| `iscsiSelfHealingInterval` | iSCSI 자동 복구가 호출되는 간격입니다. | `5m0s` 
+| `""` | `iscsiSelfHealingInterval` | iSCSI 자동 복구가 호출되는 간격입니다. 
 
 
-| `iscsiSelfHealingWaitTime` | iSCSI 자체 복구가 로그아웃과 후속 로그인을 수행하여 부실 세션을 해결하려는 시도를 시작한 이후의 기간입니다. | `7m0s` 
+| `5m0s` | `iscsiSelfHealingWaitTime` | iSCSI 자체 복구가 로그아웃과 후속 로그인을 수행하여 부실 세션을 해결하려는 시도를 시작한 이후의 기간입니다. 
 
 
-| `nodePrep` | Trident 지정된 데이터 저장 프로토콜을 사용하여 볼륨을 관리하도록 Kubernetes 클러스터의 노드를 준비할 수 있도록 합니다.  *현재, `iscsi` 지원되는 유일한 값입니다.*  참고: OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다. |  
+| `7m0s` | `nodePrep` | Trident 지정된 데이터 저장 프로토콜을 사용하여 볼륨을 관리하도록 Kubernetes 클러스터의 노드를 준비할 수 있도록 합니다.  *현재, `iscsi` 지원되는 유일한 값입니다.*  참고: OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다. 
 
 
-| `enableConcurrency`  a| 
+|  | `enableConcurrency`  a| 
 향상된 처리량을 위해 동시 Trident 컨트롤러 작업이 가능합니다.
 
 
-NOTE: *기술 미리보기*: 이 기능은 NetApp Trident 25.06에서 실험적이며 현재 ONTAP-SAN 드라이버(iSCSI 및 FCP 프로토콜)를 사용하여 제한된 병렬 워크플로를 지원합니다.
-| 거짓 
+NOTE: *기술 미리보기*: 이 기능은 실험적이며 현재 ONTAP-NAS(NFS만 해당) 및 ONTAP-SAN(통합 ONTAP 9의 NVMe) 드라이버를 사용한 제한된 병렬 워크플로를 지원합니다. 또한, ONTAP-SAN 드라이버(통합 ONTAP 9의 iSCSI 및 FCP 프로토콜)에 대한 기존 기술 미리보기도 지원합니다.
 
 
-| `k8sAPIQPS`  a| 
+
+| 거짓 | `k8sAPIQPS`  a| 
 Kubernetes API 서버와 통신하는 동안 컨트롤러가 사용하는 초당 쿼리 수(QPS) 제한입니다.  버스트 값은 QPS 값에 따라 자동으로 설정됩니다.
-| `100`; 선택 사항 
+
+
+
+| `100`; 선택 사항 | `resources`  a| 
+Trident 컨트롤러, 노드 및 운영자 포드에 대한 Kubernetes 리소스 제한 및 요청을 설정합니다. Kubernetes에서 리소스 할당을 관리하기 위해 각 컨테이너와 사이드카에 대한 CPU와 메모리를 구성할 수 있습니다.
+
+리소스 요청 및 제한 구성에 대한 자세한 내용은 다음을 참조하세요.link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["포드 및 컨테이너에 대한 리소스 관리"^] .
+
+[WARNING]
+====
+* 컨테이너나 필드의 이름을 변경하지 마세요.
+* 들여쓰기를 변경하지 마세요. YAML 들여쓰기는 올바른 구문 분석을 위해 중요합니다.
+
+
+====
+[NOTE]
+====
+* 기본적으로 제한은 적용되지 않습니다. 요청에만 기본값이 있으며, 지정하지 않으면 자동으로 적용됩니다.
+* 컨테이너 이름은 포드 사양에 나타나는 대로 나열됩니다.
+* 사이드카는 각 주요 컨테이너 아래에 나열되어 있습니다.
+* TORC를 확인하세요 `status.CurrentInstallationParams` 현재 적용된 값을 보려면 필드를 클릭하세요.
+
+
+====
+
+
+ a| 
+[source, yaml]
+----
+resources:
+  controller:
+    trident-main:
+      requests:
+        cpu: 10m
+        memory: 80Mi
+      limits:
+          cpu:
+          memory:
+    csi-provisioner:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-attacher:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-resizer:
+      requests:
+        cpu: 3m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-snapshotter:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    trident-autosupport:
+      requests:
+        cpu: 1m
+        memory: 30Mi
+      limits:
+        cpu:
+        memory:
+  node:
+    linux:
+      trident-main:
+        requests:
+          cpu: 10m
+          memory: 60Mi
+        limits:
+          cpu:
+          memory:
+      node-driver-registrar:
+        requests:
+          cpu: 1m
+          memory: 10Mi
+        limits:
+          cpu:
+          memory:
+    windows:
+      trident-main:
+        requests:
+          cpu: 6m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+      node-driver-registrar:
+        requests:
+          cpu: 6m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+      liveness-probe:
+        requests:
+          cpu: 2m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+  operator:
+    requests:
+      cpu: 10m
+      memory: 40Mi
+    limits:
+      cpu:
+      memory:
+----| `httpsMetrics` | Prometheus 메트릭 엔드포인트에 HTTPS를 활성화합니다. 
+
+
+| 거짓 | 호스트 네트워크  a| 
+Trident 컨트롤러에 대한 호스트 네트워킹을 활성화합니다. 이 기능은 멀티 홈 네트워크에서 프런트엔드와 백엔드 트래픽을 분리할 때 유용합니다.
+
 |===
 
 

@@ -68,7 +68,7 @@ Trident for Docker를 업그레이드하려면 아래 단계를 수행하십시�
 
 == 볼륨의 클론을 생성합니다
 
-사용 시 `ontap-nas` , `ontap-san` , `solidfire-san` , 그리고 `gcp-cvs storage drivers` Trident 볼륨을 복제할 수 있습니다. 사용 시 `ontap-nas-flexgroup` 또는 `ontap-nas-economy` 드라이버, 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새로운 스냅샷이 생성됩니다.
+사용 시 `ontap-nas` , `ontap-san` , 그리고 `solidfire-san` 저장 드라이버인 Trident 볼륨을 복제할 수 있습니다. 사용 시 `ontap-nas-flexgroup` 또는 `ontap-nas-economy` 드라이버, 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새로운 스냅샷이 생성됩니다.
 
 * 볼륨을 검사하여 스냅샷을 열거합니다.
 +
