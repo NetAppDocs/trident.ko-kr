@@ -34,13 +34,13 @@ Trident 와 Trident Protect의 새로운 기능, 개선 사항, 수정 사항, �
 * * Kubernetes *:
 +
 ** ONTAP -SAN(iSCSI 및 FC) 외에도 ONTAP-NAS NFS 및 ONTAP -SAN-Economy 드라이버에 대한 v1beta1 볼륨 그룹 스냅샷 Kubernetes API를 통해 CSI 볼륨 그룹 스냅샷에 대한 지원이 추가되었습니다. 보다link:https://docs.netapp.com/us-en/trident/trident-use/vol-group-snapshots.html["볼륨 그룹 스냅샷 작업"^] .
-** ONTAP-NAS 및 ONTAP-NAS-Economy(두 NAS 드라이버 모두에서 SMB 제외)와 ONTAP-SAN 및 ONTAP-SAN-Economy 드라이버에 대해 강제 볼륨 분리를 통한 자동 워크로드 장애 조치 지원이 추가되었습니다. 보다link:../trident-reco/force-detach.html["강제 분리에 대한 세부 정보"^] .
+** ONTAP-NAS 및 ONTAP-NAS-Economy(두 NAS 드라이버 모두에서 SMB 제외)와 ONTAP-SAN 및 ONTAP-SAN-Economy 드라이버에 대해 강제 볼륨 분리를 통한 자동 워크로드 장애 조치 지원이 추가되었습니다. 보다link:https://docs.netapp.com/us-en/trident/trident-reco/force-detach.html["Trident 사용하여 상태 저장 애플리케이션의 장애 조치 자동화"^] .
 ** FCP 볼륨의 노드 작업에서 더 높은 확장성을 위해 향상된 Trident 노드 동시성을 제공합니다.
 ** ONTAP NAS 드라이버에 대한 ONTAP AFX 지원이 추가되었습니다. 보다link:https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html["ONTAP NAS 구성 옵션 및 예"^] .
 ** TridentOrchestrator CR 및 Helm 차트 값을 통해 Trident 컨테이너에 대한 CPU 및 메모리 리소스 요청과 제한을 구성하는 지원이 추가되었습니다. (link:https://github.com/NetApp/trident/issues/1000["1000호"] ,link:https://github.com/NetApp/trident/issues/927["927호"] ,link:https://github.com/NetApp/trident/issues/853["853호"] ,link:https://github.com/NetApp/trident/issues/592["592호"] ,link:https://github.com/NetApp/trident/issues/110["110호"] ).
 ** ASAr2 개성에 대한 FC 지원이 추가되었습니다. 보다link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html["ONTAP SAN 구성 옵션 및 예"^] .
-** HTTP 대신 HTTPS로 Prometheus 메트릭을 제공하는 옵션이 추가되었습니다. 보다link:../trident-use/monitor-trident.html["Trident 모니터링"^] .
-** 옵션을 추가했습니다 `--no-rename` 볼륨을 가져올 때 원래 이름은 유지하면서 Trident 볼륨의 수명 주기를 관리하도록 합니다. 보다link:../trident-use/vol-import.html["볼륨 가져오기"^] .
+** HTTP 대신 HTTPS로 Prometheus 메트릭을 제공하는 옵션이 추가되었습니다. 보다link:https://docs.netapp.com/us-en/trident/trident-use/monitor-trident.html["Trident 모니터링"^] .
+** 옵션을 추가했습니다 `--no-rename` 볼륨을 가져올 때 원래 이름은 유지하면서 Trident 볼륨의 수명 주기를 관리하도록 합니다. 보다link:https://docs.netapp.com/us-en/trident/trident-use/vol-import.html["볼륨 가져오기"^] .
 ** Trident 배포는 이제 시스템 클러스터 중요 우선 순위 클래스에서 실행됩니다.
 
 
