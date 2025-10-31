@@ -18,7 +18,7 @@ summary: '영구 볼륨(PVS)의 Kubernetes 볼륨 스냅샷은 볼륨의 시점 
 
 == 개요
 
-볼륨 스냅샷은 다음에서 지원됩니다.  `ontap-nas` ,  `ontap-nas-flexgroup` ,  `ontap-san` ,  `ontap-san-economy` ,  `solidfire-san` ,  `gcp-cvs` ,  `azure-netapp-files` , 그리고  `google-cloud-netapp-volumes` 운전자.
+볼륨 스냅샷은 다음에서 지원됩니다. `ontap-nas` , `ontap-nas-flexgroup` , `ontap-san` , `ontap-san-economy` , `solidfire-san` , `azure-netapp-files` , 그리고 `google-cloud-netapp-volumes` 운전자.
 
 .시작하기 전에
 스냅샷을 사용하려면 외부 스냅샷 컨트롤러와 CRD(사용자 정의 리소스 정의)가 있어야 합니다. Kubernetes Orchestrator의 책임입니다(예: Kubeadm, GKE, OpenShift).
@@ -257,7 +257,7 @@ NOTE: 스냅샷 복사본을 복원하면 기존 볼륨 구성이 덮어쓰여�
 
 Trident는 (TASR) CR을 사용하여 스냅샷에서 제자리에서 신속하게 볼륨을 복원할 수 있도록 `TridentActionSnapshotRestore` 합니다. 이 CR은 필수 Kubernetes 조치로 작동하며 작업이 완료된 후에도 유지되지 않습니다.
 
-Trident는 `ontap-san-economy` , , `ontap-nas`, , , `ontap-nas-flexgroup` `azure-netapp-files` 에서 스냅샷 복구를 `ontap-san` 지원합니다. `gcp-cvs`, `google-cloud-netapp-volumes` 및 `solidfire-san` 드라이버.
+Trident 스냅샷 복원을 지원합니다. `ontap-san` , `ontap-san-economy` , `ontap-nas` , `ontap-nas-flexgroup` , `azure-netapp-files` , `google-cloud-netapp-volumes` , 그리고 `solidfire-san` 운전자.
 
 .시작하기 전에
 바인딩된 PVC 및 사용 가능한 볼륨 스냅샷이 있어야 합니다.

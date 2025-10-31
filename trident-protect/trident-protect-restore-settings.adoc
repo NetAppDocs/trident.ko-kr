@@ -135,4 +135,7 @@ storageClassMapping:
 
 
 | 보호.트라이던트.넷앱.io/코피아-콘텐츠-캐시-크기-제한-mb | 문자열 | Kopia 콘텐츠 캐시의 최대 크기 제한(메가바이트)입니다. | "1000" 
+
+
+| protect.trident.netapp.io/pvc-bind-timeout-sec | 문자열 | 새로 생성된 PersistentVolumeClaims(PVC)가 도달할 때까지 기다리는 최대 시간(초) `Bound` 작업이 실패하기 전 단계입니다.  모든 복원 CR 유형(BackupRestore, BackupInplaceRestore, SnapshotRestore, SnapshotInplaceRestore)에 적용됩니다.  스토리지 백엔드나 클러스터에 더 많은 시간이 필요한 경우 더 높은 값을 사용하세요. | "1200"(20분) 
 |===
