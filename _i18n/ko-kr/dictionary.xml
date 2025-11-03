@@ -5731,7 +5731,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="b3cced1be48d0693b2f46bcda2fa2c69" category="inline-link-macro">포드 및 컨테이너에 대한 리소스 관리</block>
   <block id="7f63543d9b500b3e7393819885f5f1e9" category="paragraph">리소스 요청 및 제한 구성에 대한 자세한 내용은 다음을 참조하세요.<block ref="de686d97b32164bdc56086e6c13cb3a8" category="inline-link-macro-rx"></block> .</block>
   <block id="4bd9e59a927ee617750858c374fbd520" category="list-text">기본적으로 제한은 적용되지 않습니다. 요청에만 기본값이 적용됩니다.</block>
-  <block id="110948e00913b5858d789e532b2bcf8e" category="cell">노드 상태 점검(NHC) 연산자와 통합하여 강제 분리 프로세스를 자동화할 수 있습니다. 자세한 내용은 다음을 참조하세요.<block ref="b527eafc73367312d2cf15ed698bf909" category="inline-link-macro-rx"></block> .</block>
   <block id="f30810552abf03525fcde528c58a7732" category="list-text">기본적으로 제한은 적용되지 않습니다. 요청에만 기본값이 있으며, 지정하지 않으면 자동으로 적용됩니다.</block>
   <block id="6e3335c4209c3f574d11a55c3c410b51" category="cell"><block ref="511a93ba3f22794b25bb3e8095217c70" prefix="" category="inline-code"></block></block>
   <block id="cca021b5f438a6d9183c226d38fb5a5a" category="cell">Prometheus 메트릭 엔드포인트에 HTTPS를 활성화합니다.</block>
@@ -5946,4 +5945,5 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="8381e23b38563797c34712dd03a338af" category="list-text">ONTAP-NAS 및 ONTAP-NAS-Economy(두 NAS 드라이버 모두에서 SMB 제외)와 ONTAP-SAN 및 ONTAP-SAN-Economy 드라이버에 대해 강제 볼륨 분리를 통한 자동 워크로드 장애 조치 지원이 추가되었습니다. 보다<block ref="a0b18ac4464586bcd0ef288f450a4b90" category="inline-link-macro-rx"></block> .</block>
   <block id="c99a3e599c7121ee81c14119678920d6" category="list-text">HTTP 대신 HTTPS로 Prometheus 메트릭을 제공하는 옵션이 추가되었습니다. 보다<block ref="586c064a2ab176c62a5b2a439f317c69" category="inline-link-macro-rx"></block> .</block>
   <block id="c3321b49eb2cf3cee2a3de2bf85aea24" category="list-text">옵션을 추가했습니다<block ref="c6b199cbed247635514ab9e4771be7ff" prefix=" " category="inline-code"></block> 볼륨을 가져올 때 원래 이름은 유지하면서 Trident 볼륨의 수명 주기를 관리하도록 합니다. 보다<block ref="f6a6f2bd8dd988ec020611ce2a45c009" category="inline-link-macro-rx"></block> .</block>
+  <block id="7c1bc9b37347420055cd1e893cbad87c" category="cell">Trident 의 로그 수준을 설정할 수 있습니다.<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block> . 노드 상태 점검(NHC) 연산자와 통합하여 강제 분리 프로세스를 자동화할 수 있습니다. 자세한 내용은 다음을 참조하세요.<block ref="b527eafc73367312d2cf15ed698bf909" category="inline-link-macro-rx"></block> .</block>
 </blocks>
