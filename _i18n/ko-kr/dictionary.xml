@@ -5495,7 +5495,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="11162de38772a3876602bb4d9d213f43" category="section-title">스토리지 클래스 매핑</block>
   <block id="b48c8c7ca3eb5e63afdfe6bbd74a35c9" category="paragraph">그만큼<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block> 속성은 소스 애플리케이션에 있는 스토리지 클래스에서 대상 클러스터의 새 스토리지 클래스로의 매핑을 정의합니다.  서로 다른 스토리지 클래스를 사용하는 클러스터 간에 애플리케이션을 마이그레이션하거나 BackupRestore 작업에 대한 스토리지 백엔드를 변경할 때 이 기능을 사용할 수 있습니다.</block>
   <block id="27f5153068cecd37b6fa4a136586658d" category="sidebar">고급 설정 사용</block>
-  <block id="2c9ccd5e8999c2c36f29069165f327c3" category="admonition">Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 알아두는 것이 중요합니다.  네임스페이스 주석은 복원된 포드가 OpenShift 보안 컨텍스트 제약(SCC)에 의해 정의된 적절한 권한과 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있도록 보장합니다.  자세한 내용은 다음을 참조하세요.<block ref="f3121e004cef0b92f500227025367589" category="inline-link-rx"></block> .</block>
   <block id="dcc6257f6685a427757ede81b2086cb2" category="admonition">OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.</block>
   <block id="56f0b7f1d902abcea5e9a924acc8cf68" category="list-text">하위 시스템에서 매핑 해제되기 전에 NQN이 확인되지 않는 문제가 해결되었습니다.</block>
   <block id="74ede3b036d836536636c89ae6208dc1" category="list-text">LUKS 장치를 닫으려고 여러 번 시도하면 볼륨 분리에 실패하는 문제가 해결되었습니다.</block>
@@ -5595,7 +5594,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="4789829a93714df585353f631620ef1d" category="paragraph-title">iSCSI를 사용한 PVC 예제</block>
   <block id="325b282cbc15cc9dcde1a69271472526" category="paragraph">이 예에서는 RWO 액세스가 있는 iSCSI용 기본 PVC를 보여줍니다. 이 PVC는 StorageClass와 연결되어 있습니다.<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> .</block>
   <block id="4aac510e801e497da3b150682838f5f7" category="section-title">PVC 생성</block>
-  <block id="bef9303dd11d749d2facca8b3064630e" category="list-text">OpenShift 4.12, 4.14 - 4.19(OpenShift 4.19에서 iSCSI 노드 준비를 사용할 계획인 경우 지원되는 최소 Trident 버전은 25.06.1입니다.)</block>
   <block id="3b30a7aea8a6f98824f61888e8628449" category="inline-link-macro">Red Hat Extended Update Support(EUS) 릴리스 수명 주기</block>
   <block id="6b62784ed0975ba9ec1e2f69af860e25" category="admonition">Trident 다음과 같은 기준으로 이전 OpenShift 버전을 계속 지원합니다.<block ref="d73f30265a77d175825591fd08508146" category="inline-link-macro-rx"></block> 더 이상 공식적으로 지원되지 않는 Kubernetes 버전을 사용하는 경우에도 마찬가지입니다.  이런 경우 Trident 설치하는 동안 Kubernetes 버전에 대한 경고 메시지는 무시해도 됩니다.</block>
   <block id="4efb4e385545dd4fb4a8cf16e5ef7763" category="paragraph">보호 정책은 정의된 일정에 따라 스냅샷, 백업 또는 둘 다를 생성하여 앱을 보호합니다.  매시간, 매일, 매주, 매월 스냅샷과 백업을 만들도록 선택할 수 있으며, 보관할 복사본 수를 지정할 수 있습니다.  full-backup-rule 주석을 사용하여 비증분 전체 백업을 예약할 수 있습니다.  기본적으로 모든 백업은 증분 백업입니다.  주기적으로 전체 백업을 수행하고 그 사이에 증분 백업을 수행하면 복원과 관련된 위험을 줄이는 데 도움이 됩니다.</block>
@@ -5962,4 +5960,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="75bf9030851f3cf5454c338258e98f47" category="example-title">Trident 컨트롤러와 Trident Windows 및 Linux 노드 포드에 대한 Kubernetes 리소스 요청 및 제한 구성</block>
   <block id="c6f0dfdaf60b2fd022cd1b94ce713c90" category="paragraph">이 예제에서는 Trident 컨트롤러와 Trident Windows 및 Linux 노드 포드에 대한 Kubernetes 리소스 요청 및 제한을 구성합니다.</block>
   <block id="b320bddb4a4bb9ebc05f4941f7f248a0" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0</block>
+  <block id="80aabc2f42a52376f3d884d3b02360f4" category="admonition">Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스페이스 주석의 중요한 역할을 알아두는 것이 중요합니다. 네임스페이스 주석은 복원된 포드가 OpenShift 보안 컨텍스트 제약(SCC)에 의해 정의된 적절한 권한과 보안 구성을 준수하고 권한 문제 없이 볼륨에 액세스할 수 있도록 보장합니다. 자세한 내용은 다음을 참조하세요.<block ref="842acfa178c0bbf09e368bf9db0716b8" category="inline-link-macro-rx"></block> .</block>
+  <block id="0547999ac2794529491ce433caf5eadb" category="list-text">OpenShift 4.12, 4.14 - 4.20(OpenShift 4.19에서 iSCSI 노드 준비를 사용하려는 경우 지원되는 최소 Trident 버전은 25.06.1입니다.)</block>
 </blocks>

@@ -42,7 +42,7 @@ Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
 * 쿠버네티스 1.27 - 1.34
-* OpenShift 4.12, 4.14 - 4.19(OpenShift 4.19에서 iSCSI 노드 준비를 사용할 계획인 경우 지원되는 최소 Trident 버전은 25.06.1입니다.)
+* OpenShift 4.12, 4.14 - 4.20(OpenShift 4.19에서 iSCSI 노드 준비를 사용하려는 경우 지원되는 최소 Trident 버전은 25.06.1입니다.)
 +
 
 NOTE: Trident 다음과 같은 기준으로 이전 OpenShift 버전을 계속 지원합니다.link:https://access.redhat.com/support/policy/updates/openshift["Red Hat Extended Update Support(EUS) 릴리스 수명 주기"] 더 이상 공식적으로 지원되지 않는 Kubernetes 버전을 사용하는 경우에도 마찬가지입니다.  이런 경우 Trident 설치하는 동안 Kubernetes 버전에 대한 경고 메시지는 무시해도 됩니다.
