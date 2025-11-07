@@ -3760,8 +3760,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="c59bb4e25695c195dbaa360d34c9795e" category="cell"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix="" category="inline-code"></block></block>
   <block id="091b358e8a9ea5e6b1137fbd4c18372f" category="paragraph"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix=" " category="inline-code"></block>볼륨을 포맷할 때마다 적용되는 명령에 대한 명령줄 인수를 지정하는 데<block ref="899da842f7d2c1db0e3f8c88ad72507f" prefix=" " category="inline-code"></block> 사용합니다. 이렇게 하면 기본 설정에 따라 볼륨을 포맷할 수 있습니다. 장치 경로를 제외하고 mkfs 명령 옵션과 비슷한 formatOptions를 지정해야 합니다. 예: "-E NODEARD"</block>
   <block id="18eb1633594b2436e83e73071958b960" category="section-title">포맷옵션 사용에 대한 권장 사항</block>
-  <block id="d9ec468a8922eca17349404c59b7659c" category="paragraph">Trident에서는 다음 옵션을 사용하여 서식 프로세스를 신속하게 수행할 것을 권장합니다.</block>
-  <block id="ee8d7eb9cc1e43184ed6a64abb3255f6" category="paragraph">* -E nobiscard: *</block>
   <block id="f1e8c049fa2ad08b8d1a332e2d26163e" category="cell">생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀/백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다.</block>
   <block id="c598aba0725ffc7663bf0f4db1a3238f" category="cell"><block ref="80fd16da9d17abac4374b362f2e409fe" prefix="" category="inline-code"></block></block>
   <block id="a5b88f2b14a5b0fa1aa2bbed9eb87602" category="cell">백엔드가 LUN을 포함하도록 새 FlexVol 볼륨을 생성하지 못하도록<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 제한합니다. 기존 FlexVol만 새 PVS 프로비저닝에 사용됩니다.</block>
@@ -5086,7 +5084,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="c72dc6713f14ba2541824417f46e1cd6" category="cell">문제 해결 시 사용할 디버그 플래그입니다. 예: {"api":false, "method":true}</block>
   <block id="cc1ae9a700356c7c519b4aee7dcbf53b" category="cell">"10.0.0.1"," [2001:1234:ABCD::fefe]"</block>
   <block id="1925cd490b13f25205214eccfe51fccd" category="admonition">"vsadmin" 자격 증명을 사용하는 경우, 은<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block> SVM의 자격 증명이어야 합니다. "admin" 자격 증명을 사용하는 경우에는 이 클러스터의 자격 증명이어야<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block> 합니다.</block>
-  <block id="788fe8d661645297ab41d7c9235dcbb8" category="list-text">유지, mkfs 시간에 블록 삭제를 시도하지 마십시오(처음에는 솔리드 스테이트 디바이스 및 스파스/씬 프로비저닝된 스토리지에서 블록 삭제가 유용함). 이 옵션은 더 이상 사용되지 않는 옵션 "-K"를 대체하며 모든 파일 시스템(xfs, ext3 및 ext4)에 적용됩니다.</block>
   <block id="470fa5f00d398bad1d1874a9b4d59d7b" category="cell">"["0.0.0.0/0",":/0"]"</block>
   <block id="1e8d899088cef4cd1758075ac2b63721" category="cell">스냅샷 "0"에 대해 예약된 볼륨의 백분율</block>
   <block id="d8d01124b8b3fe614b475ad96fca4635" category="cell"><block ref="0a236e7685e50a59df980d0a30929d6c" prefix=" " category="inline-code"></block><block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block>있다면,<block ref="2954e92a9b4d0e998fe4893f8141649a" prefix=" " category="inline-code"></block>""</block>
@@ -5649,7 +5646,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="b9785b666a04771c63b539840201a4db" category="paragraph">ONTAP 업그레이드한 후 NFSv4.2 클라이언트가 NFSv4.2 내보내기를 마운트하려고 할 때 "잘못된 인수" 오류를 보고할 수 있습니다. 이 문제는 다음과 같은 경우에 발생합니다.<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> SVM에서는 옵션이 활성화되어 있지 않습니다. .해결 방법 활성화<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> SVM에서 옵션을 선택하거나 ONTAP 9.12.1 이상으로 업그레이드하면 이 옵션이 기본적으로 활성화됩니다.</block>
   <block id="65cfb19ed2b3d296782fbfdd6b7075b1" category="list-text">Kubernetes 1.34가 이제 Trident 에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident 업그레이드하세요.</block>
   <block id="e69ddc8f5253cd0167cca555b0f0fd9c" category="list-text">쿠버네티스 1.27 - 1.34</block>
-  <block id="7f6d66fd53fc399c1b8baeebcdb94472" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.27.x - 1.34.x</block>
   <block id="844c50b4f1aab48821867a1209be687b" category="admonition">Trident 는 Rancher Kubernetes Engine 2(RKE2) 버전 1.27.x - 1.34.x에서 지원되지만, Trident 현재 RKE2 v1.28.5+rke2r1에서만 검증되었습니다._</block>
   <block id="27f15237580e8f85cd2846baf40ad83b" category="paragraph">1.27 - 1.34</block>
   <block id="73b1fe6d150d74c875ee4a368dd3b1a9" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0</block>
@@ -5963,4 +5959,8 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="5137aa193de4e4cc652a198db463acd3" category="admonition">기본적으로 Trident의 메트릭은 대상 포트에 노출됩니다.<block ref="bc3c4a6331a8a9950945a1aa8c95ab8a" prefix=" " category="inline-code"></block> 에서<block ref="ae3b848d2daecffc635ae20b0b882d8f" prefix=" " category="inline-code"></block> 종점. 이러한 측정항목은 Trident 가 설치되면 *기본적으로* 활성화됩니다. HTTPS를 통해 포트에서 Trident 메트릭을 사용하도록 구성할 수 있습니다.<block ref="c24f4c5eef7ec01c46e003a9296c8645" prefix=" " category="inline-code"></block> 또한.</block>
   <block id="e4850469bb389cec2e3ac44d4276ffb0" category="inline-link-macro">Prometheus Operator 문서</block>
   <block id="faa779ed6ae9bda26148b1ff6bf0cc52" category="paragraph">Prometheus 대상을 정의하여 Trident 관리하는 백엔드, Trident가 생성하는 볼륨 등에 대한 메트릭과 정보를 수집해야 합니다. 보다<block ref="64a51bde051e46320750fd80d285a3d9" category="inline-link-macro-rx"></block> .</block>
+  <block id="0bca60aba2da7f8ae6d6dac4fb580afe" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.28.x - 1.34.x</block>
+  <block id="3802caa8e4bea50419dcef8b68f5b82e" category="paragraph">Trident 포맷 과정을 신속하게 진행하기 위해 다음 옵션을 권장합니다.</block>
+  <block id="8b081afdb240ed6d03a50d7b70aac895" category="list-text">*-E nodiscard(ext3, ext4):* mkfs 시점에 블록을 삭제하려고 시도하지 마세요(처음에 블록을 삭제하는 것은 솔리드 스테이트 장치와 스파스/씬 프로비저닝 스토리지에서 유용합니다). 이는 더 이상 사용되지 않는 옵션인 "-K"를 대체하며 ext3, ext4 파일 시스템에 적용할 수 있습니다.</block>
+  <block id="01f770831133fae79fa85eb89c42b8f2" category="list-text">*-K (xfs):* mkfs 시간에 블록을 버리려고 시도하지 마십시오. 이 옵션은 xfs 파일 시스템에 적용할 수 있습니다.</block>
 </blocks>
