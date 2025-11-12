@@ -3942,7 +3942,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="da9d072bec5b191d5b5120761a2094e5" category="section-title">명령 자동 완성 활성화</block>
   <block id="2994879f05c105b10427c87890d6ce6a" category="paragraph">Trident Protect CLI 플러그인을 설치한 후 특정 명령에 대해 자동 완성 기능을 활성화할 수 있습니다.</block>
   <block id="df7d0aa2cf46fe870b9bba130ea4d964" category="open-title">Bash 셸에 대해 자동 완성 기능을 활성화합니다</block>
-  <block id="dc8d08efd37c5c2cd13f1da4b74b2004" category="list-text">완료 스크립트 다운로드:</block>
   <block id="bbd32e1d32af84e3002666b13f548cce" category="list-text">스크립트를 포함할 홈 디렉토리에 새 디렉토리를 만듭니다.</block>
   <block id="63f01fb9933705d6d795c4c690a6504c" category="list-text">다운로드한 스크립트를 디렉터리로 이동합니다<block ref="37476bab24bad3126a5edbc11fab761e" prefix=" " category="inline-code"></block>.</block>
   <block id="4a76f80f250e570c9fd0b4b8b9e41486" category="list-text">홈 디렉토리의 파일에 다음 줄을 추가합니다<block ref="b8cb707d54dfbd8ab64f0b1dc81b72e1" prefix=" " category="inline-code"></block>.</block>
@@ -4250,7 +4249,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="57cc31c4785dfe52bb22cc8d375a3b67" category="list-text">사용자 정의 리소스(CR) 파일을 만들고 이름을 지정합니다(예:<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block>).</block>
   <block id="87918fdbe5607aeceec3ec53bc40a2f8" category="list-text">*metadata.name*: (_required_) 일정 사용자 정의 리소스의 이름입니다.</block>
   <block id="3e23380d121194d4ed43d5587e33eeba" category="list-text">* spec.AppVaultRef *: (_required_) 이 값은 원본 응용 프로그램에 대한 AppVault의 metadata.name 필드와 일치해야 합니다.</block>
-  <block id="a7ac547d97c63ad78926b420081cf36d" category="list-text">*spec.ApplicationRef*: (_required_) 이 값은 소스 응용 프로그램 CR의 metadata.name 필드와 일치해야 합니다.</block>
   <block id="565c53b27f6972afc514c3431a7fb733" category="list-text">*spec.backupRetention*: (_required_) 이 필드는 필수 필드이며 값을 0으로 설정해야 합니다.</block>
   <block id="e00228f2eaa851d908b74fd6e1cbb1ab" category="list-text">* spec. enabled *: 반드시 true로 설정해야 합니다.</block>
   <block id="b8e08f9f53492c0cf7c4c918c8c27185" category="list-text">*spec.granularity*: 으로 설정해야<block ref="90589c47f06eb971d548591f23c285af" prefix=" " category="inline-code"></block> 합니다.</block>
@@ -4270,7 +4268,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="5c0044cad9c27e4f4742c4a031edd6eb" category="list-text">* spec.sourceApplicationName *: (_required_) 이 값은 소스 응용 프로그램 CR에서 정의한 소스 응용 프로그램의 이름과 일치해야 합니다.</block>
   <block id="e1e70c108ffb369c9c05ac65820562c3" category="list-text">파일을 올바른 값으로 채운 후<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> CR:</block>
   <block id="d4c94febe4f13411fa761de57ad6cce6" category="open-title">CLI를 사용하여 AppMirrorRelationship을 생성한다</block>
-  <block id="1d29e9d9da5d097b90cc18a976fa591c" category="list-text">AppMirrorRelationship 개체를 만들고 적용하여 대괄호 안의 값을 사용자 환경의 정보로 바꿉니다. 예를 들면 다음과 같습니다.</block>
   <block id="86d47ead9019d8e9c93c863f7ab4e41b" category="list-text">(_선택 사항_) 복제 관계의 상태 및 상태를 확인합니다.</block>
   <block id="70cc2bec279e168711b67e789468c45c" category="section-title">대상 클러스터로 페일오버합니다</block>
   <block id="196c4df78e5add7c9590d6a1c18367ec" category="paragraph">Trident Protect를 사용하면 복제된 애플리케이션을 대상 클러스터로 페일오버할 수 있습니다. 이 절차는 복제 관계를 중지하고 대상 클러스터에서 앱을 온라인으로 전환합니다. Trident Protect는 소스 클러스터의 앱이 작동 중이었다면 중지하지 않습니다.</block>
@@ -4435,7 +4432,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="baafbccab17d07f9ba18e7becb7c76d2" category="inline-link-macro">백업에서 데이터를 복원합니다</block>
   <block id="878bbf0662ed19ef900e4e06bfad92d2" category="list-text">대상 클러스터에서<block ref="11860f9f3ec51316f8ebc9805806b6cd" category="inline-link-macro-rx"></block>.</block>
   <block id="4a0207b6a74b63dcaaa4d58fe75ec431" category="list-text">*resourceFilter.resourceSelectionCriteria*:(필터링에 필요)<block ref="f4d72a64acd8929c0cc9ed96a7a336cc" prefix=" " category="inline-code"></block> resourceMatchers에 정의된 리소스를 포함하거나 제외하려면 또는 을<block ref="843f2812f595e7ec7c5036e89fde02d6" prefix=" " category="inline-code"></block> 사용합니다. 다음 resourceMatchers 매개 변수를 추가하여 포함하거나 제외할 리소스를 정의합니다.</block>
-  <block id="5e77ee724e7a9c6f34c1fd6a65b3f3b5" category="list-text">* spec.storageClassName *: (_required_) 클러스터에서 유효한 스토리지 클래스의 이름을 선택하십시오. 스토리지 클래스는 소스 환경을 피어링하는 ONTAP 스토리지 VM에 연결되어야 한다.</block>
   <block id="b22804421b3e5bca94f2a9979721eb60" category="cell">역할이 지정된 Google Cloud 서비스 계정의 API 키입니다.<block ref="e50dbf86780cfad5e007e4a95a6aa71e" prefix=" " category="inline-code"></block> 여기에는 Google Cloud 서비스 계정의 개인 키 파일(백엔드 구성 파일에 verbatim 복사)의 JSON 형식 콘텐츠가 포함됩니다. <block ref="c9ff119073ea2567730fb42e3a4fe805" prefix=" " category="inline-code"></block>, , , , , , 키를 사용하려면 키-값 쌍을 포함해야 합니다<block ref="599dcce2998a6b40b1e38e8c6006cb0a" prefix=" " category="inline-code"></block><block ref="b098ad43c65e68f3d8ce27a3c7e6f6e2" prefix=" " category="inline-code"></block><block ref="a4a9fd77bfb3720e66b510bef7ffe71a" prefix=" " category="inline-code"></block><block ref="2bfe9d72a4aae8f06a31025b7536be80" prefix=" " category="inline-code"></block><block ref="478cc0e49bfbb9ded4ffc7ea662d3968" prefix=" " category="inline-code"></block>.<block ref="98b215082431c21156af94f3aa69f838" prefix=" " category="inline-code"></block><block ref="8201fe8e688f4f948a62370fd1b411d4" prefix=" " category="inline-code"></block>, , 및<block ref="61426bc7fdd11e59a5c98e7ee37e3dbb" prefix=" " category="inline-code"></block>.</block>
   <block id="d0e48e9528072c6ff90b82adeab94dea" category="list-text">NetApp 볼륨 관리자) 역할을 가진 Google Cloud 서비스 계정입니다. <block ref="04bf1a6a0250bc9d4cba09ee34106dfc" prefix="(" category="inline-code"></block> 을 <block ref="4f506c30a158c85db714d53536a12770" category="inline-link-macro-rx"></block>참조하십시오.</block>
   <block id="a13eeeef5ff2b7fe85692890fb5d28b3" category="open-title">Amazon S3(AWS)</block>
@@ -5234,12 +5230,9 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="3d11bc959173dddd2997400e7bdf4d67" category="list-text">장애 조치(failover) 중에 실행 후크는 소스 클러스터에서 대상 클러스터로 자동으로 복사됩니다. 따라서 수동으로 다시 만들 필요가 없습니다. 장애 조치(failover) 후에는 실행 후크가 애플리케이션에 존재하며 관련 작업 중에 실행됩니다.</block>
   <block id="ba9dd6212c2e02686051fbf28e548584" category="list-text">역방향 또는 역방향 재동기화 중에는 애플리케이션에 있는 기존 실행 후크가 모두 제거됩니다. 소스 애플리케이션이 대상 애플리케이션으로 변경되면 이러한 실행 후크는 유효하지 않으므로 삭제되어 실행되지 않습니다.</block>
   <block id="98b9f287abe5860abcc3ab5364313188" category="paragraph">실행 후크에 대해 자세히 알아보려면 다음을 참조하세요. <block ref="d0f7adc5528355d3ba6ac91271095c29" category="inline-link-macro-rx"></block> .</block>
-  <block id="f815c45e5a618fe75ef3a716b30b711d" category="list-text">선택적으로 소스 클러스터에서 소스 애플리케이션의 스냅샷을 만듭니다. 이 스냅샷은 대상 클러스터에서 애플리케이션의 기반으로 사용됩니다. 이 단계를 건너뛸 경우 다음 예약된 스냅샷이 실행될 때까지 기다려야 최신 스냅샷이 생성됩니다.</block>
   <block id="9399bd959f53d5a7d8671b597df92df2" category="paragraph">아래 제공된 일정 외에도, 피어링된 ONTAP 클러스터 간에 공통 스냅샷을 유지하기 위해 7일의 보존 기간을 갖는 별도의 일일 스냅샷 일정을 생성하는 것이 좋습니다. 이를 통해 스냅샷을 최대 7일 동안 사용할 수 있지만, 보존 기간은 사용자 요구 사항에 따라 맞춤 설정할 수 있습니다.</block>
   <block id="bd8250ba3a5ac73f1ca0ba8c92937c5a" category="paragraph">장애 조치(failover)가 발생하면 시스템은 최대 7일 동안 이러한 스냅샷을 역방향 작업에 사용할 수 있습니다. 이 방식은 마지막 스냅샷 이후 변경된 내용만 전송하고 모든 데이터는 전송하지 않으므로 역방향 프로세스가 더 빠르고 효율적입니다.</block>
   <block id="af22b57fbc1d302d6a0b83cb06ce9e6a" category="paragraph">해당 애플리케이션의 기존 일정이 이미 원하는 보존 요구 사항을 충족하는 경우 추가 일정은 필요하지 않습니다.</block>
-  <block id="84caf200e79d5962bc7f3516e9ad328c" category="open-title">CR을 사용하여 스냅샷을 촬영합니다</block>
-  <block id="3feb4a62c8b59cd52ae22845d363c901" category="open-title">CLI를 사용하여 스냅샷을 생성합니다</block>
   <block id="e995d56efd9e31d97825dd79be4d1383" category="inline-link-macro">ASA R2 스토리지 시스템에 대해 알아보십시오</block>
   <block id="19bf8687ff63071d6f6661c290cba7c2" category="admonition">ASA r2 시스템에서는 LUKS 암호화가 지원되지 않습니다. ASA r2 시스템에 대한 자세한 내용은 다음을 참조하세요. <block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> .</block>
   <block id="9470f4768dd90ef0be0fb76cb2f6e04b" category="admonition">다른 StorageClass와 연결된 PVC를 복제하지 마십시오. 호환성을 보장하고 예기치 않은 동작을 방지하려면 동일한 StorageClass 내에서 복제 작업을 수행하십시오.</block>
@@ -5883,8 +5876,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="8b8d9f4c952c1a96deb64c793af4e464" category="list-text"><block ref="a3f0891bded2c705ab3b29833481ffcf" prefix="" category="inline-code"></block></block>
   <block id="73a728f42314eb885248ddf406b25363" category="list-text"><block ref="af978cfba15392673bcd27f4c22e2926" prefix="" category="inline-code"></block></block>
   <block id="aee2fa9c2204a55585128f5277354ae9" category="inline-link-macro">지원되는 백업 및 일정 주석</block>
-  <block id="c012e297eb92b407e41744b41b55a25a" category="paragraph">보다<block ref="76183371d4bb7f7ba60f0a02290c6001" category="inline-link-macro-rx"></block> .</block>
-  <block id="39ebbf61bcc7edd8606432a4977ae4fc" category="list-text">백업 CR에서 사용될 PVC 바인딩 시간 초과를 구성하기 위해 일정 CR에 주석을 추가했습니다.<block ref="728633ade1403bcbcd881fc22ec19596" prefix=" " category="inline-code"></block> . 보다<block ref="76183371d4bb7f7ba60f0a02290c6001" category="inline-link-macro-rx"></block> .</block>
   <block id="e3245c0aba43966b1051780d8f62f1fb" category="list-text">개선됨<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block> 실행 후크 실패를 나타내는 새 필드가 추가되어 백업 및 스냅샷 목록이 추가되었습니다.</block>
   <block id="6c194c516ba4058b297409f4d40113b5" category="section-title">25.06.2의 변경 사항</block>
   <block id="cd133424a13afaa0badf4f13c4bf4c72" category="list-text">iSCSI 외에도 NVMe/TCP용 ONTAP ASA r2에 대한 지원이 추가되었습니다. 보다<block ref="f2fd3fe662daf33e514604a72251389c" category="inline-link-macro-rx"></block> .</block>
@@ -5963,4 +5954,17 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="3802caa8e4bea50419dcef8b68f5b82e" category="paragraph">Trident 포맷 과정을 신속하게 진행하기 위해 다음 옵션을 권장합니다.</block>
   <block id="8b081afdb240ed6d03a50d7b70aac895" category="list-text">*-E nodiscard(ext3, ext4):* mkfs 시점에 블록을 삭제하려고 시도하지 마세요(처음에 블록을 삭제하는 것은 솔리드 스테이트 장치와 스파스/씬 프로비저닝 스토리지에서 유용합니다). 이는 더 이상 사용되지 않는 옵션인 "-K"를 대체하며 ext3, ext4 파일 시스템에 적용할 수 있습니다.</block>
   <block id="01f770831133fae79fa85eb89c42b8f2" category="list-text">*-K (xfs):* mkfs 시간에 블록을 버리려고 시도하지 마십시오. 이 옵션은 xfs 파일 시스템에 적용할 수 있습니다.</block>
+  <block id="1a715172aa56ca325fbc38f4b522da46" category="list-text">완료 스크립트를 만듭니다.</block>
+  <block id="30e52f4e46178e20ec0172d136f6e964" category="list-text">선택적으로 소스 클러스터에서 소스 애플리케이션의 스냅샷을 만듭니다. 이 스냅샷은 대상 클러스터의 애플리케이션의 기반으로 사용됩니다. 이 단계를 건너뛰면 다음 예약된 스냅샷이 실행될 때까지 기다려야 최신 스냅샷을 얻을 수 있습니다. 주문형 스냅샷을 생성하려면 다음을 참조하세요. <block ref="359fb751a7b652662d6f4f859ab7278e" category="inline-link-macro-rx"></block>.</block>
+  <block id="5c24c4abf654732ea864deb8dfd27900" category="list-text">소스 클러스터에서 복제 일정 CR을 만듭니다.</block>
+  <block id="7f3cf5a508f65aafe24cfcbde532a846" category="open-title">CR을 사용하여 복제 일정을 만듭니다.</block>
+  <block id="7228f7e08042915e251a683bfff18231" category="list-text">*spec.appVaultRef*: (_필수_) 이 값은 소스 애플리케이션의 AppVault의 metadata.name 필드와 일치해야 합니다.</block>
+  <block id="2845cbe42176f1140d5d897aaf3abea8" category="list-text">*spec.applicationRef*: (_필수_) 이 값은 소스 애플리케이션 CR의 metadata.name 필드와 일치해야 합니다.</block>
+  <block id="4cd94b75213793150ad247d75cd897e9" category="open-title">CLI를 사용하여 복제 일정을 만듭니다.</block>
+  <block id="3de5f07029546bc00c37d9c9edf9cc20" category="list-text">괄호 안의 값을 사용자 환경의 정보로 바꿔 복제 일정을 만듭니다.</block>
+  <block id="7749c9ae56691a1f3a933f4d23d038e3" category="list-text">*spec.sourceApplicationUID*: (필수) 이 값은 소스 애플리케이션 CR에서 정의한 소스 애플리케이션의 UID와 일치해야 합니다.</block>
+  <block id="3d684c1e0271c67148a368e61c2e954e" category="list-text">*spec.storageClassName*: (_선택 사항_) 클러스터에서 유효한 스토리지 클래스의 이름을 선택합니다. 스토리지 클래스는 소스 환경과 피어링된 ONTAP 스토리지 VM에 연결되어야 합니다. 스토리지 클래스가 제공되지 않으면 기본적으로 클러스터의 기본 스토리지 클래스가 사용됩니다.</block>
+  <block id="c97418e1743694adcebfb4447351b629" category="list-text">AppMirrorRelationship 객체를 만들고 적용하며, 괄호 안의 값을 사용자 환경의 정보로 바꿉니다.</block>
+  <block id="2b4bab15439acee1a7a1ecf65aefccf8" category="paragraph">보다<block ref="8a2f8872ebe6d6c56e608637c3cdaf0f" category="inline-link-macro-rx"></block> .</block>
+  <block id="da88dec11cfebffca5dfcf278b6ef68c" category="list-text">백업 CR에서 사용될 PVC 바인딩 시간 초과를 구성하기 위해 일정 CR에 주석을 추가했습니다.<block ref="728633ade1403bcbcd881fc22ec19596" prefix=" " category="inline-code"></block> . 보다<block ref="8a2f8872ebe6d6c56e608637c3cdaf0f" category="inline-link-macro-rx"></block> .</block>
 </blocks>

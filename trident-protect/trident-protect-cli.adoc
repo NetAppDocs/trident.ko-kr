@@ -122,11 +122,11 @@ Trident Protect CLI 플러그인을 설치한 후 특정 명령에 대해 자동
 .Bash 셸에 대해 자동 완성 기능을 활성화합니다
 --
 .단계
-. 완료 스크립트 다운로드:
+. 완료 스크립트를 만듭니다.
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.10.0/tridentctl-completion.bash
+tridentctl-protect completion bash > tridentctl-completion.bash
 ----
 . 스크립트를 포함할 홈 디렉토리에 새 디렉토리를 만듭니다.
 +
@@ -152,11 +152,11 @@ source ~/.bash/completions/tridentctl-completion.bash
 .Z 쉘에 대한 자동 완성 기능을 활성화합니다
 --
 .단계
-. 완료 스크립트 다운로드:
+. 완료 스크립트를 만듭니다.
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.10.0/tridentctl-completion.zsh
+tridentctl-protect completion zsh > tridentctl-completion.zsh
 ----
 . 스크립트를 포함할 홈 디렉토리에 새 디렉토리를 만듭니다.
 +

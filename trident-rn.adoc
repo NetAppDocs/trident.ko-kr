@@ -102,11 +102,11 @@ NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident 
 ** `protect.trident.netapp.io/volume-snapshots-ready-to-use-timeout`
 ** `protect.trident.netapp.io/volume-snapshots-created-timeout`
 +
-보다link:trident-protect-protect-apps.html["지원되는 백업 및 일정 주석"^] .
+보다link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html["지원되는 백업 및 일정 주석"^] .
 
 
 
-* 백업 CR에서 사용될 PVC 바인딩 시간 초과를 구성하기 위해 일정 CR에 주석을 추가했습니다. `protect.trident.netapp.io/pvc-bind-timeout-sec` . 보다link:trident-protect-protect-apps.html["지원되는 백업 및 일정 주석"^] .
+* 백업 CR에서 사용될 PVC 바인딩 시간 초과를 구성하기 위해 일정 CR에 주석을 추가했습니다. `protect.trident.netapp.io/pvc-bind-timeout-sec` . 보다link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html["지원되는 백업 및 일정 주석"^] .
 * 개선됨 `tridentctl-protect` 실행 후크 실패를 나타내는 새 필드가 추가되어 백업 및 스냅샷 목록이 추가되었습니다.
 
 
