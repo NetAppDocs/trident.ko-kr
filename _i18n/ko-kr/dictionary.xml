@@ -5968,4 +5968,5 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="da88dec11cfebffca5dfcf278b6ef68c" category="list-text">백업 CR에서 사용될 PVC 바인딩 시간 초과를 구성하기 위해 일정 CR에 주석을 추가했습니다.<block ref="728633ade1403bcbcd881fc22ec19596" prefix=" " category="inline-code"></block> . 보다<block ref="8a2f8872ebe6d6c56e608637c3cdaf0f" category="inline-link-macro-rx"></block> .</block>
   <block id="506953e8ef42800e0b5f740b30b09a33" category="list-text"><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix="" category="inline-code"></block> - iSCSI 프로토콜에만 해당됩니다.</block>
   <block id="ebe98a8374dc31f4dd5bb51932ba3ba4" category="admonition">NetApp ASA r2 또는 AFX 스토리지 시스템에서는 볼륨 그룹 스냅샷이 지원되지 않습니다.</block>
+  <block id="b3fd6a68d255a3fb79774387cf52d7e4" category="admonition">vNet이 Azure NetApp Files (ANF) 스토리지 계정과 다른 리소스 그룹에 있는 경우 백엔드에 대한 resourceGroups 목록을 구성하는 동안 가상 네트워크에 대한 리소스 그룹을 지정합니다.</block>
 </blocks>

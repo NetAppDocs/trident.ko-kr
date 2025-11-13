@@ -113,6 +113,9 @@ PVC 생성 시 "No capacity pool found" 오류가 발생하는 경우 앱 등록
 
 의 값 `resourceGroups`, `netappAccounts`, `capacityPools`, `virtualNetwork`, 및 `subnet` 간단한 이름 또는 정규화된 이름을 사용하여 지정할 수 있습니다. 이름이 같은 여러 리소스와 이름이 일치할 수 있으므로 대부분의 경우 정규화된 이름을 사용하는 것이 좋습니다.
 
+
+NOTE: vNet이 Azure NetApp Files (ANF) 스토리지 계정과 다른 리소스 그룹에 있는 경우 백엔드에 대한 resourceGroups 목록을 구성하는 동안 가상 네트워크에 대한 리소스 그룹을 지정합니다.
+
 를 클릭합니다 `resourceGroups`, `netappAccounts`, 및 `capacityPools` 값은 검색된 리소스 집합을 이 스토리지 백엔드에서 사용할 수 있는 리소스로 제한하는 필터이며, 이 둘을 조합하여 지정할 수 있습니다. 정규화된 이름은 다음 형식을 따릅니다.
 
 [cols="2"]
@@ -204,13 +207,13 @@ spec:
   version: 1
   storageDriverName: azure-netapp-files
   capacityPools:
-    - ultra-pool
+    - resource-group-1/netapp-account-1/ultra-pool
   resourceGroups:
-    - aks-ami-eastus-rg
+    - resource-group-1
   netappAccounts:
-    - smb-na
-  virtualNetwork: eastus-prod-vnet
-  subnet: eastus-anf-subnet
+    -  resource-group-1/netapp-account-1
+  virtualNetwork: resource-group-1/eastus-prod-vnet
+  subnet: resource-group-1/eastus-prod-vnet/eastus-anf-subnet
 ----
 ====
 .AKS용 클라우드 ID
@@ -316,8 +319,8 @@ serviceLevel: Ultra
 capacityPools:
   - application-group-1/account-1/ultra-1
   - application-group-1/account-1/ultra-2
-virtualNetwork: my-virtual-network
-subnet: my-subnet
+virtualNetwork: application-group-1/eastus-prod-vnet
+subnet: application-group-1/eastus-prod-vnet/my-subnet
 networkFeatures: Standard
 nfsMountOptions: vers=3,proto=tcp,timeo=600
 limitVolumeSize: 500Gi
@@ -355,20 +358,20 @@ storage:
       performance: gold
     serviceLevel: Ultra
     capacityPools:
-      - ultra-1
-      - ultra-2
+      - application-group-1/netapp-account-1/ultra-1
+      - application-group-1/netapp-account-1/ultra-2
     networkFeatures: Standard
   - labels:
       performance: silver
     serviceLevel: Premium
     capacityPools:
-      - premium-1
+      - application-group-1/netapp-account-1/premium-1
   - labels:
       performance: bronze
     serviceLevel: Standard
     capacityPools:
-      - standard-1
-      - standard-2
+      - application-group-1/netapp-account-1/standard-1
+      - application-group-1/netapp-account-1/standard-2
 
 ----
 ====
