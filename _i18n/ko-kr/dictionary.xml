@@ -2931,10 +2931,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="3c49604e542827bab74a3fdc9c521379" category="doc">볼륨 이름 및 레이블을 사용자 지정합니다</block>
   <block id="52929ef06c83a3071dc677c6076f8eb3" category="paragraph">사용자 지정 가능한 볼륨 이름 및 레이블 지원:</block>
   <block id="ba7ad86bd3d0a50a4a04306d941e6c28" category="list-text">볼륨 생성, 가져오기 및 클론 복제 작업입니다.</block>
-  <block id="174a7026faf4af3e1ec0eeec9d35af81" category="list-text">ONTAP-NAS-Economy 드라이버의 경우 Qtree 볼륨 이름만 이름 템플릿을 따릅니다.</block>
-  <block id="12df52676a1d1f4040501d3a804b1a4b" category="list-text">ONTAP-SAN-이코노미 드라이버의 경우 LUN 이름만 템플릿 을 준수합니다.</block>
-  <block id="0ee903e586aac760f5cdfb2c770f936b" category="list-text">사용자 지정 가능한 볼륨 이름은 ONTAP 온프레미스 드라이버와만 호환됩니다.</block>
-  <block id="b3c7ca4cfca79f517812064c1b9b0ef3" category="list-text">사용자 지정 가능한 볼륨 이름은 기존 볼륨에 적용되지 않습니다.</block>
   <block id="4c71628145ace597229ccf6ca6fdc8bf" category="section-title">사용자 지정 가능한 볼륨 이름의 주요 동작</block>
   <block id="a5a284fe1356005dc517f157bef35adc" category="list-text">이름 템플릿의 잘못된 구문으로 인해 오류가 발생하면 백엔드 생성이 실패합니다. 그러나 템플릿 응용 프로그램이 실패하면 볼륨의 이름은 기존 명명 규칙에 따라 지정됩니다.</block>
   <block id="d654edd1d54bb9458ddce1a8e82a2733" category="list-text">백엔드 구성에서 이름 템플릿을 사용하여 볼륨 이름을 지정한 경우에는 스토리지 접두사를 사용할 수 없습니다. 원하는 접두사 값을 템플릿에 직접 추가할 수 있습니다.</block>
@@ -5970,4 +5966,9 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="8227b927875caa5115317241f2ef5aed" category="paragraph-title">SMB 도구</block>
   <block id="07481e3d69515bb71aba543becb5f83d" category="paragraph"><block ref="2c87a2692f74b765fc7d12f8607c123c" category="inline-link-macro-rx"></block> 다음을 사용하는 경우:<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> SMB 볼륨을 프로비저닝합니다.</block>
   <block id="d35c59236d3e20dddbaa302d4a00761e" category="paragraph">다음을 사용하여 SMB 볼륨을 프로비저닝할 수 있습니다.<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 운전자.</block>
+  <block id="f69aa651a1e9b3f43819495ea61170d7" category="list-text">의 경우에는<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 드라이버의 경우 Qtree 볼륨의 이름만 이름 템플릿을 따릅니다.</block>
+  <block id="482b43f7720e701d1c20f10fcb766b00" category="list-text">의 경우에는<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 드라이버의 경우 LUN 이름만 이름 템플릿을 준수합니다.</block>
+  <block id="da9889ca93f8b399ea30566497c29a3e" category="list-text">사용자 정의 볼륨 이름은 ONTAP 온프레미스 드라이버와만 호환됩니다.</block>
+  <block id="c45320b69becc7810ef088c7d038c27a" category="list-text">사용자 정의 레이블은 다음에 대해서만 지원됩니다.<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>,<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>, 그리고<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 운전자.</block>
+  <block id="a9703a3dbb920f8f87b7d3293e2e0831" category="list-text">사용자 정의 볼륨 이름은 기존 볼륨에는 적용되지 않습니다.</block>
 </blocks>
