@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-restore-settings.html
 keywords: trident, protect, restore, data, backup 
 summary: 주석, 네임스페이스 설정 및 스토리지 옵션을 사용하여 Trident Protect 복원 작업을 사용자 정의할 수 있습니다. 
 ---
-= 고급 Trident 보호 복원 설정 사용
+= 고급 Trident Protect 복원 설정 사용
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -32,9 +32,9 @@ NOTE: Red Hat OpenShift를 사용하는 경우 OpenShift 환경에서 네임스�
 helm upgrade trident-protect --set restoreSkipNamespaceAnnotations=<annotation_key_to_skip_1>,<annotation_key_to_skip_2> --reuse-values
 ----
 
-NOTE: 복원 또는 장애 조치 작업을 수행할 때 지정된 모든 네임스페이스 주석 및 레이블 `restoreSkipNamespaceAnnotations` 그리고 `restoreSkipNamespaceLabels` 복구 또는 장애 조치 작업에서 제외됩니다. 이러한 설정은 Helm을 처음 설치할 때 구성되어야 합니다. 자세한 내용은 다음을 참조하세요. link:../trident-protect/trident-protect-customize-installation.html#configure-additional-trident-protect-helm-chart-settings["추가 Trident 보호 헬름 차트 설정 구성"].
+NOTE: 복원 또는 장애 조치 작업을 수행할 때 지정된 모든 네임스페이스 주석 및 레이블 `restoreSkipNamespaceAnnotations` 그리고 `restoreSkipNamespaceLabels` 복구 또는 장애 조치 작업에서 제외됩니다. 이러한 설정은 Helm을 처음 설치할 때 구성되어야 합니다. 자세한 내용은 다음을 참조하세요. link:../trident-protect/trident-protect-customize-installation.html#configure-additional-trident-protect-helm-chart-settings["추가 Trident Protect 헬름 차트 설정 구성"].
 
-플래그가 있는 Helm을 사용하여 소스 애플리케이션을 설치한 경우 `--create-namespace` 레이블 키에 특수 치료가 `name` 제공됩니다. 복구 또는 페일오버 프로세스 중에 Trident Protect는 이 레이블을 대상 네임스페이스에 복제하지만 소스의 값이 소스 네임스페이스와 일치하면 대상 네임스페이스 값으로 업데이트합니다. 이 값이 소스 네임스페이스와 일치하지 않으면 변경 없이 대상 네임스페이스로 복사됩니다.
+Helm을 사용하여 소스 애플리케이션을 설치한 경우 `--create-namespace` 깃발에는 특별한 대우가 주어집니다. `name` 라벨 키. 복구 또는 장애 조치 프로세스 중에 Trident Protect는 이 레이블을 대상 네임스페이스에 복사하지만 소스의 값이 소스 네임스페이스와 일치하는 경우 값을 대상 네임스페이스 값으로 업데이트합니다. 이 값이 소스 네임스페이스와 일치하지 않으면 변경 사항 없이 대상 네임스페이스에 복사됩니다.
 
 
 

@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-appvault-custom-resources.html 
 keywords: trident. appvault, custom, protect, kubernetes 
-summary: 'Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault라고 합니다. AppVaults는 스토리지 버킷의 선언적 Kubernetes 워크플로 표현입니다.' 
+summary: 'Trident Protect의 버킷 사용자 정의 리소스(CR)는 AppVault로 알려져 있습니다. AppVaults는 스토리지 버킷의 선언적 Kubernetes 워크플로 표현입니다.' 
 ---
-= Trident Protect AppVault 객체를 사용하여 버킷을 관리합니다
+= Trident Protect AppVault 객체를 사용하여 버킷을 관리합니다.
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,7 +14,7 @@ summary: 'Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault�
 
 
 [role="lead"]
-Trident Protect의 버킷 사용자 지정 리소스(CR)를 AppVault라고 합니다. AppVault 개체는 스토리지 버킷의 선언적 Kubernetes 워크플로우 표현입니다. AppVault CR에는 백업, 스냅샷, 복원 작업 및 SnapMirror 복제와 같은 보호 작업에 사용되는 버킷에 필요한 구성이 포함되어 있습니다. 관리자만 AppVaults를 만들 수 있습니다.
+Trident Protect의 버킷 사용자 정의 리소스(CR)는 AppVault로 알려져 있습니다. AppVault 객체는 스토리지 버킷의 선언적 Kubernetes 워크플로 표현입니다. AppVault CR에는 백업, 스냅샷, 복원 작업, SnapMirror 복제와 같은 보호 작업에 버킷을 사용하는 데 필요한 구성이 포함되어 있습니다. 관리자만 AppVault를 만들 수 있습니다.
 
 애플리케이션에서 데이터 보호 작업을 수행할 때는 AppVault CR을 수동으로 또는 명령줄에서 생성해야 합니다. AppVault CR은 사용자 환경에 따라 다르므로, 이 페이지의 예시를 참고하여 AppVault CR을 생성할 수 있습니다.
 
@@ -31,17 +31,17 @@ AppVault CR을 생성하기 전에 AppVault와 선택한 데이터 이동자가 
 
 === Data Mover 저장소 암호입니다
 
-CR 또는 Trident Protect CLI 플러그인을 사용하여 AppVault 객체를 생성할 때 Restic 및 Kopia 암호화를 위한 사용자 지정 비밀번호와 함께 Kubernetes 비밀번호를 지정할 수 있습니다. 비밀번호를 지정하지 않으면 Trident Protect는 기본 비밀번호를 사용합니다.
+CR이나 Trident Protect CLI 플러그인을 사용하여 AppVault 객체를 생성하는 경우 Restic 및 Kopia 암호화를 위한 사용자 정의 비밀번호가 포함된 Kubernetes 비밀번호를 지정할 수 있습니다.  비밀번호를 지정하지 않으면 Trident Protect는 기본 비밀번호를 사용합니다.
 
 * AppVault CR을 수동으로 생성할 때 *spec.dataMoverPasswordSecretRef* 필드를 사용하여 비밀번호를 지정합니다.
-* Trident Protect CLI를 사용하여 AppVault 객체를 생성할 때 다음을 사용하십시오.  `--data-mover-password-secret-ref` 비밀을 지정하는 인수입니다.
+* Trident Protect CLI를 사용하여 AppVault 객체를 생성할 때 다음을 사용하십시오. `--data-mover-password-secret-ref` 비밀을 지정하는 인수입니다.
 
 
 
 
 ==== Data Mover 리포지토리 암호 암호를 생성합니다
 
-다음 예제를 사용하여 암호 암호를 만듭니다. AppVault 개체를 생성할 때 Trident Protect에서 이 암호를 사용하여 Data Mover 리포지토리를 인증하도록 지시할 수 있습니다.
+다음 예를 사용하여 비밀번호를 생성하세요. AppVault 객체를 생성할 때 Trident Protect가 이 비밀번호를 사용하여 데이터 이동 저장소를 인증하도록 지시할 수 있습니다.
 
 [NOTE]
 ====
@@ -83,7 +83,7 @@ kubectl create secret generic my-optional-data-mover-secret \
 
 === S3 호환 스토리지 IAM 권한
 
-Amazon S3, Generic S3 등 S3 호환 스토리지에 접속할 경우  https://docs.netapp.com/us-en/storagegrid/s3/index.html["StorageGRID S3"^] , 또는  https://docs.netapp.com/us-en/ontap/s3-config/["ONTAP S3 를 참조하십시오"^] Trident Protect를 사용하는 경우, 제공하는 사용자 자격 증명에 버킷 액세스에 필요한 권한이 있는지 확인해야 합니다. 다음은 Trident Protect를 사용하여 액세스하는 데 필요한 최소 권한을 부여하는 정책의 예입니다. 이 정책은 S3 호환 버킷 정책을 관리하는 사용자에게 적용할 수 있습니다.
+Amazon S3, Generic S3 등 S3 호환 스토리지에 접속할 경우 https://docs.netapp.com/us-en/storagegrid/s3/index.html["StorageGRID S3"^] , 또는 https://docs.netapp.com/us-en/ontap/s3-config/["ONTAP S3 를 참조하십시오"^] Trident Protect를 사용하는 경우, 제공하는 사용자 자격 증명에 버킷에 액세스하는 데 필요한 권한이 있는지 확인해야 합니다.  다음은 Trident Protect에 대한 액세스에 필요한 최소한의 권한을 부여하는 정책의 예입니다. 이 정책은 S3 호환 버킷 정책을 관리하는 사용자에게 적용할 수 있습니다.
 
 [source, json]
 ----
@@ -109,9 +109,9 @@ Amazon S3 정책에 대한 자세한 내용은 다음 예제를 참조하세요.
 
 === Amazon S3(AWS) 인증을 위한 EKS Pod ID
 
-Trident Protect는 Kopia 데이터 이동 작업을 위한 EKS Pod Identity를 지원합니다.  이 기능을 사용하면 Kubernetes 비밀에 AWS 자격 증명을 저장하지 않고도 S3 버킷에 안전하게 액세스할 수 있습니다.
+Trident Protect는 Kopia 데이터 이동 작업을 위해 EKS Pod Identity를 지원합니다. 이 기능을 사용하면 Kubernetes 비밀에 AWS 자격 증명을 저장하지 않고도 S3 버킷에 안전하게 액세스할 수 있습니다.
 
-* Trident 프로텍트가 포함된 EKS 포드 아이덴티티에 대한 요구 사항*
+* Trident Protect를 사용한 EKS Pod Identity 요구 사항*
 
 Trident Protect와 함께 EKS Pod Identity를 사용하기 전에 다음 사항을 확인하세요.
 
@@ -495,7 +495,7 @@ tridentctl-protect create vault StorageGridS3 <vault-name> \
 
 == AppVault 정보를 봅니다
 
-Trident Protect CLI 플러그인을 사용하여 클러스터에서 생성한 AppVault 개체에 대한 정보를 볼 수 있습니다.
+Trident Protect CLI 플러그인을 사용하면 클러스터에서 생성한 AppVault 개체에 대한 정보를 볼 수 있습니다.
 
 .단계
 . AppVault 개체의 내용을 봅니다.
@@ -528,7 +528,7 @@ tridentctl-protect get appvaultcontent gcp-vault \
 ----
 . 선택적으로, 각 리소스의 AppVaultPath를 보려면 플래그를 `--show-paths`사용합니다.
 +
-테이블의 첫 번째 열에 있는 클러스터 이름은 Trident Protect Helm 설치에 클러스터 이름이 지정된 경우에만 사용할 수 있습니다. 예를 들면 다음과 `--set clusterName=production1`같습니다.
+표의 첫 번째 열에 있는 클러스터 이름은 Trident Protect helm 설치 시 클러스터 이름이 지정된 경우에만 사용할 수 있습니다. 예를 들어: `--set clusterName=production1` .
 
 
 
@@ -558,7 +558,7 @@ kubectl delete appvault <appvault-name> \
 
 
 --
-.Trident Protect CLI를 사용하여 AppVault를 제거합니다
+.Trident Protect CLI를 사용하여 AppVault 제거
 --
 . AppVault 개체를 제거하고 `appvault-name` 제거할 AppVault 개체의 이름으로 바꿉니다.
 +

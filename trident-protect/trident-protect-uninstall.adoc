@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-uninstall.html 
 keywords: trident, protect, netapp, uninstall, full version 
-summary: 평가판을 정식 버전으로 업그레이드하는 경우 Trident Protect 구성 요소를 제거해야 할 수 있습니다. 
+summary: 평가판에서 정식 버전으로 업그레이드하는 경우 Trident Protect 구성 요소를 제거해야 할 수도 있습니다. 
 ---
-= Trident Protect를 제거합니다
+= Trident Protect 제거
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,9 +14,9 @@ summary: 평가판을 정식 버전으로 업그레이드하는 경우 Trident P
 
 
 [role="lead"]
-평가판을 정식 버전으로 업그레이드하는 경우 Trident Protect 구성 요소를 제거해야 할 수 있습니다.
+평가판에서 정식 버전으로 업그레이드하는 경우 Trident Protect 구성 요소를 제거해야 할 수도 있습니다.
 
-Trident Protect를 제거하려면 다음 단계를 수행하십시오.
+Trident Protect를 제거하려면 다음 단계를 수행하세요.
 
 .단계
 . Trident Protect CR 파일을 제거합니다.
@@ -35,7 +35,7 @@ helm uninstall -n trident-protect trident-protect-crds
 ----
 helm uninstall -n trident-protect trident-protect
 ----
-. Trident Protect 네임스페이스 제거:
+. Trident Protect 네임스페이스를 제거합니다.
 +
 [source, console]
 ----

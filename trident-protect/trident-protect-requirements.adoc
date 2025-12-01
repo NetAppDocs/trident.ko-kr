@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-requirements.html 
 keywords: trident protect, application, cluster, snapmirror replication, ontap, configuration 
-summary: 운영 환경, 애플리케이션 클러스터, 애플리케이션 및 라이센스의 준비 상태를 확인하는 것으로 시작하십시오. Trident Protect를 배포 및 운영하기 위해 사용자 환경이 이러한 요구 사항을 충족하는지 확인합니다. 
+summary: 운영 환경, 애플리케이션 클러스터, 애플리케이션 및 라이선스의 준비 상태를 확인하여 시작하세요. Trident Protect를 배포하고 운영하려면 환경이 이러한 요구 사항을 충족하는지 확인하세요. 
 ---
-= Trident 보호 요구 사항
+= Trident 프로텍트 요구 사항
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,13 +14,13 @@ summary: 운영 환경, 애플리케이션 클러스터, 애플리케이션 및 
 
 
 [role="lead"]
-운영 환경, 애플리케이션 클러스터, 애플리케이션 및 라이센스의 준비 상태를 확인하는 것으로 시작하십시오. Trident Protect를 배포 및 운영하기 위해 사용자 환경이 이러한 요구 사항을 충족하는지 확인합니다.
+운영 환경, 애플리케이션 클러스터, 애플리케이션 및 라이선스의 준비 상태를 확인하여 시작하세요. Trident Protect를 배포하고 운영하려면 환경이 이러한 요구 사항을 충족하는지 확인하세요.
 
 
 
-== Trident는 Kubernetes 클러스터 호환성을 보호합니다
+== Trident Protect Kubernetes 클러스터 호환성
 
-Trident Protect는 다음과 같은 완전관리형 및 자가 관리형 Kubernetes 오퍼링과 호환됩니다.
+Trident Protect는 다음을 포함한 광범위한 완전 관리형 및 자체 관리형 Kubernetes 제품과 호환됩니다.
 
 * Amazon Elastic Kubernetes Service(EKS)
 * Google Kubernetes Engine(GKE)
@@ -33,16 +33,16 @@ Trident Protect는 다음과 같은 완전관리형 및 자가 관리형 Kuberne
 
 [NOTE]
 ====
-* Trident Protect 백업은 Linux 컴퓨트 노드에서만 지원됩니다.  Windows 컴퓨팅 노드에서는 백업 작업이 지원되지 않습니다.
-* Trident Protect를 설치하는 클러스터가 실행 중인 스냅샷 컨트롤러와 관련 CRD로 구성되어 있는지 확인합니다. 스냅샷 컨트롤러를 설치하려면 을 https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["참조하십시오"]참조하십시오.
+* Trident Protect 백업은 Linux 컴퓨트 노드에서만 지원됩니다. Windows 컴퓨팅 노드에서는 백업 작업이 지원되지 않습니다.
+* Trident Protect를 설치하는 클러스터가 실행 중인 스냅샷 컨트롤러와 관련 CRD로 구성되어 있는지 확인하세요. 스냅샷 컨트롤러를 설치하려면 다음을 참조하세요. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["참조하십시오"] .
 
 
 ====
 
 
-== Trident는 스토리지 백엔드 호환성을 보호합니다
+== Trident Protect 스토리지 백엔드 호환성
 
-Trident Protect는 다음 스토리지 백엔드를 지원합니다.
+Trident Protect는 다음과 같은 스토리지 백엔드를 지원합니다.
 
 * NetApp ONTAP용 Amazon FSx
 * Cloud Volumes ONTAP
@@ -58,14 +58,14 @@ Trident Protect는 다음 스토리지 백엔드를 지원합니다.
 
 * NetApp ONTAP 스토리지 백엔드가 있는지 확인합니다.
 * 백업을 저장할 오브젝트 스토리지 버킷을 구성했는지 확인합니다.
-* 응용 프로그램 또는 응용 프로그램 데이터 관리 작업에 사용할 응용 프로그램 네임스페이스를 만듭니다. Trident Protect는 이러한 네임스페이스를 자동으로 만들지 않습니다. 사용자 지정 리소스에 존재하지 않는 네임스페이스를 지정하면 작업이 실패합니다.
+* 애플리케이션이나 애플리케이션 데이터 관리 작업에 사용할 애플리케이션 네임스페이스를 만듭니다. Trident Protect는 이러한 네임스페이스를 자동으로 생성하지 않습니다. 사용자 정의 리소스에 존재하지 않는 네임스페이스를 지정하면 작업이 실패합니다.
 
 
 
 
 == NAS 경제 볼륨에 대한 요구 사항
 
-Trident Protect는 NAS 경제 볼륨에 대한 백업 및 복원 작업을 지원합니다. 현재 NAS 경제 볼륨으로의 스냅샷, 클론, SnapMirror 복제는 지원되지 않습니다. Trident Protect와 함께 사용할 각 NAS 경제 볼륨에 대해 스냅샷 디렉토리를 활성화해야 합니다.
+Trident Protect는 NAS 경제형 볼륨에 대한 백업 및 복원 작업을 지원합니다. 현재 NAS 경제 볼륨에 대한 스냅샷, 복제 및 SnapMirror 복제는 지원되지 않습니다.  Trident Protect와 함께 사용하려는 각 NAS-Economy 볼륨에 대해 스냅샷 디렉토리를 활성화해야 합니다.
 
 [NOTE]
 ====
@@ -89,7 +89,7 @@ NOTE: Trident 백엔드 구성 옵션을 로 `true` 설정하면 기본적으로
 
 == KubeVirt VM으로 데이터 보호
 
-Trident Protect는 데이터 보호 작업 중에 KubeVirt 가상 머신에 파일 시스템 동결 및 동결 해제 기능을 제공하여 데이터 일관성을 보장합니다. VM 동결 작업에 대한 구성 방법과 기본 동작은 Trident Protect 버전마다 다르며, 최신 릴리스에서는 Helm 차트 매개변수를 통해 간소화된 구성을 제공합니다.
+Trident Protect는 데이터 보호 작업 중에 KubeVirt 가상 머신에 파일 시스템 동결 및 동결 해제 기능을 제공하여 데이터 일관성을 보장합니다.  VM 동결 작업에 대한 구성 방법과 기본 동작은 Trident Protect 버전마다 다르며, 최신 릴리스에서는 Helm 차트 매개변수를 통해 간소화된 구성을 제공합니다.
 
 
 NOTE: 복원 작업 중에  `VirtualMachineSnapshots` 가상 머신(VM)에 대해 생성된 항목은 복원되지 않습니다.
@@ -97,7 +97,7 @@ NOTE: 복원 작업 중에  `VirtualMachineSnapshots` 가상 머신(VM)에 대�
 .Trident Protect 25.10 이상
 [%collapsible%open]
 ====
-Trident Protect는 일관성을 보장하기 위해 데이터 보호 작업 중에 KubeVirt 파일 시스템을 자동으로 동결 및 동결 해제합니다. Trident protect 25.10부터 다음을 사용하여 이 동작을 비활성화할 수 있습니다. `vm.freeze` Helm 차트 설치 중 매개변수. 해당 매개변수는 기본적으로 활성화되어 있습니다.
+Trident Protect는 일관성을 보장하기 위해 데이터 보호 작업 중에 KubeVirt 파일 시스템을 자동으로 동결 및 동결 해제합니다.  Trident Protect 25.10부터 다음을 사용하여 이 동작을 비활성화할 수 있습니다. `vm.freeze` Helm 차트 설치 중 매개변수. 해당 매개변수는 기본적으로 활성화되어 있습니다.
 
 [source, console]
 ----
@@ -107,19 +107,19 @@ helm install ... --set vm.freeze=false ...
 .Trident 프로텍트 24.10.1~25.06
 [%collapsible]
 ====
-Trident Protect 24.10.1부터 Trident Protect는 데이터 보호 작업 중에 KubeVirt 파일 시스템이 자동으로 작동 중지되고 작동 중지되지 않습니다. 다음 명령을 사용하여 이 자동 동작을 비활성화할 수도 있습니다.
+Trident Protect 24.10.1부터 Trident Protect는 데이터 보호 작업 중에 KubeVirt 파일 시스템을 자동으로 동결 및 동결 해제합니다. 선택적으로 다음 명령을 사용하여 이 자동 동작을 비활성화할 수 있습니다.
 
 [source, console]
 ----
 kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=false -n trident-protect
 ----
 ====
-.Trident Protect 24.10
+.Trident 프로텍트 24.10
 [%collapsible]
 ====
-Trident Protect 24.10은 데이터 보호 작업 중에 KubeVirt VM 파일 시스템의 일관된 상태를 자동으로 보장하지 않습니다. Trident Protect 24.10을 사용하여 KubeVirt VM 데이터를 보호하려면 데이터 보호 작업 전에 파일 시스템에 대해 고정/고정 해제 기능을 수동으로 활성화해야 합니다. 이렇게 하면 파일 시스템이 정합성 보장 상태가 됩니다.
+Trident Protect 24.10은 데이터 보호 작업 중에 KubeVirt VM 파일 시스템의 일관된 상태를 자동으로 보장하지 않습니다.  Trident Protect 24.10을 사용하여 KubeVirt VM 데이터를 보호하려면 데이터 보호 작업을 시작하기 전에 파일 시스템의 동결/동결 해제 기능을 수동으로 활성화해야 합니다. 이렇게 하면 파일 시스템이 일관된 상태를 유지하게 됩니다.
 
-를 사용하여 데이터 보호 작업 중에 VM 파일 시스템의 고정 및 고정 해제를 관리하도록 Trident Protect 24.10을 구성한 후 다음 명령을 사용하여 관리할 수 link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["가상화 구성"^]있습니다.
+데이터 보호 작업 중 VM 파일 시스템의 동결 및 동결 해제를 관리하도록 Trident Protect 24.10을 구성할 수 있습니다.link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["가상화 구성"^] 그리고 다음 명령을 사용합니다.
 
 [source, console]
 ----
@@ -130,7 +130,7 @@ kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=
 
 == SnapMirror 복제에 대한 요구 사항
 
-NetApp SnapMirror 복제는 다음 ONTAP 솔루션의 Trident Protect와 함께 사용할 수 있습니다.
+NetApp SnapMirror 복제는 다음 ONTAP 솔루션에 대해 Trident Protect와 함께 사용할 수 있습니다.
 
 * 온프레미스 NetApp FAS, AFF, ASA 클러스터
 * NetApp ONTAP Select를 참조하십시오
@@ -144,7 +144,7 @@ NetApp SnapMirror 복제는 다음 ONTAP 솔루션의 Trident Protect와 함께 
 
 SnapMirror 복제를 사용하려는 경우 ONTAP 클러스터가 다음 요구 사항을 충족하는지 확인하십시오.
 
-* *NetApp Trident*: NetApp Trident는 백엔드로 ONTAP을 활용하는 소스 및 대상 Kubernetes 클러스터 모두에 존재해야 합니다. Trident Protect는 다음 드라이버를 통해 지원되는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 복제를 지원합니다.
+* * NetApp Trident*: NetApp Trident 백엔드로 ONTAP 활용하는 소스 및 대상 Kubernetes 클러스터 모두에 존재해야 합니다. Trident Protect는 다음 드라이버로 지원되는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 복제를 지원합니다.
 +
 ** `ontap-nas` : NFS
 ** `ontap-san` : iSCSI
@@ -174,14 +174,14 @@ NOTE: SnapMirror 비동기 보호만 지원됩니다.
 NOTE: 두 ONTAP 클러스터 간의 복제 관계에 사용되는 SVM 이름이 고유한지 확인합니다.
 
 * *NetApp Trident 및 SVM*: 피어링된 원격 SVM은 대상 클러스터의 NetApp Trident에서 사용할 수 있어야 합니다.
-* * 관리되는 백엔드 *: 복제 관계를 만들려면 Trident Protect에서 ONTAP 스토리지 백엔드를 추가 및 관리해야 합니다.
+* *관리형 백엔드*: 복제 관계를 생성하려면 Trident Protect에서 ONTAP 스토리지 백엔드를 추가하고 관리해야 합니다.
 
 
 
 
 === SnapMirror 복제를 위한 Trident/ONTAP 구성
 
-Trident Protect를 사용하려면 소스 및 대상 클러스터 모두에 대해 복제를 지원하는 스토리지 백엔드를 하나 이상 구성해야 합니다. 소스 및 대상 클러스터가 동일한 경우 대상 애플리케이션은 최상의 복원력을 위해 소스 애플리케이션과 다른 스토리지 백엔드를 사용해야 합니다.
+Trident Protect를 사용하려면 소스 및 대상 클러스터 모두에 대한 복제를 지원하는 하나 이상의 스토리지 백엔드를 구성해야 합니다. 소스 및 대상 클러스터가 동일한 경우, 최상의 복원력을 위해 대상 애플리케이션은 소스 애플리케이션과 다른 스토리지 백엔드를 사용해야 합니다.
 
 
 

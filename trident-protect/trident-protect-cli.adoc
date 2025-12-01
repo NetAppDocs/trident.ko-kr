@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-cli.html 
 keywords: trident, protect, command line utility, cli, netapp, custom, resources 
-summary: protectctl 명령을 사용하여 Trident Protect 사용자 지정 리소스를 만들고 상호 작용할 수 있습니다. 
+summary: protectctl 명령을 사용하면 Trident Protect 사용자 정의 리소스를 만들고 상호 작용할 수 있습니다. 
 ---
-= Trident Protect CLI 플러그인을 설치합니다
+= Trident Protect CLI 플러그인을 설치하세요
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,11 +14,11 @@ summary: protectctl 명령을 사용하여 Trident Protect 사용자 지정 리�
 
 
 [role="lead"]
-Trident 유틸리티의 확장인 Trident Protect 명령줄 플러그인을 사용하여 Trident CRS(사용자 지정 리소스)를 만들고 상호 작용할 수 있습니다 `tridentctl`.
+Trident Protect 명령줄 플러그인을 사용할 수 있습니다. 이 플러그인은 Trident 의 확장 기능입니다. `tridentctl` Trident Protect 사용자 정의 리소스(CR)를 생성하고 상호 작용할 수 있는 유틸리티입니다.
 
 
 
-== Trident Protect CLI 플러그인을 설치합니다
+== Trident Protect CLI 플러그인을 설치하세요
 
 명령줄 유틸리티를 사용하기 전에 클러스터에 액세스하는 데 사용하는 시스템에 설치해야 합니다. 컴퓨터에서 x64 또는 ARM CPU를 사용하는지 여부에 따라 다음 단계를 수행합니다.
 
@@ -27,7 +27,7 @@ Trident 유틸리티의 확장인 Trident Protect 명령줄 플러그인을 사�
 .Linux AMD64 CPU용 플러그인을 다운로드합니다
 --
 .단계
-. Trident Protect CLI 플러그인 다운로드:
+. Trident Protect CLI 플러그인을 다운로드하세요:
 +
 [source, console]
 ----
@@ -39,7 +39,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .Linux ARM64 CPU용 플러그인을 다운로드합니다
 --
 .단계
-. Trident Protect CLI 플러그인 다운로드:
+. Trident Protect CLI 플러그인을 다운로드하세요:
 +
 [source, console]
 ----
@@ -51,7 +51,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .Mac AMD64 CPU용 플러그인을 다운로드합니다
 --
 .단계
-. Trident Protect CLI 플러그인 다운로드:
+. Trident Protect CLI 플러그인을 다운로드하세요:
 +
 [source, console]
 ----
@@ -63,7 +63,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .Mac ARM64 CPU용 플러그인을 다운로드합니다
 --
 .단계
-. Trident Protect CLI 플러그인 다운로드:
+. Trident Protect CLI 플러그인을 다운로드하세요:
 +
 [source, console]
 ----
@@ -115,7 +115,7 @@ tridentctl-protect help
 
 == 명령 자동 완성 활성화
 
-Trident Protect CLI 플러그인을 설치한 후 특정 명령에 대해 자동 완성 기능을 활성화할 수 있습니다.
+Trident Protect CLI 플러그인을 설치한 후 특정 명령에 대한 자동 완성을 활성화할 수 있습니다.
 
 [role="tabbed-block"]
 ====

@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-upgrade.html 
 keywords: trident, protect, netapp, upgrade, new, version 
-summary: Trident Protect를 최신 버전으로 업그레이드하여 새로운 기능 또는 버그 수정을 활용할 수 있습니다. 
+summary: Trident Protect를 최신 버전으로 업그레이드하면 새로운 기능이나 버그 수정을 활용할 수 있습니다. 
 ---
-= Trident Protect를 업그레이드합니다
+= Trident 프로텍트 업그레이드
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,7 +14,7 @@ summary: Trident Protect를 최신 버전으로 업그레이드하여 새로운 
 
 
 [role="lead"]
-Trident Protect를 최신 버전으로 업그레이드하여 새로운 기능 또는 버그 수정을 활용할 수 있습니다.
+Trident Protect를 최신 버전으로 업그레이드하면 새로운 기능이나 버그 수정을 활용할 수 있습니다.
 
 [NOTE]
 ====
@@ -22,11 +22,11 @@ Trident Protect를 최신 버전으로 업그레이드하여 새로운 기능 �
 +
 잠재적인 오류를 방지하려면 업그레이드 전에 모든 스냅샷 일정을 비활성화했다가 나중에 다시 활성화할 수 있습니다. 하지만 이렇게 하면 업그레이드 기간 동안 예약된 스냅샷이 모두 손실될 수 있습니다.
 
-* 개인 레지스트리 설치의 경우 대상 버전에 필요한 Helm 차트와 이미지가 개인 레지스트리에서 사용 가능한지 확인하고, 사용자 지정 Helm 값이 새 차트 버전과 호환되는지 확인하세요. 자세한 내용은 다음을 참조하세요.link:trident-protect-installation.html["개인 레지스트리로부터 Trident Protect를 설치합니다"] .
+* 개인 레지스트리 설치의 경우 대상 버전에 필요한 Helm 차트와 이미지가 개인 레지스트리에서 사용 가능한지 확인하고, 사용자 지정 Helm 값이 새 차트 버전과 호환되는지 확인하세요. 자세한 내용은 다음을 참조하세요.link:trident-protect-installation.html["개인 레지스트리에서 Trident Protect 설치"] .
 
 
 ====
-Trident Protect를 업그레이드하려면 다음 단계를 수행하십시오.
+Trident Protect를 업그레이드하려면 다음 단계를 수행하세요.
 
 .단계
 . Trident Helm 리포지토리를 업데이트합니다.
@@ -59,7 +59,7 @@ kubectl delete secret -n trident-protect -l name=trident-protect-crds,owner=helm
 ----
 
 
-. Trident Protect 업그레이드:
+. Trident 프로텍트 업그레이드:
 +
 [source, console]
 ----

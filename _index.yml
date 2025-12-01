@@ -43,11 +43,11 @@ indexpage:
       url: "/trident-use/vol-operations.html"
   - title: 고급 데이터 관리 및 보호 기능을 제공합니다
     links:
-    - title: Trident 보호를 통한 고급 데이터 보호
+    - title: Trident Protect를 통한 고급 데이터 보호
       url: "/trident-protect/learn-about-trident-protect.html"
-    - title: Trident Protect를 구축합니다
+    - title: Trident 프로텍트 배치
       url: "/trident-protect/trident-protect-installation.html"
-    - title: Trident Protect를 업그레이드합니다
+    - title: Trident 프로텍트 업그레이드
       url: "/trident-protect/trident-protect-upgrade.html"
   - title: 데모 자습서
     links:
@@ -55,7 +55,7 @@ indexpage:
       url: https://media.netapp.com/video-detail/c5bebae0-aab6-5fed-ae16-df6a3a8b260d/netapp-trident-advanced-data-protection-for-kubernetes-applications
   - title: 블로그 커뮤니티
     links:
-    - title: Trident 및 Trident 보호 블로그
+    - title: Trident 및 Trident 프로텍트 블로그
       url: "/blog-posts.html"
     - title: NetApp.IO를 참조하십시오
       url: https://netapp.io/

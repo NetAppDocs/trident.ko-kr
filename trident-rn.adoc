@@ -88,9 +88,9 @@ NOTE: 프로덕션 환경에서는 사용할 수 없습니다.
 
 
 
-=== Trident 보호
+=== Trident 프로텍트
 
-NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저닝 프로그램을 통해 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 개선하는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
+NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저너가 지원하는 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 향상시키는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
 
 
 
@@ -227,9 +227,9 @@ NOTE: 이 기능은 실험적이며 현재 ONTAP-SAN 드라이버(iSCSI 및 FCP 
 
 
 
-=== Trident 보호
+=== Trident 프로텍트
 
-NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저닝 프로그램을 통해 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 개선하는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
+NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저너가 지원하는 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 향상시키는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
 
 
 
@@ -280,7 +280,7 @@ NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident 
 
 == 25.02의 변경 사항
 
-Trident 25.02부터 Trident 및 Trident Protect 릴리스의 향상된 기능, 수정 사항 및 사용 중단에 대한 자세한 내용은 새로운 기능 요약을 참조하십시오.
+Trident 25.02부터 새로운 기능 요약에서는 Trident 와 Trident Protect 릴리스에 대한 개선 사항, 수정 사항 및 사용 중단에 대한 세부 정보를 제공합니다.
 
 
 
@@ -333,21 +333,21 @@ Trident 25.02부터 Trident 및 Trident Protect 릴리스의 향상된 기능, �
 
 
 
-=== Trident 보호
+=== Trident 프로텍트
 
-NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저닝 프로그램을 통해 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 개선하는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
+NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident CSI 스토리지 프로비저너가 지원하는 상태 저장 Kubernetes 애플리케이션의 기능과 가용성을 향상시키는 고급 애플리케이션 데이터 관리 기능을 제공합니다.
 
 
 
 ==== 향상된 기능
 
-* 볼륨 모드: 파일 및 볼륨 모드: 블록(원시 장치) 스토리지 모두에 대한 KubeVirt/OpenShift Virtualization VM에 대한 백업 및 복구 지원 추가 이 지원은 모든 Trident 드라이버와 호환되며, Trident Protect와 함께 NetApp SnapMirror를 사용하여 스토리지를 복제할 때 기존 보호 기능이 향상됩니다.
+* volumeMode: File 및 volumeMode: Block(원시 장치) 스토리지 모두에 대해 KubeVirt/OpenShift 가상화 VM에 대한 백업 및 복원 지원이 추가되었습니다. 이 지원은 모든 Trident 드라이버와 호환되며, Trident Protect와 함께 NetApp SnapMirror 사용하여 스토리지를 복제할 때 기존 보호 기능을 향상시킵니다.
 * Kubevirt 환경의 애플리케이션 수준에서 동결 동작을 제어하는 기능이 추가되었습니다.
 * AutoSupport 프록시 연결 구성에 대한 지원이 추가되었습니다.
 * Data Mover 암호화에 대한 암호를 정의하는 기능이 추가되었습니다(Kopia/Restic).
 * 실행 후크를 수동으로 실행할 수 있는 기능이 추가되었습니다.
-* Trident Protect 설치 중에 SCC(Security Context Constraints)를 구성하는 기능이 추가되었습니다.
-* Trident Protect 설치 중에 노드 선택기 구성에 대한 지원이 추가되었습니다.
+* Trident Protect 설치 중에 보안 컨텍스트 제약 조건(SCC)을 구성하는 기능이 추가되었습니다.
+* Trident Protect 설치 중 nodeSelector 구성에 대한 지원이 추가되었습니다.
 * AppVault 개체에 대한 HTTP/HTTPS 송신 프록시에 대한 지원이 추가되었습니다.
 * 확장 ResourceFilter - 클러스터 범위 리소스를 제외할 수 있도록 설정합니다.
 * S3 AppVault 자격 증명에서 AWS 세션 토큰에 대한 지원이 추가되었습니다.
@@ -417,7 +417,7 @@ NetApp Trident Protect는 NetApp ONTAP 스토리지 시스템과 NetApp Trident 
 ** 재해 복구
 ** 애플리케이션 이동성
 +
-link:./trident-protect/learn-about-trident-protect.html["Trident Protect에 대해 자세히 알아보십시오"]..
+link:./trident-protect/learn-about-trident-protect.html["Trident Protect에 대해 자세히 알아보세요"].
 
 
 

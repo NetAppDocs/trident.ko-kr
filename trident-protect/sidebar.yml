@@ -1,28 +1,28 @@
 ---
 section: trident-protect
-title: Trident Protect로 애플리케이션을 보호합니다
+title: Trident Protect로 애플리케이션을 보호하세요
 entries:
-- title: Trident Protect에 대해 자세히 알아보십시오
+- title: Trident Protect에 대해 알아보세요
   url: "/trident-protect/learn-about-trident-protect.html"
-- title: Trident Protect를 설치합니다
+- title: Trident Protect 설치
   entries:
-  - title: Trident 보호 요구 사항
+  - title: Trident 프로텍트 요구 사항
     url: "/trident-protect/trident-protect-requirements.html"
-  - title: Trident Protect를 설치합니다
+  - title: Trident Protect 설치
     url: "/trident-protect/trident-protect-installation.html"
-  - title: Trident Protect CLI 플러그인을 설치합니다
+  - title: Trident Protect CLI 플러그인을 설치하세요
     url: "/trident-protect/trident-protect-cli.html"
-  - title: Trident Protect 설치를 사용자 지정합니다
+  - title: Trident Protect 설치 사용자 정의
     url: "/trident-protect/trident-protect-customize-installation.html"
-- title: Trident Protect를 관리합니다
+- title: Trident Protect 관리
   entries:
   - title: 권한 부여 및 액세스 제어 관리
     url: "/trident-protect/manage-authorization-access-control.html"
   - title: Trident Protect 리소스 모니터링
     url: "/trident-protect/monitor-trident-protect-resources.html"
-  - title: Trident Protect 지원 번들을 생성합니다
+  - title: Trident Protect 지원 번들 생성
     url: "/trident-protect/trident-protect-generate-support-bundle.html"
-  - title: Trident Protect를 업그레이드합니다
+  - title: Trident 프로텍트 업그레이드
     url: "/trident-protect/trident-protect-upgrade.html"
 - title: 애플리케이션을 관리하고 보호합니다
   entries:
@@ -34,7 +34,7 @@ entries:
     url: "/trident-protect/trident-protect-protect-apps.html"
   - title: 응용 프로그램을 복원합니다
     entries:
-    - title: Trident Protect를 사용하여 애플리케이션을 복원합니다
+    - title: Trident Protect를 사용하여 애플리케이션 복원
       url: "/trident-protect/trident-protect-restore-apps.html"
     - title: 고급 설정 사용
       url: "/trident-protect/trident-protect-restore-settings.html"
@@ -42,7 +42,7 @@ entries:
     url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
   - title: 애플리케이션을 마이그레이션합니다
     url: "/trident-protect/trident-protect-migrate-apps.html"
-  - title: Trident Protect로 실행 후크를 관리합니다
+  - title: Trident Protect로 실행 후크 관리
     url: "/trident-protect/trident-protect-use-execution-hooks.html"
-- title: Trident Protect를 제거합니다
+- title: Trident Protect 제거
   url: "/trident-protect/trident-protect-uninstall.html"
