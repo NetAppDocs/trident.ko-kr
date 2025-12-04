@@ -4010,7 +4010,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="1f3ba9ee33f6eeade259b37d0a9d4295" category="open-title">CR을 사용하여 일정을 생성합니다</block>
   <block id="0e94d109e3c6dd8f63d25b03253b5d5b" category="list-text">CR(사용자 정의 리소스) 파일을 만들고 이름을<block ref="8b0c6e1f32e0c117335dedae62b11dba" prefix=" " category="inline-code"></block>지정합니다.</block>
   <block id="fd3508664419c1ac5449e5dc6073188b" category="list-text">* spec.applicationRef *: 백업할 응용 프로그램의 Kubernetes 이름입니다.</block>
-  <block id="53ea99d8bfae17bb8fc2186524166892" category="list-text">* spec.snapshotRetention *: 보존할 스냅샷 수입니다. 0은 스냅샷을 생성하지 않아야 함을 나타냅니다.</block>
   <block id="da9137c7fbfdc9b7f02e3ca8def0431d" category="list-text">*spec.granularity*: 일정이 실행되는 빈도. 가능한 값과 필수 관련 필드:</block>
   <block id="1326c499c45cd471c6075891c6573130" category="list-text">파일을 올바른 값으로 채운 후<block ref="8b0c6e1f32e0c117335dedae62b11dba" prefix=" " category="inline-code"></block> CR:</block>
   <block id="6bb2ab2bbc2b0f3f5faec961628f6f4b" category="open-title">CLI를 사용하여 일정을 생성합니다</block>
@@ -5406,7 +5405,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="6b62784ed0975ba9ec1e2f69af860e25" category="admonition">Trident 다음과 같은 기준으로 이전 OpenShift 버전을 계속 지원합니다.<block ref="d73f30265a77d175825591fd08508146" category="inline-link-macro-rx"></block> 더 이상 공식적으로 지원되지 않는 Kubernetes 버전을 사용하는 경우에도 마찬가지입니다.  이런 경우 Trident 설치하는 동안 Kubernetes 버전에 대한 경고 메시지는 무시해도 됩니다.</block>
   <block id="4efb4e385545dd4fb4a8cf16e5ef7763" category="paragraph">보호 정책은 정의된 일정에 따라 스냅샷, 백업 또는 둘 다를 생성하여 앱을 보호합니다.  매시간, 매일, 매주, 매월 스냅샷과 백업을 만들도록 선택할 수 있으며, 보관할 복사본 수를 지정할 수 있습니다.  full-backup-rule 주석을 사용하여 비증분 전체 백업을 예약할 수 있습니다.  기본적으로 모든 백업은 증분 백업입니다.  주기적으로 전체 백업을 수행하고 그 사이에 증분 백업을 수행하면 복원과 관련된 위험을 줄이는 데 도움이 됩니다.</block>
   <block id="71f68550bd8133367f60c4ea58f6680d" category="list-text">스냅샷에 대한 일정은 다음을 설정하여 생성할 수 있습니다.<block ref="90d510783632c9f8604cd880d9f84137" prefix=" " category="inline-code"></block> 0으로 그리고<block ref="460d2880d85882a9c98985b9b97c15f8" prefix=" " category="inline-code"></block> 0보다 큰 값으로.  환경<block ref="460d2880d85882a9c98985b9b97c15f8" prefix=" " category="inline-code"></block> 0으로 설정하면 예약된 백업은 여전히 스냅샷을 생성하지만, 이는 임시적이며 백업이 완료되면 즉시 삭제됩니다.</block>
-  <block id="183c1f11eb5fcbc4a480f1ed7ec6315d" category="list-text">*spec.backupRetention*: 보관할 백업 수.  0은 백업을 생성하지 않음을 나타냅니다(스냅샷만 생성).</block>
   <block id="50b9f8f4650a278b466928c2105fc23a" category="list-text"><block ref="769cb50c95fd3a43c659aa73aba99e5b" prefix="" category="inline-code"></block>(지정해야 함)<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block> )</block>
   <block id="03b866ae4a8a50619a4126154196606b" category="list-text"><block ref="c512b685438f41daa7386329a3b8f8d3" prefix="" category="inline-code"></block>(지정해야 함)<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block> 그리고<block ref="9199af27775b1a2a876e6d7b25540711" prefix=" " category="inline-code"></block> )</block>
   <block id="2cfd34c47c4dbe46650e40185474bd21" category="list-text"><block ref="6c25e6a6da95b3d583c6ec4c3f82ed4d" prefix="" category="inline-code"></block>(지정해야 함)<block ref="d5870327522a71f5b75f9d3793d0dc97" prefix=" " category="inline-code"></block> , 그리고<block ref="4a04848e0e6e9423892ebc93ae61842d" prefix=" " category="inline-code"></block> )</block>
@@ -5969,4 +5967,10 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="70568f333da28442c152ac2e1f71e1a0" category="sidebar">Trident Protect로 애플리케이션을 보호하세요</block>
   <block id="8545a0d7cdafff8da2dece1a851630dc" category="sidebar">Trident Protect 관리</block>
   <block id="83ff2dd2ff6a9ee85daa1b0fefef4019" category="sidebar">Trident Protect로 실행 후크 관리</block>
+  <block id="94404deae8ba6c1ce377a82e28c7c23d" category="list-text">*spec.backupRetention*: (_필수_) 보관할 백업 수입니다. 0은 백업을 생성하지 않음을 나타냅니다(스냅샷만 생성).</block>
+  <block id="18b62a0490b46e770b6772506df16e66" category="list-text">*spec.backupReclaimPolicy*: (_선택 사항_) 보존 기간 동안 백업 CR이 삭제된 경우 백업에 어떤 일이 발생하는지 결정합니다.  보관 기간이 지나면 백업은 항상 삭제됩니다. 가능한 값(대소문자 구분):</block>
+  <block id="b847e9fad963501d7bf56021c133b124" category="list-text">*spec.snapshotRetention*: (_필수_) 보관할 스냅샷 수입니다. 0은 스냅샷을 생성하지 않음을 나타냅니다.</block>
+  <block id="7686f86b5b964234d48e80748592235c" category="list-text">*spec.snapshotReclaimPolicy*: (_선택 사항_) 스냅샷 CR이 보존 기간 동안 삭제된 경우 스냅샷에 어떤 일이 발생하는지 결정합니다.  보존 기간이 지나면 스냅샷은 항상 삭제됩니다. 가능한 값(대소문자 구분):</block>
+  <block id="0219cebc6ab6bc045fd44c689e3508dd" category="list-text"><block ref="afece4245269582cb2f1009d4fb52047" prefix="" category="inline-code"></block></block>
+  <block id="eced49573e92b0138aa5161875ff0f1e" category="list-text"><block ref="f2a6c498fb90ee345d997f888fce3b18" prefix="" category="inline-code"></block>(기본)</block>
 </blocks>

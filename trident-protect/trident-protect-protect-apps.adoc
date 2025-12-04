@@ -221,8 +221,20 @@ tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --a
 
 ** * spec.applicationRef *: 백업할 응용 프로그램의 Kubernetes 이름입니다.
 ** * spec.appVaultRef *: (_required_) 백업 내용을 저장할 AppVault의 이름입니다.
-** *spec.backupRetention*: 보관할 백업 수.  0은 백업을 생성하지 않음을 나타냅니다(스냅샷만 생성).
-** * spec.snapshotRetention *: 보존할 스냅샷 수입니다. 0은 스냅샷을 생성하지 않아야 함을 나타냅니다.
+** *spec.backupRetention*: (_필수_) 보관할 백업 수입니다. 0은 백업을 생성하지 않음을 나타냅니다(스냅샷만 생성).
+** *spec.backupReclaimPolicy*: (_선택 사항_) 보존 기간 동안 백업 CR이 삭제된 경우 백업에 어떤 일이 발생하는지 결정합니다.  보관 기간이 지나면 백업은 항상 삭제됩니다. 가능한 값(대소문자 구분):
++
+*** `Retain` (기본값)
+*** `Delete`
+
+
+** *spec.snapshotRetention*: (_필수_) 보관할 스냅샷 수입니다. 0은 스냅샷을 생성하지 않음을 나타냅니다.
+** *spec.snapshotReclaimPolicy*: (_선택 사항_) 스냅샷 CR이 보존 기간 동안 삭제된 경우 스냅샷에 어떤 일이 발생하는지 결정합니다.  보존 기간이 지나면 스냅샷은 항상 삭제됩니다. 가능한 값(대소문자 구분):
++
+*** `Retain`
+*** `Delete`(기본)
+
+
 ** *spec.granularity*: 일정이 실행되는 빈도. 가능한 값과 필수 관련 필드:
 +
 *** `Hourly`(지정해야 함) `spec.minute` )
@@ -301,7 +313,22 @@ NOTE: 을 사용하여 `tridentctl-protect create schedule --help` 이 명령에
 +
 [source, console]
 ----
-tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace> --full-backup-rule <string>
+tridentctl-protect create schedule <my_schedule_name> \
+  --appvault <my_appvault_name> \
+  --app <name_of_app_to_snapshot> \
+  --backup-retention <how_many_backups_to_retain> \
+  --backup-reclaim-policy <Retain|Delete (default Retain)> \
+  --data-mover <Kopia_or_Restic> \
+  --day-of-month <day_of_month_to_run_schedule> \
+  --day-of-week <day_of_week_to_run_schedule> \
+  --granularity <frequency_to_run> \
+  --hour <hour_of_day_to_run> \
+  --minute <minute_of_hour_to_run> \
+  --recurrence-rule <recurrence> \
+  --snapshot-retention <how_many_snapshots_to_retain> \
+  --snapshot-reclaim-policy <Retain|Delete (default Delete)> \
+  --full-backup-rule <string> \
+  -n <application_namespace>
 ----
 +
 고정 전체 백업을 위해 플래그를 `always` 설정하거나 요구 사항에 따라 사용자 지정할 수 `--full-backup-rule` 있습니다. 예를 들어, 매일 세분화를 선택하는 경우 전체 백업이 수행되는 요일을 지정할 수 있습니다. 예를 들어 월요일과 목요일에 전체 백업을 예약하려면 을 `--full-backup-rule "Monday,Thursday"` 사용합니다.
