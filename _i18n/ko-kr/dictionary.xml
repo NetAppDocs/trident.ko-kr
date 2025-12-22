@@ -2097,8 +2097,6 @@
   <block id="1dedbfd605df8b562acc8f759a8e9acc" category="list-text">를 실행하는 Kubernetes 클러스터 <block ref="229e1052bb9ecd8cf2680d6f44691174" category="inline-link-macro-rx"></block></block>
   <block id="17c5eeb01739643b5aef94fe18b6c849" category="paragraph">버전 선택기를 사용하여 최신 버전과 이전 버전 4개를 탐색하거나 아래 링크를 사용할 수 있습니다.</block>
   <block id="2122a8acb599837078e6b76436e892c4" category="list-text">이제 Trident에서 Kubernetes 1.27이 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
-  <block id="a3460163c4a2854c79a419dda57ac917" category="list-text">RHEL 8+(AMD64 및 ARM64)</block>
-  <block id="f51a58a0cffb9f9953edce6411578b53" category="list-text">Ubuntu 22.04 이상(AMD64 및 ARM64)</block>
   <block id="38a0b9f59e6fe23e1617dc0e78498afe" category="section-title">강제 분리에 대한 세부 정보</block>
   <block id="20c0c9efee2da2645ec0eefaf3c75d8c" category="inline-link-macro">Kubernetes: 노드 정상 종료 아님</block>
   <block id="8f57f52b7233aecf56728bcd48d3a51c" category="list-text">노드에서 오래된 게시된 경로를 식별하고 제거합니다.</block>
@@ -4989,7 +4987,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e80b6a304e29d5dfcb9150f47d69db94" category="section-title">KubeVirt 및 OpenShift 가상화를 위한 Trident 지원</block>
   <block id="cffd29fb8e17cb30625130ee24cd667d" category="paragraph">Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.</block>
   <block id="0ae326ef84f2a6bc4be48951f88c0162" category="list-text">OpenShift Virtualization 환경에서 매개 변수(예<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>:)를 갖도록 스토리지 클래스를 업데이트합니다<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block>. 필요한 경우 의 매개 변수를<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block> 사용하여 볼륨 모드를 명시적으로 차단하도록<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block> 설정하여 CDI에 블록 데이터 볼륨을 생성하도록 알립니다.</block>
-  <block id="daa6a182f8035711e9635994f572c7bc" category="list-text">OpenShift Container Platform(AMD64 및 ARM64)에서 지원하는 Red Hat Enterprise Linux CoreOS(RHCOS) 버전</block>
   <block id="2bf380408feee0a9443f217c907f0681" category="inline-link-macro">Red Hat OpenShift 로깅 문서</block>
   <block id="796814ebd3d324fe438f0c699c37c89e" category="admonition">아래 표에는 로깅 서비스와 관련된 스토리지 구성과 관련된 변수만 나와 있습니다. 배포에 따라 검토, 구성 및 사용해야 하는 다른 옵션을 찾을 수 <block ref="202ad309c67a74272d432350a2d0cf76" category="inline-link-macro-rx"></block>있습니다.</block>
   <block id="3a298688c4d78e1b7532d3859cd16a57" category="inline-link-macro">Red Hat OpenShift Container Platform 3.11 설명서</block>
@@ -5990,4 +5987,8 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e40bdae327bee4d52c74e4b3250b08ce" category="cell"><block ref="27081e7eec2d2a1beae20d90b1d5af4f" prefix="" category="inline-code"></block></block>
   <block id="304bbbc132c2b33e03e087cb6838276e" category="cell">S3 버킷에 접근하기 위해 IAM 인증을 활성화하세요.  EKS Pod Identity에 적용됩니다.</block>
   <block id="09a18f0598e032559af2cd41ba3aa659" category="list-text">VolumeSnapshotClass가 하나 이상 존재하는지 확인하십시오. 자세한 내용은 다음을 참조하세요.<block ref="9597869a9c7d53c1c9b0a0dcb905675c" category="inline-link-macro-rx"></block> .</block>
+  <block id="01a2f6f3fc3712c00aaaff540b7187f3" category="list-text">AMD64 및 ARM64 환경에서 OpenShift 컨테이너 플랫폼이 지원하는 Red Hat Enterprise Linux CoreOS(RHCOS) 버전</block>
+  <block id="1c93bd59e1abbbe543685399acba3c3b" category="list-text">AMD64 및 ARM64 기반 Red Hat Enterprise Linux(RHEL) 8 이상</block>
+  <block id="d79b838675f4d040c12110c1c22fcf32" category="list-text">AMD64 및 ARM64에서 Ubuntu 22.04 LTS 이상 버전</block>
+  <block id="02869471b3c4ac5c57fb8c2e1d4355dd" category="list-text">SUSE Linux Enterprise Server (SLES) 15 이상</block>
 </blocks>
