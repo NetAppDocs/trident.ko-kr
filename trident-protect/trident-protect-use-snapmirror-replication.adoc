@@ -366,6 +366,10 @@ kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n trident-
 
 . 대상 클러스터에서 AppMirrorRelationship CR 파일을 생성합니다.
 +
+
+NOTE: CR을 사용할 때는 CR을 적용하기 전에 대상 네임스페이스를 수동으로 생성해야 합니다. Trident Protect는 CLI를 사용할 때만 네임스페이스를 자동으로 생성합니다.
+
++
 [role="tabbed-block"]
 ====
 .CR을 사용하여 AppMirrorRelationship을 생성합니다

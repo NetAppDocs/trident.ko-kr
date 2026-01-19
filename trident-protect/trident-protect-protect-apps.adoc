@@ -328,13 +328,25 @@ tridentctl-protect create schedule <my_schedule_name> \
   --snapshot-retention <how_many_snapshots_to_retain> \
   --snapshot-reclaim-policy <Retain|Delete (default Delete)> \
   --full-backup-rule <string> \
+  --run-immediately <true|false> \
   -n <application_namespace>
 ----
 +
-고정 전체 백업을 위해 플래그를 `always` 설정하거나 요구 사항에 따라 사용자 지정할 수 `--full-backup-rule` 있습니다. 예를 들어, 매일 세분화를 선택하는 경우 전체 백업이 수행되는 요일을 지정할 수 있습니다. 예를 들어 월요일과 목요일에 전체 백업을 예약하려면 을 `--full-backup-rule "Monday,Thursday"` 사용합니다.
+다음 플래그를 사용하면 일정을 더욱 세밀하게 제어할 수 있습니다.
 
 +
-스냅샷 전용 일정의 경우 다음을 설정합니다. `--backup-retention 0` 0보다 큰 값을 지정합니다. `--snapshot-retention` .
+** *전체 백업 예약*: 다음을 사용하세요 `--full-backup-rule` 증분 백업이 아닌 전체 백업을 예약하려면 플래그를 지정하세요. 이 플래그는 다음 경우에만 작동합니다. `--granularity Daily`. 가능한 값:
++
+*** `Always`매일 전체 백업을 생성하세요.
+*** 특정 요일 지정: 쉼표로 구분하여 하나 이상의 요일을 지정하세요(예: `"Monday,Thursday"`). 유효한 값: 월요일, 화요일, 수요일, 목요일, 금요일, 토요일, 일요일.
++
+
+NOTE: 그만큼 `--full-backup-rule` 해당 플래그는 시간별, 주별 또는 월별 세분화에서는 작동하지 않습니다.
+
+
+
+** *스냅샷 전용 일정*: 설정 `--backup-retention 0` 그리고 0보다 큰 값을 지정하십시오. `--snapshot-retention`.
+
 
 
 
@@ -351,7 +363,7 @@ tridentctl-protect create schedule <my_schedule_name> \
 | 주석 | 유형 | 설명 | 기본값 
 
 
-| protect.trident.netapp.io/전체 백업 규칙 | 문자열 | 전체 백업을 예약하기 위한 규칙을 지정합니다. 설정할 수 있습니다 `always` 지속적인 전체 백업을 위해 사용하거나 요구 사항에 맞게 사용자 정의할 수 있습니다. 예를 들어, 일일 단위를 선택하면 전체 백업이 발생해야 하는 요일을 지정할 수 있습니다(예: `"Monday,Thursday"` ). | 설정되지 않음(모든 백업은 증분 백업임) 
+| protect.trident.netapp.io/전체 백업 규칙 | 문자열 | 전체 백업 예약 규칙을 지정합니다. 다음과 같이 설정할 수 있습니다. `Always` 지속적인 전체 백업을 원하시거나 필요에 따라 맞춤 설정할 수 있습니다. 예를 들어, 일별 세분성을 선택하면 전체 백업이 수행될 요일을 지정할 수 있습니다(예: `"Monday,Thursday"`). 유효한 요일 값은 월요일, 화요일, 수요일, 목요일, 금요일, 토요일, 일요일입니다. 참고로 이 주석은 특정 조건을 충족하는 일정에만 사용할 수 있습니다. `granularity` 설정됨 `Daily`. | 설정되지 않음(모든 백업은 증분 백업임) 
 
 
 | protect.trident.netapp.io/스냅샷 완료 시간 초과 | 문자열 | 전체 스냅샷 작업이 완료되는 데 허용되는 최대 시간입니다. | "60m" 
