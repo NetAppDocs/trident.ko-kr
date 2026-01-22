@@ -189,6 +189,9 @@ NOTE: *Pod Identity 연결을 사용하는 경우 이 단계를 건너뜁니다.
 
 *Pod Identity의 경우 다음 형식을 사용하세요*:
 
+
+NOTE: 다음을 사용하세요
+
 [source, json]
 ----
 {

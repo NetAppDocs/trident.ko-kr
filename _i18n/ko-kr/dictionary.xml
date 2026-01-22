@@ -5997,4 +5997,7 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="11442c99db3d2b2bf685a98052263ff2" category="list-text">CR을 사용하여 새 네임스페이스로 복원할 경우, CR을 적용하기 전에 대상 네임스페이스를 수동으로 생성해야 합니다. Trident Protect는 CLI를 사용할 때만 네임스페이스를 자동으로 생성합니다.</block>
   <block id="0f98c9dc4568dec3e7387b839805d490" category="list-text">대상 클러스터에서 AppMirrorRelationship CR 파일을 생성합니다.</block>
   <block id="b056e38029a731ef20ed5ec00c3dcfd8" category="admonition">CR을 사용할 때는 CR을 적용하기 전에 대상 네임스페이스를 수동으로 생성해야 합니다. Trident Protect는 CLI를 사용할 때만 네임스페이스를 자동으로 생성합니다.</block>
+  <block id="5d644af86a05d68ceba69b7be5855202" category="paragraph">다음 예시 명령은 Trident EKS 애드온 버전 25.6.1을 설치합니다:<block ref="c0283be6b5622fc9d2b8ebb2d7fd26c9" prefix=" " category="inline-code"></block> (전용 버전 포함)</block>
+  <block id="5ebe108c241a46f56c18ffb59389b015" category="paragraph">다음 예시 명령은 Trident EKS 애드온 버전 25.6.2를 설치합니다:<block ref="c1c3ee7d0d3404bd1e2b5bdd62f81d43" prefix=" " category="inline-code"></block> (전용 버전 포함)</block>
+  <block id="7400a1a595f19cde496a4d3cdf6a4570" category="admonition">다음을 사용하세요</block>
 </blocks>
