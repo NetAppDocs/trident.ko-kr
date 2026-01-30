@@ -591,7 +591,6 @@
   <block id="c96383270cbab23de47b4f0961f64929" category="cell">'프로젝트 번호'</block>
   <block id="4dd7128ceae058946c44bbbb0985ec6f" category="paragraph">각 백엔드는 단일 Google Cloud 지역에 볼륨을 프로비저닝합니다. 다른 영역에 볼륨을 생성하려면 추가 백엔드를 정의할 수 있습니다.</block>
   <block id="51b2015e6da8653f4041b71312ad43fe" category="cell">'.snapshot' 디렉토리에 액세스합니다</block>
-  <block id="cf13ba16f33b5f6772614929649be6c2" category="summary">tridentctl import를 사용하여 기존 스토리지 볼륨을 Kubernetes PV로 가져올 수 있습니다.</block>
   <block id="5f48c343984786005c9830d96c6fca87" category="doc">볼륨 가져오기</block>
   <block id="76057e180d7b3edcebaa935c7ccab687" category="paragraph">PVC 및 PV에 주석이 추가되어 용적을 가져온 후 PVC와 PV가 관리되었는지 여부를 나타내는 두 가지 목적으로 사용됩니다. 이 주석은 수정하거나 제거할 수 없습니다.</block>
   <block id="2941c38dbb7c39c325787067c0540247" category="summary">kubbtl을 사용하여 백엔드 관리 작업을 수행하는 방법에 대해 알아보십시오.</block>
@@ -2203,29 +2202,21 @@
   <block id="604eea1f3df98285b6887ff059258827" category="list-text">처음에 부가세 반환 청구액 정책이 로 설정되어 있습니다<block ref="16d79ff80feadcf2f52096f073f2b94a" prefix=" " category="inline-code"></block> PV에서 Kubernetes에서 PVC 및 PV를 성공적으로 바인딩하면 스토리지 클래스의 부가세 반환 청구액 정책에 맞게 부가세 반환 청구액 정책이 업데이트됩니다.</block>
   <block id="5d24684cf5054f53b1e945be75b37f69" category="list-text">스토리지 클래스의 부가세 반환 청구액 정책이 인 경우<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block>, PV 삭제 시 저장 볼륨이 삭제된다.</block>
   <block id="db31dcd83fd57b294fb0340ea975015f" category="section-title">볼륨을 가져옵니다</block>
-  <block id="61a1adebea5e6a017b4bd4b405ae4f52" category="paragraph">을 사용할 수 있습니다<block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block> 를 눌러 볼륨을 가져옵니다.</block>
-  <block id="8feb5f647cb423db7fa8a957ae4ef075" category="list-text">영구 볼륨 클레임(PVC) 파일(예:<block ref="88bf8ee4d993e535425148da6a64c1c2" prefix=" " category="inline-code"></block>)를 사용하여 PVC를 생성합니다. PVC 파일에는 다음이 포함되어야 합니다<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>,<block ref="89801e9e98979062e84647433a8ed3e9" prefix=" " category="inline-code"></block>,<block ref="1963d17f24888bdf1f22d7ea7f72f607" prefix=" " category="inline-code"></block>, 및<block ref="ee822781a3bd0ae0f8f6331dc4865d9c" prefix=" " category="inline-code"></block>. 선택적으로 을 지정할 수 있습니다<block ref="c005e78d4bd808038335c32dd84cf7da" prefix=" " category="inline-code"></block> PVC 정의.</block>
   <block id="7f745c89a2e8fd59353bab523e12eb77" category="paragraph">다음은 최소 사양의 예입니다.</block>
-  <block id="a9e31569460a0b133fdd97c5f482c04e" category="admonition">PV 이름 또는 볼륨 크기와 같은 추가 매개 변수는 포함하지 마십시오. 이로 인해 가져오기 명령이 실패할 수 있습니다.</block>
   <block id="37c0e0081d2fa3ebdf688df7e37ecd7a" category="paragraph">지원되는 드라이버에 대한 다음 볼륨 가져오기 예를 검토하십시오.</block>
   <block id="b8cd11aae04b2508e6cf401f43cdb4f9" category="section-title">ONTAP NAS 및 ONTAP NAS FlexGroup를 지원합니다</block>
   <block id="15f21f5d1f84f4b986a4db037c57333d" category="list-text">를 클릭합니다<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 및<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 드라이버는 중복 볼륨 이름을 허용하지 않습니다.</block>
-  <block id="3fa3bc64b029b88f42b842bb7dc4e52d" category="paragraph-title">ONTAP NAS의 예</block>
-  <block id="77fe25c67ee05760d58e91a98e3ff055" category="paragraph">다음은 관리되는 볼륨 및 관리되지 않는 볼륨 가져오기의 예입니다.</block>
   <block id="865c1a701e3847de9fbff4a375ac7177" category="open-title">관리 볼륨</block>
   <block id="9baac1fff2f93c6aa6f2205921fe6b32" category="paragraph">다음 예에서는 라는 볼륨을 가져옵니다<block ref="b61fdc0d7fc5d08e674f3891a91d3116" prefix=" " category="inline-code"></block> 백엔드에서 을(를) 선택합니다<block ref="b0253ee501e433d48faea12f8e40ef28" prefix=" " category="inline-code"></block>:</block>
   <block id="ed12f17a6dc2e65dfdf289eb64d258ae" category="open-title">관리되지 않는 볼륨</block>
   <block id="30690ec57cb4844d007f7d2e2c9393a2" category="paragraph">다음 예에서는 를 가져옵니다<block ref="60d9e6d88af815fe67aed90572f53184" prefix=" " category="inline-code"></block> 를 누릅니다<block ref="b0253ee501e433d48faea12f8e40ef28" prefix=" " category="inline-code"></block> 백엔드:</block>
   <block id="548fedaf4074fe2826e3c53dfd92a19e" category="section-title">ONTAP SAN</block>
-  <block id="854d516b7e1eddbead5cbea0b17dac88" category="paragraph-title">ONTAP SAN 예</block>
   <block id="d172829ee06c1c52828b60f0544b2f06" category="paragraph">다음 예에서는 를 가져옵니다<block ref="a5c0fa75ec8cf92d22eadab558660dda" prefix=" " category="inline-code"></block> 를 누릅니다<block ref="2dec4fe0d108047546d031f48f4073f7" prefix=" " category="inline-code"></block> 백엔드:</block>
   <block id="58f7692a8b6ce5b3fa31b6daec3259fe" category="paragraph">다음 예에 표시된 것처럼 IQN을 Kubernetes 노드 IQN과 공유하는 igroup에 LUN이 매핑되어 있는 경우 오류가 발생합니다.<block ref="4524d417d10c9cf90c4a674da76c4964" prefix=" " category="inline-code"></block>. 볼륨을 가져오려면 이니시에이터를 제거하거나 LUN 매핑을 해제해야 합니다.</block>
   <block id="5ccef908ed30c9dac1afd0a7f3dc5e7f" category="inline-image-macro">iqn 및 클러스터 iqn에 매핑된 LUN 이미지</block>
   <block id="81238a539b4fc11fb20c6d27db1e5d33" category="paragraph"><block ref="81238a539b4fc11fb20c6d27db1e5d33" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="d12ef9e4a047861afd11513bde147f35" category="paragraph-title">요소 예제</block>
   <block id="e91134286ebcca5f894ca859ce6e6527" category="paragraph">다음 예제에서는 을 가져옵니다<block ref="ce9d6be888db333d9f15ad3ca22aab5c" prefix=" " category="inline-code"></block> 백엔드의 볼륨<block ref="54034d50b7e92e0dd9d45b9be754d7bd" prefix=" " category="inline-code"></block>.</block>
   <block id="7501988e9549daa8c2fcd13e55b9fc78" category="admonition">Azure NetApp Files 볼륨을 가져오려면 해당 볼륨 경로를 기준으로 볼륨을 식별합니다. 볼륨 경로는 이후 볼륨 내보내기 경로의 일부입니다<block ref="fb256b96ee496724e4579987e5a6e4da" prefix=" " category="inline-code"></block>. 예를 들어, 마운트 경로가 인 경우<block ref="a88065dde27cea3a008a18172c5a9c9e" prefix=" " category="inline-code"></block>, 볼륨 경로는 입니다<block ref="062b749476713f7b5bbc675159e90bad" prefix=" " category="inline-code"></block>.</block>
-  <block id="1cfd9b4e20d41cdca62f758d3b0cb58b" category="paragraph-title">Azure NetApp Files의 예</block>
   <block id="bd46b0a8c2c4c89a60ee85052ad2dd0e" category="paragraph">다음 예제에서는 을 가져옵니다<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 백엔드의 볼륨<block ref="d8dd89ab9d39f5487714722f9becb468" prefix=" " category="inline-code"></block> 볼륨 경로 포함<block ref="062b749476713f7b5bbc675159e90bad" prefix=" " category="inline-code"></block>.</block>
   <block id="0b8ca2be5f4fe564fb8e843cbc53703d" category="admonition">GKE 환경에서 필요 시 볼륨 스냅샷을 생성할 경우 스냅샷 컨트롤러를 생성하지 마십시오. GKE는 내장된 숨겨진 스냅샷 컨트롤러를 사용합니다.</block>
   <block id="ad90b7d29d0d8a9c746868fe1f38ca90" category="paragraph">RWO, ROX, rwx, RWOP</block>
@@ -4720,8 +4711,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="76f6a2d1bd679fa4c1b485fed91cd412" category="paragraph">관리되는 볼륨의 경우 Trident의 이름은 FlexVol volume의 이름을 형식으로, FlexVol volume 내의 LUN의<block ref="1793051c27c3288cfb3a1c86e4e41b41" prefix=" " category="inline-code"></block> 이름은<block ref="b1a57c8f543d163276a264ab84f98485" prefix=" " category="inline-code"></block> 으로 바꿉니다.</block>
   <block id="4e0dca66d693b4377c93d787e9d5176a" category="paragraph">다음 예에서는<block ref="9c263b72b293041bdc16e8711bb55a99" prefix=" " category="inline-code"></block> 백엔드에 있는 FlexVol volume를<block ref="5461c7e570fd7b4318a37f0dceb291c1" prefix=" " category="inline-code"></block> 가져옵니다.</block>
   <block id="aa39e6a781613c350b8408df39aa0171" category="paragraph">Trident는 드라이버를 사용하여 볼륨 가져오기를<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 지원합니다.</block>
-  <block id="89df083c083e8cfa84ef1517f2b9e609" category="paragraph-title">Google Cloud NetApp 볼륨의 예입니다</block>
-  <block id="3312627a317726be3901705d655e8582" category="paragraph">다음 예에서는<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 볼륨이 포함된<block ref="acdf8df0c694db089171ecaf51f80166" prefix=" " category="inline-code"></block> 백엔드에서 볼륨을<block ref="c082d32d434314708cccf35dd974ac32" prefix=" " category="inline-code"></block> 가져옵니다.</block>
   <block id="94154cfb6a6056267c34a431cd1a4224" category="paragraph">다음 예에서는 동일한 영역에 두 개의 볼륨이 있을 때 볼륨을 가져옵니다<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>.</block>
   <block id="93c5b0ed9261693ca8644540ac8a1cd9" category="admonition">NetApp은 NVMe/TCP에 ONTAP 9.12 이상을 권장합니다.</block>
   <block id="d019fe86b16ae6b783603693309fb4c6" category="section-title">FC 볼륨을 통한 SCSI</block>
@@ -6000,4 +5989,30 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="5d644af86a05d68ceba69b7be5855202" category="paragraph">다음 예시 명령은 Trident EKS 애드온 버전 25.6.1을 설치합니다:<block ref="c0283be6b5622fc9d2b8ebb2d7fd26c9" prefix=" " category="inline-code"></block> (전용 버전 포함)</block>
   <block id="5ebe108c241a46f56c18ffb59389b015" category="paragraph">다음 예시 명령은 Trident EKS 애드온 버전 25.6.2를 설치합니다:<block ref="c1c3ee7d0d3404bd1e2b5bdd62f81d43" prefix=" " category="inline-code"></block> (전용 버전 포함)</block>
   <block id="7400a1a595f19cde496a4d3cdf6a4570" category="admonition">다음을 사용하세요</block>
+  <block id="5b8e1e79bf81135afd29cee3f88e8b30" category="summary"><block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block> 또는 PVC 어노테이션을 사용하여 기존 스토리지 볼륨을 Kubernetes PV로 가져올 수 있습니다.</block>
+  <block id="397460c9fd506a22e7b4c34b8d0d4d7d" category="paragraph">기존 스토리지 볼륨을 Kubernetes PV로 가져오려면 <block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block>를 사용하거나 Trident 가져오기 어노테이션을 사용하여 영구 볼륨 클레임(PVC)을 생성할 수 있습니다.</block>
+  <block id="b08d73a7ef39ba9a1b69252df2432d6d" category="paragraph"><block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block>를 사용하거나 Trident 가져오기 주석이 포함된 PVC를 생성하여 볼륨을 가져올 수 있습니다.</block>
+  <block id="cbaac9a260727431dda3844fc89a1f56" category="admonition">PVC 주석을 사용하는 경우 볼륨을 가져오기 위해 <block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>를 다운로드하거나 사용할 필요가 없습니다.</block>
+  <block id="9f33c2a343cecba4e698e173a72b7205" category="open-title">tridentctl 사용</block>
+  <block id="dc2ba8519acbce5371c3c73e23b848da" category="list-text">PVC를 생성하는 데 사용할 PVC 파일(예:<block ref="88bf8ee4d993e535425148da6a64c1c2" prefix=" " category="inline-code"></block>)을 생성합니다. PVC 파일에는<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>,<block ref="89801e9e98979062e84647433a8ed3e9" prefix=" " category="inline-code"></block>,<block ref="1963d17f24888bdf1f22d7ea7f72f607" prefix=" " category="inline-code"></block> 및<block ref="ee822781a3bd0ae0f8f6331dc4865d9c" prefix=" " category="inline-code"></block>가 포함되어야 합니다. 선택적으로 PVC 정의에서<block ref="c005e78d4bd808038335c32dd84cf7da" prefix=" " category="inline-code"></block>를 지정할 수 있습니다.</block>
+  <block id="3830f157276a56250bf76ff75b8cff68" category="admonition">필수 매개변수만 포함하십시오. PV 이름이나 볼륨 크기와 같은 추가 매개변수는 가져오기 명령이 실패할 수 있습니다.</block>
+  <block id="088199d1debc901b2e9436960c656998" category="open-title">PVC 주석 사용</block>
+  <block id="746a5142790411babd49bcf9a3e4b947" category="list-text">필요한 Trident 가져오기 주석이 포함된 PVC YAML 파일(예:<block ref="88bf8ee4d993e535425148da6a64c1c2" prefix=" " category="inline-code"></block>)을 생성합니다. PVC 파일에는 다음 내용이 포함되어야 합니다.</block>
+  <block id="c5af1b1587b493f72559330872964fe5" category="list-text"><block ref="b068931cc450442b63f5b3d276ea4297" prefix="" category="inline-code"></block> 및 <block ref="89801e9e98979062e84647433a8ed3e9" prefix=" " category="inline-code"></block> 메타데이터</block>
+  <block id="d305a0a83c85bbd5ad5d69d2717694ac" category="list-text"><block ref="1963d17f24888bdf1f22d7ea7f72f607" prefix="" category="inline-code"></block>, <block ref="0a36a88c4bcbae4c6ef55004d652aba3" prefix=" " category="inline-code"></block> 및 <block ref="ee822781a3bd0ae0f8f6331dc4865d9c" prefix=" " category="inline-code"></block> 사양</block>
+  <block id="0ff8f09564f199f14ff7a19d17eeab3e" category="list-text">주석:</block>
+  <block id="38cfc99fbbb0ca3eb7dfec7a76498ade" category="list-text"><block ref="2b57591dab2fd7e62891330cb5c08e04" prefix="" category="inline-code"></block>: 백엔드의 볼륨 이름</block>
+  <block id="35ab5de095ed9aa55079aab648067876" category="list-text"><block ref="c7715ec18c9136486b59fd3ecb8b4728" prefix="" category="inline-code"></block>: 볼륨이 존재하는 백엔드 UUID</block>
+  <block id="652807bc698e3601f704586910f8f354" category="list-text"><block ref="cc636a9cad634dcc341d49da1bb224db" prefix="" category="inline-code"></block> (_선택 사항_): 관리되지 않는 볼륨의 경우 <block ref="ebc576222020c2a2ae2fc769169f1d2a" prefix=" " category="inline-code"></block>로 설정합니다. 기본값은 <block ref="c07fbc0b2a1a865fe9e3a55c05b4f690" prefix=" " category="inline-code"></block>입니다.</block>
+  <block id="2c9db1af51ac3e6429befaccc4a28946" category="paragraph">다음은 관리형 볼륨을 가져오기 위한 예시 사양입니다.</block>
+  <block id="de88eae0ff40e6781524bc7c680fc27d" category="list-text">PVC YAML 파일을 Kubernetes 클러스터에 적용합니다.</block>
+  <block id="04861a760059dbbada499fbe4c3ef328" category="paragraph">Trident는 볼륨을 자동으로 가져와 PVC에 바인딩합니다.</block>
+  <block id="96eb863539228447aee795db4a9ef144" category="paragraph-title">tridentctl을 사용한 ONTAP NAS 예제</block>
+  <block id="06c358feef346225dd8f00164106a052" category="paragraph">다음 예제는<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>을 사용하여 관리형 볼륨과 관리되지 않는 볼륨을 가져오는 방법을 보여줍니다.</block>
+  <block id="566544cc9547e874249525434ef6b92c" category="paragraph-title">PVC 주석을 사용한 ONTAP NAS 예제</block>
+  <block id="ecc356799a42045ed6a6397f3f280cd2" category="paragraph">다음 예제는 PVC 주석을 사용하여 관리형 볼륨과 비관리형 볼륨을 가져오는 방법을 보여줍니다.</block>
+  <block id="cd8b45d6d96bb528f04c3ce2788b337d" category="paragraph">다음 예제는 PVC 주석을 사용하여 RWO 액세스 모드가 설정된 백엔드<block ref="ac181edf7a7be1f8ae6a6b0ac4a71686" prefix=" " category="inline-code"></block>에서 <block ref="47068649001b68b4aba2f4219a2f981b" prefix=" " category="inline-code"></block>라는 이름의 1GiB<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 볼륨을 가져옵니다.</block>
+  <block id="6aa655b386a1e31c420fd6553ed2b4fc" category="paragraph">다음 예제는 PVC 주석을 사용하여 RWO 액세스 모드가 설정된 백엔드<block ref="4bafc897a4f30b09156a60d3350c8819" prefix=" " category="inline-code"></block>에서 이름이<block ref="a8aa3f9da25a5d21fdd26c0a26592e1e" prefix=" " category="inline-code"></block>인 1Gi<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 볼륨을 가져옵니다.</block>
+  <block id="3a175f8153aad5b64492df6eadb5a5af" category="paragraph">다음 예는 관리형 볼륨과 비관리형 볼륨을 가져오는 방법을 보여줍니다.</block>
+  <block id="ae3918e109e702f2d03b5027de8a73eb" category="paragraph">다음 예제는 backend<block ref="c082d32d434314708cccf35dd974ac32" prefix=" " category="inline-code"></block>에서 volume<block ref="acdf8df0c694db089171ecaf51f80166" prefix=" " category="inline-code"></block>을 가져옵니다.</block>
 </blocks>
