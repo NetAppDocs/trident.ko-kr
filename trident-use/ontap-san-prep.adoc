@@ -119,6 +119,10 @@ ssl modify -vserver <vserver-name> -server-enabled true -client-enabled true -co
 security certificate install -type client-ca -cert-name <certificate-name> -vserver <vserver-name>
 security ssl modify -vserver <vserver-name> -client-enabled true
 ----
++
+
+NOTE: 이 명령을 실행하면 ONTAP에서 인증서 입력을 요청합니다. 1단계에서 생성된 `k8senv.pem` 파일의 내용을 붙여넣은 다음 `END`를 입력하여 설치를 완료하십시오.
+
 . ONTAP 보안 로그인 역할이 인증서 인증 방법을 지원하는지 확인합니다.
 +
 [listing]
