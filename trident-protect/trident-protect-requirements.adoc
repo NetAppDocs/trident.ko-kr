@@ -133,7 +133,7 @@ kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=
 
 NetApp SnapMirror 복제는 다음 ONTAP 솔루션에 대해 Trident Protect와 함께 사용할 수 있습니다.
 
-* 온프레미스 NetApp FAS, AFF, ASA 클러스터
+* 온프레미스 NetApp FAS, AFF 및 ASA 시스템. SnapMirror Trident Protect를 사용한 복제는 현재 ASA r2 시스템에서 지원되지 않습니다.
 * NetApp ONTAP Select를 참조하십시오
 * NetApp Cloud Volumes ONTAP를 참조하십시오
 * NetApp ONTAP용 Amazon FSx

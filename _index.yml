@@ -9,6 +9,8 @@ indexpage:
       url: trident-rn.html
     - title: 이전 버전
       url: "/earlier-versions.html"
+    - title: Trident ASA r2 스토리지 시스템 지원
+      url: trident-asar2-support.html
   - title: 시작하십시오
     links:
     - title: Trident에 대해 자세히 알아보십시오

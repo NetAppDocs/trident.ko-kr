@@ -1,0 +1,48 @@
+= 지원되는 작업
+:allow-uri-read: 
+
+
+sidebar: sidebar permalink: trident-asar2-support.html keywords: asar2, trident, fcp, nvme, tcp, nvme/tcp, 파이버 채널 summary: NetApp Trident는 iSCSI 및 NVMe/TCP용 ONTAP ASA r2를 지원합니다. --- = NetApp Trident의 ONTAP ASA r2 스토리지 시스템 지원 :hardbreaks: :icons: font :imagesdir: ./media/
+
+[role="lead"]
+NetApp Trident 25.02 이상 버전은 NetApp ASA r2 시스템을 스토리지 백엔드로 지원합니다. 자세한 내용은 link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2 시스템"^]를 참조하십시오.
+
+ASA r2 시스템에는  `ontap-san` 드라이버가 필요합니다. Trident는 ASA r2 시스템용  `ontap-san-economy` 드라이버를 지원하지 않습니다.
+
+백엔드 구성에서  `ontap-san`를  `storageDriverName`로 지정하면, Trident가 ASA r2 스토리지 시스템을 자동으로 감지합니다.
+
+Trident는 Trident protect를 통해 ASA r2 시스템에 제한적인 데이터 보호 기능을 제공합니다.
+
+지원되는 SAN 프로토콜은 Trident 버전에 따라 다릅니다.
+
+* Trident 25.02 이상에서는 iSCSI를 지원합니다.
+* Trident 25.06 이상에서는 iSCSI 외에도 NVMe/TCP를 지원합니다.
+
+
+ONTAP 백엔드 스토리지의 경우 스토리지 가상 머신(SVM)에 하나 이상의 애그리게이트를 할당해야 합니다. 지침은 link:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["ASA r2 시스템에서 SVM에 애그리게이트 할당"^]을(를) 참조하십시오.
+
+
+
+== 지원되는 작업
+
+* 영구 볼륨(PV) 프로비저닝
+* 동적 볼륨 프로비저닝
+* 볼륨 생성 및 삭제
+* 볼륨 클론 생성
+* 볼륨 확장
+* 스토리지 클래스 관리
+
+
+
+
+== 지원되지 않는 작업
+
+* LUKS 암호화
+* SnapMirror 볼륨 복제
+* 총 사용량 제한
+* 공간 예약 모드
+* 스냅샷 수
+* 계층화
+
+
+자세한 내용은 link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html["ONTAP SAN 구성 옵션 및 예"^]을 참조하십시오.
