@@ -1,0 +1,352 @@
+---
+sidebar: sidebar 
+permalink: trident-use/gcnv-block.html 
+keywords: Trident backend, Google Cloud NetApp Volumes, iSCSI, SAN, block storage, Flex Unified pools, GKE 
+summary: 'Google Cloud NetApp Volumes Flex Unified 풀에서 블록(iSCSI) 볼륨을 프로비저닝하도록 Trident를 구성합니다.' 
+---
+= SAN 워크로드를 위해 Google Cloud NetApp Volumes 구성
+:allow-uri-read: 
+
+
+[role="lead"]
+Google Cloud NetApp Volumes에서 iSCSI 프로토콜을 사용하여 블록 스토리지 볼륨을 프로비저닝하도록 Trident를 구성할 수 있습니다. SAN 볼륨은
+`google-cloud-netapp-volumes-san` 스토리지 드라이버를 사용하여 *Flex Unified* 스토리지 풀에서 프로비저닝됩니다.
+
+이 드라이버는 블록 워크로드 전용이며 NAS 프로토콜을 지원하지 않습니다.
+
+
+NOTE:  `google-cloud-netapp-volumes-san` 백엔드는 iSCSI 블록 볼륨을 프로비저닝하는 데 필요합니다.  `google-cloud-netapp-volumes` 백엔드는 NAS 프로토콜만 지원하며 SAN 워크로드에는 사용할 수 없습니다.
+
+
+
+== NAS 볼륨 및 iSCSI 블록 볼륨
+
+Google Cloud NetApp Volumes는 NAS 스토리지와 블록 스토리지를 모두 지원하며, 이 두 스토리지 유형은 애플리케이션이 데이터에 액세스하고 관리하는 방식이 다릅니다.
+
+NAS 볼륨은 파일 기반 스토리지를 제공하며 NFS 또는 SMB를 사용하여 공유 파일 시스템으로 마운트됩니다. 이러한 볼륨은 여러 파드 또는 노드가 동일한 데이터에 동시에 액세스해야 할 때 일반적으로 사용됩니다.
+
+iSCSI 블록 볼륨은 원시 블록 스토리지를 제공하며 블록 디바이스로 Kubernetes 노드에 연결됩니다. 각 볼륨은 LUN(논리 유닛 번호)으로 프로비저닝되고 iSCSI 프로토콜을 사용하여 액세스됩니다. 블록 스토리지는 일반적으로 워크로드에서 블록 레벨 액세스 또는 애플리케이션 관리 I/O 동작이 필요한 경우에 사용됩니다.
+
+*Flex Unified* Google Cloud NetApp Volumes 풀을 기반으로 하는 Trident 관리형 iSCSI 스토리지를 사용하여 Google Kubernetes Engine에 블록 지향 워크로드를 배포할 수 있습니다.
+
+이는 다음 환경에 적용됩니다.
+
+* Trident 26.02 이상
+* Google Kubernetes Engine(GKE)
+* Google Cloud NetApp Volumes *Flex Unified* 스토리지 풀
+* iSCSI 기반 블록 워크로드
+
+
+
+NOTE: Trident 26.02에서는 SAN 워크로드에 대해 Flex 서비스 레벨만 지원됩니다.
+
+
+
+== 스토리지 아키텍처 개요
+
+SAN 워크로드의 경우 Trident는 Flex Unified 스토리지 풀에 iSCSI LUN(논리 유닛 번호)을 생성하여 블록 스토리지를 프로비저닝합니다.
+
+각 Kubernetes PersistentVolume은 단일 LUN에 해당합니다. Trident는 LUN의 생성, 호스트 매핑, 연결 및 정리 등 전체 수명 주기를 관리합니다.
+
+
+
+== Flex Unified 스토리지 풀
+
+Flex Unified 스토리지 풀은 iSCSI 프로토콜을 사용하여 블록 스토리지를 제공하며 SAN 프로비저닝에 필요합니다.
+
+Trident 26.02의 경우:
+
+* *Flex Unified REGIONAL* 풀만 지원됩니다
+* Flex Unified *ZONAL* 풀은 Trident 26.02.1부터 지원됩니다
+* SAN 워크로드의 경우 *Flex* 서비스 레벨만 지원됩니다
+
+
+
+
+== 블록 볼륨
+
+블록 볼륨은 iSCSI LUN으로 프로비저닝되고 Kubernetes 노드에 블록 디바이스로 제공됩니다.
+
+블록 볼륨:
+
+* iSCSI 프로토콜 사용
+* 파일 시스템 및 원시 블록 프레젠테이션 지원
+* Trident에 의해 연결되고 관리됩니다
+* 여러 Kubernetes 액세스 모드 지원
+
+
+
+
+== 액세스 모드
+
+Trident에서 프로비저닝한 블록 볼륨은 다음과 같은 액세스 모드를 지원합니다.
+
+* `ReadWriteOnce` (RWO)
+* `ReadOnlyMany` (ROX)
+* `ReadWriteOncePod` (RWOP)
+* `ReadWriteMany` (RWX), 다음과 같은 경우에만 지원됩니다 `volumeMode: Block`
+
+
+
+
+== volumeMode 동작
+
+ `volumeMode` 필드는 블록 볼륨이 노출되는 방식을 제어합니다.
+
+* `Filesystem` Trident가 볼륨을 포맷하고 마운트합니다.
+* `Block` Trident는 장치를 연결하고 이를 원시 블록 장치로 노출합니다.
+
+
+
+
+== Trident SAN 백엔드를 구성합니다
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: gcnv-san
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes-san
+  projectNumber: "<project-number>"
+  location: "<region>"
+  sdkTimeout: "600"
+  storage:
+  - labels:
+      cloud: gcp
+      performance: flex
+    network: "<vpc-network>"
+    serviceLevel: Flex
+----
+
+
+== SAN 워크로드용 StorageClass를 생성합니다
+
+SAN 백엔드를 구성한 후
+`google-cloud-netapp-volumes-san` 드라이버를 참조하는 StorageClass를 생성합니다.
+
+파일 시스템 유형은 백엔드가 아닌 StorageClass에서 정의됩니다.
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-san
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes-san"
+  fsType: "ext4"
+allowVolumeExpansion: true
+----
+지원되는 파일 시스템 유형:
+
+* `ext4` (기본값)
+* `ext3`
+* `xfs`
+
+
+
+NOTE: SAN 드라이버는 Flex 서비스 레벨만 지원하며 `exportRule`, `unixPermissions`,
+`nasType`, `snapshotDir`, `nfsMountOptions`와 같은 NAS 관련 백엔드 매개변수나 티어링 관련 설정은 사용하지 않습니다.
+
+
+
+== 지원되는 작업
+
+
+`google-cloud-netapp-volumes-san` 드라이버를 사용하여 프로비저닝된 블록 볼륨은 다음을 지원합니다:
+
+* 생성
+* 삭제
+* 클론
+* 스냅샷
+* 크기 조정
+* 가져오기
+
+
+
+
+== 블록 볼륨 프로비저닝
+
+
+
+=== ReadWriteOnce(RWO)
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-rwo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+----
+
+
+=== ReadWriteOncePod(RWOP)
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-rwop
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+----
+
+
+=== ReadOnlyMany (ROX)
+
+ROX에서 흔히 사용되는 패턴은 기존 ReadWriteOnce 볼륨을 복제하고 복제본을 읽기 전용으로 마운트하는 것입니다.
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-rox
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+  dataSource:
+    kind: PersistentVolumeClaim
+    name: gcnv-san-rwo
+----
+
+
+=== ReadWriteMany (RWX) — 원시 블록 전용
+
+ReadWriteMany는 `volumeMode: Block`인 경우에만 지원됩니다.
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-raw-rwx
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Block
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+----
+
+
+== 추가 GiB 오버프로비저닝 동작
+
+Google Cloud NetApp Volumes 블록 볼륨에는 내부 메타데이터 오버헤드가 포함됩니다. 이 오버헤드로 인해 커널에서 인식되는 장치 크기가 프로비저닝된 용량보다 작아집니다.
+
+테스트 결과:
+
+* 초기 생성 시 약 300 KiB의 오버헤드가 발생합니다
+* 크기 조정 후 최대 약 107MiB의 오버헤드
+
+
+Google Cloud NetApp Volumes는 GiB 단위의 할당만 허용하므로 Trident는 다음과 같은 방법으로 사용 가능한 장치 크기가 항상 PVC 요청을 충족하거나 초과하도록 합니다.
+
+* 요청된 크기를 다음 정수 GiB로 올림합니다
+* 추가 1 GiB 버퍼 추가
+
+
+예:
+
+* PVC 요청: 100 GiB
+* Google Cloud NetApp Volumes에 프로비저닝된 크기: 101 GiB
+* 애플리케이션에 표시되는 사용 가능한 공간: 최소 100 GiB
+
+
+이를 통해 애플리케이션은 내부 metadata 오버헤드를 고려한 후에도 항상 요청한 용량을 확보할 수 있습니다.
+
+
+
+== Pod 예
+
+
+
+=== 파일 시스템 마운트 블록 볼륨(RWO)
+
+[source, yaml]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-rwo
+spec:
+  containers:
+  - name: app
+    image: ubuntu:22.04
+    command: ["sleep", "infinity"]
+    volumeMounts:
+    - name: data
+      mountPath: /mnt/data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: gcnv-san-rwo
+----
+
+
+=== 원시 블록 디바이스(RWX)
+
+[source, yaml]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-raw-rwx
+spec:
+  containers:
+  - name: app
+    image: ubuntu:22.04
+    command: ["sleep", "infinity"]
+    volumeDevices:
+    - name: data
+      devicePath: /dev/xda
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: gcnv-san-raw-rwx
+----
+
+
+== 연결 및 마운트 동작
+
+Google Cloud NetApp Volumes에서 프로비저닝된 SAN 볼륨의 경우:
+
+* Trident는 Flex Unified 스토리지 풀에 LUN(논리 유닛 번호)을 생성합니다.
+* 게시 중에 Trident는 LUN을 노드별 호스트 그룹에 매핑합니다.
+* 노드 스테이징 중에 Trident는 다음을 수행합니다.
++
+** iSCSI 타겟에 로그인합니다
+** LUN을 검색합니다
+** 다중 경로를 구성합니다
+
+
+*  `volumeMode: Filesystem`Trident는 필요한 경우 장치를 포맷하고 마운트합니다.
+*  `volumeMode: Block`인 경우 Trident는 포맷이나 마운트 없이 장치를 연결하고 Pod에 직접 노출합니다.
+
+
+
+NOTE: SAN 블록 볼륨은 분산 잠금 또는 쓰기 조정을 제공하지 않습니다. 여러 노드에서 블록 볼륨에 액세스할 때(ReadWriteMany 사용 시 `volumeMode: Block`) 애플리케이션 또는 파일 시스템이 동시성을 관리해야 합니다.

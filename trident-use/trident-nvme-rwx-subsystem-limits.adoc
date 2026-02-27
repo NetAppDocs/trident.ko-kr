@@ -1,0 +1,84 @@
+---
+sidebar: sidebar 
+permalink: trident-use/trident-nvme-rwx-subsystem-limits.html 
+keywords: trident, nvme, rwx, ontap, nvme subsystem, rwx nvme limit, super-subsystem, controller limit, 26.02 
+summary: 'RWX NVMe 하위 시스템 제한 사항(볼륨당 64개 노드 제한 포함), 하위 시스템 아키텍처 변경 사항 및 필요한 업그레이드 단계에 대해 알아보십시오.' 
+---
+= RWX NVMe 하위 시스템 제한 사항 이해
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ReadWriteMany(RWX) 볼륨은 NVMe 프로토콜을 사용하며 볼륨당 64개 노드의 확장성 제한이 있습니다. 다음은 제한 사항, 관련 NVMe 서브시스템 아키텍처 및 필요한 해결 단계를 설명합니다.
+
+
+
+== 64개 노드 제한 이해
+
+NVMe 프로토콜과 함께 ReadWriteMany(RWX) 볼륨을 사용하려는 경우, 단일 RWX NVMe 볼륨은 Kubernetes 클러스터에서 64개 이상의 노드에 마운트할 수 없습니다.
+
+64개 이상의 노드에 걸쳐 동일한 RWX NVMe PersistentVolumeClaim을 마운트하는 워크로드를 예약하지 마십시오.
+
+이 제한 사항은 NVMe 프로토콜을 사용하는 RWX 볼륨에만 적용됩니다.
+
+
+
+== NVMe 하위 시스템 모델 이해
+
+
+
+=== 볼륨별 하위 시스템 모델(Trident 26.02 이전 릴리스)
+
+Trident 26.02 이전 릴리스에서는 RWX NVMe 볼륨이 볼륨별 서브시스템 모델을 사용하여 프로비저닝됩니다. 각 RWX NVMe 볼륨은 ONTAP의 자체 전용 NVMe 서브시스템에 매핑됩니다.
+
+이 모델은 단순하지만 확장성 한계가 낮습니다. 대규모 Kubernetes 클러스터에서는 각 RWX 볼륨이 전용 서브시스템을 사용하기 때문에 서브시스템 컨트롤러 한계에 빠르게 도달합니다.
+
+
+
+=== 슈퍼 서브시스템 모델(Trident 26.02에서 도입)
+
+Trident 26.02부터 RWX NVMe 볼륨은 공유 슈퍼 서브시스템 모델을 사용합니다. 여러 RWX NVMe 볼륨이 동일한 NVMe 서브시스템을 공유합니다.
+
+각 슈퍼 서브시스템은 최대 1024개의 네임스페이스(볼륨)를 지원합니다. 이 모델은 RWX 워크로드의 확장성을 크게 향상시키고 ONTAP 서브시스템 한계에 도달할 가능성을 줄입니다.
+
+각 RWX NVMe 볼륨은 최대 64개의 노드를 지원합니다.
+
+
+
+== 오류 증상 파악
+
+대규모로 RWX NVMe 볼륨을 생성하거나 연결하는 경우 다음과 유사한 오류가 발생할 수 있습니다.
+
+[listing]
+----
+Maximum number of controllers reached. No more controllers can be created.
+----
+이 오류는 ONTAP NVMe 서브시스템 컨트롤러 제한에 도달했음을 나타냅니다.
+
+
+
+== 하위 시스템 제한 오류 해결
+
+볼륨별 하위 시스템 제한을 넘어 슈퍼 하위 시스템 모델을 활용하려면 Trident 26.02 이상으로 업그레이드하십시오.
+
+
+
+== Trident를 업그레이드하여 슈퍼 서브시스템 모델을 적용합니다
+
+RWX NVMe 볼륨에 슈퍼 서브시스템 모델을 적용하려면 다음을 수행합니다.
+
+. Trident를 버전 26.02 이상으로 업그레이드하십시오.
+. RWX NVMe 볼륨을 사용하는 모든 파드를 0개의 복제본으로 축소합니다.
+. RWX NVMe 볼륨을 적극적으로 사용하는 워크로드가 없는지 확인하십시오.
+. 포드를 다시 확장합니다.
+
+
+이 재시작 시퀀스는 RWX NVMe 볼륨이 super-subsystem 모델을 사용하여 연결되도록 보장합니다.
+
+* 이 제한 사항은 NVMe 프로토콜을 사용하는 RWX 볼륨에만 적용됩니다.
+* 64노드 제한은 RWX NVMe 볼륨당 적용됩니다.
+* 다른 액세스 모드 및 다른 프로토콜은 영향을 받지 않습니다.
+

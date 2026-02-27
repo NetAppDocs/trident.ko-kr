@@ -20,6 +20,8 @@ entries:
     entries:
     - title: 개요
       url: "/trident-use/gcnv.html"
+    - title: 블록 스토리지 구성
+      url: "/trident-use/gcnv-block.html"
     - title: 구성 준비
       url: "/trident-use/gcnv-prep.html"
     - title: 구성 옵션 및 예
@@ -52,6 +54,8 @@ entries:
       url: "/trident-use/trident-fsx-install-trident.html"
     - title: 스토리지 백엔드를 구성합니다
       url: "/trident-use/trident-fsx-storage-backend.html"
+    - title: 자동 백엔드 구성 구성
+      url: "/trident-use/trident-fsx-auto-backend-configuration.html"
     - title: 스토리지 클래스 및 PVC를 구성합니다
       url: "/trident-use/trident-fsx-storageclass-pvc.html"
     - title: 샘플 응용 프로그램을 배포합니다
@@ -80,6 +84,12 @@ entries:
     url: "/trident-use/vol-provision.html"
   - title: 볼륨 확장
     url: "/trident-use/vol-expansion.html"
+  - title: RWX NVMe 하위 시스템 제한 사항 이해
+    url: "/trident-use/trident-nvme-rwx-subsystem-limits.html"
+  - title: 컨트롤러 확장성
+    url: "/trident-use/controller-scalability.html"
+  - title: 자동 볼륨 확장
+    url: "/trident-use/automatic-volume-expansion.html"
   - title: 볼륨 가져오기
     url: "/trident-use/vol-import.html"
   - title: 볼륨 이름을 사용자 지정합니다

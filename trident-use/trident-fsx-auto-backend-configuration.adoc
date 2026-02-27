@@ -1,0 +1,132 @@
+---
+sidebar: sidebar 
+permalink: trident-use/trident-fsx-auto-backend-configuration.html 
+keywords: trident, aws fsx, fsxn, fsx for netapp ontap, automatic backend configuration, storageclass, backend automation, ontap-nas, ontap-san 
+summary: Trident StorageClass 매개변수를 사용하여 AWS FSx for NetApp ONTAP의 자동 백엔드 생성을 구성하는 방법을 알아보세요. 
+---
+= AWS FSx for NetApp ONTAP에 대한 자동 백엔드 구성 구성
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident는 AWS FSx for NetApp ONTAP(FSxN)에 대한 자동 백엔드 구성을 지원합니다. 필요한 FSxN 매개변수를 포함하는 StorageClass를 생성하면 Trident가 해당 백엔드와 VolumeSnapshotClass를 자동으로 생성합니다.
+
+
+
+== 자동 백엔드 구성 작동 방식 이해
+
+Trident는 StorageClass 정의에서 백엔드 구성을 가져옵니다. StorageClass를 적용하면 Trident는 필수 매개변수를 검증하고 백엔드를 생성한 다음 StorageClass에 상태 주석을 추가합니다.
+
+Trident는 VolumeSnapshotClass를 한 번만 생성합니다. Trident는 이후의 StorageClasses에 대해 동일한 VolumeSnapshotClass를 재사용합니다.
+
+
+
+== 필수 StorageClass 매개변수를 지정하세요
+
+자동 백엔드 생성을 트리거하려면 StorageClass `parameters` 섹션에서 필요한 매개변수를 정의하십시오.
+
+[cols="2,1,2,2"]
+|===
+| 매개 변수 | 필수 요소입니다 | 유형 | 설명 
+
+
+| `fsxFilesystemID` | 예 | 문자열 | FSx for NetApp ONTAP 파일 시스템 ID 
+
+
+| 'torageDriverName'입니다 | 예 | 문자열 | Trident 스토리지 드라이버(예: `ontap-nas` 또는 `ontap-san`) 
+
+
+| `credentialsName` | 예 | 문자열 | AWS 자격 증명이 포함된 Kubernetes Secret의 이름 
+|===
+
+
+== 선택적 매개변수 지정
+
+StorageClass를 통해 선택적 백엔드 매개 변수를 전달할 수 있습니다. StorageClass `parameters` 섹션에서 모든 선택적 값을 문자열로 정의하십시오.
+
+백엔드 매개변수의 전체 목록은 다음을 참조하십시오: xref:trident-use/trident-fsx-storage-backend.adoc#backend-advanced-configuration-and-examples[FSx for NetApp ONTAP 백엔드 구성].
+
+
+
+== StorageClass 생성
+
+다음 예는 자동 백엔드 구성을 트리거하는 StorageClass를 보여줍니다.
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-fsx-demo
+  annotations:
+    description: "Demo StorageClass for FSx for NetApp ONTAP"
+provisioner: csi.trident.netapp.io
+parameters:
+  fsxFilesystemID: "fs-0abc123"
+  storageDriverName: "ontap-nas"
+  credentialsName: trident-fsx-credentials
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+StorageClass를 적용하면 Trident가 백엔드를 자동으로 생성합니다. 이 StorageClass를 참조하는 PersistentVolumeClaims를 생성할 수 있습니다.
+
+
+
+== 백엔드 구성 상태를 확인합니다
+
+Trident는 백엔드 생성 결과를 StorageClass 어노테이션에 기록합니다.
+
+[cols="2,2"]
+|===
+| 주석 | 설명 
+
+
+| `trident.netapp.io/configuratorStatus` | 구성 결과 (`Success` 또는 `Failure`) 
+
+
+| `trident.netapp.io/configuratorMessage` | 자세한 상태 또는 오류 메시지 
+
+
+| `trident.netapp.io/configuratorName` | 내부 구성자 리소스의 이름 
+
+
+| `trident.netapp.io/managed` | StorageClass가 Trident에 의해 관리됨을 나타냅니다 
+
+
+| `trident.netapp.io/additionalStoragePools` | 이 백엔드용으로 생성된 스토리지 풀 
+|===
+상태를 확인하려면 다음을 실행합니다.
+
+[source, bash]
+----
+kubectl get storageclass ontap-fsx-demo -o yaml
+----
+ `trident.netapp.io/configuratorStatus`이(가)  `Success`(으)로 설정되어 있는지 확인하십시오. 값이  `Failure`인 경우 오류에 대해  `trident.netapp.io/configuratorMessage`을(를) 검토하십시오.
+
+
+
+== 추가 FSxN 파일 시스템 추가
+
+동일한 StorageClass를 계속 사용하면서 추가 스토리지 용량이 필요한 경우 추가 FSxN 파일 시스템 ID를 추가하십시오.
+
+StorageClass를 편집하고 다음 주석을 추가하세요.
+
+[source, yaml]
+----
+metadata:
+  annotations:
+    trident.netapp.io/additionalFsxNFileSystemID: '["fs-03cc1a718cddd6e248"]'
+----
+변경 사항을 적용하면 Trident가 백엔드 구성을 업데이트하고 StorageClass 어노테이션을 업데이트합니다.
+
+
+
+== 운영상의 고려사항 및 제한사항
+
+StorageClass를 삭제하면 일반적으로 연결된 Trident 백엔드도 함께 삭제됩니다. 이로 인해 스토리지 연결이 중단되고 실행 중인 워크로드가 중단될 수 있습니다. 관리형 StorageClass를 삭제하기 전에 영향을 검증하십시오.
+
+자동 백엔드 구성은 AWS FSx for NetApp ONTAP에서만 지원됩니다.
