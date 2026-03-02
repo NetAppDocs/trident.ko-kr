@@ -26,6 +26,7 @@ Trident Protect는 다음을 포함한 광범위한 완전 관리형 및 자체 
 * Google Kubernetes Engine(GKE)
 * Microsoft Azure Kubernetes Service(AKS)
 * Red Hat OpenShift
+* SUSE Harvester 1.7.0(ONTAP iSCSI)
 * 수세 목장
 * VMware Tanzu 포트폴리오
 * 업스트림 Kubernetes
