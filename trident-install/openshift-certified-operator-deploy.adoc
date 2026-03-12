@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/openshift-certified-operator-deploy.html 
-keywords: deploy, trident, methods, operator, openshift, operatorhub, certified operator, community operator 
-summary: Red Hat OpenShift를 사용하는 경우 운영자를 사용하여 Trident를 설치할 수 있습니다. 
+permalink: trident-install/openshift-certified-operator-deploy.html 
+keywords: deploy, trident, methods, operator, openshift, operatorhub, certified operator, community operator, helm 
+summary: Red Hat OpenShift를 사용하는 경우 커뮤니티 오퍼레이터, Helm 기반 설치 또는 수동으로 배포한 오퍼레이터에서 인증된 Trident 오퍼레이터로 전환할 수 있습니다. 
 ---
-= Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환
+= OpenShift 인증 Trident 운영자로 전환하세요
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,14 +12,17 @@ summary: Red Hat OpenShift를 사용하는 경우 운영자를 사용하여 Trid
 
 
 [role="lead"]
-NetApp 커뮤니티 Trident 운영자에서 Red Hat OpenShift Certified Trident 운영자로 전환하려면 커뮤니티 운영자를 제거한 다음 OperatorHub를 사용하여 인증된 운영자를 설치해야 합니다.
+Red Hat OpenShift 인증 Trident 오퍼레이터는 커뮤니티 오퍼레이터, Helm 기반 설치 또는 수동으로 배포된 오퍼레이터에서 전환할 수 있습니다. 각 방법의 프로세스에는 기존 오퍼레이터를 제거한 다음 OperatorHub를 사용하여 인증된 오퍼레이터를 설치하는 작업이 포함됩니다.
 
 .시작하기 전에
 설치를 시작하기 전에 link:../trident-get-started/requirements.html["Trident 설치 환경을 준비합니다"]를 참조하십시오.
 
 
+IMPORTANT:  `TridentOrchestrator` 사용자 지정 리소스(CR)를 제거 과정 중에 삭제하지 마십시오.  `TridentOrchestrator` CR은 인증된 운영자를 설치한 후 필요한 백엔드 및 스토리지 클래스 구성을 유지합니다.
 
-== NetApp Trident 커뮤니티 운영자를 제거합니다
+
+
+== 커뮤니티 운영자에서 전환
 
 .단계
 . OpenShift 콘솔을 사용하여 OperatorHub로 이동합니다.
@@ -35,11 +38,48 @@ image::../media/openshift-operator-06.png[설치되어 있습니다]
 WARNING: 이 연산자에서 모든 피연산자 인스턴스 삭제 * 를 선택하지 마십시오.
 
 . 제거 * 를 클릭합니다.
+. 제거가 완료되면 <<install-certified,OpenShift 인증 운영자를 설치하세요>>(으)로 진행하십시오.
 
 
 
 
-== OpenShift Certified Operator를 설치합니다
+== Helm 기반 운영자 설치에서 전환
+
+.단계
+. Trident 설치에 대한 Helm 릴리스를 나열합니다.
++
+[listing]
+----
+helm ls -n trident
+----
+. Helm 릴리스를 제거하세요:
++
+[listing]
+----
+helm uninstall <release-name> -n trident
+----
+. 제거가 완료되면 <<install-certified,OpenShift 인증 운영자를 설치하세요>>(으)로 진행하십시오.
+
+
+
+
+== 수동으로 배포된 operator에서 전환
+
+설치 패키지의 `bundle.yaml`를 사용하여 수동으로 운영자를 배포하여 Trident를 설치한 경우 동일한 매니페스트를 삭제하여 제거하십시오.
+
+.단계
+. 번들 매니페스트를 사용하여 운영자 배포를 삭제합니다.
++
+[listing]
+----
+kubectl delete -f deploy/bundle.yaml -n trident
+----
+. 제거가 완료되면 <<install-certified,OpenShift 인증 운영자를 설치하세요>>(으)로 진행하십시오.
+
+
+
+
+== OpenShift 인증 운영자를 설치하세요
 
 .단계
 . Red Hat OperatorHub 로 이동합니다.

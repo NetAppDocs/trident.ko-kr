@@ -26,5 +26,5 @@ entries:
   entries:
   - title: OpenShift OperatorHub를 사용하여 Trident를 설치합니다
     url: "/trident-get-started/openshift-operator-deploy.html"
-  - title: Trident 커뮤니티 운영자에서 OpenShift 인증 운영자로 전환
-    url: "/trident-get-started/openshift-certified-operator-deploy.html"
+  - title: OpenShift 인증 Trident 운영자로 전환하세요
+    url: "/trident-install/openshift-certified-operator-deploy.html"
