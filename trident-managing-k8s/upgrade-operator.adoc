@@ -85,7 +85,7 @@ helm mapkubeapis trident  --namespace trident
 
 
 .단계
-. link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["Helm을 사용하여 Trident를 설치했습니다"]를 사용하여 한 단계로 업그레이드할 수 `helm upgrade trident netapp-trident/trident-operator --version 100.2506.0` 있습니다. Helm repo를 추가하지 않았거나 업그레이드에 사용할 수 없는 경우:
+. link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["Helm을 사용하여 Trident를 설치했습니다"]한 경우  `helm upgrade trident netapp-trident/trident-operator --version 100.2602.0`를 사용하여 한 단계로 업그레이드할 수 있습니다. Helm 리포지토리를 추가하지 않았거나 업그레이드에 사용할 수 없는 경우:
 +
 .. 에서 최신 Trident 릴리스를 link:https://github.com/NetApp/trident/releases/latest["GitHub의 _Assets_섹션"^]다운로드하십시오.
 ..  `helm upgrade` 명령을 사용합니다. 여기서  `trident-operator-26.02.0.tgz`는 업그레이드할 버전을 나타냅니다.
