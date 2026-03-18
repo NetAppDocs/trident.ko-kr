@@ -16,9 +16,9 @@ Google Cloud NetApp Volumes 백엔드를 구성하기 전에 다음 요구사항
 
 
 
-== NFS 볼륨을 위한 사전 요구사항
+== NFS 또는 SMB 볼륨의 사전 요구 사항
 
-처음으로 또는 새 위치에서 Google Cloud NetApp 볼륨을 사용하는 경우 Google Cloud NetApp 볼륨을 설정하고 NFS 볼륨을 생성하려면 초기 구성이 필요합니다. 을 link:https://cloud.google.com/netapp/volumes/docs/before-you-begin/application-resilience["시작하기 전에"^]참조하십시오.
+Google Cloud NetApp Volumes를 처음 사용하거나 새 위치에서 사용하는 경우 Google Cloud NetApp Volumes를 설정하고 NFS 또는 SMB 볼륨을 생성하려면 몇 가지 초기 구성이 필요합니다. link:https://cloud.google.com/netapp/volumes/docs/before-you-begin/application-resilience["시작하기 전에"^]을 참조하십시오.
 
 Google Cloud NetApp 볼륨 백엔드를 구성하기 전에 다음 사항이 있는지 확인하십시오.
 
