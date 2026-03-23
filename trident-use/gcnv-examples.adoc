@@ -105,7 +105,10 @@ Google Cloud NetApp 볼륨의 백엔드 구성 옵션에 대해 알아보고 구
 ====
 이는 절대적인 최소 백엔드 구성입니다. 이 구성을 통해 Trident은 Google Cloud NetApp 볼륨에 위임된 모든 스토리지 풀을 구성된 위치에서 검색하고 해당 풀 중 하나에 무작위로 새 볼륨을 배치합니다. 이 생략되므로 `nasType` `nfs` 기본값이 적용되고 백엔드에서 NFS 볼륨에 대한 프로비저닝이 수행됩니다.
 
-이 구성은 Google Cloud NetApp Volumes로 시작한 후 나중에 시험할 때 이상적이지만, 실제로는 프로비저닝한 볼륨에 대한 추가 범위를 제공해야 할 가능성이 높습니다.
+이 구성은 Google Cloud NetApp Volumes를 처음 사용하고 테스트할 때 이상적이지만, 실제로는 프로비저닝하는 볼륨에 대해 추가적인 범위 지정이 필요할 수 있습니다.
+
+
+NOTE:  `<id_value>` 및  `<key_value>`를 서비스 계정 자격 증명으로 바꾸십시오.
 
 [source, yaml]
 ----
@@ -116,15 +119,11 @@ metadata:
   name: backend-tbc-gcnv-secret
 type: Opaque
 stringData:
-  private_key_id: f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec
+  private_key_id: "<id_value>"
   private_key: |
     -----BEGIN PRIVATE KEY-----
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    XsYg6gyxy4zq7OlwWgLwGa==
+    <key_value>
     -----END PRIVATE KEY-----
-
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -191,14 +190,12 @@ metadata:
   name: backend-tbc-gcnv-secret
 type: Opaque
 stringData:
-  private_key_id: f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec
+  private_key_id: "<id_value>"
   private_key: |
     -----BEGIN PRIVATE KEY-----
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    XsYg6gyxy4zq7OlwWgLwGa==
+    <key_value>
     -----END PRIVATE KEY-----
+---
 
 ---
 apiVersion: trident.netapp.io/v1
@@ -245,14 +242,10 @@ metadata:
   name: backend-tbc-gcnv-secret
 type: Opaque
 stringData:
-  private_key_id: f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec
+  private_key_id: "<id_value>"
   private_key: |
     -----BEGIN PRIVATE KEY-----
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    XsYg6gyxy4zq7OlwWgLwGa==
+    <key_value>
     -----END PRIVATE KEY-----
 
 ---
