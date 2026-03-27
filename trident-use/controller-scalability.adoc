@@ -38,12 +38,16 @@ Trident는 스토리지 드라이버에 따라 다양한 성숙도 수준의 컨
 
 다음 드라이버는 Trident 26.02의 정식 출시 버전에서 컨트롤러 확장성을 지원합니다.
 
-* `san`
-* `nas`
-* `san-nvme`
+* 'ONTAP-SAN'
+* 'ONTAP-NAS'
 * `google-cloud-netapp-volumes`
 
 
+[NOTE]
+====
+ `google-cloud-netapp-volumes`와 `google-cloud-netapp-volumes-san` 드라이버는 서로 다릅니다.  `google-cloud-netapp-volumes`만 지원됩니다. 백엔드 구성이나 예제에서 `google-cloud-netapp-volumes-san`를 사용하지 마십시오.
+
+====
 
 
 == 컨트롤러 확장성 활성화

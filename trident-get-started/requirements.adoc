@@ -80,7 +80,6 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.
 
 * ONTAP - NAS
-* ONTAP - NAS - 경제형
 * ONTAP-SAN(iSCSI, FCP, NVMe over TCP)
 * ONTAP - SAN - 경제성(iSCSI만 해당)
 
@@ -224,7 +223,7 @@ link:../trident-reference/ports.html["Trident 포트"]
 | Kubernetes 버전 | 컨테이너 이미지 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.35.0  a| 
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0  a| 
 * docker.io/netapp/trident:26.02.0
 * docker.io/netapp/trident-autosupport:26.02
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0

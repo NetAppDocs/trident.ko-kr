@@ -29,7 +29,7 @@ iSCSI 블록 볼륨은 원시 블록 스토리지를 제공하며 Kubernetes 노
 이는 다음 환경에 적용됩니다.
 
 * Trident 26.02 이상
-* Google Kubernetes Engine(GKE)
+* Google Kubernetes Engine(GKE) 또는 Red Hat OpenShift
 * Google Cloud NetApp Volumes NAS 풀
 * NFS 및 SMB 워크로드
 
