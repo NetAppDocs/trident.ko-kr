@@ -13,7 +13,7 @@ summary: Trident를 사용하여 Kubernetes 네이티브 메커니즘으로 Goog
 
 
 [role="lead"]
-이 페이지에서는 Trident를 사용하여 Google Cloud NetApp Volumes에 대한 자동 계층화를 구성하는 방법에 대해 설명합니다. 자동 계층화는 볼륨 프로비저닝 중에 Trident 백엔드 매개변수와 PersistentVolumeClaim 주석을 통해 구성됩니다.
+자동 계층화는 볼륨 프로비저닝 중에 Trident 백엔드 매개변수와 PersistentVolumeClaim 주석을 통해 구성됩니다. Trident를 사용하여 Google Cloud NetApp Volumes에 대한 자동 계층화를 구성할 수 있습니다.
 
 
 

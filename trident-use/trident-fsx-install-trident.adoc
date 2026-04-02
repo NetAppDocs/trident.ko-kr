@@ -12,9 +12,7 @@ summary: 'Trident를 Amazon FSx for NetApp ONTAP와 함께 사용하면 Amazon E
 
 
 [role="lead"]
-Trident은 Kubernetes에서 Amazon FSx for NetApp ONTAP 스토리지 관리를 간소화하여 개발자와 관리자가 애플리케이션 구축에 집중할 수 있도록 지원합니다.
-
-다음 방법 중 하나를 사용하여 Trident를 설치할 수 있습니다.
+Trident는 Amazon FSx for NetApp ONTAP 스토리지 관리를 Kubernetes에서 간소화하여 개발자와 관리자가 애플리케이션 배포에 집중할 수 있도록 지원합니다. 다음 방법 중 하나를 사용하여 Trident를 설치할 수 있습니다.
 
 * 헬름
 * EKS 추가 기능

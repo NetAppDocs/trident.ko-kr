@@ -12,20 +12,18 @@ summary: Trident 설치 시 ONTAP NAS 드라이버를 생성하고 사용하는 
 
 
 [role="lead"]
-Trident 설치 시 ONTAP NAS 드라이버를 생성하고 사용하는 방법에 대해 알아봅니다. 이 섹션에서는 백엔드 구성 예제 및 Backend를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다.
-
-25.10 릴리스부터 NetApp Trident 다음을 지원합니다.link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 스토리지 시스템"^] . NetApp AFX 스토리지 시스템은 스토리지 계층 구현 측면에서 다른 ONTAP 기반 시스템(ASA, AFF, FAS)과 다릅니다.
+Trident 설치 환경에서 ONTAP NAS 드라이버를 생성하고 사용하는 방법을 알아보세요. 이 섹션에서는 백엔드 구성 예제와 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 25.10 릴리스부터 NetApp Trident는 link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 스토리지 시스템"^]을(를) 지원합니다. NetApp AFX 스토리지 시스템은 스토리지 계층 구현에서 다른 ONTAP 기반 시스템(ASA, AFF, FAS)과 다릅니다.
 
 
 NOTE: 오직 `ontap-nas` 드라이버(NFS 프로토콜 포함)는 NetApp AFX 시스템에서 지원됩니다. SMB 프로토콜은 지원되지 않습니다.
-
-Trident 백엔드 구성에서는 시스템이 NetApp AFX 스토리지 시스템임을 지정할 필요가 없습니다. 선택할 때 `ontap-nas` 로서 `storageDriverName` Trident AFX 저장 시스템을 자동으로 감지합니다. 아래 표에 나와 있는 것처럼 일부 백엔드 구성 매개변수는 AFX 스토리지 시스템에 적용할 수 없습니다.
 
 
 
 == 백엔드 구성 옵션
 
-백엔드 구성 옵션은 다음 표를 참조하십시오.
+Trident 백엔드 구성에서 시스템이 NetApp AFX 스토리지 시스템임을 지정할 필요가 없습니다.  `ontap-nas`을(를)  `storageDriverName`(으)로 선택하면 Trident가 AFX 스토리지 시스템을 자동으로 감지합니다. 일부 백엔드 구성 매개변수는 AFX 스토리지 시스템에는 적용되지 않습니다.
+
+다음 표는 백엔드 구성 옵션을 보여줍니다.
 
 [cols="1,3,2"]
 |===

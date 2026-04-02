@@ -90,7 +90,7 @@ link:https://docs.netapp.com/us-en/trident-2301/index.html["23.01"^]
 
 == 자가 지원
 
-전체 문제 해결 문서 목록은 을 https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Trident_Kubernetes["NetApp Knowledgebase(로그인 필요)"^]참조하십시오.
+문제 해결 문서의 전체 목록은 https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Trident_Kubernetes["NetApp Knowledgebase(로그인 필요)"^]을 참조하십시오.
 
 
 
