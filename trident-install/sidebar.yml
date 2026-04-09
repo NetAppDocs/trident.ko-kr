@@ -3,28 +3,28 @@ section: trident-install
 title: Trident를 설치합니다
 entries:
 - title: 설치 개요
-  url: "/trident-get-started/kubernetes-deploy.html"
+  url: "/trident-install/kubernetes-deploy.html"
 - title: Trident 연산자를 사용하여 설치합니다
   entries:
   - title: Trident 연산자 수동 배포(표준)
-    url: "/trident-get-started/kubernetes-deploy-operator.html"
+    url: "/trident-install/kubernetes-deploy-operator.html"
   - title: Trident 연산자 수동 배포(오프라인)
-    url: "/trident-get-started/kubernetes-deploy-operator-mirror.html"
+    url: "/trident-install/kubernetes-deploy-operator-mirror.html"
   - title: Trident 제어 차트(표준) 사용
-    url: "/trident-get-started/kubernetes-deploy-helm.html"
+    url: "/trident-install/kubernetes-deploy-helm.html"
   - title: Trident 제어 차트(오프라인) 사용
-    url: "/trident-get-started/kubernetes-deploy-helm-mirror.html"
+    url: "/trident-install/kubernetes-deploy-helm-mirror.html"
   - title: Trident 운영자 설치를 사용자 지정합니다
-    url: "/trident-get-started/kubernetes-customize-deploy.html"
+    url: "/trident-install/kubernetes-customize-deploy.html"
 - title: tridentctl을 사용하여 설치합니다
   entries:
   - title: tridentctl을 사용하여 설치합니다
-    url: "/trident-get-started/kubernetes-deploy-tridentctl.html"
+    url: "/trident-install/kubernetes-deploy-tridentctl.html"
   - title: tridentctl 설치를 사용자 지정합니다
-    url: "/trident-get-started/kubernetes-customize-deploy-tridentctl.html"
+    url: "/trident-install/kubernetes-customize-deploy-tridentctl.html"
 - title: OpenShift 인증 운영자를 사용하여 설치합니다
   entries:
   - title: OpenShift OperatorHub를 사용하여 Trident를 설치합니다
-    url: "/trident-get-started/openshift-operator-deploy.html"
+    url: "/trident-install/openshift-operator-deploy.html"
   - title: OpenShift 인증 Trident 운영자로 전환하세요
     url: "/trident-install/openshift-certified-operator-deploy.html"

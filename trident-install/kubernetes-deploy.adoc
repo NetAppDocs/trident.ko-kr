@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-deploy.html 
+permalink: trident-install/kubernetes-deploy.html 
 keywords: deploy, Trident, methods, operator, tridentctl, helm, tanzu, vmware 
 summary: 'Trident 연산자(수동 또는 Helm 사용) 또는 를 사용하여 Trident를 설치할 수 `tridentctl` 있습니다. 이 항목에서는 적합한 설치 프로세스를 선택하는 데 필요한 중요한 정보를 제공합니다.' 
 ---
@@ -62,7 +62,7 @@ TIP: 에 익숙지 않은 경우 link:../trident-get-started/intro.html["기본 
 
 === Trident 연산자 사용
 
-수동으로 배포하든 Helm을 사용하든 Trident 운영자는 설치를 단순화하고 Trident 리소스를 동적으로 관리할 수 있는 훌륭한 방법입니다. link:../trident-get-started/kubernetes-customize-deploy.html["Trident 운영자 배포를 사용자 지정합니다"]사용자 정의 리소스(CR)의 특성을 사용할 `TridentOrchestrator` 수도 있습니다.
+수동으로 배포하든 Helm을 사용하든, Trident operator는 설치를 간소화하고 Trident 리소스를 동적으로 관리하는 훌륭한 방법입니다. 속성을 사용하여 link:kubernetes-customize-deploy.html["Trident 운영자 배포를 사용자 지정합니다"]도 할 수 있으며, 이는  `TridentOrchestrator` 커스텀 리소스(CR)에서 가능합니다.
 
 Trident 연산자를 사용하면 다음과 같은 이점이 있습니다.
 

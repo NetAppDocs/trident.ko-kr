@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-customize-deploy.html 
+permalink: trident-install/kubernetes-customize-deploy.html 
 keywords: deploy, trident, methods, operator, tridentctl, helm, attributes, customize, tridentorchestrator, smb, windows 
 summary: 'Trident 연산자를 사용하면 사양의 특성을 사용하여 Trident가 설치되는 방식을 사용자 지정할 수 `TridentOrchestrator` 있습니다.' 
 ---

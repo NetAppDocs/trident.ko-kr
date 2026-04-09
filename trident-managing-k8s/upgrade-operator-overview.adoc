@@ -18,7 +18,7 @@ Trident 연산자를 사용하여 Trident를 업그레이드하기 전에 업그
 
 == Trident 운영자 업그레이드 처리
 
-Trident를 설치하고 업그레이드할 수 있는 툴 중 link:../trident-get-started/kubernetes-deploy.html["Trident 연산자를 사용할 때의 이점"]하나는 기존의 마운트된 볼륨을 중단하지 않고 Trident 및 Kubernetes 개체를 자동으로 처리하는 것입니다. 이와 같이 Trident는 다운타임 없이 업그레이드를 지원할 수 있습니다. 또는link:https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/["_롤링 업데이트 _"^] 특히, Trident 운영자는 Kubernetes 클러스터와 통신하여 다음을 수행합니다.
+Trident를 설치 및 업그레이드하는 많은 link:../trident-install/kubernetes-deploy.html["Trident 연산자를 사용할 때의 이점"] 중 하나는 기존에 마운트된 볼륨에 영향을 주지 않고 Trident 및 Kubernetes 객체를 자동으로 처리한다는 점입니다. 이러한 방식으로 Trident는 다운타임 없이 업그레이드를 지원할 수 있습니다(link:https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/["_롤링 업데이트 _"^]). 특히 Trident 오퍼레이터는 Kubernetes 클러스터와 통신하여 다음을 수행합니다.
 
 * Trident 컨트롤러 배포 및 노드 DemonSet을 삭제하고 다시 만듭니다.
 * Trident 컨트롤러 Pod 및 Trident 노드 Pod를 새로운 버전으로 교체합니다.

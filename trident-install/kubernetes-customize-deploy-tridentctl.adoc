@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-customize-deploy-tridentctl.html 
+permalink: trident-install/kubernetes-customize-deploy-tridentctl.html 
 keywords: deploy, Trident, methods, operator, tridentctl, helm, attributes, customize 
 summary: Trident 설치 프로그램을 사용하여 배포를 사용자 지정할 수 있습니다. 
 ---

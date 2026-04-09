@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-asar2-support.html 
-keywords: asar2, trident, fcp, nvme, tcp, nvme/tcp, fibre channel 
+keywords: asar2, trident, fcp, nvme, tcp, nvme tcp, fibre channel 
 summary: NetApp Trident는 iSCSI 및 NVMe/TCP용으로 ONTAP ASA r2를 지원합니다. 
 ---
 = NetApp Trident ONTAP ASA r2 스토리지 시스템 지원
