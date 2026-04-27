@@ -39,14 +39,7 @@ NOTE: 최신 운영자 버전을 선택했는지 확인하세요.
 +
 image::../media/openshift-operator-03.png[설치합니다]
 
-+
-설치가 완료되면 설치된 운영자 목록에 해당 운영자가 표시되고 사용할 준비가 됩니다.
-
 . 운영자 세부 정보를 보려면 *운영자 보기*를 클릭하세요.
-+
-image::../media/openshift-operator-04.png[설치되어 있습니다]
-
-. * Trident Orchestrator*에서 *인스턴스 만들기*를 클릭합니다.
 +
 image::../media/openshift-operator-07.png[설치되어 있습니다]
 
@@ -70,11 +63,29 @@ spec:
   silenceAutosupport: false
 ----
 +
-[]
+[NOTE]
 ====
-** Red Hat Enterprise Linux CoreOS(RHCOS)에는 iSCSI가 활성화 및 구성되어 있지 않습니다.
-** 추가할 수 있습니다 `nodePrep` 모든 OpenShift 워커 노드에서 iSCSI 및 Multipath 서비스를 구성하고 활성화하기 위한 매개변수입니다.
-** OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.
+사용자 인터페이스는 기본 예시를 제공합니다. 전체 구성을 복사하는 대신 직접 편집할 수 있습니다.
+
+====
+
+
+[NOTE]
+====
+선택 사항: 동시 실행 활성화
+
+동시성을 활성화하려면 spec에 다음 필드를 추가하십시오.
+
+[source, yaml]
+----
+enableConcurrency: true
+----
+====
+[NOTE]
+====
+* Red Hat Enterprise Linux CoreOS(RHCOS)에는 iSCSI가 활성화 및 구성되어 있지 않습니다.
+* 추가할 수 있습니다 `nodePrep` 모든 OpenShift 워커 노드에서 iSCSI 및 Multipath 서비스를 구성하고 활성화하기 위한 매개변수입니다.
+* OpenShift 4.19부터 이 기능을 지원하는 최소 Trident 버전은 25.06.1입니다.
 
 
 ====
