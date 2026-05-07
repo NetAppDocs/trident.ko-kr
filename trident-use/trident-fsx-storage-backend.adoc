@@ -13,7 +13,17 @@ summary: 'Trident를 Amazon FSx for NetApp ONTAP와 함께 사용하면 Amazon E
 
 
 
-== ONTAP SAN 및 NAS 드라이버 통합
+== 개요
+
+Trident를 사용하여 볼륨을 프로비저닝하려면 먼저 Trident 백엔드 구성(TBC)을 생성하여 스토리지 백엔드를 Trident와 통합해야 합니다. TBC는 Trident가 스토리지 백엔드에 연결하는 방법을 정의하고 Trident가 스토리지 리소스를 관리하는 데 필요한 정보를 제공합니다.
+
+
+
+== FSx for ONTAP용 Trident 백엔드 구성(TBC) 생성
+
+Trident 백엔드가 FSx for ONTAP 파일 시스템을 사용하도록 구성하는 방법은 두 가지입니다. * 자동 백엔드 기능을 활용하는 StorageClass를 생성합니다. * 백엔드와 StorageClass를 별도로 생성합니다.
+
+이 섹션의 단계에서는 백엔드를 별도로 생성하는 방법을 다룹니다. 자동 백엔드 기능 사용 방법에 대한 자세한 내용은 xref:trident-fsx-storageclass-pvc.html#configure-a-kubernetes-storageclass-object-with-automatic-backend-configuration-support-for-fsx-for-ontap[StorageClass 및 PVC 구성] 섹션을 참조하십시오.
 
 스토리지 백엔드를 생성하려면 JSON 또는 YAML 형식으로 구성 파일을 만들어야 합니다. 파일에서 원하는 스토리지 유형(NAS 또는 SAN), 파일 시스템, SVM을 가져와 인증 방법을 지정해야 합니다. 다음 예제는 NAS 기반 스토리지를 정의하고 AWS 암호를 사용하여 사용하려는 SVM에 자격 증명을 저장하는 방법을 보여줍니다.
 
@@ -280,4 +290,4 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 
 == SMB 볼륨 제공
 
-다음을 사용하여 SMB 볼륨을 프로비저닝할 수 있습니다. `ontap-nas` 운전사. 완료하기 전에 <<ONTAP SAN 및 NAS 드라이버 통합>> 다음 단계를 완료하세요. link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["SMB 볼륨 프로비저닝을 위한 준비"].
+다음을 사용하여 SMB 볼륨을 프로비저닝할 수 있습니다. `ontap-nas` 운전사. 완료하기 전에 <<ONTAP SAN and NAS driver integration>> 다음 단계를 완료하세요. link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["SMB 볼륨 프로비저닝을 위한 준비"].

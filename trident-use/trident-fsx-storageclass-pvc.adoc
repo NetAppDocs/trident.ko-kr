@@ -4,7 +4,7 @@ permalink: trident-use/trident-fsx-storageclass-pvc.html
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
 summary: 'Trident를 Amazon FSx for NetApp ONTAP와 함께 사용하면 Amazon EKS(Elastic Kubernetes Service)에서 실행되는 Kubernetes 클러스터가 ONTAP에서 지원하는 블록 및 파일 영구 볼륨을 프로비저닝할 수 있습니다.' 
 ---
-= 저장소 클래스 및 PVC를 구성합니다
+= 스토리지 클래스 구성
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,17 +12,322 @@ summary: 'Trident를 Amazon FSx for NetApp ONTAP와 함께 사용하면 Amazon E
 
 
 [role="lead"]
-Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성하여 Trident에 볼륨 프로비저닝 방법을 지시합니다. 구성된 Kubernetes StorageClass를 사용하여 PV에 대한 액세스를 요청하는 PersistentVolumeClaim(PVC)을 생성합니다. 그런 다음 PV를 포드에 장착할 수 있습니다.
+이  https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] 설정은 프로비저너를 식별하고 프로비저너에게 볼륨을 프로비저닝하는 방법을 지시합니다. 이 섹션에서는 Trident를 프로비저너로 지정하는 Kubernetes StorageClass 객체를 구성하는 방법을 보여줍니다.
 
 
 
-== 스토리지 클래스를 생성합니다
+== StorageClass 객체를 생성합니다
+
+FSx for ONTAP용 StorageClass를 생성하면 Trident가 백엔드 구성을 자동으로 생성합니다.
+
+
+NOTE: 스토리지 백엔드를 수동으로 구성하려면 Trident 백엔드와 스토리지 클래스를 별도로 생성하는 방법에 대한 <<create-a-kubernetes-storageclass-without-automatic-backend-configuration>> 섹션을 참조하십시오.
 
 
 
-=== Kubernetes StorageClass 개체를 구성합니다
+=== 필수 StorageClass 매개변수를 지정하세요
 
-그만큼 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] 객체는 Trident 해당 클래스에 사용되는 프로비저너로 식별하고 Trident 볼륨을 프로비저닝하는 방법을 지시합니다.  NFS를 사용하여 볼륨에 대한 Storageclass를 설정하려면 이 예제를 사용하세요(전체 속성 목록은 아래의 Trident 속성 섹션을 참조하세요).
+StorageClass를 생성할 때 다음 세 가지 매개 변수를 정의해야 합니다.
+
+[cols="2,1,1,3"]
+|===
+| 매개 변수 | 필수 요소입니다 | 유형 | 설명 
+
+
+| `fsxFilesystemID` | 예 | 문자열 | FSx for NetApp ONTAP 파일 시스템 ID 
+
+
+| 'torageDriverName'입니다 | 예 | 문자열 | Trident 스토리지 드라이버(예: `ontap-nas` 또는 `ontap-san`) 
+
+
+| `credentialsName` | 예 | 문자열 | ONTAP 자격 증명용 FSx가 포함된 Kubernetes Secret의 이름 
+|===
+
+
+==== 선택적 매개변수 지정
+
+StorageClass를 통해 선택적 백엔드 매개 변수를 전달할 수 있습니다. StorageClass `parameters` 섹션에서 모든 선택적 값을 문자열로 정의하십시오. 백엔드 매개변수의 전체 목록은 다음을 참조하십시오: xref:trident-fsx-storage-backend.html#backend-advanced-configuration-and-examples[FSx for NetApp ONTAP 백엔드 구성].
+
+
+
+==== StorageClass 구성 파일의 예입니다.
+
+다음 예는 자동 백엔드 구성을 트리거하는 StorageClass를 보여줍니다.
+
+[role="tabbed-block"]
+====
+.YAML
+--
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-fsx-demo
+  annotations:
+    description: "Demo StorageClass for FSx for NetApp ONTAP"
+provisioner: csi.trident.netapp.io
+parameters:
+  fsxFilesystemID: "fs-0abc123"
+  storageDriverName: "ontap-nas"
+  credentialsName: trident-fsx-credentials
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+--
+.JSON을 참조하십시오
+--
+[source, json]
+----
+{
+  "apiVersion": "storage.k8s.io/v1",
+  "kind": "StorageClass",
+  "metadata": {
+    "name": "ontap-fsx-demo",
+    "annotations": {
+      "description": "Demo StorageClass for FSx for NetApp ONTAP"
+    }
+  },
+  "provisioner": "csi.trident.netapp.io",
+  "parameters": {
+    "fsxFilesystemID": "fs-0abc123",
+    "storageDriverName": "ontap-nas",
+    "credentialsName": "trident-fsx-credentials"
+  },
+  "allowVolumeExpansion": true,
+  "reclaimPolicy": "Delete",
+  "volumeBindingMode": "Immediate"
+}
+----
+--
+====
+
+
+==== StorageClass 생성
+
+구성 파일을 생성한 후 다음 명령을 실행하여 스토리지 클래스를 생성하십시오.
+
+[source, console]
+----
+kubectl create -f storage-class-ontapnas.yaml
+----
+이제 Kubernetes와 Trident 모두에서 * BASIC-CSI * 스토리지 클래스가 표시되고 Trident는 백엔드에서 풀을 검색해야 합니다.
+
+[source, console]
+----
+kubectl get sc basic-csi
+----
+[listing]
+----
+NAME         PROVISIONER             AGE
+basic-csi    csi.trident.netapp.io   15h
+----
+StorageClass를 적용하면 Trident가 백엔드를 자동으로 생성합니다. 그런 다음, 이 StorageClass를 참조하는 PersistentVolumeClaims를 생성할 수 있습니다.
+
+
+
+==== 백엔드 구성 상태를 확인합니다
+
+Trident는 백엔드 생성 결과를 StorageClass 어노테이션에 기록합니다.
+
+[cols="2,2"]
+|===
+| 주석 | 설명 
+
+
+| `trident.netapp.io/configuratorStatus` | 구성 결과 (`Success` 또는 `Failure`) 
+
+
+| `trident.netapp.io/configuratorMessage` | 자세한 상태 또는 오류 메시지 
+
+
+| `trident.netapp.io/configuratorName` | 내부 구성자 리소스의 이름 
+
+
+| `trident.netapp.io/managed` | StorageClass가 Trident에 의해 관리됨을 나타냅니다 
+
+
+| `trident.netapp.io/additionalStoragePools` | 이 백엔드용으로 생성된 스토리지 풀 
+|===
+상태를 확인하려면 다음을 실행합니다.
+
+[source, bash]
+----
+kubectl get storageclass ontap-fsx-demo -o yaml
+----
+ `trident.netapp.io/configuratorStatus`이(가)  `Success`(으)로 설정되어 있는지 확인하십시오. 값이  `Failure`인 경우 오류에 대해  `trident.netapp.io/configuratorMessage`을(를) 검토하십시오.
+
+
+
+==== 추가 FSxN 파일 시스템 추가
+
+동일한 StorageClass를 계속 사용하면서 추가 스토리지 용량이 필요한 경우 추가 FSxN 파일 시스템 ID를 추가하십시오.
+
+StorageClass를 편집하고 다음 주석을 추가하세요.
+
+[source, yaml]
+----
+metadata:
+  annotations:
+    trident.netapp.io/additionalFsxNFileSystemID: '["fs-xxxxxxxxxxxxxxxxxx"]'
+----
+변경 사항을 적용하면 Trident가 백엔드 구성을 업데이트하고 StorageClass 어노테이션을 업데이트합니다.
+
+
+
+==== 운영상의 고려사항 및 제한사항
+
+* 자동 백엔드 구성이 있는 StorageClass를 삭제하면 일반적으로 연결된 Trident 백엔드도 함께 삭제됩니다. 이로 인해 스토리지 연결이 중단되고 실행 중인 워크로드가 중단될 수 있습니다. 관리형 StorageClass를 삭제하기 전에 영향을 검증하십시오.
+* 자동 백엔드 구성은 AWS FSx for NetApp ONTAP에서만 지원됩니다.
+
+
+
+
+=== 자동 백엔드 구성 없이 Kubernetes StorageClass 생성
+
+Trident 백엔드와 StorageClass를 별도로 생성하려면 다음 단계를 따르세요.
+
+
+
+==== 자동 백엔드 구성 작동 방식 이해
+
+Trident는 StorageClass 정의에서 백엔드 구성을 가져옵니다. StorageClass를 적용하면 Trident는 필수 매개변수를 검증하고 백엔드를 생성한 다음 StorageClass에 상태 주석을 추가합니다.
+
+Trident는 VolumeSnapshotClass를 한 번만 생성합니다. Trident는 이후의 StorageClasses에 대해 동일한 VolumeSnapshotClass를 재사용합니다.
+
+
+
+=== Trident 백엔드를 생성합니다
+
+Trident 백엔드를 생성하려면 JSON 또는 YAML 형식의 구성 파일을 만들어야 합니다. 이 파일에는 사용할 스토리지 유형(NAS 또는 SAN), 파일 시스템, 스토리지를 가져올 SVM, 그리고 인증 방법을 지정해야 합니다. 다음 예는 NAS 기반 스토리지를 정의하고 AWS 시크릿을 사용하여 사용할 SVM에 대한 자격 증명을 저장하는 방법을 보여줍니다.
+
+[role="tabbed-block"]
+====
+.YAML
+--
+[source, YAML]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  backendName: tbc-ontap-nas
+  svm: svm-name
+  aws:
+    fsxFilesystemID: fs-xxxxxxxxxx
+  credentials:
+    name: "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name"
+    type: awsarn
+
+----
+--
+.JSON을 참조하십시오
+--
+[source, JSON]
+----
+{
+  "apiVersion": "trident.netapp.io/v1",
+  "kind": "TridentBackendConfig",
+  "metadata": {
+    "name": "backend-tbc-ontap-nas"
+    "namespace": "trident"
+  },
+  "spec": {
+    "version": 1,
+    "storageDriverName": "ontap-nas",
+    "backendName": "tbc-ontap-nas",
+    "svm": "svm-name",
+    "aws": {
+      "fsxFilesystemID": "fs-xxxxxxxxxx"
+    },
+    "managementLIF": null,
+    "credentials": {
+      "name": "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name",
+      "type": "awsarn"
+    }
+  }
+}
+
+----
+--
+====
+
+
+==== FSx for ONTAP 드라이버 세부 정보
+
+다음 드라이버를 사용하여 Trident를 Amazon FSx for NetApp ONTAP와 통합할 수 있습니다.
+
+[cols="1,4"]
+|===
+| 드라이버 이름 | 설명 
+
+
+| 'ONTAP-SAN' | 프로비저닝된 각 PV는 자체 Amazon FSx for NetApp ONTAP 볼륨 내의 LUN입니다. 블록 스토리지에 권장됩니다. 
+
+
+| 'ONTAP-NAS' | 프로비저닝된 각 PV는 전체 Amazon FSx for NetApp ONTAP 볼륨입니다. NFS 및 SMB에 권장됩니다. 
+
+
+| ONTAP-SAN-이코노미 | 프로비저닝된 각 PV는 Amazon FSx for NetApp ONTAP 볼륨당 구성 가능한 LUN 수를 가진 LUN입니다. 
+
+
+| ONTAP-NAS-이코노미 | 프로비저닝된 각 PV는 qtree이며, Amazon FSx for NetApp ONTAP 볼륨당 구성 가능한 수의 qtree가 할당됩니다. 
+
+
+| 'ONTAP-NAS-Flexgroup' | 프로비저닝된 각 PV는 Amazon FSx for NetApp ONTAP FlexGroup 볼륨입니다. 
+|===
+드라이버에 대한 자세한 내용은 을 참조하십시오 link:../trident-use/ontap-nas.html["NAS 드라이버"] 및 link:../trident-use/ontap-san.html["SAN 드라이버"].
+
+
+
+==== 백엔드를 생성합니다
+
+구성 파일을 생성한 후 다음 명령을 실행하여 Trident 백엔드 구성(TBC)을 생성하고 유효성을 검사하십시오.
+
+* YAML 파일에서 TBC(Trident 백엔드 구성)를 생성하고 다음 명령을 실행합니다.
++
+[source, console]
+----
+kubectl create -f backendconfig.yaml -n trident
+----
++
+[listing]
+----
+tridentbackendconfig.trident.netapp.io/backend-tbc-ontap-nas created
+----
+* Trident 백엔드 구성(TBC)이 성공적으로 생성되었는지 확인:
++
+[source, console]
+----
+Kubectl get tbc -n trident
+----
++
+[listing]
+----
+NAME                         BACKEND NAME         BACKEND UUID                           PHASE   STATUS
+
+backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d916ac5e9   Bound   Success
+----
+
+
+다른 구성 옵션에 대한 자세한 내용은 아래 <<Backend-advanced-configuration-and-examples>> 섹션을 참조하십시오.
+
+
+
+=== 자동 백엔드 구성 *없이* 스토리지 클래스 구성
+
+다음은 Trident 및 FSx for ONTAP에서 사용할 스토리지 클래스 구성의 예입니다.
+
+
+
+==== NFS용 스토리지 클래스
+
+이 예제를 사용하여 NFS를 사용하는 볼륨에 대한 StorageClass를 설정할 수 있습니다(전체 속성 목록은 아래 Trident 속성 섹션을 참조하십시오).
 
 [source, YAML]
 ----
@@ -36,7 +341,11 @@ parameters:
   provisioningType: "thin"
   snapshots: "true"
 ----
-iSCSI를 사용하여 볼륨에 대한 Storageclass를 설정하려면 다음 예를 사용하세요.
+
+
+==== iSCSI용 스토리지 클래스
+
+iSCSI를 사용하여 볼륨에 대한 StorageClass를 설정하려면 다음 예를 사용하십시오.
 
 [source, YAML]
 ----
@@ -50,6 +359,10 @@ parameters:
   provisioningType: "thin"
   snapshots: "true"
 ----
+
+
+==== NFSv3 및 AWS Bottlerocket을 사용하는 스토리지 클래스
+
 AWS Bottlerocket에서 NFSv3 볼륨을 프로비저닝하려면 필요한 를 `mountOptions` 스토리지 클래스에 추가합니다.
 
 [source, YAML]
@@ -68,116 +381,9 @@ mountOptions:
   - nfsvers=3
   - nolock
 ----
-Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.
 
 
-
-=== 스토리지 클래스를 생성합니다
-
-.단계
-. Kubernetes 오브젝트이므로 를 사용하십시오 `kubectl` Kubernetes에서 생성해야 합니다.
-+
-[source, console]
-----
-kubectl create -f storage-class-ontapnas.yaml
-----
-. 이제 Kubernetes와 Trident 모두에서 * BASIC-CSI * 스토리지 클래스가 표시되고 Trident는 백엔드에서 풀을 검색해야 합니다.
-+
-[source, console]
-----
-kubectl get sc basic-csi
-----
-
-
-[listing]
-----
-NAME         PROVISIONER             AGE
-basic-csi    csi.trident.netapp.io   15h
-
-----
-
-
-== PVC를 작성합니다
-
-A https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersistentVolumeClaim_"^](PVC)는 클러스터의 PersistentVolume에 대한 액세스 요청입니다.
-
-PVC는 특정 크기 또는 액세스 모드의 저장을 요청하도록 구성할 수 있습니다. 클러스터 관리자는 연결된 StorageClass를 사용하여 PersistentVolume 크기 및 액세스 모드(예: 성능 또는 서비스 수준)를 제어할 수 있습니다.
-
-PVC를 생성한 후 포드에 볼륨을 장착할 수 있습니다.
-
-
-
-=== 샘플 매니페스트
-
-.PersistentVolumeClaim 샘플 매니페스트
-[%collapsible]
-====
-이러한 예는 기본적인 PVC 구성 옵션을 보여줍니다.
-
-.RWX 액세스 PVC
-이 예에서는 이름이 인 StorageClass와 연결된 rwx 액세스 권한이 있는 기본 PVC를 보여 `basic-csi`줍니다.
-
-[source, YAML]
-----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: pvc-storage
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: ontap-gold
-----
-.iSCSI를 사용한 PVC 예제
-이 예에서는 RWO 액세스가 있는 iSCSI용 기본 PVC를 보여줍니다. 이 PVC는 StorageClass와 연결되어 있습니다. `protection-gold` .
-
-[source, YAML]
-----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-name: pvc-san
-spec:
-accessModes:
-  - ReadWriteOnce
-resources:
-  requests:
-    storage: 1Gi
-storageClassName: protection-gold
-----
-====
-
-
-=== PVC 생성
-
-.단계
-. PVC를 작성합니다.
-+
-[source, console]
-----
-kubectl create -f pvc.yaml
-----
-. PVC 상태를 확인합니다.
-+
-[source, console]
-----
-kubectl get pvc
-----
-
-
-[listing]
-----
-NAME        STATUS VOLUME     CAPACITY ACCESS MODES STORAGECLASS AGE
-pvc-storage Bound  pv-name 2Gi      RWO                       5m
-----
-Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.
-
-
-
-== Trident 특성
+==== Trident StorageClass 속성
 
 이러한 매개 변수는 지정된 유형의 볼륨을 프로비저닝하는 데 사용해야 하는 Trident 관리 스토리지 풀을 결정합니다.
 
@@ -208,4 +414,186 @@ ontap-nas, ontap-nas-economy, ontap-nas-flexgroup, ontap-san, solidfire-san, azu
 
 | IOPS | 내부 | 양의 정수입니다 | 풀은 이 범위에서 IOPS를 보장할 수 있습니다 | 볼륨은 이러한 IOPS를 보장합니다 | solidfire-SAN 
 |===
-^1^: ONTAP Select 시스템에서 지원되지 않습니다
+^1^: ONTAP Select 또는 FSx for ONTAP 시스템에서 지원되지 않습니다
+
+Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용되는 및 매개 변수와 스토리지 클래스가 상호 작용하는 방법에 대한 자세한 `PersistentVolumeClaim` 내용은 을 link:../trident-reference/objects.html["Kubernetes 및 Trident 오브젝트"]참조하십시오.
+
+
+
+==== 스토리지 클래스를 생성합니다
+
+StorageClass를 구성한 후 Kubernetes에서 생성할 수 있습니다.
+
+.단계
+. Kubernetes 오브젝트이므로 를 사용하십시오 `kubectl` Kubernetes에서 생성해야 합니다.
++
+[source, console]
+----
+kubectl create -f storage-class-ontapnas.yaml
+----
+. 이제 Kubernetes와 Trident 모두에서 * BASIC-CSI * 스토리지 클래스가 표시되고 Trident는 백엔드에서 풀을 검색해야 합니다.
++
+[source, console]
+----
+kubectl get sc basic-csi
+----
+
+
+[listing]
+----
+NAME         PROVISIONER             AGE
+basic-csi    csi.trident.netapp.io   15h
+
+----
+
+
+== SMB 볼륨 제공
+
+ `ontap-nas` 드라이버를 사용하여 SMB 볼륨을 프로비저닝할 수 있습니다. 하지만 그러려면 다음 단계를 완료해야 합니다: link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["SMB 볼륨 프로비저닝을 위한 준비"].
+
+
+
+== 백엔드 고급 구성 및 예
+
+백엔드 구성 옵션은 다음 표를 참조하십시오.
+
+[cols="3"]
+|===
+| 매개 변수 | 설명 | 예 
+
+
+| '내전' |  | 항상 1 
+
+
+| 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다 | `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `ontap-san`, `ontap-san-economy` 
+
+
+| 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + "_" + dataLIF 
+
+
+| 마나멘타LIF | 클러스터 또는 SVM 관리 LIF의 IP 주소 정규화된 도메인 이름(FQDN)을 지정할 수 있습니다. IPv6 플래그를 사용하여 Trident가 설치된 경우 IPv6 주소를 사용하도록 설정할 수 있습니다. IPv6 주소는 대괄호로 묶어야 합니다(예: [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]).  `aws`현장에서 을 제공하는 경우 `fsxFilesystemID`, Trident이 AWS에서 SVM 정보를 검색하기 때문에 를 제공할 필요가 없습니다 `managementLIF`. `managementLIF` 따라서 SVM에서 사용자에 대한 자격 증명(예: vsadmin)을 제공해야 하며 사용자에게 역할이 있어야 합니다. `vsadmin` | "10.0.0.1"," [2001:1234:ABCD::fefe]" 
+
+
+| 다타LIF | 프로토콜 LIF의 IP 주소입니다. *ONTAP NAS 드라이버*: NetApp에서는 dataLIF를 지정하는 것을 권장합니다. 지정하지 않으면 Trident가 SVM에서 dataLIF를 가져옵니다. NFS 마운트 작업에 사용할 FQDN(정규화된 도메인 이름)을 지정하여 여러 dataLIF에 걸쳐 로드 밸런싱을 수행하는 라운드 로빈 DNS를 생성할 수 있습니다. 초기 설정 후 변경할 수 있습니다. *ONTAP SAN 드라이버*: iSCSI의 경우 지정하지 마십시오. Trident는 ONTAP Selective LUN Map을 사용하여 다중 경로 세션을 설정하는 데 필요한 iSCSI LIF를 검색합니다. dataLIF가 명시적으로 정의된 경우 경고가 생성됩니다. Trident가 IPv6 플래그를 사용하여 설치된 경우 IPv6 주소를 사용할 수 있도록 설정할 수 있습니다. IPv6 주소는 [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]와 같이 대괄호로 정의해야 합니다. |  
+
+
+| 자동 내보내기 정책 | 자동 엑스포트 정책 생성 및 업데이트 [Boolean] 활성화 Trident는 및 `autoExportCIDRs` 옵션을 사용하여 `autoExportPolicy` 엑스포트 정책을 자동으로 관리할 수 있습니다. | 거짓입니다 
+
+
+| 자동 내보내기 | 이 설정된 경우에 대해 Kubernetes 노드 IP를 필터링하는 CIDR `autoExportPolicy` 목록입니다. Trident는 및 `autoExportCIDRs` 옵션을 사용하여 `autoExportPolicy` 엑스포트 정책을 자동으로 관리할 수 있습니다. | "["0.0.0.0/0",":/0"]" 
+
+
+| '라벨' | 볼륨에 적용할 임의의 JSON 형식 레이블 세트입니다 | "" 
+
+
+| '고객증명서' | Base64 - 클라이언트 인증서의 인코딩된 값입니다. 인증서 기반 인증에 사용됩니다 | "" 
+
+
+| 'clientPrivateKey'입니다 | Base64 - 클라이언트 개인 키의 인코딩된 값입니다. 인증서 기반 인증에 사용됩니다 | "" 
+
+
+| 신탁인증서다 | Base64 - 신뢰할 수 있는 CA 인증서의 인코딩된 값입니다. 선택 사항. 인증서 기반 인증에 사용됩니다. | "" 
+
+
+| '사용자 이름' | 클러스터 또는 SVM에 연결할 사용자 이름입니다. 자격 증명 기반 인증에 사용됩니다. 예: vsadmin. |  
+
+
+| "암호" | 클러스터 또는 SVM에 연결하는 암호 자격 증명 기반 인증에 사용됩니다. |  
+
+
+| 'VM'입니다 | 사용할 스토리지 가상 머신입니다 | SVM 관리 LIF가 지정된 경우에 파생됩니다. 
+
+
+| '토르agePrefix' | SVM에서 새 볼륨을 프로비저닝할 때 사용되는 접두사 생성 후에는 수정할 수 없습니다. 이 매개 변수를 업데이트하려면 새 백엔드를 생성해야 합니다. | `trident` 
+
+
+| 제한선태사용법 | * NetApp ONTAP * 용 아마존 FSx에 대해서는 지정하지 마십시오 제공된 및 `vsadmin` 에는 `fsxadmin` 애그리게이트 사용량을 검색하고 Trident를 사용하여 제한하는 데 필요한 권한이 포함되어 있지 않습니다. | 사용하지 마십시오. 
+
+
+| LimitVolumeSize | 요청된 볼륨 크기가 이 값보다 큰 경우 용량 할당에 실패합니다. 또한 qtree 및 LUN에서 관리하는 볼륨의 최대 크기를 제한하고, `qtreesPerFlexvol` 옵션을 통해 FlexVol volume당 최대 qtree 수를 사용자 지정할 수 있습니다 | ""(기본적으로 적용되지 않음) 
+
+
+| '오만유연한' | FlexVol volume당 최대 LUN은 [50, 200] 범위에 있어야 합니다. SAN만 해당. | "'100'" 
+
+
+| debugTraceFlags를 선택합니다 | 문제 해결 시 사용할 디버그 플래그입니다. 예: {"api":false, "method":true}
+
+사용하지 마십시오 `debugTraceFlags` 문제 해결 및 자세한 로그 덤프가 필요한 경우를 제외하고 | null입니다 
+
+
+| nfsMountOptions를 선택합니다 | 쉼표로 구분된 NFS 마운트 옵션 목록입니다. Kubernetes 영구 볼륨의 마운트 옵션은 일반적으로 스토리지 클래스에 지정되어 있지만, 스토리지 클래스에 마운트 옵션이 지정되지 않은 경우 Trident는 스토리지 백엔드의 구성 파일에 지정된 마운트 옵션을 사용하도록 폴백합니다. 스토리지 클래스 또는 구성 파일에 마운트 옵션이 지정되지 않은 경우 Trident는 연결된 영구 볼륨에 마운트 옵션을 설정하지 않습니다. | "" 
+
+
+| `nasType` | NFS 또는 SMB 볼륨 생성을 구성합니다. 옵션은 입니다 `nfs`, `smb`또는 null입니다. * 를 로 설정해야 합니다 `smb` SMB 볼륨의 경우. * null로 설정하면 기본적으로 NFS 볼륨이 설정됩니다. | `nfs` 
+
+
+| "케트리스퍼플랙스볼륨" | FlexVol volume당 최대 qtree, 범위 [50, 300] 내에 있어야 함 | `"200"` 
+
+
+| `smbShare` | Microsoft 관리 콘솔 또는 ONTAP CLI를 사용하여 생성된 SMB 공유의 이름 또는 Trident에서 SMB 공유를 생성하도록 허용하는 이름을 지정할 수 있습니다. 이 매개변수는 ONTAP 백엔드에 대한 Amazon FSx에 필요합니다. | `smb-share` 
+
+
+| 'useREST' | ONTAP REST API를 사용하는 부울 매개 변수입니다. 로 `true` 설정하면 Trident에서 ONTAP REST API를 사용하여 백엔드와 통신합니다. 이 기능을 사용하려면 ONTAP 9.11.1 이상이 필요합니다. 또한 사용되는 ONTAP 로그인 역할에는 애플리케이션에 대한 액세스 권한이 있어야 `ontap` 합니다. 이는 미리 정의된 역할과 역할에 의해 충족됩니다. `vsadmin` `cluster-admin` | 거짓입니다 
+
+
+| `aws` | AWS FSx for ONTAP의 구성 파일에서 다음을 지정할 수 있습니다.
+- `fsxFilesystemID`: AWS FSx 파일 시스템의 ID를 지정합니다.
+- `apiRegion`: AWS API 지역 이름입니다.
+- `apikey`: AWS API 키입니다.
+- `secretKey`: AWS 비밀 키입니다. | ``
+``
+
+
+`""`
+`""`
+`""` 
+
+
+| `credentials` | AWS Secrets Manager에 저장할 FSx SVM 자격 증명을 지정합니다. - `name`: SVM의 자격 증명이 포함된 비밀의 ARN(Amazon Resource Name).  `type`-: 로 `awsarn`설정합니다. 자세한 내용은 을 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["AWS Secrets Manager 암호를 생성합니다"^] 참조하십시오. |  
+|===
+
+
+== 볼륨 프로비저닝을 위한 백엔드 구성 옵션
+
+에서 이러한 옵션을 사용하여 기본 프로비저닝을 제어할 수 있습니다 `defaults` 섹션을 참조하십시오. 예를 들어, 아래 구성 예제를 참조하십시오.
+
+[cols="3"]
+|===
+| 매개 변수 | 설명 | 기본값 
+
+
+| '팩시배부 | LUN에 대한 공간 할당 | "참"입니다 
+
+
+| '예비공간' | 공간 예약 모드, "없음"(씬) 또는 "볼륨"(일반) | "없음" 
+
+
+| 냅샷정책 | 사용할 스냅샷 정책입니다 | "없음" 
+
+
+| "qosPolicy" | 생성된 볼륨에 할당할 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. Trident에서 QoS 정책 그룹을 사용하려면 ONTAP 9 .8 이상이 필요합니다. 비공유 QoS 정책 그룹을 사용하고 정책 그룹이 각 구성 요소에 개별적으로 적용되도록 해야 합니다. 공유 QoS 정책 그룹은 모든 워크로드의 총 처리량에 대한 제한을 적용합니다. | "" 
+
+
+| 적응성 QosPolicy | 생성된 볼륨에 할당할 적응형 QoS 정책 그룹입니다. 스토리지 풀 또는 백엔드에서 qosPolicy 또는 adapativeQosPolicy 중 하나를 선택합니다. ONTAP에서 지원되지 않음 - NAS - 이코노미 | "" 
+
+
+| 안산예비역 | 스냅샷 "0"에 대해 예약된 볼륨의 백분율 |  `snapshotPolicy` `none`있다면, `else`"" 
+
+
+| 'plitOnClone'을 선택합니다 | 생성 시 상위 클론에서 클론을 분할합니다 | 거짓입니다 
+
+
+| 암호화 | 새 볼륨에서 NetApp 볼륨 암호화(NVE)를 활성화하고, 기본값은 로 설정합니다. `false` 이 옵션을 사용하려면 NVE 라이센스가 클러스터에서 활성화되어 있어야 합니다. 백엔드에서 NAE가 활성화된 경우 Trident에서 프로비저닝된 모든 볼륨은 NAE가 사용됩니다. 자세한 내용은 다음을 link:../trident-reco/security-reco.html["Trident가 NVE 및 NAE와 작동하는 방법"]참조하십시오. | 거짓입니다 
+
+
+| `luksEncryption` | LUKS 암호화를 사용합니다. 을 참조하십시오 link:../trident-reco/security-reco.html#Use-Linux-Unified-Key-Setup-(LUKS)["LUKS(Linux Unified Key Setup) 사용"]. SAN만 해당. | "" 
+
+
+| '계층화 정책' | 사용할 계층화 정책	`none` |  
+
+
+| 유니크권한 | 모드를 선택합니다. * SMB 볼륨의 경우 비워 둡니다. * | "" 
+
+
+| '생태성 스타일'을 참조하십시오 | 새로운 볼륨에 대한 보안 스타일 NFS를 지원합니다 `mixed` 및 `unix` 보안 스타일. SMB 지원 `mixed` 및 `ntfs` 보안 스타일. | NFS 기본값은 입니다 `unix`. SMB 기본값은 입니다 `ntfs`. 
+|===

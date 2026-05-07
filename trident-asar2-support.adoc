@@ -24,6 +24,7 @@ Trident는 Trident protect를 통해 ASA r2 시스템에 제한적인 데이터 
 
 * Trident 25.02 이상에서는 iSCSI를 지원합니다.
 * Trident 25.06 이상에서는 iSCSI 외에도 NVMe/TCP를 지원합니다.
+* Trident 25.10 이상에서는 iSCSI 및 NVMe/TCP 외에도 FC를 지원합니다.
 
 
 ONTAP 백엔드 스토리지의 경우 스토리지 가상 머신(SVM)에 하나 이상의 애그리게이트를 할당해야 합니다. 지침은 link:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["ASA r2 시스템에서 SVM에 애그리게이트 할당"^]을(를) 참조하십시오.
