@@ -43,7 +43,7 @@ Trident 사용 link:https://artifacthub.io/packages/helm/netapp-trident/trident-
 link:kubernetes-deploy.html["설치 개요"]을(를) 검토하여 설치 사전 요구 사항을 충족했는지, 그리고 사용 환경에 맞는 올바른 설치 옵션을 선택했는지 확인하십시오.
 
 .시작하기 전에
-link:kubernetes-deploy.html#before-you-deploy["구축 사전 요구 사항"] 외에도 link:https://v3.helm.sh/["Helm 버전 3"^]이(가) 필요합니다.
+link:kubernetes-deploy.html#before-you-begin["구축 사전 요구 사항"] 외에도 link:https://v3.helm.sh/["Helm 버전 3"^]이(가) 필요합니다.
 
 .단계
 . Trident Helm 저장소 추가:

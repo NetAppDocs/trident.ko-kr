@@ -151,7 +151,7 @@ trident-controller-679648bd45-cv2mx   6/6     Running   0          5m29s
 trident-node-linux-vgc8n              2/2     Running   0          5m29s
 ----
 
-NOTE: 설치 프로그램이 성공적으로 완료되지 않거나 `trident-controller-<generated id>` (`trident-csi-<generated id>` 23.01 이전 버전에서는 * Running * 상태가 없으며 플랫폼이 설치되지 않았습니다. 사용 `-d` 를 선택합니다 link:../troubleshooting.html#troubleshooting-an-unsuccessful-trident-deployment-using-tridentctl["디버그 모드를 켭니다"] 문제를 해결합니다.
+NOTE: 설치 프로그램이 성공적으로 완료되지 않거나 `trident-controller-<generated id>` (`trident-csi-<generated id>`에 *실행 중* 상태가 표시되지 않으면 플랫폼이 설치되지 않은 것입니다.  `-d`를 사용하여 link:../troubleshooting.html#unsuccessful-trident-deployment-using-tridentctl["디버그 모드를 켭니다"]하고 문제를 해결하세요.
 
 
 

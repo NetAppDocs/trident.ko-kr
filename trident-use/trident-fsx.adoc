@@ -37,7 +37,7 @@ NOTE: Amazon Linux 및 Ubuntu에 필요한 노드 준비 단계를 따라야 합
 +
 ** SMB 볼륨은 를 사용하여 지원됩니다 `ontap-nas` 드라이버만 해당.
 ** Trident EKS 애드온에서는 SMB 볼륨이 지원되지 않습니다.
-** Trident는 Windows 노드에서만 실행되는 Pod에 마운트된 SMB 볼륨을 지원합니다. 자세한 내용은 을 link:../trident-use/trident-fsx-storage-backend.html#prepare-to-provision-smb-volumes["SMB 볼륨 프로비저닝을 위한 준비"] 참조하십시오.
+** Trident는 Windows 노드에서 실행되는 Pod에 마운트된 SMB 볼륨만 지원합니다. 자세한 내용은 link:worker-node-prep.html#prepare-to-provision-smb-volumes["SMB 볼륨 프로비저닝을 위한 준비"]를 참조하십시오.
 
 
 * Trident 24.02 이전에는 자동 백업이 활성화된 Amazon FSx 파일 시스템에서 생성된 볼륨을 Trident에서 삭제할 수 없었습니다. Trident 24.02 이상에서 이 문제를 방지하려면 `fsxFilesystemID` AWS FSx for ONTAP의 백엔드 구성 파일에, AWS, `apikey` AWS `apiRegion` 및 AWS를 `secretKey` 지정합니다.

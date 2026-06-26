@@ -56,7 +56,7 @@ TIP: 에 익숙지 않은 경우 link:../trident-get-started/intro.html["기본 
 
 == 설치 방법을 선택합니다
 
-적합한 설치 방법을 선택합니다. 의 고려 사항도 검토해야 합니다 link:kubernetes-deploy.html#move-between-installation-methods["방법 간 이동"] 결정을 내리기 전에
+본인에게 맞는 설치 방법을 선택하세요. 결정하기 전에 link:kubernetes-deploy.html#moving-between-installation-methods["방법 간 이동"]에 대한 고려 사항도 검토해야 합니다.
 
 
 

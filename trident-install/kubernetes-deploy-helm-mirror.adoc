@@ -38,12 +38,12 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 
 == Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치합니다
 
-Trident 사용link:https://netapp.github.io/trident-helm-chart["Helm 차트"^] 한 단계로 Trident 운영자를 배포하고 Trident 설치할 수 있습니다.
+Trident 사용 link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm 차트"^] Trident 연산자를 구축하고 Trident를 한 번에 설치할 수 있습니다.
 
 link:kubernetes-deploy.html["설치 개요"]을(를) 검토하여 설치 사전 요구 사항을 충족했는지, 그리고 사용 환경에 맞는 올바른 설치 옵션을 선택했는지 확인하십시오.
 
 .시작하기 전에
-link:kubernetes-deploy.html#before-you-deploy["구축 사전 요구 사항"] 외에도 link:https://v3.helm.sh/["Helm 버전 3"^]이(가) 필요합니다.
+link:kubernetes-deploy.html#before-you-begin["구축 사전 요구 사항"] 외에도 link:https://v3.helm.sh/["Helm 버전 3"^]이(가) 필요합니다.
 
 
 IMPORTANT: 전용 리포지토리에 Trident를 설치할 때 스위치를 사용하여 리포지토리 위치를 지정하는 경우 `imageRegistry` 리포지토리 경로에서 를 사용하지 마십시오 `/netapp/`.
