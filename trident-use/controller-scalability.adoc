@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/controller-scalability.html 
-keywords: trident, controller scalability, concurrency, san, nas, san-nvme, gcnv, nas-eco, san-eco 
+keywords: trident, controller scalability, concurrency, san, nas, san-nvme, gcnv, ontap-nas-economy, ontap-san-economy, asa-r2 
 summary: 컨트롤러 확장성, 동시성 동작 및 기능 성숙도를 이해합니다. 
 ---
 = 컨트롤러 확장성
@@ -12,7 +12,9 @@ summary: 컨트롤러 확장성, 동시성 동작 및 기능 성숙도를 이해
 
 
 [role="lead"]
-Trident는 여러 스토리지 드라이버에 걸쳐 향상된 동시성을 통해 컨트롤러 확장성을 제공합니다. 고객은 일반 출시 시점에 컨트롤러 확장성을 지원하는 Trident 드라이버와 Trident 26.02에서 기술 미리 보기로 제공되는 드라이버를 확인할 수 있습니다. 이를 통해 확장 가능한 Kubernetes 환경을 위한 정보에 기반한 배포 결정을 내리고 적절한 위험 관리를 수행할 수 있습니다.
+Trident는 여러 스토리지 드라이버에 걸쳐 동시성을 향상시켜 컨트롤러 확장성을 개선합니다. 컨트롤러 확장성을 활성화하면 Trident 컨트롤러는 스토리지 작업을 직렬화하는 대신 병렬로 처리하여 동시 작업이 많은 Kubernetes 환경에서 처리량을 높입니다.
+
+배포하기 전에, 일반 출시 버전에서 컨트롤러 확장성을 지원하는 Trident 드라이버와 Trident 26.06에서 기술 미리 보기로 제공되는 드라이버를 확인하십시오. 이를 통해 정보에 기반한 배포 결정을 내리고 위험을 관리할 수 있습니다. 컨트롤러 확장성은 기본적으로 비활성화되어 있습니다.
 
 
 
@@ -22,51 +24,113 @@ Trident는 여러 스토리지 드라이버에 걸쳐 향상된 동시성을 통
 
 === 컨트롤러 확장성
 
-컨트롤러 확장성은 Trident 컨트롤러가 단일 잠금 뒤에서 여러 스토리지 작업을 직렬화하는 대신 병렬로 처리할 수 있는 능력을 의미합니다. 이러한 작업에는 볼륨 생성, 삭제, 크기 조정, 스냅샷 생성 및 삭제, 볼륨 게시 및 게시 취소, 백엔드 관리가 포함됩니다.
+컨트롤러 확장성은 Trident 컨트롤러가 단일 잠금 뒤에서 여러 스토리지 작업을 직렬화하는 대신 병렬로 처리할 수 있는 능력을 의미합니다. 이러한 작업에는 볼륨 생성, 삭제 및 크기 조정, 스냅샷 생성 및 삭제, 볼륨 게시 및 게시 취소, 백엔드 관리가 포함됩니다.
 
-컨트롤러 확장성이 활성화되면 서로 다른 볼륨 및 백엔드에 대한 작업이 동시에 진행됩니다. 이는 PersistentVolumeClaim 및 VolumeSnapshot 작업이 동시에 많이 발생하는 환경에서 처리량을 높이고 엔드 투 엔드 작업 시간을 단축합니다.
+컨트롤러 확장성을 활성화하면 서로 다른 볼륨 및 백엔드에 대한 작업이 동시에 진행됩니다. 이를 통해 동시 PersistentVolumeClaim 및 VolumeSnapshot 작업이 많은 환경에서 처리량이 증가하고 엔드 투 엔드 작업 시간이 단축됩니다.
+
+
+
+== 기본 동작(직렬 모드)
+
+기본적으로 Trident 컨트롤러는 작업을 한 번에 하나씩 처리합니다. 생성, 삭제, 크기 조정 또는 스냅샷 요청이 모두 완료된 후에야 Trident는 다음 작업을 시작합니다. 직렬 모드는 모든 설치에서 기본적으로 지원되는 모드이며 구성이 필요하지 않습니다.
+
+대부분의 워크로드에는 직렬 모드가 충분합니다. 직렬 처리 시 작업량이 누적되어 처리 지연이 발생하는 경우에만 컨트롤러 확장성을 활성화하십시오.
 
 
 
 == 컨트롤러 확장성 지원
 
-Trident는 스토리지 드라이버에 따라 다양한 성숙도 수준의 컨트롤러 확장성을 지원합니다.
+Trident는 다양한 스토리지 드라이버에 대해 서로 다른 성숙도 수준의 컨트롤러 확장성을 지원합니다.
 
 
 
 === 일반 가용성
 
-다음 드라이버는 Trident 26.02의 정식 출시 버전에서 컨트롤러 확장성을 지원합니다.
+다음 드라이버는 Trident 26.06의 정식 출시 버전에서 컨트롤러 확장성을 지원합니다.
 
 * 'ONTAP-SAN'
 * 'ONTAP-NAS'
+* ONTAP-NAS-이코노미
+* ONTAP-SAN-이코노미
 * `google-cloud-netapp-volumes`
+* 'Azure-NetApp-파일'
+* '솔더불-산'
 
 
 [NOTE]
 ====
- `google-cloud-netapp-volumes`와 `google-cloud-netapp-volumes-san` 드라이버는 서로 다릅니다.  `google-cloud-netapp-volumes`만 지원됩니다. 백엔드 구성이나 예제에서 `google-cloud-netapp-volumes-san`를 사용하지 마십시오.
+The `google-cloud-netapp-volumes`와 `google-cloud-netapp-volumes-san`드라이버는 서로 다릅니다. Trident는 `google-cloud-netapp-volumes`만 지원합니다. 백엔드 구성이나 예제에서 `google-cloud-netapp-volumes-san`를 사용하지 마십시오.
 
 ====
 
 
+=== 기술 미리 보기
+
+다음 드라이버는 Trident 26.06의 기술 미리 보기 기능으로 컨트롤러 확장성을 지원합니다.
+
+* `asa-r2` (SAN 및 NVMe)
+
+
+이 드라이버에는 다음과 같은 제한 사항이 있습니다.
+
+* 컨트롤러 동시성 기능은 평가 및 테스트 목적으로만 사용할 수 있습니다.
+* 동작 방식은 릴리스마다 변경될 수 있습니다.
+* NetApp은 운영 환경에서의 사용을 권장하지 않습니다.
+
+
+
+
+== enableConcurrency 작동 방식
+
+이 설정  `enableConcurrency`을  `true`로 설정하면 Trident는 컨트롤러가 관리하는 모든 백엔드에 걸쳐 동시 처리를 적용합니다. 이 설정은 모든 백엔드에 동시에 적용됩니다. 개별 백엔드 또는 개별 드라이버에 대해서는 활성화할 수 없습니다.
+
+구성된 모든 백엔드는 일반 출시 또는 기술 미리 보기 목록에 있는 드라이버를 사용해야 합니다. 백엔드 중 하나라도 지원되지 않는 드라이버를 사용하는 경우 Trident가 시작되지 않으며, Trident는 지원되지 않는 드라이버를 사용하는 백엔드를 추가하지 않습니다.
+
+시작 기능을 복원하려면 지원되지 않는 드라이버를 사용하는 백엔드를 제거하거나 재구성하거나 컨트롤러 확장성을 비활성화하십시오.
+
+
+
+== 활성화하기 전에
+
+[IMPORTANT]
+====
+컨트롤러 확장성을 활성화하기 전에 구성된 모든 백엔드가 일반 공급 또는 기술 미리 보기 목록에 있는 드라이버를 사용하는지 확인하십시오. 백엔드 중 하나라도 지원되지 않는 드라이버를 사용하는 경우, 해당 기능을 활성화한 후 Trident가 시작되지 않습니다.
+
+====
+컨트롤러 확장성 활성화 여부를 결정하려면 다음 표를 참조하십시오.
+
+[cols="1,1"]
+|===
+| 환경이 | 그 다음에 
+
+
+| 지원되는 드라이버만 사용하며 컨트롤러 작업의 백로그가 발생합니다. | 컨트롤러 확장성을 활성화합니다. 
+
+
+| 지원되지 않는 드라이버를 사용합니다 | 기본 직렬 모드를 유지하십시오. 컨트롤러 확장성을 활성화하지 마십시오. 
+
+
+| 처리량이 적고 백로그가 없는 상태를 처리합니다. | 기본 직렬 모드를 유지하십시오. 
+|===
+
+
 == 컨트롤러 확장성 활성화
 
-컨트롤러 확장성은  `enableConcurrency` 구성 옵션을 통해 제어됩니다. 이 옵션은 Trident 설치 중 또는 기존 배포 업데이트 시 명시적으로 활성화해야 합니다.
+이  `enableConcurrency` 구성 옵션은 컨트롤러의 확장성을 제어합니다. Trident 설치 시 또는 기존 배포를 업데이트할 때 이 옵션을 명시적으로 활성화해야 합니다.
 
 
 
 === Trident 운영자 배포
 
-Trident operator에서 컨트롤러 확장성을 활성화하려면,  `enableConcurrency`를  `true`로  `TridentOrchestrator` 커스텀 리소스에서 설정하세요.
+Trident 오퍼레이터를 사용하여 컨트롤러 확장성을 활성화하려면  `TridentOrchestrator` 사용자 정의 리소스(CR)에서  `enableConcurrency`을(를)  `true`(으)로 설정하십시오.
 
 
 
 ==== 신규 설치
 
- `TridentOrchestrator` CR을 생성하거나 편집하고  `enableConcurrency`을(를)  `true`(으)로 설정합니다:
+ `TridentOrchestrator` CR을 생성하거나 편집하고  `enableConcurrency`을(를)  `true`(으)로 설정합니다.
 
-[source]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
@@ -78,7 +142,7 @@ spec:
 ----
 CR 적용:
 
-[source]
+[source, console]
 ----
 kubectl apply -f tridentorchestrator_cr.yaml
 ----
@@ -88,13 +152,13 @@ kubectl apply -f tridentorchestrator_cr.yaml
 
 기존 `TridentOrchestrator` CR에 패치를 적용하여 컨트롤러 확장성을 활성화합니다.
 
-[source]
+[source, console]
 ----
 kubectl patch torc trident --type=merge -p '{"spec":{"enableConcurrency":true}}'
 ----
-설정이 적용되었는지 확인합니다.
+Trident가 설정을 적용했는지 확인합니다.
 
-[source]
+[source, console]
 ----
 kubectl get torc trident -o jsonpath='{.status.currentInstallationParams.enableConcurrency}'
 ----
@@ -108,7 +172,7 @@ Helm을 사용하여 컨트롤러 확장성을 활성화하려면  `enableConcur
 
 ==== 신규 설치
 
-[source]
+[source, console]
 ----
 helm install trident netapp-trident/trident-operator --namespace trident --create-namespace --set enableConcurrency=true
 ----
@@ -116,20 +180,20 @@ helm install trident netapp-trident/trident-operator --namespace trident --creat
 
 ==== 기존 설치
 
-[source]
+[source, console]
 ----
 helm upgrade trident netapp-trident/trident-operator --namespace trident --set enableConcurrency=true
 ----
 또는, 사용자 지정 `values.yaml` 파일에서  `enableConcurrency`을(를)  `true`(으)로 설정하십시오:
 
-[source]
+[source, yaml]
 ----
 # values.yaml
 enableConcurrency: true
 ----
 그런 다음 값 파일을 사용하여 설치 또는 업그레이드하십시오.
 
-[source]
+[source, console]
 ----
 helm install trident netapp-trident/trident-operator --namespace trident --create-namespace -f values.yaml
 ----
@@ -143,7 +207,7 @@ helm install trident netapp-trident/trident-operator --namespace trident --creat
 
 ==== 신규 설치
 
-[source]
+[source, console]
 ----
 tridentctl install -n trident --enable-concurrency
 ----
@@ -151,96 +215,68 @@ tridentctl install -n trident --enable-concurrency
 
 ==== 기존 설치
 
-기존  `tridentctl` 기반 배포에서 컨트롤러 확장성을 활성화하려면 다음 플래그를 사용하여 제거한 후 다시 설치하십시오.
+기존  `tridentctl` 배포 환경에서 컨트롤러 확장성을 활성화하려면 Trident를 제거한 후 다음 플래그를 사용하여 다시 설치하십시오.
 
-[source]
+[source, console]
 ----
 tridentctl uninstall -n trident
 tridentctl install -n trident --enable-concurrency
 ----
 
 
-=== 컨트롤러 확장성이 활성화되어 있는지 확인하십시오
+=== 컨트롤러 확장성이 활성화되어 있는지 확인하십시오.
 
-컨트롤러 확장성을 활성화한 후 컨트롤러 파드 로그를 확인하여 Trident 컨트롤러가 동시 실행 기능을 활성화한 상태로 실행 중인지 확인하십시오.
+컨트롤러 확장성을 활성화한 후 Trident 컨트롤러가 동시 실행 기능을 사용하여 실행되는지 확인하십시오. 컨트롤러 Pod 로그를 확인하십시오.
 
-[source]
+[source, console]
 ----
 kubectl logs -n trident deploy/trident-controller | grep -i concurrency
 ----
-동시 실행이 활성화되었음을 나타내는 로그 항목이 표시됩니다.
-
-
-
-=== 기술 미리 보기
-
-다음 드라이버는 Trident 26.02에서 기술 미리 보기로 컨트롤러 확장성을 지원합니다.
-
-* `nas-eco`
-* `san-eco`
-
-
-다음 드라이버의 경우:
-
-* 컨트롤러 동시성을 평가 및 테스트할 수 있습니다.
-* 향후 릴리스에서 동작 방식이 변경될 수 있습니다.
-* 운영 환경에서는 사용하지 않는 것이 좋습니다
-
+출력에는 동시 실행이 활성화되었음을 확인하는 로그 항목이 포함되어 있습니다.
 
 
 
 == 동시성 동작
 
-컨트롤러 확장성이 활성화된 경우:
+컨트롤러 확장성이 활성화되면 Trident 컨트롤러는 다음과 같은 동작을 적용합니다.
 
 * Trident는 단일 전역 잠금을 리소스별 세분화된 잠금으로 대체합니다.
-* 동일한 리소스를 수정하는 작업은 데이터 일관성을 유지하기 위해 직렬화됩니다
-* 리소스에서 읽기만 하는 작업은 해당 리소스에 대한 다른 읽기 작업과 동시에 진행될 수 있습니다.
-* Trident는 백엔드 스토리지 시스템의 과부하를 방지하기 위해 관리 LIF당 동시 ONTAP API 요청을 20개로 제한합니다
-* 여러 백엔드가 동일한 관리 LIF를 공유하는 경우 이 20개 요청 제한을 공유합니다
-
-
-
-
-== 알려진 제한 사항 및 고려 사항
-
-컨트롤러 확장성에는 다음 사항이 적용됩니다.
-
-* 동시성은 Trident 컨트롤러에 의해 내부적으로 관리됩니다
-* 이번 릴리스에는 사용자가 구성할 수 있는 동시성 제한이 없습니다
-* 전체 처리량은 다음 요소에 따라 달라집니다.
-+
-** 사용 중인 스토리지 드라이버
-** 백엔드 응답성
-** Kubernetes API 서버 성능
-
-
-* 높은 동시성은 백엔드 스토리지 시스템의 부하를 증가시킬 수 있습니다
+* Trident는 데이터 일관성을 유지하기 위해 동일한 리소스를 수정하는 작업을 직렬화합니다.
+* 리소스에서 읽기만 하는 작업은 해당 리소스에 대한 다른 읽기 작업과 동시에 진행됩니다.
+* Trident는 백엔드 스토리지 시스템의 과부하를 방지하기 위해 관리 LIF당 동시 ONTAP API 요청을 20개로 제한합니다.
+* 여러 백엔드가 동일한 관리 LIF를 공유하는 경우, 해당 백엔드들은 20건의 요청 제한을 공유합니다.
 
 
 
 
 == 주의사항 및 제한사항
 
-Trident 26.02에는 다음과 같은 제한 사항이 적용됩니다.
+Trident 26.06의 컨트롤러 확장성과 관련하여 다음과 같은 사항을 고려해야 합니다.
 
-* 컨트롤러 확장성 동작은 모든 드라이버에서 동일하지 않습니다
-* 기술 미리 보기 드라이버에서 다음과 같은 현상이 나타날 수 있습니다.
-+
-** 높은 부하에서 일관되지 않은 성능
-** 릴리스 간 동작 변경 사항
-
-
-* 병렬 실행으로 인해 동시 작업 디버깅이 더 복잡해질 수 있습니다.
-* 지표 및 로그에는 인터리브된 작업 출력이 표시될 수 있습니다
+* 컨트롤러 확장성은 일반 출시 및 기술 미리 보기 목록에 있는 드라이버만 지원합니다. 자세한 내용은 <<before-you-enable,활성화하기 전에>>을 참조하십시오.
+* Trident 컨트롤러는 동시 실행을 내부적으로 관리합니다. 이번 릴리스에서는 사용자가 구성할 수 있는 동시 실행 제한을 제공하지 않습니다.
+* 전반적인 처리량은 사용 중인 스토리지 드라이버, 백엔드 응답성 및 Kubernetes API 서버 성능에 따라 달라집니다.
+* 높은 동시성은 백엔드 스토리지 시스템의 부하를 증가시킬 수 있습니다.
+* 컨트롤러 확장성 동작은 모든 드라이버에서 동일하지 않습니다.
+* 기술 미리보기 드라이버는 고부하 환경에서 성능이 불안정할 수 있으며, 릴리스 간에 동작이 변경될 수 있습니다.
+* 병렬 실행으로 인해 동시 작업 디버깅이 더 복잡해질 수 있습니다. 메트릭과 로그를 통해 작업 출력이 뒤섞여 나타나는 것을 확인할 수 있습니다.
 
 
 
 
 == 권장 사항
 
-* 높은 확장성이 필요한 운영 환경에는 일반 가용성(GA) 드라이버를 사용하십시오
-* 비프로덕션 환경에서 기술 미리 보기 드라이버를 평가합니다
-* 대규모로 운영할 때 백엔드 및 컨트롤러 성능 모니터링
-* 자동화 스크립트에서 작업 순서를 가정하지 마십시오
+컨트롤러 확장성을 활성화하기 전에 다음 단계를 완료하십시오.
+
+. 구성된 모든 백엔드가 일반 출시 또는 기술 미리 보기 목록에 있는 드라이버를 사용하는지 확인하십시오.
+. 변경 사항을 프로덕션 환경에 적용하기 전에 비프로덕션 클러스터에서 테스트하십시오.
+. 변경 사항을 적용한 후 컨트롤러 확장성이 활성화되었는지 확인하십시오.
+
+
+컨트롤러 확장성을 활용할 때는 다음과 같은 일반적인 권장 사항을 적용하십시오.
+
+* 높은 확장성이 요구되는 프로덕션 환경에는 일반 가용성 드라이버를 사용하십시오.
+* 기술 미리보기 드라이버는 비운영 환경에서만 평가하십시오.
+* 대규모 운영 환경에서 백엔드 및 컨트롤러 성능을 모니터링하십시오.
+* 자동화 스크립트에서 작업 순서를 가정하지 마십시오.
 

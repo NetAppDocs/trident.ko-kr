@@ -36,12 +36,16 @@ entries:
     entries:
     - title: Trident Protect를 사용하여 애플리케이션 복원
       url: "/trident-protect/trident-protect-restore-apps.html"
-    - title: 고급 설정 사용
+    - title: 고급 복원 설정 사용
       url: "/trident-protect/trident-protect-restore-settings.html"
+    - title: 복원 중 리소스 수정
+      url: "/trident-protect/trident-protect-resource-transformations.html"
   - title: NetApp SnapMirror를 사용하여 애플리케이션 복제
     url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
   - title: 애플리케이션을 마이그레이션합니다
     url: "/trident-protect/trident-protect-migrate-apps.html"
+  - title: KubeVirt 가상 머신 보호
+    url: "/trident-protect/trident-protect-kubevirt-vms.html"
   - title: Trident Protect로 실행 후크 관리
     url: "/trident-protect/trident-protect-use-execution-hooks.html"
 - title: Trident Protect 제거

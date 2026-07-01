@@ -150,7 +150,7 @@ TNR은 다음 상태 중 하나에 속할 수 있습니다.
 
 
 
-NOTE: 또한 지정된 대로 노드 실패를 감지하기 위해 대체 방법을 사용할 수도 있습니다.<<Integrating Custom Node Health Check Solutions>> 아래 섹션을 참조하세요.
+NOTE: 아래 <<사용자 정의 노드 상태 점검 솔루션 통합>> 섹션에 명시된 대로 노드 장애를 감지하는 다른 방법을 사용할 수도 있습니다.
 
 보다link:https://www.redhat.com/en/blog/node-health-check-operator["노드 상태 점검 운영자"^] 자세한 내용은.
 

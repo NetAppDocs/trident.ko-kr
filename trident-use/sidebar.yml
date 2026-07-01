@@ -28,6 +28,8 @@ entries:
       url: "/trident-use/gcnv-examples.html"
     - title: 자동 계층화 구성
       url: "/trident-use/gcnv-auto-tiering.html"
+    - title: ONTAP 모드 스토리지 풀 구성
+      url: "/trident-use/gcnv-ontap-mode.html"
   - title: NetApp HCI 또는 SolidFire
     url: "/trident-use/element.html"
   - title: ONTAP SAN 드라이버
@@ -82,6 +84,8 @@ entries:
   entries:
   - title: 볼륨을 프로비저닝합니다
     url: "/trident-use/vol-provision.html"
+  - title: 볼륨 이동
+    url: "/trident-use/vol-move.html"
   - title: 볼륨 확장
     url: "/trident-use/vol-expansion.html"
   - title: RWX NVMe 하위 시스템 제한 사항 이해

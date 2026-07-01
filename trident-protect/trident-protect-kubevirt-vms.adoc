@@ -1,0 +1,568 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-kubevirt-vms.html 
+keywords: kubevirt, openshift virtualization, virtual machine, vm, backup, restore, includedvirtualmachines 
+summary: KubeVirt 가상 머신을 OpenShift Virtualization에서 Trident Protect로 보호하세요. 네임스페이스의 모든 VM을 백업하거나 이름으로 특정 VM을 대상으로 백업할 수 있습니다. 백업 또는 스냅샷 아카이브에서 개별 VM을 선택적으로 복원할 수 있습니다. 
+---
+= KubeVirt 가상 머신을 Trident Protect로 보호합니다
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident Protect를 사용하면 OpenShift Virtualization에서 실행되는 KubeVirt 가상 머신(VM)을 백업하고 복원할 수 있습니다. 하나 이상의 네임스페이스에 있는 모든 VM을 한 번에 보호하거나  `includedVirtualMachines` 필드를 사용하여 이름별로 특정 VM을 지정할 수 있습니다. Trident Protect는 백업 중에 모든 종속 VM 리소스를 자동으로 수집하며, 복원 중에는 전체 아카이브를 복구하거나 개별 VM을 선택적으로 복원할 수 있습니다.
+
+
+
+== KubeVirt 보호 모드
+
+Trident Protect는 보호할 KubeVirt VM을 정의하는 두 가지 방법을 지원합니다. 애플리케이션을 정의할 때 이 중 하나의 모드를 선택하십시오.
+
+[cols="1,1,2"]
+|===
+| 모드 | 필드에 입력합니다 | 설명 
+
+
+| 네임스페이스 기반 | `includedNamespaces` | 하나 이상의 네임스페이스에서 일치하는 모든 리소스를 보호합니다. 네임스페이스 항목에  `labelSelector`를 사용하여 동적으로 포함될 VM을 제어할 수 있습니다. 
+
+
+| VM 범위 | `includedVirtualMachines` | 네임스페이스 및 이름을 기준으로 특정 KubeVirt VM을 보호합니다. VM이 여러 네임스페이스에 분산되어 있거나 모든 네임스페이스 리소스를 보호할 필요가 없는 경우에 이 모드를 사용하십시오. 
+|===
+반드시 정확히 하나의 필드 (`includedNamespaces` 또는 `includedVirtualMachines`)를  `ApplicationSpec`에 지정해야 합니다. 동일한 애플리케이션에서 두 필드를 모두 사용할 수 없습니다.
+
+두 모드 모두 추가 필터링을 지원합니다.
+
+*  `resourceFilter`을(를) 사용하여 특정 리소스를 포함하거나 제외합니다.
+*  `includedClusterScopedResources`을(를) 사용하여  `StorageClass` 객체와 같은 호환 가능한 클러스터 범위 리소스를 포함합니다.
+
+
+
+NOTE: Trident Protect는 데이터 보호 작업 중에 KubeVirt VM 파일 시스템을 동결 및 해제하여 일관성을 보장할 수 있습니다. 구성 세부 정보는 link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["KubeVirt VM으로 데이터 보호"]을 참조하십시오.
+
+
+
+== 백업 및 스냅샷 중에 수집된 리소스
+
+KubeVirt VM이 포함된 애플리케이션의 백업 또는 스냅샷을 생성할 때 Trident Protect는 선택한 VM 리소스를 수집하고 해당 종속 리소스를 자동으로 검색합니다.
+
+수집 동작은 다음 두 가지 경우에 적용됩니다.
+
+* VM 범위 애플리케이션은  `includedVirtualMachines`을(를) 사용합니다.
+* KubeVirt `VirtualMachine` 리소스를 포함하는 네임스페이스 기반 애플리케이션.
+
+
+
+
+=== VM 범위 컬렉션
+
+VM 범위 애플리케이션의 경우, Trident Protect는  `includedVirtualMachines`에 나열된 각  `VirtualMachine`에서 시작하여 해당 VM을 복원하는 데 필요한 종속 리소스를 검색합니다.
+
+[cols="1,1,3"]
+|===
+| 리소스 유형 | 범위 | 검색 방법 
+
+
+| `VirtualMachine` | 네임스페이스 |  `includedVirtualMachines` 목록에서 직접 일치하는 항목입니다. 
+
+
+| `VirtualMachineInstance` | 네임스페이스 | VM이 실행 중인 경우 VM과 동일한 네임스페이스 및 이름을 사용합니다. 
+
+
+| `VirtualMachineInstancetype` | 네임스페이스 |  `spec.instancetype`에 의해 참조됩니다 `kind: VirtualMachineInstancetype`. 
+
+
+| `VirtualMachineClusterInstancetype` | 클러스터 |  `spec.instancetype`에 의해 참조되며, `kind`가 설정되지 않았거나 `kind: VirtualMachineClusterInstancetype`인 경우에 해당합니다. 
+
+
+| `VirtualMachinePreference` | 네임스페이스 |  `spec.preference`에 의해 참조됨 `kind: VirtualMachinePreference`. 
+
+
+| `VirtualMachineClusterPreference` | 클러스터 |  `spec.preference`에 의해 참조되며 `kind`가 설정되지 않았거나 `kind: VirtualMachineClusterPreference`인 경우에 사용됩니다. 
+
+
+| `DataVolume` | 네임스페이스 | 참조 대상: `spec.template.spec.volumes[].dataVolume.name`. 
+
+
+| `PersistentVolumeClaim` | 네임스페이스 | DataVolume과 동일한 이름을 사용하는 DataVolume 지원 PVC에서 검색되었으며,  `persistentVolumeClaim.claimName`의 직접 PVC 참조,  `memoryDump.claimName`의 메모리 덤프 PVC 및  `ephemeral.persistentVolumeClaim.claimName`의 임시 PVC가 포함됩니다. 
+
+
+| `PersistentVolume` | 클러스터 | 수집된 각 PVC의 백업 PV에서  `spec.volumeName`을(를) 사용하여 검색됩니다. 
+
+
+| `Secret` | 네임스페이스 | 볼륨 비밀에서 검색됨 `secret.secretName`; containerDisk 이미지 풀 시크릿; CloudInitNoCloud 및 CloudInitConfigDrive 사용자 데이터 및 네트워크 데이터 시크릿 참조; Sysprep 시크릿; KernelBoot 컨테이너 이미지 풀 시크릿; 및 AccessCredentials SSH 또는 암호 시크릿. 
+
+
+| `ConfigMap` | 네임스페이스 | 볼륨 ConfigMaps `configMap.name` 및 Sysprep ConfigMaps에서 검색되었습니다. 
+
+
+| `ServiceAccount` | 네임스페이스 |  `serviceAccount.serviceAccountName` 볼륨 참조에서 검색되었습니다. 
+
+
+| `NetworkAttachmentDefinition` | 네임스페이스 | Multus 네트워크에서  `spec.template.spec.networks[].multus.networkName` 네트워크 이름에  `/`이(가) 포함되지 않은 경우 검색됩니다. 동일 네임스페이스의 NetworkAttachmentDefinition 참조만 수집됩니다. 다른 네임스페이스 참조는 건너뜁니다. 
+
+
+| `Pod` | 네임스페이스 |  `virt-launcher`레이블 선택기 `kubevirt.io=virt-launcher,vm.kubevirt.io/name=<vmName>`를 사용하여 Pods에 대해 검색되었습니다. 
+
+
+| 스토리지 클래스, Trident 볼륨 및 Trident 백엔드 | 클러스터 | VM에 대해 검색된 PVC를 기반으로 네임스페이스 기반 애플리케이션과 동일한 방식으로 수집됩니다. 
+|===
+
+NOTE: VM 범위의 네임스페이스 리소스 수집이 완료되면 Trident Protect는 표준 `resourceFilter`을 적용합니다(구성된 경우). 이후 클러스터 범위 리소스 수집은 정상적으로 진행됩니다.
+
+
+
+=== 네임스페이스 기반 컬렉션
+
+네임스페이스 기반 애플리케이션의 경우, Trident Protect는 선택한 네임스페이스를 스캔하고 일치하는 모든 리소스를 수집합니다. KubeVirt `VirtualMachine` 객체가 발견되면 Trident Protect는 VM 범위 애플리케이션과 마찬가지로 인스턴스 유형, 환경 설정 및 `virt-launcher` Pod를 포함한 해당 종속 리소스를 자동으로 수집합니다.
+
+즉, 애플리케이션이  `includedNamespaces`로 정의된 경우에도 VM별 리소스가 백업 또는 스냅샷에 포함됩니다.
+
+
+
+== 네임스페이스 기반 애플리케이션 정의를 사용하여 VM 보호
+
+네임스페이스 기반 애플리케이션을 생성하면 Trident Protect는 선택한 네임스페이스를 스캔하여 KubeVirt VM을 포함한 모든 리소스를 수집합니다. Trident Protect는 발견된 각 가상 머신에 대해 해당 VM을 백업하고 복원하는 데 필요한 종속 리소스도 수집합니다.
+
+예시 네임스페이스 기반 애플리케이션 CR:
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace>
+----
+애플리케이션을 생성한 후에는 표준 Trident Protect 워크플로를 사용하여 백업 및 스냅샷을 생성하십시오.
+
+* 스냅샷 YAML 예제는 link:trident-protect-protect-apps.html#create-an-on-demand-snapshot["필요 시 스냅샷을 생성합니다"]을 참조하십시오.
+* 백업 YAML 예제는 link:trident-protect-protect-apps.html#create-an-on-demand-backup["필요 시 백업을 생성합니다"]을 참조하십시오.
+
+
+
+
+=== 네임스페이스 기반 VM 애플리케이션의 동작 복원
+
+네임스페이스 기반 애플리케이션은 선택한 네임스페이스에서 리소스를 수집하므로 백업 또는 스냅샷에 KubeVirt 런타임 객체 및 KubeVirt에서 관리하는 메타데이터가 포함될 수 있습니다. 이러한 객체 중 일부는 소스 클러스터의 런타임 상태를 나타내므로 직접 복원해서는 안 됩니다.
+
+복원 과정에서 Trident Protect는 KubeVirt를 인식하는 변환을 적용하여 소스 클러스터 메타데이터를 제거하고 임시 KubeVirt 리소스를 건너뜁니다. 이를 통해 KubeVirt가 복원된 환경에서 VM을 깔끔하게 다시 생성할 수 있습니다.
+
+[cols="1,2"]
+|===
+| 리소스 | 변환 
+
+
+| VirtualMachine |  `kubevirt.io/`으로 시작하는 레이블과 주석을 제거합니다. 
+
+
+| VirtualMachineInstance |  `kubevirt.io/`으로 시작하는 레이블과 주석을 제거합니다. 
+
+
+| VirtualMachineInstanceMigration | 무시되었고 복구되지 않았습니다. 
+
+
+| VirtualMachineSnapshot | 무시되었고 복구되지 않았습니다. 
+
+
+| VirtualMachineSnapshotContent | 무시되었고 복구되지 않았습니다. 
+
+
+| Pod (`virt-launcher`) | 포드에  `kubevirt.io=virt-launcher` 라벨이 있는 경우 건너뜁니다. 
+|===
+
+NOTE: Trident Protect는 종속성 문제를 방지하기 위해 정의된 순서대로 KubeVirt 리소스를 복원합니다. CDI DataVolumes (`cdi.kubevirt.io`)가 먼저 복원되어 VM 객체가 생성되기 전에 VM 디스크 데이터를 사용할 수 있게 됩니다. 그 후 VirtualMachines (`kubevirt.io`)가 VirtualMachineInstances 이전에 복원됩니다.
+
+
+
+== 레이블 선택기를 사용한 동적 VM 보호
+
+각 VM 이름을 나열하지 않고 VM을 동적으로 보호하려면 레이블 선택기를 사용하는 네임스페이스 기반 애플리케이션 정의를 사용하십시오.
+
+VirtualMachine CR에만 레이블이 필요합니다. DataVolumes, PVC, Secrets, ConfigMaps와 같은 종속 리소스는 자동으로 수집됩니다.
+
+.단계
+. 가상 머신 CR에 공유 레이블을 지정합니다.
++
+[source, console]
+----
+kubectl label virtualmachine <vm_name 1> app=<label_value> -n <vm_namespace>
+kubectl label virtualmachine <vm_name_2> app=<label_value> -n <vm_namespace>
+----
+.  `includedNamespaces` 및  `labelSelector`을(를) 사용하여 애플리케이션 CR을 생성합니다.
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace>
+      labelSelector:
+        matchLabels:
+          app: <label_value>
+----
+. Trident Protect의 표준 워크플로를 사용하여 백업 및 복원을 생성합니다.
+
+
+*추가 정보*:
+
+* 레이블을 변경하면 언제든지 VM을 보호 대상에 추가하거나 제거할 수 있습니다.
+
+
+[source, console]
+----
+kubectl label virtualmachine <vm_name_to_add> app=<label_value> -n <vm_namespace>
+kubectl label virtualmachine <vm_name_to_remove> app=<different_label_value> -n <vm_namespace>
+----
+* 레이블 선택기를 여러 네임스페이스에 걸쳐 사용할 수도 있습니다.
+
+
+[source, yaml]
+----
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace_1>
+      labelSelector:
+        matchLabels:
+          <label_key>: <label_value>
+    - namespace: <vm_namespace_2>
+      labelSelector:
+        matchLabels:
+          <label_key>: <label_value>
+----
+
+
+== includedVirtualMachines로 특정 VM 보호
+
+하나 이상의 네임스페이스에 걸쳐 지정된 VirtualMachines 집합을 보호하고 아카이브에서 특정 VM을 선택적으로 복원하려는 경우 `includedVirtualMachines`를 사용합니다.
+
+응용 프로그램 및 복원 CR 모두 동일한 `includedVirtualMachines` 선택기 형식을 사용합니다.
+
+이 선택자를 다양한 상황에서 사용하세요:
+
+* 애플리케이션 CR에서는 어떤 VM을 보호할지 정의합니다.
+* 복원 CR에서는 백업 또는 스냅샷 아카이브에서 복원할 VM을 정의합니다.
+
+
+
+NOTE: CR 복원 시  `includedVirtualMachines`는 선택 사항입니다. 이 필드를 포함하지 않으면 전체 아카이브가 복원됩니다. 지정하면 나열된 VM과 해당 종속 리소스만 복원됩니다.
+
+아래 YAML은 공유 선택자 구조를 보여줍니다.
+
+[source, yaml]
+----
+includedVirtualMachines:
+  - namespace: <vm_namespace_1>
+    names:
+      - <vm_name_1>
+      - <vm_name_2>
+  - namespace: <vm_namespace_2>
+    names:
+      - <vm_name_3>
+----
+
+NOTE:  `includedVirtualMachines`의 여러 항목이 서로 다른 네임스페이스를 참조할 수 있으므로 다중 네임스페이스를 지원하는 VM 인식 애플리케이션 정의 및 복원이 가능합니다.
+
+[cols="1,1,2"]
+|===
+| 필드에 입력합니다 | 유형 | 설명 
+
+
+| 네임스페이스 | 문자열 | 대상 가상 머신 객체가 포함된 Kubernetes 네임스페이스입니다. 
+
+
+| 이름 | 문자열 목록 | 해당 네임스페이스에 있는 하나 이상의 가상 머신 이름입니다. 
+|===
+.가상 머신 기반 애플리케이션 예시:
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedVirtualMachines:
+    - namespace: <vm_namespace_1>
+      names:
+        - <vm_name_1>
+        - <vm_name_2>
+    - namespace: <vm_namespace_2>
+      names:
+        - <vm_name_3>
+  includedClusterScopedResources:
+    - group: storage.k8s.io
+      kind: StorageClass
+----
+
+
+== 특정 KubeVirt VM 복원
+
+복원 CR에서  `includedVirtualMachines`을 사용하면 백업, 스냅샷 또는 복제된 스냅샷 아카이브에서 선택한 KubeVirt VM만 복원할 수 있습니다.
+
+복원 CR에 `includedVirtualMachines`이 지정된 경우 Trident Protect는 나열된 VirtualMachines과 해당 종속 리소스(예: `VirtualMachineInstance`, `DataVolume`, `PersistentVolumeClaim`, `PersistentVolume`, `Secret`, `ConfigMap`, `ServiceAccount`, 기타 VM 관련 개체)만 복원합니다.
+
+복원 CR에서  `includedVirtualMachines`을(를) 지정하지 않으면 Trident Protect는 복원 CR 구성에 따라 전체 아카이브를 복원합니다.
+
+
+
+=== 지원되는 복원 CR 및 CLI 명령
+
+다음 표는 지원되는 복원 CR  `includedVirtualMachines`과 해당 CLI 명령을 나열합니다.
+
+[cols="1,1,3"]
+|===
+| CR 복원 | CLI 명령 | 설명 
+
+
+| `BackupRestore` | `tridentctl-protect create backuprestore` | 새롭거나 다른 네임스페이스 매핑으로 백업에서 복원합니다.  `namespaceMapping` 및  `storageClassMapping`을(를) 지원합니다. 
+
+
+| `BackupInplaceRestore` | `tridentctl-protect create backupinplacerestore` | 백업에서 원래 네임스페이스 또는 여러 네임스페이스로 복원합니다. 
+
+
+| `SnapshotRestore` | `tridentctl-protect create snapshotrestore` | 스냅샷에서 새롭거나 다른 네임스페이스 매핑으로 복원합니다.  `namespaceMapping` 및  `storageClassMapping`를 지원합니다. 
+
+
+| `SnapshotInplaceRestore` | `tridentctl-protect create snapshotinplacerestore` | 스냅샷에서 원래 네임스페이스 또는 네임스페이스들로 복원합니다. 
+
+
+| `ReplicateSnapshotRestore` | YAML만 사용하거나, 환경에서 지원되는 CLI 명령을 사용하십시오(사용 가능한 경우). | 복제된 스냅샷에서 복원합니다.  `namespaceMapping`,  `storageClassMapping`, 및  `inPlaceRestore` 플래그를 사용한 제자리 복원을 지원합니다. 
+|===
+
+NOTE:  `tridentctl-protect` CLI에는 복원 명령에  `includedVirtualMachines`에 대한 플래그가 없습니다. 특정 VM을 복원하려면  `kubectl apply`을(를) 사용하여 복원 CR YAML 파일을 직접 적용해야 합니다. 처음부터 YAML을 작성하거나,  `--dry-run --output yaml`와(과) 함께 CLI를 사용하여 시작 파일을 생성하고,  `spec` 아래에  `includedVirtualMachines` 필드를 추가한 다음 이를 적용할 수 있습니다.
+
+
+
+=== VM 범위 복원 동작
+
+복원 CR의  `includedVirtualMachines` 필드는 애플리케이션 CR과 동일한 선택기 형식을 사용합니다.
+
+[source, yaml]
+----
+includedVirtualMachines:
+  - namespace: <source_vm_namespace>
+    names:
+      - <vm_name_1>
+      - <vm_name_2>
+----
+CR 복원의 경우  `includedVirtualMachines`의 네임스페이스 값은 백업, 스냅샷 또는 복제된 스냅샷 아카이브에 존재하는 소스 네임스페이스를 참조합니다.
+
+ `namespaceMapping`를 사용하는 경우, Trident Protect는 먼저 소스 아카이브에서 요청된 VM을 선택한 다음 복원 중에 네임스페이스 매핑을 적용합니다.  `storageClassMapping`를 사용하는 경우, Trident Protect는 복원 변환 단계에서 스토리지 클래스 매핑을 적용합니다.
+
+
+
+=== CLI를 사용하여 복원 YAML 생성
+
+ `tridentctl-protect`을 사용하여 기본 복원 CR을 생성한 다음 YAML을 편집하여  `includedVirtualMachines`을 추가할 수 있습니다.
+
+[source, console]
+----
+tridentctl-protect create <restore_command> <restore_name> \
+  <restore_options> \
+  --dry-run --output yaml > <restore_name>.yaml
+----
+생성된 YAML을 편집하고  `includedVirtualMachines` 필드를  `spec` 아래에 추가한 다음 파일을 적용하세요.
+
+[source, console]
+----
+kubectl apply -f <restore_name>.yaml
+----
+
+
+=== 예시: VM 기반 애플리케이션 정의
+
+다음 애플리케이션은 두 개의 네임스페이스에 걸쳐 있는 세 개의 특정 가상 머신을 보호합니다.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: production-vms
+  namespace: prod
+spec:
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - app-server
+        - database-server
+    - namespace: monitoring
+      names:
+        - prometheus-vm
+  includedClusterScopedResources:
+    - group: storage.k8s.io
+      kind: StorageClass
+----
+
+
+=== 예시: 백업 생성
+
+VM 기반 애플리케이션의 백업을 생성할 때는 표준 백업 CR을 사용합니다. 백업 CR에는 VM별 필드를 입력할 필요가 없습니다.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Backup
+metadata:
+  name: daily-backup
+  namespace: prod
+spec:
+  applicationRef: production-vms
+  appVaultRef: s3-vault
+----
+
+
+=== 예시: 백업에서 단일 가상 머신 복원
+
+다음 예제는 백업 아카이브에서 `database-server`만 복원합니다. 아카이브에 있는 다른 VM(예: `app-server` 및 `prometheus-vm`)은 건너뜁니다.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: BackupRestore
+metadata:
+  name: restore-db-only
+  namespace: prod-vms-restore
+spec:
+  appVaultRef: s3-vault
+  appArchivePath: backups/production-vms/2026-03-10T00-00-00Z
+  namespaceMapping:
+    - source: prod
+      destination: prod-dr
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - database-server
+----
+[source, console]
+----
+kubectl apply -f restore-db-only.yaml
+----
+Only `database-server` 및 DataVolumes, PVCs, PVs, Secrets, ConfigMaps, 관련 KubeVirt 리소스와 같은 종속 리소스만 복원됩니다.
+
+
+
+=== 예시: 백업에서 단일 가상 머신을 제자리에 복원
+
+다음 예제는  `database-server`을(를) 백업 아카이브에서 원래 네임스페이스로만 복원합니다.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: BackupInplaceRestore
+metadata:
+  name: ipr-db-only
+  namespace: prod
+spec:
+  appVaultRef: s3-vault
+  appArchivePath: backups/production-vms/2026-03-10T00-00-00Z
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - database-server
+----
+[source, console]
+----
+kubectl apply -f ipr-db-only.yaml
+----
+
+
+=== 예시: 스냅샷에서 단일 가상 머신 복원
+
+다음 예제는 스냅샷 아카이브에서  `ubuntu-vm-blue-a627be38`만 복원합니다.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: SnapshotRestore
+metadata:
+  name: blue-vm-snap-restore
+  namespace: blue
+spec:
+  appVaultRef: my-appvault
+  appArchivePath: snapshots/protectctl-blue-vm/snap-1
+  includedVirtualMachines:
+    - namespace: blue
+      names:
+        - ubuntu-vm-blue-a627be38
+----
+[source, console]
+----
+kubectl apply -f blue-vm-snap-restore.yaml
+----
+
+
+=== VM 복원 기능을 다른 필터와 결합
+
+ `includedVirtualMachines`을 동일한 복원 CR에서  `resourceFilter`,  `namespaceMapping`,  `storageClassMapping`와 함께 사용하여 복원 대상을 세밀하게 조정할 수 있습니다.
+
+를 추가하면  `resourceFilter`, Trident Protect는 먼저  `includedVirtualMachines`에 나열된 VM과 해당 VM에 종속된 리소스를 선택합니다. 그런 다음 리소스 필터를 적용하여 결과에 포함되거나 제외될 항목을 더욱 세분화합니다.
+
+[source, yaml]
+----
+spec:
+  includedVirtualMachines:
+    - namespace: <vm_namespace>
+      names:
+        - <vm_name>
+  resourceFilter:
+    resourceSelectionCriteria: Include
+    resourceMatchers:
+      - kinds: ["PersistentVolumeClaim"]
+        names: ["<pvc_name>"]
+----
+ `BackupRestore`,  `SnapshotRestore` 및  `ReplicateSnapshotRestore`의 경우,  `namespaceMapping` 및  `storageClassMapping`는  `includedVirtualMachines`와 함께 작동합니다.  `includedVirtualMachines`의 네임스페이스 참조는 아카이브에 나타나는 소스 네임스페이스에 해당합니다. 네임스페이스 및 스토리지 클래스 매핑은 필터링이 완료된 후 복원 변환 단계에서 적용됩니다.
+
+복원 동작에 대한 자세한 내용은 link:trident-protect-restore-apps.html["Trident Protect를 사용하여 애플리케이션 복원"]을 참조하십시오.
+
+
+
+== CLI를 사용하여 VM 범위 애플리케이션 생성
+
+이  `--virtual-machines` 플래그를 사용하면 전체 네임스페이스 대신 특정 KubeVirt VM에 애플리케이션 범위를 지정할 수 있습니다. 이  `--virtual-machines` 플래그는  `--namespaces`와 함께 사용할 수 없습니다.
+
+.단계
+. 다음 명령 중 하나를 실행하여 애플리케이션을 생성하십시오. 대괄호 안의 값은 사용자 환경 정보로 바꿔야 합니다.  `--virtual-machines` 플래그의 형식은  `<namespace>(<vm_name>)`입니다. 여러 개의 가상 머신(VM)을 사용하는 경우 괄호 안에 쉼표로 구분된 이름을 사용하십시오.
++
+** 네임스페이스 내 단일 VM:
++
+[source, console]
+----
+tridentctl-protect create application <application_name> \
+  -n <application_namespace> \
+  --virtual-machines "<vm_namespace>(<vm_name>)"
+----
+** 여러 네임스페이스에 걸쳐 있는 여러 VM:
++
+[source, console]
+----
+tridentctl-protect create application <application_name> \
+  -n <application_namespace> \
+  --virtual-machines "<vm_namespace_1>(<vm_name_1>,<vm_name_2>),<vm_namespace_2>(<vm_name_3>)"
+----
+
+
+
+
+
+
+== 관련 정보
+
+* link:trident-protect-manage-applications.html["관리할 애플리케이션을 정의합니다"]
+* link:trident-protect-protect-apps.html["애플리케이션 보호"]
+* link:trident-protect-restore-apps.html["Trident Protect를 사용하여 애플리케이션 복원"]
+* link:trident-protect-restore-settings.html["고급 복원 설정 사용"]
+* link:trident-protect-cli.html["Trident Protect CLI 플러그인을 설치하세요"]
+* link:trident-protect-appvault-custom-resources.html["AppVault 객체를 사용하여 버킷을 관리합니다"]
+

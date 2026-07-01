@@ -290,6 +290,12 @@ spec:
 .GKE용 클라우드 ID
 [%collapsible]
 ====
+GKE 클라우드 ID를 사용하여 Trident를 설치하면 백엔드는 워크로드 ID로 인증하고  `apiKey` 블록을 생략합니다. 클라우드 ID는 Google Cloud NetApp Volumes 드라이버 모두에 대해 동일한 방식으로 구성됩니다. 유일한 차이점은  `storageDriverName` 값입니다. NAS(NFS 또는 SMB) 볼륨에는  `google-cloud-netapp-volumes`을 사용하고 SAN(iSCSI 블록) 볼륨에는  `google-cloud-netapp-volumes-san`을 사용합니다.
+
+
+NOTE:  `google-cloud-netapp-volumes-san` 드라이버에 대한 클라우드 ID 지원을 위해서는 Trident 26.06 이상이 필요합니다. SAN 볼륨은 Flex Unified 스토리지 풀에서 프로비저닝되므로  `serviceLevel`을(를)  `flex`(으)로 설정하십시오.
+
+.NAS 드라이버(<code>google-cloud-netapp-volumes</code>)
 [source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
@@ -304,6 +310,22 @@ spec:
   location: us-west2
   serviceLevel: Premium
   storagePool: pool-premium1
+----
+.SAN 드라이버(<code>google-cloud-netapp-volumes-san</code>)
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-gcp-gcnv-san
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes-san
+  projectNumber: '012345678901'
+  network: gcnv-network
+  location: us-west2
+  serviceLevel: flex
+  storagePool: pool-flex1
 ----
 ====
 .지원되는 토폴로지 구성

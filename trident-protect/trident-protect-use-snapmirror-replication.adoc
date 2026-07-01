@@ -384,6 +384,17 @@ NOTE: CR을 사용할 때는 CR을 적용하기 전에 대상 네임스페이스
 *** * spec.sourceApplicationName *: (_required_) 이 값은 소스 응용 프로그램 CR에서 정의한 소스 응용 프로그램의 이름과 일치해야 합니다.
 *** *spec.sourceApplicationUID*: (필수) 이 값은 소스 애플리케이션 CR에서 정의한 소스 애플리케이션의 UID와 일치해야 합니다.
 *** *spec.storageClassName*: (_선택 사항_) 클러스터에서 유효한 스토리지 클래스의 이름을 선택합니다. 스토리지 클래스는 소스 환경과 피어링된 ONTAP 스토리지 VM에 연결되어야 합니다. 스토리지 클래스가 제공되지 않으면 기본적으로 클러스터의 기본 스토리지 클래스가 사용됩니다.
+*** *spec.storageClassMapping*: (_선택 사항_) 동일한 AMR 내의 개별 PVC에 대해 소스 스토리지 클래스를 타겟 스토리지 클래스에 매핑합니다. 각 항목에는  `source` 및  `destination` 스토리지 클래스 이름이 필요합니다. 설정된 경우,  `storageClassMapping`은(는)  `storageClassName`을(를) 완전히 재정의하며, 일치하는 소스 항목이 없는 PVC는  `storageClassName`이(가) 아닌 클러스터 기본 스토리지 클래스를 사용합니다.
++
+ `storageClassMapping`을 AppMirrorRelationship CR에서 사용할 때는 다음과 같은 제한 사항에 유의하십시오.
+
++
+**** `storageClassMapping`이(가)  `storageClassName`을(를) 완전히 덮어씁니다. 두 필드가 모두 설정된 경우  `storageClassName`은(는) 무시됩니다.
+**** 에 일치하는 항목이 없는 소스 스토리지 클래스를 가진 PVC는 `storageClassMapping` 클러스터 기본 스토리지 클래스를 사용하며, `storageClassName`은(는) 사용하지 않습니다.
+**** 각 항목에는  `source`와  `destination` 값이 모두 필요합니다.
+**** 대상 스토리지 클래스를 변경하면 기존 대상 PVC가 삭제되고 다시 생성될 수 있습니다.
+
+
 *** *spec.recurrenceRule*: UTC 시간과 반복 간격으로 시작 날짜를 정의합니다.
 +
 YAML 예:
@@ -428,10 +439,14 @@ kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
 +
 [source, console]
 ----
-tridentctl-protect create appmirrorrelationship <name_of_appmirorrelationship> --destination-app-vault <my_vault_name> --source-app-vault <my_vault_name> --recurrence-rule <rule> --namespace-mapping <ns_mapping> --source-app-id <source_app_UID> --source-app <my_source_app_name> --storage-class <storage_class_name> -n <application_namespace>
+tridentctl-protect create appmirrorrelationship <name_of_appmirorrelationship> --destination-app-vault <my_vault_name> --source-app-vault <my_vault_name> --recurrence-rule <rule> --namespace-mapping <ns_mapping> --source-app-id <source_app_UID> --source-app <my_source_app_name> --storage-class <storage_class_name> --storageclass-mapping  <src_class:dst_class> -n <application_namespace>
 ----
 +
-* 예: *
+
+NOTE:  `--storageclass-mapping`을 사용하여 개별 소스 스토리지 클래스를 대상 스토리지 클래스에 매핑합니다. 쉼표로 구분하여 하나 이상의  `source:destination` 쌍을 지정합니다(예:  `"class-a:class-b,class-c:class-d"`).  `*:destination-class`를 와일드카드로 사용하여 매핑되지 않은 모든 PVC를 단일 대상 스토리지 클래스에 매핑합니다.  `--storageclass-mapping`가 설정된 경우  `--storage-class`는 무시됩니다.
+
++
+*단일 대상 스토리지 클래스를 사용하는 예시 (`--storage-class`):*
 
 +
 [source, console]

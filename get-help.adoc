@@ -80,11 +80,6 @@ link:https://docs.netapp.com/us-en/trident-2307/index.html["2007년 3월"^]
  a| 
 link:https://docs.netapp.com/us-en/trident-2304/index.html["23.04"^]
 | -- | -- | 2026년 4월 
-
-
- a| 
-link:https://docs.netapp.com/us-en/trident-2301/index.html["23.01"^]
-| -- | -- | 2026년 1월 
 |===
 
 

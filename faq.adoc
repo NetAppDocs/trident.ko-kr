@@ -62,7 +62,7 @@ Trident는 다른 NetApp 소프트웨어 제품에 의존하지 않으며 독립
 
 === Trident는 개인 레지스트리에서 오프라인 설치를 지원합니까?
 
-예, Trident는 오프라인으로 설치할 수 있습니다. link:../trident-install/kubernetes-deploy.html["Trident 설치에 대해 알아봅니다"^]을 참조하십시오.
+예, Trident는 오프라인으로 설치할 수 있습니다. 다음을 참조하십시오. link:./trident-install/kubernetes-deploy.html["Trident 설치에 대해 알아봅니다"].
 
 
 

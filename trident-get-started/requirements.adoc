@@ -42,7 +42,7 @@ Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
 * Kubernetes 1.27 - 1.36
-* OpenShift 4.12, 4.14 - 4.21(OpenShift 4.19에서 iSCSI 노드 준비를 사용하려는 경우 지원되는 최소 Trident 버전은 25.06.1입니다.)
+* OpenShift 4.12, 4.14 - 4.22(OpenShift 4.19에서 iSCSI 노드 준비를 사용하려는 경우 지원되는 최소 Trident 버전은 25.06.1입니다.)
 +
 
 NOTE: Trident 다음과 같은 기준으로 이전 OpenShift 버전을 계속 지원합니다.link:https://access.redhat.com/support/policy/updates/openshift["Red Hat Extended Update Support(EUS) 릴리스 수명 주기"] 더 이상 공식적으로 지원되지 않는 Kubernetes 버전을 사용하는 경우에도 마찬가지입니다.  이런 경우 Trident 설치하는 동안 Kubernetes 버전에 대한 경고 메시지는 무시해도 됩니다.
@@ -96,6 +96,49 @@ Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드
 
 
 
+
+
+
+== Kubernetes 및 OpenShift 호스팅 컨트롤 플레인의 Kubernetes에 대한 Trident 지원
+
+버전 26.06부터 Trident는 Kubernetes on Kubernetes 토폴로지를 완벽하게 지원합니다. Kubernetes 클러스터는 노드가 인프라(호스트) 클러스터에서 KubeVirt 가상 머신으로 실행됩니다. 이 토폴로지는 OpenShift Virtualization의 OpenShift 호스팅 컨트롤 플레인(HCP)과 같은 호스팅 컨트롤 플레인 제품의 기반이 됩니다.
+
+
+NOTE: 이 구성은 이전 버전에서는 작동했지만, 완전한 검증은 26.06부터 시작됩니다.
+
+게스트(테넌트) 클러스터는 KubeVirt CSI 드라이버 (`kubevirt-csi`를 스토리지 공급자로 사용합니다. 게스트 클러스터의 워크로드가  `PersistentVolumeClaim`를 요청하면 KubeVirt CSI 드라이버는 인프라 클러스터에 해당 볼륨을 생성합니다. Trident는 ONTAP에서 볼륨을 프로비저닝하고, 해당 볼륨은 게스트 노드 VM에 핫플러그됩니다. Trident는 인프라 클러스터에서만 실행됩니다. 게스트 클러스터는 KubeVirt CSI 드라이버를 통해 간접적으로 ONTAP 스토리지를 사용합니다.
+
+.요구 사항:
+* Trident는 지원되는 ONTAP 백엔드를 사용하는 인프라 클러스터에 설치됩니다.
+* KubeVirt CSI 드라이버가 게스트 클러스터 볼륨을 매핑할 수 있도록 인프라 클러스터에 Trident 스토리지 클래스가 존재합니다.
+* KubeVirt 또는 OpenShift Virtualization이 인프라 클러스터에 배포되고, KubeVirt CSI 드라이버가 각 게스트 클러스터에 설치됩니다.
+
+
+[cols="2,1"]
+|===
+| 구성 요소 | 버전 
+
+
+| 트라이던트 | 26.06 
+
+
+| Kubernetes(인프라 및 게스트 클러스터) | 1.36 
+
+
+| KubeVirt | 1.9.0-beta.0 
+
+
+| 컨테이너화된 데이터 가져오기(CDI) | 1.65 
+|===
+.고려 사항:
+* 게스트 클러스터에서 볼륨은 게스트 노드 VM에서 핫플러그된 블록 장치로 나타납니다.
+* KubeVirt CSI 드라이버 워크플로는 게스트 클러스터에 Trident가 필요하지 않습니다. ONTAP 백엔드와 스토리지 클래스는 인프라 클러스터에서 구성합니다.
+
+
+.게스트 클러스터에 Trident를 직접 설치합니다.
+Trident를 게스트(테넌트) 클러스터에 직접 설치할 수도 있습니다. 스냅샷, 클론, 볼륨 크기 조정 및 가져오기와 같이  `kubevirt-csi`에서 자체적으로 제공하지 않는 전체 Trident 기능 세트가 필요한 경우 게스트 클러스터에 Trident를 설치하십시오.
+
+게스트 클러스터에서는 IP 기반 프로토콜(NFS, iSCSI, NVMe/TCP)을 사용합니다. 게스트 노드는 파이버 채널(FC)에 직접 연결할 수 없는 가상 머신이므로 게스트 클러스터는 FC를 지원하지 않습니다.
 
 
 
@@ -223,7 +266,7 @@ link:../trident-reference/ports.html["Trident 포트"]
 | Kubernetes 버전 | 컨테이너 이미지 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.36.0  a| 
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
 * docker.io/netapp/trident:26.02.0
 * docker.io/netapp/trident-autosupport:26.02
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0

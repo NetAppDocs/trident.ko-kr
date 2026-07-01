@@ -1,0 +1,187 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-move.html 
+keywords: trident, volume move, move volume, ontap-san, iscsi, tridentvolumemove, non-disruptive, aggregate, node, relocate 
+summary: 동일한 클러스터 내의 다른 ONTAP 노드 및 애그리게이트로 TridentVolumeMove 리소스를 사용하여 iSCSI 볼륨을 중단 없이 이동합니다. 
+---
+= 볼륨 이동
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident 26.06 버전부터 스토리지 관리자는 워크로드가 계속 실행되는 동안에도 iSCSI 볼륨을 동일한 ONTAP 클러스터 내의 다른 ONTAP 노드 및 애그리게이트로 중단 없이 이동할 수 있습니다.  `TridentVolumeMove` 사용자 지정 리소스 또는  `tridentctl` 이와 동등한 기능을 사용하여 이동을 선언적으로 요청하면 Trident가 ONTAP과 호스트를 조정하여 I/O가 중단되지 않도록 합니다.
+
+
+
+== 요구 사항
+
+볼륨 이동 기능은  `ontap-san` iSCSI 볼륨용 드라이버에만 적용됩니다. NVMe 및 NAS 프로토콜은 지원되지 않습니다.
+
+볼륨을 이동하기 전에 다음 요구 사항이 충족되었는지 확인하십시오.
+
+* 백엔드는 ONTAP REST API와 함께  `ontap-san` 드라이버를 사용합니다.
+* ONTAP 클러스터는 최소 두 개의 노드로 구성됩니다.
+* 귀하는 다음 자격 증명 중 하나를 보유하고 있습니다.
++
+** 전용 사용자 지정 ONTAP 역할을 사용하는 경우 ONTAP 9.19.1 이상이 필요합니다.
+** 이전 ONTAP 릴리스의 클러스터 관리자 자격 증명입니다.
+
+
+
+
+
+
+== 작동 원리
+
+Trident는 동일한 ONTAP 클러스터 내의 두 위치 간에 볼륨(LUN)을 이동합니다. 데이터 이동 전에 Trident는 기존 경로와 함께 대상에 새로운 iSCSI 경로를 추가하여 호스트 다중 경로 장치가 액세스 권한을 잃지 않도록 합니다. ONTAP이 이동을 완료하면 Trident는 더 이상 사용하지 않는 소스 경로를 제거합니다.
+
+Trident는 이동을 진행하면서 `TridentVolumeMove` 리소스에서 확인할 수 있는 일련의 순서 있는 상태를 거치므로 이동 진행 상황을 추적할 수 있습니다.
+
+
+
+== 볼륨 이동
+
+
+
+=== 볼륨 및 위치 식별
+
+. 이동할 PV의 이름을 찾으세요. PV 이름은 이동 리소스의 이름과 동일합니다.
+. ONTAP 클러스터에서 해당 볼륨의 현재(소스) 노드와 애그리게이트를 확인하고 대상(타겟) 노드와 애그리게이트를 선택합니다.
+
+
+
+
+=== 이동 시작
+
+두 가지 방법 중 하나를 사용하십시오. 두 방법 모두 동일한  `TridentVolumeMove` 리소스를 생성하며, 해당 리소스의 이름은 PV 이름입니다.
+
+[role="tabbed-block"]
+====
+.tridentctl 사용
+--
+[source, console]
+----
+tridentctl create volume-move \
+  --volume      pvc-8a814d62-bd58-4253-b0d1-82f2885db671 \
+  --source-node ontap-node-01 \
+  --source-pool aggr1_node01 \
+  --target-node ontap-node-02 \
+  --target-pool aggr1_node02 \
+  -n trident
+----
+`tvm`는  `volume-move`의 별칭입니다. 이동이 성공하면 리소스를 자동으로 제거하려면  `--delete-after-success 10m`를 추가하세요.
+
+--
+.TridentVolumeMove 리소스 사용
+--
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentVolumeMove
+metadata:
+  name: pvc-8a814d62-bd58-4253-b0d1-82f2885db671   # the PV to move
+  namespace: trident
+spec:
+  sourceNode: ontap-node-01
+  sourcePool: aggr1_node01
+  targetNode: ontap-node-02
+  targetPool: aggr1_node02
+  # deleteAfterSuccess: 10m   # optional
+----
+리소스를 적용합니다:
+
+[source, console]
+----
+kubectl apply -f tridentvolumemove.yaml
+----
+--
+====
+.사양 필드
+`sourceNode` / `targetNode`:: ONTAP 노드 이름(UUID가 아님).
+`sourcePool` / `targetPool`:: ONTAP 애그리게이트 이름.
+`deleteAfterSuccess`:: 선택적 지속 시간(예:  `30s` 또는  `10m`).  `0`로 설정하면 리소스를 즉시 삭제하고, 생략하면 리소스를 유지합니다.
+
+
+
+
+=== 이동 상황을 모니터링합니다
+
+ `tvm` 단축 이름 또는  `tridentvolumemove`을(를) 사용하여 진행 상황을 추적합니다.
+
+[source, console]
+----
+kubectl get tridentvolumemove -n trident
+----
+현재 상태 및 노드별 진행 상황을 확인하려면 리소스를 설명합니다.
+
+[source, console]
+----
+kubectl describe tridentvolumemove <pv-name> -n trident
+----
+볼륨이  `Moving` 상태 동안 동시에 여러 연결이 발생할 수 있습니다. ONTAP에서 대용량 볼륨의 이동을 완료하는 데 시간이 걸릴 수 있기 때문입니다. 원활한 이동을 보장하기 위해 Trident는 Trident 컨트롤러와 Trident 노드 간의 조정을 수행합니다. 각 상태는 다음 단계를 순서대로 수행하며,  `Succeeded` 또는  `Failed`으로 종료됩니다.
+
+[cols="1,2"]
+|===
+| 상태 | 무슨 일이 일어나고 있습니까? 
+
+
+| `Pending` | Trident는 이전 요청을 승인하고 유효성을 검사한 후 스토리지 변경 작업을 시작하기 전에 필요한 정보를 수집합니다. 
+
+
+| `ControllerStaging` | Trident가 대상 위치를 준비합니다. 대상 노드의 스토리지 인터페이스를 LUN에 매핑하고 Kubernetes를 업데이트하여 향후 노드 재시작 시 올바른 위치에 다시 연결되도록 합니다. 
+
+
+| `NodeStaging` | 볼륨이 마운트된 각 호스트에서 Trident는 대상 노드의 새 스토리지 경로를 기존 경로와 함께 추가하여 Pod의 I/O가 두 경로 세트 모두에서 계속되도록 합니다. 
+
+
+| `Moving` | ONTAP는 볼륨 데이터를 대상 애그리게이트로 복사하고 전송합니다. 이 단계가 가장 오래 걸리며, ONTAP가 전적으로 처리하는 동안 Trident는 완료될 때까지 폴링합니다. 이 상태 동안에도 새로운 게시가 허용됩니다. 
+
+
+| `ControllerUnstaging` | 데이터 이동이 완료되었습니다. Trident는 Kubernetes를 업데이트하여 원하는 상태에서 소스 경로를 삭제한 다음 소스 노드의 스토리지 인터페이스를 LUN에서 매핑 해제합니다. 
+
+
+| `NodeUnstaging` | 각 호스트에서 Trident는 오래된 소스 경로를 제거합니다. 호스트에는 대상 경로만 남게 되고, 다중 경로 장치는 중단 없이 I/O 작업을 계속 수행합니다. 
+
+
+| `Succeeded` | 볼륨이 대상 위치로 완전히 이동되어 온라인 상태가 되었습니다. Trident는 `TridentVolumeMove` 리소스를 유지하거나, `deleteAfterSuccess`을 설정하면 자동으로 삭제합니다. 
+
+
+| `Failed` | 복구할 수 없는 오류로 인해 이동 작업이 중단되었거나 시작되지 못했습니다. Trident는 정상적인 작업이 재개될 수 있도록 볼륨 상태를 재설정하고 오류 메시지와 함께 리소스를 유지합니다. 메시지를 검토하고 근본 원인을 해결한 후 리소스를 삭제하고 다시 시도하십시오. 
+|===
+이  `.status.attachments` 목록은 연결된 각 노드의 진행 상황을 해당  `state` 필드에 표시합니다.
+
+[cols="1,2"]
+|===
+| 첨부 상태 | 의미 
+
+
+| `Pending` | 노드가 연결된 것으로 확인되었으며, 작업은 아직 시작되지 않았습니다. 
+
+
+| `Bridged` | 기존 경로와 함께 새로운 대상 경로가 추가되었습니다. 
+
+
+| `Migrated` | 이제 새 경로를 통해 트래픽이 제공됩니다. 
+
+
+| `Cleaned` | 노드에서 오래된 소스 경로가 제거되었습니다. 
+
+
+| `Detached` | 노드가 이동 중에 분리되어 Trident가 연결 상태가 다음 단계로 진행될 준비가 되었는지 평가하는 동안 추가 고려 대상에서 제외되었습니다. 
+
+
+| `Failed` | 이 노드에서 터미널 오류가 발생했습니다. 메시지를 확인하세요. 
+|===
+
+
+=== 이동 리소스를 정리합니다
+
+ `deleteAfterSuccess`을 설정하면 Trident가 리소스를 자동으로 제거합니다. 그렇지 않으면 수동으로 삭제할 수 있습니다. 동일한 볼륨에 대해 다른 이동을 요청하기 전에 해당 볼륨에 대한  `TridentVolumeMove` 리소스가  `Succeeded` 또는  `Failed` 상태로 존재하지 않는지 확인하십시오.
+
+[NOTE]
+====
+Trident는 실패한 이동을 자동으로 삭제하지 않습니다. Trident는  `Failed`리소스를 감사 기록으로 보관합니다. 근본 원인을 해결한 후에는 다시 시도하기 전에 리소스를 수동으로 삭제하십시오.
+
+====
