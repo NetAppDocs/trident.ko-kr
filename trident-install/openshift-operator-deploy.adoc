@@ -19,6 +19,7 @@ Red Hat OpenShift를 사용하는 경우 Red Hat 공인 운영자를 사용하�
 
 
 
+[[find-and-install-the-trident-operator]]
 == Trident 운영자를 찾아 설치합니다
 
 .단계
@@ -97,6 +98,7 @@ image::../media/openshift-operator-08.png[설치되어 있습니다]
 
 
 
+[[uninstall-trident-operator]]
 == Trident 운영자 제거
 
 .단계

@@ -18,6 +18,7 @@ summary: 리소스 변환을 사용하여 Kubernetes 리소스를 복원하는 �
 
 
 
+[[how-resource-modification-works]]
 == 리소스 수정 작동 방식
 
  `SnapshotRestore`,  `BackupRestore`,  `AppMirrorRelationship` 및 기타 복구 리소스에 있는  `transformations` 필드를 사용하면 복구 프로세스 중에 Kubernetes 리소스를 수정할 수 있습니다. 이는 예를 들어 호스트 이름, 레지스트리 URL, 리소스 제한 또는 환경 변수 변경과 같이 복구된 애플리케이션을 원본과 다르게 구성해야 할 때 유용합니다.
@@ -54,6 +55,7 @@ spec:
 ----
 
 
+[[supported-resources]]
 == 지원되는 리소스
 
 다음 기준과 일치하는 리소스에 대해 리소스 변환을 사용할 수 있습니다.
@@ -69,12 +71,14 @@ NOTE: PersistentVolumeClaims 및 네임스페이스 수정은 현재 지원되�
 
 
 
+[[supported-operations]]
 == 지원되는 작업
 
 리소스를 수정하려면 다음 작업을 사용할 수 있습니다. `add`, `copy`, `move`, `remove`, `replace`, 및 `test`.
 
 
 
+[[add-a-value-to-a-resource]]
 === 리소스에 값 추가
 
  `add` 작업을 사용하여 지정된 경로에 새 필드 또는 값을 추가합니다. 객체 또는 배열에 데이터를 추가할 수 있습니다.
@@ -113,6 +117,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[copy-a-value-within-a-resource]]
 === 리소스 내의 값 복사
 
  `copy` 연산을 사용하여 동일한 리소스 내의 한 경로에서 다른 경로로 값을 복사할 수 있습니다. 원본은 변경되지 않습니다.
@@ -149,6 +154,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[move-a-value-within-a-resource]]
 === 리소스 내에서 값 이동
 
  `move` 연산을 사용하여 동일한 리소스 내에서 한 경로에서 다른 경로로 값을 이동할 수 있습니다. 원본은 제거되고 값은 대상에 배치됩니다.
@@ -185,6 +191,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[remove-a-value-from-a-resource]]
 === 리소스에서 값 제거
 
  `remove` 작업을 사용하여 지정된 경로에서 필드 또는 값을 제거합니다.
@@ -223,6 +230,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[replace-a-value-within-a-resource]]
 === 리소스 내의 값을 바꿉니다
 
  `replace` 작업을 사용하여 지정된 경로에 있는 리소스 내의 기존 값을 바꿉니다. JSON 경로는 이미 존재해야 합니다.
@@ -260,6 +268,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[test-the-resource-modification]]
 === 리소스 수정 테스트
 
 이  `test` 연산을 사용하여 다른 연산을 적용하기 전에 경로의 값이 예상 값과 일치하는지 확인하십시오. 테스트에 실패하면 전체 수정 사항이 롤백됩니다.

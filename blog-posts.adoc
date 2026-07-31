@@ -16,6 +16,7 @@ summary: 훌륭한 NetApp Trident 및 Trident Protect 블로그를 찾아볼 수
 
 
 
+[[trident-blogs]]
 == Trident 블로그
 
 * 2025년 10월 16일:link:https://www.netapp.com/blog/trident-25-10-advanced-kubernetes-storage-solutions/["Kubernetes를 위한 고급 스토리지 솔루션"^]
@@ -39,6 +40,7 @@ summary: 훌륭한 NetApp Trident 및 Trident Protect 블로그를 찾아볼 수
 
 
 
+[[trident-protect-blogs]]
 == Trident 프로텍트 블로그
 
 * 2025년 5월 16일:link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Automating-registry-failover-for-disaster-recovery-with-Trident-protect-post/ba-p/460777["Trident Protect 복원 후 후크를 사용하여 재해 복구를 위한 레지스트리 장애 조치 자동화"^]

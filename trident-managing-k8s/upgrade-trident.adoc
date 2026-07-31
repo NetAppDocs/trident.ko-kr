@@ -16,6 +16,7 @@ summary: Trident는 4개월 릴리즈 주기를 준수하여 매년 3가지 주�
 
 
 
+[[considerations-before-upgrading]]
 == 업그레이드 전 고려 사항
 
 Trident의 최신 릴리즈로 업그레이드할 때 다음 사항을 고려하십시오.
@@ -33,6 +34,7 @@ Trident의 최신 릴리즈로 업그레이드할 때 다음 사항을 고려하
 
 
 
+[[step-1-select-a-version]]
 == 1단계: 버전을 선택합니다
 
 Trident 버전은 날짜 기반 `YY.MM` 명명 규칙을 따릅니다. 여기서 "YY"는 연도의 마지막 두 자리이고 "MM"은 월입니다. DOT 릴리스는 `YY.MM.X` 규칙을 따릅니다. 여기서 "X"는 패치 수준입니다. 업그레이드할 버전에 따라 업그레이드할 버전을 선택합니다.
@@ -51,6 +53,7 @@ NOTE: OpenShift Container Platform에서 Trident 연산자를 사용하여 업�
 
 
 
+[[step-2-determine-the-original-installation-method]]
 == 2단계: 원래 설치 방법을 결정합니다
 
 Trident를 처음 설치할 때 사용한 버전을 확인하려면 다음을 수행합니다.
@@ -71,6 +74,7 @@ Trident를 처음 설치할 때 사용한 버전을 확인하려면 다음을 �
 
 
 
+[[step-3-select-an-upgrade-method]]
 == 3단계: 업그레이드 방법을 선택합니다
 
 일반적으로 초기 설치에 사용했던 것과 동일한 방법으로 업그레이드하는 것이 좋지만, link:../trident-install/kubernetes-deploy.html#moving-between-installation-methods["설치 방법 간에 이동합니다"]. Trident를 업그레이드하는 두 가지 옵션이 있습니다.

@@ -16,6 +16,7 @@ Trident에서 드라이버에 대한 볼륨 스냅샷 생성을 어떻게 처리
 
 
 
+[[learn-about-volume-snapshot-creation]]
 == 볼륨 스냅샷 생성에 대해 자세히 알아보십시오
 
 * 를 위해 `ontap-nas` , `ontap-san` , 그리고 `azure-netapp-files` 드라이버, 각 영구 볼륨(PV)은 FlexVol volume 에 매핑됩니다. 결과적으로 볼륨 스냅샷은 NetApp 스냅샷으로 생성됩니다. NetApp 스냅샷 기술은 경쟁사의 스냅샷 기술보다 더 뛰어난 안정성, 확장성, 복구 가능성 및 성능을 제공합니다. 이러한 스냅샷 복사본은 복사본을 만드는 데 필요한 시간과 저장 공간 측면에서 매우 효율적입니다.

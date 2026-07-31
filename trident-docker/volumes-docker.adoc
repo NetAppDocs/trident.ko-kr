@@ -16,6 +16,7 @@ summary: '볼륨을 생성하려면 필요에 따라 지정된 Trident 드라이
 
 
 
+[[create-a-volume]]
 == 볼륨을 생성합니다
 
 * 기본 이름을 사용하여 드라이버로 볼륨을 생성합니다.
@@ -48,6 +49,7 @@ TIP: 볼륨 크기는 옵션 단위(예: 10G, 20GB, 3TiB)가 포함된 정수 �
 
 
 
+[[remove-a-volume]]
 == 볼륨을 제거합니다
 
 * 다른 Docker 볼륨과 마찬가지로 볼륨을 제거합니다.
@@ -66,6 +68,7 @@ Trident for Docker를 업그레이드하려면 아래 단계를 수행하십시�
 
 
 
+[[clone-a-volume]]
 == 볼륨의 클론을 생성합니다
 
 사용 시 `ontap-nas` , `ontap-san` , 그리고 `solidfire-san` 저장 드라이버인 Trident 볼륨을 복제할 수 있습니다. 사용 시 `ontap-nas-flexgroup` 또는 `ontap-nas-economy` 드라이버, 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새로운 스냅샷이 생성됩니다.
@@ -92,6 +95,7 @@ docker volume create -d <driver_name> --name <new_name> -o from=<source_docker_v
 
 
 
+[[example]]
 === 예
 
 [source, console]
@@ -128,6 +132,7 @@ docker volume rm volFromSnap
 ----
 
 
+[[access-externally-created-volumes]]
 == 외부에서 생성된 볼륨에 액세스합니다
 
 파티션이 없고 파일 시스템이 Trident에서 지원되는 경우(예: Trident를 통해 형식 지정된 `/dev/sdc1` 블록 장치에 액세스할 수 없음) Trident * only * 를 사용하여 컨테이너를 통해 외부에서 생성된 블록 장치(또는 해당 클론) `ext4`에 액세스할 수 있습니다.

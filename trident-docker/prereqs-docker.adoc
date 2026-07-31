@@ -16,6 +16,7 @@ Trident를 배포하기 전에 호스트에 필요한 프로토콜 사전 요구
 
 
 
+[[verify-the-requirements]]
 == 요구 사항을 확인합니다
 
 * 배포가 모든 를 충족하는지 확인합니다 link:../trident-get-started/requirements.html["요구 사항"].
@@ -30,6 +31,7 @@ docker --version
 
 
 
+[[nfs-tools]]
 === NFS 툴
 
 운영 체제의 명령을 사용하여 NFS 툴을 설치합니다.
@@ -56,6 +58,7 @@ WARNING: 볼륨에 연결할 때 오류가 발생하지 않도록 NFS 툴을 설
 
 
 
+[[iscsi-tools]]
 === iSCSI 툴
 
 운영 체제의 명령을 사용하여 iSCSI 도구를 설치합니다.
@@ -158,6 +161,7 @@ sudo systemctl status open-iscsi
 ====
 
 
+[[nvme-tools]]
 == NVMe 툴
 
 운영 체제의 명령을 사용하여 NVMe 툴을 설치합니다.
@@ -192,6 +196,7 @@ sudo modprobe nvme-tcp
 ====
 
 
+[[fc-tools]]
 == FC 도구
 
 운영 체제의 명령을 사용하여 FC 툴을 설치합니다.

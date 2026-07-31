@@ -31,6 +31,7 @@ ONTAP 백엔드 스토리지의 경우 스토리지 가상 머신(SVM)에 하나
 
 
 
+[[supported-operations]]
 == 지원되는 작업
 
 * 영구 볼륨(PV) 프로비저닝
@@ -43,6 +44,7 @@ ONTAP 백엔드 스토리지의 경우 스토리지 가상 머신(SVM)에 하나
 
 
 
+[[unsupported-operations]]
 == 지원되지 않는 작업
 
 * LUKS 암호화

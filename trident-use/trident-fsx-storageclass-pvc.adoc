@@ -16,6 +16,7 @@ summary: 'Trident를 Amazon FSx for NetApp ONTAP와 함께 사용하면 Amazon E
 
 
 
+[[create-a-storageclass-object]]
 == StorageClass 객체를 생성합니다
 
 FSx for ONTAP용 StorageClass를 생성하면 Trident가 백엔드 구성을 자동으로 생성합니다.
@@ -25,6 +26,7 @@ NOTE: 스토리지 백엔드를 수동으로 구성하려면 Trident 백엔드�
 
 
 
+[[specify-required-storageclass-parameters]]
 === 필수 StorageClass 매개변수를 지정하세요
 
 StorageClass를 생성할 때 다음 세 가지 매개 변수를 정의해야 합니다.
@@ -184,6 +186,7 @@ metadata:
 
 
 
+[[create-a-kubernetes-storageclass-without-automatic-backend-configuration]]
 === 자동 백엔드 구성 없이 Kubernetes StorageClass 생성
 
 Trident 백엔드와 StorageClass를 별도로 생성하려면 다음 단계를 따르세요.
@@ -198,6 +201,7 @@ Trident는 VolumeSnapshotClass를 한 번만 생성합니다. Trident는 이후�
 
 
 
+[[create-the-trident-backend]]
 === Trident 백엔드를 생성합니다
 
 Trident 백엔드를 생성하려면 JSON 또는 YAML 형식의 구성 파일을 만들어야 합니다. 이 파일에는 사용할 스토리지 유형(NAS 또는 SAN), 파일 시스템, 스토리지를 가져올 SVM, 그리고 인증 방법을 지정해야 합니다. 다음 예는 NAS 기반 스토리지를 정의하고 AWS 시크릿을 사용하여 사용할 SVM에 대한 자격 증명을 저장하는 방법을 보여줍니다.
@@ -319,6 +323,7 @@ backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d91
 
 
 
+[[configure-a-storage-class-without-automatic-backend-configuration]]
 === 자동 백엔드 구성 *없이* 스토리지 클래스 구성
 
 다음은 Trident 및 FSx for ONTAP에서 사용할 스토리지 클래스 구성의 예입니다.
@@ -447,12 +452,14 @@ basic-csi    csi.trident.netapp.io   15h
 ----
 
 
+[[provision-smb-volumes]]
 == SMB 볼륨 제공
 
  `ontap-nas` 드라이버를 사용하여 SMB 볼륨을 프로비저닝할 수 있습니다. 하지만 그러려면 다음 단계를 완료해야 합니다: link:worker-node-prep.html#prepare-to-provision-smb-volumes["SMB 볼륨 프로비저닝을 위한 준비"].
 
 
 
+[[backend-advanced-configuration-and-examples]]
 == 백엔드 고급 구성 및 예
 
 백엔드 구성 옵션은 다음 표를 참조하십시오.
@@ -553,6 +560,7 @@ basic-csi    csi.trident.netapp.io   15h
 |===
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 볼륨 프로비저닝을 위한 백엔드 구성 옵션
 
 에서 이러한 옵션을 사용하여 기본 프로비저닝을 제어할 수 있습니다 `defaults` 섹션을 참조하십시오. 예를 들어, 아래 구성 예제를 참조하십시오.

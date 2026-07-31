@@ -13,6 +13,7 @@ Google Cloud NetApp Volumes를 Trident의 백엔드로 구성하여 Kubernetes �
 
 
 
+[[overview]]
 == 개요
 
 Trident는 NAS(NFS 및 SMB)와 블록(iSCSI) 워크로드 모두에 대해 Google Cloud NetApp Volumes를 지원합니다.
@@ -36,6 +37,7 @@ NAS 볼륨은 파일 기반 스토리지를 제공하며 NFS 또는 SMB 프로�
 
 
 
+[[prepare-to-configure]]
 == 구성 준비
 
 Cloud ID를 사용하면 Kubernetes 워크로드가 정적 자격 증명을 사용하는 대신 워크로드 ID로 인증하여 Google Cloud 리소스에 액세스할 수 있습니다.
@@ -92,6 +94,8 @@ tridentctl install \
 ====
 
 
+[[configure-nas-storage]]
+[[nas]]
 == NAS 스토리지 구성
 
 
@@ -101,6 +105,7 @@ NOTE: Google Cloud NetApp Volumes UNIFIED 스토리지 풀의 경우, Trident는
 
 
 
+[[driver-details]]
 === 드라이버 세부 정보
 
 Trident는 `google-cloud-netapp-volumes` Google Cloud NetApp Volumes에서 NAS 스토리지를 프로비저닝하는 드라이버를 제공합니다.
@@ -131,6 +136,7 @@ RWO, ROX, rwx, RWOP
 |===
 
 
+[[configure-a-trident-nas-backend]]
 === Trident NAS 백엔드 구성
 
 [source, yaml]
@@ -153,6 +159,7 @@ spec:
 ----
 
 
+[[provision-nas-volumes]]
 === NAS 볼륨 프로비저닝
 
 NAS 볼륨은  `google-cloud-netapp-volumes` 백엔드를 사용하여 프로비저닝되며 NFS 및 SMB 프로토콜을 지원합니다.

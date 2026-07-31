@@ -16,7 +16,8 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 
 
 
-== Trident 26.02에 대한 중요 정보
+[[critical-information-about-trident-26-06]]
+== Trident 26.06에 대한 중요 정보
 
 *Trident에 대한 다음 중요 정보를 읽어야 합니다.*
 
@@ -25,7 +26,7 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 ====
 []
 =====
-* Kubernetes 1.35는 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.
+* Kubernetes 1.36는 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.
 * Trident은 multipath.conf 파일에서 권장 값을 값으로 하여 SAN 환경에서 다중 경로 구성을 엄격히 적용합니다 `find_multipaths: no`.
 +
 비 경로 다중화 구성 또는 의 사용 `find_multipaths: yes` 또는 `find_multipaths: smart` multipath.conf 파일의 값으로 인해 마운트 오류가 발생합니다. Trident에서 의 사용을 권장했습니다 `find_multipaths: no` 21.07 릴리스 이후.
@@ -36,6 +37,7 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 ====
 
 
+[[deploy-the-trident-operator-and-install-trident-using-helm]]
 == Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치합니다
 
 Trident 사용 link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm 차트"^] Trident 연산자를 구축하고 Trident를 한 번에 설치할 수 있습니다.
@@ -70,7 +72,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set i
 --
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:26.02.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:26.02 --set tridentImage=<your-registry>/trident:26.02.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:26.06.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:26.06 --set tridentImage=<your-registry>/trident:26.06.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
@@ -84,6 +86,7 @@ NOTE: Trident에 대한 네임스페이스를 이미 만든 경우에는 '--crea
 
 
 
+[[pass-configuration-data-during-install]]
 == 설치 중에 구성 데이터를 전달합니다
 
 설치 중에 구성 데이터를 전달하는 방법에는 두 가지가 있습니다.
@@ -116,6 +119,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2602.0  --crea
 ----
 
 
+[[configuration-options]]
 == 구성 옵션
 
 이 표와 `values.yaml` 제어 차트의 일부인 파일 에는 키 목록과 해당 기본값이 나와 있습니다.

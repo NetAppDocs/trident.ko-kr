@@ -23,6 +23,7 @@ Trident는 ONTAP를 스토리지 백엔드로 위해 Kerberos 암호화를 지�
 
 
 
+[[configure-in-flight-kerberos-encryption-with-on-premise-ontap-volumes]]
 == 사내 ONTAP 볼륨을 사용하여 전송 중인 Kerberos 암호화를 구성합니다
 
 관리 클러스터와 온프레미스 ONTAP 스토리지 백엔드 사이의 스토리지 트래픽에 Kerberos 암호화를 활성화할 수 있습니다.
@@ -40,6 +41,7 @@ NOTE: 온-프레미스 ONTAP 스토리지 백엔드를 사용하는 NFS 트래�
 
 
 
+[[add-or-modify-ontap-export-policies]]
 === ONTAP 엑스포트 정책을 추가 또는 수정합니다
 
 기존 ONTAP 엑스포트 정책에 규칙을 추가하거나, ONTAP 스토리지 VM 루트 볼륨뿐 아니라 업스트림 Kubernetes 클러스터와 공유된 ONTAP 볼륨에 대해 Kerberos 암호화를 지원하는 새 엑스포트 정책을 생성해야 합니다. 추가한 내보내기 정책 규칙 또는 새로 만든 내보내기 정책은 다음 액세스 프로토콜 및 액세스 권한을 지원해야 합니다.
@@ -77,6 +79,7 @@ ONTAP 엑스포트 정책과 엑스포트 정책 규칙을 생성하는 방법�
 
 
 
+[[create-a-storage-backend]]
 === 스토리지 백엔드를 생성합니다
 
 Kerberos 암호화 기능을 포함하는 Trident 스토리지 백엔드 구성을 만들 수 있습니다.
@@ -144,6 +147,7 @@ tridentctl logs
 
 
 
+[[create-a-storage-class]]
 === 스토리지 클래스를 생성합니다
 
 스토리지 클래스를 만들어 Kerberos 암호화를 사용하여 볼륨을 프로비저닝할 수 있습니다.
@@ -202,12 +206,14 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 
 
 
+[[provision-volumes]]
 === 볼륨 프로비저닝
 
 스토리지 백엔드와 스토리지 클래스를 생성한 후 이제 볼륨을 프로비저닝할 수 있습니다. 자세한 내용은 을 https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["볼륨을 프로비저닝합니다"^]참조하십시오.
 
 
 
+[[configure-in-flight-kerberos-encryption-with-azure-netapp-files-volumes]]
 == Azure NetApp Files 볼륨과 함께 전송 중인 Kerberos 암호화를 구성합니다
 
 관리 클러스터와 단일 Azure NetApp Files 스토리지 백엔드 또는 Azure NetApp Files 스토리지 백엔드의 가상 풀 사이의 스토리지 트래픽에 Kerberos 암호화를 활성화할 수 있습니다.
@@ -221,6 +227,7 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 
 
 
+[[create-a-storage-backend]]
 === 스토리지 백엔드를 생성합니다
 
 Kerberos 암호화 기능을 포함하는 Azure NetApp Files 스토리지 백엔드 구성을 만들 수 있습니다.
@@ -347,6 +354,7 @@ tridentctl logs
 
 
 
+[[create-a-storage-class]]
 === 스토리지 클래스를 생성합니다
 
 스토리지 클래스를 만들어 Kerberos 암호화를 사용하여 볼륨을 프로비저닝할 수 있습니다.
@@ -391,6 +399,7 @@ sc-nfs       csi.trident.netapp.io   15h
 
 
 
+[[provision-volumes]]
 === 볼륨 프로비저닝
 
 스토리지 백엔드와 스토리지 클래스를 생성한 후 이제 볼륨을 프로비저닝할 수 있습니다. 자세한 내용은 을 https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["볼륨을 프로비저닝합니다"^]참조하십시오.

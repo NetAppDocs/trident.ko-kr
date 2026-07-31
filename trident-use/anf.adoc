@@ -16,6 +16,7 @@ Azure NetApp Files를 Trident의 백엔드로 사용합니다. 이 백엔드는 
 
 
 
+[[supported-azure-cloud-environments]]
 == 지원되는 Azure 클라우드 환경
 
 Trident는 다양한 Azure 클라우드 환경에서 Azure NetApp Files 백엔드를 지원합니다.
@@ -30,6 +31,7 @@ Trident를 배포하거나 Azure NetApp Files 백엔드를 구성할 때 Azure R
 
 
 
+[[review-azure-netapp-files-driver-support]]
 == Azure NetApp Files 드라이버 지원 검토
 
 Trident는 다음과 같은 Azure NetApp Files 스토리지 드라이버를 제공합니다.
@@ -54,6 +56,7 @@ RWO, ROX, rwx, RWOP
 |===
 
 
+[[review-considerations]]
 == 검토 시 고려 사항
 
 * Azure NetApp Files는 50GiB보다 작은 볼륨을 지원하지 않습니다. 더 작은 볼륨을 요청하면 Trident는 50GiB 볼륨을 생성합니다.
@@ -63,6 +66,7 @@ RWO, ROX, rwx, RWOP
 
 
 
+[[use-managed-identities-for-aks]]
 == AKS에 관리형 ID 사용
 
 Trident는 AKS 클러스터에 대한 link:https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview["관리되는 ID입니다"^]를 지원합니다.
@@ -116,6 +120,7 @@ tridentctl install --cloud-provider="Azure" -n trident
 ====
 
 
+[[use-workload-identity-for-aks]]
 == AKS에 워크로드 ID 사용
 
 워크로드 ID를 사용하면 Kubernetes Pod가 워크로드 ID로 인증하여 Azure 리소스에 액세스할 수 있습니다.

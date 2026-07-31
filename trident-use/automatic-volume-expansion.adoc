@@ -21,6 +21,7 @@ NOTE: 정의된 사용률 임계값을 초과하면 볼륨 크기가 자동으�
 
 
 
+[[requirements]]
 == 요구 사항
 
 자동 볼륨 확장을 구성하기 전에 다음 요구 사항을 충족하는지 확인하십시오.
@@ -40,6 +41,7 @@ NOTE: 정의된 사용률 임계값을 초과하면 볼륨 크기가 자동으�
 
 
 
+[[limitations]]
 == 제한 사항
 
 * ONTAP 9.16.1 이전 버전의 ONTAP Non-Volatile Memory Express 원시 블록 볼륨은 자동 확장을 지원하지 않습니다.
@@ -58,6 +60,7 @@ NOTE: 정의된 사용률 임계값을 초과하면 볼륨 크기가 자동으�
 
 
 
+[[provision-volumes-with-autogrow-policy]]
 == 자동 확장 정책이 적용된 볼륨 프로비저닝
 
 자동 확장 정책은 두 가지 수준에서 구성할 수 있습니다.
@@ -68,6 +71,7 @@ NOTE: 정의된 사용률 임계값을 초과하면 볼륨 크기가 자동으�
 
 
 
+[[create-an-autogrow-policy]]
 == 자동 증가 정책 생성
 
 자동 확장 정책을 사용하면 볼륨이 정의된 용량 임계값에 도달할 때 볼륨이 자동으로 확장됩니다.
@@ -92,6 +96,7 @@ NOTE: 정의된 사용률 임계값을 초과하면 볼륨 크기가 자동으�
 
 
 
+[[autogrow-policy-specifications]]
 === 자동 확장 정책 사양
 
 자동 증가 정책은 다음과 같이 정의된 Kubernetes 사용자 지정 리소스입니다.
@@ -114,6 +119,7 @@ NOTE: 정의된 사용률 임계값을 초과하면 볼륨 크기가 자동으�
 |===
 
 
+[[create-an-autogrow-policy]]
 == 자동 증가 정책 생성
 
 .단계
@@ -153,6 +159,7 @@ standard-autogrow   80%              10%             Success
 
 
 
+[[policy-states]]
 == 정책 상태
 
 정책을 생성하면 Trident가 사양을 검증하고 다음 상태 중 하나를 할당합니다.
@@ -172,6 +179,7 @@ standard-autogrow   80%              10%             Success
 |===
 
 
+[[associate-a-policy-with-a-storageclass]]
 == 정책을 StorageClass에 연결합니다
 
  `trident.netapp.io/autogrowPolicy` 어노테이션을 사용하여 StorageClass에 자동 확장 정책을 연결할 수 있습니다. 해당 StorageClass에서 프로비저닝된 모든 볼륨은 이 정책을 상속받습니다.
@@ -218,6 +226,7 @@ production-db-policy
 
 
 
+[[policy-precedence]]
 == 정책 우선 순위
 
 StorageClass와 PVC 모두에 Autogrow Policy 어노테이션이 설정된 경우 Trident는 다음 우선순위 규칙을 적용합니다.
@@ -248,12 +257,14 @@ StorageClass와 PVC 모두에 Autogrow Policy 어노테이션이 설정된 경�
 |===
 
 
+[[configuration-examples]]
 == 구성 예
 
 다음 예시는 다양한 사용 사례에 대한 일반적인 Autogrow Policy 구성을 보여줍니다.
 
 
 
+[[conservative-policy-for-production-databases]]
 === 운영 데이터베이스에 대한 보수적인 정책
 
 [source, yaml]
@@ -269,6 +280,7 @@ spec:
 ----
 
 
+[[log-storage-with-fixed-growth-increments]]
 === 고정 증가 단위로 로그 스토리지
 
 [source, yaml]
@@ -284,6 +296,7 @@ spec:
 ----
 
 
+[[minimal-policy-with-defaults]]
 === 기본값이 포함된 최소 정책
 
  `growthAmount`및 `maxSize`를 생략하면 Trident는 기본값(`10%` 증가, 무제한 크기)을 사용합니다.
@@ -299,6 +312,7 @@ spec:
 ----
 
 
+[[policy-with-a-custom-maxsize-and-default-growthamount]]
 === 사용자 지정 maxSize 및 기본 growthAmount가 있는 정책
 
 [source, yaml]
@@ -313,6 +327,7 @@ spec:
 ----
 
 
+[[aggressive-growth-with-unlimited-maxsize]]
 === 무제한 maxSize로 공격적인 성장
 
 [source, yaml]
@@ -327,6 +342,7 @@ spec:
 ----
 
 
+[[policy-with-fractional-percentages]]
 === 소수 백분율이 포함된 정책
 
 [source, yaml]
@@ -345,6 +361,7 @@ NOTE: 소수점 이하 백분율도 지원됩니다. 소수점 이하 세 자리
 
 
 
+[[nas-storageclass-with-autogrow]]
 === 자동 확장 기능이 있는 NAS StorageClass
 
 [source, yaml]
@@ -363,6 +380,7 @@ allowVolumeExpansion: true
 ----
 
 
+[[san-storageclass-with-autogrow]]
 === 자동 확장 기능이 있는 SAN StorageClass
 
 [source, yaml]

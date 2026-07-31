@@ -18,6 +18,7 @@ summary: 각 스토리지 드라이버에는 다양한 옵션이 있으며, 볼�
 
 
 
+[[ontap-volume-options]]
 == ONTAP 볼륨 옵션
 
 NFS, iSCSI 및 FC 모두의 볼륨 생성 옵션에는 다음이 포함됩니다.
@@ -105,6 +106,7 @@ NFS, iSCSI 및 FC 모두의 볼륨 생성 옵션에는 다음이 포함됩니다
 |===
 
 
+[[examples]]
 === 예
 
 아래 예를 참조하십시오.
@@ -161,6 +163,7 @@ docker volume create -d netapp --name my_vol --opt snapshotPolicy=myPolicy
 
 
 
+[[element-software-volume-options]]
 == Element 소프트웨어 볼륨 옵션
 
 Element 소프트웨어 옵션은 볼륨과 연관된 서비스 품질(QoS) 정책의 크기 및 크기를 표시합니다. 볼륨을 생성할 때 해당 볼륨과 연관된 QoS 정책은 '-o type=service_level' 명명법을 사용하여 지정합니다.
@@ -185,6 +188,7 @@ Element 드라이버로 QoS 서비스 수준을 정의하는 첫 번째 단계�
 |===
 
 
+[[example]]
 === 예
 
 QoS 정의가 포함된 다음 샘플 구성 파일을 참조하십시오.

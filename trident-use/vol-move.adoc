@@ -15,6 +15,7 @@ Trident 26.06 버전부터 스토리지 관리자는 워크로드가 계속 실�
 
 
 
+[[requirements]]
 == 요구 사항
 
 볼륨 이동 기능은  `ontap-san` iSCSI 볼륨용 드라이버에만 적용됩니다. NVMe 및 NAS 프로토콜은 지원되지 않습니다.
@@ -33,6 +34,7 @@ Trident 26.06 버전부터 스토리지 관리자는 워크로드가 계속 실�
 
 
 
+[[how-it-works]]
 == 작동 원리
 
 Trident는 동일한 ONTAP 클러스터 내의 두 위치 간에 볼륨(LUN)을 이동합니다. 데이터 이동 전에 Trident는 기존 경로와 함께 대상에 새로운 iSCSI 경로를 추가하여 호스트 다중 경로 장치가 액세스 권한을 잃지 않도록 합니다. ONTAP이 이동을 완료하면 Trident는 더 이상 사용하지 않는 소스 경로를 제거합니다.
@@ -41,10 +43,12 @@ Trident는 이동을 진행하면서 `TridentVolumeMove` 리소스에서 확인�
 
 
 
+[[move-a-volume]]
 == 볼륨 이동
 
 
 
+[[identify-the-volume-and-locations]]
 === 볼륨 및 위치 식별
 
 . 이동할 PV의 이름을 찾으세요. PV 이름은 이동 리소스의 이름과 동일합니다.
@@ -53,6 +57,7 @@ Trident는 이동을 진행하면서 `TridentVolumeMove` 리소스에서 확인�
 
 
 
+[[start-the-move]]
 === 이동 시작
 
 두 가지 방법 중 하나를 사용하십시오. 두 방법 모두 동일한  `TridentVolumeMove` 리소스를 생성하며, 해당 리소스의 이름은 PV 이름입니다.
@@ -106,6 +111,7 @@ kubectl apply -f tridentvolumemove.yaml
 
 
 
+[[monitor-the-move]]
 === 이동 상황을 모니터링합니다
 
  `tvm` 단축 이름 또는  `tridentvolumemove`을(를) 사용하여 진행 상황을 추적합니다.
@@ -176,6 +182,7 @@ kubectl describe tridentvolumemove <pv-name> -n trident
 |===
 
 
+[[clean-up-the-move-resource]]
 === 이동 리소스를 정리합니다
 
  `deleteAfterSuccess`을 설정하면 Trident가 리소스를 자동으로 제거합니다. 그렇지 않으면 수동으로 삭제할 수 있습니다. 동일한 볼륨에 대해 다른 이동을 요청하기 전에 해당 볼륨에 대한  `TridentVolumeMove` 리소스가  `Succeeded` 또는  `Failed` 상태로 존재하지 않는지 확인하십시오.

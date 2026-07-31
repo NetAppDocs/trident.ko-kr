@@ -16,6 +16,7 @@ ONTAP 및 Cloud Volumes ONTAP SAN 드라이버를 사용하여 ONTAP 백엔드�
 
 
 
+[[ontap-san-driver-details]]
 == ONTAP SAN 드라이버 세부 정보입니다
 
 Trident는 ONTAP 클러스터와 통신할 수 있도록 다음과 같은 SAN 스토리지 드라이버를 제공합니다. 지원되는 액세스 모드는 _ReadWriteOnce_(RWO), _ReadOnlyMany_(ROX), _ReadWriteMany_(rwx), _ReadWriteOncePod_(RWOP)입니다.
@@ -111,6 +112,7 @@ xfs, ext3, ext4
 ====
 
 
+[[user-permissions]]
 == 사용자 권한
 
 Trident는 ONTAP 또는 SVM 관리자로 실행해야 하며, 일반적으로 클러스터 사용자 `vsadmin` 또는 SVM 사용자 또는 같은 역할을 가진 다른 이름의 사용자를 사용할 `admin` 것입니다. Amazon FSx for NetApp ONTAP 배포의 경우 Trident은 클러스터 사용자 또는 `vsadmin` SVM 사용자를 사용하여 ONTAP 또는 SVM 관리자로 실행하거나 `fsxadmin` 동일한 역할을 가진 다른 이름의 사용자를 실행해야 합니다.  `fsxadmin`사용자는 클러스터 관리자를 제한적으로 대체합니다.
@@ -122,6 +124,7 @@ Trident 드라이버가 사용할 수 있는 더 제한적인 역할을 ONTAP �
 
 
 
+[[additional-considerations-for-nvmetcp]]
 == NVMe/TCP에 대한 추가 고려사항
 
 Trident는 다음과 같은 드라이버를 사용하여 비휘발성 메모리 익스프레스(NVMe) 프로토콜을 `ontap-san` 지원합니다.

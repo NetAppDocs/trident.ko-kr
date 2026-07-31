@@ -19,6 +19,7 @@ NOTE: VolumeGroupSnapshot은 베타 API를 갖춘 쿠버네티스의 베타 기�
 
 
 
+[[create-volume-group-snapshots]]
 == 볼륨 그룹 스냅샷 생성
 
 볼륨 그룹 스냅샷은 다음 스토리지 드라이버에서 지원됩니다.
@@ -104,6 +105,7 @@ spec:
 ----
 
 
+[[recover-volume-data-using-a-group-snapshot]]
 == 그룹 스냅샷을 사용하여 볼륨 데이터 복구
 
 볼륨 그룹 스냅샷의 일부로 생성된 개별 스냅샷을 사용하여 개별 영구 볼륨을 복원할 수 있습니다. 볼륨 그룹 스냅샷을 하나의 단위로 복구할 수는 없습니다.
@@ -119,6 +121,7 @@ NOTE: 스냅샷 복사본을 복원하면 기존 볼륨 구성이 덮어쓰여�
 
 
 
+[[in-place-volume-restoration-from-a-snapshot]]
 == 스냅샷에서 전체 볼륨 복원
 
 Trident는 (TASR) CR을 사용하여 스냅샷에서 제자리에서 신속하게 볼륨을 복원할 수 있도록 `TridentActionSnapshotRestore` 합니다. 이 CR은 필수 Kubernetes 조치로 작동하며 작업이 완료된 후에도 유지되지 않습니다.
@@ -127,6 +130,7 @@ Trident는 (TASR) CR을 사용하여 스냅샷에서 제자리에서 신속하�
 
 
 
+[[delete-a-pv-with-associated-group-snapshots]]
 == 연관된 그룹 스냅샷이 있는 PV 삭제
 
 그룹 볼륨 스냅샷을 삭제할 때:
@@ -138,6 +142,7 @@ Trident는 (TASR) CR을 사용하여 스냅샷에서 제자리에서 신속하�
 
 
 
+[[deploy-a-volume-snapshot-controller]]
 == 볼륨 스냅샷 컨트롤러를 배포합니다
 
 Kubernetes 배포 시 스냅샷 컨트롤러와 CRD가 포함되지 않은 경우 다음과 같이 배포할 수 있습니다.
@@ -177,6 +182,7 @@ NOTE: 필요한 경우 를 엽니다 `deploy/kubernetes/snapshot-controller/rbac
 
 
 
+[[related-links]]
 == 관련 링크
 
 * link:../trident-reference/objects.html#kubernetes-volumegroupsnapshotclass-objects["볼륨 그룹 스냅샷 클래스"]

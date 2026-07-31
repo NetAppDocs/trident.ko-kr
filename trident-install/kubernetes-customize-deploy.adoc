@@ -16,6 +16,7 @@ Trident 연산자를 사용하면 사양의 속성을 사용하여 Trident 설�
 
 
 
+[[understanding-controller-pods-and-node-pods]]
 == 컨트롤러 Pod 및 노드 포드 이해
 
 Trident 클러스터의 각 워커 노드에서 단일 컨트롤러 포드와 노드 포드로 실행됩니다. Trident 볼륨을 마운트하려는 모든 호스트에서 노드 포드를 실행해야 합니다.
@@ -28,6 +29,7 @@ Trident 클러스터의 각 워커 노드에서 단일 컨트롤러 포드와 �
 
 
 
+[[configuration-options]]
 == 구성 옵션
 
 
@@ -90,7 +92,7 @@ NOTE: 그만큼 `k8sTimeout` 매개변수는 Trident 설치에만 적용됩니�
 | `logFormat` | 사용할 Trident 로깅 형식 [text, json] | `"text"` 
 
 
-| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:26.02"` 
+| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:26.06"` 
 
 
 | 'imageRegistry'입니다 | 형식의 내부 레지스트리 경로입니다
@@ -265,6 +267,7 @@ NOTE: POD 매개 변수 포맷에 대한 자세한 내용은 을 참조하십시
 
 
 
+[[sample-configurations]]
 == 샘플 구성
 
 속성을 사용할 수 있습니다<<구성 옵션>> 정의할 때 `TridentOrchestrator` 사용자 정의 설치를 위해.

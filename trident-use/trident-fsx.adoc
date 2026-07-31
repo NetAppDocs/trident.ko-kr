@@ -16,6 +16,7 @@ https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["NetApp
 
 
 
+[[requirements]]
 == 요구 사항
 
 link:../trident-get-started/requirements.html["Trident 요구사항"]FSx for ONTAP를 Trident와 통합하려면 다음이 필요합니다.
@@ -31,6 +32,7 @@ NOTE: Amazon Linux 및 Ubuntu에 필요한 노드 준비 단계를 따라야 합
 
 
 
+[[considerations]]
 == 고려 사항
 
 * SMB 볼륨:
@@ -49,6 +51,7 @@ NOTE: Trident에 IAM 역할을 지정하는 경우, `apiKey` 및 `secretKey` 필
 
 
 
+[[simultaneous-usage-of-trident-saniscsi-and-ebs-csi-driver]]
 === Trident SAN/iSCSI 및 EBS-CSI 드라이버 동시 사용
 
 AWS(EKS, ROSA, EC2 또는 기타 인스턴스)에서 ontap-san 드라이버(예: iSCSI)를 사용하려는 경우 노드에 필요한 다중 경로 구성이 Amazon Elastic Block Store(EBS) CSI 드라이버와 충돌할 수 있습니다.  동일한 노드에 있는 EBS 디스크를 방해하지 않고 멀티패스 기능을 보장하려면 멀티패스 설정에서 EBS를 제외해야 합니다.  이 예에서는 다음을 보여줍니다. `multipath.conf` EBS 디스크를 다중 경로에서 제외하면서 필수 Trident 설정을 포함하는 파일:
@@ -67,6 +70,7 @@ blacklist {
 ----
 
 
+[[authentication]]
 == 인증
 
 Trident는 두 가지 인증 모드를 제공합니다.
@@ -87,6 +91,7 @@ WARNING: Trident은 SVM 사용자로 실행하거나 동일한 역할을 가진 
 
 
 
+[[tested-amazon-machine-images-amis]]
 == 테스트된 아마존 머신 이미지(AMI)
 
 EKS 클러스터는 다양한 운영 체제를 지원하지만 AWS는 컨테이너 및 EKS에 대해 특정 AMI(Amazon Machine Images)를 최적화했습니다. 다음 AMI는 NetApp Trident 25.02에서 테스트되었습니다.
@@ -137,6 +142,7 @@ NOTE: 원하는 AMI가 여기에 나열되지 않은 경우 지원되지 않는�
 
 
 
+[[find-more-information]]
 == 자세한 내용을 확인하십시오
 
 * https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["NetApp ONTAP용 Amazon FSx 문서"^]

@@ -27,6 +27,7 @@ Trident Protect를 사용하면 스냅샷이나 백업에서 애플리케이션�
 ====
 
 
+[[restore-from-a-backup-to-a-different-namespace]]
 == 백업에서 다른 네임스페이스로 복원합니다
 
 BackupRestore CR을 사용하여 다른 네임스페이스로 백업을 복원하면 Trident Protect는 새 네임스페이스에서 애플리케이션을 복원하고 복원된 애플리케이션에 대한 애플리케이션 CR을 만듭니다. 복구된 애플리케이션을 보호하려면 주문형 백업이나 스냅샷을 만들거나 보호 일정을 설정하세요.
@@ -155,6 +156,7 @@ tridentctl-protect create backuprestore <my_restore_name> \
 ====
 
 
+[[restore-from-a-backup-to-the-original-namespace]]
 == 백업에서 원래 네임스페이스로 복구합니다
 
 언제든지 백업을 원래 네임스페이스로 복원할 수 있습니다. 제자리 복원을 수행하면 Trident Protect는 잘못된 복구 지점이 생성되는 것을 방지하기 위해 보호 일정과 진행 중인 작업을 자동으로 관리합니다.
@@ -279,6 +281,7 @@ tridentctl-protect create backupinplacerestore <my_restore_name> \
 ====
 
 
+[[restore-from-a-backup-to-a-different-cluster]]
 == 백업에서 다른 클러스터로 복원합니다
 
 원래 클러스터에 문제가 있는 경우 백업을 다른 클러스터로 복구할 수 있습니다.
@@ -406,6 +409,7 @@ tridentctl-protect create backuprestore <restore_name> \
 ====
 
 
+[[restore-from-a-snapshot-to-a-different-namespace]]
 == 스냅샷에서 다른 네임스페이스로 복구합니다
 
 사용자 정의 리소스(CR) 파일을 사용하여 스냅샷에서 데이터를 다른 네임스페이스나 원래 소스 네임스페이스로 복원할 수 있습니다. SnapshotRestore CR을 사용하여 다른 네임스페이스로 스냅샷을 복원하면 Trident Protect는 새 네임스페이스에서 애플리케이션을 복원하고 복원된 애플리케이션에 대한 애플리케이션 CR을 만듭니다. 복구된 애플리케이션을 보호하려면 주문형 백업이나 스냅샷을 만들거나 보호 일정을 설정하세요.
@@ -539,6 +543,7 @@ tridentctl-protect create snapshotrestore <my_restore_name> \
 ====
 
 
+[[restore-from-a-snapshot-to-the-original-namespace]]
 == 스냅샷에서 원래 네임스페이스로 복구합니다
 
 언제든지 스냅샷을 원래 네임스페이스로 복원할 수 있습니다. 제자리 복원을 수행하면 Trident Protect는 잘못된 복구 지점이 생성되는 것을 방지하기 위해 보호 일정과 진행 중인 작업을 자동으로 관리합니다.
@@ -645,6 +650,7 @@ tridentctl-protect create snapshotinplacerestore <my_restore_name> \
 ====
 
 
+[[check-the-status-of-a-restore-operation]]
 == 복구 작업의 상태를 확인합니다
 
 명령줄을 사용하여 진행 중이거나, 완료되었거나, 실패한 복구 작업의 상태를 확인할 수 있습니다.

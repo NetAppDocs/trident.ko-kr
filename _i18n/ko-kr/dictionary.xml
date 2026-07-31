@@ -5919,11 +5919,9 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="1dba8f0975c45572eb495fa5122b37e8" category="cell">ONTAP(LDAP를 사용하는 NFS/SMB)</block>
   <block id="b7f43df36fb2e13c1c3d456da9ceba9e" category="cell">유사, 이름 확인/인증의 경우 AD로 제한합니다.</block>
   <block id="e447b6c9645ce6cd63337d813a552cd5" category="sidebar">Trident ASA r2 스토리지 시스템 지원</block>
-  <block id="8d5731b8fc2479ac904701c0f079c178" category="paragraph">Trident 26.02을 실행 중이 아닌 경우 이전 릴리스에 대한 문서는 <block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block>을 기반으로 제공됩니다.</block>
   <block id="60706cc94c04d32db6c18b4fb8b21f21" category="inline-link">Trident 25.10</block>
   <block id="69a4986cbe93f4162ce953d8e917b215" category="list-text"><block ref="69a4986cbe93f4162ce953d8e917b215" category="inline-link-rx"></block></block>
   <block id="28b62bff68083dad22bdf1acf812f48a" category="list-text">Kubernetes 1.35는 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
-  <block id="ac6cc7900e3d9478b2fcf3a73c070b29" category="section-title">Trident 26.02에 필요한 컨테이너 이미지</block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*: (_선택 사항_) <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>로 설정하면 스케줄 생성 시 일회성으로 즉시 기준선 실행(보존 설정에 따른 백업 및/또는 스냅샷)을 트리거합니다. 기본값은 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>입니다. 이 설정은 이후 반복 실행에는 영향을 미치지 않습니다.</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">즉시 실행이 포함된 스케줄에 대한 YAML 예:</block>
   <block id="ea89dfc546da2da95449976a3262efd9" category="list-text">*즉시 기준선 보호*: <block ref="40c288e5937b634afc8b0a225fcdb4cf" prefix=" " category="inline-code"></block>을 사용하여 첫 번째 예약 실행 시간을 기다리지 않고 예약이 생성될 때 즉시 초기 백업 또는 스냅샷을 생성합니다. 기본값은 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>입니다.</block>
@@ -5935,9 +5933,7 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="4c563d04dfd50e6f3569cee14757b0d3" category="paragraph">언제든지 스냅샷을 원래 네임스페이스로 복원할 수 있습니다. 제자리 복원을 수행하면 Trident Protect는 잘못된 복구 지점이 생성되는 것을 방지하기 위해 보호 일정과 진행 중인 작업을 자동으로 관리합니다.</block>
   <block id="d299403943c136e89dcdf76b975fa78e" category="paragraph">Trident Protect 버전은 날짜 기반<block ref="fb6921a005d395f9482cdac0306d4935" prefix=" " category="inline-code"></block> 명명 규칙을 따르며, 여기서 "YY"는 연도의 마지막 두 자리 숫자이고 "MM"은 월을 나타냅니다. 도트 릴리스는<block ref="d93ec759c4a0e8c1cf9c7653b2939656" prefix=" " category="inline-code"></block> 규칙을 따르며, 여기서 "X"는 패치 레벨을 나타냅니다. 업그레이드할 버전은 업그레이드하려는 현재 버전을 기준으로 선택합니다.</block>
   <block id="0f76ee20ab451b4f754d9e30cde19650" category="list-text">설치된 버전에서 4개 릴리스 이내의 대상 릴리스로 직접 업그레이드할 수 있습니다. 예를 들어 24.10(또는 24.10의 모든 마이너 버전)에서 25.10으로 직접 업그레이드할 수 있습니다.</block>
-  <block id="09a310b79e08f8c01b750026c4388289" category="list-text">4개 릴리스 기간 외의 버전에서 업그레이드하는 경우 여러 단계를 거쳐 업그레이드하십시오. <block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block>에서 업그레이드하는 경우 해당 버전의 업그레이드 지침을 사용하여 4개 릴리스 기간에 맞는 최신 릴리스로 업그레이드하십시오. 예를 들어 24.10을 실행 중이고 26.02으로 업그레이드하려는 경우:</block>
   <block id="03a081c9536ffc6b50cecf173b0dbc2c" category="list-text">먼저 24.10에서 25.02으로 업그레이드하십시오.</block>
-  <block id="c57146c5f38b336a75fd36e963d211fd" category="list-text">그다음 25.02에서 26.02으로 업그레이드하세요.</block>
   <block id="f65c06826afa8d10471cd5dee9af7426" category="section-title">2단계: Trident Protect 업그레이드</block>
   <block id="900b2ff0e4545565ae3f08238031bafd" category="section-title">26.02의 새로운 기능</block>
   <block id="15472a280efaab6ff08ec110afd8de46" category="paragraph">NetApp Trident 및 Trident Protect의 새로운 기능, 개선 사항, 버그 수정 및 사용 중단 예정 기능에 대해 알아보세요.</block>
@@ -5979,8 +5975,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="150fed11d160cf3a20a84935a6da6b2f" category="cell">스토리지 백엔드의 사용자 지정 이름</block>
   <block id="9c8376d30ef5d31c007585fb05add5db" category="cell">볼륨에 대한 VNet 기능 집합은<block ref="972e73b7a882d0802a4e3a16946a2f94" prefix=" " category="inline-code"></block> 또는<block ref="eb6d8ae6f20283755b339c0dc273988b" prefix=" " category="inline-code"></block>일 수 있습니다. 네트워크 기능은 모든 지역에서 사용할 수 없으며 구독에서 활성화해야 할 수도 있습니다. 기능이 활성화되지 않은 상태에서<block ref="b0fdc9c7b96e4249152c61b506703142" prefix=" " category="inline-code"></block>을(를) 지정하면 볼륨 프로비저닝이 실패합니다.</block>
   <block id="eceb18783ab7d857705973afb0ba5ff1" category="cell">NFS 마운트 옵션을 세밀하게 제어할 수 있습니다. SMB 볼륨에는 적용되지 않습니다. NFS 버전 4.1을 사용하여 볼륨을 마운트하려면 쉼표로 구분된 마운트 옵션 목록에<block ref="c72da907ddca73ee114d92e5e098ce0e" prefix=" " category="inline-code"></block>를 포함하여 NFS v4.1을 선택합니다. 스토리지 클래스 정의에 설정된 마운트 옵션은 백엔드 구성에 설정된 마운트 옵션을 재정의합니다.</block>
-  <block id="ca4874fba63edd36a107178ef6510445" category="section-title">Azure 클라우드 환경 고려(26.02)</block>
-  <block id="584e93b9019a1308f5373f467e2fa893" category="paragraph">26.02 릴리스부터 Trident는 여러 Azure 클라우드 환경에서 Azure NetApp Files 백엔드를 생성하고 관리하는 것을 지원합니다.</block>
   <block id="d20c4dcda0a96ffb3a3748cbe8aba81e" category="paragraph">지원되는 Azure 클라우드는 다음과 같습니다.</block>
   <block id="3dc82a397fa9254c0f558e04583621c3" category="list-text">Azure Commercial</block>
   <block id="e96e8d7b53ef3f92949dbe568dc848b6" category="list-text">Azure Government(Azure Government/MAG)</block>
@@ -6072,7 +6066,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="ef8eb050000e134fa5a2198e8ff5038e" category="summary">Trident를 사용하여 Kubernetes 네이티브 메커니즘으로 Google Cloud NetApp Volumes 자동 계층화를 구성합니다.</block>
   <block id="dab9b285e93c136eba2e723beb8edd60" category="doc">Google Cloud NetApp Volumes에 대한 자동 계층화 구성</block>
   <block id="afb75f46d7710bfa697c616ccf2b5ea3" category="paragraph">자동 계층화 기능을 통해 Trident는 비활성 데이터를 성능 계층에서 용량 계층으로 자동으로 이동시키는 볼륨을 프로비저닝할 수 있습니다. 이를 통해 스토리지 비용을 절감하는 동시에 자주 액세스하는 데이터의 성능을 유지할 수 있습니다.</block>
-  <block id="5915b91d7147475077383a0b6bb57408" category="paragraph">Trident는 볼륨 생성 시에만 자동 계층화 설정을 적용합니다. Trident 26.02에서는 프로비저닝 후 변경이 지원되지 않습니다.</block>
   <block id="cb093658cef2560e46a3c54bec672cf8" category="section-title">자동 계층화</block>
   <block id="7b7bab0024c6202ad5a192ef0445195e" category="paragraph">자동 계층화는 접근 패턴에 따라 접근 빈도가 낮은 데이터를 성능 계층에서 용량 계층으로 이동시킵니다. 데이터 이동은 비동기적으로 발생하며 즉시 이루어지지 않습니다.</block>
   <block id="fabea8658161c3de0e08742a1ab72c7e" category="section-title">계층화 정책</block>
@@ -6092,13 +6085,10 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="5d22c20e3e02066c0600a840e879938a" category="list-text">Trident 백엔드 구성</block>
   <block id="3f5370cf58488d1347e8b2db4da682b2" category="list-text">스토리지 풀 기본값</block>
   <block id="0312731ce473db488b555d6e91acb13f" category="paragraph">우선 순위가 높은 설정이 하위 수준 값을 재정의합니다.</block>
-  <block id="45a07962bc89c0ea5e586076b72ee4c1" category="section-title">Trident 26.02에서 지원되는 기능</block>
-  <block id="8f74a1c598301b0fdd0dd57f04ccc8c4" category="paragraph">Trident 26.02는 Google Cloud NetApp Volumes에 대해 다음과 같은 자동 계층화 기능을 지원합니다.</block>
   <block id="684a5d1cd198a69c43c096d24b821491" category="list-text">볼륨 프로비저닝 중 자동 계층화 설정 또는 해제</block>
   <block id="607c651949b262cfbdc3e4ee7b7fd396" category="list-text">Trident 백엔드 구성에서 계층화 정책 정의</block>
   <block id="75fee9b8deaef7c5c9a6e29cc9726463" category="list-text">PVC 주석을 사용하여 볼륨별 계층화 정책 및 냉각 일수 재정의</block>
   <block id="895e9c66fe1163df089f36df03d4ac52" category="list-text">자동 계층화가 활성화된 볼륨에 대한 냉각 일수 구성</block>
-  <block id="b2a4e6665c958003379aae04b8853635" category="section-title">Trident 26.02에서 지원되지 않는 기능</block>
   <block id="a9983630391b773f642c371dc94873ea" category="paragraph">다음 작업은 지원되지 않습니다.</block>
   <block id="6b4626d056df29f9ddfb1347a6afd7e4" category="list-text">볼륨 생성 후 자동 계층화 설정 수정</block>
   <block id="1bb954f7eb53754523d7c2c696ee6cb7" category="list-text">Kubernetes 업데이트를 사용하여 기존 볼륨의 계층화 정책 변경</block>
@@ -6428,19 +6418,11 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="945c53097aed6aee6897384c32c13596" category="paragraph">예를 들어, 이 정책은<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>을<block ref="b3b9f60c2eb049d3bcbddd22d73210ce" prefix=" " category="inline-code"></block>로 설정하지만, Trident는 이 정책을 사용하는 모든 SAN 볼륨에 대해 51MB의 증가분을 적용합니다.</block>
   <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">이러한 자동 조정을 방지하려면 <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>을 50 MiB보다 큰 값으로 설정하십시오.</block>
   <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">자동 계층화 구성</block>
-  <block id="4711816ecf930de7bedb0fff0ed5f46a" category="list-text">docker.io/netapp/trident:26.02.0</block>
-  <block id="d9d8d43f99f88fa1757ca456d25bffdc" category="list-text">docker.io/netapp/trident-autosupport:26.02</block>
   <block id="93284b31b63cc86c59eeb4dcd6ba1751" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.1.0</block>
   <block id="f5345a3e1ca4c50ed544fae4c14150b1" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.0.0</block>
   <block id="ed2e3a3511b1047c788e7fd621778ee2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0</block>
-  <block id="62b6189a1ca283e5a1f0152c40a1d139" category="list-text">docker.io/netapp/trident-operator:26.02.0(선택 사항)</block>
   <block id="0adb26270c00fc572774f5cb57d01573" category="inline-link-macro">26.02</block>
   <block id="e352a332a817691cf8394c9b1288306f" category="paragraph"><block ref="e352a332a817691cf8394c9b1288306f" category="inline-link-macro-rx"></block></block>
-  <block id="ae86b0bdf0b542a819fd22e434545766" category="cell"><block ref="1d7ac1b2b38a742e32aa51ad1489b0a7" prefix="" category="inline-code"></block></block>
-  <block id="c28a6ef170d50135b201634575bf11b4" category="section-title">Trident 26.02에 대한 중요 정보</block>
-  <block id="e2c49768b478259ae558315a6874896b" category="paragraph"><block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>에서 <block ref="b5184a708a9f3a0020e58d5d08445198" prefix=" " category="inline-code"></block>를 업데이트하여 이미지 레지스트리의 위치를 반영하십시오. <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block>는 하나의 레지스트리 또는 여러 레지스트리에 위치할 수 있지만, 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 예를 들면 다음과 같습니다.</block>
-  <block id="73321a84803ccb3eb0b3dc9281954ba7" category="list-text"><block ref="ca771b97d048ca724b0d35dbea604dba" prefix="" category="inline-code"></block> 이미지가 모두 하나의 레지스트리에 있는 경우.</block>
-  <block id="f6742c05233fa63959541b8dde0d38c6" category="list-text"><block ref="b60c14c79386a1c34022777459be2c8d" prefix="" category="inline-code"></block> Trident 이미지가 CSI 이미지와 다른 레지스트리에 있는 경우.</block>
   <block id="f1462e5be0262f51cdc6fb6c3b5027dc" category="summary">Red Hat OpenShift를 사용하는 경우 커뮤니티 오퍼레이터, Helm 기반 설치 또는 수동으로 배포한 오퍼레이터에서 인증된 Trident 오퍼레이터로 전환할 수 있습니다.</block>
   <block id="9e7ed03c18ddecce0aa7a5623628fe1a" category="doc">OpenShift 인증 Trident 운영자로 전환하세요</block>
   <block id="00e22a4bea8f6d3bb56845f5728a38f9" category="paragraph">Red Hat OpenShift 인증 Trident 오퍼레이터는 커뮤니티 오퍼레이터, Helm 기반 설치 또는 수동으로 배포된 오퍼레이터에서 전환할 수 있습니다. 각 방법의 프로세스에는 기존 오퍼레이터를 제거한 다음 OperatorHub를 사용하여 인증된 오퍼레이터를 설치하는 작업이 포함됩니다.</block>
@@ -7251,4 +7233,27 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="53a1e3ed6dc9286a411ff4fdda7cb383" category="list-text"><block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 명령을 사용합니다. 여기서 <block ref="86ec79e27e8639c8433f7ff62822e38f" prefix=" " category="inline-code"></block>는 업그레이드할 버전을 나타냅니다.</block>
   <block id="eec73d4903362fb244dc1fa04140d8c8" category="list-text">ONTAP-SAN-ECONOMY 드라이버의 크기 조정 작업 중 Flexvol이 축소되는 것을 방지합니다.</block>
   <block id="7a1819119b273216b59fab874ebf86e8" category="list-text">AppMirrorRelationship 역방향, 역방향 재동기화 및 재동기화 작업 중에 KubeVirt 가상 머신 애플리케이션이 PersistentVolumeClaims를 잘못 재생성하는 문제를 해결했습니다.</block>
+  <block id="91d1a0ad77ca7fe00dec0239a8194b82" category="paragraph">Trident 26.06을 실행 중이 아닌 경우 이전 릴리스에 대한 문서는 <block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block>을 기반으로 제공됩니다.</block>
+  <block id="f4dfb48579d3f90a417158e53e75204a" category="inline-link">Trident 26.02</block>
+  <block id="20c6994509b12de80a77f23b290b8bcd" category="list-text"><block ref="20c6994509b12de80a77f23b290b8bcd" category="inline-link-rx"></block></block>
+  <block id="648540f1a67ebba0071e70944d7527c2" category="paragraph"><block ref="648540f1a67ebba0071e70944d7527c2" category="inline-link-macro-rx"></block></block>
+  <block id="172ebadfc5f13c0aff9b7f172bc4fed4" category="cell">2027년 7월</block>
+  <block id="4aab0cfeaa9a8262994350900bdd20f2" category="cell">2028년 7월</block>
+  <block id="f6d7c73fe3fc66fa560e7262f79f60ae" category="section-title">Trident 26.06에 필요한 컨테이너 이미지</block>
+  <block id="f87a5c52c8ee3e84d33252d80679b335" category="list-text">docker.io/netapp/trident:26.06.0</block>
+  <block id="01d86b54453ee9aefd6e3ed4a3dc0dc2" category="list-text">docker.io/netapp/trident-autosupport:26.06</block>
+  <block id="9a3b823ceeb6fcbe9a5ac0a50b995ed0" category="list-text">docker.io/netapp/trident-operator:26.06.0(선택 사항)</block>
+  <block id="c31dc22d9ccf9395630afa7de351d6bf" category="cell"><block ref="4e9f324b7febae0727b9d412cb49fa13" prefix="" category="inline-code"></block></block>
+  <block id="bcf817488b594e4daf83db1e5511242d" category="section-title">Trident 26.06에 대한 중요 정보</block>
+  <block id="a67a4c76b07caa7907851893a5518350" category="paragraph"><block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>에서 <block ref="6225334d80f70f493ad5e35aee5b3e8c" prefix=" " category="inline-code"></block>를 업데이트하여 이미지 레지스트리의 위치를 반영하십시오. <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block>는 하나의 레지스트리 또는 여러 레지스트리에 위치할 수 있지만, 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 예를 들면 다음과 같습니다.</block>
+  <block id="7559678ace63d5f03e465a5671cc7db3" category="list-text"><block ref="8e06db2260954a3b69d080710541061e" prefix="" category="inline-code"></block> 이미지가 모두 하나의 레지스트리에 있는 경우.</block>
+  <block id="ab4356213016ceded9dcaa8c910a0f8a" category="list-text"><block ref="b4b523778500749f975cd131bd70eaf0" prefix="" category="inline-code"></block> Trident 이미지가 CSI 이미지와 다른 레지스트리에 있는 경우.</block>
+  <block id="f651e630cf0f39102d38c494e842d244" category="list-text">4개 릴리스 기간 외의 버전에서 업그레이드하는 경우 여러 단계를 거쳐 업그레이드하십시오. <block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block>에서 업그레이드하는 경우 해당 버전의 업그레이드 지침을 사용하여 4개 릴리스 기간에 맞는 최신 릴리스로 업그레이드하십시오. 예를 들어 24.10 버전을 실행 중이고 26.06으로 업그레이드하려는 경우:</block>
+  <block id="9cc871b3823d788a71b5fe7d98091be7" category="list-text">그다음 25.02에서 26.06으로 업그레이드하세요.</block>
+  <block id="1d34a26ee46532c4d8a716d8ce3315d8" category="section-title">Azure 클라우드 환경 고려(26.06)</block>
+  <block id="e4f47d019eda889a3f06c8ac6170ce36" category="paragraph">26.06 릴리스부터 Trident는 여러 Azure 클라우드 환경에서 Azure NetApp Files 백엔드를 생성하고 관리하는 것을 지원합니다.</block>
+  <block id="3c5b5c17f7a5e32f4971a6c47e9bc73b" category="paragraph">Trident는 볼륨 생성 시에만 자동 계층화 설정을 적용합니다. Trident 26.06에서는 프로비저닝 후 변경이 지원되지 않습니다.</block>
+  <block id="aa2d7ad72731a70cf1acfd5476327d88" category="section-title">Trident 26.06에서 지원되는 기능</block>
+  <block id="a083a63746aa61c3da201d39ba7a4bc0" category="paragraph">Trident 26.06는 Google Cloud NetApp Volumes에 대해 다음과 같은 자동 계층화 기능을 지원합니다.</block>
+  <block id="e21cf8f8ea478f3204b9d99aa0b68e51" category="section-title">Trident 26.06에서 지원되지 않는 기능</block>
 </blocks>

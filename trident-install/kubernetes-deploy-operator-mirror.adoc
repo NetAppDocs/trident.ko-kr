@@ -16,6 +16,7 @@ Trident 운영자를 수동으로 배포하여 Trident를 설치할 수 있습�
 
 
 
+[[critical-information-about-trident]]
 == Trident에 대한 중요 정보입니다
 
 *Trident에 대한 다음 중요 정보를 읽어야 합니다.*
@@ -36,6 +37,7 @@ Trident 운영자를 수동으로 배포하여 Trident를 설치할 수 있습�
 ====
 
 
+[[manually-deploy-the-trident-operator-and-install-trident]]
 == Trident 연산자를 수동으로 구축하고 Trident를 설치합니다
 
 link:kubernetes-deploy.html["설치 개요"]을(를) 검토하여 설치 사전 요구 사항을 충족했는지, 그리고 사용 환경에 맞는 올바른 설치 옵션을 선택했는지 확인하십시오.
@@ -72,18 +74,20 @@ kubectl run -i --tty ping --image=busybox --restart=Never --rm -- \
 ====
 
 
+[[step-1-download-the-trident-installer-package]]
 === 1단계: Trident 설치 프로그램 패키지를 다운로드합니다
 
 Trident 설치 프로그램 패키지에는 Trident 운영자를 배포하고 Trident를 설치하는 데 필요한 모든 것이 포함되어 있습니다. 에서 최신 버전의 Trident 설치 프로그램을 다운로드하고 압축을 link:https://github.com/NetApp/trident/releases/latest["GitHub의 _Assets_섹션"^]풉니다.
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v6.0/trident-installer-26.02.0.tar.gz
-tar -xf trident-installer-26.02.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v6.0/trident-installer-26.06.0.tar.gz
+tar -xf trident-installer-26.06.0.tar.gz
 cd trident-installer
 ----
 
 
+[[step-2-create-the-tridentorchestrator-crd]]
 === 2단계: 을 작성합니다 `TridentOrchestrator` CRD
 
 생성하다 `TridentOrchestrator` 사용자 정의 리소스 정의(CRD). 당신은 만들 것입니다 `TridentOrchestrator` 사용자 정의 리소스는 나중에. 적절한 CRD YAML 버전을 사용하세요. `deploy/crds` 생성하기 위해 `TridentOrchestrator` CRD:
@@ -94,16 +98,18 @@ kubectl create -f deploy/crds/<VERSION>.yaml
 ----
 
 
+[[step-3-update-the-registry-location-in-the-operator]]
 === 3단계: 운영자의 레지스트리 위치를 업데이트합니다
 
- `/deploy/operator.yaml`에서  `image: docker.io/netapp/trident-operator:26.02.0`를 업데이트하여 이미지 레지스트리의 위치를 반영하십시오. link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident 및 CSI 이미지"]는 하나의 레지스트리 또는 여러 레지스트리에 위치할 수 있지만, 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 예를 들면 다음과 같습니다.
+ `/deploy/operator.yaml`에서  `image: docker.io/netapp/trident-operator:26.06.0`를 업데이트하여 이미지 레지스트리의 위치를 반영하십시오. link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident 및 CSI 이미지"]는 하나의 레지스트리 또는 여러 레지스트리에 위치할 수 있지만, 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 예를 들면 다음과 같습니다.
 
-* `image: <your-registry>/trident-operator:26.02.0` 이미지가 모두 하나의 레지스트리에 있는 경우.
-* `image: <your-registry>/netapp/trident-operator:26.02.0` Trident 이미지가 CSI 이미지와 다른 레지스트리에 있는 경우.
-
-
+* `image: <your-registry>/trident-operator:26.06.0` 이미지가 모두 하나의 레지스트리에 있는 경우.
+* `image: <your-registry>/netapp/trident-operator:26.06.0` Trident 이미지가 CSI 이미지와 다른 레지스트리에 있는 경우.
 
 
+
+
+[[step-4-deploy-the-trident-operator]]
 === 4단계: Trident 연산자를 배포합니다
 
 Trident 설치 프로그램은 운영자를 설치하고 관련 객체를 만드는 데 사용할 수 있는 번들 파일을 제공합니다. 번들 파일은 운영자를 배포하고 기본 구성을 사용하여 Trident를 설치하는 쉬운 방법입니다.
@@ -157,6 +163,7 @@ IMPORTANT: Kubernetes 클러스터에는 운영자의 인스턴스 * 하나가 �
 
 
 
+[[step-5-update-the-image-registry-location-in-the-tridentorchestrator]]
 === 5단계: 에서 이미지 레지스트리 위치를 업데이트합니다 `TridentOrchestrator`
 
 귀사의 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident 및 CSI 이미지"] 하나의 레지스트리 또는 다른 레지스트리에 있을 수 있지만 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 업데이트 `deploy/crds/tridentorchestrator_cr.yaml` 레지스트리 구성에 따라 추가 위치 사양을 추가하려면 다음을 수행합니다.
@@ -168,8 +175,8 @@ IMPORTANT: Kubernetes 클러스터에는 운영자의 인스턴스 * 하나가 �
 [listing]
 ----
 imageRegistry: "<your-registry>"
-autosupportImage: "<your-registry>/trident-autosupport:26.02"
-tridentImage: "<your-registry>/trident:26.02.0"
+autosupportImage: "<your-registry>/trident-autosupport:26.06"
+tridentImage: "<your-registry>/trident:26.06.0"
 ----
 --
 .다른 레지스트리의 이미지
@@ -177,13 +184,14 @@ tridentImage: "<your-registry>/trident:26.02.0"
 [listing]
 ----
 imageRegistry: "<your-registry>"
-autosupportImage: "<your-registry>/trident-autosupport:26.02"
-tridentImage: "<your-registry>/trident:26.02.0"
+autosupportImage: "<your-registry>/trident-autosupport:26.06"
+tridentImage: "<your-registry>/trident:26.06.0"
 ----
 --
 ====
 
 
+[[step-6-create-the-tridentorchestrator-and-install-trident]]
 === 6단계: 을 작성합니다 `TridentOrchestrator` Trident를 설치합니다
 
 이제 를 만들고 Trident를 설치할 수 `TridentOrchestrator` 있습니다. 선택적으로, 스펙의 속성을 추가로  사용할 `TridentOrchestrator` 수 link:kubernetes-customize-deploy.html["Trident 설치를 사용자 지정합니다"]있습니다. 다음 예에서는 Trident 및 CSI 이미지가 다른 레지스트리에 있는 설치를 보여 줍니다.
@@ -203,16 +211,16 @@ API Version: trident.netapp.io/v1
 Kind:        TridentOrchestrator
 ...
 Spec:
-  Autosupport Image:  <your-registry>/trident-autosupport:26.02
+  Autosupport Image:  <your-registry>/trident-autosupport:26.06
   Debug:              true
   Image Registry:     <your-registry>
   Namespace:          trident
-  Trident Image:      <your-registry>/trident:26.02.0
+  Trident Image:      <your-registry>/trident:26.06.0
 Status:
   Current Installation Params:
     IPv6:                       false
     Autosupport Hostname:
-    Autosupport Image:          <your-registry>/trident-autosupport:26.02
+    Autosupport Image:          <your-registry>/trident-autosupport:26.06
     Autosupport Proxy:
     Autosupport Serial Number:
     Debug:                      true
@@ -224,11 +232,11 @@ Status:
     Log Format:           text
     Probe Port:           17546
     Silence Autosupport:  false
-    Trident Image:        <your-registry>/trident:26.02.0
+    Trident Image:        <your-registry>/trident:26.06.0
   Message:                Trident installed
   Namespace:              trident
   Status:                 Installed
-  Version:                v26.02.0
+  Version:                v26.06.0
 Events:
     Type Reason Age From Message ---- ------ ---- ---- -------Normal
     Installing 74s trident-operator.netapp.io Installing Trident Normal
@@ -236,12 +244,14 @@ Events:
 ----
 
 
+[[verify-the-installation]]
 == 설치를 확인합니다
 
 설치를 확인하는 방법에는 여러 가지가 있습니다.
 
 
 
+[[using-tridentorchestrator-status]]
 === 사용 `TridentOrchestrator` 상태
 
 의 상태입니다 `TridentOrchestrator` 설치가 성공적으로 완료되었는지 여부를 나타내고 설치된 Trident의 버전을 표시합니다. 설치하는 동안 의 상태입니다 `TridentOrchestrator` 변경 시작 `Installing` 를 선택합니다 `Installed`. 을(를) 관찰하면 `Failed` 상태 및 운영자가 자체적으로 복구할 수 없습니다. link:../troubleshooting.html["로그를 확인합니다"].
@@ -274,6 +284,7 @@ Events:
 |===
 
 
+[[using-pod-creation-status]]
 === POD 생성 상태 사용
 
 생성된 Pod의 상태를 검토하여 Trident 설치가 완료되었는지 확인할 수 있습니다.
@@ -291,6 +302,7 @@ trident-operator-766f7b8658-ldzsv          1/1     Running   0           3m
 ----
 
 
+[[using-tridentctl]]
 === 사용 `tridentctl`
 
 를 사용하여 설치된 Trident 버전을 확인할 수 `tridentctl` 있습니다.
@@ -302,6 +314,6 @@ trident-operator-766f7b8658-ldzsv          1/1     Running   0           3m
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 26.02.0        | 26.02.0        |
+| 26.06.0        | 26.06.0        |
 +----------------+----------------+
 ----

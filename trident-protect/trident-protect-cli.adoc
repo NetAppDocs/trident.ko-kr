@@ -18,6 +18,7 @@ Trident Protect 명령줄 플러그인을 사용할 수 있습니다. 이 플러
 
 
 
+[[install-the-trident-protect-cli-plugin]]
 == Trident Protect CLI 플러그인을 설치하세요
 
 명령줄 유틸리티를 사용하기 전에 클러스터에 액세스하는 데 사용하는 시스템에 설치해야 합니다. 컴퓨터에서 x64 또는 ARM CPU를 사용하는지 여부에 따라 다음 단계를 수행합니다.
@@ -31,7 +32,7 @@ Trident Protect 명령줄 플러그인을 사용할 수 있습니다. 이 플러
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-linux-amd64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-linux-amd64
 ----
 
 
@@ -43,7 +44,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-linux-arm64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-linux-arm64
 ----
 
 
@@ -55,7 +56,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-macos-amd64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-macos-amd64
 ----
 
 
@@ -67,7 +68,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-macos-arm64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-macos-arm64
 ----
 
 
@@ -98,6 +99,7 @@ NOTE: PATH 변수의 위치에 플러그인을 복사하면 또는 `tridentctl p
 
 
 
+[[view-trident-cli-plugin-help]]
 == Trident CLI 플러그인 도움말을 봅니다
 
 내장 플러그인 도움말 기능을 사용하여 플러그인 기능에 대한 자세한 도움말을 얻을 수 있습니다.
@@ -113,6 +115,7 @@ tridentctl-protect help
 
 
 
+[[enable-command-auto-completion]]
 == 명령 자동 완성 활성화
 
 Trident Protect CLI 플러그인을 설치한 후 특정 명령에 대한 자동 완성을 활성화할 수 있습니다.

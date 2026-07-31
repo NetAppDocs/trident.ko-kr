@@ -16,6 +16,7 @@ Trident for Docker를 사용 중인 볼륨에 영향을 주지 않고 안전하�
 
 
 
+[[upgrade]]
 == 업그레이드
 
 Trident for Docker를 업그레이드하려면 아래 단계를 수행하십시오.
@@ -77,6 +78,7 @@ IMPORTANT: 이전 버전의 Trident(20.10 이전)에서 Trident 20.10 이상으�
 
 
 
+[[uninstall]]
 == 설치 제거
 
 Trident for Docker를 제거하려면 아래 단계를 수행하십시오.

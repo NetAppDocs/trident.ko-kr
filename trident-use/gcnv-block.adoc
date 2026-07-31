@@ -19,6 +19,7 @@ NOTE:  `google-cloud-netapp-volumes-san` 백엔드는 iSCSI 블록 볼륨을 프
 
 
 
+[[overview]]
 == 개요
 
 Trident는  `google-cloud-netapp-volumes-san` 드라이버를 사용하여 Google Cloud NetApp Volumes SAN(iSCSI) 워크로드를 지원합니다.
@@ -35,6 +36,7 @@ SAN 볼륨은 Flex Unified 스토리지 풀에서 프로비저닝되어 iSCSI �
 
 
 
+[[flex-unified-storage-pools]]
 == Flex Unified 스토리지 풀
 
 Flex Unified 스토리지 풀은 iSCSI 프로토콜을 사용하여 블록 스토리지를 제공하며 SAN 프로비저닝에 필요합니다.
@@ -46,6 +48,7 @@ Flex Unified 스토리지 풀은 iSCSI 프로토콜을 사용하여 블록 스�
 
 
 
+[[configure-a-trident-san-backend]]
 == Trident SAN 백엔드를 구성합니다
 
 [source, yaml]
@@ -70,6 +73,7 @@ spec:
 ----
 
 
+[[create-a-storageclass]]
 == StorageClass 생성
 
 SAN 백엔드를 구성한 후 `google-cloud-netapp-volumes-san` 드라이버를 참조하는 StorageClass를 생성합니다.
@@ -100,10 +104,12 @@ NOTE: SAN 드라이버는 Flex 서비스 레벨만 지원하며 `exportRule`, `u
 
 
 
+[[provision-block-volumes]]
 == 블록 볼륨 프로비저닝
 
 
 
+[[readwriteonce-rwo]]
 === ReadWriteOnce(RWO)
 
 [source, yaml]
@@ -122,6 +128,7 @@ spec:
 ----
 
 
+[[readwriteoncepod-rwop]]
 === ReadWriteOncePod(RWOP)
 
 [source, yaml]
@@ -140,6 +147,7 @@ spec:
 ----
 
 
+[[readonlymany-rox]]
 === ReadOnlyMany (ROX)
 
 ROX에서 흔히 사용되는 패턴은 기존 ReadWriteOnce 볼륨을 복제하고 복제본을 읽기 전용으로 마운트하는 것입니다.
@@ -163,6 +171,7 @@ spec:
 ----
 
 
+[[readwritemany-rwx-raw-block-only]]
 === ReadWriteMany (RWX) — 원시 블록 전용
 
 ReadWriteMany는 `volumeMode: Block`인 경우에만 지원됩니다.
@@ -184,6 +193,7 @@ spec:
 ----
 
 
+[[block-volume-behavior]]
 == 블록 볼륨 동작
 
 블록 볼륨은 iSCSI LUN으로 프로비저닝되고 Kubernetes 노드에 블록 디바이스로 제공됩니다.
@@ -198,6 +208,7 @@ spec:
 
 
 
+[[access-modes]]
 == 액세스 모드
 
 Trident에서 프로비저닝한 블록 볼륨은 다음과 같은 액세스 모드를 지원합니다.
@@ -210,6 +221,7 @@ Trident에서 프로비저닝한 블록 볼륨은 다음과 같은 액세스 모
 
 
 
+[[volumemode-behavior]]
 == volumeMode 동작
 
  `volumeMode` 필드는 블록 볼륨이 노출되는 방식을 제어합니다.
@@ -220,6 +232,7 @@ Trident에서 프로비저닝한 블록 볼륨은 다음과 같은 액세스 모
 
 
 
+[[supported-operations]]
 == 지원되는 작업
 
  `google-cloud-netapp-volumes-san` 드라이버를 사용하여 프로비저닝된 블록 볼륨은 다음을 지원합니다:
@@ -234,6 +247,7 @@ Trident에서 프로비저닝한 블록 볼륨은 다음과 같은 액세스 모
 
 
 
+[[extra-gib-overprovisioning-behavior]]
 == 추가 GiB 오버프로비저닝 동작
 
 Google Cloud NetApp Volumes 블록 볼륨에는 내부 메타데이터 오버헤드가 포함됩니다. 이 오버헤드로 인해 커널에서 인식되는 장치 크기가 프로비저닝된 용량보다 작아집니다.
@@ -259,10 +273,12 @@ Google Cloud NetApp Volumes는 GiB 단위의 할당만 허용하므로 Trident�
 
 
 
+[[pod-examples]]
 == Pod 예
 
 
 
+[[filesystem-mounted-block-volume-rwo]]
 === 파일 시스템 마운트 블록 볼륨(RWO)
 
 [source, yaml]
@@ -286,6 +302,7 @@ spec:
 ----
 
 
+[[raw-block-device-rwx]]
 === 원시 블록 디바이스(RWX)
 
 [source, yaml]
@@ -309,6 +326,7 @@ spec:
 ----
 
 
+[[attach-and-mount-behavior]]
 == 연결 및 마운트 동작
 
 Google Cloud NetApp Volumes에서 프로비저닝된 SAN 볼륨의 경우:

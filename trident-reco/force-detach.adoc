@@ -16,6 +16,7 @@ Trident의 강제 분리 기능을 사용하면 Kubernetes 클러스터에서 �
 
 
 
+[[details-about-force-detach]]
 == 강제 분리에 대한 세부 정보
 
 강제 분리가 가능합니다. `ontap-san` , `ontap-san-economy` , `ontap-nas` , 그리고 `ontap-nas-economy` 오직. 강제 분리를 활성화하기 전에 Kubernetes 클러스터에서 비정상적 노드 종료(NGNS)를 활성화해야 합니다. NGNS는 Kubernetes 1.28 이상에서 기본적으로 활성화되어 있습니다. 자세한 내용은 다음을 참조하세요. link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubernetes: 노드 정상 종료 아님"^] .
@@ -44,12 +45,14 @@ NOTE: Trident 컨트롤러는 Trident 노드 포드에 의해 노드가 다시 �
 
 
 
+[[details-about-automated-failover]]
 == 자동 장애 조치에 대한 세부 정보
 
 통합을 통해 강제 분리 프로세스를 자동화할 수 있습니다.link:https://github.com/medik8s/node-healthcheck-operator["노드 상태 점검(NHC) 운영자"^] . 노드 장애가 발생하면 NHC는 Trident 노드 복구(TNR)를 트리거하고 Trident의 네임스페이스에 장애가 발생한 노드를 정의하는 TridentNodeRemediation CR을 생성하여 자동으로 강제 분리합니다. TNR은 노드 장애가 발생한 경우에만 생성되며, 노드가 다시 온라인 상태가 되거나 노드가 삭제되면 NHC에서 제거됩니다.
 
 
 
+[[failed-node-pod-removal-process]]
 === 실패한 노드 포드 제거 프로세스
 
 자동 장애 조치는 실패한 노드에서 제거할 작업 부하를 선택합니다. TNR이 생성되면 TNR 컨트롤러는 노드를 더티로 표시하여 새로운 볼륨 게시를 방지하고 강제 분리가 지원되는 포드와 해당 볼륨 첨부 파일을 제거하기 시작합니다.
@@ -88,6 +91,7 @@ Pod 제거 동작은 Pod 주석을 사용하여 사용자 정의할 수 있습�
 ====
 
 
+[[tridentnoderemediation-cr]]
 === 트라이던트노드복구 CR
 
 TridentNodeRemediation(TNR) CR은 실패한 노드를 정의합니다. TNR의 이름은 실패한 노드의 이름입니다.
@@ -135,6 +139,7 @@ TNR은 다음 상태 중 하나에 속할 수 있습니다.
 
 
 
+[[enabling-automated-failover]]
 === 자동 장애 조치 활성화
 
 *필수 조건*:
@@ -198,6 +203,7 @@ spec:
 
 
 
+[[additional-setup-information]]
 === 추가 설정 정보
 
 Trident 강제 분리가 활성화된 상태로 설치하면 NHC와의 통합을 용이하게 하기 위해 Trident 네임스페이스에 두 개의 추가 리소스인 TridentNodeRemediationTemplate(TNRT)과 ClusterRole이 자동으로 생성됩니다.
@@ -246,6 +252,7 @@ rules:
 ----
 
 
+[[k8s-cluster-upgrades-and-maintenance]]
 === K8s 클러스터 업그레이드 및 유지 관리
 
 장애 조치를 방지하려면 노드가 다운되거나 재부팅될 것으로 예상되는 K8s 유지 관리 또는 업그레이드 중에 자동 장애 조치를 일시 중지합니다. 위에 설명된 NHC CR을 일시 중지하려면 CR을 패치하면 됩니다.
@@ -256,6 +263,7 @@ rules:
 
 
 
+[[limitations]]
 === 제한 사항
 
 * 강제 분리가 지원되는 볼륨의 경우 실패한 노드에서만 I/O 작업이 방지됩니다. 강제 분리를 지원하는 볼륨/PVC를 사용하는 포드만 자동으로 제거됩니다.
@@ -264,6 +272,7 @@ rules:
 
 
 
+[[integrating-custom-node-health-check-solutions]]
 === 사용자 정의 노드 상태 점검 솔루션 통합
 
 Node Healthcheck Operator를 대체 노드 장애 감지 도구로 교체하여 자동 장애 조치를 트리거할 수 있습니다. 자동 장애 조치 메커니즘과의 호환성을 보장하려면 사용자 지정 솔루션이 다음을 수행해야 합니다.

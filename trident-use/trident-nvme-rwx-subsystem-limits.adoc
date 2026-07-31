@@ -16,6 +16,7 @@ ReadWriteMany(RWX) 볼륨은 NVMe 프로토콜을 사용하며 볼륨당 64개 �
 
 
 
+[[understand-the-64-node-limit]]
 == 64개 노드 제한 이해
 
 NVMe 프로토콜과 함께 ReadWriteMany(RWX) 볼륨을 사용하려는 경우, 단일 RWX NVMe 볼륨은 Kubernetes 클러스터에서 64개 이상의 노드에 마운트할 수 없습니다.
@@ -26,10 +27,12 @@ NVMe 프로토콜과 함께 ReadWriteMany(RWX) 볼륨을 사용하려는 경우,
 
 
 
+[[understand-nvme-subsystem-models]]
 == NVMe 하위 시스템 모델 이해
 
 
 
+[[per-volume-subsystem-model-trident-releases-earlier-than-26-02]]
 === 볼륨별 하위 시스템 모델(Trident 26.02 이전 릴리스)
 
 Trident 26.02 이전 릴리스에서는 RWX NVMe 볼륨이 볼륨별 서브시스템 모델을 사용하여 프로비저닝됩니다. 각 RWX NVMe 볼륨은 ONTAP의 자체 전용 NVMe 서브시스템에 매핑됩니다.
@@ -38,6 +41,7 @@ Trident 26.02 이전 릴리스에서는 RWX NVMe 볼륨이 볼륨별 서브시�
 
 
 
+[[super-subsystem-model-introduced-in-trident-26-02]]
 === 슈퍼 서브시스템 모델(Trident 26.02에서 도입)
 
 Trident 26.02부터 RWX NVMe 볼륨은 공유 슈퍼 서브시스템 모델을 사용합니다. 여러 RWX NVMe 볼륨이 동일한 NVMe 서브시스템을 공유합니다.
@@ -48,6 +52,7 @@ Trident 26.02부터 RWX NVMe 볼륨은 공유 슈퍼 서브시스템 모델을 �
 
 
 
+[[identify-error-symptoms]]
 == 오류 증상 파악
 
 대규모로 RWX NVMe 볼륨을 생성하거나 연결하는 경우 다음과 유사한 오류가 발생할 수 있습니다.
@@ -60,12 +65,14 @@ Maximum number of controllers reached. No more controllers can be created.
 
 
 
+[[resolve-subsystem-limit-errors]]
 == 하위 시스템 제한 오류 해결
 
 볼륨별 하위 시스템 제한을 넘어 슈퍼 하위 시스템 모델을 활용하려면 Trident 26.02 이상으로 업그레이드하십시오.
 
 
 
+[[upgrade-trident-to-apply-the-super-subsystem-model]]
 == Trident를 업그레이드하여 슈퍼 서브시스템 모델을 적용합니다
 
 RWX NVMe 볼륨에 슈퍼 서브시스템 모델을 적용하려면 다음을 수행합니다.

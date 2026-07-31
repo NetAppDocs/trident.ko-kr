@@ -16,6 +16,7 @@ Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저�
 
 
 
+[[selecting-the-right-tools]]
 == 올바른 도구 선택
 
 드라이버 조합을 사용하는 경우 드라이버에 필요한 모든 도구를 설치해야 합니다. 최신 버전의 Red Hat Enterprise Linux CoreOS(RHCOS)에는 기본적으로 도구가 설치되어 있습니다.
@@ -44,6 +45,7 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#pre
 
 
 
+[[node-service-discovery]]
 == 노드 서비스 검색
 
 Trident는 노드에서 iSCSI 또는 NFS 서비스를 실행할 수 있는지 여부를 자동으로 감지합니다.
@@ -67,6 +69,7 @@ tridentctl get node -o wide -n <Trident namespace>
 ----
 
 
+[[nfs-volumes]]
 == NFS 볼륨
 
 운영 체제의 명령을 사용하여 NFS 툴을 설치합니다. 부팅 중에 NFS 서비스가 시작되었는지 확인합니다.
@@ -93,12 +96,14 @@ WARNING: 볼륨에 연결할 때 오류가 발생하지 않도록 NFS 툴을 설
 
 
 
+[[iscsi-volumes]]
 == iSCSI 볼륨
 
 Trident는 자동으로 iSCSI 세션을 설정하고, LUN을 스캔하고, 다중 경로 장치를 검색하고, 포맷하고, Pod에 마운트할 수 있습니다.
 
 
 
+[[iscsi-self-healing-capabilities]]
 === iSCSI 자동 복구 기능
 
 ONTAP 시스템의 경우 Trident는 5분마다 iSCSI 자동 복구를 실행하여 다음을 수행합니다.
@@ -131,6 +136,7 @@ NOTE: 예를 들어, 스토리지 컨트롤러에서 CHAP 암호를 회전시키
 
 
 
+[[install-the-iscsi-tools]]
 === iSCSI 도구를 설치합니다
 
 운영 체제의 명령을 사용하여 iSCSI 도구를 설치합니다.
@@ -249,6 +255,7 @@ NOTE: Ubuntu 18.04의 경우 iSCSI 데몬이 시작되도록 "open-iscsi"를 시
 ====
 
 
+[[configure-or-disable-iscsi-self-healing]]
 === iSCSI 자동 복구를 구성하거나 사용하지 않도록 설정합니다
 
 다음 Trident iSCSI 자동 복구 설정을 구성하여 오래된 세션을 수정할 수 있습니다.
@@ -291,6 +298,7 @@ tridentctl install --iscsi-self-healing-interval=3m0s --iscsi-self-healing-wait-
 ====
 
 
+[[nvmetcp-volumes]]
 == NVMe/TCP 볼륨
 
 운영 체제의 명령을 사용하여 NVMe 툴을 설치합니다.
@@ -325,6 +333,7 @@ sudo modprobe nvme-tcp
 ====
 
 
+[[verify-installation]]
 === 설치를 확인합니다
 
 설치 후 명령을 사용하여 Kubernetes 클러스터의 각 노드에 고유한 NQN이 있는지 확인합니다.
@@ -338,12 +347,14 @@ WARNING: Trident는 이 값을 수정하여 `ctrl_device_tmo` NVMe가 다운될 
 
 
 
+[[scsi-over-fc-volumes]]
 == FC 볼륨을 통한 SCSI
 
 이제 Trident와 함께 파이버 채널(FC) 프로토콜을 사용하여 ONTAP 시스템에서 스토리지 리소스를 프로비저닝하고 관리할 수 있습니다.
 
 
 
+[[prerequisites]]
 === 필수 구성 요소
 
 FC에 필요한 네트워크 및 노드 설정을 구성합니다.
@@ -373,6 +384,7 @@ FC에 필요한 네트워크 및 노드 설정을 구성합니다.
 
 
 
+[[install-the-fc-tools]]
 === FC 툴을 설치합니다
 
 운영 체제의 명령을 사용하여 FC 툴을 설치합니다.
@@ -446,6 +458,7 @@ sudo systemctl status multipath-tools
 ====
 
 
+[[prepare-to-provision-smb-volumes]]
 == SMB 볼륨 프로비저닝을 위한 준비
 
 다음을 사용하여 SMB 볼륨을 프로비저닝할 수 있습니다. `ontap-nas` 운전자.

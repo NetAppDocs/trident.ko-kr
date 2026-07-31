@@ -16,6 +16,7 @@ summary: 가상 풀은 Trident의 스토리지 백엔드와 Kubernetes의 Storag
 
 
 
+[[learn-about-virtual-pools]]
 == 가상 풀에 대해 알아보십시오
 
 스토리지 관리자는 Trident 백엔드의 가상 풀을 JSON 또는 YAML 정의 파일로 정의할 수 있습니다.

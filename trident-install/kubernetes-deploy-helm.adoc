@@ -16,6 +16,7 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 
 
 
+[[critical-information-about-trident-25-10]]
 == Trident 25.10에 대한 중요 정보
 
 *Trident에 대한 다음 중요 정보를 읽어야 합니다.*
@@ -36,6 +37,7 @@ Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치할 수 
 ====
 
 
+[[deploy-the-trident-operator-and-install-trident-using-helm]]
 == Trident 연산자를 배포하고 Helm을 사용하여 Trident를 설치합니다
 
 Trident 사용 link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm 차트"^] Trident 연산자를 구축하고 Trident를 한 번에 설치할 수 있습니다.
@@ -68,6 +70,7 @@ NOTE: Trident에 대한 네임스페이스를 이미 만든 경우에는 '--crea
 
 
 
+[[pass-configuration-data-during-install]]
 == 설치 중에 구성 데이터를 전달합니다
 
 설치 중에 구성 데이터를 전달하는 방법에는 두 가지가 있습니다.
@@ -94,6 +97,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2602.0  --crea
 ----
 
 
+[[configuration-options]]
 == 구성 옵션
 
 이 표와 `values.yaml` 제어 차트의 일부인 파일 에는 키 목록과 해당 기본값이 나와 있습니다.
@@ -380,6 +384,7 @@ Trident 컨트롤러에 대한 호스트 네트워킹을 활성화합니다. 이
 |===
 
 
+[[understanding-controller-pods-and-node-pods]]
 === 컨트롤러 Pod 및 노드 포드 이해
 
 Trident는 단일 컨트롤러 Pod와 클러스터의 각 작업자 노드에서 노드 Pod로 실행됩니다. 노드 포드는 Trident 볼륨을 마운트하려는 호스트에서 실행되고 있어야 합니다.

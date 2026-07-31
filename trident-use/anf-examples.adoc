@@ -16,6 +16,7 @@ Azure NetApp Files에 대한 NFS 및 SMB 백엔드 구성 옵션에 대해 알�
 
 
 
+[[backend-configuration-options]]
 == 백엔드 구성 옵션
 
 Trident는 백엔드 구성(서브넷, 가상 네트워크, 서비스 수준, 위치)을 사용하여 요청된 위치에서 사용 가능하고 요청된 서비스 수준 및 서브넷과 일치하는 용량 풀에 Azure NetApp Files 볼륨을 생성합니다.
@@ -107,9 +108,10 @@ NOTE: 네트워크 기능에 대한 자세한 내용은 을 참조하십시오 l
 
 
 
-== Azure 클라우드 환경 고려(26.02)
+[[consider-azure-cloud-environments-26-06]]
+== Azure 클라우드 환경 고려(26.06)
 
-26.02 릴리스부터 Trident는 여러 Azure 클라우드 환경에서 Azure NetApp Files 백엔드를 생성하고 관리하는 것을 지원합니다.
+26.06 릴리스부터 Trident는 여러 Azure 클라우드 환경에서 Azure NetApp Files 백엔드를 생성하고 관리하는 것을 지원합니다.
 
 지원되는 Azure 클라우드는 다음과 같습니다.
 
@@ -121,6 +123,7 @@ Trident를 배포하거나 Azure NetApp Files 백엔드를 생성할 때 Azure R
 
 
 
+[[required-permissions-and-resources]]
 === 필요한 권한 및 리소스
 
 PVC를 생성할 때 "No capacity pools found" 오류가 발생하는 경우, 앱 등록에 필요한 권한 및 리소스(서브넷, 가상 네트워크, 용량 풀)가 연결되어 있지 않을 가능성이 높습니다. 디버그 모드가 활성화된 경우, Trident는 백엔드 생성 시 검색된 Azure 리소스를 로그에 기록합니다. 적절한 역할이 사용되고 있는지 확인하십시오.
@@ -153,6 +156,7 @@ NOTE: vNet이 Azure NetApp Files (ANF) 스토리지 계정과 다른 리소스 �
 |===
 
 
+[[volume-provisioning]]
 === 볼륨 프로비저닝
 
 구성 파일의 특수 섹션에서 다음 옵션을 지정하여 기본 볼륨 프로비저닝을 제어할 수 있습니다. 자세한 내용은 <<예제 설정>>를 참조하십시오.
@@ -176,6 +180,7 @@ NOTE: vNet이 Azure NetApp Files (ANF) 스토리지 계정과 다른 리소스 �
 |===
 
 
+[[example-configurations]]
 == 예제 설정
 
 다음 예시들은 대부분의 매개변수를 기본값으로 유지하는 기본 구성을 보여줍니다. 이것이 백엔드를 정의하는 가장 쉬운 방법입니다.
@@ -415,12 +420,14 @@ supportedTopologies:
 ====
 
 
+[[storage-class-definitions]]
 == 스토리지 클래스 정의
 
 다음 사항을 참조하십시오 `StorageClass` 정의는 위의 스토리지 풀을 참조합니다.
 
 
 
+[[example-definitions-using-parameter-selector-field]]
 === 을 사용한 정의 예 `parameter.selector` 필드에 입력합니다
 
  `parameter.selector`을 사용하면 각 `StorageClass`에 대해 볼륨을 호스팅하는 데 사용되는 가상 풀을 지정할 수 있습니다. 볼륨은 선택한 풀에 정의된 속성을 갖게 됩니다.
@@ -459,6 +466,7 @@ allowVolumeExpansion: true
 ----
 
 
+[[example-definitions-for-smb-volumes]]
 === SMB 볼륨에 대한 정의의 예
 
  `nasType`,  `node-stage-secret-name` 및  `node-stage-secret-namespace`를 사용하면 SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다.
@@ -520,6 +528,7 @@ NOTE: `nasType: smb` SMB 볼륨을 지원하는 풀에 대한 필터입니다.
 
 
 
+[[create-the-backend]]
 == 백엔드를 생성합니다
 
 백엔드 구성 파일을 생성한 후 다음 명령을 실행합니다.

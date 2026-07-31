@@ -16,6 +16,7 @@ Google Cloud NetApp 볼륨의 백엔드 구성 옵션에 대해 알아보고 구
 
 
 
+[[backend-configuration-options]]
 == 백엔드 구성 옵션
 
 각 백엔드는 단일 Google Cloud 지역에 볼륨을 프로비저닝합니다. 다른 영역에 볼륨을 생성하려면 추가 백엔드를 정의할 수 있습니다.
@@ -74,6 +75,7 @@ Google Cloud NetApp 볼륨의 백엔드 구성 옵션에 대해 알아보고 구
 |===
 
 
+[[volume-provisioning-options]]
 == 볼륨 프로비저닝 옵션
 
 에서 기본 볼륨 프로비저닝을 제어할 수 있습니다 `defaults` 구성 파일의 섹션입니다.
@@ -96,6 +98,7 @@ Google Cloud NetApp 볼륨의 백엔드 구성 옵션에 대해 알아보고 구
 |===
 
 
+[[example-configurations]]
 == 예제 설정
 
 다음 예에서는 대부분의 매개 변수를 기본값으로 두는 기본 구성을 보여 줍니다. 이는 백엔드를 정의하는 가장 쉬운 방법입니다.
@@ -354,6 +357,7 @@ supportedTopologies:
 ====
 
 
+[[whats-next]]
 == 다음 단계
 
 백엔드 구성 파일을 생성한 후 다음 명령을 실행합니다.
@@ -381,6 +385,7 @@ tridentctl logs
 
 
 
+[[storage-class-definitions]]
 == 스토리지 클래스 정의
 
 다음은 위의 백엔드를 참조하는 기본 `StorageClass` 정의입니다.
@@ -434,6 +439,7 @@ parameters:
 
 
 
+[[example-definitions-for-smb-volumes]]
 === SMB 볼륨에 대한 정의의 예
 
  `node-stage-secret-name`, 및 를 사용하여 `nasType` `node-stage-secret-namespace` SMB 볼륨을 지정하고 필요한 Active Directory 자격 증명을 제공할 수 있습니다. 사용 권한이 있거나 없는 모든 Active Directory 사용자/암호는 노드 단계 비밀에 사용할 수 있습니다.
@@ -494,6 +500,7 @@ NOTE: `nasType: smb` SMB 볼륨을 지원하는 풀에 대한 필터입니다. `
 
 
 
+[[pvc-definition-example]]
 === PVC 정의 예
 
 [source, yaml]

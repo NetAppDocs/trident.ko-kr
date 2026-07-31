@@ -35,12 +35,14 @@ RBAC가 리소스 및 네임스페이스에 대한 액세스를 규제하는 방
 
 
 
+[[example-manage-access-for-two-groups-of-users]]
 == 예: 두 사용자 그룹에 대한 액세스를 관리합니다
 
 예를 들어, 조직에는 클러스터 관리자, 엔지니어링 사용자 그룹 및 마케팅 사용자 그룹이 있습니다. 클러스터 관리자는 엔지니어링 그룹과 마케팅 그룹이 각각 해당 네임스페이스에 할당된 리소스에만 액세스할 수 있는 환경을 만들기 위해 다음 작업을 완료합니다.
 
 
 
+[[step-1-create-a-namespace-to-contain-resources-for-each-group]]
 === 1단계: 각 그룹의 리소스를 포함할 네임스페이스를 만듭니다
 
 네임스페이스를 만들면 리소스를 논리적으로 분리하고 해당 리소스에 액세스할 수 있는 사용자를 보다 효율적으로 제어할 수 있습니다.
@@ -62,6 +64,7 @@ kubectl create ns marketing-ns
 
 
 
+[[step-2-create-new-service-accounts-to-interact-with-resources-in-each-namespace]]
 === 2단계: 각 네임스페이스의 리소스와 상호 작용할 새 서비스 계정을 만듭니다
 
 새로 만드는 각 네임스페이스에는 기본 서비스 계정이 함께 제공되지만, 나중에 필요한 경우 그룹 간에 Privileges를 추가로 나눌 수 있도록 각 사용자 그룹에 대한 서비스 계정을 만들어야 합니다.
@@ -91,6 +94,7 @@ metadata:
 
 
 
+[[step-3-create-a-secret-for-each-new-service-account]]
 === 3단계: 각 새 서비스 계정에 대한 암호를 만듭니다
 
 서비스 계정 암호는 서비스 계정을 인증하는 데 사용되며, 손상된 경우 쉽게 삭제하고 다시 만들 수 있습니다.
@@ -126,6 +130,7 @@ type: kubernetes.io/service-account-token
 
 
 
+[[step-4-create-a-rolebinding-object-to-bind-the-clusterrole-object-to-each-new-service-account]]
 === 4단계: RoleBinding 개체를 만들어 ClusterRole 개체를 각 새 서비스 계정에 바인딩합니다
 
 Trident Protect를 설치하면 기본 ClusterRole 개체가 생성됩니다. RoleBinding 객체를 생성하고 적용하여 이 ClusterRole을 서비스 계정에 바인딩할 수 있습니다.
@@ -171,6 +176,7 @@ subjects:
 
 
 
+[[step-5-test-permissions]]
 === 5단계: 권한을 테스트합니다
 
 권한이 올바른지 테스트합니다.
@@ -192,6 +198,7 @@ kubectl auth can-i --as=system:serviceaccount:engineering-ns:eng-user get applic
 
 
 
+[[step-6-grant-access-to-appvault-objects]]
 === 6단계: AppVault 객체에 대한 액세스 권한 부여
 
 백업 및 스냅샷과 같은 데이터 관리 작업을 수행하려면 클러스터 관리자가 개별 사용자에게 AppVault 개체에 대한 액세스 권한을 부여해야 합니다.

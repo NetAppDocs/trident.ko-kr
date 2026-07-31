@@ -16,6 +16,7 @@ summary: 기존 스토리지 클래스를 보고, 기본 스토리지 클래스�
 
 
 
+[[view-the-existing-storage-classes]]
 == 기존 스토리지 클래스를 봅니다
 
 * 기존 Kubernetes 스토리지 클래스를 보려면 다음 명령을 실행합니다.
@@ -48,6 +49,7 @@ tridentctl get storageclass <storage-class> -o json
 ----
 
 
+[[set-a-default-storage-class]]
 == 기본 스토리지 클래스를 설정합니다
 
 Kubernetes 1.6에는 기본 스토리지 클래스를 설정하는 기능이 추가되었습니다. 사용자가 영구 볼륨 클레임(PVC)에 영구 볼륨을 지정하지 않는 경우 영구 볼륨을 프로비저닝하는 데 사용되는 스토리지 클래스입니다.
@@ -74,6 +76,7 @@ NOTE: 클러스터에는 한 번에 하나의 기본 스토리지 클래스만 �
 
 
 
+[[identify-the-backend-for-a-storage-class]]
 == 스토리지 클래스에 대한 백엔드를 식별합니다
 
 다음은 Trident 백엔드 객체에 대해 출력하는 JSON으로 답변할 수 있는 질문의 `tridentctl` 예입니다. 이 `jq` 유틸리티는 먼저 설치해야 할 수 있는 유틸리티를 사용합니다.
@@ -84,6 +87,7 @@ tridentctl get storageclass -o json | jq  '[.items[] | {storageClass: .Config.na
 ----
 
 
+[[delete-a-storage-class]]
 == 스토리지 클래스를 삭제합니다
 
 Kubernetes에서 스토리지 클래스를 삭제하려면 다음 명령을 실행합니다.

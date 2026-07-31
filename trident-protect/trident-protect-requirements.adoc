@@ -18,6 +18,7 @@ summary: 운영 환경, 애플리케이션 클러스터, 애플리케이션 및 
 
 
 
+[[trident-protect-kubernetes-cluster-compatibility]]
 == Trident Protect Kubernetes 클러스터 호환성
 
 Trident Protect는 다음을 포함한 광범위한 완전 관리형 및 자체 관리형 Kubernetes 제품과 호환됩니다.
@@ -43,6 +44,7 @@ Trident Protect는 다음을 포함한 광범위한 완전 관리형 및 자체 
 ====
 
 
+[[trident-protect-storage-backend-compatibility]]
 == Trident Protect 스토리지 백엔드 호환성
 
 Trident Protect는 다음과 같은 스토리지 백엔드를 지원합니다.
@@ -66,6 +68,7 @@ Trident Protect는 다음과 같은 스토리지 백엔드를 지원합니다.
 
 
 
+[[requirements-for-nas-economy-volumes]]
 == NAS 경제 볼륨에 대한 요구 사항
 
 Trident Protect는 NAS 경제형 볼륨에 대한 백업 및 복원 작업을 지원합니다. 현재 NAS 경제 볼륨에 대한 스냅샷, 복제 및 SnapMirror 복제는 지원되지 않습니다.  Trident Protect와 함께 사용하려는 각 NAS-Economy 볼륨에 대해 스냅샷 디렉토리를 활성화해야 합니다.
@@ -90,6 +93,7 @@ NOTE: Trident 백엔드 구성 옵션을 로 `true` 설정하면 기본적으로
 
 
 
+[[protecting-data-with-kubevirt-vms]]
 == KubeVirt VM으로 데이터 보호
 
 Trident Protect는 데이터 보호 작업 중에 KubeVirt 가상 머신에 파일 시스템 동결 및 동결 해제 기능을 제공하여 데이터 일관성을 보장합니다.  VM 동결 작업에 대한 구성 방법과 기본 동작은 Trident Protect 버전마다 다르며, 최신 릴리스에서는 Helm 차트 매개변수를 통해 간소화된 구성을 제공합니다.
@@ -133,6 +137,7 @@ Trident Protect를 사용하여 애플리케이션을 정의하고 VM을 복원�
 
 
 
+[[requirements-for-snapmirror-replication]]
 == SnapMirror 복제에 대한 요구 사항
 
 NetApp SnapMirror 복제는 다음 ONTAP 솔루션에 대해 Trident Protect와 함께 사용할 수 있습니다.
@@ -145,6 +150,7 @@ NetApp SnapMirror 복제는 다음 ONTAP 솔루션에 대해 Trident Protect와 
 
 
 
+[[ontap-cluster-requirements-for-snapmirror-replication]]
 === SnapMirror 복제를 위한 ONTAP 클러스터 요구 사항
 
 SnapMirror 복제를 사용하려는 경우 ONTAP 클러스터가 다음 요구 사항을 충족하는지 확인하십시오.
@@ -169,6 +175,7 @@ NOTE: SnapMirror 비동기 보호만 지원됩니다.
 
 
 
+[[peering-considerations-for-snapmirror-replication]]
 === SnapMirror 복제에 대한 피어링 고려 사항
 
 스토리지 백엔드 피어링을 사용하려는 경우 환경이 다음 요구 사항을 충족하는지 확인하십시오.
@@ -184,12 +191,14 @@ NOTE: 두 ONTAP 클러스터 간의 복제 관계에 사용되는 SVM 이름이 
 
 
 
+[[trident-ontap-configuration-for-snapmirror-replication]]
 === SnapMirror 복제를 위한 Trident/ONTAP 구성
 
 Trident Protect를 사용하려면 소스 및 대상 클러스터 모두에 대한 복제를 지원하는 하나 이상의 스토리지 백엔드를 구성해야 합니다. 소스 및 대상 클러스터가 동일한 경우, 최상의 복원력을 위해 대상 애플리케이션은 소스 애플리케이션과 다른 스토리지 백엔드를 사용해야 합니다.
 
 
 
+[[kubernetes-cluster-requirements-for-snapmirror-replication]]
 === SnapMirror 복제를 위한 Kubernetes 클러스터 요구 사항
 
 Kubernetes 클러스터가 다음 요구 사항을 충족하는지 확인하세요.

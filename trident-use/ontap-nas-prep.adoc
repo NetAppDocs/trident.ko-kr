@@ -19,6 +19,7 @@ NOTE: 오직 `ontap-nas` 드라이버(NFS 프로토콜 포함)는 AFX 시스템�
 
 
 
+[[requirements]]
 == 요구 사항
 
 * 모든 ONTAP 백엔드의 경우 Trident에서는 최소한 하나의 집계가 SVM에 할당되어야 합니다.
@@ -29,6 +30,7 @@ NOTE: 오직 `ontap-nas` 드라이버(NFS 프로토콜 포함)는 AFX 시스템�
 
 
 
+[[authenticate-the-ontap-backend]]
 == ONTAP 백엔드를 인증합니다
 
 Trident는 ONTAP 백엔드를 인증하는 두 가지 모드를 제공합니다.
@@ -44,6 +46,7 @@ WARNING: 자격 증명과 인증서 * 를 모두 제공하려고 하면 구성 �
 
 
 
+[[enable-credential-based-authentication]]
 === 자격 증명 기반 인증을 사용합니다
 
 Trident은 ONTAP 백엔드와 통신하기 위해 SVM 범위/클러스터 범위 관리자에 대한 자격 증명이 필요합니다. 또는 `vsadmin` 과 같은 미리 정의된 표준 역할을 사용하는 것이 좋습니다 `admin`. 따라서 향후 Trident 릴리스에서 사용할 기능 API를 노출할 수 있는 향후 ONTAP 릴리즈와의 호환성이 보장됩니다. 사용자 지정 보안 로그인 역할을 만들어 Trident와 함께 사용할 수 있지만 권장하지는 않습니다.
@@ -89,6 +92,7 @@ credentials:
 
 
 
+[[enable-certificate-based-authentication]]
 === 인증서 기반 인증을 사용합니다
 
 신규 및 기존 백엔드는 인증서를 사용하여 ONTAP 백엔드와 통신할 수 있습니다. 백엔드 정의에는 세 가지 매개 변수가 필요합니다.
@@ -171,6 +175,7 @@ tridentctl update backend NasBackend -f cert-backend-updated.json -n trident
 
 
 
+[[update-authentication-methods-or-rotate-credentials]]
 === 인증 방법을 업데이트하거나 자격 증명을 회전합니다
 
 다른 인증 방법을 사용하거나 자격 증명을 회전하도록 기존 백엔드를 업데이트할 수 있습니다. 이렇게 하면 사용자 이름/암호를 사용하는 백엔드를 인증서를 사용하도록 업데이트할 수 있고 인증서를 사용하는 백엔드는 사용자 이름/암호 기반으로 업데이트할 수 있습니다. 이렇게 하려면 기존 인증 방법을 제거하고 새 인증 방법을 추가해야 합니다. 그런 다음 실행할 필수 매개 변수가 포함된 업데이트된 backend.json 파일을 사용합니다 `tridentctl update backend`.
@@ -210,6 +215,7 @@ NOTE: 암호를 회전할 때 스토리지 관리자는 먼저 ONTAP에서 사�
 
 
 
+[[create-custom-ontap-role-for-trident]]
 === Trident에 대한 사용자 지정 ONTAP 역할을 생성합니다
 
 Privileges에서 작업을 수행할 때 ONTAP 관리자 역할을 사용할 필요가 없도록 최소 Trident로 ONTAP 클러스터 역할을 생성할 수 있습니다. Trident 백엔드 구성에 사용자 이름을 포함하면 Trident은 사용자가 생성한 ONTAP 클러스터 역할을 사용하여 작업을 수행합니다.
@@ -269,6 +275,7 @@ SVM 레벨에서 사용자 지정 역할을 생성하려면 * 스토리지 > 스
 
 
 
+[[manage-nfs-export-policies]]
 == NFS 엑스포트 정책을 관리합니다
 
 Trident는 NFS 엑스포트 정책을 사용하여 프로비저닝한 볼륨에 대한 액세스를 제어합니다.
@@ -281,6 +288,7 @@ Trident는 내보내기 정책을 사용할 때 두 가지 옵션을 제공합�
 
 
 
+[[dynamically-manage-export-policies]]
 === 엑스포트 정책을 동적으로 관리
 
 Trident는 ONTAP 백엔드에 대한 엑스포트 정책을 동적으로 관리하는 기능을 제공합니다. 따라서 스토리지 관리자는 명시적 규칙을 수동으로 정의하는 대신 작업자 노드 IP에 허용되는 주소 공간을 지정할 수 있습니다. 엑스포트 정책 관리를 크게 간소화하므로, 엑스포트 정책을 수정하면 더 이상 스토리지 클러스터에 대한 수동 작업이 필요하지 않습니다. 또한 이렇게 하면 볼륨을 마운트하고 지정된 범위 내에서 IP를 갖는 작업자 노드만 스토리지 클러스터에 대한 액세스를 제한하여 세분화된 자동 관리를 지원합니다.
@@ -371,6 +379,7 @@ NOTE: 자동 관리되는 내보내기 정책이 있는 백엔드를 삭제하�
 
 
 
+[[prepare-to-provision-smb-volumes]]
 == SMB 볼륨 프로비저닝을 위한 준비
 
 준비를 조금만 더 하면 를 사용하여 SMB 볼륨을 프로비저닝할 수 있습니다 `ontap-nas` 드라이버.
@@ -448,6 +457,7 @@ NOTE: 을 참조하십시오 link:https://docs.netapp.com/us-en/ontap/smb-config
 
 
 
+[[enable-secure-smb]]
 === 보안 SMB 활성화
 
 25.06 릴리스부터 NetApp Trident는 다음을 사용하여 생성된 SMB 볼륨의 보안 프로비저닝을 지원합니다.  `ontap-nas` 그리고  `ontap-nas-economy` 백엔드. 보안 SMB가 활성화되면 액세스 제어 목록(ACL)을 사용하여 Active Directory(AD) 사용자 및 사용자 그룹의 SMB 공유에 대한 제어된 액세스를 제공할 수 있습니다.

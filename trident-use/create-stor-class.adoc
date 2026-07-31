@@ -16,6 +16,7 @@ Kubernetes StorageClass 개체를 구성하고 스토리지 클래스를 생성�
 
 
 
+[[configure-a-kubernetes-storageclass-object]]
 == Kubernetes StorageClass 개체를 구성합니다
 
 는 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubernetes StorageClass 객체"^] Trident를 해당 클래스에 사용되는 Provisioner로 식별하고 Trident에 볼륨 프로비저닝 방법을 지시합니다. 예를 들면 다음과 같습니다.
@@ -40,6 +41,7 @@ Trident에서 볼륨을 프로비저닝하는 방법을 제어하는 데 사용�
 
 
 
+[[create-a-storage-class]]
 == 스토리지 클래스를 생성합니다
 
 StorageClass 객체를 생성한 후 스토리지 클래스를 생성할 수 있습니다. <<보관 클래스 샘플>> 에는 사용하거나 수정할 수 있는 몇 가지 기본 샘플이 나와 있습니다.
@@ -96,6 +98,7 @@ basic-csi    csi.trident.netapp.io   15h
 ----
 
 
+[[storage-class-samples]]
 === 보관 클래스 샘플
 
 Trident가 https://github.com/NetApp/trident/tree/master/trident-installer/sample-input/storage-class-samples["특정 백엔드에 대한 간단한 스토리지 클래스 정의"^]제공합니다.

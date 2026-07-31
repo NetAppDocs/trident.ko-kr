@@ -16,6 +16,7 @@ summary: ' `tridentctl import` 또는 PVC 어노테이션을 사용하여 기존
 
 
 
+[[overview-and-considerations]]
 == 개요 및 고려 사항
 
 Trident로 볼륨을 가져올 수 있는 대상:
@@ -57,6 +58,7 @@ TIP: 이러한 옵션은 컨테이너화된 워크로드에 Kubernetes를 사용
 
 
 
+[[import-a-volume]]
 == 볼륨을 가져옵니다
 
  `tridentctl import`를 사용하거나 Trident 가져오기 주석이 포함된 PVC를 생성하여 볼륨을 가져올 수 있습니다.
@@ -152,12 +154,14 @@ Trident는 볼륨을 자동으로 가져와 PVC에 바인딩합니다.
 ====
 
 
+[[examples]]
 == 예
 
 지원되는 드라이버에 대한 다음 볼륨 가져오기 예를 검토하십시오.
 
 
 
+[[ontap-nas-and-ontap-nas-flexgroup]]
 === ONTAP NAS 및 ONTAP NAS FlexGroup를 지원합니다
 
 Trident는 및 `ontap-nas-flexgroup` 드라이버를 사용하여 볼륨 가져오기를 `ontap-nas` 지원합니다.
@@ -265,6 +269,7 @@ spec:
 ====
 
 
+[[import-qtrees]]
 === qtree 가져오기
 
 [NOTE]
@@ -327,6 +332,7 @@ FlexVol 볼륨 내보내기 정책을 업데이트하면 현재 마운트된 동
 ====
 
 
+[[ontap-san]]
 === ONTAP SAN
 
 Trident 다음을 사용하여 볼륨 가져오기를 지원합니다. `ontap-san` (iSCSI, NVMe/TCP 및 FC) 및 `ontap-san-economy` 운전자.
@@ -378,6 +384,7 @@ image:./san-import-igroup.png["iqn 및 클러스터 iqn에 매핑된 LUN 이미�
 ====
 
 
+[[ontap-san-economy-examples]]
 == ONTAP SAN-economy 예
 
 다음 예제는  `ontap-san-economy` 백엔드에 관리형 볼륨과 비관리형 볼륨을 가져오는 방법을 보여줍니다.
@@ -435,6 +442,7 @@ trident_lun_pool_xyz_randomstring/lun0
 ====
 
 
+[[element]]
 === 요소
 
 Trident는 드라이버를 사용하여 NetApp Element 소프트웨어 및 NetApp HCI 볼륨 가져오기를 `solidfire-san` 지원합니다.
@@ -456,6 +464,7 @@ tridentctl import volume element_default element-managed -f pvc-basic-import.yam
 ----
 
 
+[[azure-netapp-files]]
 === Azure NetApp Files
 
 Trident는 드라이버를 사용하여 볼륨 가져오기를 `azure-netapp-files` 지원합니다.
@@ -477,6 +486,7 @@ tridentctl import volume azurenetappfiles_40517 importvol1 -f <path-to-pvc-file>
 ----
 
 
+[[google-cloud-netapp-volumes]]
 === Google Cloud NetApp 볼륨
 
 Trident는 드라이버를 사용하여 볼륨 가져오기를 `google-cloud-netapp-volumes` 지원합니다.

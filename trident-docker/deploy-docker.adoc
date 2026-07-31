@@ -21,6 +21,7 @@ Trident의 여러 인스턴스를 동일한 호스트에서 동시에 실행할 
 
 
 
+[[docker-managed-plugin-method-version-1-1317-03-and-later]]
 == Docker 관리형 플러그인 방법(버전 1.13/17.03 이상)
 
 .시작하기 전에
@@ -121,6 +122,7 @@ docker volume rm firstVolume
 
 
 
+[[traditional-method-version-1-12-or-earlier]]
 == 기존 방법(버전 1.12 이하)
 
 .시작하기 전에
@@ -151,8 +153,8 @@ curl -fsSL https://get.docker.com/ | sh
 +
 [source, console]
 ----
-wget https://github.com/NetApp/trident/releases/download/10.0/trident-installer-26.02.0.tar.gz
-tar zxf trident-installer-26.02.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/10.0/trident-installer-26.06.0.tar.gz
+tar zxf trident-installer-26.06.0.tar.gz
 ----
 .. 용지함 경로의 위치로 이동:
 +
@@ -231,6 +233,7 @@ docker volume rm trident_2
 
 
 
+[[start-trident-at-system-startup]]
 == 시스템 시작 시 Trident를 시작합니다
 
 시스템 기반 시스템용 샘플 장치 파일은 에서 찾을 수 있습니다 `contrib/trident.service.example` Git repo에 있습니다. RHEL에서 파일을 사용하려면 다음을 수행하십시오.

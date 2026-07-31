@@ -21,6 +21,7 @@ NOTE: 데이터 보호 작업 중에 파일 시스템을 동결 및 동결 해�
 
 
 
+[[create-an-on-demand-snapshot]]
 == 필요 시 스냅샷을 생성합니다
 
 언제든지 주문형 스냅샷을 생성할 수 있습니다.
@@ -84,6 +85,7 @@ tridentctl-protect create snapshot <my_snapshot_name> --appvault <my_appvault_na
 ====
 
 
+[[create-an-on-demand-backup]]
 == 필요 시 백업을 생성합니다
 
 언제든지 앱을 백업할 수 있습니다.
@@ -168,6 +170,7 @@ tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --a
 ====
 
 
+[[supported-backup-annotations]]
 === 지원되는 백업 주석
 
 다음 표에서는 백업 CR을 만들 때 사용할 수 있는 주석을 설명합니다.
@@ -193,6 +196,7 @@ tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --a
 |===
 
 
+[[create-a-data-protection-schedule]]
 == 데이터 보호 스케줄을 생성합니다
 
 보호 정책은 정의된 일정에 따라 스냅샷, 백업 또는 둘 다를 생성하여 앱을 보호합니다.  매시간, 매일, 매주, 매월 스냅샷과 백업을 만들도록 선택할 수 있으며, 보관할 복사본 수를 지정할 수 있습니다.  full-backup-rule 주석을 사용하여 비증분 전체 백업을 예약할 수 있습니다.  기본적으로 모든 백업은 증분 백업입니다.  주기적으로 전체 백업을 수행하고 그 사이에 증분 백업을 수행하면 복원과 관련된 위험을 줄이는 데 도움이 됩니다.
@@ -378,6 +382,7 @@ NOTE: 그만큼 `--full-backup-rule` 해당 플래그는 시간별, 주별 또�
 ====
 
 
+[[supported-schedule-annotations]]
 === 지원되는 일정 주석
 
 다음 표에서는 일정 CR을 만들 때 사용할 수 있는 주석을 설명합니다.
@@ -403,6 +408,7 @@ NOTE: 그만큼 `--full-backup-rule` 해당 플래그는 시간별, 주별 또�
 |===
 
 
+[[delete-a-snapshot]]
 == 스냅샷을 삭제합니다
 
 더 이상 필요하지 않은 예약된 스냅샷 또는 주문형 스냅샷을 삭제합니다.
@@ -418,6 +424,7 @@ kubectl delete snapshot <snapshot_name> -n my-app-namespace
 
 
 
+[[delete-a-backup]]
 == 백업을 삭제합니다
 
 더 이상 필요하지 않은 예약된 백업 또는 필요 시 백업을 삭제합니다.
@@ -436,6 +443,7 @@ kubectl delete backup <backup_name> -n my-app-namespace
 
 
 
+[[check-the-status-of-a-backup-operation]]
 == 백업 작업의 상태를 확인합니다
 
 명령줄을 사용하여 진행 중이거나, 완료되었거나, 실패한 백업 작업의 상태를 확인할 수 있습니다.
@@ -451,6 +459,7 @@ kubectl get backup -n <namespace_name> <my_backup_cr_name> -o jsonpath='{.status
 
 
 
+[[enable-backup-and-restore-for-azure-netapp-files-anf-operations]]
 == Azure-NetApp-files(ANF) 작업을 위한 백업 및 복원이 가능합니다
 
 Trident Protect를 설치한 경우 azure-netapp-files 스토리지 클래스를 사용하고 Trident 24.06 이전에 생성된 스토리지 백엔드에 대해 공간 효율적인 백업 및 복원 기능을 활성화할 수 있습니다. 이 기능은 NFSv4 볼륨에서 작동하며 용량 풀에서 추가 공간을 소모하지 않습니다.

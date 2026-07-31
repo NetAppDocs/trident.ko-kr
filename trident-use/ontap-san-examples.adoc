@@ -19,6 +19,7 @@ NOTE: 오직 `ontap-san` 드라이버(iSCSI, NVMe/TCP 및 FC 프로토콜 포함
 
 
 
+[[backend-configuration-options]]
 == 백엔드 구성 옵션
 
 백엔드 구성 옵션은 다음 표를 참조하십시오.
@@ -158,6 +159,7 @@ NOTE: NVMe는 ONTAP REST API에서만 지원되며 ONTAPI(ZAPI)에서는 지원�
 |===
 
 
+[[recommendations-for-using-formatoptions]]
 === 포맷옵션 사용에 대한 권장 사항
 
 Trident 포맷 과정을 신속하게 진행하기 위해 다음 옵션을 권장합니다.
@@ -168,6 +170,7 @@ Trident 포맷 과정을 신속하게 진행하기 위해 다음 옵션을 권�
 
 
 
+[[authenticate-trident-to-a-backend-svm-using-active-directory-credentials]]
 === Active Directory 자격 증명을 사용하여 백엔드 SVM에 Trident 인증
 
 Active Directory(AD) 자격 증명을 사용하여 백엔드 SVM에 인증하도록 Trident 구성할 수 있습니다. AD 계정이 SVM에 액세스하려면 먼저 클러스터 또는 SVM에 대한 AD 도메인 컨트롤러 액세스를 구성해야 합니다. AD 계정으로 클러스터를 관리하려면 도메인 터널을 만들어야 합니다. 참조하다 link:https://docs.netapp.com/us-en/ontap/authentication/enable-ad-users-groups-access-cluster-svm-task.html["ONTAP 에서 Active Directory 도메인 컨트롤러 액세스 구성"^] 자세한 내용은.
@@ -190,6 +193,7 @@ Active Directory(AD) 자격 증명을 사용하여 백엔드 SVM에 인증하도
 
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 볼륨 프로비저닝을 위한 백엔드 구성 옵션
 
 에서 이러한 옵션을 사용하여 기본 프로비저닝을 제어할 수 있습니다 `defaults` 섹션을 참조하십시오. 예를 들어, 아래 구성 예제를 참조하십시오.
@@ -233,6 +237,7 @@ Active Directory(AD) 자격 증명을 사용하여 백엔드 SVM에 인증하도
 |===
 
 
+[[volume-provisioning-examples]]
 === 볼륨 프로비저닝의 예
 
 다음은 기본값이 정의된 예입니다.
@@ -278,6 +283,7 @@ image::../media/vol-show-san.png[에는 volume show 명령의 출력이 나와 �
 
 
 
+[[minimal-configuration-examples]]
 == 최소 구성의 예
 
 다음 예에서는 대부분의 매개 변수를 기본값으로 두는 기본 구성을 보여 줍니다. 이는 백엔드를 정의하는 가장 쉬운 방법입니다.
@@ -478,6 +484,7 @@ defaults:
 ====
 
 
+[[examples-of-backends-with-virtual-pools]]
 == 가상 풀의 백엔드 예
 
 이러한 백엔드 정의 파일 샘플에서는 와 같은 모든 스토리지 풀에 대해 특정 기본값이 설정됩니다 `spaceReserve` 없음, `spaceAllocation` 거짓일 경우, 및 `encryption` 거짓일 때. 가상 풀은 스토리지 섹션에 정의됩니다.
@@ -622,6 +629,7 @@ storage:
 ====
 
 
+[[map-backends-to-storageclasses]]
 == 백엔드를 StorageClasses에 매핑합니다
 
 다음 StorageClass 정의는 을 참조하십시오 <<가상 풀의 백엔드 예>>. 를 사용합니다 `parameters.selector` 필드에서 각 StorageClass는 볼륨을 호스팅하는 데 사용할 수 있는 가상 풀을 호출합니다. 선택한 가상 풀에 볼륨이 정의되어 있습니다.

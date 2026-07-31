@@ -16,6 +16,7 @@ Trident를 설치하기 전에 다음과 같은 일반 시스템 요구 사항�
 
 
 
+[[critical-information-about-trident]]
 == Trident에 대한 중요 정보입니다
 
 *Trident에 대한 다음 중요 정보를 읽어야 합니다.*
@@ -36,6 +37,7 @@ Trident를 설치하기 전에 다음과 같은 일반 시스템 요구 사항�
 ====
 
 
+[[supported-frontends-orchestrators]]
 == 지원되는 프런트엔드(오케스트레이터)
 
 Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레이터를 지원합니다.
@@ -59,6 +61,7 @@ WARNING: Trident가 설치된 Kubernetes 클러스터를 1.25에서 1.26 이상�
 
 
 
+[[supported-backends-storage]]
 == 지원되는 백엔드(스토리지)
 
 Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이상 필요합니다.
@@ -74,6 +77,7 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 
 
 
+[[trident-support-for-kubevirt-and-openshift-virtualization]]
 == KubeVirt 및 OpenShift 가상화를 위한 Trident 지원
 
 .지원되는 스토리지 드라이버:
@@ -99,6 +103,7 @@ Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드
 
 
 
+[[trident-support-for-kubernetes-on-kubernetes-and-openshift-hosted-control-planes]]
 == Kubernetes 및 OpenShift 호스팅 컨트롤 플레인의 Kubernetes에 대한 Trident 지원
 
 버전 26.06부터 Trident는 Kubernetes on Kubernetes 토폴로지를 완벽하게 지원합니다. Kubernetes 클러스터는 노드가 인프라(호스트) 클러스터에서 KubeVirt 가상 머신으로 실행됩니다. 이 토폴로지는 OpenShift Virtualization의 OpenShift 호스팅 컨트롤 플레인(HCP)과 같은 호스팅 컨트롤 플레인 제품의 기반이 됩니다.
@@ -142,6 +147,7 @@ Trident를 게스트(테넌트) 클러스터에 직접 설치할 수도 있습�
 
 
 
+[[feature-requirements]]
 == 피처 요구 사항
 
 아래 표에는 이 Trident 릴리스에서 사용할 수 있는 기능과 이 기능이 지원하는 Kubernetes 버전이 요약되어 있습니다.
@@ -208,6 +214,7 @@ Trident를 게스트(테넌트) 클러스터에 직접 설치할 수도 있습�
 |===
 
 
+[[tested-host-operating-systems]]
 == 호스트 운영 체제를 테스트했습니다
 
 Trident는 특정 운영 체제를 공식적으로 지원하지 않지만 다음과 같은 기능이 작동하는 것으로 알려져 있습니다.
@@ -229,6 +236,7 @@ NOTE: NVMe/TCP에는 RHEL 9 이상이 필요합니다.
 
 
 
+[[host-configuration]]
 == 호스트 구성
 
 Kubernetes 클러스터의 모든 작업자 노드는 Pod용으로 프로비저닝된 볼륨을 마운트할 수 있어야 합니다. 작업자 노드를 준비하려면 드라이버 선택에 따라 NFS, iSCSI 또는 NVMe 툴을 설치해야 합니다.
@@ -237,6 +245,7 @@ link:../trident-use/worker-node-prep.html["작업자 노드를 준비합니다"]
 
 
 
+[[storage-system-configuration]]
 == 스토리지 시스템 구성
 
 Trident를 사용하면 스토리지 시스템을 백엔드 구성에서 사용해야 할 수 있습니다.
@@ -245,6 +254,7 @@ link:../trident-use/backends.html["백엔드 구성"]
 
 
 
+[[trident-ports]]
 == Trident 포트
 
 Trident에서는 통신을 위해 특정 포트에 액세스해야 합니다.
@@ -253,13 +263,15 @@ link:../trident-reference/ports.html["Trident 포트"]
 
 
 
+[[container-images-and-corresponding-kubernetes-versions]]
 == 컨테이너 이미지 및 해당 Kubernetes 버전
 
 에어갭 설치의 경우 다음 목록은 Trident 설치에 필요한 컨테이너 이미지의 참조입니다. 명령을 사용하여 `tridentctl images` 필요한 컨테이너 이미지 목록을 확인합니다.
 
 
 
-=== Trident 26.02에 필요한 컨테이너 이미지
+[[container-images-required-for-trident-26-06]]
+=== Trident 26.06에 필요한 컨테이너 이미지
 
 [cols="2"]
 |===
@@ -267,14 +279,14 @@ link:../trident-reference/ports.html["Trident 포트"]
 
 
 | v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
-* docker.io/netapp/trident:26.02.0
-* docker.io/netapp/trident-autosupport:26.02
+* docker.io/netapp/trident:26.06.0
+* docker.io/netapp/trident-autosupport:26.06
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
 * registry.k8s.io/sig-storage/csi-attacher:v4.10.0
 * registry.k8s.io/sig-storage/csi-resizer:v2.0.0
 * registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0
 * registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
-* docker.io/netapp/trident-operator:26.02.0(선택 사항)
+* docker.io/netapp/trident-operator:26.06.0(선택 사항)
 
 
 |===
