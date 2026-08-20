@@ -1,0 +1,169 @@
+---
+sidebar: sidebar 
+permalink: trident-use/ontap-balanced-placement.html 
+keywords: trident backend, ontap, balanced placement, useBalancedPlacement, aggregates, afx, unified, provisioning, storage pools 
+summary: Trident는 ONTAP 균형 배치를 지원하며, 이는 Trident가 ONTAP 백엔드에 볼륨을 프로비저닝할 때 애그리게이트 선택을 ONTAP에 위임합니다. 
+---
+= ONTAP 백엔드와 함께 균형 잡힌 배치 사용
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:linkattrs: 
+:relative_path: ./
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP 백엔드에서 ONTAP 균형 배치 기능을 활성화할 수 있습니다. 균형 배치 기능을 사용하면 ONTAP이 각 새 볼륨에 대해 최적의 애그리게이트를 선택하므로 Trident에서 애그리게이트 할당을 관리할 필요가 없습니다.
+
+
+
+[[how-balanced-placement-works]]
+== 균형 배치 방식의 작동 방식
+
+기본적으로 Trident는 SVM에 할당된 애그리게이트를 검색하고, 각 애그리게이트를 스토리지 풀로 처리하며, 볼륨을 프로비저닝할 때 애그리게이트를 선택합니다.
+
+균형 배치를 활성화하면:
+
+* Trident는 개별 애그리게이트를 보고하는 대신 전체 SVM을 단일 스토리지 풀로 보고합니다.
+* ONTAP는 새로운 볼륨마다 애그리게이트를 선택하고 사용 가능한 애그리게이트 전체에 걸쳐 볼륨 균형을 맞춥니다.
+* Trident는 ONTAP `/application/containers` REST API를 사용하여 볼륨을 생성합니다.
+
+
+통합 ONTAP 시스템(AFF, FAS 및 ASA)과 NetApp AFX 스토리지 시스템에 대해 균형 배치가 가능합니다.
+
+
+
+[[requirements]]
+== 요구 사항
+
+* 백엔드는 ONTAP 9.19.1 이상 버전을 사용해야 합니다.
+* Trident는 REST를 사용하여 ONTAP과 통신해야 합니다. ZAPI에서는 균형 배치를 사용할 수 없습니다.
+* 백엔드 구성에서 애그리게이트를 지정해서는 안 됩니다. 균형 배치와 명시적인 애그리게이트 선택을 함께 사용할 수 없습니다.
+
+
+
+
+[[default-values]]
+== 기본값
+
+ `useBalancedPlacement`의 기본값은 스토리지 시스템에 따라 다릅니다.
+
+[cols="1,1,2"]
+|===
+| 스토리지 시스템 | 기본값 | 참고 
+
+
+| 통합 ONTAP(AFF, FAS, ASA) | 거짓입니다 | 균형 배치를 활성화하지 않으면 Trident는 애그리게이트를 선택합니다. 
+
+
+| NetApp AFX (ONTAP 9.19.1 이상) | "참"입니다 | 균형 잡힌 배치가 필요합니다.  `useBalancedPlacement`을  `false`로 설정하면 백엔드 유효성 검사가 실패합니다. 
+
+
+| NetApp AFX (ONTAP 9.19.1 이전 버전) | 거짓입니다 | 균형 잡힌 배치는 불가능합니다. 
+|===
+
+
+[[configuration-option]]
+== 구성 옵션
+
+[cols="1,2,1"]
+|===
+| 매개 변수 | 설명 | 기본값 
+
+
+| `useBalancedPlacement` | 새 볼륨에 대한 애그리게이트 선택을 ONTAP에 위임합니다. 이 옵션은 백엔드 구성의 루트 또는 개별 가상 풀에서 설정합니다. | `false`; `true` ONTAP 9.19.1 이상의 AFX용 
+|===
+
+
+[[balanced-placement-with-virtual-pools]]
+== 가상 풀을 활용한 균형 잡힌 배치
+
+균형 잡힌 배치 방식은 가상 풀의 유무와 관계없이 작동합니다.
+
+* 가상 풀이 없으면 Trident는 SVM을 단일 스토리지 풀로 보고하고 균형 배치를 사용하여 모든 새 볼륨을 생성합니다.
+* 가상 풀을 사용하는 경우 Trident는 평소와 같이 가상 풀을 보고하고 볼륨을 해당 가상 풀과 연결합니다. 연결된 가상 풀에 균형 배치가 활성화된 경우 ONTAP는 해당 볼륨에 대한 애그리게이트를 선택합니다.
+
+
+Set `useBalancedPlacement` 모든 가상 풀에 적용하려면 백엔드 구성의 최상위 레벨에 설정하고, 선택적으로 활성화하려면 개별 가상 풀에 설정하십시오.
+
+
+
+[[examples]]
+== 예
+
+다음 예시는 통합 ONTAP 백엔드에서 균형 잡힌 배치를 가능하게 합니다.
+
+[listing]
+----
+---
+version: 1
+storageDriverName: ontap-nas
+backendName: nas-balanced-placement
+managementLIF: 10.0.0.1
+dataLIF: 10.0.0.2
+svm: trident_svm
+username: cluster-admin
+password: <password>
+useBalancedPlacement: true
+----
+다음 예시는  `TridentBackendConfig`을 사용하여 균형 잡힌 배치를 활성화합니다.
+
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  backendName: nas-balanced-placement
+  managementLIF: 10.0.0.1
+  svm: trident_svm
+  useBalancedPlacement: true
+  credentials:
+    name: backend-tbc-ontap-nas-secret
+----
+다음 예시는  `gold` 가상 풀에서만 균형 배치를 활성화합니다. Trident는  `bronze` 가상 풀과 일치하는 볼륨에 대해 계속해서 애그리게이트를 선택합니다.
+
+[listing]
+----
+---
+version: 1
+storageDriverName: ontap-nas
+backendName: nas-virtual-pools
+managementLIF: 10.0.0.1
+svm: trident_svm
+username: cluster-admin
+password: <password>
+storage:
+- labels:
+    performance: gold
+  useBalancedPlacement: true
+- labels:
+    performance: bronze
+----
+
+
+[[backend-validation-errors]]
+== 백엔드 유효성 검사 오류
+
+다음과 같은 경우 백엔드 생성 또는 업데이트가 실패합니다.
+
+[cols="2,2"]
+|===
+| 구성 | 결과 
+
+
+| `useBalancedPlacement: true` ONTAP 9.19.1 이전 버전 | 유효성 검사에 실패했습니다. ONTAP 9.19.1 이상 버전으로 업그레이드하십시오. 
+
+
+| `useBalancedPlacement: true` ZAPI를 사용하는 백엔드에서 | 유효성 검사에 실패했습니다. 백엔드를 REST를 사용하도록 구성하십시오. 
+
+
+| `useBalancedPlacement: true` 특정 애그리게이트와 결합 | 유효성 검사에 실패했습니다. 애그리게이트 구성을 제거하거나 균형 배치 기능을 비활성화하십시오. 
+
+
+| `useBalancedPlacement: false` ONTAP 9.19.1 이상 버전이 설치된 AFX에서 사용 가능 | 유효성 검사에 실패했습니다. ONTAP 9.19.1 이상 버전에서 AFX를 사용하려면 균형 배치가 필요합니다. 
+|===

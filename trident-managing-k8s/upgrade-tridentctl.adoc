@@ -18,7 +18,7 @@ summary: '을 사용하여 기존 Trident 설치를 쉽게 업그레이드할 �
 Trident 제거 및 재설치는 업그레이드로 작동합니다. Trident를 제거하면 Trident 배포에 사용되는 PVC(영구 볼륨 클레임) 및 PV(영구 볼륨)가 삭제되지 않습니다. 이미 프로비저닝된 PVS는 Trident가 오프라인 상태인 동안 사용 가능한 상태로 유지되며, Trident는 다시 온라인 상태가 된 후 그 사이에 생성된 모든 PVC에 대한 볼륨을 프로비저닝합니다.
 
 .시작하기 전에
-검토 link:upgrade-trident.html#select-an-upgrade-method["업그레이드 방법을 선택합니다"] 를 사용하여 업그레이드하기 전에 `tridentctl`.
+업그레이드하기 전에 link:upgrade-trident.html#step-3-select-an-upgrade-method["업그레이드 방법을 선택합니다"]를 검토한 후  `tridentctl`를 사용하십시오.
 
 .단계
 . 에서 uninstall 명령을 `tridentctl` 실행하여 CRD 및 관련 객체를 제외한 Trident와 연결된 모든 리소스를 제거합니다.

@@ -517,7 +517,7 @@ S3 공급자 구성 옵션은 다음 표를 참조하십시오.
 | `providerConfig.s3.secure` | S3 엔드포인트와의 안전한 HTTPS 통신을 활성화합니다. | 참 | "참", "거짓" 
 
 
-| `providerConfig.s3.proxyURL` | S3에 연결하는 데 사용되는 프록시 서버의 URL을 지정하십시오. | None | http://proxy.example.com:8080[] 
+| `providerConfig.s3.proxyURL` | S3에 연결하는 데 사용되는 프록시 서버의 URL을 지정하십시오. | None | \http://proxy.example.com:8080 
 
 
 | `providerConfig.s3.rootCA` | SSL/TLS 인증을 위해 사용자 지정 루트 CA 인증서를 제공하십시오. | None | "CN=MyCustomCA" 

@@ -1,18 +1,16 @@
----
-sidebar: sidebar 
-permalink: trident-use/ontap-nas-examples.html 
-keywords: map backends, storage classes, trident backend, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, options, storageclasses, fsx, metrocluster 
-summary: Trident 설치 시 ONTAP NAS 드라이버를 생성하고 사용하는 방법에 대해 알아봅니다. 이 섹션에서는 백엔드 구성 예제 및 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 
----
 = ONTAP NAS 구성 옵션 및 예
-:hardbreaks:
 :allow-uri-read: 
-:icons: font
-:imagesdir: ../media/
 
+
+'''
+사이드바: 사이드바 영구 링크: trident-use/ontap-nas-examples.html 키워드: 백엔드 매핑, 스토리지 클래스, Trident 백엔드, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, 옵션, 스토리지 클래스, fsx, metrocluster 요약: Trident 설치 환경에서 ONTAP NAS 드라이버를 생성하고 사용하는 방법을 알아보십시오. 이 섹션에서는 백엔드 구성 예제와 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. ---
+
+
+
+= ONTAP NAS 구성 옵션 및 예
 
 [role="lead"]
-Trident 설치 환경에서 ONTAP NAS 드라이버를 생성하고 사용하는 방법을 알아보세요. 이 섹션에서는 백엔드 구성 예제와 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 25.10 릴리스부터 NetApp Trident는 link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 스토리지 시스템"^]을(를) 지원합니다. NetApp AFX 스토리지 시스템은 스토리지 계층 구현에서 다른 ONTAP 기반 시스템(ASA, AFF, FAS)과 다릅니다.
+Trident 설치에서 ONTAP NAS 드라이버를 생성하고 사용하십시오. 이 섹션에서는 백엔드 구성 예제와 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 25.10 릴리스부터 NetApp Trident는 link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 스토리지 시스템"^]을 지원합니다. NetApp AFX 스토리지 시스템은 스토리지 계층 구현 방식에서 다른 ONTAP 기반 시스템(ASA, AFF, FAS)과 다릅니다.
 
 
 NOTE: 오직 `ontap-nas` 드라이버(NFS 프로토콜 포함)는 NetApp AFX 시스템에서 지원됩니다. SMB 프로토콜은 지원되지 않습니다.
@@ -23,6 +21,8 @@ NOTE: 오직 `ontap-nas` 드라이버(NFS 프로토콜 포함)는 NetApp AFX 시
 == 백엔드 구성 옵션
 
 Trident 백엔드 구성에서 시스템이 NetApp AFX 스토리지 시스템임을 지정할 필요가 없습니다.  `ontap-nas`을(를)  `storageDriverName`(으)로 선택하면 Trident가 AFX 스토리지 시스템을 자동으로 감지합니다. 일부 백엔드 구성 매개변수는 AFX 스토리지 시스템에는 적용되지 않습니다.
+
+26.06 릴리스부터 ONTAP 균형 배치 기능을 활성화하여 ONTAP이 새 볼륨에 대한 애그리게이트를 선택하도록 할 수 있습니다. 균형 배치 기능은 ONTAP 9.19.1 이상 버전의 AFX 스토리지 시스템에 필요합니다. 요구 사항 및 예제는 link:ontap-balanced-placement.html["ONTAP 백엔드와 함께 균형 잡힌 배치 사용"]을 참조하십시오.
 
 다음 표는 백엔드 구성 옵션을 보여줍니다.
 
@@ -84,20 +84,31 @@ NOTE: NetApp AFX 시스템의 경우에만 `ontap-nas` 지원됩니다.
 SVM에서 새 볼륨을 프로비저닝할 때 사용되는 접두사 설정한 후에는 업데이트할 수 없습니다
 
 
-NOTE: 24자 이상인 ONTAP-nas-Economy와 storagePrefix를 사용할 경우 볼륨 이름에 포함되기는 하지만 qtree에 스토리지 접두사가 포함되지 않습니다.
+NOTE: ontap-nas-economy를 사용하고 storagePrefix가 24자 이상인 경우, qtree에는 스토리지 접두사가 포함되지 않지만 볼륨 이름에는 포함됩니다.
 | "트리덴트" 
 
 
 | 골재  a| 
-프로비저닝을 위한 애그리게이트(선택 사항, SVM에 셋팅해야 하는 경우) 드라이버의 경우 `ontap-nas-flexgroup` 이 옵션은 무시됩니다. 할당되지 않은 경우  사용 가능한 애그리게이트를 사용하여 FlexGroup 볼륨을 프로비저닝할 수 있습니다.
+프로비저닝용 애그리게이트(선택 사항, 설정된 경우 SVM에 할당해야 함).  `ontap-nas-flexgroup` 드라이버의 경우 이 옵션은 무시됩니다. 할당하지 않으면 사용 가능한 애그리게이트 중 하나를 사용하여 FlexGroup 볼륨을 프로비저닝할 수 있습니다.
 
 
-NOTE: SVM에서 Aggregate를 업데이트하면 Trident 컨트롤러를 다시 시작하지 않고도 SVM을 폴링하여 Trident에서 자동으로 업데이트됩니다. 볼륨을 프로비저닝하기 위해 Trident의 특정 애그리게이트를 구성한 경우, 애그리게이트의 이름을 바꾸거나 SVM에서 이동할 경우 SVM 애그리게이트를 폴링하는 동안 백엔드가 Trident에서 오류 상태로 전환됩니다. Aggregate를 SVM에 있는 Aggregate로 변경하거나 완전히 제거하여 백엔드를 다시 온라인 상태로 전환해야 합니다.
+NOTE: SVM에서 애그리게이트가 업데이트되면 Trident 컨트롤러를 재시작하지 않고도 SVM을 폴링하여 Trident에 자동으로 업데이트됩니다. Trident에서 볼륨을 프로비저닝하도록 특정 애그리게이트를 구성한 경우, 해당 애그리게이트의 이름이 변경되거나 SVM에서 제거되면 SVM 애그리게이트를 폴링하는 동안 백엔드가 Trident에서 실패 상태로 전환됩니다. 백엔드를 다시 온라인 상태로 전환하려면 SVM에 있는 애그리게이트로 변경하거나 해당 애그리게이트를 완전히 제거해야 합니다.
 
 *AFX 저장 시스템에 대해서는 지정하지 마세요.*
+
+* `useBalancedPlacement`이(가)  `true`(으)로 설정된 경우 지정하지 마십시오.*
  a| 
 ""
 
+
+
+| `useBalancedPlacement`  a| 
+새 볼륨에 대한 애그리게이트 선택을 ONTAP에 위임합니다[Boolean]. ONTAP 9.19.1 이상이 필요하며  `useREST`을(를)  `true`로 설정해야 합니다.  `aggregate`와 함께 사용할 수 없습니다.
+
+요구 사항 및 예시는 link:ontap-balanced-placement.html["ONTAP 백엔드와 함께 균형 잡힌 배치 사용"]을 참조하십시오.
+
+*명시된 경우, ONTAP 9.19.1 이상 버전의 AFX 스토리지 시스템에서는 항상  `true`으로 설정해야 합니다.*
+| `false`; `true` ONTAP 9.19.1 이상의 AFX 스토리지 시스템의 경우 
 
 
 | 제한선태사용법 | 사용량이 이 백분율을 초과하면 프로비저닝에 실패합니다. * Amazon FSx for ONTAP 에는 적용되지 않습니다*. *AFX 저장 시스템에 대해서는 지정하지 마세요.* | ""(기본적으로 적용되지 않음) 
@@ -107,7 +118,7 @@ NOTE: SVM에서 Aggregate를 업데이트하면 Trident 컨트롤러를 다시 �
 프로비저닝을 위한 애그리게이트 목록(선택 사항, SVM에 할당되어야 함) SVM에 할당된 모든 애그리게이트는 FlexGroup 볼륨을 프로비저닝하는 데 사용됩니다. ONTAP-NAS-FlexGroup * 스토리지 드라이버에 대해 지원됩니다.
 
 
-NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트롤러를 다시 시작하지 않고도 SVM을 폴링하여 Trident에서 목록이 자동으로 업데이트됩니다. 볼륨을 프로비저닝하도록 Trident의 특정 애그리게이트 목록을 구성한 경우, 애그리게이트 목록의 이름을 바꾸거나 SVM에서 이동하면 SVM 애그리게이트를 폴링하는 동안 백엔드가 Trident에서 오류 상태로 전환됩니다. 애그리게이트 목록을 SVM에 있는 목록으로 변경하거나 완전히 제거하여 백엔드를 다시 온라인 상태로 전환해야 합니다.
+NOTE: SVM에서 집계 목록이 업데이트되면 Trident 컨트롤러를 재시작하지 않고도 SVM을 폴링하여 Trident의 목록이 자동으로 업데이트됩니다. 볼륨을 프로비저닝하기 위해 Trident에서 특정 집계 목록을 구성한 경우, 해당 집계 목록의 이름이 변경되거나 SVM에서 이동되면 SVM 집계를 폴링하는 동안 Trident에서 백엔드가 실패 상태로 전환됩니다. 백엔드를 다시 온라인 상태로 전환하려면 집계 목록을 SVM에 있는 다른 목록으로 변경하거나 완전히 제거해야 합니다.
 | "" 
 
 
@@ -122,7 +133,7 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 | `nasType` | NFS 또는 SMB 볼륨 생성을 구성합니다. 옵션은 다음과 같습니다 `nfs` , `smb` 또는 null. null로 설정하면 기본적으로 NFS 볼륨이 사용됩니다. *지정된 경우 항상 다음으로 설정됩니다. `nfs` AFX 저장 시스템*용. | `nfs` 
 
 
-| nfsMountOptions를 선택합니다 | 쉼표로 구분된 NFS 마운트 옵션 목록입니다. Kubernetes 영구 볼륨의 마운트 옵션은 일반적으로 스토리지 클래스에 지정되어 있지만, 스토리지 클래스에 마운트 옵션이 지정되지 않은 경우 Trident는 스토리지 백엔드의 구성 파일에 지정된 마운트 옵션을 사용하도록 폴백합니다. 스토리지 클래스 또는 구성 파일에 마운트 옵션이 지정되지 않은 경우 Trident는 연결된 영구 볼륨에 마운트 옵션을 설정하지 않습니다. | "" 
+| nfsMountOptions를 선택합니다 | 쉼표로 구분된 NFS 마운트 옵션 목록입니다. Kubernetes 영구 볼륨의 마운트 옵션은 일반적으로 스토리지 클래스에 지정되지만, 스토리지 클래스에 마운트 옵션이 지정되지 않은 경우 Trident는 스토리지 백엔드의 구성 파일에 지정된 마운트 옵션을 사용하도록 대체됩니다. 스토리지 클래스 또는 구성 파일에 마운트 옵션이 지정되지 않은 경우 Trident는 연결된 영구 볼륨에 마운트 옵션을 설정하지 않습니다. | "" 
 
 
 | "케트리스퍼플랙스볼륨" | FlexVol당 최대 qtree, 범위 [50, 300]에 있어야 함 | "200" 
@@ -175,7 +186,7 @@ NOTE: SVM에서 애그리게이트 목록이 업데이트되면 Trident 컨트�
 | 'plitOnClone'을 선택합니다 | 생성 시 상위 클론에서 클론을 분할합니다 | "거짓" 
 
 
-| 암호화 | 새 볼륨에서 NetApp 볼륨 암호화(NVE)를 활성화하고, 기본값은 로 설정합니다. `false` 이 옵션을 사용하려면 NVE 라이센스가 클러스터에서 활성화되어 있어야 합니다. 백엔드에서 NAE가 활성화된 경우 Trident에서 프로비저닝된 모든 볼륨은 NAE가 사용됩니다. 자세한 내용은 다음을 link:../trident-reco/security-reco.html["Trident가 NVE 및 NAE와 작동하는 방법"]참조하십시오. | "거짓" 
+| 암호화 | NetApp 볼륨 암호화(NVE)를 새 볼륨에서 활성화합니다. 기본값은 `false`입니다. 이 옵션을 사용하려면 클러스터에서 NVE 라이선스가 있고 활성화되어 있어야 합니다. 백엔드에서 NAE가 활성화된 경우 Trident에서 프로비저닝된 모든 볼륨은 NAE가 활성화됩니다. 자세한 내용은 다음을 참조하십시오. link:../trident-reco/security-reco.html["Trident가 NVE 및 NAE와 작동하는 방법"]. | "거짓" 
 
 
 | '계층화 정책' | "없음"을 사용하는 계층화 정책 |  
@@ -244,7 +255,7 @@ Total volume size = <PVC requested size> / (1 - (<snapshotReserve percentage> / 
 
 image::../media/volume-show-nas.png[에는 volume show 명령의 출력이 나와 있습니다.]
 
-이전 설치의 기존 백엔드는 Trident 업그레이드 시 위에서 설명한 대로 볼륨을 프로비저닝합니다. 업그레이드 전에 생성한 볼륨의 경우, 변경 사항을 적용하려면 볼륨 크기를 조정해야 합니다. 예를 들어, 2GiB PVC의 경우  `snapshotReserve=50` 이전에는 1GiB의 쓰기 가능 공간을 제공하는 볼륨이 생성되었습니다. 예를 들어 볼륨 크기를 3GiB로 조정하면 애플리케이션은 6GiB 볼륨에서 3GiB의 쓰기 가능 공간을 확보하게 됩니다.
+이전 설치의 기존 백엔드는 Trident를 업그레이드할 때 위에서 설명한 대로 볼륨을 프로비저닝합니다. 업그레이드 전에 생성한 볼륨의 경우, 변경 사항이 적용되도록 볼륨 크기를 조정해야 합니다. 예를 들어,  `snapshotReserve=50`이전에 2GiB PVC는 1GiB의 쓰기 가능 공간을 제공하는 볼륨을 생성했습니다. 볼륨 크기를 예를 들어 3GiB로 조정하면 애플리케이션은 6GiB 볼륨에서 3GiB의 쓰기 가능 공간을 사용할 수 있게 됩니다.
 
 
 
@@ -364,6 +375,25 @@ autoExportCIDRs:
 username: admin
 password: password
 nfsMountOptions: nfsvers=4
+----
+====
+.균형 잡힌 배치 예시
+[%collapsible]
+====
+이 예제는 ONTAP 균형 배치 기능을 활성화하여 ONTAP이 새 볼륨에 대한 애그리게이트를 선택하도록 합니다. 균형 배치 기능을 사용하려면 ONTAP 9.19.1 이상 버전이 필요합니다. 자세한 내용은 link:ontap-balanced-placement.html["ONTAP 백엔드와 함께 균형 잡힌 배치 사용"]을 참조하십시오.
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: ontap-nas
+backendName: nas-balanced-placement
+managementLIF: 10.0.0.1
+dataLIF: 10.0.0.2
+svm: svm_nfs
+username: vsadmin
+password: password
+useBalancedPlacement: true
 ----
 ====
 .IPv6 주소 예
@@ -620,9 +650,9 @@ storage:
 [[map-backends-to-storageclasses]]
 == 백엔드를 StorageClasses에 매핑합니다
 
-다음 StorageClass 정의는 을 참조하십시오 <<가상 풀의 백엔드 예>>. 를 사용합니다 `parameters.selector` 필드에서 각 StorageClass는 볼륨을 호스팅하는 데 사용할 수 있는 가상 풀을 호출합니다. 선택한 가상 풀에 볼륨이 정의되어 있습니다.
+다음 StorageClass 정의는 <<가상 풀의 백엔드 예>>을 참조합니다.  `parameters.selector` 필드를 사용하여 각 StorageClass는 볼륨을 호스팅하는 데 사용할 수 있는 가상 풀을 지정합니다. 볼륨은 선택된 가상 풀에 정의된 속성을 갖습니다.
 
-* 를 클릭합니다 `protection-gold` StorageClass는 의 첫 번째 및 두 번째 가상 풀에 매핑됩니다 `ontap-nas-flexgroup` 백엔드. 골드 레벨 보호 기능을 제공하는 유일한 풀입니다.
+* The `protection-gold` StorageClass는 `ontap-nas-flexgroup` 백엔드의 첫 번째 및 두 번째 가상 풀에 매핑됩니다. 이 두 풀만 골드 레벨 보호를 제공합니다.
 +
 [source, yaml]
 ----
@@ -635,7 +665,7 @@ parameters:
   selector: "protection=gold"
   fsType: "ext4"
 ----
-* 를 클릭합니다 `protection-not-gold` StorageClass는 의 세 번째 및 네 번째 가상 풀에 매핑됩니다 `ontap-nas-flexgroup` 백엔드. 금 이외의 보호 수준을 제공하는 유일한 풀입니다.
+* The `protection-not-gold` StorageClass는 `ontap-nas-flexgroup`백엔드의 세 번째 및 네 번째 가상 풀에 매핑됩니다. 이 풀들만이 골드 등급 이외의 보호 수준을 제공합니다.
 +
 [source, yaml]
 ----
@@ -648,7 +678,7 @@ parameters:
   selector: "protection!=gold"
   fsType: "ext4"
 ----
-* 를 클릭합니다 `app-mysqldb` StorageClass는 의 네 번째 가상 풀에 매핑됩니다 `ontap-nas` 백엔드. mysqldb 유형 앱에 대한 스토리지 풀 구성을 제공하는 유일한 풀입니다.
+* The `app-mysqldb` StorageClass는 `ontap-nas` 백엔드의 네 번째 가상 풀에 매핑됩니다. 이 풀은 mysqldb 유형 애플리케이션에 대한 스토리지 풀 구성을 제공하는 유일한 풀입니다.
 +
 [source, yaml]
 ----
@@ -661,7 +691,7 @@ parameters:
   selector: "app=mysqldb"
   fsType: "ext4"
 ----
-*  `protection-silver-creditpoints-20k` StorageClass는 `ontap-nas-flexgroup` 백엔드의 세 번째 가상 풀에 매핑됩니다. 이 풀은 실버 등급 보호와 20000 크레딧 포인트를 제공하는 유일한 풀입니다.
+* The `protection-silver-creditpoints-20k` StorageClass는 `ontap-nas-flexgroup` 백엔드의 세 번째 가상 풀에 매핑됩니다. 이 풀은 실버 등급 보호와 20000 크레딧 포인트를 제공하는 유일한 풀입니다.
 +
 [source, yaml]
 ----
@@ -674,7 +704,7 @@ parameters:
   selector: "protection=silver; creditpoints=20000"
   fsType: "ext4"
 ----
-* 를 클릭합니다 `creditpoints-5k` StorageClass는 의 세 번째 가상 풀에 매핑됩니다 `ontap-nas` 의 백엔드 및 두 번째 가상 풀입니다 `ontap-nas-economy` 백엔드. 5000 크레딧 포인트를 보유한 유일한 풀 서비스입니다.
+* The `creditpoints-5k` StorageClass는 `ontap-nas` 백엔드의 세 번째 가상 풀과 `ontap-nas-economy` 백엔드의 두 번째 가상 풀에 매핑됩니다. 5000 크레딧 포인트를 제공하는 풀은 이 두 가지뿐입니다.
 +
 [source, yaml]
 ----
@@ -689,7 +719,7 @@ parameters:
 ----
 
 
-Trident는 어떤 가상 풀이 선택되었는지 결정하고 스토리지 요구 사항이 충족되는지 확인합니다.
+Trident는 어떤 가상 풀이 선택될지 결정하고 스토리지 요구사항이 충족되는지 확인합니다.
 
 
 
