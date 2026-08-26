@@ -7316,4 +7316,11 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="d25a42bf8872d5c2742f43937586ad40" category="inline-xref">백엔드 고급 구성 및 예제</block>
   <block id="f3bbb160e5770652e96a6a7ce5e4aaa9" category="paragraph">다른 구성 옵션에 대한 자세한 내용은 아래 <block ref="24ff2177ac2d3277f1e79fe1615781ee" category="inline-xref-macro-rx"></block> 섹션을 참조하십시오.</block>
   <block id="3929c8e22750fae0b1b6ca0e82f82fd3" category="section-title">[[first-link]]백엔드 고급 구성 및 예제</block>
+  <block id="c3bd78da5a8e8ae22bd50629327c0c26" category="section-title">26.06.1의 새로운 기능</block>
+  <block id="0063db86c3042093f4b48db59ca75d87" category="list-text">CSI 게시와 볼륨 이동 간의 경쟁 조건으로 인해 오래된 액세스 정보를 사용하여 볼륨이 연결될 수 있었던 문제를 수정했습니다.</block>
+  <block id="99bc89ae140f34c4ef13f436b3578358" category="list-text">NodeGetInfo가 노드 등록이 완료되기 전에 빈 토폴로지 레이블을 반환하여 토폴로지 인식 프로비저닝 실패를 유발하는 경쟁 조건을 수정했습니다.</block>
+  <block id="8141a9378a82f2d156fbd38ada6c3466" category="list-text">NVMe 연결 해제 시 발생하는 드문 경쟁 문제를 수정했습니다. 이 문제로 인해 다른 Pod가 연결 중인 동안 공유 서브시스템이 종료될 수 있었습니다.</block>
+  <block id="13d49e861126c9f4e8187c3ed601942a" category="list-text">동시 실행 환경에서 마운트한 볼륨의 클론을 생성할 때 발생하던 NVMe PVC 클론 게시 실패(및 잘못된 상위 네임스페이스 매핑) 문제를 수정했습니다.</block>
+  <block id="92908f9dc019fbc39650b0f44ecbe68d" category="list-text">nameTemplate을 사용하는 ONTAP-SAN-Economy 백엔드의 PVC에 대한 스냅샷 생성 실패 문제를 수정했습니다.</block>
+  <block id="241bcdc29e2aecc9374092674e96e3b7" category="list-text">ONTAP 백엔드 구성에 REST 및 ZAPI API 클라이언트 타임아웃을 백엔드별로 설정할 수 있는 선택적<block ref="c187d606271268ec08cafc7fe2d89aba" prefix=" " category="inline-code"></block>(초)을 추가했습니다.</block>
 </blocks>
