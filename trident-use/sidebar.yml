@@ -47,7 +47,7 @@ entries:
     - title: 구성 준비
       url: "/trident-use/ontap-nas-prep.html"
     - title: 구성 옵션 및 예
-      url: "/trident-use/ontap-nas-examples.html"
+      url: trident-use/ontap-nas-examples.
   - title: ONTAP 백엔드와 함께 균형 잡힌 배치 사용
     url: "/trident-use/ontap-balanced-placement.html"
   - title: NetApp ONTAP용 Amazon FSx

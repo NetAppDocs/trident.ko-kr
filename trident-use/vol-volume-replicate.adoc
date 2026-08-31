@@ -233,19 +233,22 @@ Trident Mirror Relationship(TMR)은 PVC 간 복제 관계의 한쪽 끝을 나�
 
 .단계
 . 운영 Kubernetes 클러스터에서 PVC의 스냅샷을 생성하고 스냅샷이 생성될 때까지 기다립니다.
-. 운영 Kubernetes 클러스터에서 SnapshotInfo CR을 생성하여 내부 세부 정보를 가져옵니다.
+. 기본 Kubernetes 클러스터에서 TridentTridentSnapshotInfoCR을 생성하여 내부 정보를 얻으십시오.
 +
 .예
 [source, yaml]
 ----
-kind: SnapshotInfo
+kind: TridentSnapshotInfo
 apiVersion: trident.netapp.io/v1
 metadata:
   name: csi-nas
 spec:
-  snapshot-name: csi-nas-snapshot
+  snapshotName csi-nas-snapshot
 ----
-. 보조 Kubernetes 클러스터에서 _TridentMirrorRelationship_CR 의 _spec.state_field를 _promitted_ 및 _spec.promotedSnapshotHandle_ 으로 업데이트하여 스냅샷의 내부 이름으로 업데이트합니다.
++
+.. 보조 Kubernetes 클러스터에서 _TridentMirrorRelationship_ CR의 _spec.state_ 필드를 _promoted_로 업데이트하고 _spec.volumeMappings[].promotedSnapshotHandle_을 스냅샷의 internalName으로 설정합니다.
+
+
 . 보조 Kubernetes 클러스터에서 승격될 TridentMirrorRelationship의 상태(status.state 필드)를 확인합니다.
 
 

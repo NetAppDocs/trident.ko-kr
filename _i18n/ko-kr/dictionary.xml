@@ -4323,8 +4323,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="ffe4cfc202d643b50342b93a4a11a82f" category="section-title">계획된 페일오버 중에 보조 PVC를 승격합니다</block>
   <block id="1d60b89a076d7f30b8efdef50e842f68" category="paragraph">계획된 장애 조치(마이그레이션) 중에 다음 단계를 수행하여 보조 PVC를 승격합니다.</block>
   <block id="3310d9a60c164accb7c262ab6e9fbc65" category="list-text">운영 Kubernetes 클러스터에서 PVC의 스냅샷을 생성하고 스냅샷이 생성될 때까지 기다립니다.</block>
-  <block id="8b17b79902950942165541a8ab704363" category="list-text">운영 Kubernetes 클러스터에서 SnapshotInfo CR을 생성하여 내부 세부 정보를 가져옵니다.</block>
-  <block id="678346d79faaa65b2da52e6d7ddce845" category="list-text">보조 Kubernetes 클러스터에서 _TridentMirrorRelationship_CR 의 _spec.state_field를 _promitted_ 및 _spec.promotedSnapshotHandle_ 으로 업데이트하여 스냅샷의 내부 이름으로 업데이트합니다.</block>
   <block id="7b007b14980acd66e9301e02a5670f47" category="list-text">보조 Kubernetes 클러스터에서 승격될 TridentMirrorRelationship의 상태(status.state 필드)를 확인합니다.</block>
   <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">페일오버 후 미러 관계를 복구합니다</block>
   <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">미러 관계를 복구하기 전에 새 1차 사이트로 만들 측면을 선택합니다.</block>
@@ -6616,7 +6614,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="7d6abad6d9b0cb2c17d374eb60cfd549" category="paragraph">다음은 Trident 및 FSx for ONTAP에서 사용할 스토리지 클래스 구성의 예입니다.</block>
   <block id="79aed0c0cab8f60748d97cff824e71d8" category="section-title">NFS용 스토리지 클래스</block>
   <block id="1aeaba8f713cb76c3933e520e71db58b" category="paragraph">이 예제를 사용하여 NFS를 사용하는 볼륨에 대한 StorageClass를 설정할 수 있습니다(전체 속성 목록은 아래 Trident 속성 섹션을 참조하십시오).</block>
-  <block id="3c2af55b3b722b8e55112e627dcfa582" category="section-title">iSCSI용 스토리지 클래스</block>
   <block id="157051d3c2492a3589f7ef937c9a3380" category="paragraph">iSCSI를 사용하여 볼륨에 대한 StorageClass를 설정하려면 다음 예를 사용하십시오.</block>
   <block id="5182a799b5d9bfc055f426543bab1173" category="section-title">NFSv3 및 AWS Bottlerocket을 사용하는 스토리지 클래스</block>
   <block id="d95d0aae1fadec77938feae823d4861b" category="section-title">Trident StorageClass 속성</block>
@@ -7323,4 +7320,7 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="13d49e861126c9f4e8187c3ed601942a" category="list-text">동시 실행 환경에서 마운트한 볼륨의 클론을 생성할 때 발생하던 NVMe PVC 클론 게시 실패(및 잘못된 상위 네임스페이스 매핑) 문제를 수정했습니다.</block>
   <block id="92908f9dc019fbc39650b0f44ecbe68d" category="list-text">nameTemplate을 사용하는 ONTAP-SAN-Economy 백엔드의 PVC에 대한 스냅샷 생성 실패 문제를 수정했습니다.</block>
   <block id="241bcdc29e2aecc9374092674e96e3b7" category="list-text">ONTAP 백엔드 구성에 REST 및 ZAPI API 클라이언트 타임아웃을 백엔드별로 설정할 수 있는 선택적<block ref="c187d606271268ec08cafc7fe2d89aba" prefix=" " category="inline-code"></block>(초)을 추가했습니다.</block>
+  <block id="69eb48c01ded3a79590a6ae42b855f34" category="section-title">iSCSI용 스토리지 클래스</block>
+  <block id="791aed607ce65a32c8115590f604749d" category="list-text">기본 Kubernetes 클러스터에서 TridentTridentSnapshotInfoCR을 생성하여 내부 정보를 얻으십시오.</block>
+  <block id="e239ae5dff4b309ee9e4b5a6800472ca" category="list-text">보조 Kubernetes 클러스터에서 _TridentMirrorRelationship_ CR의 _spec.state_ 필드를 _promoted_로 업데이트하고 _spec.volumeMappings[].promotedSnapshotHandle_을 스냅샷의 internalName으로 설정합니다.</block>
 </blocks>
