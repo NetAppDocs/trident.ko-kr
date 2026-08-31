@@ -7271,7 +7271,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="f7af0e023dc087b7d5c16907b79c4bad" category="cell">유효성 검사에 실패했습니다. 애그리게이트 구성을 제거하거나 균형 배치 기능을 비활성화하십시오.</block>
   <block id="057b2687591b3a31b14dba78c6b7d611" category="cell"><block ref="ecd0f9ed81ebb00c9d34989effc36922" prefix="" category="inline-code"></block> ONTAP 9.19.1 이상 버전이 설치된 AFX에서 사용 가능</block>
   <block id="4bb66497bc5009a192e4ed054023287c" category="cell">유효성 검사에 실패했습니다. ONTAP 9.19.1 이상 버전에서 AFX를 사용하려면 균형 배치가 필요합니다.</block>
-  <block id="6372286df7ae09afa69dbe6070fa1f7e" category="paragraph">사이드바: 사이드바 영구 링크: trident-use/ontap-nas-examples.html 키워드: 백엔드 매핑, 스토리지 클래스, Trident 백엔드, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, 옵션, 스토리지 클래스, fsx, metrocluster 요약: Trident 설치 환경에서 ONTAP NAS 드라이버를 생성하고 사용하는 방법을 알아보십시오. 이 섹션에서는 백엔드 구성 예제와 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. ---</block>
   <block id="9726f3cc0bb285cd4ca3c4d9d6de815e" category="paragraph">Trident 설치에서 ONTAP NAS 드라이버를 생성하고 사용하십시오. 이 섹션에서는 백엔드 구성 예제와 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다. 25.10 릴리스부터 NetApp Trident는 <block ref="f33b68c7b6392c7aac0a8125f2e686d8" category="inline-link-macro-rx"></block>을 지원합니다. NetApp AFX 스토리지 시스템은 스토리지 계층 구현 방식에서 다른 ONTAP 기반 시스템(ASA, AFF, FAS)과 다릅니다.</block>
   <block id="c81dd6a3a0f519696cd274574c4268bd" category="paragraph">26.06 릴리스부터 ONTAP 균형 배치 기능을 활성화하여 ONTAP이 새 볼륨에 대한 애그리게이트를 선택하도록 할 수 있습니다. 균형 배치 기능은 ONTAP 9.19.1 이상 버전의 AFX 스토리지 시스템에 필요합니다. 요구 사항 및 예제는 <block ref="deaf97e40b723f17c6bbd60f58aa3b91" category="inline-link-macro-rx"></block>을 참조하십시오.</block>
   <block id="498001a61165984b9528afdebffef381" category="admonition">ontap-nas-economy를 사용하고 storagePrefix가 24자 이상인 경우, qtree에는 스토리지 접두사가 포함되지 않지만 볼륨 이름에는 포함됩니다.</block>
@@ -7323,4 +7322,5 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="69eb48c01ded3a79590a6ae42b855f34" category="section-title">iSCSI용 스토리지 클래스</block>
   <block id="791aed607ce65a32c8115590f604749d" category="list-text">기본 Kubernetes 클러스터에서 TridentTridentSnapshotInfoCR을 생성하여 내부 정보를 얻으십시오.</block>
   <block id="e239ae5dff4b309ee9e4b5a6800472ca" category="list-text">보조 Kubernetes 클러스터에서 _TridentMirrorRelationship_ CR의 _spec.state_ 필드를 _promoted_로 업데이트하고 _spec.volumeMappings[].promotedSnapshotHandle_을 스냅샷의 internalName으로 설정합니다.</block>
+  <block id="053cd9e68cf6c155e5b93616bc7e3e32" category="summary">Trident 설치 환경에서 ONTAP NAS 드라이버를 생성하고 사용하는 방법을 알아보세요. 이 섹션에서는 백엔드 구성 예제와 백엔드를 StorageClasses에 매핑하는 방법에 대한 세부 정보를 제공합니다.</block>
 </blocks>
