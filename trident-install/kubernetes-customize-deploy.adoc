@@ -140,14 +140,11 @@ Kubernetes API 서버와 통신하는 동안 컨트롤러가 사용하는 초당
 
 
 | `enableConcurrency`  a| 
-향상된 처리량을 위해 동시 Trident 컨트롤러 작업이 가능합니다.
+Trident 컨트롤러의 동시 작동을 지원하여 처리량을 향상시킵니다. 지원되는 드라이버에 대한 자세한 내용은 링크: https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[컨트롤러 확장성 문서]를 참조하십시오.
+| `resources` 
 
 
-NOTE: *기술 미리보기*: 이 기능은 실험적이며 현재 ONTAP-NAS(NFS만 해당) 및 ONTAP-SAN(통합 ONTAP 9의 NVMe) 드라이버를 사용한 제한된 병렬 워크플로를 지원합니다. 또한, ONTAP-SAN 드라이버(통합 ONTAP 9의 iSCSI 및 FCP 프로토콜)에 대한 기존 기술 미리보기도 지원합니다.
-| 거짓 
-
-
-| `resources`  a| 
+ a| 
 Trident 컨트롤러와 노드 포드에 대한 Kubernetes 리소스 제한과 요청을 설정합니다. Kubernetes에서 리소스 할당을 관리하기 위해 각 컨테이너와 사이드카에 대한 CPU와 메모리를 구성할 수 있습니다.
 
 리소스 요청 및 제한 구성에 대한 자세한 내용은 다음을 참조하세요.link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["포드 및 컨테이너에 대한 리소스 관리"^] .
@@ -252,15 +249,10 @@ resources:
         limits:
           cpu:
           memory:
-----
+----| `httpsMetrics` 
 
 
-| `httpsMetrics` | Prometheus 메트릭 엔드포인트에 HTTPS를 활성화합니다. | 거짓 
-
-
-| 호스트 네트워크  a| 
-Trident 컨트롤러에 대한 호스트 네트워킹을 활성화합니다. 이 기능은 멀티 홈 네트워크에서 프런트엔드와 백엔드 트래픽을 분리할 때 유용합니다.
-| 거짓 
+| Prometheus 메트릭 엔드포인트에 HTTPS를 활성화합니다. | 거짓 | 호스트 네트워크 
 |===
 
 NOTE: POD 매개 변수 포맷에 대한 자세한 내용은 을 참조하십시오 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["노드에 Pod 할당"^].

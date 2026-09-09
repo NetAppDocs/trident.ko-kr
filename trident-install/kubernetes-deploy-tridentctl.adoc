@@ -206,10 +206,7 @@ tridentctl install --enable-force-detach=true -n trident
 .동시 Trident 컨트롤러 작업 활성화
 [%collapsible]
 ====
-향상된 처리량을 위해 동시 Trident 컨트롤러 작업을 활성화하려면 다음을 추가하세요. `--enable-concurrency` 이 예에서 보듯이 설치 중에 옵션을 사용할 수 있습니다.
-
-
-NOTE: *기술 미리보기*: 이 기능은 실험적이며 현재 ONTAP-NAS(NFS만 해당) 및 ONTAP-SAN(통합 ONTAP 9의 NVMe) 드라이버를 사용한 제한된 병렬 워크플로를 지원합니다. 또한, ONTAP-SAN 드라이버(통합 ONTAP 9의 iSCSI 및 FCP 프로토콜)에 대한 기존 기술 미리보기도 지원합니다.
+처리량 향상을 위해 Trident 컨트롤러의 동시 작업을 활성화하려면 이 예시와 같이 설치 중에  `--enable-concurrency` 옵션을 추가하십시오. 지원되는 드라이버에 대한 자세한 내용은 링크: https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]를 참조하십시오.
 
 [listing]
 ----
