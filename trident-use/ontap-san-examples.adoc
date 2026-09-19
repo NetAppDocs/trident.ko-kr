@@ -34,7 +34,7 @@ NOTE: 오직 `ontap-san` 드라이버(iSCSI, NVMe/TCP 및 FC 프로토콜 포함
 | '내전' |  | 항상 1 
 
 
-| 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다 | `ontap-san` 또는 `ontap-san-economy` 
+| 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다. 생성 후에는 수정할 수 없습니다. 이 매개변수를 업데이트하려면 새 백엔드를 생성해야 합니다. | `ontap-san` 또는 `ontap-san-economy` 
 
 
 | 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + "_" + dataLIF 

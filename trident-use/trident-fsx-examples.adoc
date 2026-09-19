@@ -29,7 +29,7 @@ Amazon FSx for ONTAP의 백엔드 구성 옵션에 대해 알아보십시오. �
 | '내전' |  | 항상 1 
 
 
-| 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다 | `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `ontap-san`, `ontap-san-economy` 
+| 'torageDriverName'입니다 | 스토리지 드라이버의 이름입니다. 생성 후에는 수정할 수 없습니다. 이 매개변수를 업데이트하려면 새 백엔드를 생성해야 합니다. | `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, `ontap-san`, `ontap-san-economy` 
 
 
 | 백엔드이름 | 사용자 지정 이름 또는 스토리지 백엔드 | 드라이버 이름 + "_" + dataLIF 
