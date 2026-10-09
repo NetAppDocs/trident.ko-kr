@@ -19,6 +19,42 @@ WARNING: 설치 프로그램 zip 파일에 제공되는 Linux용 tridentctl 바�
 
 
 
+[[whats-new-in-26-06-2]]
+== 26.06.2의 새로운 기능
+
+NetApp Trident 및 Trident Protect의 새로운 기능, 개선 사항, 버그 수정 및 사용 중단 예정 기능에 대해 알아보세요.
+
+
+
+[[trident]]
+=== 트라이던트
+
+
+
+==== 향상된 기능
+
+* * Kubernetes *:
++
+** Kubernetes 1.37에 대한 지원이 추가되었습니다.
+
+
+
+
+
+
+==== 수정
+
+* * Kubernetes *:
++
+** Trident 컨트롤러가 재시작되거나 `TridentBackendConfig`이(가) 업데이트될 때 `enableConcurrency`이(가) `true`으로 설정된 상태에서 ONTAP-NAS 내보내기 정책 규칙이 자동으로 삭제되는 문제가 수정되었습니다. 이로 인해 이미 마운트된 볼륨이 고립될 수 있었습니다(link:https://github.com/NetApp/trident/issues/1166["문제 #1166"], link:https://github.com/NetApp/trident/issues/1179["문제 #1179"]).
+** 자격 증명 및 QoS 등 중요하지 않은 변경 사항에 대해 볼륨별 고아 스캔을 실행하여 대규모 백엔드에서 CSI 작업을 몇 시간 동안 차단할 수 있었던 백엔드 업데이트 문제를 수정했습니다. 이제 스캔은 SVM 또는 스토리지 접두사가 변경될 때만 실행됩니다.
+** CSI gRPC 요청 덤프, 시작 환경 덤프, CRD 컨트롤러에서 기록하는  `TridentBackendConfig` 사양 등 Trident 디버그 로그에 자격 증명이 나타나는 문제를 수정했습니다. 이제 시작 환경 덤프에는 Trident 자체  `TRIDENT_*` 변수 값만 기록되고 다른 변수는 이름으로 나열됩니다.
+
+
+
+
+
+
 [[whats-new-in-26-06-1]]
 == 26.06.1의 새로운 기능
 

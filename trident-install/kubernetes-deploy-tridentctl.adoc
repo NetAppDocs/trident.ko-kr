@@ -4,7 +4,7 @@ permalink: trident-install/kubernetes-deploy-tridentctl.html
 keywords: deploy, Trident, methods, tridentctl, windows 
 summary: '을 사용하여 Trident를 설치할 수 `tridentctl` 있습니다. 이 프로세스는 Trident에 필요한 컨테이너 이미지가 개인 레지스트리에 저장되어 있거나 저장되지 않은 설치에 적용됩니다.' 
 ---
-= tridentctl을 사용하여 설치합니다
+= tridentctl을 사용하여 Trident를 설치합니다
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

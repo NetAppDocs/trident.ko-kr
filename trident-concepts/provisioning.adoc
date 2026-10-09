@@ -4,7 +4,7 @@ permalink: trident-concepts/provisioning.html
 keywords: provisioning, Trident 
 summary: Trident에서의 프로비저닝은 기본적으로 두 가지 단계로 구성됩니다. 첫 번째 단계에서는 스토리지 클래스를 적절한 백엔드 스토리지 풀 세트와 연결하고 용량 할당 전에 필요한 준비 작업으로 수행됩니다. 두 번째 단계에서는 볼륨 생성 자체를 포함하며 보류 중인 볼륨의 스토리지 클래스와 연결된 스토리지 풀을 선택해야 합니다. 
 ---
-= 프로비저닝
+= Trident 볼륨 프로비저닝 프로세스
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

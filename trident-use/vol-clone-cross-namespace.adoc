@@ -4,7 +4,7 @@ permalink: trident-use/vol-clone-cross-namespace.html
 keywords: volref, volume reference, clone, pvc, pv, namespace, cvna, cross-namespace, sharing, volumesnapshots 
 summary: Trident를 사용하면 동일한 K8s 클러스터 안에 있는 다른 네임스페이스의 기존 볼륨 또는 볼륨스냅샷을 사용하여 새 볼륨을 생성할 수 있습니다. 
 ---
-= 네임스페이스 전체에 걸친 클론 볼륨
+= 네임스페이스 간 Trident 볼륨 복제
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

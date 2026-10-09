@@ -4,7 +4,7 @@ permalink: trident-reco/deploy-reco.html
 keywords: deployment, deploy, trident, namespace 
 summary: Trident를 구축할 때 여기에 나열된 권장 사항을 사용합니다. 
 ---
-= 구축
+= Trident 배포 권장 사항
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

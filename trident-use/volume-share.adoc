@@ -4,7 +4,7 @@ permalink: trident-use/volume-share.html
 keywords: volref, volume reference, share, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing 
 summary: Trident를 사용하면 기본 네임스페이스에 볼륨을 생성한 후 하나 이상의 보조 네임스페이스에서 공유할 수 있습니다. 
 ---
-= 네임스페이스 전체에서 NFS 볼륨을 공유합니다
+= 여러 네임스페이스에서 Trident NFS 볼륨 공유
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

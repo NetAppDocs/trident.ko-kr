@@ -4,7 +4,7 @@ permalink: trident-use/vol-expansion.html
 keywords: volumes, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion 
 summary: Trident를 사용하면 Kubernetes 사용자가 생성된 후에 볼륨을 확장할 수 있습니다. iSCSI, FC 및 NFS 볼륨을 확장하는 데 필요한 구성에 대한 정보를 확인할 수 있습니다. 
 ---
-= 볼륨 확장
+= Trident 볼륨 확장
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

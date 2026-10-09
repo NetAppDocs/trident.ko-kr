@@ -4,7 +4,7 @@ permalink: trident-reco/security-reco.html
 keywords: security, chap, trident, namespace, nve, nae, encryption, volume encryption, aggregate encryption 
 summary: 여기에 나열된 권장 사항을 사용하여 Trident 설치가 안전한지 확인하십시오. 
 ---
-= 보안
+= Trident 보안 권장 사항
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

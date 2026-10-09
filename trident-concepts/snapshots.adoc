@@ -4,7 +4,7 @@ permalink: trident-concepts/snapshots.html
 keywords: provisioning, Trident 
 summary: Trident에서 드라이버에 대한 볼륨 스냅샷 생성을 어떻게 처리하는지 자세히 알아보십시오. 
 ---
-= 볼륨 스냅숏
+= Trident 볼륨 스냅샷 생성
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

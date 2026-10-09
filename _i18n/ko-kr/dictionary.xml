@@ -532,7 +532,6 @@
   <block id="8ec47dab227d183e0d3ad0cd529d289b" category="paragraph">** 메트릭을 보고하지 않으려면 ('--generate-custom-YAML' 플래그를 사용하여) 사용자 지정 YAML을 생성하고 이를 편집하여 삼중류-main' 컨테이너에 대해 호출되는 '--metrics' 플래그를 제거해야 합니다.</block>
   <block id="e5879288a130fbd8d0b8682cfc375c4f" category="doc">스냅샷 작업</block>
   <block id="72a5926b7fb086fe87e93771f6620556" category="summary">tridentctl을 사용하여 백엔드 관리 작업을 수행하는 방법에 대해 알아보십시오.</block>
-  <block id="748a22b5f1312291ad55429ba4b809a0" category="doc">tridentctl을 사용하여 백엔드 관리를 수행합니다</block>
   <block id="aeeb03235358f0f4bf3be628bed08721" category="section-title">백엔드를 생성합니다</block>
   <block id="34746f7a1d24170eeebf5510a045d43d" category="inline-link-macro">백엔드 구성 파일</block>
   <block id="99b7232073a67a8c82304f979e3dc83f" category="paragraph">을 만든 후 <block ref="03c0b6ed8698193668e92f56e9be3efa" category="inline-link-macro-rx"></block>에서 다음 명령을 실행합니다.</block>
@@ -1534,7 +1533,6 @@
   <block id="05f901da7fdacb9ca59e3d7e2d40f98d" category="cell"><block ref="0f4137ed1502b5045d6083aa258b5c42" prefix="" category="inline-code"></block></block>
   <block id="a3ff66cf5848a34d56915c8e879a5d52" category="section-title">샘플 구성</block>
   <block id="5f82f4ab2783617b6e62bdd43d4a4e49" category="doc">ONTAP SAN 드라이버를 사용하여 백엔드를 구성할 준비를 합니다</block>
-  <block id="19eb1a22d8687def5fb4904d3402728a" category="doc">네임스페이스 전체에서 NFS 볼륨을 공유합니다</block>
   <block id="6b456f0abe4c4d2f0beb62e5985136cf" category="list-text">보안을 보장하기 위한 다양한 수준의 액세스 제어</block>
   <block id="6e5d93bf8e8aaaa4795a50f012bc8fea" category="list-text">모든 Trident NFS 볼륨 드라이버와 호환됩니다</block>
   <block id="0ece56dd58b5aabac15e0d0a30553bc0" category="list-text">tridentctl 또는 기타 기본 Kubernetes 기능이 아닌 기능에 의존하지 않습니다</block>
@@ -2848,7 +2846,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="ae7206c28f1d0ee5f9f116f1cfe22c54" category="cell">사용자 지정 볼륨 이름을 생성하는 템플릿입니다.</block>
   <block id="b797b4560e6c4ae4e13d035bbce23b4d" category="example-title">nameTemplate이 포함된 백엔드 구성 예</block>
   <block id="f1b9eac8c1d92956d7734db32c5e55d9" category="list-text">K8 노드의 정상 또는 비정상적으로 종료 (24.06)</block>
-  <block id="3c49604e542827bab74a3fdc9c521379" category="doc">볼륨 이름 및 레이블을 사용자 지정합니다</block>
   <block id="52929ef06c83a3071dc677c6076f8eb3" category="paragraph">사용자 지정 가능한 볼륨 이름 및 레이블 지원:</block>
   <block id="ba7ad86bd3d0a50a4a04306d941e6c28" category="list-text">볼륨 생성, 가져오기 및 클론 복제 작업입니다.</block>
   <block id="4c71628145ace597229ccf6ca6fdc8bf" category="section-title">사용자 지정 가능한 볼륨 이름의 주요 동작</block>
@@ -3371,7 +3368,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="9cf6e031ec85179307403b10689113c9" category="paragraph">그런 다음 를 사용하여 복구된 볼륨을 Trident로 가져올 수 <block ref="b0a81d9cb6f9ea994a428f959b11d3c6" category="inline-link-macro-rx"></block>있습니다.</block>
   <block id="3c520ff745f4964007340c06ce483d92" category="summary">Trident를 구축할 때 여기에 나열된 권장 사항을 사용합니다.</block>
   <block id="4ac9935cf245d076d6ef4babd8659321" category="paragraph"><block ref="c41296e544cd0faaa4fe4e8b22535287" category="inline-link-rx"></block> 서로 다른 응용 프로그램 간의 관리 분리 기능을 제공하며 리소스 공유에 대한 장벽입니다. 예를 들어, 한 네임스페이스의 PVC는 다른 네임스페이스에서 사용할 수 없습니다. Trident는 Kubernetes 클러스터의 모든 네임스페이스에 PV 리소스를 제공하므로 Privileges가 상승한 서비스 계정을 활용합니다.</block>
-  <block id="f53e7cca65962add5f429193e9cbdb7c" category="doc">Trident 통합</block>
   <block id="ef77c788fd33425198e77cd3ce7c4525" category="paragraph">Trident를 통합하려면 드라이버 선택 및 배포, 스토리지 클래스 설계, 가상 풀 설계, PVC(영구적 볼륨 클레임)가 스토리지 프로비저닝, 볼륨 운영, Trident를 사용하는 OpenShift 서비스 배포에 미치는 영향 등 통합이 필요합니다.</block>
   <block id="9586fb9f48cc64f580092d7123d5acad" category="paragraph">아래 표에서 모든 기능이 Trident를 통해 표시되는 것은 아닙니다. 용량 할당 후 기능을 적용하려면 스토리지 관리자가 일부 기능을 적용해야 합니다. 위 첨자 각주는 기능 및 드라이버별 기능을 구별합니다.</block>
   <block id="5b003b29dfd53276a5b816a47ab32348" category="paragraph">Trident는 ONTAP용 SAN 드라이버 2개를 제공합니다. 이러한 드라이버는 다음과 같습니다.</block>
@@ -5280,8 +5276,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="d11ec52e40490f88487a9042fdcfbce4" category="list-text">를 위해<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ,<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> , 그리고<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 드라이버, 각 영구 볼륨(PV)은 FlexVol volume 에 매핑됩니다. 결과적으로 볼륨 스냅샷은 NetApp 스냅샷으로 생성됩니다. NetApp 스냅샷 기술은 경쟁사의 스냅샷 기술보다 더 뛰어난 안정성, 확장성, 복구 가능성 및 성능을 제공합니다. 이러한 스냅샷 복사본은 복사본을 만드는 데 필요한 시간과 저장 공간 측면에서 매우 효율적입니다.</block>
   <block id="493d70b01045b3860d249e304254b4c7" category="paragraph">Trident 사용하면 VolumeSnapshots를 사용하여 새로운 PV를 만들 수 있습니다. 이러한 스냅샷에서 PV를 만드는 작업은 지원되는 ONTAP 백엔드에 대한 FlexClone 기술을 사용하여 수행됩니다. 스냅샷에서 PV를 생성할 때 백업 볼륨은 스냅샷의 부모 볼륨의 FlexClone 입니다. 그만큼<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> 드라이버는 Element 소프트웨어 볼륨 복제본을 사용하여 스냅샷에서 PV를 생성합니다. 여기서는 Element 스냅샷에서 복제본을 만듭니다.</block>
   <block id="25f96c73018ecdf4416a2540508d0a38" category="paragraph">사용 시<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ,<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> , 그리고<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> 저장 드라이버인 Trident 볼륨을 복제할 수 있습니다. 사용 시<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 또는<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 드라이버, 복제가 지원되지 않습니다. 기존 볼륨에서 새 볼륨을 생성하면 새로운 스냅샷이 생성됩니다.</block>
-  <block id="04405dc8db6e17d7853c7b251f054223" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.10.0</block>
-  <block id="d49d35d0964102edd30044f046d62050" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0</block>
   <block id="a3bfe8b87df4b85184ac2c726bd7b15e" category="list-text"><block ref="1a368feb8bb72ef66bb194b43d0a15b3" prefix="" category="inline-code"></block>*</block>
   <block id="e344165681ff8191ed4faed24ded7cc3" category="paragraph">Trident 클러스터의 각 워커 노드에서 단일 컨트롤러 포드와 노드 포드로 실행됩니다. Trident 볼륨을 마운트하려는 모든 호스트에서 노드 포드를 실행해야 합니다.</block>
   <block id="2cfd796902655e533881e53b6b9743ed" category="inline-link-macro">Trident 사용하여 상태 저장 애플리케이션의 장애 조치 자동화</block>
@@ -6389,9 +6383,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="945c53097aed6aee6897384c32c13596" category="paragraph">예를 들어, 이 정책은<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>을<block ref="b3b9f60c2eb049d3bcbddd22d73210ce" prefix=" " category="inline-code"></block>로 설정하지만, Trident는 이 정책을 사용하는 모든 SAN 볼륨에 대해 51MB의 증가분을 적용합니다.</block>
   <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">이러한 자동 조정을 방지하려면 <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>을 50 MiB보다 큰 값으로 설정하십시오.</block>
   <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">자동 계층화 구성</block>
-  <block id="93284b31b63cc86c59eeb4dcd6ba1751" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.1.0</block>
-  <block id="f5345a3e1ca4c50ed544fae4c14150b1" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.0.0</block>
-  <block id="ed2e3a3511b1047c788e7fd621778ee2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0</block>
   <block id="0adb26270c00fc572774f5cb57d01573" category="inline-link-macro">26.02</block>
   <block id="e352a332a817691cf8394c9b1288306f" category="paragraph"><block ref="e352a332a817691cf8394c9b1288306f" category="inline-link-macro-rx"></block></block>
   <block id="f1462e5be0262f51cdc6fb6c3b5027dc" category="summary">Red Hat OpenShift를 사용하는 경우 커뮤니티 오퍼레이터, Helm 기반 설치 또는 수동으로 배포한 오퍼레이터에서 인증된 Trident 오퍼레이터로 전환할 수 있습니다.</block>
@@ -6630,10 +6621,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="8e31ed98521d2fbd01629de60bdbfd6a" category="list-text">Go 런타임: <block ref="472bd143483bc49bc89effbd314435c0" category="inline-link-macro-rx"></block></block>
   <block id="278b5284fc6585f71203297ebab6500e" category="inline-link-macro">CVE-2025-23109</block>
   <block id="fd2c12a453dd202f7117b96858090a49" category="list-text">추가 종속성: <block ref="7beaa9a23a5ebb4abc880f48947240a7" category="inline-link-macro-rx"></block></block>
-  <block id="1f07946fee6ac5cb85e38a3da3d8db2e" category="list-text">Kubernetes 1.36는 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
-  <block id="4713d9468516722d04cb8a63424d6222" category="list-text">Kubernetes 1.27 - 1.36</block>
-  <block id="203760c50a5659765fa822dc460e7e7b" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.28.x - 1.36.x</block>
-  <block id="f3157f5bea9295ba633b817f5c01eba4" category="paragraph">1.27 - 1.36</block>
   <block id="bd36045805a85f9665960a0f6f9e955f" category="list-text"><block ref="bd36045805a85f9665960a0f6f9e955f" category="inline-link-macro-rx"></block></block>
   <block id="7244beaf9a5f0b906f65ac443dbf07a0" category="paragraph">FlexGroups 및 FlexGroups에 적합한 워크로드에 대한 자세한 내용은<block ref="02927f5d2a03bd36432bf247f38d70d3" category="inline-link-rx"></block>을 참조하십시오.</block>
   <block id="714ad635b7b855ea6b214ed7b344a93a" category="paragraph">Cloud Volumes ONTAP은 클라우드에서 ONTAP 데이터 관리 소프트웨어를 실행하는 소프트웨어 전용 스토리지 어플라이언스입니다. Cloud Volumes ONTAP을 프로덕션 워크로드, 재해 복구, DevOps, 파일 공유 및 데이터베이스 관리에 사용할 수 있습니다. 스토리지 효율성, 고가용성, 데이터 복제, 데이터 계층화 및 애플리케이션 일관성을 제공하여 엔터프라이즈 스토리지를 클라우드로 확장합니다.</block>
@@ -6687,7 +6674,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="ab69d9120992b9296c38d9e4447f1558" category="paragraph-title">게스트 클러스터에 Trident를 직접 설치합니다.</block>
   <block id="d09686be8886e8eaf49a77f8b1785c59" category="paragraph">Trident를 게스트(테넌트) 클러스터에 직접 설치할 수도 있습니다. 스냅샷, 클론, 볼륨 크기 조정 및 가져오기와 같이 <block ref="9b2a6a8c098cece12ac0a8f284a1a269" prefix=" " category="inline-code"></block>에서 자체적으로 제공하지 않는 전체 Trident 기능 세트가 필요한 경우 게스트 클러스터에 Trident를 설치하십시오.</block>
   <block id="f02d97ba74a486c6f9a21ae16d123b52" category="paragraph">게스트 클러스터에서는 IP 기반 프로토콜(NFS, iSCSI, NVMe/TCP)을 사용합니다. 게스트 노드는 파이버 채널(FC)에 직접 연결할 수 없는 가상 머신이므로 게스트 클러스터는 FC를 지원하지 않습니다.</block>
-  <block id="3cbfe5af574efdb4391d1d3e321c8cee" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0</block>
   <block id="e9d36c266026dc04d43783120d0a2d1d" category="paragraph">Linux 호스트에 로그인하여 정상적으로 작동하는 <block ref="958ebeab180637e89445160bac2d22e7" category="inline-link-macro-rx"></block>를 관리하고 있는지, 그리고 필요한 권한이 있는지 확인하십시오.</block>
   <block id="0d8f30017a3c82df9a5d969fa5e4586f" category="paragraph">설치를 시작하기 전에 Linux 호스트에 로그인하여 작동 중인 <block ref="f546aa86570a808d23361d7f4e2a08c3" category="inline-link-macro-rx"></block>를 관리하고 있는지, 필요한 권한이 있는지 확인합니다.</block>
   <block id="4badcdbd19fc30efbca0c1955df11f87" category="list-text">이제 Kubernetes가 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 먼저 업그레이드하십시오.</block>
@@ -7203,10 +7189,7 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="648540f1a67ebba0071e70944d7527c2" category="paragraph"><block ref="648540f1a67ebba0071e70944d7527c2" category="inline-link-macro-rx"></block></block>
   <block id="172ebadfc5f13c0aff9b7f172bc4fed4" category="cell">2027년 7월</block>
   <block id="4aab0cfeaa9a8262994350900bdd20f2" category="cell">2028년 7월</block>
-  <block id="f6d7c73fe3fc66fa560e7262f79f60ae" category="section-title">Trident 26.06에 필요한 컨테이너 이미지</block>
-  <block id="f87a5c52c8ee3e84d33252d80679b335" category="list-text">docker.io/netapp/trident:26.06.0</block>
   <block id="01d86b54453ee9aefd6e3ed4a3dc0dc2" category="list-text">docker.io/netapp/trident-autosupport:26.06</block>
-  <block id="9a3b823ceeb6fcbe9a5ac0a50b995ed0" category="list-text">docker.io/netapp/trident-operator:26.06.0(선택 사항)</block>
   <block id="c31dc22d9ccf9395630afa7de351d6bf" category="cell"><block ref="4e9f324b7febae0727b9d412cb49fa13" prefix="" category="inline-code"></block></block>
   <block id="bcf817488b594e4daf83db1e5511242d" category="section-title">Trident 26.06에 대한 중요 정보</block>
   <block id="a67a4c76b07caa7907851893a5518350" category="paragraph"><block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>에서 <block ref="6225334d80f70f493ad5e35aee5b3e8c" prefix=" " category="inline-code"></block>를 업데이트하여 이미지 레지스트리의 위치를 반영하십시오. <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block>는 하나의 레지스트리 또는 여러 레지스트리에 위치할 수 있지만, 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 예를 들면 다음과 같습니다.</block>
@@ -7331,4 +7314,56 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="ff7ba160cdd39f6a0b7fe88ef8878c45" category="paragraph">생성 후에는 수정할 수 없습니다. 이 매개변수를 업데이트하려면 새 백엔드를 생성해야 합니다.</block>
   <block id="ce29b5f6c6b616b686e7705a75655bb6" category="cell">스토리지 드라이버의 이름입니다. 생성 후에는 수정할 수 없습니다. 이 매개변수를 업데이트하려면 새 백엔드를 생성해야 합니다.</block>
   <block id="aa7fcf992c04e66c97a2ecaecf8e9079" category="cell"><block ref="47cb44be55a0dffa15dfc900a4c687be" prefix="" category="inline-code"></block>참고: 백엔드 ID 및 볼륨 이름 지정에 영향을 미치는 백엔드 구성 매개변수(예:<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block> 및<block ref="ed66bef2b107983b6e4066fddf8c45c3" prefix=" " category="inline-code"></block>)는 생성 후 변경할 수 없습니다. 이러한 매개변수를 업데이트하려면 새 백엔드를 생성해야 합니다.</block>
+  <block id="93fbc816e8bf100e5538c460cbfded25" category="doc">Trident 볼륨 프로비저닝 프로세스</block>
+  <block id="7abc4557b186fa5fe308fb648a0c1759" category="doc">Trident 볼륨 스냅샷 생성</block>
+  <block id="4d701192205744a3a09c06efb968dc59" category="doc">Trident 가상 스토리지 풀 구성</block>
+  <block id="92cde28a49290d108fcbcc24221bac54" category="doc">Trident 볼륨 액세스 그룹 관리</block>
+  <block id="59d40127a6af11747a793d61df5338e5" category="doc">Trident 및 Kubernetes와 NetApp 제품 통합</block>
+  <block id="0aa4c54ee2846cd1ee10e094f05cfa48" category="list-text">Kubernetes 1.37는 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 먼저 업그레이드하십시오.</block>
+  <block id="fb969327dd7c5284cf39ef2077642427" category="list-text">Kubernetes 1.27 - 1.37</block>
+  <block id="1f8bad982c95fa13c1c3b93510b02a5e" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.28.x - 1.37.x</block>
+  <block id="d03983e9fca4277cf0919e8bea0c196c" category="paragraph">1.27 - 1.37</block>
+  <block id="ba8ebafc2389dabfa3286dbc34aec82b" category="section-title">Trident 26.06.2에 필요한 컨테이너 이미지</block>
+  <block id="df499232b0659c7b92a4bb7def65662d" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0, v1.37.0</block>
+  <block id="add431fb6c7231214d4cc5b3f76a2a96" category="list-text">docker.io/netapp/trident:26.06.2</block>
+  <block id="2c3f6f002722bde0c2e5610ddd0a46b8" category="list-text">docker.io/netapp/trident-operator:26.06.2(선택 사항)</block>
+  <block id="39b839ecfa8ad2cd1a2a661969868248" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.11.0</block>
+  <block id="a24cc2fae2df54a2712abf546e031441" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.18.0</block>
+  <block id="d61443f5de6e680d2193b40d5e49f950" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.3.0</block>
+  <block id="ed11c5a031bd827baa31f76e4b76e814" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.1.0</block>
+  <block id="6aa4aa1c57132c60ac255cec26f70cf2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.6.0</block>
+  <block id="9e2275a440e88168522f5dec7521d5b2" category="doc">Trident tridentctl 설치 사용자 정의</block>
+  <block id="66a65e8f59856ace86e7d0ab11d6ee2f" category="doc">Trident 오퍼레이터 업그레이드 워크플로 이해</block>
+  <block id="835d266e43d7fc9ad169db97e5f68bb6" category="doc">tridentctl을 사용하여 Trident 업그레이드</block>
+  <block id="17bc6151a1580a16ea3a0bb054635da1" category="doc">Trident 데이터 보호 및 재해 복구</block>
+  <block id="b6e5e8475937d3c120e40df57517dc2b" category="doc">Trident 배포 권장 사항</block>
+  <block id="d3eb63882efa67a778e4946e3f147dbe" category="doc">Trident를 Kubernetes와 통합하십시오</block>
+  <block id="6765fc072b17914d8078ae519719dac3" category="doc">Trident Kerberos 전송 중 암호화</block>
+  <block id="85c3ba6a32bf7bad0c1de9edded9a5c9" category="doc">Trident Linux Unified Key Setup(LUKS)</block>
+  <block id="d51e7b5d90845c1a14a02bc8865f816a" category="doc">Trident 보안 권장 사항</block>
+  <block id="11c409432b2783da745e2f3c5305a019" category="doc">Trident 스토리지 구성 모범 사례</block>
+  <block id="0aa58f379bc7aae0f4d89e420ac722aa" category="section-title">26.06.2의 새로운 기능</block>
+  <block id="9fed2c5f98e24bcd80d1becb14f7b9b9" category="list-text">Kubernetes 1.37에 대한 지원이 추가되었습니다.</block>
+  <block id="fb40a6ba370ad5533a7ce3c5414b2332" category="inline-link-macro">문제 #1166</block>
+  <block id="f97a774ca034ed32bdbb15bc881ffb74" category="inline-link-macro">문제 #1179</block>
+  <block id="8ad55c17d13f4d9d068c35356fccb76e" category="list-text">Trident 컨트롤러가 재시작되거나<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block>이(가) 업데이트될 때<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block>이(가)<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>으로 설정된 상태에서 ONTAP-NAS 내보내기 정책 규칙이 자동으로 삭제되는 문제가 수정되었습니다. 이로 인해 이미 마운트된 볼륨이 고립될 수 있었습니다(<block ref="2f681c0904e60dd8ca3ac232198e1fde" category="inline-link-macro-rx"></block>, <block ref="2bde1c55e1c876ea9a5b30e5998e20a4" category="inline-link-macro-rx"></block>).</block>
+  <block id="1ff7a86a442328eb4c73362f63bafe93" category="list-text">자격 증명 및 QoS 등 중요하지 않은 변경 사항에 대해 볼륨별 고아 스캔을 실행하여 대규모 백엔드에서 CSI 작업을 몇 시간 동안 차단할 수 있었던 백엔드 업데이트 문제를 수정했습니다. 이제 스캔은 SVM 또는 스토리지 접두사가 변경될 때만 실행됩니다.</block>
+  <block id="4cd96d766317606681a187daeabb7e65" category="list-text">CSI gRPC 요청 덤프, 시작 환경 덤프, CRD 컨트롤러에서 기록하는 <block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> 사양 등 Trident 디버그 로그에 자격 증명이 나타나는 문제를 수정했습니다. 이제 시작 환경 덤프에는 Trident 자체 <block ref="9587dd0b7e1ce8ba3ecc5647ca653baf" prefix=" " category="inline-code"></block> 변수 값만 기록되고 다른 변수는 이름으로 나열됩니다.</block>
+  <block id="878e26ce593b81438793485a524bfdd4" category="doc">kubectl을 사용하여 Trident 백엔드를 관리하십시오.</block>
+  <block id="ef729a4d7079ef5170ca33d7a2b2ff5b" category="doc">tridentctl을 사용하여 Trident 백엔드를 관리하십시오.</block>
+  <block id="b0fdb9fb8ca9c19b8f0e60918e66c855" category="doc">Trident 백엔드 관리 방식을 선택하세요</block>
+  <block id="f94175d68584fa6fbcca90393df1f78c" category="doc">Trident 백엔드 구성</block>
+  <block id="efbe44f08e5bb483af8587f9aa173ffb" category="doc">Trident 스토리지 클래스를 생성합니다</block>
+  <block id="95f086d73ced21ab39864fbcdafc5593" category="doc">Trident 스토리지 클래스 관리</block>
+  <block id="3262a5dac33954f8bce5abaf56b06897" category="doc">Trident 스토리지 운영 모니터링</block>
+  <block id="ce8c3a3d9a1addd78a106ad7348abd3b" category="doc">네임스페이스 간 Trident 볼륨 복제</block>
+  <block id="4c4aeb85b1b22846a524105b5bf4631f" category="doc">Trident 볼륨 이름 및 레이블 사용자 지정</block>
+  <block id="53ec4d965298dbd0a7cd7654f4cffcda" category="doc">Trident 볼륨 확장</block>
+  <block id="26dc9e2c8cafa5e40766157e25e3db26" category="doc">Trident 볼륨 그룹 스냅샷 작업</block>
+  <block id="451317abd90ea542d26ebad3c7e3b63a" category="doc">Trident 볼륨 가져오기</block>
+  <block id="4f180ac6611922295d16ff6c0c4c68a6" category="doc">Trident 볼륨 작업을 수행합니다.</block>
+  <block id="dc5de362a9aac689498b3450bb50f2d1" category="doc">Trident 볼륨 프로비저닝</block>
+  <block id="e52c3cee59da6b9b8b87a9baa0cd4b45" category="doc">Trident 스냅샷 작업</block>
+  <block id="2e521bb61d9127d4460f3262267cd834" category="doc">여러 네임스페이스에서 Trident NFS 볼륨 공유</block>
+  <block id="64fc6c7cb21b21d1926676a7cc84c9cf" category="doc">Trident 워커 노드를 준비합니다</block>
 </blocks>

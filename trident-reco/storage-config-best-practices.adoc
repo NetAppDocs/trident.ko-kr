@@ -4,7 +4,7 @@ permalink: trident-reco/storage-config-best-practices.html
 keywords: kubernetes, clusters, nodes, components, master, compute 
 summary: Kubernetes 클러스터는 일반적으로 두 가지 유형의 노드로 구성되며, 각 노드는 다양한 기능의 측면을 담당합니다. 
 ---
-= 스토리지 구성
+= Trident 스토리지 구성 모범 사례
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

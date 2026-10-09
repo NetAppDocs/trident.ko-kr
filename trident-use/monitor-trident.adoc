@@ -4,7 +4,7 @@ permalink: trident-use/monitor-trident.html
 keywords: telemetry, Trident, monitor, metrics, health, volume usage, autosupport 
 summary: Trident는 Trident의 성능을 모니터링하는 데 사용할 수 있는 Prometheus 메트릭 엔드포인트 세트를 제공합니다. 
 ---
-= Trident 모니터링
+= Trident 스토리지 운영 모니터링
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
