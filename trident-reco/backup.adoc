@@ -116,7 +116,7 @@ Trident는 SnapMirror 복제 관계를 구성할 수 없지만, 스토리지 관
 그런 다음 를 사용하여 복구된 볼륨을 Trident로 가져올 수 link:../trident-use/vol-import.html["Tridentctl 볼륨 가져오기"]있습니다.
 
 
-NOTE: 에서 가져오기가 지원되지 않습니다 `ontap-nas-economy`,  `ontap-san-economy`, 또는 `ontap-flexgroup-economy` 드라이버.
+NOTE: 볼륨 가져오기는  `ontap-san-economy` 드라이버에서 지원됩니다.  `ontap-nas-economy` 드라이버를 사용한 Qtree 가져오기는 기술 미리 보기 기능이며 프로덕션 용도로는 지원되지 않습니다. 가져오기는  `ontap-flexgroup-economy` 드라이버에서 지원되지 않습니다. 자세한 내용은 link:../trident-use/vol-import.html["Trident 볼륨 가져오기"]를 참조하십시오.
 
 
 

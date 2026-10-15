@@ -164,14 +164,24 @@ metadata:
   name: csi-nas
 spec:
   state: established
+  replicationPolicy: MirrorAllSnapshots
+  replicationSchedule: 5min
   volumeMappings:
   - localPVCName: csi-nas
     remoteVolumeHandle: "datavserver:trident_pvc_3bedd23c_46a8_4384_b12b_3c38b313c1e1"
 ----
 +
-Trident에서 구성된 관계 정책 이름(또는 ONTAP의 경우 기본값)을 사용하여 SnapMirror 관계를 생성하고 초기화합니다.
+TMR `spec`에는 4개의 최상위 필드가 있습니다. 원하는 관계 상태를 설정하는  `state`(<<볼륨 복제 상태입니다>> 참조), 로컬 PVC를 원격 볼륨 핸들과 연결하는  `volumeMappings`, 그리고 아래에 설명된 선택적  `replicationPolicy` 및  `replicationSchedule` 필드입니다.
 
-.. 이전에 생성한 StorageClass를 사용하여 PVC를 생성하여 보조(SnapMirror 대상) 역할을 합니다.
+
+
+
+
+ `replicationPolicy` 및  `replicationSchedule` 필드는 선택 사항입니다.  `replicationPolicy`를 ONTAP의 비동기식 SnapMirror 정책 이름으로 설정하고  `replicationSchedule`를 ONTAP 스케줄 이름으로 설정하십시오. 두 필드 중 하나라도 생략하면 Trident는 백엔드에 구성된 해당 복제 정책 또는 스케줄을 사용합니다. 관계를 생성할 때 이러한 필드를 설정하십시오. 관계가 설정된 후에는 정책이나 스케줄을 변경할 수 없습니다. 다른 설정을 사용하려면 TMR을 삭제하고 다시 생성하십시오.
+
+Trident는 구성된 복제 정책 및 일정을 사용하여 SnapMirror 관계를 생성하고 초기화합니다.
+
+. 이전에 생성한 StorageClass를 사용하여 PVC를 생성하여 보조(SnapMirror 대상) 역할을 합니다.
 +
 .예
 [source, yaml]
@@ -192,8 +202,6 @@ storageClassName: csi-nas
 ----
 +
 Trident는 TridentMirrorRelationship CRD를 확인하고 관계가 없는 경우 볼륨을 생성하지 못합니다. 이 관계가 있으면 Trident은 새로운 FlexVol volume을 MirrorRelationship에 정의된 원격 SVM과 피어링된 SVM에 배치하도록 보장합니다.
-
-
 
 
 
@@ -261,7 +269,7 @@ spec:
 
 .단계
 . 보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.remoteVolumeHandle_field 값이 업데이트되었는지 확인합니다.
-. 보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.mirror_field를 로 `reestablished`업데이트합니다.
+. 보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.state_ 필드를  `reestablished`로 업데이트합니다.
 
 
 

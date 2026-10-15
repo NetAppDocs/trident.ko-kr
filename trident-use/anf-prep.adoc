@@ -25,6 +25,7 @@ Trident는 다양한 Azure 클라우드 환경에서 Azure NetApp Files 백엔�
 
 * Azure Commercial
 * Azure Government(Azure Government/MAG)
+* Azure China
 
 
 환경을 준비할 때 Azure 구독, ID 구성 및 Azure NetApp Files 리소스가 적절한 Azure 클라우드 환경에 생성되었는지 확인하십시오.

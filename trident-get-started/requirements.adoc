@@ -268,6 +268,30 @@ link:../trident-reference/ports.html["Trident 포트"]
 
 에어갭 설치의 경우 다음 목록은 Trident 설치에 필요한 컨테이너 이미지의 참조입니다. 명령을 사용하여 `tridentctl images` 필요한 컨테이너 이미지 목록을 확인합니다.
 
+Trident 26.06 버전부터 Kubernetes 1.37을 지원합니다. 아래 26.06.2 이미지 목록에는 Kubernetes 1.37용 이미지가 포함되어 있습니다.
+
+
+
+[[container-images-required-for-trident-26-06-0]]
+=== Trident 26.06.0에 필요한 컨테이너 이미지
+
+[cols="2"]
+|===
+| Kubernetes 버전 | 컨테이너 이미지 
+
+
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
+* docker.io/netapp/trident:26.06.0
+* docker.io/netapp/trident-autosupport:26.06
+* docker.io/netapp/trident-operator:26.06.0(선택 사항)
+* registry.k8s.io/sig-storage/csi-attacher:v4.11.0
+* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0
+* registry.k8s.io/sig-storage/csi-provisioner:v6.3.0
+* registry.k8s.io/sig-storage/csi-resizer:v2.1.0
+* registry.k8s.io/sig-storage/csi-snapshotter:v8.6.0
+
+
+|===
 
 
 [[container-images-required-for-trident-26-06-2]]

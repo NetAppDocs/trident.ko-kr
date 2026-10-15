@@ -2145,7 +2145,6 @@
   <block id="cceb49886fed38f241928d51abab95a2" category="section-title">볼륨 복제 및 복구</block>
   <block id="815f28e53ebfb423dfe835a845095bf6" category="inline-link-macro">ONTAP SnapMirror 복제 및 복구</block>
   <block id="c3c343b5a84229bd5095fd09f2afc5f5" category="inline-link-macro">Tridentctl 볼륨 가져오기</block>
-  <block id="d8d9dfeae772da34290b750d0f848a26" category="admonition">에서 가져오기가 지원되지 않습니다<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>, <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>, 또는<block ref="70d5dbddc55e3700ddbc8d21f0de22a3" prefix=" " category="inline-code"></block> 드라이버.</block>
   <block id="b489b293d6cbe8b86835d3cac8c315fb" category="section-title">스냅샷 데이터 보호</block>
   <block id="f332d72a4b78e34e31131f3a98c98053" category="paragraph">다음을 사용하여 데이터를 보호하고 복원할 수 있습니다.</block>
   <block id="97fb495fd3b6672c40bb0092ca102eca" category="list-text">PVS(영구 볼륨)의 Kubernetes 볼륨 스냅샷을 생성하는 외부 스냅샷 컨트롤러 및 CRD</block>
@@ -4303,7 +4302,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="ce01c03f932076e82348fc5aaefacc7d" category="list-text">보조 Kubernetes 클러스터에서 다음 단계를 수행합니다.</block>
   <block id="dbe7fac150e57be9bc0d8e046792f4c3" category="list-text">trident.netapp.io/replication: true 매개 변수를 사용하여 StorageClass 를 만듭니다.</block>
   <block id="01d68e0f9630c032dc8a33358e46e65b" category="list-text">대상 및 소스 정보를 사용하여 MirrorRelationship CR을 생성합니다.</block>
-  <block id="b4dcd7f617380594be36d544e6823841" category="paragraph">Trident에서 구성된 관계 정책 이름(또는 ONTAP의 경우 기본값)을 사용하여 SnapMirror 관계를 생성하고 초기화합니다.</block>
   <block id="4ba5d2a91c95149a7ad924ebd0d9503d" category="list-text">이전에 생성한 StorageClass를 사용하여 PVC를 생성하여 보조(SnapMirror 대상) 역할을 합니다.</block>
   <block id="14c271d9e62dcf6baaab0fde456f080f" category="paragraph">Trident는 TridentMirrorRelationship CRD를 확인하고 관계가 없는 경우 볼륨을 생성하지 못합니다. 이 관계가 있으면 Trident은 새로운 FlexVol volume을 MirrorRelationship에 정의된 원격 SVM과 피어링된 SVM에 배치하도록 보장합니다.</block>
   <block id="e71d1a5cbaac30e63ed507e4b62c705f" category="section-title">볼륨 복제 상태입니다</block>
@@ -4323,7 +4321,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">페일오버 후 미러 관계를 복구합니다</block>
   <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">미러 관계를 복구하기 전에 새 1차 사이트로 만들 측면을 선택합니다.</block>
   <block id="1c7011adbcc0afa258396aff4f10266b" category="list-text">보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.remoteVolumeHandle_field 값이 업데이트되었는지 확인합니다.</block>
-  <block id="ffb25f01fda2538ae98bc0c4b4d465a6" category="list-text">보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.mirror_field를 로<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>업데이트합니다.</block>
   <block id="41a593c0bede63aac2726a18e4599087" category="section-title">추가 작업</block>
   <block id="567147b40ff26562a6dfcddbde29e62e" category="paragraph">Trident는 1차 볼륨과 2차 볼륨에서 다음 작업을 지원합니다.</block>
   <block id="253093d00b66ff2357df5085c04b2758" category="section-title">1차 PVC를 새로운 2차 PVC로 복제합니다</block>
@@ -5287,7 +5284,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e88be9be38b264da972dbe7aed0d8b93" category="list-text">컨테이너 이름은 포드 사양에 나타나는 대로 나열됩니다.</block>
   <block id="ea59db5901a073416d8796bed04dddb5" category="list-text">사이드카는 각 주요 컨테이너 아래에 나열되어 있습니다.</block>
   <block id="46dae802e97f6d812c44ca5bb195ea47" category="list-text">TORC를 확인하세요<block ref="7b54c4f2d7fe24eb4666be34acbf75ac" prefix=" " category="inline-code"></block> 현재 적용된 값을 보려면 필드를 클릭하세요.</block>
-  <block id="4a60d2fff997f6f3d9f8c6079b571355" category="section-title">Trident 25.10에 대한 중요 정보</block>
   <block id="90c0ecd3ada12b8e2971f5a66c8850b9" category="cell">강제 분리 기능을 활성화할 수 있습니다. 노드 상태 점검(NHC) 연산자와 통합하여 강제 분리 프로세스를 자동화할 수 있습니다. 자세한 내용은 다음을 참조하세요.<block ref="b527eafc73367312d2cf15ed698bf909" category="inline-link-macro-rx"></block> .</block>
   <block id="c1ece52281680ed5cdb19a2c782c2f54" category="cell"><block ref="55b558c7ef820e6e00e5993b9e55d93b" prefix="" category="inline-code"></block></block>
   <block id="ca805cfeede3ffd0058179d42f85ee4e" category="paragraph">Trident 컨트롤러, 노드 및 운영자 포드에 대한 Kubernetes 리소스 제한 및 요청을 설정합니다. Kubernetes에서 리소스 할당을 관리하기 위해 각 컨테이너와 사이드카에 대한 CPU와 메모리를 구성할 수 있습니다.</block>
@@ -5886,7 +5882,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e447b6c9645ce6cd63337d813a552cd5" category="sidebar">Trident ASA r2 스토리지 시스템 지원</block>
   <block id="60706cc94c04d32db6c18b4fb8b21f21" category="inline-link">Trident 25.10</block>
   <block id="69a4986cbe93f4162ce953d8e917b215" category="list-text"><block ref="69a4986cbe93f4162ce953d8e917b215" category="inline-link-rx"></block></block>
-  <block id="28b62bff68083dad22bdf1acf812f48a" category="list-text">Kubernetes 1.35는 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 업그레이드하십시오.</block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*: (_선택 사항_) <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>로 설정하면 스케줄 생성 시 일회성으로 즉시 기준선 실행(보존 설정에 따른 백업 및/또는 스냅샷)을 트리거합니다. 기본값은 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>입니다. 이 설정은 이후 반복 실행에는 영향을 미치지 않습니다.</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">즉시 실행이 포함된 스케줄에 대한 YAML 예:</block>
   <block id="ea89dfc546da2da95449976a3262efd9" category="list-text">*즉시 기준선 보호*: <block ref="40c288e5937b634afc8b0a225fcdb4cf" prefix=" " category="inline-code"></block>을 사용하여 첫 번째 예약 실행 시간을 기다리지 않고 예약이 생성될 때 즉시 초기 백업 또는 스냅샷을 생성합니다. 기본값은 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>입니다.</block>
@@ -6399,9 +6394,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="5a450639fa89231b036826f5af7d71cd" category="paragraph">설치 패키지의<block ref="0d472c887b61206765c1caa63a9290ec" prefix=" " category="inline-code"></block>를 사용하여 수동으로 운영자를 배포하여 Trident를 설치한 경우 동일한 매니페스트를 삭제하여 제거하십시오.</block>
   <block id="038293ff84b09b1a0092a33fdf412425" category="list-text">번들 매니페스트를 사용하여 운영자 배포를 삭제합니다.</block>
   <block id="f5c23abe35c557b95db4b3fce1038b0e" category="sidebar">OpenShift 인증 Trident 운영자로 전환하세요</block>
-  <block id="fd271eb2e0c07a35a036e5d3d38f7295" category="list-text"><block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>를 사용하여 배포 및 이미지 레지스트리 위치에 이름을 지정하십시오. <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block>는 하나의 레지스트리 또는 여러 레지스트리에 위치할 수 있지만, 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 예시에서 <block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block>는 설치하려는 Trident 버전입니다.</block>
-  <block id="b1a6996825cda91a559712aa47487d56" category="paragraph">예를 들어, <block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>의 기본값을 변경하려면 다음 명령을 실행하십시오. 여기서 <block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block>는 설치하려는 Trident 버전입니다.</block>
-  <block id="4b4a2f07a31fb7ce67a051d38cdb07a1" category="list-text"><block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>를 사용하고 다음 예시와 같이 배포 이름을 지정하십시오. 여기서 <block ref="5b8b118bf0117b802a69cacdb76c3dc5" prefix=" " category="inline-code"></block>는 설치하려는 Trident 버전입니다.</block>
   <block id="16b97664881a67a27dea071f7290ff06" category="paragraph">Trident는 StorageClass 정의에서 백엔드 구성을 가져옵니다. StorageClass를 적용하면 Trident는 필수 매개변수를 검증하고 백엔드를 생성한 다음 StorageClass에 상태 주석을 추가합니다.</block>
   <block id="3d4d8632d9ddb90edb43db4b7c53a227" category="paragraph">Trident는 VolumeSnapshotClass를 한 번만 생성합니다. Trident는 이후의 StorageClasses에 대해 동일한 VolumeSnapshotClass를 재사용합니다.</block>
   <block id="6c60936b230f8221d8dfdd63e27e1ff4" category="paragraph">자동 백엔드 생성을 트리거하려면 StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> 섹션에서 필요한 매개변수를 정의하십시오.</block>
@@ -6483,7 +6475,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="218a0c4bd3daf2a2ce3574281b7ca0b2" category="paragraph"><block ref="d5658c9dfbfb4ef585182e92445a8919" category="inline-link-macro-rx"></block>을(를) 검토하여 설치 사전 요구 사항을 충족했는지, 그리고 사용 환경에 맞는 올바른 설치 옵션을 선택했는지 확인하십시오.</block>
   <block id="b7bec5d0d77ca93cd7a03308720c371e" category="paragraph">수동으로 배포하든 Helm을 사용하든, Trident operator는 설치를 간소화하고 Trident 리소스를 동적으로 관리하는 훌륭한 방법입니다. 속성을 사용하여 <block ref="a1f2adae0e8434fa57fbe3e21b52345e" category="inline-link-macro-rx"></block>도 할 수 있으며, 이는 <block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 커스텀 리소스(CR)에서 가능합니다.</block>
   <block id="778f8fc1f45a4176e0a6dc6c0c8048d8" category="paragraph">Trident를 설치 및 업그레이드하는 많은 <block ref="2b6c752c2a0adaf915d24df45e6dabc3" category="inline-link-macro-rx"></block> 중 하나는 기존에 마운트된 볼륨에 영향을 주지 않고 Trident 및 Kubernetes 객체를 자동으로 처리한다는 점입니다. 이러한 방식으로 Trident는 다운타임 없이 업그레이드를 지원할 수 있습니다(<block ref="c0fb6b6f12bb8ae805a97690328ec023" category="inline-link-macro-rx"></block>). 특히 Trident 오퍼레이터는 Kubernetes 클러스터와 통신하여 다음을 수행합니다.</block>
-  <block id="df59e976eeaa50e1f8a5a59704fbf6ca" category="list-text"><block ref="4cb6ea02341de02a01b7d090723c78e1" category="inline-link-macro-rx"></block>한 경우 <block ref="ecdd1f9daa1459f8b8c837369bdc27a9" prefix=" " category="inline-code"></block>를 사용하여 한 단계로 업그레이드할 수 있습니다. Helm 리포지토리를 추가하지 않았거나 업그레이드에 사용할 수 없는 경우:</block>
   <block id="8edaa40191fd981b339b65738ae96ecc" category="admonition">설치 방법을 전환하기 전에 <block ref="d9897dfd3f891279098b72584e2caa99" category="inline-link-macro-rx"></block>을(를) 검토하십시오.</block>
   <block id="a91a374e8f989d015a82975728b4b552" category="paragraph">일반적으로 초기 설치에 사용했던 것과 동일한 방법으로 업그레이드하는 것이 좋지만, <block ref="be81b6c3db35f66680ab7fc08ff1a8b2" category="inline-link-macro-rx"></block>. Trident를 업그레이드하는 두 가지 옵션이 있습니다.</block>
   <block id="a92191d3aca5303d4e3dde63b3f7fb5a" category="list-text">Trident를 다시 설치합니다. <block ref="0a88f85b526e3c78d37b0fe4e95e5edc" category="inline-link-macro-rx"></block>을 참조하십시오.</block>
@@ -7366,4 +7357,24 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e52c3cee59da6b9b8b87a9baa0cd4b45" category="doc">Trident 스냅샷 작업</block>
   <block id="2e521bb61d9127d4460f3262267cd834" category="doc">여러 네임스페이스에서 Trident NFS 볼륨 공유</block>
   <block id="64fc6c7cb21b21d1926676a7cc84c9cf" category="doc">Trident 워커 노드를 준비합니다</block>
+  <block id="7916dc52b9abb193722daaeb0de2d60b" category="paragraph">Trident 26.06 버전부터 Kubernetes 1.37을 지원합니다. 아래 26.06.2 이미지 목록에는 Kubernetes 1.37용 이미지가 포함되어 있습니다.</block>
+  <block id="2e43f1c519e4ecb61781347e29f73868" category="section-title">Trident 26.06.0에 필요한 컨테이너 이미지</block>
+  <block id="3cbfe5af574efdb4391d1d3e321c8cee" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0</block>
+  <block id="f87a5c52c8ee3e84d33252d80679b335" category="list-text">docker.io/netapp/trident:26.06.0</block>
+  <block id="9a3b823ceeb6fcbe9a5ac0a50b995ed0" category="list-text">docker.io/netapp/trident-operator:26.06.0(선택 사항)</block>
+  <block id="2c5cc0fc2f7b351430f2273c60a55ce8" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0</block>
+  <block id="1b1bd3d817b55a37d7ba69f588363889" category="list-text"><block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>를 사용하여 배포 및 이미지 레지스트리 위치에 이름을 지정하십시오. <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block>는 하나의 레지스트리 또는 여러 레지스트리에 위치할 수 있지만, 모든 CSI 이미지는 동일한 레지스트리에 있어야 합니다. 예시에서 <block ref="2f1944f6f13a74763bbba63a5524cb17" prefix=" " category="inline-code"></block>는 설치하려는 Trident 버전입니다.</block>
+  <block id="1369b7b6434fa56cdab21d07a18531fb" category="paragraph">예를 들어, <block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>의 기본값을 변경하려면 다음 명령을 실행하십시오. 여기서 <block ref="2f1944f6f13a74763bbba63a5524cb17" prefix=" " category="inline-code"></block>는 설치하려는 Trident 버전입니다.</block>
+  <block id="2555b84d4b6caf6c54c076e2fe163167" category="list-text"><block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>를 사용하고 다음 예시와 같이 배포 이름을 지정하십시오. 여기서 <block ref="2f1944f6f13a74763bbba63a5524cb17" prefix=" " category="inline-code"></block>는 설치하려는 Trident 버전입니다.</block>
+  <block id="39b365c32bfda56a977434757d7dbeb6" category="list-text"><block ref="4cb6ea02341de02a01b7d090723c78e1" category="inline-link-macro-rx"></block>한 경우 <block ref="e5e8d5e699ad056ca1288855bb50e9ac" prefix=" " category="inline-code"></block>를 사용하여 한 단계로 업그레이드할 수 있습니다. Helm 리포지토리를 추가하지 않았거나 업그레이드에 사용할 수 없는 경우:</block>
+  <block id="7025f9b1df4a60725a7af1d637587d57" category="admonition">볼륨 가져오기는 <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 드라이버에서 지원됩니다. <block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 드라이버를 사용한 Qtree 가져오기는 기술 미리 보기 기능이며 프로덕션 용도로는 지원되지 않습니다. 가져오기는 <block ref="70d5dbddc55e3700ddbc8d21f0de22a3" prefix=" " category="inline-code"></block> 드라이버에서 지원되지 않습니다. 자세한 내용은 <block ref="789b6758f1cde553cc7d543061e548ae" category="inline-link-macro-rx"></block>를 참조하십시오.</block>
+  <block id="2c7a15b5360cdb2834a297c73c8a1280" category="cell"><block ref="2c2dd2a1737a7ba68195b912fe21b1cf" prefix="" category="inline-code"></block></block>
+  <block id="c5fb579991f2b764a4cb58f667d44f5f" category="cell">백엔드용 Azure 클라우드 환경을 식별합니다. Azure Government를 사용하는 경우 <block ref="061204a9983f0aecdfd52c97ddaa16de" prefix=" " category="inline-code"></block>로 설정합니다.</block>
+  <block id="2407236f70cfb3e6a9089a8ae4f42493" category="list-text">Azure China</block>
+  <block id="9b344e55b72fd40d7385656b99fa94a9" category="paragraph">Azure Government 백엔드의 경우 백엔드 구성에서 <block ref="2c2dd2a1737a7ba68195b912fe21b1cf" prefix=" " category="inline-code"></block>을(를) 설정합니다:</block>
+  <block id="af4b8a0f9788e5acca098a74e4e135c2" category="list-text">*대상 네임스페이스 소유자:* 대상 네임스페이스에 소스 PVC<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block>를 참조하는 TridentVolumeReference CR을 생성합니다.</block>
+  <block id="19704ca08fc90aa29f659214e1a39c56" category="paragraph">TMR<block ref="b979c2934ac0b4ba3f08dabfdd1b2299" prefix=" " category="inline-code"></block>에는 4개의 최상위 필드가 있습니다. 원하는 관계 상태를 설정하는 <block ref="9ed39e2ea931586b6a985a6942ef573e" prefix=" " category="inline-code"></block>(<block ref="68821a44f80ee7ba834fd66b403afa8b" category="inline-xref-macro-rx"></block> 참조), 로컬 PVC를 원격 볼륨 핸들과 연결하는 <block ref="702c93403507671a294b4511027e9c46" prefix=" " category="inline-code"></block>, 그리고 아래에 설명된 선택적 <block ref="041b1bcc7dd53968be908fb3b8c2e25e" prefix=" " category="inline-code"></block> 및 <block ref="576f0eafb190414d70d5c731b2b6a5eb" prefix=" " category="inline-code"></block> 필드입니다.</block>
+  <block id="abb338587ff0e42588275a0c5807c75a" category="paragraph"><block ref="041b1bcc7dd53968be908fb3b8c2e25e" prefix=" " category="inline-code"></block> 및 <block ref="576f0eafb190414d70d5c731b2b6a5eb" prefix=" " category="inline-code"></block> 필드는 선택 사항입니다. <block ref="041b1bcc7dd53968be908fb3b8c2e25e" prefix=" " category="inline-code"></block>를 ONTAP의 비동기식 SnapMirror 정책 이름으로 설정하고 <block ref="576f0eafb190414d70d5c731b2b6a5eb" prefix=" " category="inline-code"></block>를 ONTAP 스케줄 이름으로 설정하십시오. 두 필드 중 하나라도 생략하면 Trident는 백엔드에 구성된 해당 복제 정책 또는 스케줄을 사용합니다. 관계를 생성할 때 이러한 필드를 설정하십시오. 관계가 설정된 후에는 정책이나 스케줄을 변경할 수 없습니다. 다른 설정을 사용하려면 TMR을 삭제하고 다시 생성하십시오.</block>
+  <block id="bd6e5449a9dedf8ce1f979d098c41e44" category="paragraph">Trident는 구성된 복제 정책 및 일정을 사용하여 SnapMirror 관계를 생성하고 초기화합니다.</block>
+  <block id="2fd154f7e5b13f400a56486bd38bdabf" category="list-text">보조 Kubernetes 클러스터에서 TridentMirrorRelationship의 _spec.state_ 필드를 <block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>로 업데이트합니다.</block>
 </blocks>
