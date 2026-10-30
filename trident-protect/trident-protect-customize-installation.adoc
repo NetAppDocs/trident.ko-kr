@@ -162,6 +162,8 @@ AutoSupport 설정, 네임스페이스 필터링 및 OpenShift 웹훅 인증서 
 
 | useOpenshiftServiceCA | 부울 | OpenShift의 기본 서비스 CA Operator와의 통합을 활성화하여 Trident Protect 승인 웹훅에 대한 TLS 인증서를 자동으로 생성하고 주입합니다. 이 옵션을 `true`로 설정하면 서비스 CA Operator가 웹훅 TLS 인증서를 자동으로 관리합니다. OpenShift 클러스터에서만 사용하십시오. (기본값: `false`) 
 |===
+스냅샷 및 백업 메타데이터를 암호화하려면 link:trident-protect-encrypt-appvault-metadata.html["Trident Protect 스냅샷 및 백업용 AppVault 메타데이터 암호화"]를 참조하십시오.
+
 YAML 구성 파일이나 명령줄 플래그를 사용하여 이러한 옵션을 구성할 수 있습니다.
 
 [role="tabbed-block"]

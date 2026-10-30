@@ -47,7 +47,7 @@ ONTAP 백엔드 스토리지의 경우 스토리지 가상 머신(SVM)에 하나
 [[unsupported-operations]]
 == 지원되지 않는 작업
 
-* LUKS 암호화
+* Linux Unified Key Setup (LUKS) 암호화
 * SnapMirror 볼륨 복제
 * 총 사용량 제한
 * 공간 예약 모드

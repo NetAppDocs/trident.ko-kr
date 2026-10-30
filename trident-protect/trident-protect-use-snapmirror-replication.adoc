@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-use-snapmirror-replication.html
 keywords: trident, protect, netapp, snapmirror, data, asynchronous, replication, clusters 
 summary: Trident Protect를 사용하면 NetApp SnapMirror 기술의 비동기 복제 기능을 사용하여 동일한 클러스터 또는 서로 다른 클러스터 간에 데이터 및 애플리케이션 변경 사항을 한 스토리지 백엔드에서 다른 스토리지 백엔드로 복제할 수 있습니다. 
 ---
-= NetApp SnapMirror 및 Trident Protect를 사용하여 애플리케이션 복제
+= Trident Protect를 사용하여 애플리케이션 복제를 설정하고 관리합니다.
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -382,6 +382,7 @@ NOTE: CR을 사용할 때는 CR을 적용하기 전에 대상 네임스페이스
 .. 다음 특성을 구성합니다.
 +
 *** *metadata.name:* (필수) AppMirrorRelationship 사용자 정의 리소스의 이름입니다.
+*** *metadata.annotations.protect.trident.netapp.io/retain-mac-address*: (_선택 사항_) 타겟 클러스터에서 KubeVirt VM의 MAC 주소를 유지하려면  `"true"`(으)로 설정합니다. link:trident-protect-restore-settings.html#supported-annotations["고급 Trident Protect 복원 설정 사용"]을(를) 참조하십시오.
 *** *spec.destinationAppVaultRef*: (_required_) 이 값은 대상 클러스터의 대상 응용 프로그램에 대한 AppVault 이름과 일치해야 합니다.
 *** *spec.namespaceMapping*: (_required_) 대상 및 소스 네임스페이스는 해당 응용 프로그램 CR에 정의된 응용 프로그램 네임스페이스와 일치해야 합니다.
 *** * spec.sourceAppVaultRef *: (_required_) 이 값은 소스 응용 프로그램의 AppVault 이름과 일치해야 합니다.
@@ -476,7 +477,15 @@ kubectl get amr -n my-app-namespace <relationship name> -o=jsonpath='{.status}' 
 
 Trident Protect를 사용하면 복제된 애플리케이션을 대상 클러스터로 장애 조치할 수 있습니다. 이 절차는 복제 관계를 중지하고 대상 클러스터에서 앱을 온라인으로 전환합니다.  Trident Protect는 소스 클러스터에서 앱이 작동 중이면 앱을 중지하지 않습니다.
 
+이 절차는 최신 스냅샷으로 페일오버합니다. 이전 스냅샷으로 페일오버하려면 link:trident-protect-failover-older-snapshot.html["Trident Protect를 사용하여 이전 스냅샷으로 페일오버합니다."]을(를) 참조하십시오.
+
 .단계
+. (_선택 사항_) KubeVirt VM의 MAC 주소를 유지하려면 승격하기 전에 AppMirrorRelationship에 주석을 추가하십시오. link:trident-protect-restore-settings.html#supported-annotations["고급 Trident Protect 복원 설정 사용"]를 참조하십시오.
++
+[source, console]
+----
+kubectl annotate appmirrorrelationship <relationship_name> -n <application_namespace> protect.trident.netapp.io/retain-mac-address="true"
+----
 . 대상 클러스터에서 AppMirrorRelationship CR 파일(예 `trident-protect-relationship.yaml`:)을 편집하고 * spec.desiredState* 값을 로 변경합니다. `Promoted`
 . CR 파일을 저장합니다.
 . CR 적용:

@@ -51,6 +51,7 @@ NOTE: 전체 네임스페이스가 아닌 이름으로 특정 KubeVirt 가상 �
 **** *labelSelector*: (_Optional_) 레이블을 기반으로 클러스터 범위 리소스를 필터링합니다.
 
 
+*** *spec.volumeGroups*: (_선택 사항_) 이 속성을 사용하여 관련 볼륨을 크래시 일관성 볼륨 그룹 스냅샷으로 함께 스냅샷할 수 있습니다. 자세한 내용은 link:trident-protect-volume-group-snapshots.html["Trident Protect에서 볼륨 그룹 스냅샷 사용"]을(를) 참조하십시오.
 *** *metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_선택 사항_) 이 주석은 KubeVirt 환경과 같이 스냅샷 전에 파일 시스템이 정지되는 가상 머신에서 정의된 애플리케이션에만 적용됩니다. 스냅샷 중에 이 애플리케이션이 파일 시스템에 쓸 수 있는지 여부를 지정합니다. true로 설정하면 애플리케이션은 글로벌 설정을 무시하고 스냅샷 중에 파일 시스템에 쓸 수 있습니다. false로 설정하면 애플리케이션은 글로벌 설정을 무시하고 스냅샷을 찍는 동안 파일 시스템이 동결됩니다. 지정되었지만 애플리케이션 정의에 가상 머신이 없는 경우 주석은 무시됩니다. 지정하지 않으면 응용 프로그램은 다음을 따릅니다.link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["글로벌 Trident 프로텍트 동결 설정"] .
 +
 [NOTE]

@@ -36,13 +36,13 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --version 100.2606.0 --create-namespace --namespace trident-protect
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --version 100.2610.0 --create-namespace --namespace trident-protect
 ----
 . 선택적으로, 디버그 로깅을 활성화하려면(문제 해결에 권장됨) 다음을 사용합니다.
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --set logLevel=debug --version 100.2606.0 --create-namespace --namespace trident-protect
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --set logLevel=debug --version 100.2610.0 --create-namespace --namespace trident-protect
 ----
 +
 디버그 로깅은 NetApp 이 로그 수준을 변경하거나 문제를 재현하지 않고도 문제를 해결하는 데 도움이 됩니다.
@@ -59,15 +59,15 @@ Kubernetes 클러스터가 인터넷에 액세스할 수 없는 경우 개인 �
 +
 [source, console]
 ----
-docker.io/netapp/controller:26.06.0
-docker.io/netapp/restic:26.06.0
-docker.io/netapp/kopia:26.06.0
-docker.io/netapp/kopiablockrestore:26.06.0
-docker.io/netapp/trident-autosupport:26.06.0
-docker.io/netapp/exechook:26.06.0
-docker.io/netapp/resourcebackup:26.06.0
-docker.io/netapp/resourcerestore:26.06.0
-docker.io/netapp/resourcedelete:26.06.0
+docker.io/netapp/controller:26.10.0
+docker.io/netapp/restic:26.10.0
+docker.io/netapp/kopia:26.10.0
+docker.io/netapp/kopiablockrestore:26.10.0
+docker.io/netapp/trident-autosupport:26.10.0
+docker.io/netapp/exechook:26.10.0
+docker.io/netapp/resourcebackup:26.10.0
+docker.io/netapp/resourcerestore:26.10.0
+docker.io/netapp/resourcedelete:26.10.0
 docker.io/netapp/trident-protect-utils:v1.0.0
 ----
 +
@@ -76,21 +76,21 @@ docker.io/netapp/trident-protect-utils:v1.0.0
 +
 [source, console]
 ----
-docker pull docker.io/netapp/controller:26.06.0
+docker pull docker.io/netapp/controller:26.10.0
 ----
 +
 [source, console]
 ----
-docker tag docker.io/netapp/controller:26.06.0 <private-registry-url>/controller:26.06.0
+docker tag docker.io/netapp/controller:26.10.0 <private-registry-url>/controller:26.10.0
 ----
 +
 [source, console]
 ----
-docker push <private-registry-url>/controller:26.06.0
+docker push <private-registry-url>/controller:26.10.0
 ----
 +
 
-NOTE: Helm 차트를 얻으려면 먼저 인터넷에 연결된 컴퓨터에서 `helm pull trident-protect --version 100.2606.0 --repo https://netapp.github.io/trident-protect-helm-chart`를 사용하여 Helm 차트를 다운로드한 다음, 생성된 `trident-protect-100.2606.0.tgz` 파일을 오프라인 환경으로 복사하고 마지막 단계에서 저장소 참조 대신 `helm install trident-protect ./trident-protect-100.2606.0.tgz`를 사용하여 설치하십시오.
+NOTE: Helm 차트를 얻으려면 먼저 인터넷에 연결된 컴퓨터에서 `helm pull trident-protect --version 100.2610.0 --repo https://netapp.github.io/trident-protect-helm-chart`를 사용하여 Helm 차트를 다운로드한 다음, 생성된 `trident-protect-100.2610.0.tgz` 파일을 오프라인 환경으로 복사하고 마지막 단계에서 저장소 참조 대신 `helm install trident-protect ./trident-protect-100.2610.0.tgz`를 사용하여 설치하십시오.
 
 . Trident Protect 시스템 네임스페이스를 만듭니다.
 +
@@ -133,13 +133,13 @@ NOTE: 그만큼 `imageRegistry` 그리고 `imagePullSecrets` 값은 다음을 �
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2606.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2610.0 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
 . 선택적으로, 디버그 로깅을 활성화하려면(문제 해결에 권장됨) 다음을 사용합니다.
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --set logLevel=debug --version 100.2606.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --set logLevel=debug --version 100.2610.0 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
 +
 디버그 로깅은 NetApp 이 로그 수준을 변경하거나 문제를 재현하지 않고도 문제를 해결하는 데 도움이 됩니다.

@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/controller-scalability.html 
-keywords: trident, controller scalability, concurrency, san, nas, san-nvme, gcnv, ontap-nas-economy, ontap-san-economy, asa-r2 
+keywords: trident, controller scalability, concurrency, san, nas, san-nvme, gcnv, ontap-nas-economy, ontap-san-economy, ontap-nas-flexgroup, asa-r2 
 summary: 컨트롤러 확장성, 동시성 동작 및 기능 성숙도를 이해합니다. 
 ---
 = 컨트롤러 확장성
@@ -14,7 +14,7 @@ summary: 컨트롤러 확장성, 동시성 동작 및 기능 성숙도를 이해
 [role="lead"]
 Trident는 여러 스토리지 드라이버에 걸쳐 동시성을 향상시켜 컨트롤러 확장성을 개선합니다. 컨트롤러 확장성을 활성화하면 Trident 컨트롤러는 스토리지 작업을 직렬화하는 대신 병렬로 처리하여 동시 작업이 많은 Kubernetes 환경에서 처리량을 높입니다.
 
-배포하기 전에, 일반 출시 버전에서 컨트롤러 확장성을 지원하는 Trident 드라이버와 Trident 26.06에서 기술 미리 보기로 제공되는 드라이버를 확인하십시오. 이를 통해 정보에 기반한 배포 결정을 내리고 위험을 관리할 수 있습니다. 컨트롤러 확장성은 기본적으로 비활성화되어 있습니다.
+배포하기 전에, 일반 출시 버전에서 컨트롤러 확장성을 지원하는 Trident 드라이버와 Trident 26.10에서 기술 미리 보기로 제공되는 드라이버를 확인하십시오. 이를 통해 정보에 기반한 배포 결정을 내리고 위험을 관리할 수 있습니다. 컨트롤러 확장성은 기본적으로 비활성화되어 있습니다.
 
 
 
@@ -51,11 +51,12 @@ Trident는 다양한 스토리지 드라이버에 대해 서로 다른 성숙도
 [[general-availability]]
 === 일반 가용성
 
-다음 드라이버는 Trident 26.06의 정식 출시 버전에서 컨트롤러 확장성을 지원합니다.
+다음 드라이버는 Trident 26.10의 정식 출시 버전에서 컨트롤러 확장성을 지원합니다.
 
 * 'ONTAP-SAN'
 * 'ONTAP-NAS'
 * ONTAP-NAS-이코노미
+* 'ONTAP-NAS-Flexgroup'
 * ONTAP-SAN-이코노미
 * `google-cloud-netapp-volumes`
 * 'Azure-NetApp-파일'
@@ -72,7 +73,7 @@ The `google-cloud-netapp-volumes`와 `google-cloud-netapp-volumes-san`드라이�
 [[technical-preview]]
 === 기술 미리 보기
 
-다음 드라이버는 Trident 26.06의 기술 미리 보기 기능으로 컨트롤러 확장성을 지원합니다.
+다음 드라이버는 Trident 26.10의 기술 미리 보기 기능으로 컨트롤러 확장성을 지원합니다.
 
 * `asa-r2` (SAN 및 NVMe)
 
@@ -266,7 +267,7 @@ kubectl logs -n trident deploy/trident-controller | grep -i concurrency
 [[caveats-and-limitations]]
 == 주의사항 및 제한사항
 
-Trident 26.06의 컨트롤러 확장성과 관련하여 다음과 같은 사항을 고려해야 합니다.
+Trident 26.10의 컨트롤러 확장성과 관련하여 다음과 같은 사항을 고려해야 합니다.
 
 * 컨트롤러 확장성은 일반 출시 및 기술 미리 보기 목록에 있는 드라이버만 지원합니다. 자세한 내용은 <<before-you-enable,활성화하기 전에>>을 참조하십시오.
 * Trident 컨트롤러는 동시 실행을 내부적으로 관리합니다. 이번 릴리스에서는 사용자가 구성할 수 있는 동시 실행 제한을 제공하지 않습니다.

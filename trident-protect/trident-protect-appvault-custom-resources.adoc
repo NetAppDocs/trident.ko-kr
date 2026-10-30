@@ -40,6 +40,9 @@ CR이나 Trident Protect CLI 플러그인을 사용하여 AppVault 객체를 생
 
 
 
+NOTE: 스냅샷 및 백업 메타데이터를 암호화하거나 볼트 암호를 변경하려면  `spec.vaultPasswordSecretRef` 필드를 사용하십시오. link:trident-protect-encrypt-appvault-metadata.html["Trident Protect 스냅샷 및 백업용 AppVault 메타데이터 암호화"]를 참조하십시오.
+
+
 
 ==== Data Mover 리포지토리 암호 암호를 생성합니다
 

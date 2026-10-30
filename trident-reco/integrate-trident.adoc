@@ -130,6 +130,15 @@ Trident는  `azure-netapp-files` 드라이버를 사용하여 link:https://azure
 
 
 
+[[google-cloud-netapp-volumes-backend-drivers]]
+=== Google Cloud NetApp Volumes 백엔드 드라이버
+
+Trident는 NAS 워크로드용  `google-cloud-netapp-volumes` 드라이버와 SAN(iSCSI) 워크로드용  `google-cloud-netapp-volumes-san` 드라이버를 지원합니다. GCP에서 실행되는 OpenShift 클러스터의 경우, 두 드라이버 모두 Trident 26.10부터 Google Cloud Workload Identity Federation을 지원합니다. 여기에는 자체 관리형 OpenShift Container Platform(IPI 배포를 포함한 OCP) 및 OpenShift Dedicated(OSD)가 포함됩니다.
+
+백엔드 구성 및 WIF 필수 조건에 대해서는 link:../trident-use/gcnv.html["Google Cloud NetApp Volumes 구성"] 및 link:../trident-use/gcnv-block.html["SAN 워크로드를 위해 Google Cloud NetApp Volumes 구성"]를 참조하십시오.
+
+
+
 [[storage-class-design]]
 == 스토리지 클래스 설계
 
@@ -313,7 +322,7 @@ CAUTION: Red Hat OpenShift 버전 3.9를 기준으로 공식 문서는 데이터
 기본 서비스에서 올바른 스토리지를 활용하기 위해서는 배포 방법에 따라 Ansible 변수를 구성하는 것이 중요합니다. 각 배포 방법에 대한 옵션을 살펴보겠습니다.
 
 
-NOTE: 아래 표에는 로깅 서비스와 관련된 스토리지 구성과 관련된 변수만 나와 있습니다. 배포에 따라 검토, 구성 및 사용해야 하는 다른 옵션을 찾을 수 link:https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html["Red Hat OpenShift 로깅 문서"^]있습니다.
+NOTE: 아래 표에는 로깅 서비스와 관련된 스토리지 구성에 필요한 변수만 포함되어 있습니다. link:https://docs.redhat.com/en/documentation/openshift_container_platform/3.11/html/configuring_clusters/install-config-aggregate-logging-sizing["Red Hat OpenShift 로깅 문서"^]에서 배포 환경에 따라 검토, 구성 및 사용해야 하는 다른 옵션을 찾을 수 있습니다.
 
 아래 표의 변수는 제공된 세부 정보를 사용하여 로깅 서비스에 대한 PV 및 PVC를 생성하는 Ansible 플레이북을 만듭니다. 이 방법은 OpenShift 설치 후 구성 요소 설치 플레이북을 사용하는 것보다 훨씬 덜 유연하지만, 기존 볼륨을 사용할 수 있는 경우 옵션으로 제공됩니다.
 
@@ -372,7 +381,7 @@ OpenShift 클러스터가 이미 실행 중이고 Trident가 배포 및 구성�
 
 초기 OpenShift 설치 프로세스의 일부로 로깅을 배포하는 경우 표준 배포 프로세스만 따르면 됩니다. Ansible이 완료되는 즉시 서비스를 이용할 수 있도록 필요한 서비스와 OpenShift 개체를 구성 및 배포합니다.
 
-하지만 초기 설치 후에 구축할 경우 구성 요소 플레이북을 Ansible에서 사용해야 합니다. 이 프로세스는 OpenShift의 다른 버전에 따라 약간 변경될 수 있으므로 해당 버전에 대해 읽고 link:https://docs.openshift.com/container-platform/3.11/welcome/index.html["Red Hat OpenShift Container Platform 3.11 설명서"^]따르십시오.
+하지만 초기 설치 후 배포하는 경우에는 Ansible에서 컴포넌트 플레이북을 사용해야 합니다. 이 과정은 OpenShift 버전에 따라 약간 다를 수 있으므로 사용 중인 버전에 맞는 link:https://docs.openshift.com/en/documentation/openshift_container_platform/3.11/["Red Hat OpenShift Container Platform 3.11 설명서"^]를 읽고 따르십시오.
 
 
 
@@ -430,4 +439,4 @@ OpenShift 클러스터가 이미 실행 중이고 Trident가 배포 및 구성�
 
 호스트/인벤토리 파일에 정의된 적절한 Ansible 변수를 사용하여 서비스를 구축하십시오. OpenShift 설치 시 배포하는 경우 PV가 자동으로 생성되고 사용됩니다. 구성 요소 플레이북을 사용하여 배포하려는 경우 OpenShift 설치 후 Ansible은 필요한 PVC를 생성하고 Trident에서 이를 위해 스토리지를 프로비저닝한 후 서비스를 배포합니다.
 
-위의 변수와 배포 프로세스는 각 OpenShift 버전에 따라 변경될 수 있습니다. 사용자 환경에 맞게 구성할 수 있도록 버전을 검토하고 그에 따라 link:https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html["Red Hat의 OpenShift 배포 가이드"^]수행하십시오.
+위의 변수 및 배포 프로세스는 OpenShift의 각 버전에 따라 변경될 수 있습니다. 사용 중인 버전에 맞는 link:https://docs.redhat.com/en/documentation/openshift_container_platform/3.11/html/configuring_clusters/install-config-cluster-metrics["Red Hat의 OpenShift 배포 가이드"^]을(를) 검토하고 따라 환경에 맞게 구성되도록 하십시오.

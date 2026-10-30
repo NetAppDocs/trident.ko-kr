@@ -28,10 +28,14 @@ entries:
   entries:
   - title: AppVault 객체를 사용하여 버킷을 관리합니다
     url: "/trident-protect/trident-protect-appvault-custom-resources.html"
+  - title: AppVault 메타데이터 암호화
+    url: "/trident-protect/trident-protect-encrypt-appvault-metadata.html"
   - title: 관리할 애플리케이션을 정의합니다
     url: "/trident-protect/trident-protect-manage-applications.html"
   - title: 애플리케이션 보호
     url: "/trident-protect/trident-protect-protect-apps.html"
+  - title: 볼륨 그룹 스냅샷을 사용하십시오
+    url: "/trident-protect/trident-protect-volume-group-snapshots.html"
   - title: 응용 프로그램을 복원합니다
     entries:
     - title: Trident Protect를 사용하여 애플리케이션 복원
@@ -41,7 +45,11 @@ entries:
     - title: 복원 중 리소스 수정
       url: "/trident-protect/trident-protect-resource-transformations.html"
   - title: NetApp SnapMirror를 사용하여 애플리케이션 복제
-    url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
+    entries:
+    - title: 애플리케이션 복제 설정 및 관리
+      url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
+    - title: 이전 스냅샷으로 페일오버
+      url: "/trident-protect/trident-protect-failover-older-snapshot.html"
   - title: 애플리케이션을 마이그레이션합니다
     url: "/trident-protect/trident-protect-migrate-apps.html"
   - title: KubeVirt 가상 머신 보호

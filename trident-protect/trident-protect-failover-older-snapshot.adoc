@@ -1,0 +1,136 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-failover-older-snapshot.html 
+keywords: trident protect, netapp, snapmirror, failover, older snapshot, recovery point, ransomware, AppMirrorRelationship, promotedSnapshot 
+summary: 복제된 애플리케이션을 이전 스냅샷으로 페일오버하여 데이터가 손상되거나 유출되기 이전 시점으로 복구할 수 있습니다. 
+---
+= Trident Protect를 사용하여 이전 스냅샷으로 페일오버합니다.
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident Protect를 사용하면 복제된 애플리케이션을 이전 스냅샷으로 페일오버하여 데이터 손상 또는 유출 이전 시점으로 복구할 수 있습니다. 기본적으로 페일오버는 가장 최근에 전송된 스냅샷을 사용합니다.
+
+
+CAUTION: 이전 스냅샷으로 페일오버하면 ONTAP SnapMirror가 타겟 클러스터에서 선택한 스냅샷보다 최신인 스냅샷을 삭제합니다. 이는 해당 스냅샷이 더 이상 유효하지 않기 때문입니다. 이러한 데이터 손실이 허용되는 경우에만 이 절차에 주석을 추가하십시오.
+
+.시작하기 전에
+* AppMirrorRelationship이(가) 존재하며  `Established` 상태입니다. 이를 생성하려면 link:trident-protect-use-snapmirror-replication.html#set-up-a-replication-relationship["복제 관계를 설정합니다"]을(를) 참조하십시오. 상태를 확인하려면  `kubectl get amr -n <namespace> <relationship_name> -o=jsonpath='{.status}'`을(를) 실행하십시오.
+* 소스 및 타겟 클러스터는 SnapMirror 복제를 사용하는 ONTAP 스토리지 백엔드를 사용합니다. Azure NetApp Files 및 기타 비 ONTAP 백엔드는 지원되지 않습니다. link:trident-protect-requirements.html#requirements-for-snapmirror-replication["SnapMirror 복제에 대한 요구 사항"]을(를) 참조하십시오.
+* 소스 애플리케이션에 스냅샷 일정( `snapshotRetention` 1보다 큼)이 있습니다.
+
+
+
+
+[[identify-the-snapshot]]
+== 스냅샷을 식별하십시오
+
+각 스냅샷에는 완료 시간이 있으므로 원하는 시점을 선택할 수 있습니다.
+
+.단계
+. 소스 클러스터에서 스냅샷을 나열합니다:
++
+[source, console]
+----
+kubectl get snapshots -n my-app-namespace
+----
+. 장애 조치를 수행할 스냅샷을 찾으십시오.  `completionTimestamp` 값을 사용하여 특정 시점을 선택하십시오.
+. 해당 스냅샷의 아카이브 경로를 가져오십시오:
++
+[source, console]
+----
+kubectl get snapshots <snapshot_name> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
+. 경로의 마지막 부분, 즉 마지막 슬래시 뒤의 모든 부분을 기록하십시오. 이 부분이 _basename_입니다. 예를 들면 다음과 같습니다.
++
+[listing]
+----
+20231114173500_schedule-20231114173500_f8df8bd3-a727-4a14-b954-9666aa618b55
+----
++
+
+NOTE: 스냅샷 사용자 지정 리소스의 이름이 아닌 기본 이름을 사용하십시오.
+
+
+
+.결과
+선택한 스냅샷의 기본 이름이 기록됩니다.
+
+
+
+[[fail-over-to-the-selected-snapshot]]
+== 선택한 스냅샷으로 페일오버합니다
+
+승격할 스냅샷을 지정하고, 주석을 추가하여 데이터 손실을 확인하십시오.
+
+.단계
+. 타겟 클러스터에서 AppMirrorRelationship에 어노테이션을 추가합니다. 어노테이션이 없으면 장애 조치 시 가장 최근에 전송된 스냅샷만 사용할 수 있습니다.
++
+[source, console]
+----
+kubectl annotate appmirrorrelationship <relationship_name> -n my-app-namespace protect.trident.netapp.io/allow-promotion-with-older-snapshots="true"
+----
+. AppMirrorRelationship CR 파일을 편집합니다(예:  `trident-protect-relationship.yaml`):
++
+** *spec.desiredState*를  `Promoted`로 설정합니다.
+** *spec.promotedSnapshot*을 <<스냅샷을 식별하십시오>>에 기록한 기본 이름으로 설정하십시오.
++
+예를 들면 다음과 같습니다.
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppMirrorRelationship
+metadata:
+  name: <relationship_name>
+  namespace: <namespace>
+  annotations:
+    protect.trident.netapp.io/allow-promotion-with-older-snapshots: "true"
+spec:
+  desiredState: Promoted
+  promotedSnapshot: <basename>
+----
+
+
+. CR 적용:
++
+[source, console]
+----
+kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
+----
+. 관계 상태를 확인하십시오:
++
+[source, console]
+----
+kubectl get amr -n my-app-namespace <relationship_name> -o=jsonpath='{.status}' | jq
+----
+
+
+.결과
+관계가  `Promoted` 상태로 이동하고, 애플리케이션은 선택된 스냅샷의 데이터를 사용하여 타겟 클러스터에서 실행됩니다.
+
+관계가  `Promoting` 상태로 유지되고  `status.error`에  `The snapshot provided is invalid or older than the most recently transferred snapshot`이(가) 표시되면 어노테이션이 누락되었거나  `true`(으)로 설정되지 않은 것입니다. 어노테이션을 추가하고 다시 시도하십시오.
+
+.다음 단계
+원래 클러스터로 돌아가려면 link:trident-protect-use-snapmirror-replication.html#reverse-resync-a-failed-over-replication-relationship["역방향 재동기화"]을(를) 수행한 다음 link:trident-protect-use-snapmirror-replication.html#reverse-application-replication-direction["복제 방향을 반전하십시오"].
+
+
+CAUTION: 원래 클러스터로 돌아가려면 일반 재동기화를 수행하지 마십시오. 일반 재동기화는 장애 조치된 애플리케이션을 삭제하고 관계를 최신 소스 스냅샷으로 되돌립니다.
+
+
+
+[[related-information]]
+== 관련 정보
+
+* link:trident-protect-use-snapmirror-replication.html["Trident Protect를 사용하여 애플리케이션 복제를 설정하고 관리합니다."]
+* link:trident-protect-use-snapmirror-replication.html#fail-over-to-destination-cluster["대상 클러스터로 페일오버합니다"]
+* link:trident-protect-use-snapmirror-replication.html#resync-a-failed-over-replication-relationship["페일오버된 복제 관계를 다시 동기화합니다"]
+* link:trident-protect-use-snapmirror-replication.html#fail-back-applications-to-the-original-source-cluster["애플리케이션을 원래 소스 클러스터로 페일백합니다"]
+* link:trident-protect-protect-apps.html#create-a-data-protection-schedule["데이터 보호 스케줄을 생성합니다"]
+

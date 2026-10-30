@@ -51,6 +51,11 @@ WARNING: `spec.namespace` Trident가 설치된 네임스페이스를 나타내�
 | `enableForceDetach` | `ontap-san`, `ontap-san-economy` , `ontap-nas` , 그리고 `ontap-nas-economy` 오직. Kubernetes Non-Graceful Node Shutdown(NGNS)과 함께 작동하여 클러스터 관리자가 노드가 비정상적으로 될 경우 마운트된 볼륨이 있는 작업 부하를 새 노드로 안전하게 마이그레이션할 수 있는 기능을 제공합니다. 자세한 내용은 다음을 참조하세요.link:../trident-reco/force-detach.html["Trident 사용하여 상태 저장 애플리케이션의 장애 조치 자동화"] . | 거짓입니다 
 
 
+| `enableDataLIFRefresh`  a| 
+LIF가 추가, 제거되거나 새 주소가 할당될 때 게시된 볼륨에 대한 NVMe 데이터 LIF를 새로 고칠 수 있습니다. 통합 ONTAP의 `ontap-san`과 `sanType: nvme` 및 ASA r2의 NVMe/TCP에 적용됩니다. 자세한 내용은 link:../trident-use/refresh-nvme-data-lifs.html["NVMe 데이터 LIF 새로 고침"]을 참조하십시오.
+| 거짓입니다 
+
+
 | `windows` | 를 로 설정합니다 `true` Windows 작업자 노드에 설치할 수 있습니다. | 거짓입니다 
 
 
@@ -62,6 +67,9 @@ AKS 클러스터에서 관리되는 ID 또는 클라우드 ID를 사용할 때 �
 | `cloudIdentity`  a| 
 AKS 클러스터에서 클라우드 ID를 사용할 때 워크로드 ID("Azure.workload.identity/client-id: xxxxxxxxxxxx-xxxx-xxxx-xxxxxxxxxxxxx")로 설정합니다. EKS 클러스터에서 클라우드 ID를 사용할 때 AWS IAM 역할("'eks.amazonaws.com/role-arn: arn:AWS:IAM::123456:role/Trident-role'")로 설정합니다. GKE 클러스터에서 클라우드 ID를 사용하는 경우 클라우드 ID("'iam.gke.io/gc-service-account:xxxx@mygcpproject.iam.gserviceaccount.com') 로 설정합니다.
 | `""` 
+
+
+| `gcpWIFAudience` | OpenShift의 Google Cloud Workload Identity Federation과 함께 사용되는 프로젝션된 서비스 계정 토큰의 대상입니다. 공급자의 정규 리소스 이름을 사용하십시오. 자세한 내용은 link:../trident-use/gcnv.html#openshift-wif["워크로드 ID 페더레이션을 사용하여 Google Cloud NetApp Volumes 구성"]을(를) 참조하십시오. | `""` 
 
 
 | `IPv6` | IPv6를 통해 Trident를 설치합니다 | 거짓 
@@ -79,7 +87,7 @@ NOTE: 그만큼 `k8sTimeout` 매개변수는 Trident 설치에만 적용됩니�
 자동으로 계층화 | 거짓입니다 
 
 
-| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport10"` 
+| 자동 지원 이미지 | AutoSupport 텔레메트리 컨테이너 이미지입니다 | `"netapp/trident-autosupport:26.10"` 
 
 
 | 자동 지원 프록시 | AutoSupport를 보내는 프록시의 주소/포트입니다
@@ -92,7 +100,7 @@ NOTE: 그만큼 `k8sTimeout` 매개변수는 Trident 설치에만 적용됩니�
 | `logFormat` | 사용할 Trident 로깅 형식 [text, json] | `"text"` 
 
 
-| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:26.06"` 
+| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:26.10.0"` 
 
 
 | 'imageRegistry'입니다 | 형식의 내부 레지스트리 경로입니다
@@ -141,7 +149,12 @@ Kubernetes API 서버와 통신하는 동안 컨트롤러가 사용하는 초당
 
 | `enableConcurrency`  a| 
 Trident 컨트롤러의 동시 작동을 지원하여 처리량을 향상시킵니다. 지원되는 드라이버에 대한 자세한 내용은 링크: https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[컨트롤러 확장성 문서]를 참조하십시오.
-| `resources` 
+| `enableCOSI` 
+
+
+ a| 
+Trident 컨테이너 오브젝트 스토리지 인터페이스(COSI) 프런트엔드를 활성화합니다.  `enableConcurrency`을(를)  `true`(으)로 설정해야 합니다. Trident COSI는 커뮤니티 COSI 컨트롤러와 함께 실행할 수 없습니다. 자세한 내용은 link:../trident-use/cosi.html["COSI를 사용하여 오브젝트 스토리지 프로비저닝"]을(를) 참조하십시오.
+| 거짓입니다 | `resources` 
 
 
  a| 

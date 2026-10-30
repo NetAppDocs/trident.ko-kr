@@ -4,6 +4,8 @@ title: Trident를 사용합니다
 entries:
 - title: 작업자 노드를 준비합니다
   url: "/trident-use/worker-node-prep.html"
+- title: COSI를 사용하여 오브젝트 스토리지 프로비저닝
+  url: "/trident-use/cosi.html"
 - title: 백엔드 구성 및 관리
   entries:
   - title: 개요
@@ -40,6 +42,8 @@ entries:
       url: "/trident-use/ontap-san-prep.html"
     - title: 구성 옵션 및 예
       url: "/trident-use/ontap-san-examples.html"
+    - title: NVMe 데이터 LIF 새로 고침
+      url: "/trident-use/refresh-nvme-data-lifs.html"
   - title: ONTAP NAS 드라이버
     entries:
     - title: 개요
@@ -96,6 +100,8 @@ entries:
     url: "/trident-use/controller-scalability.html"
   - title: 자동 볼륨 확장
     url: "/trident-use/automatic-volume-expansion.html"
+  - title: ONTAP 볼륨 자동 크기 조정을 구성합니다
+    url: "/trident-use/ontap-autosize.html"
   - title: 자동 볼륨 확장 관리
     url: "/trident-use/manage-autogrow-policies.html"
   - title: 볼륨 가져오기

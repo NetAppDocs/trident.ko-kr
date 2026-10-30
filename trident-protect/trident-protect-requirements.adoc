@@ -126,7 +126,7 @@ kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=
 ====
 Trident Protect 24.10은 데이터 보호 작업 중에 KubeVirt VM 파일 시스템의 일관된 상태를 자동으로 보장하지 않습니다.  Trident Protect 24.10을 사용하여 KubeVirt VM 데이터를 보호하려면 데이터 보호 작업을 시작하기 전에 파일 시스템의 동결/동결 해제 기능을 수동으로 활성화해야 합니다. 이렇게 하면 파일 시스템이 일관된 상태를 유지하게 됩니다.
 
-데이터 보호 작업 중 VM 파일 시스템의 동결 및 동결 해제를 관리하도록 Trident Protect 24.10을 구성할 수 있습니다.link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["가상화 구성"^] 그리고 다음 명령을 사용합니다.
+Trident Protect 24.10을 구성하여 link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.16/html/virtualization/index["가상화 구성"^]을(를) 사용한 다음 다음 명령을 사용하여 데이터 보호 작업 중 VM 파일 시스템의 동결 및 해제를 관리할 수 있습니다.
 
 [source, console]
 ----

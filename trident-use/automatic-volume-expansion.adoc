@@ -16,6 +16,8 @@ summary: Trident Autogrow 정책을 사용하여 자동 볼륨 확장을 구성�
 * 볼륨이 도달할 수 있는 최대 크기
 
 
+Trident Autogrow 정책은 PVC를 확장합니다. 이는 link:ontap-autosize.html["ONTAP 볼륨 자동 크기 조정"]와(과) 다르며, PVC 크기를 변경하지 않고 백킹 FlexVol을 확장합니다.
+
 
 NOTE: 정의된 사용률 임계값을 초과하면 볼륨 크기가 자동으로 증가합니다. 볼륨은 자동으로 축소되지 않습니다.
 

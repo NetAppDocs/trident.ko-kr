@@ -18,6 +18,17 @@ summary: 다음은 이 릴리스의 알려진 문제입니다.
 
 
 
+[[volumes-remain-attached-after-upgrading-from-trident-22-10-or-earlier]]
+== Trident 22.10 또는 이전 버전에서 업그레이드한 후에도 볼륨은 연결된 상태로 유지됩니다.
+
+이 문제는 볼륨이 연결된 상태에서 Trident 22.10 또는 이전 버전에서 Trident 26.10으로 직접 업그레이드하는 고객에게 영향을 미칩니다. Trident 23.01 이상 버전에서의 업그레이드는 영향을 받지 않습니다.
+
+업그레이드 후 영향을 받는 볼륨이 분리되지 않을 수 있습니다. ReadWriteOnce(RWO) 볼륨을 사용하는 Pod는 다른 노드로 이동할 수 없으며 다중 연결 오류가 발생할 수 있습니다. PersistentVolume(PV)을 삭제하는 작업도 중단될 수 있습니다.
+
+이 문제를 해결하려면 오래된 볼륨 연결이 있는 노드에서 해당 볼륨의 `globalmount` 디렉토리에서 남아 있는 `volumePublishInfo.json` 파일을 삭제하십시오.
+
+
+
 [[volumesnapshots-not-reaching-readytouse-state]]
 == VolumeSnapshots이 ReadyToUse 상태에 도달하지 못했습니다
 

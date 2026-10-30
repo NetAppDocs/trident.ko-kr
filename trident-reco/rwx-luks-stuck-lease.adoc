@@ -1,0 +1,101 @@
+---
+sidebar: sidebar 
+permalink: trident-reco/rwx-luks-stuck-lease.html 
+keywords: LUKS, RWX, Lease, cryptsetup, troubleshooting, remediation 
+summary: 'ReadWriteMany (RWX) Linux Unified Key Setup (LUKS) 볼륨에 대해 고착된 Kubernetes Lease를 식별하고 안전하게 해결합니다.' 
+---
+= RWX Linux Unified Key Setup(LUKS) 볼륨에 대한 임대가 중단된 문제를 해결합니다
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Kubernetes 임대를 보유한 노드에 장애가 발생하면 ReadWriteMany(RWX) Linux 통합 키 설정(LUKS) 볼륨이 차단될 수 있습니다. 임대를 삭제하기 전에 실행 중인  `cryptsetup` 작업이 없는지 확인하십시오. 작업 중에 임대를 삭제하면 LUKS 헤더가 손상될 위험이 있습니다.
+
+
+
+[[understand-the-lease]]
+== 임대 이해
+
+Trident는 Kubernetes 리스를 사용하여 한 번에 하나의 노드만 RWX LUKS 볼륨에서  `cryptsetup` 명령을 실행하도록 합니다. 리스는 Trident 네임스페이스에 생성되며, 리스 이름은 PersistentVolume(PV) 이름입니다. 홀더 ID는 작업을 실행하는 노드를 식별합니다.
+
+Trident는 작업이 성공적으로 완료되면 리스를 삭제합니다. 작업이 실패하면 Trident는 동일한 노드에서만 재시도할 수 있도록 리스를 유지합니다. 리스는 자동으로 만료되거나 갱신되지 않습니다. 이유가  `LeaseRetained`인 경고 이벤트에는 실패한 작업에 대한 세부 정보가 포함됩니다.
+
+
+
+[[identify-a-potentially-stuck-lease]]
+== 잠재적으로 중단된 Lease 식별
+
+증상으로는 포드가  `ContainerCreating` 또는  `Terminating`에 멈춰 있거나, 볼륨 확장이 실패하거나, 일시적인 잠금 오류가 발생하는 경우가 있습니다.
+
+. 문제가 발생한 포드에서 사용된 PVC를 찾으십시오:
++
+[source, console]
+----
+kubectl get pod -n <app-namespace> <pod-name> \
+  -o jsonpath='{.spec.volumes[*].persistentVolumeClaim.claimName}'
+----
+. PVC에 바인딩된 PV를 찾으십시오:
++
+[source, console]
+----
+kubectl get pvc -n <app-namespace> <pvc-name> \
+  -o jsonpath='{.spec.volumeName}'
+----
+. Trident 네임스페이스에서 리스를 나열하고 PV 이름으로 리스를 식별합니다:
++
+[source, console]
+----
+kubectl get lease -n <trident-namespace>
+----
+. holder, age, 이벤트를 포함하여 일치하는 Lease를 검사합니다:
++
+[source, console]
+----
+kubectl describe lease -n <trident-namespace> <pv-name>
+----
+
+
+`cryptsetup` 작업은 일반적으로 몇 초 내에 완료됩니다. 5~10분 이상 된 Lease는 교착 상태를 나타낼 수 있습니다.  `LeaseRetained` 이벤트에서 반복되는 오류를 확인하고, 홀더 노드를 식별하고, 노드 상태를 확인하십시오:
+
+[source, console]
+----
+kubectl get nodes
+kubectl get pods -A -o wide --field-selector spec.nodeName=<lease-holder-node>
+----
+노드가 정상이고 리스에 경고 이벤트가 없는 경우, 리스가 멈췄다고 판단하기 전에 홀더 노드의 Trident 노드 파드 로그를 확인하십시오:
+
+[source, console]
+----
+kubectl get pods -n <trident-namespace> -o wide \
+  --field-selector spec.nodeName=<lease-holder-node>
+kubectl logs -n <trident-namespace> <trident-node-pod> -c trident-main
+----
+기본 노드 또는 네트워크 문제를 해결할 수 있다면 먼저 해결하십시오. Trident가 작업을 성공적으로 완료하면 리스가 해결될 수 있습니다.
+
+
+
+[[safely-resolve-the-stuck-lease]]
+== 고착된 임대를 안전하게 해결하십시오
+
+[IMPORTANT]
+====
+리스 소유자가 여전히  `cryptsetup` 작업을 실행 중일 수 있는 동안에는 리스를 삭제하지 마십시오. 리스로 조정되지 않는 서로 다른 노드의 동시 `cryptsetup` 명령은 LUKS 헤더를 손상시킬 수 있습니다.
+
+====
+노드 상태에 맞는 해결 방법을 사용하십시오:
+
+* **홀더 노드에 장애가 발생하여 전원이 꺼졌습니다:** 해당 노드가 보유한 리스를 식별하고 영향을 받는 리스를 삭제합니다. 워크로드가 재스케줄링되기 전에 노드가 복구되면 Trident가 작업을 완료하고 리스를 해제하도록 허용합니다. 워크로드가 이미 이동된 경우, 복구된 노드의 Pod가 완전히 종료될 때까지 기다리고, 교착 상태가 여전히 존재하는지 확인한 후 만료된 리스를 제거합니다.
+* **홀더 노드의 컨트롤 플레인 연결이 끊어졌습니다:** 노드에서 여전히 워크로드가 실행 중일 수 있습니다. 리스를 삭제하기 전에 노드를 종료하는 것이 좋습니다. 노드에 계속 액세스할 수 있는 경우, 해당 노드의 Trident 노드 컨테이너를 중지하거나 로그를 통해 리스를 획득하거나 삭제할 수 없고 실행 중이 아님을 확인 `cryptsetup`하십시오. Trident는 각 작업 전에 리스를 획득하기 위해 Kubernetes API에 액세스해야 합니다. 연결이 끊어지면 다른 작업을 시작할 수 없습니다. 진행 중인 명령이 완료될 수 있도록 리스 생성 후 최소 5분 이상 기다린 후 삭제를 고려하십시오.
+* **홀더 노드와 네트워크가 정상인 경우:** Lease 경고 이벤트와 Trident 노드 로그를 검사하여 실패한 작업을 식별하십시오. 영향을 받는 워크로드를 다른 노드로 이동해야 하는 경우, 홀더 노드를 격리하고, 영향을 받는 애플리케이션 Pod를 강제 삭제하지 않고 삭제한 후, Pod가 종료될 때까지 기다린 다음 노드의 격리를 해제하십시오. 원래 작업이 더 이상 실행되지 않는 것을 확인한 후에만 Lease를 삭제하십시오.
+
+
+안전한지 확인한 후에만 임대를 삭제하십시오:
+
+[source, console]
+----
+kubectl delete lease -n <trident-namespace> <pv-name>
+----
+복구 조치 후 영향을 받은 Pod 및 볼륨 작업을 모니터링하십시오. Lease가 다시 유지되는 경우 Lease 이벤트에 보고된 cryptsetup 오류를 조사하고 근본적인 문제를 해결하십시오.

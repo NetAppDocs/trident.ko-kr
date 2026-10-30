@@ -384,7 +384,7 @@ PVC 보호는 버전 1.10부터 Kubernetes에서 자동으로 활성화됩니다
 [[can-i-grow-nfs-pvcs-that-were-created-by-trident]]
 === Trident에서 생성된 NFS PVC를 확장할 수 있습니까?
 
-예. Trident에서 만든 PVC를 확장할 수 있습니다. 볼륨 자동 증가 기능은 Trident에 적용되지 않는 ONTAP 기능입니다.
+예. Trident에서 생성한 NFS PVC를 확장할 수 있습니다. Trident 자동 확장 정책은 용량 임계값에 따라 PVC를 자동으로 확장할 수 있습니다. ONTAP 볼륨 자동 크기 조정은 별개이며 지원되는 ONTAP SAN 드라이버에 적용됩니다. 이는 PVC 크기를 변경하지 않고 백업 FlexVol을 확장합니다. 자세한 내용은 link:trident-use/ontap-autosize.html["ONTAP 볼륨 자동 크기 조정"^]을 참조하십시오.
 
 
 
