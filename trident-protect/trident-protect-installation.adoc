@@ -60,15 +60,15 @@ Kubernetes 클러스터가 인터넷에 액세스할 수 없는 경우 개인 �
 [source, console]
 ----
 docker.io/netapp/controller:26.10.0
-docker.io/netapp/restic:26.10.0
-docker.io/netapp/kopia:26.10.0
+docker.io/netapp/trident-protect-utils:v6.0.0
+docker.io/netapp/trident-protect-guestfs:v2.0.0
 docker.io/netapp/kopiablockrestore:26.10.0
 docker.io/netapp/trident-autosupport:26.10.0
 docker.io/netapp/exechook:26.10.0
 docker.io/netapp/resourcebackup:26.10.0
 docker.io/netapp/resourcerestore:26.10.0
 docker.io/netapp/resourcedelete:26.10.0
-docker.io/netapp/trident-protect-utils:v1.0.0
+docker.io/netapp/filebrowse-transfer:26.10.0
 ----
 +
 예를 들면 다음과 같습니다.
