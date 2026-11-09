@@ -279,8 +279,8 @@ link:../trident-reference/ports.html["Trident 포트"]
 
 
 
-[[container-images-required-for-trident-26-10-0]]
-=== Trident 26.10.0에 필요한 컨테이너 이미지
+[[container-images-required-for-trident-26-10-1]]
+=== Trident 26.10.1에 필요한 컨테이너 이미지
 
 [cols="2"]
 |===
@@ -288,9 +288,9 @@ link:../trident-reference/ports.html["Trident 포트"]
 
 
 | v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0, v1.37.0  a| 
-* docker.io/netapp/trident:26.10.0
+* docker.io/netapp/trident:26.10.1
 * docker.io/netapp/trident-autosupport:26.10
-* docker.io/netapp/trident-operator:26.10.0(선택 사항)
+* docker.io/netapp/trident-operator:26.10.1(선택 사항)
 * registry.k8s.io/sig-storage/csi-attacher:v4.11.0
 * registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0
 * registry.k8s.io/sig-storage/csi-provisioner:v6.3.0

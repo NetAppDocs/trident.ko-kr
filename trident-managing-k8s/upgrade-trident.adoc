@@ -21,11 +21,6 @@ summary: Trident는 4개월 릴리즈 주기를 준수하여 매년 3가지 주�
 
 Trident의 최신 릴리즈로 업그레이드할 때 다음 사항을 고려하십시오.
 
-[WARNING]
-====
-Trident 25.10 또는 이전 버전에서 Trident 26.10.0으로 업그레이드하지 마십시오. 시작 중에 Trident 노드 Pod가 여전히 사용 중인 볼륨을 분리할 수 있습니다. 영향을 받는 Pod는 오류 `volume ... is not staged`로 인해 실패할 수 있습니다. 이 문제는 업그레이드가 지원되는 4개 릴리스 기간 내에 있는 경우에도 발생합니다. 업그레이드하기 전에 수정 사항이 포함된 릴리스를 기다리십시오. 자세한 내용은 link:../known-issues.html["알려진 문제점"]을(를) 참조하십시오.
-
-====
 * 특정 Kubernetes 클러스터의 모든 네임스페이스에 Trident 인스턴스는 하나만 설치해야 합니다.
 * Trident 23.07 이상에서는 v1 볼륨 스냅샷이 필요하며 알파 또는 베타 스냅샷을 더 이상 지원하지 않습니다.
 * 업그레이드할 때 Trident에서 사용되는 를 `StorageClasses` 제공하는 것이 중요합니다 `parameter.fsType`. 기존 볼륨을 중단하지 않고 삭제 및 재생성할 수 `StorageClasses` 있습니다.
@@ -52,9 +47,6 @@ Trident 버전은 날짜 기반 `YY.MM` 명명 규칙을 따릅니다. 여기서
 
 
 
-
-
-NOTE: OpenShift Container Platform에서 Trident 연산자를 사용하여 업그레이드할 때는 Trident 21.01.1 이상으로 업그레이드해야 합니다. 21.01.0으로 릴리스된 Trident 연산자에는 21.01.1에서 해결된 알려진 문제가 포함되어 있습니다. 자세한 내용은 를 참조하십시오 https://github.com/NetApp/trident/issues/517["GitHub에 대한 발행 세부 정보"^].
 
 
 

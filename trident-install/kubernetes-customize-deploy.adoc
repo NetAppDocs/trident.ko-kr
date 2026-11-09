@@ -100,7 +100,7 @@ NOTE: 그만큼 `k8sTimeout` 매개변수는 Trident 설치에만 적용됩니�
 | `logFormat` | 사용할 Trident 로깅 형식 [text, json] | `"text"` 
 
 
-| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:26.10.0"` 
+| 트리덴티이미지 | 설치할 Trident 이미지 | `"netapp/trident:26.10.1"` 
 
 
 | 'imageRegistry'입니다 | 형식의 내부 레지스트리 경로입니다
