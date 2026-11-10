@@ -1122,19 +1122,6 @@
   <block id="588d2fe1c60271cde75dbeba32e0b25b" category="list-text">시스템에 NFS 및/또는 iSCSI가 구성되어 있는지 확인합니다.</block>
   <block id="03fe5b0d58270efa87041677cac72ad7" category="list-text">NetApp Docker Volume Plugin 설치 및 구성:</block>
   <block id="f45f5a64dae951d3e37c9bd382201b06" category="list-text">응용 프로그램 다운로드 및 압축 풀기:</block>
-  <block id="b255d9e06a4ca8e9f5bc31c9198426ad" category="list-text">용지함 경로의 위치로 이동:</block>
-  <block id="e3dec3f86b9a3b1be209ab63855ce432" category="list-text">볼륨 생성:</block>
-  <block id="5ff2e3e853922fdb84ef21b85ffdac2e" category="list-text">컨테이너를 시작할 때 Docker 볼륨 프로비저닝:</block>
-  <block id="8f6a91f5f21d0478e3fd89095fc28ab9" category="list-text">Docker 볼륨 제거:</block>
-  <block id="5b51496da86e5a2073e0c618390c3d2a" category="list-text">파일을 올바른 위치에 복사합니다.</block>
-  <block id="44103de0a164f687d305ad91e919d8ee" category="paragraph">실행 중인 인스턴스가 두 개 이상인 경우 단위 파일에 고유한 이름을 사용해야 합니다.</block>
-  <block id="3223aadc84a3ccb4a3473ba01c895184" category="list-text">파일을 편집하고 설명(행 2)을 드라이버 이름과 구성 파일 경로(줄 9)에 맞게 변경하여 환경을 반영합니다.</block>
-  <block id="1edae3931401a32d7dd7dd6e0a2ad563" category="list-text">IT 부서에서 변경 사항을 수집하도록 시스템 다시 로드:</block>
-  <block id="db38a93e27eba57d507611d002ad612f" category="list-text">서비스를 활성화합니다.</block>
-  <block id="c7e0a4deeebe264aa7d5f7f3ca3ef77f" category="paragraph">이 이름은 '/usr/lib/systemd/system' 디렉토리에 있는 파일의 이름에 따라 달라집니다.</block>
-  <block id="baa04490a79e9e8de7fa4cd44e2c6fbb" category="list-text">서비스를 시작합니다.</block>
-  <block id="93c7574cf83c1f01b04891cf2d826cea" category="list-text">상태를 봅니다.</block>
-  <block id="f4f15418284ae7a01b27fccc1af0463a" category="admonition">단위 파일을 수정할 때마다 'stemctl daemon -reload' 명령을 실행하여 변경 사항을 확인합니다.</block>
   <block id="f683581d3e75f05f9d9215f9b4696cef" category="section-title">업그레이드</block>
   <block id="ed279061e829314cb0dc7a1708ca5e5b" category="list-text">기존 볼륨 나열:</block>
   <block id="7c256ad076320e18e087b238e9063f3f" category="list-text">플러그인 비활성화:</block>
@@ -1696,7 +1683,6 @@
   <block id="bba4e1b8d8614fe9da2d67e2dcef4b52" category="paragraph"><block ref="8321592ce24c8a122ecf26a63cfca407" prefix="" category="inline-code"></block>,<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>,<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>,<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>,<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block></block>
   <block id="c95cada2a569592345ebc18e5ef4c7aa" category="paragraph">프로토콜 LIF의 IP 주소입니다.</block>
   <block id="25edde63e4922bb316018c25888e64a6" category="inline-link-macro">ONTAP 선택적 LUN 맵</block>
-  <block id="0350980c728940d67af063bb5d711f0f" category="paragraph">시스템 기반 시스템용 샘플 장치 파일은 에서 찾을 수 있습니다<block ref="50a97f9b0dec64cc53ca48406c60fe4d" prefix=" " category="inline-code"></block> Git repo에 있습니다. RHEL에서 파일을 사용하려면 다음을 수행하십시오.</block>
   <block id="2f6c694f9d016c7193ece4853c402d96" category="doc">Trident 운영자 설치를 사용자 지정합니다</block>
   <block id="79445b5dba623a55ad4d974712853c2f" category="cell"><block ref="2b8b5018006a800ae06485c3aacfa08d" prefix="" category="inline-code"></block></block>
   <block id="cbea7dc9eb2c3c926a86130b0be6368f" category="cell">Trident 운영자의 이미지 풀 정책을 설정합니다. 유효한 값은 다음과 같습니다.<block ref="68eec46437c384d8dad18d5464ebc35c" prefix=" " category="inline-code"></block> 항상 이미지를 당깁니다.<block ref="7803982c6b845094275e8e83f0fad3a6" prefix=" " category="inline-code"></block> 이미지가 아직 노드에 없는 경우에만 이미지를 가져옵니다.<block ref="6e7b34fa59e1bd229b207892956dc41c" prefix=" " category="inline-code"></block> 이미지를 당기지 않습니다.</block>
@@ -2296,7 +2282,6 @@
   <block id="7646000ea978570e919e657f5ec9aa57" category="paragraph"><block ref="7646000ea978570e919e657f5ec9aa57" category="inline-link-macro-rx"></block></block>
   <block id="abefc87b0c4c459aa6fdb12d98caf984" category="paragraph">이제 백엔드를 추가하고, 스토리지 클래스를 관리하고, 백엔드를 관리하고, 볼륨 작업을 수행할 수 있습니다.</block>
   <block id="ca3c25915a30bef4ec583f6082477acf" category="paragraph">기본값을 사용하는 구성에서 구성을 수정하는 경우<block ref="47cb44be55a0dffa15dfc900a4c687be" prefix=" " category="inline-code"></block> 다른 사람을 사용하는 그룹에 대한 액세스 그룹에는 의 ID도 포함됩니다<block ref="47cb44be55a0dffa15dfc900a4c687be" prefix=" " category="inline-code"></block> 목록에 있는 액세스 그룹.</block>
-  <block id="b2edeceecc054572188ee3b08cd58c64" category="list-text">바이너리를 배치하고 구성 파일을 생성한 후 원하는 구성 파일을 사용하여 Trident 데몬을 시작합니다.</block>
   <block id="b4f83b03956523a39e8bbbd0895f0f29" category="inline-link-macro">Cloud Insights</block>
   <block id="63bfc0691d397470e5b0b05f2a9bcbe4" category="inline-link-macro">문제 #740</block>
   <block id="c8af8b49eb3be9ce411280db66de8a12" category="list-text">종료 상태로 고착된 이전 Pod를 무시하도록 Trident 업그레이드를 수정했습니다(<block ref="6f993c83118cc4a1dd5351c8501e26c9" category="inline-link-macro-rx"></block>)를 클릭합니다.</block>
@@ -2431,7 +2416,6 @@
   <block id="de9e7e8f2c463ef15bebdbf8d2d1aa6d" category="inline-link-macro">SAN 드라이버</block>
   <block id="9aa82da0cffe247b84587c1cc8e32746" category="cell">"기본값"</block>
   <block id="dfb6135042da6e8fbf367d9cf13431ef" category="paragraph">볼륨 크기에 대한 선택적 제한. 기본값:""(적용 안 됨)</block>
-  <block id="4846d107d8ddb5051591d14dcbddba8c" category="admonition">지정되지 않은 경우 볼륨 드라이버의 기본 이름은 "NetApp"입니다.</block>
   <block id="5ab207578468b7bbc201024492654253" category="list-text">Azure NetApp Files 드라이버에 네트워크 기능에 대한 지원이 추가되었습니다. (<block ref="e0e89f8bd936a5eb3adce74cac88eab0" category="inline-link-macro-rx"></block>)</block>
   <block id="302e5f91d375f03821f8fd6340563539" category="list-text">Azure NetApp Files 드라이버가 여러 내보내기 규칙을 사용하여 볼륨을 복제하지 못하는 문제가 해결되었습니다.</block>
   <block id="1d61f4e1411b6940bc918fb56346f64d" category="list-text">Azure NetApp Files 드라이버를 수정하여 중복된 리소스 이름을 허용하고 단일 위치로 작업을 제한했습니다.</block>
@@ -3074,7 +3058,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="58391bc76e8c1c5635a11134b3e4083d" category="admonition">기존 데몬 메서드에서 Trident pre Docker 1.13/17.03을 사용한 경우 관리되는 플러그인 방법을 사용하기 전에 Trident 프로세스를 중지하고 Docker 데몬을 다시 시작해야 합니다.</block>
   <block id="8554af307cedea04e0e39362f35175f4" category="list-text">관리되는 플러그인 시스템을 사용하여 Trident를 시작합니다. <block ref="3d689bd3819ead35ed794427bd12f459" prefix=" " category="inline-code"></block>사용 중인 플러그인 버전(xxx.xx.x)으로 바꿉니다.</block>
   <block id="8020e7c6d37db1ac7100b3b117f46cfd" category="list-text">Trident를 사용하여 구성된 시스템에서 스토리지를 소비합니다.</block>
-  <block id="b48e6203239c93859800f96924a39ed7" category="section-title">시스템 시작 시 Trident를 시작합니다</block>
   <block id="a5a6bc232526faaa8ab11bd5f46a069c" category="summary">Trident와 Docker를 함께 사용할 때 알려진 문제에 대한 정보를 확인할 수 있습니다.</block>
   <block id="44110fddc560d626db733ac60924ea7c" category="paragraph">Trident를 Docker와 함께 사용할 때 알려진 문제 및 제한 사항에 대한 정보를 찾을 수 있습니다.</block>
   <block id="442b5623691118072cf6342e3614f21a" category="section-title">Docker Swarm에는 모든 스토리지와 드라이버 조합에서 Trident이 이를 지원하지 못하는 특정한 동작이 있습니다.</block>
@@ -4715,7 +4698,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="8ef3114bf1395e8f04d7b3404982499e" category="list-text">NVE 암호화 플래그를 로 설정하여 NAE 지원 볼륨을 생성할 수 있습니다<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>.</block>
   <block id="351e2b20bd9ea864b69cd832f3a4a5df" category="list-text">백엔드에서 NAE가 사용되지 않는 경우, 백엔드 구성에서 NVE 암호화 플래그가 (기본값)로 설정되지 않은 경우 Trident에서 프로비저닝된 모든 볼륨은 NVE가<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> 사용됩니다.</block>
   <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">저장 클래스 및 PVC가 생성되면 PV를 포드에 장착할 수 있습니다. 이 섹션에는 PV를 Pod에 연결하기 위한 명령 및 구성의 예가 나와 있습니다.</block>
-  <block id="f253a45a33bc62e467efd426699d9025" category="paragraph">데몬을 시작한 후 Docker CLI 인터페이스를 사용하여 볼륨을 생성 및 관리할 수 있습니다.</block>
   <block id="a0ba0b0d751124c646a352594c7e9d7b" category="paragraph">나머지 드라이버는 경합 조건과 같이 명확한 "승자"가 없는 단일 요청에 대해 대량의 볼륨을 생성할 수 있는 문제가 발생합니다. 예를 들어 Element에는 볼륨이 동일한 이름을 갖지만 ID를 가질 수 있는 기능이 있습니다.</block>
   <block id="8904f6454065d44212063d39eeae5f07" category="paragraph">NFS 마운트 옵션을 세부적으로 제어하고 기본값은 "-o nfsvers=3"입니다. *및<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 드라이버에서만 사용 가능<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>*.<block ref="71f7a3f48cfd3876cffba401813b7db0" category="inline-link-rx"></block>..</block>
   <block id="6a3f2fe5a221ff5e914123b7d1d207ac" category="paragraph">스냅샷 예약 비율입니다. 기본값은 ""이며 ONTAP 기본값을 적용합니다</block>
@@ -7956,6 +7938,20 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="32e050df1ec85a2f1e5df0a5f58268ec" category="list-text"><block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 명령을 사용합니다. 여기서 <block ref="a4b3c2e901b9e596a96af375fe1d5a7c" prefix=" " category="inline-code"></block>는 업그레이드할 버전을 나타냅니다.</block>
   <block id="65eb82fddd05e92e211e0d77aeb0e4e1" category="section-title">26.10.1의 새로운 기능</block>
   <block id="24ab713b78d3325367406612bac11467" category="list-text">Trident 25.10 이하 버전에서 업그레이드한 후 시작 시 Trident 노드 Pod가 사용 중인 볼륨을 강제로 분리하여 Pod가 <block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block> 오류로 실패하는 문제를 수정했습니다.</block>
-  <block id="08a653a879b277b1ab0d81324b64565e" category="paragraph">Trident 26.10.1로 업그레이드하지 마십시오. 시작하는 동안 Trident 노드 Pod가 아직 사용 중인 볼륨을 분리할 수 있습니다. 영향을 받는 Pod는 오류<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>로 인해 실패할 수 있습니다. 이 문제는 Trident 26.10.1에서 수정되었습니다. 대신 Trident 26.10.1 이상으로 업그레이드하십시오.</block>
   <block id="90e0d67f77c8a5ec012e93f3be5c8331" category="list-text">적어도 하나의<block ref="c5f14b2142014dc234282a513132bad4" category="inline-link-rx"></block>를 포함하는 Azure<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block>. <block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> 매개변수는 백엔드 구성 파일의 최상위 수준에서 필요합니다. 가상 풀에 지정된 위치 값은 무시됩니다.</block>
+  <block id="784329f85fd663964c68f0a0708c6a94" category="paragraph">sudo mv trident-installer/extras/bin/trident /usr/local/bin/ sudo chown root:root /usr/local/bin/trident sudo chmod 755 /usr/local/bin/trident</block>
+  <block id="5dd8f815786ef70394bd3584d3a83edb" category="paragraph">sudo mkdir -p /etc/netappdvp</block>
+  <block id="e3390f4eb37ee288a1506cb1c597aa95" category="paragraph">cat &lt;&lt; EOF &gt; /etc/netappdvp/ontap-nas.json</block>
+  <block id="adc4dd00e378338b858aca4e95957991" category="paragraph">{ "version": 1, "storageDriverName": "ontap-nas", "managementLIF": "10.0.0.1", "dataLIF": "10.0.0.2", "svm": "svm_nfs", "username": "vsadmin", "password": "password", "aggregate": "aggr1" } EOF</block>
+  <block id="59eded362480a8bf2a93749d766232f5" category="paragraph">sudo trident --config=/etc/netappdvp/ontap-nas.json</block>
+  <block id="d61aa82a9c4cc0306260158ad8814a0f" category="paragraph">docker volume create -d netapp --name trident_1</block>
+  <block id="23eec71379bdec8968a87c5d8d0ce0a0" category="paragraph">docker run --rm -it --volume-driver netapp --volume trident_2:/my_vol alpine ash</block>
+  <block id="1a3c38b86779ead156135d6d6117f9e0" category="paragraph">docker volume rm trident_1</block>
+  <block id="8e77e19e4710951abc111ddaa1a9700a" category="paragraph">docker volume rm trident_2</block>
+  <block id="6e764ace6033355001647dc536a222e2" category="paragraph">cp contrib/trident.service.example /usr/lib/systemd/system/trident.service</block>
+  <block id="269b117015efb12595eebf74692e5cbc" category="paragraph">systemctl daemon-reload</block>
+  <block id="906e1aecd65b40017e38c9165527f849" category="paragraph">systemctl enable trident</block>
+  <block id="0bb25bc3cf1d0c26ca853353a2dd7109" category="paragraph">systemctl start trident</block>
+  <block id="f2f8542f9f112ea6545bf028e893aadc" category="paragraph">systemctl status trident</block>
+  <block id="4e7dcfae0cbac5529245e0641c2da2e4" category="paragraph">Trident 26.10.0로 업그레이드하지 마십시오. 시작하는 동안 Trident 노드 Pod가 아직 사용 중인 볼륨을 분리할 수 있습니다. 영향을 받는 Pod는 오류<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>로 인해 실패할 수 있습니다. 이 문제는 Trident 26.10.1에서 수정되었습니다. 대신 Trident 26.10.1 이상으로 업그레이드하십시오.</block>
 </blocks>
