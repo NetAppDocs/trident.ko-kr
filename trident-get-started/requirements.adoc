@@ -44,12 +44,14 @@ Trident는 다음을 비롯한 다수의 컨테이너 엔진 및 오케스트레
 
 * 베어 메탈 기반 Anthos(VMware) 및 Anthos 1.16
 * Kubernetes 1.27 - 1.37
+* OpenShift 5.0
 * OpenShift 4.12, 4.14 - 4.22(OpenShift 4.19에서 iSCSI 노드 준비를 사용하려는 경우 지원되는 최소 Trident 버전은 25.06.1입니다.)
 +
 
 NOTE: Trident 다음과 같은 기준으로 이전 OpenShift 버전을 계속 지원합니다.link:https://access.redhat.com/support/policy/updates/openshift["Red Hat Extended Update Support(EUS) 릴리스 수명 주기"] 더 이상 공식적으로 지원되지 않는 Kubernetes 버전을 사용하는 경우에도 마찬가지입니다.  이런 경우 Trident 설치하는 동안 Kubernetes 버전에 대한 경고 메시지는 무시해도 됩니다.
 
-* Rancher Kubernetes Engine 2(RKE2) v1.28.x - 1.37.x
+* SUSE Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.37.x
+* SUSE 가상화(Harvester) 1.8.x - 1.9.x (NFS, iSCSI, NVMe/TCP 및 FC)
 * NFSv4, iSCSI 및 NVMe/TCP용 Talos OS. 각 프로토콜에는 다음 Talos 시스템 확장이 필요합니다. Sidero Labs에 이러한 요구 사항을 확인하십시오.
 +
 ** NFSv4: `siderolabs/nfs-utils`
@@ -84,15 +86,22 @@ Trident를 사용하려면 다음과 같은 지원되는 백엔드가 하나 이
 
 
 
-[[trident-support-for-kubevirt-and-openshift-virtualization]]
-== KubeVirt 및 OpenShift 가상화를 위한 Trident 지원
+[[trident-support-for-kubevirt-openshift-virtualization-and-suse-virtualization]]
+== KubeVirt, OpenShift 가상화 및 SUSE 가상화에 대한 Trident 지원
 
 .지원되는 스토리지 드라이버:
-Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.
+Trident는 KubeVirt, OpenShift 가상화 및 SUSE 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다:
 
 * ONTAP - NAS
 * ONTAP-SAN(iSCSI, FCP, NVMe over TCP)
 * ONTAP - SAN - 경제성(iSCSI만 해당)
+
+
+.SUSE 가상화 인증 보고서
+다음 Trident 26.10 구성은 SUSE 가상화 환경에서 검증되었습니다. 테스트는 Suresh Thoppay 님께서 진행해 주셨습니다:
+
+* link:https://netapp-my.sharepoint.com/:w:/p/lrico/IQAF9GNKmi64SKJIhoBo4QcOASK58qAyI3j-Gm5QCd4fHa8?e=Z8G3cO["SUSE Virtualization 1.8.2가 포함된 Trident 26.10"^]
+* link:https://netapp-my.sharepoint.com/:w:/p/lrico/IQCwh98Enw7CTYcbu_fRhSS0AVN__iDN_jYFTvVrELgxNYI?e=dLNcqx["Trident 26.10 (SUSE Virtualization 1.9.1 포함)"^]
 
 
 .고려 사항:
@@ -287,7 +296,7 @@ link:../trident-reference/ports.html["Trident 포트"]
 | Kubernetes 버전 | 컨테이너 이미지 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0, v1.37.0  a| 
+| v1.37.0  a| 
 * docker.io/netapp/trident:26.10.1
 * docker.io/netapp/trident-autosupport:26.10
 * docker.io/netapp/trident-operator:26.10.1(선택 사항)

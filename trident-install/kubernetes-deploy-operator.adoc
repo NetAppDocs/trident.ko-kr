@@ -81,7 +81,7 @@ Trident 설치 프로그램 패키지에는 Trident 운영자를 배포하고 Tr
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v26.10.0/trident-installer-26.10.1.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v26.10.1/trident-installer-26.10.1.tar.gz
 tar -xf trident-installer-26.10.1.tar.gz
 cd trident-installer
 ----

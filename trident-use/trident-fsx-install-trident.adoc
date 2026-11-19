@@ -27,13 +27,14 @@ Trident는 Amazon FSx for NetApp ONTAP 스토리지 관리를 Kubernetes에서 �
 
 [role="tabbed-block"]
 ====
-.포드 아이덴티티
+.Pod Identity(EKS)
 --
 . Trident Helm 저장소 추가:
 +
 [source, console]
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+helm repo update
 ----
 . 다음 예를 사용하여 Trident를 설치하세요.
 +
@@ -53,13 +54,12 @@ helm list -n trident
 [listing]
 ----
 NAME                NAMESPACE   REVISION    UPDATED                                 STATUS       CHART                          APP VERSION
-
 trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT    deployed     trident-operator-100.2502.0    25.02.0
 ----
 
 
 --
-.서비스 계정 연결(IRSA)
+.서비스 계정(IRSA)용 IAM 역할(EKS)
 --
 . Trident Helm 저장소 추가:
 +
@@ -72,10 +72,10 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 [source, console]
 ----
 helm install trident-operator netapp-trident/trident-operator --version 100.2502.1  \
---set cloudProvider="AWS" \
---set cloudIdentity="'eks.amazonaws.com/role-arn: arn:aws:iam::<accountID>:role/<AmazonEKS_FSxN_CSI_DriverRole>'" \
---namespace trident \
---create-namespace
+  --set cloudProvider="AWS" \
+  --set cloudIdentity="'eks.amazonaws.com/role-arn: arn:aws:iam::<accountID>:role/<AmazonEKS_FSxN_CSI_DriverRole>'" \
+  --namespace trident \
+  --create-namespace
 ----
 +
 명령을 사용하여 이름, 네임스페이스, 차트, 상태, 앱 버전 및 수정 번호와 같은 설치 세부 정보를 검토할 수 `helm list` 있습니다.
@@ -92,6 +92,42 @@ NAME                NAMESPACE   REVISION    UPDATED                             
 
 trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT    deployed     trident-operator-100.2510.0    25.10.0
 ----
+
+
+--
+.자체 관리형 OpenShift용 IAM 역할
+--
+. Trident Helm 저장소 추가:
++
+[source, console]
+----
+helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+helm repo update
+----
+. 다음 예를 사용하여 Trident를 설치하세요.
++
+[source, console]
+----
+helm install trident-operator netapp-trident/trident-operator --version 100.2606.1 --namespace trident --set hostNetwork=true --create-namespace
+----
++
+명령을 사용하여 이름, 네임스페이스, 차트, 상태, 앱 버전 및 수정 번호와 같은 설치 세부 정보를 검토할 수 `helm list` 있습니다.
+
++
+[source, console]
+----
+helm list -n trident
+----
++
+[listing]
+----
+NAME               NAMESPACE   REVISION   UPDATED                                  STATUS     CHART                         APP VERSION
+trident-operator   trident     1          2026-11-10 16:58:16.108649912 -0600 CST  deployed   trident-operator-100.2606.1   26.06.1
+----
++
+
+NOTE: 자체 관리형 OpenShift 설치 프로그램은  `hostNetwork`이(가) 활성화된 경우 Trident가 TCP 포트 8443에 대해 요구하는 보안 그룹 규칙을 생성하지 않습니다. OpenShift 설치 프로그램에서 생성한  `<cluster_name>-<random_string>-node` 및  `<cluster_name>-<random_string>-controlplane` 보안 그룹에 VPC CIDR에서 TCP 포트 8443에 대한 인바운드 규칙을 추가하십시오.
+
 
 
 --

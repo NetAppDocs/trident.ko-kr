@@ -763,7 +763,6 @@
   <block id="b8f98ceeb9b158e8af3527fce91e9e57" category="list-text">'ONTAP-SAN-이코노미': 프로비저닝되는 각 PV는 NetApp ONTAP 볼륨에 대해 Amazon FSx당 구성 가능한 LUN 수를 가진 LUN입니다.</block>
   <block id="94a834f420b7c21f3a1053e6dc705a31" category="list-text">'ONTAP-NAS-E경제적인': 각 PV 프로비저닝은 qtree이며, NetApp ONTAP 볼륨에 대해 Amazon FSx당 qtree를 구성할 수 있습니다.</block>
   <block id="e42b07a9f050ef51ea1211004a50f223" category="list-text">'ONTAP-NAS-flexgroup': 프로비저닝되는 각 PV는 NetApp ONTAP FlexGroup 볼륨에 대한 전체 Amazon FSx입니다.</block>
-  <block id="80d13d3dbe137e8fb646193f275eceeb" category="list-text">kubbtl이 설치된 기존 Amazon EKS 클러스터 또는 자체 관리 Kubernetes 클러스터</block>
   <block id="fe914214000491758957f04647f8da36" category="inline-link">Amazon Machine Images(아마존 머신 이미지)</block>
   <block id="cc788b7e72b2a734dd0985bd1e0e9fe3" category="inline-link">NetApp ONTAP용 Amazon FSx 문서</block>
   <block id="fd570b75466e2daca21a032e6fd5981c" category="list-text"><block ref="fd570b75466e2daca21a032e6fd5981c" category="inline-link-rx"></block></block>
@@ -2850,9 +2849,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="c09ee63e688125cf9517a66bb5a0a5a6" category="paragraph">다음 예는 PVC를 포드에 부착하기 위한 기본 구성을 보여줍니다. * 기본 구성 *:</block>
   <block id="f477db05998ad8420119de646e2ff290" category="doc">IAM 역할 및 AWS Secret을 생성합니다</block>
   <block id="98c3c9acd444d11890d48438db3c165e" category="paragraph">AWS 자격 증명을 명시적으로 제공하는 대신 AWS IAM 역할로 인증하여 Kubernetes Pod를 구성하여 AWS 리소스에 액세스할 수 있습니다.</block>
-  <block id="3f566b5ded6e7ac8c26dd3c07a2ea056" category="admonition">AWS IAM 역할을 사용하여 인증하려면 EKS를 사용하여 Kubernetes 클러스터를 구축해야 합니다.</block>
-  <block id="3926fdac6344d565c95f560468946335" category="section-title">IAM 정책을 생성합니다</block>
-  <block id="78edc229f8df1c5e0840f6469bc28454" category="paragraph">다음 예에서는 AWS CLI를 사용하여 IAM 정책을 생성합니다.</block>
   <block id="77f6e3db9b70538186091595d9c8c9e8" category="list-text">EKS 추가 기능</block>
   <block id="e477faed39be08642267684bb501d931" category="open-title">관리 콘솔과 직접 연결되어 있습니다</block>
   <block id="e8d532dbf6904e2793dbda6fd0d03818" category="list-text">에서 Amazon EKS 콘솔을 엽니다<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>.</block>
@@ -4460,12 +4456,7 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="e992eb9afeef39efec8f68b68ffade1d" category="paragraph">* 정책 JSON 예 *:</block>
   <block id="54fe765490f6a1e88df34666a34bd7de" category="paragraph">* trust-relationship.json 파일: *</block>
   <block id="383e53c41c71ed73661ac56b250f6ba3" category="paragraph">파일에서 다음 값을<block ref="d19984a25b3e536a13a6bc3036325ffd" prefix=" " category="inline-code"></block> 업데이트합니다.</block>
-  <block id="e6fd9d7b1a119dcc259f2b06b2a2168c" category="list-text">* &lt;account_id&gt; * - AWS 계정 ID</block>
-  <block id="799fd029d6ab8a846f662458a1f8df55" category="list-text">* &lt;oidc_provider&gt; * - EKS 클러스터의 OIDC. 다음을 실행하여 oidc_provider를 가져올 수 있습니다.</block>
-  <block id="053db598e2fbb7aa26ff7edbf6139941" category="paragraph">* IAM 정책에 IAM 역할 연결 *:</block>
   <block id="069097b4881e6034a743e694f616726d" category="paragraph">역할이 생성되면 다음 명령을 사용하여 정책(위 단계에서 만든 정책)을 역할에 연결합니다.</block>
-  <block id="02b550dde0cf971ab3461242774691c7" category="paragraph">* OICD 공급자가 연결되었는지 확인 *:</block>
-  <block id="25c5ea267b4be122e562399076209238" category="paragraph">OIDC 공급자가 클러스터와 연결되어 있는지 확인합니다. 다음 명령을 사용하여 확인할 수 있습니다.</block>
   <block id="7c3f89bd6bb66984ef17d4765bf1f65a" category="open-title">eksctl입니다</block>
   <block id="a01b2c45a64c7d0c2a2aa3ce418eaa04" category="inline-link-macro">CSI 볼륨에 대해 스냅샷 기능을 활성화합니다</block>
   <block id="9adc02aa546c3838bddb73a67ebaa4e2" category="paragraph">스냅샷 기능을 사용하려면 CSI 스냅샷 컨트롤러 애드온을 설치하십시오. 자세한 내용은 을 <block ref="d2fce68a585fb4c517040885fb7393e9" category="inline-link-macro-rx"></block> 참조하십시오.</block>
@@ -4683,8 +4674,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="f8c91efdaebc08b292c83903943a18c8" category="admonition">충돌 해결 방법으로 재정의 를 선택한 경우 기존 애드온에 대한 하나 이상의 설정을 Amazon EKS 애드온 설정으로 덮어쓸 수 있습니다. 이 옵션을 사용하지 않고 기존 설정과 충돌하는 경우 작업이 실패합니다. 결과 오류 메시지를 사용하여 충돌 문제를 해결할 수 있습니다. 이 옵션을 선택하기 전에 Amazon EKS 추가 기능이 자체 관리해야 하는 설정을 관리하지 않는지 확인하십시오.</block>
   <block id="3b19f031abb1ee1e70a3d19640060ff8" category="cell">AWS Secrets Manager에 저장할 FSx SVM 자격 증명을 지정합니다. -<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>: SVM의 자격 증명이 포함된 비밀의 ARN(Amazon Resource Name). <block ref="599dcce2998a6b40b1e38e8c6006cb0a" prefix=" " category="inline-code"></block>-: 로<block ref="eb301fdabb7b8996ba898845d5546121" prefix=" " category="inline-code"></block>설정합니다. 자세한 내용은 을 <block ref="e10af1024bf046058eef4c68dff3462a" category="inline-link-macro-rx"></block> 참조하십시오.</block>
   <block id="f62b661d066f6d5a24622ec3438e051b" category="example-title">Secrets Manager가 포함된 AWS FSx for ONTAP에 대한 구성</block>
-  <block id="88f9965484e8785ad82e1b99cdae3ab3" category="section-title">AWS Secrets Manager 암호를 생성합니다</block>
-  <block id="646ed389b399156cbfb4923c9d8fbf95" category="paragraph">Trident는 사용자를 위해 스토리지 관리를 위해 FSx 가상 서버에 대해 API를 발행하므로 이를 위해 자격 증명이 필요합니다. 이러한 자격 증명을 전달하는 안전한 방법은 AWS Secrets Manager 암호를 사용하는 것입니다. 따라서 아직 계정이 없는 경우 vsadmin 계정의 자격 증명이 포함된 AWS Secrets Manager 암호를 생성해야 합니다.</block>
   <block id="360f6e9d45a33dadfdb2b47fa3a32110" category="paragraph">이 예에서는 Trident CSI 자격 증명을 저장하기 위한 AWS Secrets Manager 암호를 생성합니다.</block>
   <block id="1cb68d4d58173447ddb7517b51d352a9" category="paragraph">Trident를 올바르게 실행하려면 AWS 권한도 필요합니다. 따라서 Trident에 필요한 사용 권한을 부여하는 정책을 만들어야 합니다.</block>
   <block id="49512d524988e02360eaf4f4bb2ad8f3" category="paragraph">출력이 비어 있는 경우 다음 명령을 사용하여 IAM OIDC를 클러스터에 연결합니다.</block>
@@ -4771,8 +4760,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">iSCSI 자동 복구 중 간헐적으로 비CHAP 포털에 대한 로그아웃을 제거했습니다<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>().</block>
   <block id="78937357687a7b0292ed689d4e420485" category="inline-link">Red Hat 설명서</block>
   <block id="89e30b0f2c0e48835ff872a994fc749c" category="list-text">RHEL/Red Hat Enterprise Linux CoreOS(RHCOS)를 실행하는 작업자 노드를 FC PVS와 함께 사용하는 경우 StorageClass에서 mount옵션을 지정하여<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> 인라인 공간 재확보를 수행합니다. 을<block ref="65c95aeda8cb0b26307f9839dd3fefbf" category="inline-link-rx"></block>참조하십시오.</block>
-  <block id="e80b6a304e29d5dfcb9150f47d69db94" category="section-title">KubeVirt 및 OpenShift 가상화를 위한 Trident 지원</block>
-  <block id="cffd29fb8e17cb30625130ee24cd667d" category="paragraph">Trident는 KubeVirt 및 OpenShift 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다.</block>
   <block id="0ae326ef84f2a6bc4be48951f88c0162" category="list-text">OpenShift Virtualization 환경에서 매개 변수(예<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>:)를 갖도록 스토리지 클래스를 업데이트합니다<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block>. 필요한 경우 의 매개 변수를<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block> 사용하여 볼륨 모드를 명시적으로 차단하도록<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block> 설정하여 CDI에 블록 데이터 볼륨을 생성하도록 알립니다.</block>
   <block id="2bf380408feee0a9443f217c907f0681" category="inline-link-macro">Red Hat OpenShift 로깅 문서</block>
   <block id="3a298688c4d78e1b7532d3859cd16a57" category="inline-link-macro">Red Hat OpenShift Container Platform 3.11 설명서</block>
@@ -4971,26 +4958,18 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="d075b47d76ffc95cce31e3ff1a3bf887" category="paragraph">Trident은 재해 복구에 대비해 데이터를 복제하기 위해 한 클러스터의 소스 볼륨과 피어링된 클러스터의 타겟 볼륨 간의 미러링 관계를 지원합니다.  Trident Mirror Relationship(TMR)이라고 하는 네임스페이스가 지정된 사용자 지정 리소스 정의(CRD)를 사용하여 다음 작업을 수행할 수 있습니다.</block>
   <block id="2d78d4f2531b53f3a4980133900540f7" category="paragraph">NetApp Trident는 다음 드라이버가 지원하는 스토리지 클래스를 사용하여 NetApp SnapMirror 기술을 통한 볼륨 복제를 지원합니다.** <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> : NFS ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : iSCSI ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : FC ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : NVMe/TCP(최소 ONTAP 버전 9.15.1 필요)</block>
   <block id="a6d2a1b8501003e74309a1ac77e249d4" category="admonition">SnapMirror를 사용한 볼륨 복제는 ASA r2 시스템에서는 지원되지 않습니다. ASA r2 시스템에 대한 자세한 내용은 다음을 참조하세요. <block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> .</block>
-  <block id="b2b0186a010875b0d453752a8aa06a4c" category="section-title">서비스 계정 연결(IRSA)을 위한 Pod ID 또는 IAM 역할 생성</block>
-  <block id="152bceec6d4e34c053208d61763334bc" category="paragraph">Kubernetes 서비스 계정이 EKS Pod Identity를 사용하는 AWS Identity and Access Management(IAM) 역할 또는 서비스 계정 연결(IRSA)을 위한 IAM 역할을 맡도록 구성할 수 있습니다. 서비스 계정을 사용하도록 구성된 모든 Pod는 해당 역할에 액세스 권한이 있는 모든 AWS 서비스에 액세스할 수 있습니다.</block>
-  <block id="0522426ad683048758e710700760f5a9" category="open-title">포드 아이덴티티</block>
   <block id="acbe8cfddfd64fba35512f543affb372" category="paragraph">Amazon EKS Pod Identity 연결은 Amazon EC2 인스턴스 프로필이 Amazon EC2 인스턴스에 자격 증명을 제공하는 방식과 유사하게 애플리케이션의 자격 증명을 관리하는 기능을 제공합니다.</block>
   <block id="870d5f69e46397da39e4d5bc6a55edc4" category="paragraph">*EKS 클러스터에 Pod Identity 설치*:</block>
   <block id="3a735289083f3ebf5b12bf1252f47e70" category="paragraph">AWS 콘솔을 통해 또는 다음 AWS CLI 명령을 사용하여 Pod ID를 생성할 수 있습니다.</block>
   <block id="6b12dab36e102678866ee1a9295bf251" category="inline-link-macro">Amazon EKS Pod Identity Agent 설정</block>
-  <block id="f0e49b3188e2241a1fd992e7697df37f" category="paragraph">자세한 내용은 다음을 참조하세요. <block ref="223f02a97a1894440d2727b156e834b6" category="inline-link-macro-rx"></block> .</block>
   <block id="4fcddd38c3384849e906ff198dca9a35" category="paragraph">*trust-relationship.json을 생성합니다*:</block>
   <block id="9eaa0d9301ed8e0e6ec8d359da513e09" category="paragraph">EKS 서비스 주체가 Pod Identity에 대한 이 역할을 수행할 수 있도록 trust-relationship.json 파일을 생성하세요. 그런 다음 다음 신뢰 정책을 사용하여 역할을 생성하세요.</block>
   <block id="c256d9b106d5b83ccc940e1c11d40213" category="paragraph">*trust-relationship.json 파일*:</block>
   <block id="d5bcbf5d17aa3658058051153a3abb49" category="paragraph">*IAM 역할에 역할 정책 첨부*:</block>
   <block id="5855de3e8f302cffda094dad3434d14d" category="paragraph">이전 단계의 역할 정책을 생성된 IAM 역할에 연결합니다.</block>
   <block id="ae33daeae7be898405819838f197197f" category="paragraph">*포드 ID 연결 생성*:</block>
-  <block id="bfb2fc1510ac240a94b2b84a57023dfd" category="paragraph">IAM 역할과 Trident 서비스 계정(trident-controller) 간에 Pod ID 연결을 생성합니다.</block>
-  <block id="37d9be75a57d7c290f4624befaf41cba" category="open-title">서비스 계정 연결(IRSA)을 위한 IAM 역할</block>
   <block id="58b24f910cf7a97cc3ea8486155b2ee3" category="paragraph">*AWS CLI 사용*:</block>
-  <block id="4411692a55eac3faa65c355f682424c8" category="paragraph">*eksctl을 사용하는 경우* 다음 예를 사용하여 EKS의 서비스 계정에 대한 IAM 역할을 생성하세요.</block>
   <block id="de756da101866f0bf66d3cfdb32b337b" category="list-text">다음 예를 사용하여 Trident를 설치하세요.</block>
-  <block id="3840ce271260ab4b489b1664491a7ae0" category="open-title">서비스 계정 연결(IRSA)</block>
   <block id="682fae06c762bb51c348b65f07930993" category="list-text">*클라우드 공급자* 및 *클라우드 ID*에 대한 값을 설정합니다.</block>
   <block id="eff2bb231132a96a28f9d538ef100a34" category="paragraph">iSCSI를 사용하려면 클라이언트 머신에서 iSCSI가 활성화되어 있는지 확인하세요. AL2023 Worker 노드 OS를 사용하는 경우, helm 설치 시 node prep 매개변수를 추가하여 iSCSI 클라이언트 설치를 자동화할 수 있습니다.</block>
   <block id="586ac0fdd530431245eb98eb3aa882f4" category="list-text">추가 기능을 선택하려면 다음 단계를 따르세요.</block>
@@ -6409,7 +6388,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="a24b1fc957d4a3542de5e601eac1d28f" category="doc">애플리케이션 배포</block>
   <block id="1c21e9c64b7661ab6b46e1a5d6c8bc6d" category="section-title">샘플 애플리케이션 배포</block>
   <block id="7fdc028dffbf771dba84d86122529ce5" category="paragraph">Trident는 Amazon FSx for NetApp ONTAP 스토리지 관리를 Kubernetes에서 간소화하여 개발자와 관리자가 애플리케이션 배포에 집중할 수 있도록 지원합니다. 다음 방법 중 하나를 사용하여 Trident를 설치할 수 있습니다.</block>
-  <block id="6529ed4499fd7aea7863a4cbdb1e267a" category="paragraph"><block ref="6a2736fcbb5755dd03d114a5153506eb" category="inline-link-rx"></block>는 NetApp ONTAP 스토리지 운영 체제를 기반으로 하는 파일 시스템을 실행하는 완전 관리형 AWS 서비스입니다. AWS의 확장성과 운영 간편성과 함께 ONTAP의 기능, 성능 및 관리를 제공합니다. 파일 시스템은 Amazon FSx의 기본 리소스이며 온프레미스 ONTAP 클러스터와 유사합니다. 각 파일 시스템에는 하나 이상의 스토리지 가상 머신(SVM)이 포함되고, 각 SVM에는 파일과 디렉터리를 저장하는 하나 이상의 볼륨이 포함됩니다. 이 통합을 통해 Amazon Elastic Kubernetes Service(EKS)에서 실행되는 Kubernetes 클러스터는 블록 및 파일 워크로드를 위해 ONTAP 기반 영구 볼륨을 프로비저닝할 수 있습니다.</block>
   <block id="e135dbea693333923195aacbaa21dfde" category="paragraph">ReadWriteMany(RWX) 볼륨은 NVMe 프로토콜을 사용하며 볼륨당 64개 노드의 확장성 제한이 있습니다. 다음은 제한 사항, 관련 NVMe 서브시스템 아키텍처 및 필요한 해결 단계를 설명합니다.</block>
   <block id="4daca3334f00c4ec7830e587d1e0269d" category="list-text">Trident Protect를 설치하려면 Helm 4.x 이상이 필요합니다.</block>
   <block id="43da129a49cd39591bce7ddda6f0dc82" category="list-text">Trident Protect CLI 플러그인을 사용하여 타겟 클러스터에 AppVault CR이 있는지 확인합니다.</block>
@@ -6434,7 +6412,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="7d46dc6377e8ce5df89a34c4ad4e2991" category="image-alt">Trident 추가 기능 활성 상태</block>
   <block id="2c0204a63fd46aab7636df3eb5f83972" category="paragraph"><block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 유틸리티를 사용하면 <block ref="b5eda0a74558a342cf659187f06f746f" prefix=" " category="inline-code"></block> 명령을 실행하여 하위 볼륨을 가져올 수 있습니다. 자세한 내용은 link:../trident-reference/trident-cl.html<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix="[" category="inline-code"></block> 명령 및 옵션]을 참조하십시오.</block>
   <block id="955581130750cc1758fa61171c2e0575" category="paragraph">NetApp Trident는 퍼블릭 클라우드 또는 온프레미스 환경에서 모든 인기 있는 NetApp 스토리지 플랫폼의 스토리지 리소스 소비 및 관리를 가능하게 하며, 온프레미스 ONTAP 클러스터(AFF, FAS, ASA), ONTAP Select, Cloud Volumes ONTAP, Element 소프트웨어(NetApp HCI, SolidFire), Azure NetApp Files, Amazon FSx for NetApp ONTAP, Google Cloud NetApp Volumes를 포함합니다.</block>
-  <block id="e08706b9934e8c02c4412d7cbbb8de70" category="paragraph">지원되는 플랫폼은 다음과 같습니다. * 업스트림 Kubernetes * Red Hat OpenShift * SUSE Harvester 1.7.0 (ONTAP iSCSI)</block>
   <block id="1868784d55625cd96ac74dd1393e90f9" category="paragraph">사용자 인터페이스는 기본 예시를 제공합니다. 전체 구성을 복사하는 대신 직접 편집할 수 있습니다.</block>
   <block id="ca375865284ae4e0a7735a38800e6c18" category="paragraph">선택 사항: 동시 실행 활성화</block>
   <block id="a7dfe0e5a21691eba1519b710d8d3a75" category="paragraph">동시성을 활성화하려면 spec에 다음 필드를 추가하십시오.</block>
@@ -6510,8 +6487,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="45785995a830d1fc258f9f492e7419f3" category="doc">스토리지 클래스 구성</block>
   <block id="1a9cbcbc6ddc2988ba989623616f551f" category="paragraph">이 <block ref="da3f7f170e13df7f56e057fc4226aa85" category="inline-link-rx"></block> 설정은 프로비저너를 식별하고 프로비저너에게 볼륨을 프로비저닝하는 방법을 지시합니다. 이 섹션에서는 Trident를 프로비저너로 지정하는 Kubernetes StorageClass 객체를 구성하는 방법을 보여줍니다.</block>
   <block id="181d66d2970ca0a79166620ff77f2365" category="section-title">StorageClass 객체를 생성합니다</block>
-  <block id="210b23a19c97ecce400f85135dfa4f55" category="paragraph">FSx for ONTAP용 StorageClass를 생성하면 Trident가 백엔드 구성을 자동으로 생성합니다.</block>
-  <block id="509f5efbbc1d003a3134ba763ce9a153" category="admonition">스토리지 백엔드를 수동으로 구성하려면 Trident 백엔드와 스토리지 클래스를 별도로 생성하는 방법에 대한 <block ref="f92675ea6cdcb434e9668b63d509b6c2" category="inline-xref-macro-rx"></block> 섹션을 참조하십시오.</block>
   <block id="9fdbc2bf1d74e1af2c19ff15c59205a5" category="paragraph">StorageClass를 생성할 때 다음 세 가지 매개 변수를 정의해야 합니다.</block>
   <block id="1ebccd08373f6e20b1548e7b97f25d9f" category="section-title">StorageClass 구성 파일의 예입니다.</block>
   <block id="e838148d72a21ebe7c26751f37c63e59" category="section-title">StorageClass 생성</block>
@@ -7221,10 +7196,8 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="59d40127a6af11747a793d61df5338e5" category="doc">Trident 및 Kubernetes와 NetApp 제품 통합</block>
   <block id="0aa4c54ee2846cd1ee10e094f05cfa48" category="list-text">Kubernetes 1.37는 이제 Trident에서 지원됩니다. Kubernetes를 업그레이드하기 전에 Trident를 먼저 업그레이드하십시오.</block>
   <block id="fb969327dd7c5284cf39ef2077642427" category="list-text">Kubernetes 1.27 - 1.37</block>
-  <block id="1f8bad982c95fa13c1c3b93510b02a5e" category="list-text">Rancher Kubernetes Engine 2(RKE2) v1.28.x - 1.37.x</block>
   <block id="d03983e9fca4277cf0919e8bea0c196c" category="paragraph">1.27 - 1.37</block>
   <block id="ba8ebafc2389dabfa3286dbc34aec82b" category="section-title">Trident 26.06.2에 필요한 컨테이너 이미지</block>
-  <block id="df499232b0659c7b92a4bb7def65662d" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0, v1.37.0</block>
   <block id="add431fb6c7231214d4cc5b3f76a2a96" category="list-text">docker.io/netapp/trident:26.06.2</block>
   <block id="2c3f6f002722bde0c2e5610ddd0a46b8" category="list-text">docker.io/netapp/trident-operator:26.06.2(선택 사항)</block>
   <block id="39b839ecfa8ad2cd1a2a661969868248" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.11.0</block>
@@ -7934,20 +7907,6 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="65eb82fddd05e92e211e0d77aeb0e4e1" category="section-title">26.10.1의 새로운 기능</block>
   <block id="24ab713b78d3325367406612bac11467" category="list-text">Trident 25.10 이하 버전에서 업그레이드한 후 시작 시 Trident 노드 Pod가 사용 중인 볼륨을 강제로 분리하여 Pod가 <block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block> 오류로 실패하는 문제를 수정했습니다.</block>
   <block id="90e0d67f77c8a5ec012e93f3be5c8331" category="list-text">적어도 하나의<block ref="c5f14b2142014dc234282a513132bad4" category="inline-link-rx"></block>를 포함하는 Azure<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block>. <block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> 매개변수는 백엔드 구성 파일의 최상위 수준에서 필요합니다. 가상 풀에 지정된 위치 값은 무시됩니다.</block>
-  <block id="784329f85fd663964c68f0a0708c6a94" category="paragraph">sudo mv trident-installer/extras/bin/trident /usr/local/bin/ sudo chown root:root /usr/local/bin/trident sudo chmod 755 /usr/local/bin/trident</block>
-  <block id="5dd8f815786ef70394bd3584d3a83edb" category="paragraph">sudo mkdir -p /etc/netappdvp</block>
-  <block id="e3390f4eb37ee288a1506cb1c597aa95" category="paragraph">cat &lt;&lt; EOF &gt; /etc/netappdvp/ontap-nas.json</block>
-  <block id="adc4dd00e378338b858aca4e95957991" category="paragraph">{ "version": 1, "storageDriverName": "ontap-nas", "managementLIF": "10.0.0.1", "dataLIF": "10.0.0.2", "svm": "svm_nfs", "username": "vsadmin", "password": "password", "aggregate": "aggr1" } EOF</block>
-  <block id="59eded362480a8bf2a93749d766232f5" category="paragraph">sudo trident --config=/etc/netappdvp/ontap-nas.json</block>
-  <block id="d61aa82a9c4cc0306260158ad8814a0f" category="paragraph">docker volume create -d netapp --name trident_1</block>
-  <block id="23eec71379bdec8968a87c5d8d0ce0a0" category="paragraph">docker run --rm -it --volume-driver netapp --volume trident_2:/my_vol alpine ash</block>
-  <block id="1a3c38b86779ead156135d6d6117f9e0" category="paragraph">docker volume rm trident_1</block>
-  <block id="8e77e19e4710951abc111ddaa1a9700a" category="paragraph">docker volume rm trident_2</block>
-  <block id="6e764ace6033355001647dc536a222e2" category="paragraph">cp contrib/trident.service.example /usr/lib/systemd/system/trident.service</block>
-  <block id="269b117015efb12595eebf74692e5cbc" category="paragraph">systemctl daemon-reload</block>
-  <block id="906e1aecd65b40017e38c9165527f849" category="paragraph">systemctl enable trident</block>
-  <block id="0bb25bc3cf1d0c26ca853353a2dd7109" category="paragraph">systemctl start trident</block>
-  <block id="f2f8542f9f112ea6545bf028e893aadc" category="paragraph">systemctl status trident</block>
   <block id="4e7dcfae0cbac5529245e0641c2da2e4" category="paragraph">Trident 26.10.0로 업그레이드하지 마십시오. 시작하는 동안 Trident 노드 Pod가 아직 사용 중인 볼륨을 분리할 수 있습니다. 영향을 받는 Pod는 오류<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>로 인해 실패할 수 있습니다. 이 문제는 Trident 26.10.1에서 수정되었습니다. 대신 Trident 26.10.1 이상으로 업그레이드하십시오.</block>
   <block id="79c2ec5d9abadd1928864428c124fbf6" category="paragraph">각 스냅샷에는 완료 시간이 있습니다. 소스 클러스터에서 <block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block>을(를) 사용하거나 CLI를 사용하여 해당 아카이브 경로를 확인하십시오.</block>
   <block id="9cf75acdd1d73c0ba1f192ebd7c1af71" category="admonition">소스 클러스터가 다운되었거나 스냅샷 사용자 지정 리소스를 사용할 수 없는 경우 CLI를 사용하십시오. 타겟 클러스터 또는 소스 AppVault가 있는 모든 클러스터에서 명령을 실행하십시오.</block>
@@ -7958,4 +7917,69 @@ AKS 클러스터에서 관리되는 ID가 설정된 경우 선택 사항입니�
   <block id="875a912cbb29f994f1b2176315627605" category="paragraph">Trident Protect CLI를 사용하여 아카이브 경로를 가져옵니다. 타겟 클러스터 또는 소스 AppVault가 있는 모든 클러스터에서 스냅샷 목록을 확인합니다.<block ref="87fb568bfdc633ffd5dee0f22cb4606c" prefix=" " category="inline-code"></block>는 완료 시간이고<block ref="5ffb5f0d0de78321df46fc7c93ca64a3" prefix=" " category="inline-code"></block>는 아카이브 경로입니다.</block>
   <block id="a912c0a1c642f7dc58bec8536841ad2b" category="admonition">소스 애플리케이션의 AppVault CR은 명령을 실행하는 클러스터에 존재해야 하며, 사용 환경은 AppVault CR에 정의된 오브젝트 스토리지 버킷에 연결할 수 있어야 합니다. 네트워크 제한으로 인해 액세스할 수 없는 경우 클러스터의 Pod 내에서 CLI를 실행하십시오.</block>
   <block id="d9f64db02c827452abb5970dc13d7416" category="paragraph">경로에서 마지막 슬래시 뒤에 오는 모든 부분이 기본 이름입니다. 예를 들면 다음과 같습니다.</block>
+  <block id="b255d9e06a4ca8e9f5bc31c9198426ad" category="list-text">bin 경로의 위치로 이동합니다.</block>
+  <block id="b2edeceecc054572188ee3b08cd58c64" category="list-text">바이너리를 배치하고 구성 파일을 생성한 후 원하는 구성 파일을 사용하여 Trident 데몬을 시작합니다.</block>
+  <block id="4846d107d8ddb5051591d14dcbddba8c" category="admonition">별도로 지정하지 않으면 볼륨 드라이버의 기본 이름은 "netapp"입니다.</block>
+  <block id="f253a45a33bc62e467efd426699d9025" category="paragraph">데몬이 시작되면 Docker CLI 인터페이스를 사용하여 볼륨을 생성하고 관리할 수 있습니다.</block>
+  <block id="e3dec3f86b9a3b1be209ab63855ce432" category="list-text">볼륨 생성:</block>
+  <block id="5ff2e3e853922fdb84ef21b85ffdac2e" category="list-text">컨테이너를 시작할 때 Docker 볼륨을 프로비저닝합니다.</block>
+  <block id="8f6a91f5f21d0478e3fd89095fc28ab9" category="list-text">Docker 볼륨 제거:</block>
+  <block id="b48e6203239c93859800f96924a39ed7" category="section-title">시스템 시작 시 Trident를 시작합니다</block>
+  <block id="0350980c728940d67af063bb5d711f0f" category="paragraph">systemd 기반 시스템용 샘플 유닛 파일은 Git 저장소의 <block ref="50a97f9b0dec64cc53ca48406c60fe4d" prefix=" " category="inline-code"></block>에서 찾을 수 있습니다. RHEL에서 파일을 사용하려면 다음을 수행합니다.</block>
+  <block id="5b51496da86e5a2073e0c618390c3d2a" category="list-text">파일을 올바른 위치에 복사합니다.</block>
+  <block id="44103de0a164f687d305ad91e919d8ee" category="paragraph">여러 인스턴스를 실행하는 경우 유닛 파일에 고유한 이름을 사용해야 합니다.</block>
+  <block id="3223aadc84a3ccb4a3473ba01c895184" category="list-text">파일을 편집하고 설명(2행)을 드라이버 이름과 일치하도록 변경하고 구성 파일 경로(9행)를 환경에 맞게 변경하십시오.</block>
+  <block id="1edae3931401a32d7dd7dd6e0a2ad563" category="list-text">변경 사항을 수집하도록 systemd를 다시 로드합니다.</block>
+  <block id="db38a93e27eba57d507611d002ad612f" category="list-text">서비스를 활성화합니다.</block>
+  <block id="c7e0a4deeebe264aa7d5f7f3ca3ef77f" category="paragraph">이 이름은 <block ref="dce2a9642217836d54f614dfd625b753" prefix=" " category="inline-code"></block> 디렉터리에서 파일 이름을 지정한 내용에 따라 달라집니다.</block>
+  <block id="baa04490a79e9e8de7fa4cd44e2c6fbb" category="list-text">서비스를 시작합니다.</block>
+  <block id="93c7574cf83c1f01b04891cf2d826cea" category="list-text">상태를 확인합니다.</block>
+  <block id="f4f15418284ae7a01b27fccc1af0463a" category="admonition">유닛 파일을 수정할 때마다 변경 사항을 인식하도록 <block ref="269b117015efb12595eebf74692e5cbc" prefix=" " category="inline-code"></block> 명령을 실행합니다.</block>
+  <block id="2a0ab69690643375ed9dc83c59b8aa9c" category="paragraph">지원되는 플랫폼은 다음과 같습니다. * 업스트림 Kubernetes * Red Hat OpenShift * SUSE 가상화(Harvester) 1.8.x - 1.9.x (ONTAP NFS, iSCSI, NVMe/TCP 및 FC)</block>
+  <block id="36b055be954f090c5fb6f25e33c699fe" category="list-text">OpenShift 5.0</block>
+  <block id="d3391c138d54f9b74f52b306efa08f7a" category="list-text">SUSE Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.37.x</block>
+  <block id="835cc74797e1c8ee07bd8c38ac1bd60b" category="list-text">SUSE 가상화(Harvester) 1.8.x - 1.9.x (NFS, iSCSI, NVMe/TCP 및 FC)</block>
+  <block id="f42f40f6d5d49b5e3806b87d986b741b" category="section-title">KubeVirt, OpenShift 가상화 및 SUSE 가상화에 대한 Trident 지원</block>
+  <block id="7d29727835a92964fb9fb5ffc0b8397d" category="paragraph">Trident는 KubeVirt, OpenShift 가상화 및 SUSE 가상화를 위해 다음과 같은 ONTAP 드라이버를 지원합니다:</block>
+  <block id="25a956744b1b23c58b6a78b27f1a06b8" category="paragraph-title">SUSE 가상화 인증 보고서</block>
+  <block id="201ff38abd6cf7b8f6e5570e2f83b156" category="paragraph">다음 Trident 26.10 구성은 SUSE 가상화 환경에서 검증되었습니다. 테스트는 Suresh Thoppay 님께서 진행해 주셨습니다:</block>
+  <block id="8c68c72d4745d450a969a4897b811dfe" category="inline-link-macro">SUSE Virtualization 1.8.2가 포함된 Trident 26.10</block>
+  <block id="01961ac303c9c071ee8df33c4dff8af0" category="list-text"><block ref="01961ac303c9c071ee8df33c4dff8af0" category="inline-link-macro-rx"></block></block>
+  <block id="ef41f172d2c7b8aeb6740d4ef084563c" category="inline-link-macro">Trident 26.10 (SUSE Virtualization 1.9.1 포함)</block>
+  <block id="76d108e7a62e81a3d79b10c7a23e46f3" category="list-text"><block ref="76d108e7a62e81a3d79b10c7a23e46f3" category="inline-link-macro-rx"></block></block>
+  <block id="b4991f9cac039ba1e0291cc3946ed350" category="cell">v1.37.0</block>
+  <block id="0c50ade86b7b5a19e1df41171bd3cabe" category="summary">Amazon FSx for NetApp ONTAP와 함께 Trident를 사용하면, Amazon EKS 또는 Red Hat OpenShift에서 실행되는 Kubernetes 클러스터가 ONTAP에서 지원하는 블록 및 파일 영구 볼륨을 프로비저닝하도록 설정할 수 있습니다.</block>
+  <block id="9219283c7dd0470bcc67f4cc7618af9c" category="doc">IAM 역할과 AWS Secrets Manager 암호를 생성합니다</block>
+  <block id="0fe6ece7a799b5f7f58e60f8d5d8ab5b" category="admonition">AWS IAM 역할을 사용하여 인증하려면 Amazon EKS 또는 Red Hat OpenShift를 사용하여 구축된 Kubernetes 클러스터가 있어야 합니다.</block>
+  <block id="4f996e7b73b796b1b798a651d5157001" category="paragraph">Trident는 FSx for ONTAP SVM에서 스토리지를 관리하기 위해 자격 증명이 필요합니다. <block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 자격 증명을 AWS Secrets Manager 암호에 저장하십시오.</block>
+  <block id="0fdc81bb400ca1e69ba8ff758bfa0311" category="section-title">IAM 정책 생성</block>
+  <block id="7c933eceab71ddc0f6e5b189ef4d7134" category="paragraph">다음 예제는 AWS CLI를 사용하여 IAM 정책을 생성합니다:</block>
+  <block id="2fa5938e4796a92472535650065b5ddf" category="paragraph">이 명령은 정책 ARN을 반환합니다. 다음 명령에서 이 ARN을 사용하십시오.</block>
+  <block id="92fd1a17a422b110107ac9ad0dba5772" category="section-title">Pod Identity용 IAM 역할 또는 서비스 계정(IRSA)용 IAM 역할을 생성합니다</block>
+  <block id="7a153cae27958d18c049b81e891ed581" category="paragraph">EKS Pod Identity 또는 서비스 계정용 IAM 역할(IRSA)을 사용하여 AWS Identity and Access Management(IAM) 역할을 수임하도록 Kubernetes 서비스 계정을 구성할 수 있습니다. 그러면 서비스 계정을 사용하도록 구성된 Pod는 해당 역할에 액세스 권한이 부여된 AWS 서비스에 액세스할 수 있습니다.</block>
+  <block id="e7942d102dca4335d425fb7b94464c62" category="open-title">Pod Identity(EKS)</block>
+  <block id="ddebea2d16294ee89475a78b213929b0" category="paragraph">자세한 내용은 <block ref="223f02a97a1894440d2727b156e834b6" category="inline-link-macro-rx"></block>를 참조하십시오.</block>
+  <block id="3727e3118bfd7d7d319f06bc69577054" category="paragraph">IAM 역할과 Trident 서비스 계정 간에 Pod ID 연결을 생성합니다 <block ref="1043da3d0f6135a3085a7e59f7e2c6cd" prefix="(" category="inline-code"></block>).</block>
+  <block id="35fa532ede4914a065f5f50df94ff4e1" category="open-title">서비스 계정용 IAM 역할(IRSA) (EKS 전용)</block>
+  <block id="8c54c9c042ce8a35604da46cdbddb12a" category="list-text">*&lt;account_id&gt;* - AWS 계정 ID</block>
+  <block id="7899a1460d2924e9dde80941a83c321a" category="list-text">*&lt;oidc_provider&gt;* - EKS 클러스터의 OIDC 공급자 URL입니다. 다음 명령을 실행하여 얻을 수 있습니다.</block>
+  <block id="710b9a6a7b8c499878daf733c504748d" category="paragraph">*IAM 정책을 IAM 역할에 연결합니다*:</block>
+  <block id="137735a6c4a78c39a8aa31d7664d1b7a" category="paragraph">*OIDC 제공자 연결을 확인하십시오*:</block>
+  <block id="58546741f53933689e6874e222688825" category="paragraph">다음 명령을 실행하여 OIDC 공급자가 클러스터에 연결되어 있는지 확인하십시오.</block>
+  <block id="6cf59ffc46829d02e154b6d0d917ee08" category="paragraph"><block ref="7c3f89bd6bb66984ef17d4765bf1f65a" prefix=" " category="inline-code"></block>을(를) 사용하는 경우 다음 예제를 사용하여 EKS에서 서비스 계정에 대한 IAM 역할을 생성하십시오.</block>
+  <block id="be2ca5d2675fd02a025aeda2d76cd21b" category="open-title">자체 관리형 OpenShift용 IAM 역할</block>
+  <block id="d4ba96cc1aa73a6a05af0f3285a5511f" category="paragraph">자체 관리 OpenShift 배포는 IAM 역할을 생성하고 이를 클러스터 노드에 연결합니다. 각 노드에 할당된 역할에 Trident IAM 정책을 연결하십시오.</block>
+  <block id="d54319c0f22cb86336f3c083972bd91f" category="paragraph">클러스터에 있는 노드의 인스턴스 ID를 찾으려면 다음 명령을 실행하십시오:</block>
+  <block id="2bb28164a1980e68bf9d92a5204db32d" category="paragraph">각 인스턴스와 연결된 IAM 역할을 찾으려면 각 인스턴스에 대해 다음 명령을 실행하십시오:</block>
+  <block id="b7eff210151c8a7f7893d4898db62c3e" category="paragraph">다음 명령을 실행하여 각 역할에 IAM 정책을 연결하십시오.</block>
+  <block id="ddb180d2e11702d995d386d8cd83b6f6" category="open-title">서비스 계정(IRSA)용 IAM 역할(EKS)</block>
+  <block id="b84ef15482e99cba8fcf9c23c06b1208" category="admonition">자체 관리형 OpenShift 설치 프로그램은 <block ref="e3b493bcbdc62af28f127a151a9fb487" prefix=" " category="inline-code"></block>이(가) 활성화된 경우 Trident가 TCP 포트 8443에 대해 요구하는 보안 그룹 규칙을 생성하지 않습니다. OpenShift 설치 프로그램에서 생성한 <block ref="12f48cfdba1a62c28c0c99833d7dc1c3" prefix=" " category="inline-code"></block> 및 <block ref="e1d582509d68c34e13d09a18c734d384" prefix=" " category="inline-code"></block> 보안 그룹에 VPC CIDR에서 TCP 포트 8443에 대한 인바운드 규칙을 추가하십시오.</block>
+  <block id="3e7bd056cfe8bdd6495ab53326546232" category="paragraph">FSx for ONTAP용 StorageClass를 생성하면 Trident가 자동으로 백엔드 구성을 생성할 수 있습니다.</block>
+  <block id="43ad98a623d4fa4d5cb6c73b72cf2e6f" category="paragraph">스토리지 백엔드를 수동으로 구성하려면 <block ref="f92675ea6cdcb434e9668b63d509b6c2" category="inline-xref-macro-rx"></block>에서 Trident 백엔드와 StorageClass를 별도로 생성하는 방법에 대한 지침을 참조하십시오.</block>
+  <block id="eaa39a8597929826698488fffbfaf2d8" category="admonition">OpenShift에서는 Trident 백엔드와 StorageClass를 별도로 생성해야 합니다.</block>
+  <block id="5757a5ba9568bee1eb6a600c754b34ee" category="cell">FSx for ONTAP 자격 증명이 포함된 Kubernetes Secret 또는 AWS Secrets Manager secret ARN의 이름</block>
+  <block id="f9ac6b8213d2b2cf0e1212175cff0d5f" category="paragraph"><block ref="6a2736fcbb5755dd03d114a5153506eb" category="inline-link-rx"></block>은(는) NetApp ONTAP 스토리지 운영 체제로 구동되는 파일 시스템을 실행하는 완전 관리형 AWS 서비스입니다. AWS의 확장성과 운영 단순성을 바탕으로 ONTAP 기능, 성능 및 관리를 제공합니다. 파일 시스템은 Amazon FSx의 기본 리소스이며 온프레미스 ONTAP 클러스터와 유사합니다. 각 파일 시스템에는 하나 이상의 스토리지 가상 머신(SVM)이 포함되며, 각 SVM에는 파일과 디렉터리를 저장하는 하나 이상의 볼륨이 포함됩니다. 이 통합을 통해 자체 관리형 Kubernetes 클러스터, Amazon Elastic Kubernetes Service(EKS) 클러스터 및 자체 관리형 OpenShift 클러스터에서 블록 및 파일 워크로드를 위한 ONTAP 기반 영구 볼륨을 프로비저닝할 수 있습니다.</block>
+  <block id="0eb421f2772e4f12180ab8ff4bc33bcd" category="list-text"><block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block>이(가) 설치된 기존 자체 관리형 Kubernetes 클러스터 또는 Amazon EKS 클러스터, 또는 <block ref="fb024832e51eb5f6da9113a745f1eb59" prefix=" " category="inline-code"></block>이(가) 설치된 자체 관리형 OpenShift 클러스터.</block>
+  <block id="52cf57e7f48f933bb1fb7c46911d7307" category="list-text">자체 관리형 OpenShift 클러스터:</block>
+  <block id="874b92447a68adcb603ab8bcb1fd4801" category="list-text">FSx for ONTAP 자격 증명에 AWS Secrets Manager 암호를 사용하는 권장 Trident 통합의 경우, OpenShift의 Trident 컨트롤러 포드는 <block ref="e3b493bcbdc62af28f127a151a9fb487" prefix=" " category="inline-code"></block>을(를) <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>(으)로 설정하여 실행해야 합니다.</block>
 </blocks>

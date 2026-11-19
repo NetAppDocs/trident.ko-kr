@@ -35,7 +35,7 @@ NOTE: Kubernetes를 처음으로 사용하는 경우라면 에 익숙해야 합�
 
 Trident는 다양한 Kubernetes 배포판 및 플랫폼에서 지원됩니다.
 
-지원되는 플랫폼은 다음과 같습니다. * 업스트림 Kubernetes * Red Hat OpenShift * SUSE Harvester 1.7.0 (ONTAP iSCSI)
+지원되는 플랫폼은 다음과 같습니다. * 업스트림 Kubernetes * Red Hat OpenShift * SUSE 가상화(Harvester) 1.8.x - 1.9.x (ONTAP NFS, iSCSI, NVMe/TCP 및 FC)
 
 
 
